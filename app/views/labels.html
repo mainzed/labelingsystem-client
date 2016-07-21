@@ -1,0 +1,13 @@
+<a href="#/vocabularies">all vocabularies</a>
+
+<h1 ng-init="getVocabulary()">Vocabulary: {{ vocabulary.title[0] }}</h1>
+
+<input type="text" name="search" value="search" placeholder="filter" ng-model="labelFilter">
+
+<ul>
+  <li ng-repeat="label in labels | filter: labelFilter">
+    <a href="#/vocabularies/{{ vocabulary.id }}/labels/{{ label.label.id }}">
+      {{ label.label.preferredLabel[0]}}
+    </a>
+  </li>
+</ul>

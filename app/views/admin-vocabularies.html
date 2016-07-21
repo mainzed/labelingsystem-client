@@ -1,0 +1,19 @@
+<breadcrumbs></breadcrumbs>
+
+<h1>User: {{ user.name }}</h1>
+
+filter: <input type="text" name="search" value="search" ng-model="vocabFilter">
+
+<ul>
+  <li ng-repeat="vocab in vocabularies | filter: vocabFilter">
+    <a href="#/admin/vocabularies/{{ vocab.vocab.id }}/labels/">
+      {{ vocab.vocab.title[0] }}
+      :
+    </a>
+    <ul>
+      <li>description: {{ vocab.vocab.description[0] }}</li>
+      <li>created: {{ vocab.vocab.created[0] }}</li>
+      <li>license: {{ vocab.vocab.license[0] }}</li>
+    </ul>
+  </li>
+</ul>
