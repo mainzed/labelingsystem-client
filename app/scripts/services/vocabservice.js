@@ -23,7 +23,7 @@ angular.module('labelsApp')
         		"topConcept": [],
         		"creator": [],
         		"contributor": [],
-        		"id": "first-vocab-id",
+        		"id": "9c51004c-7746-4bfd-b4be-93e1d3551ebb",
         		"license": ["CC-BY-SA 4.0"]
             }
         },{

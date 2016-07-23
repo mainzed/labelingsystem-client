@@ -1,0 +1,13 @@
+<a href="#/vocabularies">all vocabularies</a>
+ >
+<a href="#/vocabularies/{{ vocabulary.id }}/labels">{{ vocabulary.title[0] }}</a>
+ >
+{{ label.preferredLabel[0] }}
+
+<h1 ng-init="getLabel()">label: {{ label.preferredLabel[0] }}</h1>
+
+<ul>
+  <li>note: {{ label.note }}</li>
+  <li>broader: {{ label.broadMatch }}</li>
+  <li>narrower: {{ label.narrowMatch }}</li>
+</ul>

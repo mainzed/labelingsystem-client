@@ -27,6 +27,7 @@ angular.module('labelsApp')
 
     this.logout = function() {
         user = {};
+        $cookies.put('labelsUser', undefined);
         $location.path('/admin/login');
     };
 

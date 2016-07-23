@@ -1,8 +1,9 @@
-<breadcrumbs></breadcrumbs>
+
+<button type="button" name="button" ng-click="onLogoutClick()">logout</button>
 
 <h1>User: {{ user.name }}</h1>
 
-filter: <input type="text" name="search" value="search" ng-model="vocabFilter">
+<input type="text" name="search" value="search" ng-model="vocabFilter" placeholder="filter">
 
 <ul>
   <li ng-repeat="vocab in vocabularies | filter: vocabFilter">

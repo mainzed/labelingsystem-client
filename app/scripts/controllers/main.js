@@ -8,7 +8,12 @@
  * Controller of the labelsApp
  */
 angular.module('labelsApp')
-  .controller('MainCtrl', function ($scope, $routeParams, $location, AuthService, VocabService, LabelService) {
+  .controller('MainCtrl', function ($scope, $routeParams, $location, AuthService, VocabService, LabelService, FilterService) {
+
+    // redirect if not logged in
+    if ($location.path().indexOf("admin/") > -1 && !AuthService.getUser()) {
+        $location.path("admin/login");
+    }
 
     $scope.user = AuthService.getUser();
 
@@ -18,6 +23,12 @@ angular.module('labelsApp')
 
     LabelService.query(function(labels) {
         $scope.labels = labels;
+    });
+
+    $scope.vocabFilter = FilterService.getVocabFilter();
+
+    $scope.$watch('vocabFilter', function(newValue) {
+        FilterService.setVocabFilter(newValue);
     });
 
     $scope.getVocabulary = function() {
@@ -40,13 +51,17 @@ angular.module('labelsApp')
     $scope.searchInRepositories = function() {
         $scope.searchResults = [
             {
-                prefLabel: "label1"
+                prefLabel: "label1",
+                scopeNote: "This is a note"
             },{
-                prefLabel: "label2"
+                prefLabel: "label2",
+                scopeNote: "This is a note"
             },{
-                prefLabel: "label3"
+                prefLabel: "label3",
+                scopeNote: "This is a note"
             },{
-                prefLabel: "label4"
+                prefLabel: "label4",
+                scopeNote: "This is a note"
             }
         ];
     };
@@ -61,6 +76,13 @@ angular.module('labelsApp')
         if ($scope.label.broadMatch.indexOf(prefLabel) === -1) {
             $scope.label.broadMatch.push(prefLabel);
         }
+    };
+
+    $scope.onLogoutClick = function() {
+        AuthService.logout(function() {
+            // success
+            $location.path('/admin/login');
+        });
     };
 
   });

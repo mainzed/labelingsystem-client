@@ -31,6 +31,10 @@ angular
         templateUrl: 'views/labels.html',
         controller: 'MainCtrl'
       })
+      .when('/vocabularies/:vID/labels/:lID', {
+        templateUrl: 'views/label-detail.html',
+        controller: 'MainCtrl'
+      })
 
       .when('/admin', {
         redirectTo: '/admin/login'
