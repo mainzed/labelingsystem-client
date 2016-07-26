@@ -10,7 +10,6 @@
 angular.module('labelsApp')
   .controller('LabelDetailCtrl', function ($scope, $routeParams, VocabService, LabelService, ExternalResourcesService) {
 
-    console.log("reload details");
     VocabService.get({id: $routeParams.vID}, function(vocabulary) {
         $scope.vocabulary = vocabulary;
     });
