@@ -25,17 +25,16 @@ angular
       })
       .when('/vocabularies', {
         templateUrl: 'views/vocabularies.html',
-        controller: 'MainCtrl'
+        controller: 'VocabsCtrl'
       })
       .when('/vocabularies/:vID/labels', {
         templateUrl: 'views/labels.html',
-        controller: 'MainCtrl'
+        controller: 'LabelsCtrl'
       })
       .when('/vocabularies/:vID/labels/:lID', {
         templateUrl: 'views/label-detail.html',
-        controller: 'MainCtrl'
+        controller: 'LabelDetailCtrl'
       })
-
       .when('/admin', {
         redirectTo: '/admin/login'
       })

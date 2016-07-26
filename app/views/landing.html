@@ -1,27 +1,38 @@
 <h1>Labeling System Webapp</h1>
 
 <!-- search box -->
-<input type="text" name="search" value="" placeholder="search labels" ng-model="labelFilter" ng-change="onSearchBoxChange()">
-<!--<button type="button" name="button" ng-click="onSearchClick()">search</button>-->
+<input type="text" name="search" value="" placeholder="{{placeholder}}" ng-model="labelFilter" ng-change="onSearchBoxChange()" ng-disabled="!labels" >
 
 <!-- search results -->
 <ul ng-show="labelFilter">
-  <li ng-repeat="label in labels | filter: labelFilter as filtered">
+  <!-- <li ng-repeat="label in labels | filter: labelFilter as filtered | limitTo: 50"> -->
+  <li ng-repeat="label in filteredLabels = (labels | filter: labelFilter | limitTo: 30)">
 
-    <a href="#/vocabularies/{{ label.label.vocabID }}/labels/{{ label.id }}">
-      <span ng-repeat="prefLabel in label.prefLabels" ng-show="prefLabel.isThumbnail" ng-bind-html="highlightResult(prefLabel.value, labelFilter)"></span>
+    <a href="#/vocabularies/{{ label.vocabID }}/labels/{{ label.id }}">
+      <!-- {{ prefLabel.value }} -->
+      <span ng-repeat="prefLabel in label.prefLabels" ng-bind-html="highlightResult(prefLabel.value, labelFilter)" ng-show="prefLabel.isThumbnail"></span>
     </a>
 
+    <!-- scopeNote -->
     <ul>
-      <li ng-bind-html="highlightResult(label.scopeNote.value, labelFilter)"></li>
-      ({{ label.scopeNote.lang }})
+      <li ng-bind-html="highlightResult(label.scopeNote.value, labelFilter)" ng-show="label.scopeNote.value.indexOf(labelFilter) > -1"></li>
+    </ul>
+
+    <!-- altlabels -->
+    <ul>
+      <li ng-repeat="altLabel in label.altLabels" ng-bind-html="highlightResult(altLabel.value, labelFilter)" ng-show="altLabel.value.indexOf(labelFilter) > -1"></li>
     </ul>
 
   </li>
 
   <!-- message when no labels found -->
-  <span ng-show="labelFilter && !filtered.length">
+  <span ng-show="labelFilter && !filteredLabels.length">
     No labels found, <a href="#/vocabularies">browse vocabularies!</a>
+  </span>
+
+  <!-- message when too many labels found -->
+  <span ng-show="labelFilter && filteredLabels.length >= 30">
+    Only showing first 30 results!
   </span>
 </ul>
 

@@ -2,18 +2,15 @@
 
 <h1>all vocabularies</h1>
 
-<input type="text" name="search" value="search" placeholder="filter" ng-model="vocabFilter">
+<!-- <input type="text" name="search" value="search" placeholder="filter" ng-model="vocabFilter"> -->
 
-<ul>
-  <li ng-repeat="vocab in vocabularies | filter: vocabFilter">
-    <a href="#/vocabularies/{{ vocab.vocab.id }}/labels/">
-      {{ vocab.vocab.title[0] }}
-      :
-    </a>
-    <ul>
-      <li>description: {{ vocab.vocab.description[0] }}</li>
-      <li>created: {{ vocab.vocab.created[0] }}</li>
-      <li>license: {{ vocab.vocab.license[0] }}</li>
-    </ul>
-  </li>
-</ul>
+<div ng-repeat="vocab in vocabularies | filter: vocabFilter" style="border: 1px solid black; margin: 10px;">
+  <a href="#/vocabularies/{{ vocab.id }}/labels/">
+    {{ vocab.title.value }}
+  </a>
+  <ul>
+    <li>description: {{ vocab.description.value }}</li>
+    <li>created: {{ vocab.created | date: 'dd.MM.yyyy'}}</li>
+    <li>license: {{ vocab.license }}</li>
+  </ul>
+</div>

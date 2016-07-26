@@ -8,7 +8,7 @@
  * Controller of the labelsApp
  */
 angular.module('labelsApp')
-  .controller('MainCtrl', function ($scope, $routeParams, $location, AuthService, VocabService, LabelService, FilterService) {
+  .controller('MainCtrl', function ($scope, $routeParams, $http, $location, AuthService, VocabService, LabelService, FilterService) {
 
     // redirect if not logged in
     if ($location.path().indexOf("admin/") > -1 && !AuthService.getUser()) {
@@ -31,20 +31,17 @@ angular.module('labelsApp')
         FilterService.setVocabFilter(newValue);
     });
 
-    $scope.getVocabulary = function() {
-        VocabService.get($routeParams.vID, function(vocabulary) {
-            $scope.vocabulary = vocabulary.vocab;
+    $scope.getLabelsForVocabulary = function() {
+        LabelService.get({vocabID: $routeParams.vID}, function(labels) {
+            $scope.labels = labels;
         });
     };
 
-    $scope.getLabel = function() {
+
+    $scope.getVocabulary = function() {
 
         VocabService.get($routeParams.vID, function(vocabulary) {
             $scope.vocabulary = vocabulary.vocab;
-        });
-
-        LabelService.get($routeParams.lID, function(label) {
-            $scope.label = label.label;
         });
     };
 
