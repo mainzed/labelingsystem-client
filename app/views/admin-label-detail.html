@@ -1,20 +1,115 @@
 <breadcrumbs></breadcrumbs>
 
-<h1 ng-init="getLabel()">label: {{ label.prefLabel[0] }}</h1>
+<h1>label: {{ prefLabel.value }}</h1>
 
 <ul>
-  <li>note: {{ label.note }}</li>
-  <li>broader: {{ label.broadMatch }}</li>
-  <li>narrower: {{ label.narrowMatch }}</li>
+
+  <li ng-show="label.prefLabels">Begriffsbezeichnungen:</li>
+  <ul ng-repeat="prefLabel in label.prefLabels">
+    <li>{{ prefLabel.value }} ({{prefLabel.lang}}) <span ng-show="prefLabel.isThumbnail">*</span></li>
+  </ul>
+
+  <li ng-show="label.altLabels">alternive Begriffsbezeichnungen:</li>
+  <ul ng-repeat="altLabel in label.altLabels">
+    <li>{{ altLabel.value }} ({{prefLabel.lang}})</li>
+  </ul>
+
+  <li ng-show="label.scopeNote">Beschreibung: {{ label.scopeNote.value }}</li>
+  <li ng-show="!label.scopeNote">Beschreibung: fehlt!!!</li>
+
+</ul>
+
+<h3>same level</h3>
+<ul>
+
+  <li ng-show="label.related">related Labels:</li>
+  <ul>
+    <li ng-repeat="relatedLabel in relatedLabels">
+      <span ng-repeat="prefLabel in relatedLabel.prefLabels" ng-show"prefLabel.isThumbnail">
+        {{ prefLabel.value }}
+      </span>
+      <button type="button" name="button" ng-click="onDetailClick(relatedLabel)">details</button>
+    </li>
+  </ul>
+
+  <li ng-show="label.exactMatch">exact match:</li>
+  <ul>
+    <li ng-repeat="match in exactMatches">
+      {{ match.label }} ({{ match.type }})
+    </li>
+  </ul>
+
+  <li ng-show="label.closeMatch">close match:</li>
+  <ul>
+    <li ng-repeat="match in closeMatch">
+      {{ match.label }} ({{ match.type }})
+    </li>
+  </ul>
+
+  <li ng-show="label.relatedMatch">related match:</li>
+  <ul>
+    <li ng-repeat="match in relatedMatch">
+      {{ match.label }} ({{ match.type }})
+    </li>
+  </ul>
+
+  <li ng-show="label.seeAlso">Wayback Links</li>
+  <ul>
+    <li ng-repeat="resource in seeAlsoResources">{{ resource.label }} ({{ resource.type }})</li>
+  </ul>
+
+</ul>
+
+<h3>Broader</h3>
+<ul>
+  <li ng-show="label.broader">broader Labels:</li>
+  <ul ng-repeat="broaderLabel in broaderLabels">
+    <li ng-repeat="prefLabel in broaderLabel.prefLabels" ng-show"prefLabel.isThumbnail">
+      {{ prefLabel.value }}
+      <button type="button" name="button" ng-click="onDetailClick(broaderLabel)">details</button>
+    </li>
+  </ul>
+
+  <li ng-show="label.broadMatch">broad match:</li>
+  <ul>
+    <li ng-repeat="match in broadMatches">
+      {{ match.label }} ({{ match.type }})
+    </li>
+  </ul>
+</ul>
+
+<h3>Narrower</h3>
+<ul>
+  <li ng-show="label.narrower">narrower Labels:</li>
+  <ul ng-repeat="narrowerLabel in narrowerLabels">
+    <li ng-repeat="prefLabel in narrowerLabel.prefLabels" ng-show"prefLabel.isThumbnail">
+      {{ prefLabel.value }}
+      <button type="button" name="button" ng-click="onDetailClick(narrowerLabel)">details</button>
+    </li>
+  </ul>
+
+  <li ng-show="label.narrowMatch">narrow match:</li>
+  <ul>
+    <li ng-repeat="match in narrowMatch">
+      {{ match.label }} ({{ match.type }})
+    </li>
+  </ul>
 </ul>
 
 <!-- search repositories -->
-<input type="text" name="search" value="">
-<button type="button" name="button" ng-click="searchInRepositories()">search in repositories</button>
-<ul>
-  <li ng-repeat="result in searchResults">
-    {{ result.prefLabel }}
-    <button type="button" name="button" ng-click="onNarrowerClick(result.prefLabel)">narrower</button>
-    <button type="button" name="button" ng-click="onBroaderClick(result.prefLabel)">broader</button>
-  </li>
-</ul>
+<div style="border: 1px solid;">
+  <h3>Anreichern</h3>
+  <input type="text" name="search" value="" placeholder="search" ng-model="labelFilter">
+  <!-- <button type="button" name="button" ng-click="searchInRepositories()">search in repositories</button> -->
+  <ul ng-show="labelFilter">
+    <li ng-repeat="label in labels | filter: labelFilter | limitTo: 25">
+      {{ label.prefLabels[0].value }}
+
+      <span ng-show="label.vocabID !== vocabulary.id" style="background-color: lightblue;">ls</span>
+      <span ng-show="label.vocabID === vocabulary.id" style="background-color: yellow;">same vocab</span>
+
+      <button type="button" name="button" ng-click="onNarrowerClick(label)">narrower</button>
+      <button type="button" name="button" ng-click="onBroaderClick(label)">broader</button>
+    </li>
+  </ul>
+</div>

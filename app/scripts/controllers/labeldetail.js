@@ -8,7 +8,18 @@
  * Controller of the labelsApp
  */
 angular.module('labelsApp')
-  .controller('LabelDetailCtrl', function ($scope, $routeParams, VocabService, LabelService, ExternalResourcesService) {
+  .controller('LabelDetailCtrl', function ($scope, $routeParams, $location, ngDialog, AuthService, VocabService, LabelService, ExternalResourcesService) {
+
+    // authentication
+    if ($location.path().indexOf("admin/") > -1) {  // is admin view
+        if (!AuthService.getUser()) {
+            // redirect if not logged in
+            $location.path("admin/login");
+        } else {
+            // if logged in, get user name
+            $scope.user = AuthService.getUser();
+        }
+    }
 
     VocabService.get({id: $routeParams.vID}, function(vocabulary) {
         $scope.vocabulary = vocabulary;
@@ -28,6 +39,11 @@ angular.module('labelsApp')
         $scope.getLabelMatches(label);
         $scope.getExternalResources(label);
 
+    });
+
+    // load all labels for search function
+    LabelService.query(function(labels) {
+        $scope.labels = labels;
     });
 
     $scope.getLabelRelations = function(label) {
@@ -142,4 +158,51 @@ angular.module('labelsApp')
             });
         }
     };
+
+    $scope.onDetailClick = function(label) {
+        $scope.detailLabel = label;
+        ngDialog.open({
+            template: 'views/dialogs/label-detail.html',
+            scope: $scope
+        });
+    };
+
+    $scope.onNarrowerClick = function(label) {
+
+        // prevent from adding label as broader and narrower
+        if ($scope.label.broader) {
+            if ($scope.label.broader.indexOf(label.id) > -1) {
+                return false;
+            }
+        }
+
+        if (!$scope.label.narrower) {
+            $scope.label.narrower = [label.id];
+        } else if ($scope.label.narrower.indexOf(label.id) === -1) {
+            $scope.label.narrower.push(label.id);
+        }
+
+        // refresh
+        $scope.getLabelRelations($scope.label);
+    };
+
+    $scope.onBroaderClick = function(label) {
+
+        // prevent from adding label as broader and narrower
+        if ($scope.label.narrower) {
+            if ($scope.label.narrower.indexOf(label.id) > -1) {
+                return false;
+            }
+        }
+
+        if (!$scope.label.broader) {
+            $scope.label.broader = [label.id];
+        } else if ($scope.label.broader.indexOf(label.id) === -1) {
+            $scope.label.broader.push(label.id);
+        }
+
+        // refresh
+        $scope.getLabelRelations($scope.label);
+    };
+
   });

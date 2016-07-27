@@ -15,7 +15,8 @@ angular
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'ngDialog'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -44,15 +45,15 @@ angular
       })
       .when('/admin/vocabularies', {
         templateUrl: 'views/admin-vocabularies.html',
-        controller: 'MainCtrl'
+        controller: 'VocabsCtrl'
       })
       .when('/admin/vocabularies/:vID/labels', {
         templateUrl: 'views/admin-labels.html',
-        controller: 'MainCtrl'
+        controller: 'LabelsCtrl'
       })
       .when('/admin/vocabularies/:vID/labels/:lID', {
         templateUrl: 'views/admin-label-detail.html',
-        controller: 'MainCtrl'
+        controller: 'LabelDetailCtrl'
       })
       .otherwise({
         redirectTo: '/'

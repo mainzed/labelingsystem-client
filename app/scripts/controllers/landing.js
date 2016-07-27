@@ -26,7 +26,7 @@ angular.module('labelsApp')
 
     $scope.highlightResult = function(labelName, search) {
         if (labelName) {
-            var re = new RegExp(search, "gi");  // gi makes it case insensitive
+            var re = new RegExp(search, "i");  // gi makes it case insensitive
             var match = labelName.match(re);  // find case sensitive to replace
             return labelName.replace(re, '<span class="highlight">' + match + '</span>');
         } else {

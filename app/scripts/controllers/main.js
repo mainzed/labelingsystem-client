@@ -10,76 +10,9 @@
 angular.module('labelsApp')
   .controller('MainCtrl', function ($scope, $routeParams, $http, $location, AuthService, VocabService, LabelService, FilterService) {
 
-    // redirect if not logged in
-    if ($location.path().indexOf("admin/") > -1 && !AuthService.getUser()) {
-        $location.path("admin/login");
-    }
-
-    $scope.user = AuthService.getUser();
-
-    VocabService.query(function(vocabularies) {
-        $scope.vocabularies = vocabularies;
-    });
-
-    LabelService.query(function(labels) {
-        $scope.labels = labels;
-    });
-
     $scope.vocabFilter = FilterService.getVocabFilter();
 
     $scope.$watch('vocabFilter', function(newValue) {
         FilterService.setVocabFilter(newValue);
     });
-
-    $scope.getLabelsForVocabulary = function() {
-        LabelService.get({vocabID: $routeParams.vID}, function(labels) {
-            $scope.labels = labels;
-        });
-    };
-
-
-    $scope.getVocabulary = function() {
-
-        VocabService.get($routeParams.vID, function(vocabulary) {
-            $scope.vocabulary = vocabulary.vocab;
-        });
-    };
-
-    $scope.searchInRepositories = function() {
-        $scope.searchResults = [
-            {
-                prefLabel: "label1",
-                scopeNote: "This is a note"
-            },{
-                prefLabel: "label2",
-                scopeNote: "This is a note"
-            },{
-                prefLabel: "label3",
-                scopeNote: "This is a note"
-            },{
-                prefLabel: "label4",
-                scopeNote: "This is a note"
-            }
-        ];
-    };
-
-    $scope.onNarrowerClick = function(prefLabel) {
-        if ($scope.label.narrowMatch.indexOf(prefLabel) === -1) {
-            $scope.label.narrowMatch.push(prefLabel);
-        }
-    };
-
-    $scope.onBroaderClick = function(prefLabel) {
-        if ($scope.label.broadMatch.indexOf(prefLabel) === -1) {
-            $scope.label.broadMatch.push(prefLabel);
-        }
-    };
-
-    $scope.onLogoutClick = function() {
-        AuthService.logout(function() {
-            // success
-            $location.path('/admin/login');
-        });
-    };
-
   });

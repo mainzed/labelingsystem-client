@@ -10,6 +10,11 @@
 angular.module('labelsApp')
   .controller('LoginCtrl', function ($scope, $location, AuthService) {
 
+    // skip login if authenticated
+    if (AuthService.getUser()) {
+        $location.path("admin/vocabularies");
+    }
+    
     $scope.onLoginClick = function() {
         AuthService.login($scope.username, $scope.password, function() {
             // success

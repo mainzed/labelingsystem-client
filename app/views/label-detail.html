@@ -28,7 +28,12 @@
 
   <li ng-show="label.related">related Labels:</li>
   <ul>
-    <li ng-repeat="relatedLabel in relatedLabels"><span ng-repeat="prefLabel in relatedLabel.prefLabels" ng-show"prefLabel.isThumbnail">{{ prefLabel.value }}</span></li>
+    <li ng-repeat="relatedLabel in relatedLabels">
+      <span ng-repeat="prefLabel in relatedLabel.prefLabels" ng-show"prefLabel.isThumbnail">
+        {{ prefLabel.value }}
+      </span>
+      <button type="button" name="button" ng-click="onDetailClick(relatedLabel)">details</button>
+    </li>
   </ul>
 
   <li ng-show="label.exactMatch">exact match:</li>
@@ -65,7 +70,7 @@
   <ul ng-repeat="broaderLabel in broaderLabels">
     <li ng-repeat="prefLabel in broaderLabel.prefLabels" ng-show"prefLabel.isThumbnail">
       {{ prefLabel.value }}
-      <button type="button" name="button">open details</button>
+      <button type="button" name="button" ng-click="onDetailClick(broaderLabel)">details</button>
     </li>
   </ul>
 
@@ -83,7 +88,7 @@
   <ul ng-repeat="narrowerLabel in narrowerLabels">
     <li ng-repeat="prefLabel in narrowerLabel.prefLabels" ng-show"prefLabel.isThumbnail">
       {{ prefLabel.value }}
-      <button type="button" name="button">open details</button>
+      <button type="button" name="button" ng-click="onDetailClick(narrowerLabel)">details</button>
     </li>
   </ul>
 

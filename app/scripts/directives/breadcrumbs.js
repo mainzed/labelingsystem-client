@@ -16,7 +16,7 @@ angular.module('labelsApp')
             '<span ng-show="showVocabulary">',
                 '<a ng-show="!showVocabularies" href="#/admin/vocabularies">{{ user.name }}</a>',
                 ' > ',
-                '{{ vocabulary.title[0] }}',
+                '{{ vocabulary.title.value }}',
             '</span>',
 
             // label detail
@@ -24,10 +24,10 @@ angular.module('labelsApp')
                 '<a ng-show="!showVocabularies" href="#/admin/vocabularies">{{ user.name }}</a>',
                 ' > ',
                 '<a href="#/admin/vocabularies/{{ vocabulary.id }}/labels">',
-                    '{{ vocabulary.title[0] }}',
+                    '{{ vocabulary.title.value }}',
                 '</a>',
                 ' > ',
-                '{{ label.prefLabel[0] }}',
+                '{{ label.prefLabels[0].value }}',
             '</span>',
 
           '</div>'
