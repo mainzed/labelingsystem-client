@@ -1,11 +1,12 @@
 <!-- Labeling System Prototype -->
 
 <div id="header" class="box full">
-	<div id="breadcrumb"></div>
-	<h1>LBK phase 14 (Lindig)</h1>
+  <div id="breadcrumb"></div>
+	<h1>{{ prefLabel.value }}</h1>
 	<span class="icon-label"></span>
-	<span class="language">en</span>
+	<span class="language">{{ prefLabel.lang }}</span>
 </div>
+
 <div id="enrichment-ov">
 	<!-- fixed table header -->
 	<div class="tableheadwrapper">
@@ -19,114 +20,34 @@
 
 	<!-- table -->
 	<div class="nano enrichmentswrapper">
-	<div id="enrichments" class="nano-content">
+  	<div id="enrichments" class="nano-content">
 
-    <!-- broader column -->
-		<div class="col left">
-			<div class="box small getty">
-				<span class="relation"></span>
-				<span class="thumbnail">Linienbandkeramik (Neolithic culture and style)</span>
-				<span class="type">(Getty)</span>
-				<span class="language">en</span>
-			</div>
+      <!-- broader column -->
+  		<div class="col left">
+        <small-box ng-repeat="box in boxes | filter: broaderFilter" ng-model="box"></small-box>
+  		</div>
 
-			<div class="box small eh">
-				<span class="relation"></span>
-				<span class="thumbnail"></span>
-				<span class="type">(EH)</span>
-				<span class="language">en</span>
-			</div>
-		</div>
+      <!-- middle column -->
+  		<div class="insidewrapper half paddingbottom">
 
+        <!-- text column -->
+  			<div class="col halfleft">
+          <small-box ng-repeat="box in boxes | filter: attributeFilter" ng-model="box"></small-box>
+  			</div>
 
-		<div class="insidewrapper half paddingbottom">
-			<!-- text column -->
-			<div class="col halfleft">
+  			<!-- relations column -->
+  			<div class="col halfright">
+          <small-box ng-repeat="box in boxes | filter: relatedFilter" ng-model="box"></small-box>
+  			</div>
 
-        <div class="box small text">
-					<span class="relation"></span>
-					<span class="thumbnail">Linienbandkeramik (Neolithic culture and style)</span>
-					<span class="type"><span class="icon-preflabel"></span></span>
-					<span class="language">en</span>
-				</div>
+  		</div>
 
-        <div class="box small text">
-					<span class="relation"></span>
-					<span class="thumbnail">Linienbandkeramik (Neolithic culture and style)</span>
-					<span class="type"><span class="icon-preflabel"></span></span>
-					<span class="language">en</span>
-				</div>
-				<div class="box small text">
-					<span class="relation"></span>
-					<span class="thumbnail"></span>
-					<span class="type"><span class="icon-preflabel"></span></span>
-					<span class="language">en</span>
-				</div>
-				<div class="box small text">
-					<span class="relation"></span>
-					<span class="thumbnail">Linienbandkeramik (Neolithic culture and style)</span>
-					<span class="type"><span class="icon-preflabel"></span></span>
-					<span class="language">en</span>
-				</div>
-				<div class="box small text">
-					<span class="relation"></span>
-					<span class="thumbnail">Linienbandkeramik (Neolithic culture and style)</span>
-					<span class="type"><span class="icon-altlabel"></span></span>
-					<span class="language">en</span>
-				</div>
-				<div class="box small text">
-					<span class="relation"></span>
-					<span class="thumbnail"></span>
-					<span class="type"><span class="icon-altlabel"></span></span>
-					<span class="language">en</span>
-				</div>
-			</div>
+  		<!-- narrower column -->
+  		<div class="col right">
+        <small-box ng-repeat="box in boxes | filter: narrowerFilter" ng-model="box"></small-box>
+  		</div>
 
-			<!-- relations column -->
-			<div class="col halfright">
-				<div class="box small label">
-					<span class="relation"></span>
-					<span class="thumbnail"></span>
-					<span class="type"><span class="icon-label"></span></span>
-					<span class="language">en</span>
-				</div>
-				<div class="box small label">
-					<span class="relation"></span>
-					<span class="thumbnail"></span>
-					<span class="type"><span class="icon-label"></span></span>
-					<span class="language">en</span>
-				</div>
-				<div class="box small getty">
-					<span class="relation"></span>
-					<span class="thumbnail"></span>
-					<span class="type">(Getty)</span>
-					<span class="language">en</span>
-				</div>
-				<div class="box small eh">
-					<span class="relation"></span>
-					<span class="thumbnail"></span>
-					<span class="type">(EH)</span>
-					<span class="language">en</span>
-				</div>
-			</div>
-		</div>
-
-		<!-- narrower column -->
-		<div class="col right">
-			<div class="box small getty">
-				<span class="relation"></span>
-				<span class="thumbnail"></span>
-				<span class="type"></span>
-				<span class="language">en</span>
-			</div>
-			<div class="box small eh">
-				<span class="relation"></span>
-				<span class="thumbnail"></span>
-				<span class="type"></span>
-				<span class="language">en</span>
-			</div>
-		</div>
-	</div>
+  	</div>
 	</div>
 </div>
 
@@ -137,20 +58,25 @@
 			<input type="search" value="Search in Thesauri"></input>
 		</div>
 	</div>
-	<div class="col left">
-		<button class="enrichbutton">
+
+  <div class="col left">
+
+    <button class="enrichbutton" ng-click="onAddPrefLabel()">
 			<span class="buttontext">Add preflabel</span>
 			<span class="buttonicon"><span class="icon-preflabel"></span></span>
 		</button>
-		<button class="enrichbutton">
+
+    <button class="enrichbutton" ng-click="onAddAltLabel()">
 			<span class="buttontext">Add alt label</span>
 			<span class="buttonicon"><span class="icon-altlabel"></span></span>
 		</button>
-		<button class="enrichbutton">
+
+    <button class="enrichbutton" ng-click="onAddScopeNote()">
 			<span class="buttontext">Add scope note</span>
 			<span class="buttonicon"><span class="icon-note"></span></span>
 		</button>
-		<button class="enrichbutton">
+
+    <button class="enrichbutton">
 			<span class="buttontext">Add wayback link</span>
 			<span class="buttonicon"></span>
 		</button>

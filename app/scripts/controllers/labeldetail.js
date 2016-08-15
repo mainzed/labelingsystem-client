@@ -21,6 +21,12 @@ angular.module('labelsApp')
         }
     }
 
+    $scope.boxes = [
+        { "category": "broadMatch", "type": "getty", "value": "broader getty label", "lang": "en" },
+        { "category": "narrowMatch", "type": "getty", "value": "narrower getty label", "lang": "en" },
+        { "category": "related", "type": "eh", "value": "related EH Label", "lang": "en" }
+    ];
+
     // init nanoscroll
     $(".nano").nanoScroller();
 
@@ -29,21 +35,43 @@ angular.module('labelsApp')
         getVocabThesauri(vocabulary.id);
     });
 
-    // load all labels for the current vocabulary
+    // load label for the current vocabulary
     LabelService.get({id: $routeParams.lID}, function(label) {
         $scope.label = label;
 
+        // broader, narrower and related gathered later
         label.prefLabels.forEach(function(prefLabel) {
             if (prefLabel.isThumbnail) {
                 $scope.prefLabel = prefLabel;
             }
         });
 
+        // add description to attributeBoxes
+        $scope.getLabelAttributes(label);
+
+        // append to broaderBoxes etc
         $scope.getLabelRelations(label);
         $scope.getLabelMatches(label);
         $scope.getExternalResources(label);
 
     });
+
+    // filters
+    $scope.attributeFilter = function(box) {
+        return box.category === "attribute";
+    };
+
+    $scope.broaderFilter = function(box) {
+        return box.category === "broader" || box.category === "broadMatch";
+    };
+
+    $scope.narrowerFilter = function(box) {
+        return box.category === "narrower" || box.category === "narrowMatch";
+    };
+
+    $scope.relatedFilter = function(box) {
+        return box.category === "related" || box.category === "closeMatch" || box.category === "relatedMatch" || box.category === "exactMatch";
+    };
 
     // get all thesauri associated with this vocabulary, preload these for search function
     function getVocabThesauri(vocabID) {
@@ -57,19 +85,10 @@ angular.module('labelsApp')
         });
     }
 
-
-    // load all labels for search function
-    // LabelService.query(function(labels) {
-    //     //$scope.labels = labels;
-    //     //$scope.searchResults = labels;
-    // });
-
     // when searching, append search results
     // search when something is entered,
     // ls results are cached anyway, everything else gets searched on change
     $scope.onSearchClick = function() {
-
-
 
         // TODO: search in all thesauri and append as soon as they're found!
         $http.get('http://143.93.114.135/api/v1/resourcequery?retcat=' + "Vornamen" + '&query=' + $scope.labelFilter).then(function(res) {
@@ -82,46 +101,104 @@ angular.module('labelsApp')
         });
     };
 
+    $scope.getLabelAttributes = function(label) {
 
+        if (label.scopeNote) {
+            $scope.boxes.push({
+                category: "attribute",
+                type: "description",
+                value: label.scopeNote.value,
+                lang: label.scopeNote.lang
+            });
+        }
+
+        // add prefLabels to attributeBoxes
+        if (label.prefLabels) {
+            label.prefLabels.forEach(function(prefLabel) {
+                $scope.boxes.push({
+                    category: "attribute",
+                    type: "prefLabel",
+                    value: prefLabel.value,
+                    lang: prefLabel.lang
+                });
+            });
+        }
+
+        // add altLabels to attributeBoxes
+        if (label.altLabels) {
+            label.altLabels.forEach(function(altLabel) {
+                $scope.boxes.push({
+                    category: "attribute",
+                    type: "altLabel",
+                    value: altLabel.value,
+                    lang: altLabel.lang
+                });
+            });
+        }
+    };
+
+    // relations = ls internal
     $scope.getLabelRelations = function(label) {
-        // get all narrower and broader
-        $scope.broaderLabels = [];
+
+        // get all broader ls labels
         if (label.broader) {
             label.broader.forEach(function(broaderID) {
                 LabelService.get({id: broaderID}, function(label) {
-                    $scope.broaderLabels.push(label);
+                    // append to boxes
+                    $scope.boxes.push({
+                        category: "broader",
+                        type: "label",
+                        value: label.prefLabels[0].value,
+                        lang: label.prefLabels[0].lang
+                    });
                 });
             });
         }
 
-        $scope.narrowerLabels = [];
         if (label.narrower) {
             label.narrower.forEach(function(narrowerID) {
                 LabelService.get({id: narrowerID}, function(label) {
-                    $scope.narrowerLabels.push(label);
+                    // append to boxes
+                    $scope.boxes.push({
+                        category: "narrower",
+                        type: "label",
+                        value: label.prefLabels[0].value,
+                        lang: label.prefLabels[0].lang
+                    });
                 });
             });
         }
 
-        $scope.relatedLabels = [];
         if (label.related) {
             label.related.forEach(function(relatedID) {
                 LabelService.get({id: relatedID}, function(label) {
-                    $scope.relatedLabels.push(label);
+                    // append to boxes
+                    $scope.boxes.push({
+                        category: "related",
+                        type: "label",
+                        value: label.prefLabels[0].value,
+                        lang: label.prefLabels[0].lang
+                    });
                 });
             });
         }
 
     };
 
+    // external labels
     $scope.getLabelMatches = function(label) {
 
-        $scope.broadMatches = [];
         if (label.broadMatch) {
             label.broadMatch.forEach(function(match) {
                 ExternalResourcesService.get(match.url, function(resource) {
                     // success
-                    $scope.broadMatches.push(resource);
+                    $scope.boxes.push({
+                        category: "broadMatch",
+                        type: resource.type,
+                        value: resource.label
+                        //relation: "broadMatch"
+                    });
+
                 }, function(errorMessage) {
                     // error
                     console.log(errorMessage);
@@ -129,12 +206,15 @@ angular.module('labelsApp')
             });
         }
 
-        $scope.narrowMatches = [];
         if (label.narrowMatch) {
             label.narrowMatch.forEach(function(match) {
                 ExternalResourcesService.get(match.url, function(resource) {
                     // success
-                    $scope.narrowMatches.push(resource);
+                    $scope.boxes.push({
+                        category: "narrowMatch",
+                        type: resource.type,
+                        value: resource.label
+                    });
                 }, function(errorMessage) {
                     // error
                     console.log(errorMessage);
@@ -142,12 +222,15 @@ angular.module('labelsApp')
             });
         }
 
-        $scope.closeMatches = [];
         if (label.closeMatch) {
             label.closeMatch.forEach(function(match) {
                 ExternalResourcesService.get(match.url, function(resource) {
                     // success
-                    $scope.closeMatches.push(resource);
+                    $scope.boxes.push({
+                        category: "closeMatch",
+                        type: resource.type,
+                        value: resource.label
+                    });
                 }, function(errorMessage) {
                     // error
                     console.log(errorMessage);
@@ -155,12 +238,16 @@ angular.module('labelsApp')
             });
         }
 
-        $scope.relatedMatches = [];
+        //$scope.relatedMatches = [];
         if (label.relatedMatch) {
             label.relatedMatch.forEach(function(match) {
                 ExternalResourcesService.get(match.url, function(resource) {
                     // success
-                    $scope.relatedMatches.push(resource);
+                    $scope.boxes.push({
+                        category: "relatedMatch",
+                        type: resource.type,
+                        value: resource.label
+                    });
                 }, function(errorMessage) {
                     // error
                     console.log(errorMessage);
@@ -168,12 +255,17 @@ angular.module('labelsApp')
             });
         }
 
-        $scope.exactMatches = [];
+        //$scope.exactMatches = [];
         if (label.exactMatch) {
             label.exactMatch.forEach(function(match) {
                 ExternalResourcesService.get(match.url, function(resource) {
                     // success
-                    $scope.exactMatches.push(resource);
+                    $scope.boxes.push({
+                        category: "exactMatch",
+                        type: resource.type,
+                        value: resource.label
+                    });
+
                 }, function(errorMessage) {
                     // error
                     console.log(errorMessage);
@@ -242,4 +334,33 @@ angular.module('labelsApp')
         $scope.getLabelRelations($scope.label);
     };
 
+    $scope.onAddPrefLabel = function() {
+        //console.log("add prefLabel");
+        $scope.boxes.push({
+            category: "attribute",
+            type: "prefLabel",
+            value: "new prefLabel",
+            lang: "en"
+        });
+    };
+
+    $scope.onAddAltLabel = function() {
+        //console.log("add altLabel");
+        $scope.boxes.push({
+            category: "attribute",
+            type: "altLabel",
+            value: "new altLabel",
+            lang: "en"
+        });
+    };
+
+    $scope.onAddScopeNote = function() {
+        //console.log("add scopeNote");
+        $scope.boxes.push({
+            category: "attribute",
+            type: "description",
+            value: "this is a new description",
+            lang: "en"
+        });
+    };
   });
