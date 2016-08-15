@@ -8,7 +8,7 @@
  * Controller of the labelsApp
  */
 angular.module('labelsApp')
-  .controller('LabelDetailCtrl', function ($scope, $routeParams, $location, ngDialog, AuthService, VocabService, LabelService, ExternalResourcesService) {
+  .controller('LabelDetailCtrl', function ($scope, $routeParams, $location, $http, ngDialog, AuthService, VocabService, LabelService, ExternalResourcesService) {
 
     // authentication
     if ($location.path().indexOf("admin/") > -1) {  // is admin view
@@ -23,6 +23,7 @@ angular.module('labelsApp')
 
     VocabService.get({id: $routeParams.vID}, function(vocabulary) {
         $scope.vocabulary = vocabulary;
+        getVocabThesauri(vocabulary.id);
     });
 
     // load all labels for the current vocabulary
@@ -41,10 +42,43 @@ angular.module('labelsApp')
 
     });
 
+    // get all thesauri associated with this vocabulary, preload these for search function
+    function getVocabThesauri(vocabID) {
+
+        $http.get('http://143.93.114.135/api/v1/retcat/vocabulary/' + vocabID).then(function(res) {
+            // success
+            console.log(res.data);
+
+        }, function() {
+            // error
+        });
+    }
+
+
     // load all labels for search function
-    LabelService.query(function(labels) {
-        $scope.labels = labels;
-    });
+    // LabelService.query(function(labels) {
+    //     //$scope.labels = labels;
+    //     //$scope.searchResults = labels;
+    // });
+
+    // when searching, append search results
+    // search when something is entered,
+    // ls results are cached anyway, everything else gets searched on change
+    $scope.onSearchClick = function() {
+
+
+
+        // TODO: search in all thesauri and append as soon as they're found!
+        $http.get('http://143.93.114.135/api/v1/resourcequery?retcat=' + "Vornamen" + '&query=' + $scope.labelFilter).then(function(res) {
+            // success
+            $scope.searchResults = res.data;
+
+        }, function() {
+            // error
+            console.log("something went wrong trying to get label search results!");
+        });
+    };
+
 
     $scope.getLabelRelations = function(label) {
         // get all narrower and broader
@@ -150,7 +184,7 @@ angular.module('labelsApp')
         if (label.seeAlso) {
             label.seeAlso.forEach(function(resource) {
                 ExternalResourcesService.get(resource.url, function(externalResource) {
-                    $scope.seeAlsoResources.push(externalResource);
+                    $scope.seeAlsoResources.push(externalResource);//
                 }, function(errorMessage) {
                     // failure
                     console.log(errorMessage);

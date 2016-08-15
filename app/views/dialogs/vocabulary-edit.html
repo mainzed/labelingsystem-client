@@ -1,0 +1,17 @@
+<h3>vocabulary details</h3>
+
+<ul>
+  <li>Titel: {{ vocab.title.value }}</li>
+  <li>Beschreibung: {{ vocab.description.value }}</li>
+  <li>Referenzthesauri:</li>
+  <ul>
+    <li ng-repeat="vocabThesaurus in vocabThesauri">{{ vocabThesaurus.name }} ({{ vocabThesaurus.group }})</li>
+    <li ng-show="showSelection">
+      <select ng-model="choice" ng-change="onSelectionChange(choice); showSelection = false">
+        <option value="" disabled selected>Select thesaurus</option>
+        <option ng-repeat="thesaurus in thesauri">{{ thesaurus.name }}</option>
+      </select>
+    </li>
+  </ul>
+  <button type="button" name="button" ng-click="showSelection = true">+</button>
+</ul>

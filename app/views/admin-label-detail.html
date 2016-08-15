@@ -99,17 +99,30 @@
 <!-- search repositories -->
 <div style="border: 1px solid;">
   <h3>Anreichern</h3>
-  <input type="text" name="search" value="" placeholder="search" ng-model="labelFilter">
+  <input type="text" name="search" value="" placeholder="search" ng-model="labelFilter"><button type="button" name="button" ng-click="onSearchClick()">suchen</button>
   <!-- <button type="button" name="button" ng-click="searchInRepositories()">search in repositories</button> -->
-  <ul ng-show="labelFilter">
-    <li ng-repeat="label in labels | filter: labelFilter | limitTo: 25">
-      {{ label.prefLabels[0].value }}
 
-      <span ng-show="label.vocabID !== vocabulary.id" style="background-color: lightblue;">ls</span>
-      <span ng-show="label.vocabID === vocabulary.id" style="background-color: yellow;">same vocab</span>
+  <li ng-repeat="result in searchResults">
+    <!-- {{ label.prefLabels[0].value }} -->
+    {{ result.labels[0] }}
+    <span ng-show="result.scheme === 'Labeling System'" style="background-color: lightblue;">ls</span>
+    <!-- <span ng-show="label.vocabID === vocabulary.id" style="background-color: yellow;">same vocab</span> -->
 
-      <button type="button" name="button" ng-click="onNarrowerClick(label)">narrower</button>
-      <button type="button" name="button" ng-click="onBroaderClick(label)">broader</button>
-    </li>
-  </ul>
+    <button type="button" name="button" ng-click="onNarrowerClick(label)">narrower</button>
+    <button type="button" name="button" ng-click="onBroaderClick(label)">broader</button>
+
+    <!-- details -->
+    <ul>
+      <li>description: {{ result.descriptions[0]}}</li>
+    </ul>
+
+
+
+  </li>
+
+  <!-- message in case no search results found -->
+  <div ng-show="searchResults.length < 1">
+    No search results found!
+  </div>
+
 </div>

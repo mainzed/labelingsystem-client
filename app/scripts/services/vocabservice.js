@@ -12,7 +12,7 @@ angular.module('labelsApp')
     // AngularJS will instantiate a singleton by calling "new" on this function
 
 
-    return $resource('http://labeling.i3mainz.hs-mainz.de/api/v1/vocabs/:id', null, {
+    return $resource('http://143.93.114.135/api/v1/vocabs/:id', null, {
         'update': { method:'PUT' }
     });
 

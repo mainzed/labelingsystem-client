@@ -7,7 +7,7 @@
  * # breadcrumb
  */
 angular.module('labelsApp')
-  .directive('breadcrumbs', function ($location) {
+  .directive('breadcrumbs', function ($location, $routeParams) {
     return {
       template: [
           '<div>',
@@ -37,11 +37,26 @@ angular.module('labelsApp')
         //element.text('this is the breadcrumb directive');
         var path = $location.path();
 
+        // get label from url
+        // var labelID = $routeParams.lID
+        // console.log(scope.label);
+        // for (var i = 0; i < scope.label.prefLabels.length; i++) {
+        //     var label = scope.label.prefLabels[i];
+        //     if (label.isThumbnail) {
+        //         scope.prefLabel = label;
+        //     }
+        // }
+
         // check view and decide what breadcrumbs to show
         if (path.indexOf("/labels/") > -1) {
             scope.showLabelDetail = true;
+            //console.log(scope.label);
+            // get label by id
+
+
         } else if (path.indexOf("/vocabularies/") > -1) {
             scope.showVocabulary = true;
+
         } else {
             scope.showVocabulary = false;
         }

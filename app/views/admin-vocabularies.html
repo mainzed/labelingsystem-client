@@ -14,4 +14,5 @@
     <li>Erstellt von {{ vocab.creator }} am {{ vocab.created | date: 'dd.MM.yyyy' }}
     <li>license: {{ vocab.license }}</li>
   </ul>
-</li>
+  <button type="button" name="button" ng-click="onEditClick(vocab.id)">edit</button>
+</div>
