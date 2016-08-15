@@ -32,23 +32,26 @@
 /*-------------------------------------------------------------------------------------------------------------------*/
 /*-------------------------------------------------- css ------------------------------------------------------------*/
 
-* {					font-size: @regular; margin: 0; padding: 0; font-family: Roboto; letter-spacing: 0.02em;	}
+* {					font-size: @regular; margin: 0; padding: 0; font-family: Roboto, Arial, sans-serif; letter-spacing: 0.02em;	}
 html {				height: 100%;	}
 body {				height: 100%;	}
 h1 {				font-size: @headlines; font-weight: normal; }
 
 #header {			color: white; height: 100px; position: relative; background: @background;	}
+#viewport {			height: 100%; }
 #separator {		color: white; height: 75px; }
 #separator h1 {		margin-left: calc(@tableheadmarginleft); margin-top: 20px; float: left; width: calc(@quartersize);  }
 #header h1 {		margin-top: 50px; float: left;}
-.nano {				height: 38%; position: absolute !important;	}
+.nano {				 	}
 .enrichmentswrapper {
-					top: 150px;
+					height: calc(100% - 50px);
 }
 #enrichment-ov {	width: 100%; float: left; background: @workareas; height: calc(38% + 50px);	}
 #enrichment-src {	width: 100%; float: left; background: @workareas; height: calc(38% + 50px); margin-top: 2px; }
 .tableheadwrapper {	width: 100%; float: left; }
 #enrichments {		overflow-y: scroll; overflow-x: hidden; float: left; background: @workareas;}
+#labellistwrapper {	height: 80%;}
+#labellist {		overflow-y: scroll; overflow-x: hidden; float: left; background: @workareas;}
 #enrichmentbrowser {
 					overflow-x: hidden; float: left; height: 100%; }
 #enrichmentsearch {	float: left; margin-top: 30px; }
@@ -120,7 +123,13 @@ h1 {				font-size: @headlines; font-weight: normal; }
 .buttontext {		margin-left: @margininboxsmall; float: left; margin-top: 4px;			}
 #header .language {	font-size: @regular; margin-right: calc(@margininboxsmall * 2); bottom: 12px; }
 
-.boxextension {margin-top: -3px; border-top: 1px solid black; }
+.boxextension {		margin-top: -3px; border-top: 1px solid black; }
+
+.minipreview {		height: 80px; background: black; width: 200px; float: left;	}
+.minicol	 {		width: 25%; float: left;	}
+.minibox 	{		width: 90%; height: 20px; margin-top: 4px; display: block;}
+
+
 
 
 /* icon corrections */
@@ -128,10 +137,8 @@ h1 {				font-size: @headlines; font-weight: normal; }
 	{ 				margin-right: -2px; margin-top: -4px; display: block; }
 .small .icon-preflabel, .small .icon-altlabel
 	{ 				margin-right: -6px; margin-top: -4px; display: block; }
-#header .icon-label {
+#header .icon-label, #header .icon-folder {
 					position: absolute; right: 50px; font-size: 130px; top: 2px;
 }
 
-.ng-scope {
-  height: 100%;
-}
+
