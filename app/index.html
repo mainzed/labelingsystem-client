@@ -1,20 +1,24 @@
 <!doctype html>
-<html>
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml" prefix="foaf: http://xmlns.com/foaf/0.1/ vcard: http://www.w3.org/2006/vcard/ns#">
   <head>
     <meta charset="utf-8">
     <title>Labeling System Webapp</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,700" rel="stylesheet">
     <!-- build:css(.) styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.css" />
     <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-default.css" />
     <link rel="stylesheet" href="bower_components/font-awesome-bower/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/nanoscroller/bin/css/nanoscroller.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/labsys.css">
+    <link rel="stylesheet" type="text/css" href="images/icomoon/style.css">
     <!-- endbuild -->
   </head>
   <body ng-app="labelsApp">
@@ -22,10 +26,8 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-    <!-- Add your site or application content here -->
-    <div class="container">
+    <!-- Add your site or application content here -->  
     <div ng-view=""></div>
-    </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -40,6 +42,7 @@
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
@@ -48,6 +51,7 @@
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/ng-dialog/js/ngDialog.js"></script>
+    <script src="bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
 

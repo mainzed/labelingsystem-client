@@ -21,6 +21,9 @@ angular.module('labelsApp')
         }
     }
 
+    // init nanoscroll
+    $(".nano").nanoScroller();
+
     VocabService.get({id: $routeParams.vID}, function(vocabulary) {
         $scope.vocabulary = vocabulary;
         getVocabThesauri(vocabulary.id);

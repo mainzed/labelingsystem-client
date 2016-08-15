@@ -1,128 +1,200 @@
-<breadcrumbs></breadcrumbs>
+<!-- Labeling System Prototype -->
 
-<h1>label: {{ prefLabel.value }}</h1>
+<div id="header" class="box full">
+	<div id="breadcrumb"></div>
+	<h1>LBK phase 14 (Lindig)</h1>
+	<span class="icon-label"></span>
+	<span class="language">en</span>
+</div>
+<div id="enrichment-ov">
+	<!-- fixed table header -->
+	<div class="tableheadwrapper">
+		<div class="tablehead left"><span>Broader</span></div>
+		<div class="insidewrapper half">
+			<div class="tablehead halfleft"><span>Text</span></div>
+			<div class="tablehead halfright"><span>Relations</span></div>
+		</div>
+		<div class="tablehead right"><span>Narrower</span></div>
+	</div>
 
-<ul>
-
-  <li ng-show="label.prefLabels">Begriffsbezeichnungen:</li>
-  <ul ng-repeat="prefLabel in label.prefLabels">
-    <li>{{ prefLabel.value }} ({{prefLabel.lang}}) <span ng-show="prefLabel.isThumbnail">*</span></li>
-  </ul>
-
-  <li ng-show="label.altLabels">alternive Begriffsbezeichnungen:</li>
-  <ul ng-repeat="altLabel in label.altLabels">
-    <li>{{ altLabel.value }} ({{prefLabel.lang}})</li>
-  </ul>
-
-  <li ng-show="label.scopeNote">Beschreibung: {{ label.scopeNote.value }}</li>
-  <li ng-show="!label.scopeNote">Beschreibung: fehlt!!!</li>
-
-</ul>
-
-<h3>same level</h3>
-<ul>
-
-  <li ng-show="label.related">related Labels:</li>
-  <ul>
-    <li ng-repeat="relatedLabel in relatedLabels">
-      <span ng-repeat="prefLabel in relatedLabel.prefLabels" ng-show"prefLabel.isThumbnail">
-        {{ prefLabel.value }}
-      </span>
-      <button type="button" name="button" ng-click="onDetailClick(relatedLabel)">details</button>
-    </li>
-  </ul>
-
-  <li ng-show="label.exactMatch">exact match:</li>
-  <ul>
-    <li ng-repeat="match in exactMatches">
-      {{ match.label }} ({{ match.type }})
-    </li>
-  </ul>
-
-  <li ng-show="label.closeMatch">close match:</li>
-  <ul>
-    <li ng-repeat="match in closeMatch">
-      {{ match.label }} ({{ match.type }})
-    </li>
-  </ul>
-
-  <li ng-show="label.relatedMatch">related match:</li>
-  <ul>
-    <li ng-repeat="match in relatedMatch">
-      {{ match.label }} ({{ match.type }})
-    </li>
-  </ul>
-
-  <li ng-show="label.seeAlso">Wayback Links</li>
-  <ul>
-    <li ng-repeat="resource in seeAlsoResources">{{ resource.label }} ({{ resource.type }})</li>
-  </ul>
-
-</ul>
-
-<h3>Broader</h3>
-<ul>
-  <li ng-show="label.broader">broader Labels:</li>
-  <ul ng-repeat="broaderLabel in broaderLabels">
-    <li ng-repeat="prefLabel in broaderLabel.prefLabels" ng-show"prefLabel.isThumbnail">
-      {{ prefLabel.value }}
-      <button type="button" name="button" ng-click="onDetailClick(broaderLabel)">details</button>
-    </li>
-  </ul>
-
-  <li ng-show="label.broadMatch">broad match:</li>
-  <ul>
-    <li ng-repeat="match in broadMatches">
-      {{ match.label }} ({{ match.type }})
-    </li>
-  </ul>
-</ul>
-
-<h3>Narrower</h3>
-<ul>
-  <li ng-show="label.narrower">narrower Labels:</li>
-  <ul ng-repeat="narrowerLabel in narrowerLabels">
-    <li ng-repeat="prefLabel in narrowerLabel.prefLabels" ng-show"prefLabel.isThumbnail">
-      {{ prefLabel.value }}
-      <button type="button" name="button" ng-click="onDetailClick(narrowerLabel)">details</button>
-    </li>
-  </ul>
-
-  <li ng-show="label.narrowMatch">narrow match:</li>
-  <ul>
-    <li ng-repeat="match in narrowMatch">
-      {{ match.label }} ({{ match.type }})
-    </li>
-  </ul>
-</ul>
-
-<!-- search repositories -->
-<div style="border: 1px solid;">
-  <h3>Anreichern</h3>
-  <input type="text" name="search" value="" placeholder="search" ng-model="labelFilter"><button type="button" name="button" ng-click="onSearchClick()">suchen</button>
-  <!-- <button type="button" name="button" ng-click="searchInRepositories()">search in repositories</button> -->
-
-  <li ng-repeat="result in searchResults">
-    <!-- {{ label.prefLabels[0].value }} -->
-    {{ result.labels[0] }}
-    <span ng-show="result.scheme === 'Labeling System'" style="background-color: lightblue;">ls</span>
-    <!-- <span ng-show="label.vocabID === vocabulary.id" style="background-color: yellow;">same vocab</span> -->
-
-    <button type="button" name="button" ng-click="onNarrowerClick(label)">narrower</button>
-    <button type="button" name="button" ng-click="onBroaderClick(label)">broader</button>
-
-    <!-- details -->
-    <ul>
-      <li>description: {{ result.descriptions[0]}}</li>
-    </ul>
+	<!-- table -->
+	<div class="nano enrichmentswrapper">
+	<div id="enrichments" class="nano-content">
+		<!-- broader column -->
+		<div class="col left">
+			<div class="box small getty">
+				<span class="relation"></span>
+				<span class="thumbnail">Linienbandkeramik (Neolithic culture and style)</span>
+				<span class="type">(Getty)</span>
+				<span class="language">en</span>
+			</div>
+			<div class="box small eh">
+				<span class="relation"></span>
+				<span class="thumbnail"></span>
+				<span class="type">(EH)</span>
+				<span class="language">en</span>
+			</div>
+		</div>
 
 
+		<div class="insidewrapper half paddingbottom">
+			<!-- text column -->
+			<div class="col halfleft">
+				<div class="box small text">
+					<span class="relation"></span>
+					<span class="thumbnail">Linienbandkeramik (Neolithic culture and style)</span>
+					<span class="type"><span class="icon-preflabel"></span></span>
+					<span class="language">en</span>
+				</div>
+				<div class="box small text">
+					<span class="relation"></span>
+					<span class="thumbnail">Linienbandkeramik (Neolithic culture and style)</span>
+					<span class="type"><span class="icon-preflabel"></span></span>
+					<span class="language">en</span>
+				</div>
+				<div class="box small text">
+					<span class="relation"></span>
+					<span class="thumbnail"></span>
+					<span class="type"><span class="icon-preflabel"></span></span>
+					<span class="language">en</span>
+				</div>
+				<div class="box small text">
+					<span class="relation"></span>
+					<span class="thumbnail">Linienbandkeramik (Neolithic culture and style)</span>
+					<span class="type"><span class="icon-preflabel"></span></span>
+					<span class="language">en</span>
+				</div>
+				<div class="box small text">
+					<span class="relation"></span>
+					<span class="thumbnail">Linienbandkeramik (Neolithic culture and style)</span>
+					<span class="type"><span class="icon-altlabel"></span></span>
+					<span class="language">en</span>
+				</div>
+				<div class="box small text">
+					<span class="relation"></span>
+					<span class="thumbnail"></span>
+					<span class="type"><span class="icon-altlabel"></span></span>
+					<span class="language">en</span>
+				</div>
+			</div>
 
-  </li>
+			<!-- relations column -->
+			<div class="col halfright">
+				<div class="box small label">
+					<span class="relation"></span>
+					<span class="thumbnail"></span>
+					<span class="type"><span class="icon-label"></span></span>
+					<span class="language">en</span>
+				</div>
+				<div class="box small label">
+					<span class="relation"></span>
+					<span class="thumbnail"></span>
+					<span class="type"><span class="icon-label"></span></span>
+					<span class="language">en</span>
+				</div>
+				<div class="box small getty">
+					<span class="relation"></span>
+					<span class="thumbnail"></span>
+					<span class="type">(Getty)</span>
+					<span class="language">en</span>
+				</div>
+				<div class="box small eh">
+					<span class="relation"></span>
+					<span class="thumbnail"></span>
+					<span class="type">(EH)</span>
+					<span class="language">en</span>
+				</div>
+			</div>
+		</div>
 
-  <!-- message in case no search results found -->
-  <div ng-show="searchResults.length < 1">
-    No search results found!
-  </div>
+		<!-- narrower column -->
+		<div class="col right">
+			<div class="box small getty">
+				<span class="relation"></span>
+				<span class="thumbnail"></span>
+				<span class="type"></span>
+				<span class="language">en</span>
+			</div>
+			<div class="box small eh">
+				<span class="relation"></span>
+				<span class="thumbnail"></span>
+				<span class="type"></span>
+				<span class="language">en</span>
+			</div>
+		</div>
+	</div>
+	</div>
+</div>
+<div id="enrichment-src">
+	<div id="separator">
+		<h1>Enrich</h1>
+		<div id="enrichmentsearch">
+			<input type="search" value="Search in Thesauri"></input>
+		</div>
+	</div>
+	<div class="col left">
+		<button class="enrichbutton">
+			<span class="buttontext">Add preflabel</span>
+			<span class="buttonicon"><span class="icon-preflabel"></span></span>
+		</button>
+		<button class="enrichbutton">
+			<span class="buttontext">Add alt label</span>
+			<span class="buttonicon"><span class="icon-altlabel"></span></span>
+		</button>
+		<button class="enrichbutton">
+			<span class="buttontext">Add scope note</span>
+			<span class="buttonicon"><span class="icon-note"></span></span>
+		</button>
+		<button class="enrichbutton">
+			<span class="buttontext">Add wayback link</span>
+			<span class="buttonicon"></span>
+		</button>
+
+	</div>
+	<div class="col threequarter">
+	<div id="enrichmentbrowser" class="nano">
+	<div class="nano-content">
+		<div class="box bigbox label">
+			<span class="thumbnail">Linienbandkeramik (Neolithic culture and style)</span>
+			<span class="note">This is a note.</span>
+			<span class="type"><span class="icon-label"></span></span>
+			<span class="language">en</span>
+		</div>
+		<div class="box bigbox label">
+			<span class="thumbnail"><button class="showadditionalcontent">+</button>Linienbandkeramik (Neolithic culture and style)</span>
+			<span class="type"><span class="icon-label"></span></span>
+			<span class="language">en</span>
+		</div>
+		<div class="box boxextension bigbox label">
+			<span class="relations"></span>
+		</div>
+		<div class="box bigbox dbpedia">
+			<span class="thumbnail"></span>
+			<span class="type">(EH)</span>
+			<span class="language">en</span>
+		</div>
+		<div class="box bigbox getty">
+			<span class="thumbnail">Linienbandkeramik (Neolithic culture and style)</span>
+			<span class="type">(Getty)</span>
+			<span class="language">en</span>
+		</div>
+		<div class="box bigbox eh">
+			<span class="thumbnail"></span>
+			<span class="type">(EH)</span>
+			<span class="language">en</span>
+		</div>
+		<div class="box bigbox dbpedia">
+			<span class="thumbnail"></span>
+			<span class="type">(EH)</span>
+			<span class="language">en</span>
+		</div>
+		<div class="box bigbox eh">
+			<span class="thumbnail"></span>
+			<span class="type">(EH)</span>
+			<span class="language">en</span>
+		</div>
+	</div>
+	</div>
+	</div>
 
 </div>

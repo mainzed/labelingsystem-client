@@ -357,10 +357,12 @@ module.exports = function (grunt) {
     less: {
       development: {
         options: {
-          paths: ['<%= yeoman.app %>/styles/less']
+          paths: ['<%= yeoman.app %>/styles/less'],
+          strictMath: true
         },
         files: {
-          '<%= yeoman.app %>/styles/main.css': '<%= yeoman.app %>/styles/less/main.less'
+          '<%= yeoman.app %>/styles/main.css': '<%= yeoman.app %>/styles/less/main.less',
+          '<%= yeoman.app %>/styles/labsys.css': '<%= yeoman.app %>/styles/less/labsys.less'
         }
       }
     },
