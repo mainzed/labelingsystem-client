@@ -1,0 +1,133 @@
+/*------------------- colors---------------------*/
+@background: 		black;
+@workareas: 		#1c1c1c;
+@middle: 			#333333;
+@getty: 			#FCF495;
+@eh: 				#B8DBF1;
+@dbpedia:			#0086FF;
+@text: 				#3f3f3f;
+@label: 			#f5f5f5;
+
+/*------------- unused predefined colors-------- */
+
+/* font-sizes */
+@headlines: 		32px;
+@regular: 			16px;
+@small: 			12px;
+
+/*------------------ margins ------------------- */
+@margininboxsmall: 	8px;
+@marginoutboxsmall: 9px;
+@tableheadmargin: 	@margininboxsmall + @marginoutboxsmall;
+@tableheadmarginleft: @margininboxsmall + @marginoutside;
+@marginoutside: 	20px;
+@marginbottombox: 	3px;
+
+
+/*------------------- grid --------------------- */
+@quartersize: 		(100% - @marginoutboxsmall * 5 - @marginoutside * 2) / 4;
+
+
+
+/*-------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------- css ------------------------------------------------------------*/
+
+* {					font-size: @regular; margin: 0; padding: 0; font-family: Roboto; letter-spacing: 0.02em;	}
+html {				height: 100%;	}
+body {				background: @background; height: 100%;	}
+h1 {				font-size: @headlines; font-weight: normal; }
+
+#header {			color: white; height: 100px; position: relative;	}
+#separator {		color: white; height: 75px; }
+#separator h1 {		margin-left: calc(@tableheadmarginleft); margin-top: 20px; float: left; width: calc(@quartersize);  }
+#header h1 {		margin-top: 50px; float: left;}
+.nano {				height: 38%; position: absolute !important;	}
+.enrichmentswrapper {
+					top: 150px;
+}
+#enrichment-ov {	width: 100%; float: left; background: @workareas; height: calc(38% + 50px);	}
+#enrichment-src {	width: 100%; float: left; background: @workareas; height: calc(38% + 50px); margin-top: 2px; }
+.tableheadwrapper {	width: 100%; float: left; }
+#enrichments {		overflow-y: scroll; overflow-x: hidden; float: left; background: @workareas;}
+#enrichmentbrowser {		
+					overflow-x: hidden; float: left; height: 100%; }
+#enrichmentsearch {	float: left; margin-top: 30px; }
+#enrichmentsearch input
+				 {	background: none; border: none;  color: gray; width: 200px;}
+
+#breadcrumb {		float: left; width: 100px; display: block; height: 100px; }
+.tablehead {		float: left; height: 50px; color: white;	}
+.tablehead span {	margin-top: 15px; margin-left: calc(@tableheadmargin); display: block; }
+.tablehead.left span {	
+					margin-left: calc(@tableheadmarginleft); display: block; }
+.col {				float: left; 	}
+.insidewrapper { 	background: @middle; float: left; }
+
+/* box */
+.box 	{ 			float: left; min-height: 70px; }
+.small 	{			margin-bottom: @marginbottombox; margin-left: @marginoutboxsmall; position: relative; }
+.bigbox {			width: calc(100% - @marginoutside - @marginoutboxsmall); margin-bottom: @marginbottombox; margin-left: @marginoutboxsmall; position: relative;	}
+
+/* box types */
+.getty	{			background: @getty;	}
+.eh		{			background: @eh;	}
+.dbpedia {			background: @dbpedia; }
+.text	{			background: @text; color: white;	}
+.label {			background: @label; }
+
+/* box elements */
+.thumbnail {		margin-bottom: @margininboxsmall; margin-left: @margininboxsmall; float: left; width: 80%; display: block; margin-top: 43px;}
+.language {			bottom: @margininboxsmall; right: @margininboxsmall; font-size: @small; letter-spacing: 0.08em; position: absolute; text-transform: uppercase; font-style: italic;}
+.type {				top: @margininboxsmall; right: @margininboxsmall; font-size: @small; position: absolute;}
+.note {				float: left; margin-top: @margininboxsmall;		}
+.bigbox .thumbnail {
+					position: static; float: left; margin-left: @margininboxsmall; 
+					margin-top: @margininboxsmall; bottom: auto; left: auto; top: auto; width: 50%;  }
+
+
+
+
+/* grid */
+.full 	{			width: 100%;	}
+.left {				width: calc(@quartersize + @marginoutboxsmall + @marginoutside );		}
+.right {			width: calc(@quartersize + @marginoutboxsmall + @marginoutside );		}
+.half {				width: calc(@quartersize * 2 + @marginoutboxsmall * 3);		}
+
+.halfleft {			width: calc((100% - @marginoutboxsmall * 3) / 2 + @marginoutboxsmall * 2 ); }
+.halfright {		width: calc((100% - @marginoutboxsmall * 3) / 2 + @marginoutboxsmall ); }
+
+
+.left .box {		margin-left: @marginoutside; margin-right: @marginoutboxsmall; width: calc(100% - @marginoutboxsmall - @marginoutside); }
+.right .box {		margin-right: @marginoutside; margin-left: @marginoutboxsmall; width: calc(100% - @marginoutboxsmall - @marginoutside); }
+.halfleft .box {	margin-right: @marginoutboxsmall; margin-left: @marginoutboxsmall; width: calc(100% - @marginoutboxsmall * 2);  }
+.halfright .box {	margin-right: @marginoutboxsmall; margin-left: 0; width: calc(100% - @marginoutboxsmall); }
+.enrichbutton	{	margin-left: @marginoutside; margin-right: @marginoutboxsmall; width: calc(100% - @marginoutboxsmall - @marginoutside);
+					height: 40px; background: @middle; border: 0; text-align: left; color: white; margin-bottom: @marginbottombox;
+					cursor: pointer; }
+.middle {			background: @middle;	}
+
+.threequarter {		width: calc(100% - ( @quartersize + @marginoutside + @marginoutboxsmall ) ); position: relative; height: calc(100% - 75px);	}
+
+
+
+/* nano slider details */
+.nano-slider {		background: white !important; border-radius: 0 !important; width: 5px !important; }
+.nano-pane {		right: 1px !important;	}
+
+.paddingbottom {	padding-bottom: 10px;	}
+
+.buttonicon {		margin-right: @margininboxsmall; float: right;}
+.buttontext {		margin-left: @margininboxsmall; float: left; margin-top: 4px;			}
+#header .language {	font-size: @regular; margin-right: calc(@margininboxsmall * 2); bottom: 12px; }	
+
+.boxextension {margin-top: -3px; border-top: 1px solid black; }
+
+
+/* icon corrections */
+.small .icon-label, .bigbox .icon-label 
+	{ 				margin-right: -2px; margin-top: -4px; display: block; }
+.small .icon-preflabel, .small .icon-altlabel
+	{ 				margin-right: -6px; margin-top: -4px; display: block; }
+#header .icon-label {
+					position: absolute; right: 50px; font-size: 130px; top: 2px;
+}	

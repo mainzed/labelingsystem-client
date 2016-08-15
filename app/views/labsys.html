@@ -1,0 +1,220 @@
+<!-- Labeling System Prototype -->
+<!DOCTYPE html>
+<html lang="de" xmlns="http://www.w3.org/1999/xhtml" prefix="foaf: http://xmlns.com/foaf/0.1/ vcard: http://www.w3.org/2006/vcard/ns#">
+
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.nanoscroller/0.8.7/css/nanoscroller.min.css">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,700" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="labsys.css">
+	<link rel="stylesheet" type="text/css" href="icomoon/style.css">
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.nanoscroller/0.8.7/javascripts/jquery.nanoscroller.min.js"></script>
+</head>
+
+<body>
+	<div id="header" class="box full">
+		<div id="breadcrumb"></div>
+		<h1>LBK phase 14 (Lindig)</h1>
+		<span class="icon-label"></span>
+		<span class="language">en</span>
+	</div>
+	<div id="enrichment-ov">
+		<!-- fixed table header -->
+		<div class="tableheadwrapper">
+			<div class="tablehead left"><span>Broader</span></div>	
+			<div class="insidewrapper half">
+				<div class="tablehead halfleft"><span>Text</span></div>	
+				<div class="tablehead halfright"><span>Relations</span></div>	
+			</div>
+			<div class="tablehead right"><span>Narrower</span></div>	
+		</div>
+
+		<!-- table -->
+		<div class="nano enrichmentswrapper">
+		<div id="enrichments" class="nano-content">
+			<!-- broader column -->
+			<div class="col left">
+				<div class="box small getty">
+					<span class="relation"></span>
+					<span class="thumbnail">Linienbandkeramik (Neolithic culture and style)</span>
+					<span class="type">(Getty)</span>
+					<span class="language">en</span>
+				</div>
+				<div class="box small eh">
+					<span class="relation"></span>
+					<span class="thumbnail"></span>
+					<span class="type">(EH)</span>
+					<span class="language">en</span>
+				</div>
+			</div>	
+
+
+			<div class="insidewrapper half paddingbottom">
+				<!-- text column -->
+				<div class="col halfleft">
+					<div class="box small text">
+						<span class="relation"></span>
+						<span class="thumbnail">Linienbandkeramik (Neolithic culture and style)</span>
+						<span class="type"><span class="icon-preflabel"></span></span>
+						<span class="language">en</span>
+					</div>
+					<div class="box small text">
+						<span class="relation"></span>
+						<span class="thumbnail">Linienbandkeramik (Neolithic culture and style)</span>
+						<span class="type"><span class="icon-preflabel"></span></span>
+						<span class="language">en</span>
+					</div>
+					<div class="box small text">
+						<span class="relation"></span>
+						<span class="thumbnail"></span>
+						<span class="type"><span class="icon-preflabel"></span></span>
+						<span class="language">en</span>
+					</div>
+					<div class="box small text">
+						<span class="relation"></span>
+						<span class="thumbnail">Linienbandkeramik (Neolithic culture and style)</span>
+						<span class="type"><span class="icon-preflabel"></span></span>
+						<span class="language">en</span>
+					</div>
+					<div class="box small text">
+						<span class="relation"></span>
+						<span class="thumbnail">Linienbandkeramik (Neolithic culture and style)</span>
+						<span class="type"><span class="icon-altlabel"></span></span>
+						<span class="language">en</span>
+					</div>
+					<div class="box small text">
+						<span class="relation"></span>
+						<span class="thumbnail"></span>
+						<span class="type"><span class="icon-altlabel"></span></span>
+						<span class="language">en</span>
+					</div>
+				</div>	
+
+				<!-- relations column -->
+				<div class="col halfright">
+					<div class="box small label">
+						<span class="relation"></span>
+						<span class="thumbnail"></span>
+						<span class="type"><span class="icon-label"></span></span>
+						<span class="language">en</span>
+					</div>
+					<div class="box small label">
+						<span class="relation"></span>
+						<span class="thumbnail"></span>
+						<span class="type"><span class="icon-label"></span></span>
+						<span class="language">en</span>
+					</div>
+					<div class="box small getty">
+						<span class="relation"></span>
+						<span class="thumbnail"></span>
+						<span class="type">(Getty)</span>
+						<span class="language">en</span>
+					</div>
+					<div class="box small eh">
+						<span class="relation"></span>
+						<span class="thumbnail"></span>
+						<span class="type">(EH)</span>
+						<span class="language">en</span>
+					</div>
+				</div>	
+			</div>
+
+			<!-- narrower column -->
+			<div class="col right">
+				<div class="box small getty">
+					<span class="relation"></span>
+					<span class="thumbnail"></span>
+					<span class="type"></span>
+					<span class="language">en</span>
+				</div>
+				<div class="box small eh">
+					<span class="relation"></span>
+					<span class="thumbnail"></span>
+					<span class="type"></span>
+					<span class="language">en</span>
+				</div>
+			</div>	
+		</div>
+		</div>
+	</div>
+	<div id="enrichment-src">
+		<div id="separator">
+			<h1>Enrich</h1>
+			<div id="enrichmentsearch">
+				<input type="search" value="Search in Thesauri"></input>
+			</div>
+		</div>
+		<div class="col left">
+			<button class="enrichbutton">
+				<span class="buttontext">Add preflabel</span>
+				<span class="buttonicon"><span class="icon-preflabel"></span></span>
+			</button>
+			<button class="enrichbutton">
+				<span class="buttontext">Add alt label</span>
+				<span class="buttonicon"><span class="icon-altlabel"></span></span>
+			</button>
+			<button class="enrichbutton">
+				<span class="buttontext">Add scope note</span>
+				<span class="buttonicon"><span class="icon-note"></span></span>
+			</button>
+			<button class="enrichbutton">
+				<span class="buttontext">Add wayback link</span>
+				<span class="buttonicon"></span>
+			</button>
+			
+		</div>	
+		<div class="col threequarter">
+		<div id="enrichmentbrowser" class="nano">
+		<div class="nano-content">
+			<div class="box bigbox label">
+				<span class="thumbnail">Linienbandkeramik (Neolithic culture and style)</span>
+				<span class="note">This is a note.</span>
+				<span class="type"><span class="icon-label"></span></span>
+				<span class="language">en</span>
+			</div>			
+			<div class="box bigbox label">
+				<span class="thumbnail"><button class="showadditionalcontent">+</button>Linienbandkeramik (Neolithic culture and style)</span>
+				<span class="type"><span class="icon-label"></span></span>
+				<span class="language">en</span>
+			</div>
+			<div class="box boxextension bigbox label">
+				<span class="relations"></span>
+			</div>
+			<div class="box bigbox dbpedia">
+				<span class="thumbnail"></span>
+				<span class="type">(EH)</span>
+				<span class="language">en</span>
+			</div>
+			<div class="box bigbox getty">
+				<span class="thumbnail">Linienbandkeramik (Neolithic culture and style)</span>
+				<span class="type">(Getty)</span>
+				<span class="language">en</span>
+			</div>
+			<div class="box bigbox eh">
+				<span class="thumbnail"></span>
+				<span class="type">(EH)</span>
+				<span class="language">en</span>
+			</div>
+			<div class="box bigbox dbpedia">
+				<span class="thumbnail"></span>
+				<span class="type">(EH)</span>
+				<span class="language">en</span>
+			</div>
+			<div class="box bigbox eh">
+				<span class="thumbnail"></span>
+				<span class="type">(EH)</span>
+				<span class="language">en</span>
+			</div>
+		</div>
+		</div>	
+		</div>
+		
+	</div>
+</body>
+<script>
+	$(".nano").nanoScroller();
+</script
+
+</html>
