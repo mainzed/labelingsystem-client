@@ -34,10 +34,10 @@
 
 * {					font-size: @regular; margin: 0; padding: 0; font-family: Roboto; letter-spacing: 0.02em;	}
 html {				height: 100%;	}
-body {				background: @background; height: 100%;	}
+body {				height: 100%;	}
 h1 {				font-size: @headlines; font-weight: normal; }
 
-#header {			color: white; height: 100px; position: relative;	}
+#header {			color: white; height: 100px; position: relative; background: @background;	}
 #separator {		color: white; height: 75px; }
 #separator h1 {		margin-left: calc(@tableheadmarginleft); margin-top: 20px; float: left; width: calc(@quartersize);  }
 #header h1 {		margin-top: 50px; float: left;}
@@ -130,4 +130,8 @@ h1 {				font-size: @headlines; font-weight: normal; }
 	{ 				margin-right: -6px; margin-top: -4px; display: block; }
 #header .icon-label {
 					position: absolute; right: 50px; font-size: 130px; top: 2px;
+}
+
+.ng-scope {
+  height: 100%;
 }

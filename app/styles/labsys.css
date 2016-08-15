@@ -16,7 +16,6 @@ html {
   height: 100%;
 }
 body {
-  background: black;
   height: 100%;
 }
 h1 {
@@ -27,6 +26,7 @@ h1 {
   color: white;
   height: 100px;
   position: relative;
+  background: black;
 }
 #separator {
   color: white;
@@ -292,4 +292,7 @@ h1 {
   right: 50px;
   font-size: 130px;
   top: 2px;
+}
+.ng-scope {
+  height: 100%;
 }

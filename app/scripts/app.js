@@ -55,6 +55,10 @@ angular
         templateUrl: 'views/admin-label-detail.html',
         controller: 'LabelDetailCtrl'
       })
+      .when('/cssTest', {
+        templateUrl: 'views/matthias.html',
+        controller: 'RandomCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
