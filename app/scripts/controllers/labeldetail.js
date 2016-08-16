@@ -22,8 +22,8 @@ angular.module('labelsApp')
     }
 
     $scope.boxes = [
-        { "category": "broadMatch", "type": "getty", "value": "broader getty label", "lang": "en" },
-        { "category": "narrowMatch", "type": "getty", "value": "narrower getty label", "lang": "en" }
+        //{ "category": "broadMatch", "type": "getty", "value": "broader getty label", "lang": "en", "quality": "high" },
+        //{ "category": "narrowMatch", "type": "getty", "value": "narrower getty label", "lang": "en", "quality": "high" }
     ];
 
     // init nanoscroll
@@ -74,6 +74,7 @@ angular.module('labelsApp')
 
     // get all thesauri associated with this vocabulary, preload these for search function
     function getVocabThesauri(vocabID) {
+        console.log(vocabID);
 
         $http.get('http://143.93.114.135/api/v1/retcat/vocabulary/' + vocabID).then(function(res) {
             // success
@@ -298,7 +299,8 @@ angular.module('labelsApp')
                     $scope.boxes.push({
                         category: "seeAlso",
                         type: externalResource.type,
-                        value: externalResource.label
+                        value: externalResource.label,
+                        quality: "low"
 
                     });
                 }, function(errorMessage) {
@@ -381,7 +383,8 @@ angular.module('labelsApp')
         $scope.boxes.push({
             category: "seeAlso",
             type: "wayback",
-            value: "Page title"
+            value: "Page title",
+            quality: "low"
             //lang: "en"
         });
     };
