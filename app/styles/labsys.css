@@ -116,7 +116,15 @@ button {
   margin-top: 64px;
   display: block;
   float: left;
+  margin-right: 9px;
+}
+#breadcrumb a.outside {
   margin-left: calc(20px + 9px);
+}
+#breadcrumb span span {
+  display: block;
+  float: left;
+  margin-top: 60px;
   margin-right: 9px;
 }
 .tablehead {
@@ -357,14 +365,14 @@ button {
 .small .icon-label,
 .bigbox .icon-label {
   margin-right: -2px;
-  margin-top: -4px;
+  margin-top: -5px;
   display: block;
 }
 .small .icon-preflabel,
 .small .icon-altlabel,
 .small .icon-note {
   margin-right: -6px;
-  margin-top: -4px;
+  margin-top: -5px;
   display: block;
 }
 .small .icon-exact,
@@ -378,6 +386,6 @@ button {
 #header .icon-folder {
   position: absolute;
   right: 50px;
-  font-size: 130px;
+  font-size: 110px;
   top: 2px;
 }

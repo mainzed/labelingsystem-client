@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'icomoon';
-  src:  url('fonts/icomoon.eot?14u1r5');
-  src:  url('fonts/icomoon.eot?14u1r5#iefix') format('embedded-opentype'),
-    url('fonts/icomoon.ttf?14u1r5') format('truetype'),
-    url('fonts/icomoon.woff?14u1r5') format('woff'),
-    url('fonts/icomoon.svg?14u1r5#icomoon') format('svg');
+  src:  url('fonts/icomoon.eot?o6p5ly');
+  src:  url('fonts/icomoon.eot?o6p5ly#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?o6p5ly') format('truetype'),
+    url('fonts/icomoon.woff?o6p5ly') format('woff'),
+    url('fonts/icomoon.svg?o6p5ly#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -18,13 +18,22 @@
   font-variant: normal;
   text-transform: none;
   line-height: 1;
-  font-size: 28px;
+  font-size: 30px;
 
   /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-note:before {
+  content: "\e901";
+}
+.icon-folder:before {
+  content: "\e900";
+}
+.icon-arrow:before {
+  content: "\e90a";
+}
 .icon-related:before {
   content: "\e907";
 }
@@ -33,12 +42,6 @@
 }
 .icon-close:before {
   content: "\e909";
-}
-.icon-note:before {
-  content: "\e900";
-}
-.icon-folder:before {
-  content: "\e901";
 }
 .icon-label:before {
   content: "\e902";
@@ -51,8 +54,5 @@
 }
 .icon-search:before {
   content: "\e905";
-}
-.icon-relation:before {
-  content: "\e906";
 }
 
