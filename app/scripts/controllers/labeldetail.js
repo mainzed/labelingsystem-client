@@ -74,7 +74,7 @@ angular.module('labelsApp')
 
     // get all thesauri associated with this vocabulary, preload these for search function
     function getVocabThesauri(vocabID) {
-        console.log(vocabID);
+        //console.log(vocabID);
 
         $http.get('http://143.93.114.135/api/v1/retcat/vocabulary/' + vocabID).then(function(res) {
             // success

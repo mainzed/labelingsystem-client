@@ -8,23 +8,42 @@
   </span>
 
   <span class="minipreview">
+
+    <!-- broader -->
     <span class="minileft minicol">
+      <span ng-repeat="box in miniBoxes | filter: broaderFilter" class="minibox label"></span>
+
+
       <span class="minibox getty"></span>
       <span class="minibox eh"></span>
+
     </span>
+
+    <!-- text -->
     <span class="minihalfleft minicol">
       <span class="minibox text"></span>
       <span class="minibox text"></span>
     </span>
+
+    <!-- relations -->
     <span class="minihalfright minicol">
-      <span class="minibox label"></span>
-      <span class="minibox label"></span>
+        <!-- <span class="minibox getty"></span> -->
+      <!-- <span class="minibox label"></span>
+      <span class="minibox label"></span> -->
     </span>
+
+    <!-- narrower -->
     <span class="miniright minicol">
-      <span class="minibox label"></span>
-      <span class="minibox label"></span>
+      <span ng-repeat="box in miniBoxes | filter: narrowerFilter" class="minibox label"></span>
+    </span>
+
+  </span>
+
+  <span class="type"><span class="icon-label"></span></span>
+
+  <span class="language">
+    <span ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: 'true'}">
+    {{ prefLabel.lang}}
     </span>
   </span>
-  <span class="type"><span class="icon-label"></span></span>
-  <span class="language">en</span>
 </div>
