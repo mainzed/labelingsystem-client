@@ -10,7 +10,7 @@ angular.module('labelsApp')
   .directive('breadcrumbs', function ($location, $routeParams) {
     return {
       template: [
-          '<div>',
+          '<div id="breadcrumb">',
 
             // vocabulary
             '<span ng-show="showVocabulary">',
@@ -27,10 +27,11 @@ angular.module('labelsApp')
                     '{{ vocabulary.title.value }}',
                 '</a>',
                 ' > ',
-                '{{ label.prefLabels[0].value }}',
             '</span>',
-
-          '</div>'
+          '</div>',
+          '<h1 ng-repeat="prefLabel in label.prefLabels" ng-show="prefLabel.isThumbnail">',
+            '{{ prefLabel.value }}',
+          '</h1>'
       ].join(""),
       restrict: 'E',
       link: function postLink(scope, element, attrs) {

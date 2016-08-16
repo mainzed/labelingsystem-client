@@ -77,7 +77,9 @@ angular.module('labelsApp')
 
         $http.get('http://143.93.114.135/api/v1/retcat/vocabulary/' + vocabID).then(function(res) {
             // success
+            console.log("found the following thesauri");
             console.log(res.data);
+
 
         }, function() {
             // error
@@ -87,12 +89,17 @@ angular.module('labelsApp')
     // when searching, append search results
     // search when something is entered,
     // ls results are cached anyway, everything else gets searched on change
+    $scope.resultBoxes = [];
+
     $scope.onSearchClick = function() {
 
-        // TODO: search in all thesauri and append as soon as they're found!
-        $http.get('http://143.93.114.135/api/v1/resourcequery?retcat=' + "Vornamen" + '&query=' + $scope.labelFilter).then(function(res) {
+        // search in ls first
+
+        // search in all thesauri and append as soon as they're found!
+        $http.get('http://143.93.114.135/api/v1/resourcequery?retcat=' + "Local Labeling System" + '&query=' + $scope.searchValue).then(function(res) {
             // success
-            $scope.searchResults = res.data;
+            $scope.resultBoxes = res.data;
+            console.log(res.data[0]);
 
         }, function() {
             // error
@@ -114,12 +121,14 @@ angular.module('labelsApp')
         // add prefLabels to attributeBoxes
         if (label.prefLabels) {
             label.prefLabels.forEach(function(prefLabel) {
-                $scope.boxes.push({
-                    category: "attribute",
-                    type: "prefLabel",
-                    value: prefLabel.value,
-                    lang: prefLabel.lang
-                });
+                if (!prefLabel.isThumbnail) {  // ignore thumbnail preflabel
+                    $scope.boxes.push({
+                        category: "attribute",
+                        type: "prefLabel",
+                        value: prefLabel.value,
+                        lang: prefLabel.lang
+                    });
+                }
             });
         }
 
@@ -148,7 +157,8 @@ angular.module('labelsApp')
                         category: "broader",
                         type: "label",
                         value: label.prefLabels[0].value,
-                        lang: label.prefLabels[0].lang
+                        lang: label.prefLabels[0].lang,
+                        quality: "high"
                     });
                 });
             });
@@ -162,7 +172,8 @@ angular.module('labelsApp')
                         category: "narrower",
                         type: "label",
                         value: label.prefLabels[0].value,
-                        lang: label.prefLabels[0].lang
+                        lang: label.prefLabels[0].lang,
+                        quality: "high"
                     });
                 });
             });
@@ -176,7 +187,8 @@ angular.module('labelsApp')
                         category: "related",
                         type: "label",
                         value: label.prefLabels[0].value,
-                        lang: label.prefLabels[0].lang
+                        lang: label.prefLabels[0].lang,
+                        quality: "high"
                     });
                 });
             });
@@ -194,8 +206,8 @@ angular.module('labelsApp')
                     $scope.boxes.push({
                         category: "broadMatch",
                         type: resource.type,
-                        value: resource.label
-                        //relation: "broadMatch"
+                        value: resource.label,
+                        quality: resource.quality
                     });
 
                 }, function(errorMessage) {
@@ -212,7 +224,8 @@ angular.module('labelsApp')
                     $scope.boxes.push({
                         category: "narrowMatch",
                         type: resource.type,
-                        value: resource.label
+                        value: resource.label,
+                        quality: resource.quality
                     });
                 }, function(errorMessage) {
                     // error
@@ -228,7 +241,8 @@ angular.module('labelsApp')
                     $scope.boxes.push({
                         category: "closeMatch",
                         type: resource.type,
-                        value: resource.label
+                        value: resource.label,
+                        quality: resource.quality
                     });
                 }, function(errorMessage) {
                     // error
@@ -245,7 +259,8 @@ angular.module('labelsApp')
                     $scope.boxes.push({
                         category: "relatedMatch",
                         type: resource.type,
-                        value: resource.label
+                        value: resource.label,
+                        quality: resource.quality
                     });
                 }, function(errorMessage) {
                     // error
@@ -262,7 +277,8 @@ angular.module('labelsApp')
                     $scope.boxes.push({
                         category: "exactMatch",
                         type: resource.type,
-                        value: resource.label
+                        value: resource.label,
+                        quality: resource.quality
                     });
 
                 }, function(errorMessage) {

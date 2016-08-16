@@ -10,7 +10,7 @@ angular.module('labelsApp')
   .directive('smallBox', function (ngDialog) {
     return {
       template: [
-        '<div class="box small {{ cssClass }}" ng-click="onBoxClick()">',
+        '<div class="box small {{ cssClass }} {{ quality }}" ng-click="onBoxClick()">',
             '<span class="relation" ng-bind-html="relation"></span>',
             '<span class="thumbnail" ng-bind="text"></span>',
             '<span class="type" ng-bind-html="type"></span>',
@@ -64,6 +64,9 @@ angular.module('labelsApp')
             scope.cssClass = scope.ngModel.type;
         }
 
+        // add quality css
+        scope.quality = scope.ngModel.quality;
+
         // add language
         scope.language = scope.ngModel.lang;
 
@@ -79,6 +82,7 @@ angular.module('labelsApp')
             scope.relation = "";
         }
 
+        //console.log(scope.ngModel);
         //console.log();
         //scope.relation = "<span class='icon-exact'></span>";
 
