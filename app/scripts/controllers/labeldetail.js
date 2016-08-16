@@ -23,8 +23,7 @@ angular.module('labelsApp')
 
     $scope.boxes = [
         { "category": "broadMatch", "type": "getty", "value": "broader getty label", "lang": "en" },
-        { "category": "narrowMatch", "type": "getty", "value": "narrower getty label", "lang": "en" },
-        { "category": "related", "type": "eh", "value": "related EH Label", "lang": "en" }
+        { "category": "narrowMatch", "type": "getty", "value": "narrower getty label", "lang": "en" }
     ];
 
     // init nanoscroll

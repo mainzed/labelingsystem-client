@@ -9,10 +9,17 @@
 angular.module('labelsApp')
   .directive('searchResultBox', function () {
     return {
-      template: '<div></div>',
-      restrict: 'E',
-      link: function postLink(scope, element, attrs) {
-        element.text('this is the searchResultBox directive');
-      }
+        template: [
+            '<div class="box bigbox label">',
+    		  '<span class="thumbnail">Linienbandkeramik (Neolithic culture and style)</span>',
+    		  '<span class="note">This is a note.</span>',
+    		  '<span class="type"><span class="icon-label"></span></span>',
+    		  '<span class="language">en</span>',
+    		'</div>'
+        ].join(""),
+        restrict: 'E',
+        link: function postLink(scope, element, attrs) {
+            //element.text('this is the searchResultBox directive');
+        }
     };
   });
