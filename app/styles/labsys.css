@@ -36,6 +36,7 @@ h1 {
 }
 #viewport {
   height: 100%;
+  background: black;
 }
 #separator {
   color: white;
@@ -110,6 +111,7 @@ h1 {
   color: white;
   margin-top: 64px;
   display: block;
+  float: left;
   margin-left: calc(20px + 9px);
   margin-right: 9px;
 }
@@ -129,10 +131,12 @@ h1 {
 }
 .col {
   float: left;
+  min-height: 10px;
 }
 .insidewrapper {
   background: #333333;
   float: left;
+  min-height: 100%;
 }
 /* box */
 .box {
