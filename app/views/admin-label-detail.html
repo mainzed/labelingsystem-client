@@ -1,10 +1,9 @@
 <!-- Labeling System Prototype -->
 
+
 <div id="header" class="box full">
 
-  <div id="breadcrumb"><a href="#/admin/vocabularies/{{ vocabulary.id }}/labels">{{ vocabulary.title.value }}</a></div>
-
-	<h1>{{ prefLabel.value }}</h1>
+  <breadcrumbs></breadcrumbs>
 
 	<span class="icon-label"></span>
 	<span class="language">{{ prefLabel.lang }}</span>
@@ -58,7 +57,8 @@
 	<div id="separator">
 		<h1>Enrich</h1>
 		<div id="enrichmentsearch">
-			<input type="search" value="Search in Thesauri"></input>
+			<input type="search" placeholder="Search in Thesauri" ng-model="searchValue"></input>
+      <button type="button" name="button" ng-click="onSearchClick()">search</button>
 		</div>
 	</div>
 
@@ -88,48 +88,56 @@
 	<div class="col threequarter">
 	<div id="enrichmentbrowser" class="nano">
 	<div class="nano-content">
-		<div class="box bigbox label">
+
+    <!-- <div class="box bigbox label">
 			<span class="thumbnail">Linienbandkeramik (Neolithic culture and style)</span>
 			<span class="note">This is a note.</span>
 			<span class="type"><span class="icon-label"></span></span>
 			<span class="language">en</span>
-		</div>
-    
-    <search-result-box></search-result-box>
+		</div> -->
 
-		<div class="box bigbox label">
+    <search-result-box ng-repeat="box in resultBoxes"></search-result-box>
+
+		<!-- <div class="box bigbox label">
 			<span class="thumbnail"><button class="showadditionalcontent">+</button>Linienbandkeramik (Neolithic culture and style)</span>
 			<span class="type"><span class="icon-label"></span></span>
 			<span class="language">en</span>
-		</div>
-		<div class="box boxextension bigbox label">
+		</div> -->
+
+		<!-- <div class="box boxextension bigbox label">
 			<span class="relations"></span>
-		</div>
-		<div class="box bigbox dbpedia">
+		</div> -->
+
+    <!-- <div class="box bigbox dbpedia">
 			<span class="thumbnail"></span>
 			<span class="type">(EH)</span>
 			<span class="language">en</span>
-		</div>
-		<div class="box bigbox getty">
+		</div> -->
+
+    <!-- <div class="box bigbox getty">
 			<span class="thumbnail">Linienbandkeramik (Neolithic culture and style)</span>
 			<span class="type">(Getty)</span>
 			<span class="language">en</span>
-		</div>
-		<div class="box bigbox eh">
+		</div> -->
+
+    <!-- <div class="box bigbox eh">
 			<span class="thumbnail"></span>
 			<span class="type">(EH)</span>
 			<span class="language">en</span>
-		</div>
-		<div class="box bigbox dbpedia">
+		</div> -->
+
+    <!-- <div class="box bigbox dbpedia">
 			<span class="thumbnail"></span>
 			<span class="type">(EH)</span>
 			<span class="language">en</span>
-		</div>
-		<div class="box bigbox eh">
+		</div> -->
+
+    <!-- <div class="box bigbox eh">
 			<span class="thumbnail"></span>
 			<span class="type">(EH)</span>
 			<span class="language">en</span>
-		</div>
+		</div> -->
+
 	</div>
 	</div>
 	</div>

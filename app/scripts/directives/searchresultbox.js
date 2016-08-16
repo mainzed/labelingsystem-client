@@ -10,11 +10,11 @@ angular.module('labelsApp')
   .directive('searchResultBox', function () {
     return {
         template: [
-            '<div class="box bigbox label">',
-    		  '<span class="thumbnail">Linienbandkeramik (Neolithic culture and style)</span>',
-    		  '<span class="note">This is a note.</span>',
+            '<div class="box bigbox label">',  // label
+    		  '<span class="thumbnail">{{ box.label }}</span>',
+    		  '<span class="note">{{ box.description }}</span>',
     		  '<span class="type"><span class="icon-label"></span></span>',
-    		  '<span class="language">en</span>',
+    		  '<span class="language"></span>',
     		'</div>'
         ].join(""),
         restrict: 'E',
