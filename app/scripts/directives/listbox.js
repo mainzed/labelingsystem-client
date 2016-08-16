@@ -35,6 +35,27 @@ angular.module('labelsApp')
                 });
             }
 
+            if (scope.label.narrowMatch) {
+                scope.label.narrowMatch.forEach(function(match) {
+                    console.log(match);
+                    // scope.miniBoxes.push({
+                    //     category: "narrower",
+                    //     type: "label"
+                    // });
+                });
+            }
+
+            if (scope.label.broadMatch) {
+                scope.label.broadMatch.forEach(function(match) {
+                    console.log(match);
+                    // scope.miniBoxes.push({
+                    //     category: "narrower",
+                    //     type: "label"
+                    // });
+                });
+            }
+            console.log(scope.label);
+
 
             //console.log(scope.miniBoxes);
 

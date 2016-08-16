@@ -40,10 +40,9 @@
   </span>
 
   <span class="type"><span class="icon-label"></span></span>
-
-  <span class="language">
-    <span ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: 'true'}">
+  
+  <span class="language" ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: 'true'}">
     {{ prefLabel.lang}}
-    </span>
   </span>
+
 </div>
