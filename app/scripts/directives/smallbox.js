@@ -11,7 +11,7 @@ angular.module('labelsApp')
     return {
       template: [
         '<div class="box small {{ cssClass }}" ng-click="onBoxClick()">',
-            '<span class="relation"><span class="icon-exact"></span></span>',
+            '<span class="relation" ng-bind-html="relation"></span>',
             '<span class="thumbnail" ng-bind="text"></span>',
             '<span class="type" ng-bind-html="type"></span>',
             '<span class="language" ng-bind="language"></span>',
@@ -68,18 +68,19 @@ angular.module('labelsApp')
         scope.language = scope.ngModel.lang;
 
         // add relation icons
-        if (scope.category === "related" || scope.category === "relatedMatch" || scope.category === "seeAlso") {
+        if (scope.ngModel.category === "related" || scope.ngModel.category === "relatedMatch" || scope.ngModel.category === "seeAlso") {
             scope.relation = "<span class='icon-related'></span>";
-        } else if (scope.category === "exactMatch") {
+        } else if (scope.ngModel.category === "exactMatch") {
             scope.relation = "<span class='icon-exact'></span>";
-        } else if (scope.category === "closeMatch") {
+        } else if (scope.ngModel.category === "closeMatch") {
             scope.relation = "<span class='icon-close'></span>";
         } else {
             // narrower, broader etc. no icon
             scope.relation = "";
         }
 
-        scope.relation = "<span class='icon-close'></span>";
+        //console.log();
+        //scope.relation = "<span class='icon-exact'></span>";
 
         scope.onBoxClick = function() {
             ngDialog.open({
