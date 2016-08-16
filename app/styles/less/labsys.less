@@ -82,7 +82,11 @@ button {			border: 0; background: transparent;}
 				 {	background: none; border: none;  color: gray; width: 200px;}
 
 #breadcrumb {		float: left; display: block; height: 100px; }
-#breadcrumb a {		color: white; margin-top: 64px; display: block; float: left; margin-left: calc(@marginoutside + @marginoutboxsmall); margin-right: @marginoutboxsmall; }
+#breadcrumb a {		color: white; margin-top: 64px; display: block; float: left;  margin-right: @marginoutboxsmall; }
+#breadcrumb a.outside  {
+					margin-left: calc(@marginoutside + @marginoutboxsmall); }
+#breadcrumb span span 
+				{	display: block; float: left; margin-top: 60px; margin-right: @marginoutboxsmall; }
 .tablehead {		float: left; height: 50px; color: white;	}
 .tablehead span {	margin-top: 15px; margin-left: calc(@tableheadmargin); display: block; }
 .tablehead.left span {
@@ -172,13 +176,13 @@ button {			border: 0; background: transparent;}
 
 /* icon corrections */
 .small .icon-label, .bigbox .icon-label
-	{ 				margin-right: -2px; margin-top: -4px; display: block; }
+	{ 				margin-right: -2px; margin-top: -5px; display: block; }
 .small .icon-preflabel, .small .icon-altlabel, .small .icon-note
-	{ 				margin-right: -6px; margin-top: -4px; display: block; }
+	{ 				margin-right: -6px; margin-top: -5px; display: block; }
 .small .icon-exact, .small .icon-close, .small .icon-related
 	{ 				margin-left: -5px; margin-top: -5px; display: block; }
 #header .icon-label, #header .icon-folder {
-					position: absolute; right: 50px; font-size: 130px; top: 2px;
+					position: absolute; right: 50px; font-size: 110px; top: 2px;
 }
 
 
