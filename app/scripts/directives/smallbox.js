@@ -7,10 +7,10 @@
  * # smallBox
  */
 angular.module('labelsApp')
-  .directive('smallBox', function () {
+  .directive('smallBox', function (ngDialog) {
     return {
       template: [
-          '<div class="box small {{ cssClass }}">',
+        '<div class="box small {{ cssClass }}" ng-click="onBoxClick()">',
             '<span class="relation" ng-bind="relation"></span>',
             '<span class="thumbnail" ng-bind="text"></span>',
             '<span class="type" ng-bind-html="type"></span>',
@@ -19,28 +19,36 @@ angular.module('labelsApp')
       ].join(""),
       restrict: 'E',
       //replace: true,
-      scope:{
+      scope: {
         ngModel: '='
       },
       link: function postLink(scope, element, attrs) {
-        //console.log(scope.ngModel);
+        //console.log(scope.boxes);
+        var boxes;
+
+        // set boxes as soon as they are ready
+        scope.$watchCollection('scope.boxes', function(newValue, oldValue) {
+            console.log("boxes changed!!!");
+            //boxes = newValue;
+            console.log(newValue);
+        });
 
         if (scope.ngModel.category === "attribute") {
 
             if (scope.ngModel.type === "prefLabel") {
-                scope.cssClass = "label";
+                scope.cssClass = "text";
                 scope.type = "<span class='icon-preflabel'></span>";  // icon
                 scope.text = scope.ngModel.value;
                 scope.language = scope.ngModel.lang;
 
             } else if (scope.ngModel.type === "altLabel") {
-                scope.cssClass = "label";
+                scope.cssClass = "text";
                 scope.type = "<span class='icon-altlabel'></span>";  // icon
                 scope.text = scope.ngModel.value;
                 scope.language = scope.ngModel.lang;
 
             } else if (scope.ngModel.type === "description") {
-                scope.cssClass = "label";
+                scope.cssClass = "text";
                 scope.type = "<span class='icon-note'></span>";  // icon
                 scope.text = scope.ngModel.value;
                 scope.language = scope.ngModel.lang;
@@ -74,6 +82,14 @@ angular.module('labelsApp')
                 scope.text = scope.ngModel.value;
                 scope.language = scope.ngModel.lang;
                 scope.relation = scope.ngModel.category;
+
+            } else if (scope.ngModel.type === "wayback") {
+                scope.cssClass = "wayback";
+                scope.type = "(wayback)";  // icon
+                scope.text = scope.ngModel.value;
+                scope.language = scope.ngModel.lang;
+                scope.relation = scope.ngModel.category;
+
             } else {
                 scope.cssClass = "dbpedia";
                 scope.type = scope.ngModel.type;  // icon
@@ -87,6 +103,22 @@ angular.module('labelsApp')
                 scope.relation = "";
             }
         }
+
+        scope.onBoxClick = function() {
+            ngDialog.open({
+                template: 'views/dialogs/small-box-detail.html',
+                disableAnimation: true,
+                scope: scope
+            });
+        };
+
+        scope.onDeleteClick = function() {
+
+            console.log(scope.ngModel.type);
+
+            console.log(scope.boxes);
+
+        };
 
     }
   };

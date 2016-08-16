@@ -70,7 +70,7 @@ angular.module('labelsApp')
     };
 
     $scope.relatedFilter = function(box) {
-        return box.category === "related" || box.category === "closeMatch" || box.category === "relatedMatch" || box.category === "exactMatch";
+        return box.category === "related" || box.category === "closeMatch" || box.category === "relatedMatch" || box.category === "exactMatch" || box.category === "seeAlso";
     };
 
     // get all thesauri associated with this vocabulary, preload these for search function
@@ -274,26 +274,24 @@ angular.module('labelsApp')
         }
     };
 
+    // wayback links
     $scope.getExternalResources = function(label) {
-        $scope.seeAlsoResources = [];
         if (label.seeAlso) {
             label.seeAlso.forEach(function(resource) {
                 ExternalResourcesService.get(resource.url, function(externalResource) {
-                    $scope.seeAlsoResources.push(externalResource);//
+                    //$scope.seeAlsoResources.push(externalResource);//
+                    $scope.boxes.push({
+                        category: "seeAlso",
+                        type: externalResource.type,
+                        value: externalResource.label
+
+                    });
                 }, function(errorMessage) {
                     // failure
                     console.log(errorMessage);
                 });
             });
         }
-    };
-
-    $scope.onDetailClick = function(label) {
-        $scope.detailLabel = label;
-        ngDialog.open({
-            template: 'views/dialogs/label-detail.html',
-            scope: $scope
-        });
     };
 
     $scope.onNarrowerClick = function(label) {
@@ -361,6 +359,15 @@ angular.module('labelsApp')
             type: "description",
             value: "this is a new description",
             lang: "en"
+        });
+    };
+
+    $scope.onAddLink = function() {
+        $scope.boxes.push({
+            category: "seeAlso",
+            type: "wayback",
+            value: "Page title"
+            //lang: "en"
         });
     };
   });

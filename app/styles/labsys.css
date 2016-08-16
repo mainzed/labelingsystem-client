@@ -9,7 +9,7 @@
   font-size: 16px;
   margin: 0;
   padding: 0;
-  font-family: Roboto;
+  font-family: Roboto, Arial, sans-serif;
   letter-spacing: 0.02em;
 }
 html {
@@ -28,6 +28,9 @@ h1 {
   position: relative;
   background: black;
 }
+#viewport {
+  height: 100%;
+}
 #separator {
   color: white;
   height: 75px;
@@ -42,12 +45,8 @@ h1 {
   margin-top: 50px;
   float: left;
 }
-.nano {
-  height: 38%;
-  position: absolute !important;
-}
 .enrichmentswrapper {
-  top: 150px;
+  height: calc(100% - 50px);
 }
 #enrichment-ov {
   width: 100%;
@@ -67,6 +66,15 @@ h1 {
   float: left;
 }
 #enrichments {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  float: left;
+  background: #1c1c1c;
+}
+#labellistwrapper {
+  height: 80%;
+}
+#labellist {
   overflow-y: scroll;
   overflow-x: hidden;
   float: left;
@@ -274,6 +282,22 @@ h1 {
   margin-top: -3px;
   border-top: 1px solid black;
 }
+.minipreview {
+  height: 80px;
+  background: black;
+  width: 200px;
+  float: left;
+}
+.minicol {
+  width: 25%;
+  float: left;
+}
+.minibox {
+  width: 90%;
+  height: 20px;
+  margin-top: 4px;
+  display: block;
+}
 /* icon corrections */
 .small .icon-label,
 .bigbox .icon-label {
@@ -287,12 +311,10 @@ h1 {
   margin-top: -4px;
   display: block;
 }
-#header .icon-label {
+#header .icon-label,
+#header .icon-folder {
   position: absolute;
   right: 50px;
   font-size: 130px;
   top: 2px;
-}
-.ng-scope {
-  height: 100%;
 }

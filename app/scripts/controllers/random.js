@@ -9,6 +9,7 @@
  */
 angular.module('labelsApp')
   .controller('RandomCtrl', function () {
-
+  	// init nanoscroll
+    $(".nano").nanoScroller();
     
   });

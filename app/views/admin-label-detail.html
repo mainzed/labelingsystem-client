@@ -1,8 +1,11 @@
 <!-- Labeling System Prototype -->
 
 <div id="header" class="box full">
-  <div id="breadcrumb"></div>
+
+  <div id="breadcrumb"><a href="#/admin/vocabularies/{{ vocabulary.id }}/labels">{{ vocabulary.title.value }}</a></div>
+
 	<h1>{{ prefLabel.value }}</h1>
+
 	<span class="icon-label"></span>
 	<span class="language">{{ prefLabel.lang }}</span>
 </div>
@@ -76,7 +79,7 @@
 			<span class="buttonicon"><span class="icon-note"></span></span>
 		</button>
 
-    <button class="enrichbutton">
+    <button class="enrichbutton" ng-click="onAddLink()">
 			<span class="buttontext">Add wayback link</span>
 			<span class="buttonicon"></span>
 		</button>
