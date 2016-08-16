@@ -103,9 +103,15 @@ h1 {
 }
 #breadcrumb {
   float: left;
-  width: 100px;
   display: block;
   height: 100px;
+}
+#breadcrumb a {
+  color: white;
+  margin-top: 64px;
+  display: block;
+  margin-left: calc(20px + 9px);
+  margin-right: 9px;
 }
 .tablehead {
   float: left;
