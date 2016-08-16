@@ -1,16 +1,34 @@
+/*---------------------LESS----------------------*/
 /*------------------- colors---------------------*/
+/* basic */
 @background: 		black;
 @workareas: 		#1c1c1c;
 @middle: 			#333333;
-@getty: 			#FCF495;
-@eh: 				#B8DBF1;
-@dbpedia:			#0086FF;
 @text: 				#3f3f3f;
 @label: 			#f5f5f5;
-@chronontology: 	#A9A7E0;
-@wayback:			#141259;
 
-/*------------- unused predefined colors-------- */
+/* high quality */
+@getty: 			#FFF8A6;
+@eh: 				#CFFFA1;
+@chronontology: 	#C0FFE8;
+@ls:				#A9D2FF;
+@pleiades:			#FFCCE1;
+/*unused*/
+@aaaaa:				#FCE2CA;		
+@aaaaaa:			#EFCAFF;
+
+
+/* low quality */
+@dbpedia:			#170056;
+@finto:				#513C00;
+@fao: 				#013642;
+@geonames:			#2B4400;
+@wayback:			#5E0101;
+/*unused*/
+@bbb:				#47003A;
+@bbbb:				#422200;
+
+
 
 /* font-sizes */
 @headlines: 		32px;
@@ -24,6 +42,7 @@
 @tableheadmarginleft: @margininboxsmall + @marginoutside;
 @marginoutside: 	20px;
 @marginbottombox: 	3px;
+@boxheight: 		70px;
 
 
 /*------------------- grid --------------------- */
@@ -33,6 +52,7 @@
 
 /*-------------------------------------------------------------------------------------------------------------------*/
 /*-------------------------------------------------- css ------------------------------------------------------------*/
+/*------------------- Do not edit this css file directly. Edit the LESS file-----------------------------------------*/
 
 * {					font-size: @regular; margin: 0; padding: 0; font-family: Roboto, Arial, sans-serif; letter-spacing: 0.02em;	}
 html {				height: 100%;	}
@@ -69,11 +89,11 @@ h1 {				font-size: @headlines; font-weight: normal; }
 .insidewrapper { 	background: @middle; float: left; }
 
 /* box */
-.box 	{ 			float: left; min-height: 70px; }
+.box 	{ 			float: left; min-height: @boxheight; }
 .small 	{			margin-bottom: @marginbottombox; margin-left: @marginoutboxsmall; position: relative; }
 .bigbox {			width: calc(100% - @marginoutside - @marginoutboxsmall); margin-bottom: @marginbottombox; margin-left: @marginoutboxsmall; position: relative;	}
 
-/* box types */
+/* box color types */
 .getty	{			background: @getty;	}
 .eh		{			background: @eh;	}
 .dbpedia {			background: @dbpedia; }
@@ -81,6 +101,13 @@ h1 {				font-size: @headlines; font-weight: normal; }
 .label {			background: @label; }
 .chronontology {	background: @chronontology; }
 .wayback {			background: @wayback; }
+.ls {				background: @ls; }
+.pleiades {			background: @pleiades; }
+.finto {			background: @finto; }
+.fao {				background: @fao;	}
+
+.high {				color: black;	}
+.low	{			color: white;	}
 
 /* box elements */
 .thumbnail {		margin-bottom: @margininboxsmall; margin-left: @margininboxsmall; float: left; width: 80%; display: block; margin-top: 43px;}
@@ -130,7 +157,9 @@ h1 {				font-size: @headlines; font-weight: normal; }
 
 .boxextension {		margin-top: -3px; border-top: 1px solid black; }
 
-.minipreview {		height: 80px; background: black; width: 200px; float: left;	}
+
+/* mini preview */
+.minipreview {		height: @boxheight; background: black; width: 200px; float: left;	}
 .minicol	 {		width: 25%; float: left;	}
 .minibox 	{		width: 90%; height: 20px; margin-top: 4px; display: block;}
 
