@@ -12,7 +12,7 @@ angular.module('labelsApp')
         templateUrl: "views/directive-search-result-box.html",
         restrict: 'E',
         link: function postLink(scope, element, attrs) {
-
+            scope.showMore = false;
             // set icon
             if (scope.box.type === "ls" && scope.box.scheme === scope.vocabulary.title.value) {  // ls same vocab
                 scope.icon = "<span class='icon-label'></span>";

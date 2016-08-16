@@ -1,6 +1,6 @@
-<div class="box bigbox {{ box.type }} {{ box.quality }}">
+<div class="box bigbox {{ box.type }} {{ box.quality }}" ng-init="showMore = false">
   <span class="thumbnail">
-    <button class="showadditionalcontent" ng-click="showMore = true" ng-init="showMore = false">
+    <button class="showadditionalcontent" ng-click="showMore = true">
       <span ng-show="!showMore">+</span>
       <span ng-show="showMore">-</span>
     </button>
