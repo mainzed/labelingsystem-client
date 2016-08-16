@@ -28,6 +28,10 @@ h1 {
   font-size: 32px;
   font-weight: normal;
 }
+button {
+  border: 0;
+  background: transparent;
+}
 #header {
   color: white;
   height: 100px;
@@ -141,7 +145,7 @@ h1 {
 /* box */
 .box {
   float: left;
-  min-height: 70px;
+  min-height: 60px;
 }
 .small {
   margin-bottom: 3px;
@@ -202,7 +206,7 @@ h1 {
   float: left;
   width: 80%;
   display: block;
-  margin-top: 43px;
+  margin-top: 33px;
 }
 .language {
   bottom: 8px;
@@ -329,21 +333,23 @@ h1 {
 }
 /* mini preview */
 .minipreview {
-  height: calc(70px - 8px * 2 - 10px);
+  height: calc(60px - 8px * 2 - 10px);
   margin-top: 8px;
   background: black;
   width: 100px;
   float: left;
   padding: 5px;
+  overflow: hidden;
 }
 .minicol {
   width: calc(25% - 4px);
   padding: 0 2px;
   float: left;
+  height: 100%;
 }
 .minibox {
   width: 100%;
-  height: 8px;
+  height: 7px;
   margin-bottom: 3px;
   display: block;
 }
@@ -355,9 +361,17 @@ h1 {
   display: block;
 }
 .small .icon-preflabel,
-.small .icon-altlabel {
+.small .icon-altlabel,
+.small .icon-note {
   margin-right: -6px;
   margin-top: -4px;
+  display: block;
+}
+.small .icon-exact,
+.small .icon-close,
+.small .icon-related {
+  margin-left: -5px;
+  margin-top: -5px;
   display: block;
 }
 #header .icon-label,
