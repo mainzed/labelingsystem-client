@@ -102,6 +102,9 @@ angular.module('labelsApp')
             $scope.resultBoxes = res.data;
             console.log(res.data[0]);
 
+
+            //$(".nano").nanoScroller();
+
         }, function() {
             // error
             console.log("something went wrong trying to get label search results!");

@@ -15,18 +15,18 @@ angular.module('labelsApp')
             // vocabulary
             '<span ng-show="showVocabulary">',
                 '<a ng-show="!showVocabularies" href="#/admin/vocabularies">{{ user.name }}</a>',
-                ' > ',
+                '<span class="icon-arrow"></span>',
                 '{{ vocabulary.title.value }}',
             '</span>',
 
             // label detail
             '<span ng-show="showLabelDetail">',
                 '<a ng-show="!showVocabularies" href="#/admin/vocabularies">{{ user.name }}</a>',
-                ' > ',
+                '<span class="icon-arrow"></span>',
                 '<a href="#/admin/vocabularies/{{ vocabulary.id }}/labels">',
                     '{{ vocabulary.title.value }}',
                 '</a>',
-                ' > ',
+                '<span class="icon-arrow"></span>',
             '</span>',
           '</div>',
           '<h1 ng-repeat="prefLabel in label.prefLabels" ng-show="prefLabel.isThumbnail">',
