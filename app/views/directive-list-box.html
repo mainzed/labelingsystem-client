@@ -1,10 +1,8 @@
 <div class="box bigbox label" ng-click="onLabelClick(label.id)">
 
-  <span class="thumbnail">
+  <span class="thumbnail" ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: 'true'}">
     <button class="showadditionalcontent">+</button>
-    <span ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: 'true'}">
-      {{ prefLabel.value}}
-    </span>
+    {{ prefLabel.value}}
   </span>
 
   <span class="minipreview">
@@ -34,7 +32,7 @@
   <span class="type"><span class="icon-label"></span></span>
 
   <span class="language" ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: 'true'}">
-    {{ prefLabel.lang}}
+    {{ prefLabel.lang.split("-")[0] }}
   </span>
 
 </div>

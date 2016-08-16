@@ -58,7 +58,7 @@
 		<h1>Enrich</h1>
 		<div id="enrichmentsearch">
 			<input type="search" placeholder="Search in Thesauri" ng-model="searchValue"></input>
-      <button type="button" name="button" ng-click="onSearchClick()">search</button>
+      <button type="button" name="button" ng-click="onSearchClick()" ng-disabled="!searchValue">search</button>
 		</div>
 	</div>
 

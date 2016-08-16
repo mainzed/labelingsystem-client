@@ -108,8 +108,8 @@ angular.module('labelsApp')
                 });
             }
 
-            if (scope.label.closeMatch) {
-                scope.label.closeMatch.forEach(function(match) {
+            if (scope.label.relatedMatch) {
+                scope.label.relatedMatch.forEach(function(match) {
                     scope.miniBoxes.push({
                         category: "relatedMatch",
                         type: match.type
@@ -125,13 +125,6 @@ angular.module('labelsApp')
                     });
                 });
             }
-
-
-
-            console.log(scope.label);
-
-
-            //console.log(scope.miniBoxes);
 
             // filters
             scope.attributeFilter = function(box) {
@@ -149,9 +142,6 @@ angular.module('labelsApp')
             scope.relatedFilter = function(box) {
                 return box.category === "related" || box.category === "closeMatch" || box.category === "relatedMatch" || box.category === "exactMatch" || box.category === "seeAlso";
             };
-
-            //console.log(scope.label.broader);
-
         }
     };
   });

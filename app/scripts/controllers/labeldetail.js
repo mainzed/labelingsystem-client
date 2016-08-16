@@ -21,10 +21,7 @@ angular.module('labelsApp')
         }
     }
 
-    $scope.boxes = [
-        //{ "category": "broadMatch", "type": "getty", "value": "broader getty label", "lang": "en", "quality": "high" },
-        //{ "category": "narrowMatch", "type": "getty", "value": "narrower getty label", "lang": "en", "quality": "high" }
-    ];
+    $scope.boxes = [];
 
     // init nanoscroll
     $(".nano").nanoScroller();
@@ -52,7 +49,6 @@ angular.module('labelsApp')
         $scope.getLabelRelations(label);
         $scope.getLabelMatches(label);
         $scope.getExternalResources(label);
-
     });
 
     // filters
@@ -73,14 +69,15 @@ angular.module('labelsApp')
     };
 
     // get all thesauri associated with this vocabulary, preload these for search function
+    $scope.thesauri = ["Local Labeling System"];
     function getVocabThesauri(vocabID) {
         //console.log(vocabID);
 
         $http.get('http://143.93.114.135/api/v1/retcat/vocabulary/' + vocabID).then(function(res) {
             // success
-            console.log("found the following thesauri");
-            console.log(res.data);
-
+            res.data.forEach(function(item) {
+                $scope.thesauri.push(item.name);
+            });
 
         }, function() {
             // error
@@ -90,25 +87,27 @@ angular.module('labelsApp')
     // when searching, append search results
     // search when something is entered,
     // ls results are cached anyway, everything else gets searched on change
-    $scope.resultBoxes = [];
-
     $scope.onSearchClick = function() {
-
-        // search in ls first
+        $scope.resultBoxes = [];
 
         // search in all thesauri and append as soon as they're found!
-        $http.get('http://143.93.114.135/api/v1/resourcequery?retcat=' + "Local Labeling System" + '&query=' + $scope.searchValue).then(function(res) {
-            // success
-            $scope.resultBoxes = res.data;
-            console.log(res.data[0]);
+        $scope.thesauri.forEach(function(thesaurus) {
+            //console.log(thesaurus);
+            $http.get('http://143.93.114.135/api/v1/resourcequery?retcat=' + thesaurus + '&query=' + $scope.searchValue).then(function(res) {
+                // append results
+                //console.log("results for " + thesaurus + ": " + res.data.length);
 
+                //$scope.resultBoxes.concat(res.data);
+                $.merge($scope.resultBoxes, res.data);
 
-            //$(".nano").nanoScroller();
+                //console.log(res.data[0]);
 
-        }, function() {
-            // error
-            console.log("something went wrong trying to get label search results!");
+            }, function() {
+                // error
+                console.log("something went wrong trying to get label search results!");
+            });
         });
+
     };
 
     $scope.getLabelAttributes = function(label) {
@@ -206,6 +205,7 @@ angular.module('labelsApp')
         if (label.broadMatch) {
             label.broadMatch.forEach(function(match) {
                 ExternalResourcesService.get(match.url, function(resource) {
+
                     // success
                     $scope.boxes.push({
                         category: "broadMatch",

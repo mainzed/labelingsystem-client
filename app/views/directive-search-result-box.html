@@ -1,0 +1,17 @@
+<div class="box bigbox {{ box.type }} {{ box.quality }}">
+  <span class="thumbnail">
+    <button class="showadditionalcontent" ng-click="showMore = true" ng-init="showMore = false">
+      <span ng-show="!showMore">+</span>
+      <span ng-show="showMore">-</span>
+    </button>
+    {{ box.label }}
+  </span>
+  <span class="note">{{ box.description }}</span>
+  <span class="type" ng-bind-html="icon"></span>
+  <span class="language">{{ box.lang.split("-")[0] }}</span>
+</div>
+
+<!-- show details -->
+<div ng-show="showMore" class="box boxextension bigbox {{ box.type }} {{ box.quality }}">
+  <span class="relations">broader, narrower, etc.</span>
+</div>
