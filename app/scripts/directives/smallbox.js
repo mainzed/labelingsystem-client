@@ -11,7 +11,7 @@ angular.module('labelsApp')
     return {
       template: [
         '<div class="box small {{ cssClass }}" ng-click="onBoxClick()">',
-            '<span class="relation" ng-bind-html="relation"></span>',
+            '<span class="relation"><span class="icon-exact"></span></span>',
             '<span class="thumbnail" ng-bind="text"></span>',
             '<span class="type" ng-bind-html="type"></span>',
             '<span class="language" ng-bind="language"></span>',
@@ -78,6 +78,8 @@ angular.module('labelsApp')
             // narrower, broader etc. no icon
             scope.relation = "";
         }
+
+        scope.relation = "<span class='icon-close'></span>";
 
         scope.onBoxClick = function() {
             ngDialog.open({
