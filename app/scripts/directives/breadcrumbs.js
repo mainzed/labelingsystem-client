@@ -16,7 +16,9 @@ angular.module('labelsApp')
             '<span ng-show="showVocabulary">',
                 '<a ng-show="!showVocabularies" href="#/admin/vocabularies">{{ user.name }}</a>',
                 '<span class="icon-arrow"></span>',
-                '{{ vocabulary.title.value }}',
+                '<h1>',
+                  '{{ vocabulary.title.value }}',
+                '</h1>',
             '</span>',
 
             // label detail
@@ -27,11 +29,14 @@ angular.module('labelsApp')
                     '{{ vocabulary.title.value }}',
                 '</a>',
                 '<span class="icon-arrow"></span>',
+                '<h1 ng-repeat="prefLabel in label.prefLabels" ng-show="prefLabel.isThumbnail">',
+                  '{{ prefLabel.value }}',
+                '</h1>',
             '</span>',
+
           '</div>',
-          '<h1 ng-repeat="prefLabel in label.prefLabels" ng-show="prefLabel.isThumbnail">',
-            '{{ prefLabel.value }}',
-          '</h1>'
+
+
       ].join(""),
       restrict: 'E',
       link: function postLink(scope, element, attrs) {

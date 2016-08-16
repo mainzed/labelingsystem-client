@@ -15,6 +15,33 @@ angular.module('labelsApp')
             // get data for miniboxes
             scope.miniBoxes = [];
 
+            // get attribtue boxes
+            if (scope.label.scopeNote) {
+                scope.miniBoxes.push({
+                    category: "attribute",
+                    type: "text"
+                });
+            }
+
+            // add prefLabels to attributeBoxes
+            if (scope.label.prefLabels) {
+                scope.label.prefLabels.forEach(function() {
+                    scope.miniBoxes.push({
+                        category: "attribute",
+                        type: "text"
+                    });
+                });
+            }
+
+            if (scope.label.altLabels) {
+                scope.label.altLabels.forEach(function() {
+                    scope.miniBoxes.push({
+                        category: "attribute",
+                        type: "text"
+                    });
+                });
+            }
+
             // broader, broaderMatch
             // internal labels (white)
             if (scope.label.broader) {
@@ -35,25 +62,72 @@ angular.module('labelsApp')
                 });
             }
 
+            if (scope.label.related) {
+                scope.label.related.forEach(function() {
+                    scope.miniBoxes.push({
+                        category: "related",
+                        type: "label"
+                    });
+                });
+            }
+
             if (scope.label.narrowMatch) {
                 scope.label.narrowMatch.forEach(function(match) {
-                    console.log(match);
-                    // scope.miniBoxes.push({
-                    //     category: "narrower",
-                    //     type: "label"
-                    // });
+                    scope.miniBoxes.push({
+                        category: "narrowMatch",
+                        type: match.type
+                    });
                 });
             }
 
             if (scope.label.broadMatch) {
                 scope.label.broadMatch.forEach(function(match) {
-                    console.log(match);
-                    // scope.miniBoxes.push({
-                    //     category: "narrower",
-                    //     type: "label"
-                    // });
+                    scope.miniBoxes.push({
+                        category: "broadMatch",
+                        type: match.type
+                    });
                 });
             }
+
+            if (scope.label.exactMatch) {
+                scope.label.exactMatch.forEach(function(match) {
+                    //console.log(match);
+                    scope.miniBoxes.push({
+                        category: "exactMatch",
+                        type: match.type
+                    });
+                });
+            }
+
+            if (scope.label.closeMatch) {
+                scope.label.closeMatch.forEach(function(match) {
+                    scope.miniBoxes.push({
+                        category: "closeMatch",
+                        type: match.type
+                    });
+                });
+            }
+
+            if (scope.label.closeMatch) {
+                scope.label.closeMatch.forEach(function(match) {
+                    scope.miniBoxes.push({
+                        category: "relatedMatch",
+                        type: match.type
+                    });
+                });
+            }
+
+            if (scope.label.seeAlso) {
+                scope.label.seeAlso.forEach(function(match) {
+                    scope.miniBoxes.push({
+                        category: "seeAlso",
+                        type: match.type
+                    });
+                });
+            }
+
+
+
             console.log(scope.label);
 
 
