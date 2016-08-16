@@ -1,25 +1,78 @@
-<breadcrumbs></breadcrumbs>
+<div id="header" class="box full">
+	<div id="breadcrumb"></div>
+  <breadcrumbs></breadcrumbs>
+	<!-- <h1>LBK phase 14 (Lindig)</h1> -->
+	<span class="icon-folder"></span>
+	<span class="language">en</span>
+</div>
 
-<h1>Vocabulary: {{ vocabulary.title.value }}</h1>
+<div id="separator">
 
-<input type="text" name="search" value="search" placeholder="filter" ng-model="labelFilter">
+	<div id="enrichmentsearch">
+		<input type="search" value="Filter"></input>
+	</div>
+</div>
 
-<ul>
-  <li ng-repeat="label in labels | filter: labelFilter | limitTo: 50">
+<div id="labellistwrapper">
+	<div class="nano">
+	<div id="labellist" class="nano-content">
 
-    <!-- expand / collapse buttons -->
-    <button type="button" name="button" ng-click="expanded = 'true'" ng-disabled="expanded">+</button>
+    <list-box ng-repeat="label in labels"></list-box>
 
-    <a ng-repeat="prefLabel in label.prefLabels" ng-show="prefLabel.isThumbnail" href="#/admin/vocabularies/{{ vocabulary.id }}/labels/{{ label.id }}">
-      {{ prefLabel.value }}
-    </a>
+    <!-- <div class="box bigbox label">
+			<span class="thumbnail"><button class="showadditionalcontent">+</button>Linienbandkeramik (Neolithic culture and style)</span>
+			<span class="minipreview">
+				<span class="minileft minicol">
+					<span class="minibox getty"></span>
+					<span class="minibox eh"></span>
+				</span>
+				<span class="minihalfleft minicol">
+					<span class="minibox text"></span>
+					<span class="minibox text"></span>
+				</span>
+				<span class="minihalfright minicol">
+					<span class="minibox label"></span>
+					<span class="minibox label"></span>
+				</span>
+				<span class="miniright minicol">
+					<span class="minibox label"></span>
+					<span class="minibox label"></span>
+				</span>
+			</span>
+			<span class="type"><span class="icon-label"></span></span>
+			<span class="language">en</span>
+		</div> -->
 
-    <!-- expanded details -->
-    <ul ng-show="expanded">
-      <li>Beschreibung: {{ label.scopeNote.value }}</li>
-      <li>Erstellt von: {{ label.creator }}</li>
-      <li>Erstellt: {{ label.created | date: 'dd.MM.yyyy' }}</li>
-    </ul>
+		<!-- <div class="box bigbox label">
+			<span class="thumbnail"><button class="showadditionalcontent">+</button>Linienbandkeramik (Neolithic culture and style)</span>
+			<span class="type"><span class="icon-label"></span></span>
+			<span class="language">en</span>
+		</div>
+		<div class="box bigbox label">
+			<span class="thumbnail"><button class="showadditionalcontent">+</button>Linienbandkeramik (Neolithic culture and style)</span>
+			<span class="minipreview">
+				<span class="minileft minicol">
+					<span class="minibox getty"></span>
+					<span class="minibox eh"></span>
+				</span>
+				<span class="minihalfleft minicol">
+					<span class="minibox text"></span>
+					<span class="minibox text"></span>
+				</span>
+				<span class="minihalfright minicol">
+					<span class="minibox label"></span>
+					<span class="minibox label"></span>
+				</span>
+				<span class="miniright minicol">
+					<span class="minibox label"></span>
+					<span class="minibox label"></span>
+				</span>
+			</span>
+			<span class="type"><span class="icon-label"></span></span>
+			<span class="language">en</span>
+		</div> -->
 
-  </li>
-</ul>
+
+		</div>
+		</div>
+</div>

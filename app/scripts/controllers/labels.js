@@ -30,7 +30,12 @@ angular.module('labelsApp')
     // load all labels for the current vocabulary
     LabelService.query({'vocab': $routeParams.vID}, function(labels) {
         $scope.labels = labels;
+        console.log(labels[0]);
         $scope.placeholder = "filter";
     });
+
+    $scope.onLabelClick = function(id) {
+        $location.path("admin/vocabularies/" + $scope.vocabulary.id + "/labels/" + id);
+    };
 
   });

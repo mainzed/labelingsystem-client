@@ -9,10 +9,10 @@
 angular.module('labelsApp')
   .directive('listBox', function () {
     return {
-      template: '<div></div>',
-      restrict: 'E',
-      link: function postLink(scope, element, attrs) {
-        element.text('this is the listBox directive');
-      }
+        templateUrl: "views/directive-list-box.html",
+        restrict: 'E',
+        link: function postLink(scope, element, attrs) {
+            //element.text('this is the listBox directive');
+        }
     };
   });

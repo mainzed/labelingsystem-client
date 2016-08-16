@@ -1,0 +1,30 @@
+<div class="box bigbox label" ng-click="onLabelClick(label.id)">
+
+  <span class="thumbnail">
+    <button class="showadditionalcontent">+</button>
+    <span ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: 'true'}">
+      {{ prefLabel.value}}
+    </span>
+  </span>
+
+  <span class="minipreview">
+    <span class="minileft minicol">
+      <span class="minibox getty"></span>
+      <span class="minibox eh"></span>
+    </span>
+    <span class="minihalfleft minicol">
+      <span class="minibox text"></span>
+      <span class="minibox text"></span>
+    </span>
+    <span class="minihalfright minicol">
+      <span class="minibox label"></span>
+      <span class="minibox label"></span>
+    </span>
+    <span class="miniright minicol">
+      <span class="minibox label"></span>
+      <span class="minibox label"></span>
+    </span>
+  </span>
+  <span class="type"><span class="icon-label"></span></span>
+  <span class="language">en</span>
+</div>

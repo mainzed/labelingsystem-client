@@ -2,22 +2,7 @@
 
 <h1>label: {{ prefLabel.value }}</h1>
 
-<ul>
 
-  <li ng-show="label.prefLabels">Begriffsbezeichnungen:</li>
-  <ul ng-repeat="prefLabel in label.prefLabels">
-    <li>{{ prefLabel.value }} ({{prefLabel.lang}}) <span ng-show="prefLabel.isThumbnail">*</span></li>
-  </ul>
-
-  <li ng-show="label.altLabels">alternive Begriffsbezeichnungen:</li>
-  <ul ng-repeat="altLabel in label.altLabels">
-    <li>{{ altLabel.value }} ({{prefLabel.lang}})</li>
-  </ul>
-
-  <li ng-show="label.scopeNote">Beschreibung: {{ label.scopeNote.value }}</li>
-  <li ng-show="!label.scopeNote">Beschreibung: fehlt!!!</li>
-
-</ul>
 
 <h3>same level</h3>
 <ul>

@@ -1,0 +1,25 @@
+<breadcrumbs></breadcrumbs>
+
+<h1>Vocabulary: {{ vocabulary.title.value }}</h1>
+
+<input type="text" name="search" value="search" placeholder="filter" ng-model="labelFilter">
+
+<ul>
+  <li ng-repeat="label in labels | filter: labelFilter | limitTo: 50">
+
+    <!-- expand / collapse buttons -->
+    <button type="button" name="button" ng-click="expanded = 'true'" ng-disabled="expanded">+</button>
+
+    <a ng-repeat="prefLabel in label.prefLabels" ng-show="prefLabel.isThumbnail" href="#/admin/vocabularies/{{ vocabulary.id }}/labels/{{ label.id }}">
+      {{ prefLabel.value }}
+    </a>
+
+    <!-- expanded details -->
+    <ul ng-show="expanded">
+      <li>Beschreibung: {{ label.scopeNote.value }}</li>
+      <li>Erstellt von: {{ label.creator }}</li>
+      <li>Erstellt: {{ label.created | date: 'dd.MM.yyyy' }}</li>
+    </ul>
+
+  </li>
+</ul>

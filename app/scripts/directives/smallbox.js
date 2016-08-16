@@ -82,7 +82,7 @@ angular.module('labelsApp')
             scope.relation = "";
         }
 
-        console.log(scope.ngModel);
+        //console.log(scope.ngModel);
         //console.log();
         //scope.relation = "<span class='icon-exact'></span>";
 
