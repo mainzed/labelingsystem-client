@@ -8,6 +8,7 @@
 @label: 			#f5f5f5;
 
 /* high quality */
+@high: 				#31CAFF;
 @getty: 			#FFF8A6;
 @eh: 				#CFFFA1;
 @chronontology: 	#C0FFE8;
@@ -19,6 +20,8 @@
 
 
 /* low quality */
+@categorytwo:		#513C00;
+@categorythree:		#2B4400;
 @dbpedia:			#170056;
 @finto:				#513C00;
 @fao: 				#013642;
@@ -63,6 +66,7 @@ button {			border: 0; background: transparent;}
 #header {			color: white; height: 100px; position: relative; background: @background;	}
 #viewport {			height: 100%; background: @background;}
 #separator {		color: white; height: 75px; }
+.separatorsmall {	height: 40px; float: left; width: 100%; background: @workareas; clear: left;}
 #separator h1 {		margin-left: calc(@tableheadmarginleft); margin-top: 20px; float: left; width: calc(@quartersize);  }
 #header h1 {		margin-top: 50px; float: left;}
 .nano {				 	}
@@ -98,19 +102,23 @@ button {			border: 0; background: transparent;}
 .box 	{ 			float: left; min-height: @boxheight; }
 .small 	{			margin-bottom: @marginbottombox; margin-left: @marginoutboxsmall; position: relative; }
 .bigbox {			width: calc(100% - @marginoutside - @marginoutboxsmall); margin-bottom: @marginbottombox; margin-left: @marginoutboxsmall; position: relative;	}
-
+#labellist .bigbox {
+					margin-left: @marginoutside; width: calc(100% - @marginoutside * 2); }
 /* box color types */
-.getty	{			background: @getty;	}
-.heritagedata	{	background: @eh;	}
-.dbpedia {			background: @dbpedia; }
-.text	{			background: @text; color: white;	}
+.getty	{			background: @high;	}
+.heritagedata	{	background: @high;	}
+.ls {				background: @high; }
+.pleiades {			background: @high; }
+.chronontology {	background: @high; }
+
 .label {			background: @label; }
-.chronontology {	background: @chronontology; }
-.wayback {			background: @wayback; }
-.ls {				background: @ls; }
-.pleiades {			background: @pleiades; }
-.finto {			background: @finto; }
-.fao {				background: @fao;	}
+
+.finto {			background: @categorytwo; }
+.fao {				background: @categorytwo;	}
+.dbpedia {			background: @categorythree; }
+.wayback {			background: @text; }
+
+.text	{			background: @text; color: white;	}
 
 .high {				color: black;	}
 .low	{			color: white;	}
@@ -166,10 +174,10 @@ button {			border: 0; background: transparent;}
 
 /* mini preview */
 .minipreview {		height: calc(@boxheight - @margininboxsmall * 2 - 10px); margin-top: @margininboxsmall; 
-					background: black; width: 100px; float: left; padding: 5px;
+					background: black; width: 100px; float: left; padding: 4px 2px 6px 2px;
 					overflow: hidden;	}
 .minicol	 {		width: calc(25% - 4px); padding: 0 2px; float: left; height: 100%;	}
-.minibox 	{		width: 100%; height: 7px; margin-bottom: 3px; display: block;}
+.minibox 	{		width: 100%; height: 6px; margin-bottom: 4px; display: block;}
 
 
 
