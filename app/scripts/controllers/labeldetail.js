@@ -8,7 +8,7 @@
  * Controller of the labelsApp
  */
 angular.module('labelsApp')
-  .controller('LabelDetailCtrl', function ($scope, $routeParams, $location, $http, ngDialog, AuthService, VocabService, LabelService, ExternalResourcesService, TooltipService) {
+  .controller('LabelDetailCtrl', function ($scope, $routeParams, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ExternalResourcesService, TooltipService) {
 
     // authentication
     if ($location.path().indexOf("admin/") > -1) {  // is admin view
@@ -140,6 +140,7 @@ angular.module('labelsApp')
         // add altLabels to attributeBoxes
         if (label.altLabels) {
             label.altLabels.forEach(function(altLabel) {
+
                 $scope.boxes.push({
                     category: "attribute",
                     type: "altLabel",
@@ -157,12 +158,20 @@ angular.module('labelsApp')
         if (label.broader) {
             label.broader.forEach(function(broaderID) {
                 LabelService.get({id: broaderID}, function(label) {
+
+                    // get thumbnail preflabel
+                    var prefLabel;
+                    for (var i = 0; i < label.prefLabels.length; i++) {
+                        if (label.prefLabels[i].isThumbnail) {
+                            prefLabel = label.prefLabels[i];
+                        }
+                    }
                     // append to boxes
                     $scope.boxes.push({
                         category: "broader",
                         type: "label",
-                        value: label.prefLabels[0].value,
-                        lang: label.prefLabels[0].lang,
+                        value: prefLabel.value,
+                        lang: prefLabel.lang,
                         quality: "high"
                     });
                 });
@@ -172,12 +181,21 @@ angular.module('labelsApp')
         if (label.narrower) {
             label.narrower.forEach(function(narrowerID) {
                 LabelService.get({id: narrowerID}, function(label) {
+
+                    // get thumbnail preflabel
+                    var prefLabel;
+                    for (var i = 0; i < label.prefLabels.length; i++) {
+                        if (label.prefLabels[i].isThumbnail) {
+                            prefLabel = label.prefLabels[i];
+                        }
+                    }
+
                     // append to boxes
                     $scope.boxes.push({
                         category: "narrower",
                         type: "label",
-                        value: label.prefLabels[0].value,
-                        lang: label.prefLabels[0].lang,
+                        value: prefLabel.value,
+                        lang: prefLabel.lang,
                         quality: "high"
                     });
                 });
@@ -187,12 +205,21 @@ angular.module('labelsApp')
         if (label.related) {
             label.related.forEach(function(relatedID) {
                 LabelService.get({id: relatedID}, function(label) {
+
+                    // get thumbnail preflabel
+                    var prefLabel;
+                    for (var i = 0; i < label.prefLabels.length; i++) {
+                        if (label.prefLabels[i].isThumbnail) {
+                            prefLabel = label.prefLabels[i];
+                        }
+                    }
+
                     // append to boxes
                     $scope.boxes.push({
                         category: "related",
                         type: "label",
-                        value: label.prefLabels[0].value,
-                        lang: label.prefLabels[0].lang,
+                        value: prefLabel.value,
+                        lang: prefLabel.lang,
                         quality: "high"
                     });
                 });
@@ -388,7 +415,6 @@ angular.module('labelsApp')
             disableAnimation: true,
             showClose: false,
             closeByDocument: false,
-
             //className: "smalldialog",
             scope: $scope
         });
@@ -442,5 +468,15 @@ angular.module('labelsApp')
             //lang: "en"
         });
     };
+
+    // hotkeys
+    $document.keydown(function(e) {
+        if (e.keyCode === 13) {  // enter
+            if ($scope.searchValue) {  // input is not empty
+                $scope.onSearchClick();
+            }
+        }
+    });
+
 
   });
