@@ -21,7 +21,7 @@ angular.module('labelsApp')
         }
     }
     $scope.tooltips = TooltipService;
-    
+
     $scope.boxes = [];
 
     // init nanoscroll
@@ -380,8 +380,19 @@ angular.module('labelsApp')
         });
     };
 
-    $scope.onAddScopeNote = function() {
+    $scope.onAddDescription = function() {
         //console.log("add scopeNote");
+        $scope.description = "insert label description here ...";
+        ngDialog.open({
+            template: 'views/dialogs/description-detail.html',
+            disableAnimation: true,
+            showClose: false,
+            closeByDocument: false,
+
+            //className: "smalldialog",
+            scope: $scope
+        });
+
         $scope.boxes.push({
             category: "attribute",
             type: "description",

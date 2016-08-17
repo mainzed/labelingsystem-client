@@ -40,4 +40,6 @@ angular.module('labelsApp')
         $location.path("admin/vocabularies/" + $scope.vocabulary.id + "/labels/" + id);
     };
 
+
+
   });

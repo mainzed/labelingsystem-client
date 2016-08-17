@@ -17,7 +17,9 @@ angular.module('labelsApp')
       },
       link: function postLink(scope, element, attrs) {
         //console.log(scope.boxes);
-        scope.tooltips = TooltipService;
+        //scope.tooltips = TooltipService;
+
+        scope.tooltip = TooltipService.icons.types[scope.ngModel.type];
 
         var boxes;
 
@@ -96,10 +98,12 @@ angular.module('labelsApp')
             console.log(scope.boxes);
 
         };
-        scope.keys = Object.keys(scope.tooltips.icons.types);
-        console.log(scope.type);
+        //scope.keys = Object.keys(scope.tooltips.icons.types);
+        //console.log(scope.type);
         //console.log(scope.keys);
-        console.log(scope.tooltips.icons.types["label"]);
+        //console.log(scope.tooltips.icons.types[scope.ngModel.type]);
+
+        //
 
     }
   };
