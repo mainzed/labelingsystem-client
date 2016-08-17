@@ -1,17 +1,34 @@
-<div class="box bigbox {{ box.type }} {{ box.quality }}" ng-init="showMore = false">
+<div class="box bigbox {{ data.type }} {{ data.quality }}" ng-init="showMore === false">
   <span class="thumbnail">
     <button class="showadditionalcontent" ng-click="showMore = true">
       <span ng-show="!showMore">+</span>
-      <span ng-show="showMore">-</span>
+      <!-- <span ng-show="showMore">-</span> -->
     </button>
-    {{ box.label }}
+    {{ data.label }}
   </span>
-  <span class="note">{{ box.description }}</span>
+  <span class="note">{{ data.description }}</span>
   <span class="type" ng-bind-html="icon"></span>
-  <span class="language">{{ box.lang.split("-")[0] }}</span>
+  <span class="language">{{ data.lang.split("-")[0] }}</span>
 </div>
 
 <!-- show details -->
-<div ng-show="showMore" class="box boxextension bigbox {{ box.type }} {{ box.quality }}">
-  <span class="relations">broader, narrower, etc.</span>
+<div ng-show="showMore" class="box boxextension bigbox {{ data.type }} {{ data.quality }}">
+  <!-- <span class="relations">broader, narrower, etc.</span> -->
+
+  <div class="broader" ng-show="data.broaderTerms.length">
+    <span class='icon-broader'></span>
+    broader
+    <ul>
+      <li ng-repeat="term in data.broaderTerms">{{ term.label }}</li>
+    </ul>
+  </div>
+
+  <div class="narrower" ng-show="data.narrowerTerms.length">
+    <span class='icon-broader'></span>
+    narrower
+    <ul>
+      <li ng-repeat="term in data.narrowerTerms">{{ term.label }}</li>
+    </ul>
+  </div>
+
 </div>

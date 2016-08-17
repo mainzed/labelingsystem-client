@@ -34,6 +34,7 @@ angular.module('labelsApp')
     // load label for the current vocabulary
     LabelService.get({id: $routeParams.lID}, function(label) {
         $scope.label = label;
+        //console.log(label);
 
         // broader, narrower and related gathered later
         label.prefLabels.forEach(function(prefLabel) {
@@ -92,7 +93,7 @@ angular.module('labelsApp')
 
         // search in all thesauri and append as soon as they're found!
         $scope.thesauri.forEach(function(thesaurus) {
-            //console.log(thesaurus);
+
             $http.get('http://143.93.114.135/api/v1/resourcequery?retcat=' + thesaurus + '&query=' + $scope.searchValue).then(function(res) {
                 // append results
                 //console.log("results for " + thesaurus + ": " + res.data.length);
@@ -383,6 +384,38 @@ angular.module('labelsApp')
     };
 
     $scope.onAddLink = function() {
+
+        $scope.url = "http://";
+        $scope.validWaybackLink = false;
+
+        ngDialog.open({
+            template: 'views/dialogs/add-wayback-link.html',
+            disableAnimation: true,
+            scope: $scope
+        });
+    };
+
+    // todo: put that in dialog-controller
+    $scope.onGenerateClick = function(url) {
+
+        $http.get('http://143.93.114.135/api/v1/resourcewayback?url=' + url).then(function(res) {
+            // success
+
+            // replace url with generated wayback-link
+            $scope.url = res.data.url;
+
+            $scope.validWaybackLink = true;
+
+        }, function(res) {
+            // error
+            console.log("error");
+            console.log(res.data.error);
+            $scope.url = "http://";
+            $scope.validWaybackLink = false;
+        });
+    };
+
+    $scope.onLinkAddConfirm = function() {
         $scope.boxes.push({
             category: "seeAlso",
             type: "wayback",
@@ -391,4 +424,5 @@ angular.module('labelsApp')
             //lang: "en"
         });
     };
+
   });

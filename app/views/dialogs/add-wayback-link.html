@@ -1,0 +1,8 @@
+
+<p>
+  url:
+  <input type="text" name="name" ng-model="url" ng-disabled="validWaybackLink">
+  <button type="button" name="button" ng-click="onGenerateClick(url)" ng-disabled="validWaybackLink">get wayback link for this url</button>
+</p>
+
+<button type="button" name="button" ng-disabled="!validWaybackLink" ng-click="onLinkAddConfirm(); closeThisDialog()">add link</button>
