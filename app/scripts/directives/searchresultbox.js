@@ -7,7 +7,7 @@
  * # searchResultBox
  */
 angular.module('labelsApp')
-  .directive('searchResultBox', function () {
+  .directive('searchResultBox', function (ngDialog) {
     return {
         templateUrl: "views/directive-search-result-box.html",
         restrict: 'E',
@@ -28,7 +28,13 @@ angular.module('labelsApp')
                 scope.icon = "(" + scope.data.type + ")";
             }
 
-            //console.log(scope.data.broaderTerms);
+            scope.onClick = function() {
+                ngDialog.open({
+                    template: 'views/dialogs/add-resource.html',
+                    disableAnimation: true,
+                    scope: scope
+                });
+            };
         }
     };
   });

@@ -7,16 +7,9 @@
  * # smallBox
  */
 angular.module('labelsApp')
-  .directive('smallBox', function (ngDialog) {
+  .directive('smallBox', function (ngDialog, TooltipService) {
     return {
-      template: [
-        '<div class="box small {{ cssClass }} {{ quality }}" ng-click="onBoxClick()">',
-            '<span class="relation" ng-bind-html="relation"></span>',
-            '<span class="thumbnail" ng-bind="text"></span>',
-            '<span class="type" ng-bind-html="type"></span>',
-            '<span class="language" ng-bind="language"></span>',
-        '</div>'
-      ].join(""),
+      templateUrl: "views/directives/small-box.html",
       restrict: 'E',
       //replace: true,
       scope: {
@@ -24,6 +17,8 @@ angular.module('labelsApp')
       },
       link: function postLink(scope, element, attrs) {
         //console.log(scope.boxes);
+        scope.tooltips = TooltipService;
+
         var boxes;
 
         // set boxes as soon as they are ready
@@ -101,6 +96,10 @@ angular.module('labelsApp')
             console.log(scope.boxes);
 
         };
+        scope.keys = Object.keys(scope.tooltips.icons.types);
+        console.log(scope.type);
+        //console.log(scope.keys);
+        console.log(scope.tooltips.icons.types["label"]);
 
     }
   };

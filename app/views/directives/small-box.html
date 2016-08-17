@@ -1,0 +1,12 @@
+<div class="box small {{ cssClass }} {{ quality }}" ng-click="onBoxClick()">
+
+  <!-- relation icon -->
+  <span class="relation" ng-bind-html="relation"></span>
+
+  <span class="thumbnail" ng-bind="text"></span>
+
+  <!-- type icon -->
+  <span class="type" ng-bind-html="type" title="{{ tooltips.icons.types }}"></span>
+
+  <span class="language" ng-bind="language"></span>
+</div>
