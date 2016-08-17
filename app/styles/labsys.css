@@ -6,6 +6,7 @@
 /* low quality */
 /*unused*/
 /* font-sizes */
+/* laptop font-sizes */
 /*------------------ margins ------------------- */
 /*------------------- grid --------------------- */
 /*-------------------------------------------------------------------------------------------------------------------*/
@@ -27,6 +28,20 @@ body {
 h1 {
   font-size: 32px;
   font-weight: normal;
+}
+@media screen and (max-width: 1600px) {
+  h1 {
+    font-size: 26px;
+  }
+}
+h2 {
+  font-size: 32px;
+  font-weight: normal;
+}
+@media screen and (max-width: 1600px) {
+  h2 {
+    font-size: 26px;
+  }
 }
 button {
   border: 0;
@@ -65,6 +80,11 @@ input:focus {
 #header h1 {
   margin-top: 50px;
   float: left;
+}
+@media screen and (max-width: 1600px) {
+  #header h1 {
+    margin-top: 53px;
+  }
 }
 .enrichmentswrapper {
   height: calc(100% - 50px);
@@ -195,7 +215,7 @@ input:focus {
   width: calc(100% - 20px * 2);
 }
 .listbox .thumbnail {
-  font-size: 32px;
+  font-size: 22px;
 }
 /* box color types */
 .getty {
@@ -294,6 +314,16 @@ input:focus {
 .half {
   width: calc((100% - 9px * 5 - 20px * 2) / 4 * 2 + 9px * 3);
 }
+.five {
+  width: calc(((100% - 20px * 2) - 9px * 4) / 5);
+  margin-right: 9px;
+}
+.leftout {
+  margin-left: 20px;
+}
+.rightout {
+  margin-right: 20px;
+}
 .halfleft {
   width: calc((100% - 9px * 3) / 2 + 9px * 2);
 }
@@ -331,6 +361,12 @@ input:focus {
   color: white;
   margin-bottom: 3px;
   cursor: pointer;
+}
+.enrichbutton-ow {
+  background: #f5f5f5;
+  height: 100px;
+  text-align: left;
+  width: 100%;
 }
 .middle {
   background: #333333;
@@ -391,6 +427,15 @@ input:focus {
   height: 6px;
   margin-bottom: 4px;
   display: block;
+}
+/* dialogs */
+.bigdialog .ngdialog-content {
+  width: 60%;
+  position: absolute;
+  left: 50%;
+  margin-left: calc((60% * -1) / 2);
+  height: 80%;
+  top: 10%;
 }
 /* icon corrections */
 .small .icon-label,

@@ -32,11 +32,19 @@
 @bbbb:				#422200;
 
 
-
 /* font-sizes */
 @headlines: 		32px;
+@emphasize:			22px;
 @regular: 			16px;
 @small: 			12px;
+
+
+/* laptop font-sizes */
+@headlines-small:	26px;
+@emphasize-small:	20px;
+@regular-small: 	14px;
+@small-small: 		11px;
+
 
 /*------------------ margins ------------------- */
 @margininboxsmall: 	8px;
@@ -50,6 +58,7 @@
 
 /*------------------- grid --------------------- */
 @quartersize: 		(100% - @marginoutboxsmall * 5 - @marginoutside * 2) / 4;
+@bigdialogwidth: 	60%;
 
 
 
@@ -60,16 +69,20 @@
 * {					font-size: @regular; margin: 0; padding: 0; font-family: Roboto, Arial, sans-serif; letter-spacing: 0.02em;	}
 html {				height: 100%;	}
 body {				height: 100%;	}
-h1 {				font-size: @headlines; font-weight: normal; }
+h1 {				font-size: @headlines; font-weight: normal;
+					@media screen and (max-width: 1600px) {font-size: @headlines-small; } }
+h2 {				font-size: @headlines; font-weight: normal;
+					@media screen and (max-width: 1600px) {font-size: @headlines-small; } }
 button {			border: 0; background: transparent;}
-input:focus {		outline:none; }
+input:focus {		outline: none; }
 
 #header {			color: white; height: 100px; position: relative; background: @background;	}
 #viewport {			height: 100%; background: @background;}
 #separator {		color: white; height: 75px; }
 .separatorsmall {	height: 40px; float: left; width: 100%; background: @workareas; clear: left;}
 #separator h1 {		margin-left: calc(@tableheadmarginleft); margin-top: 20px; float: left; width: calc(@quartersize);  }
-#header h1 {		margin-top: 50px; float: left;}
+#header h1 {		margin-top: 50px; float: left;
+					@media screen and (max-width: 1600px) { margin-top: 53px;} }
 .nano {				 	}
 .enrichmentswrapper {
 					height: calc(100% - 50px);
@@ -110,7 +123,7 @@ input:focus {		outline:none; }
 #labellist .bigbox {
 					margin-left: @marginoutside; width: calc(100% - @marginoutside * 2); }
 .listbox .thumbnail {
-					font-size: @headlines; }
+					font-size: @emphasize; }
 /* box color types */
 .getty	{			background: @high;	}
 .heritagedata	{	background: @high;	}
@@ -148,6 +161,9 @@ input:focus {		outline:none; }
 .left {				width: calc(@quartersize + @marginoutboxsmall + @marginoutside );		}
 .right {			width: calc(@quartersize + @marginoutboxsmall + @marginoutside );		}
 .half {				width: calc(@quartersize * 2 + @marginoutboxsmall * 3);		}
+.five {				width: calc(((100% - @marginoutside * 2) - @marginoutboxsmall * 4) / 5); margin-right: @marginoutboxsmall; 		}
+.leftout {			margin-left: @marginoutside; 		}
+.rightout {			margin-right: @marginoutside;		}
 
 .halfleft {			width: calc((100% - @marginoutboxsmall * 3) / 2 + @marginoutboxsmall * 2 ); }
 .halfright {		width: calc((100% - @marginoutboxsmall * 3) / 2 + @marginoutboxsmall ); }
@@ -160,6 +176,7 @@ input:focus {		outline:none; }
 .enrichbutton	{	margin-left: @marginoutside; margin-right: @marginoutboxsmall; width: calc(100% - @marginoutboxsmall - @marginoutside);
 					height: 40px; background: @middle; border: 0; text-align: left; color: white; margin-bottom: @marginbottombox;
 					cursor: pointer; }
+.enrichbutton-ow {	background: @label; height: 100px; text-align: left; width: 100%; }
 .middle {			background: @middle;	}
 
 .threequarter {		width: calc(100% - ( @quartersize + @marginoutside + @marginoutboxsmall ) ); position: relative; height: calc(100% - 75px);	}
@@ -185,6 +202,13 @@ input:focus {		outline:none; }
 					overflow: hidden;	}
 .minicol	 {		width: calc(25% - 4px); padding: 0 2px; float: left; height: 100%;	}
 .minibox 	{		width: 100%; height: 6px; margin-bottom: 4px; display: block;}
+
+
+
+/* dialogs */
+.bigdialog .ngdialog-content {
+					width: @bigdialogwidth; position: absolute; left: 50%; margin-left: calc(( @bigdialogwidth * -1 ) / 2);
+					height: 80%; top: 10%; }
 
 
 

@@ -31,6 +31,9 @@ angular.module('labelsApp')
             scope.onClick = function() {
                 ngDialog.open({
                     template: 'views/dialogs/add-resource.html',
+                    className: 'bigdialog',
+                    showClose: false,
+                    closeByDocument: false,
                     disableAnimation: true,
                     scope: scope
                 });
