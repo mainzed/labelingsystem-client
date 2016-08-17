@@ -113,6 +113,16 @@ button {
   color: gray;
   width: 200px;
 }
+#filtersearch {
+  margin-left: 20px;
+  color: white;
+}
+#filtersearch input {
+  background: none;
+  border: none;
+  color: gray;
+  width: 200px;
+}
 #breadcrumb {
   float: left;
   display: block;
