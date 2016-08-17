@@ -8,7 +8,7 @@
  * Controller of the labelsApp
  */
 angular.module('labelsApp')
-  .controller('LabelDetailCtrl', function ($scope, $routeParams, $location, $http, ngDialog, AuthService, VocabService, LabelService, ExternalResourcesService) {
+  .controller('LabelDetailCtrl', function ($scope, $routeParams, $location, $http, ngDialog, AuthService, VocabService, LabelService, ExternalResourcesService, TooltipService) {
 
     // authentication
     if ($location.path().indexOf("admin/") > -1) {  // is admin view
@@ -20,6 +20,7 @@ angular.module('labelsApp')
             $scope.user = AuthService.getUser();
         }
     }
+    $scope.tooltips = TooltipService;
 
     $scope.boxes = [];
 
@@ -206,12 +207,13 @@ angular.module('labelsApp')
         if (label.broadMatch) {
             label.broadMatch.forEach(function(match) {
                 ExternalResourcesService.get(match.url, function(resource) {
-
+                    console.log(resource);
                     // success
                     $scope.boxes.push({
                         category: "broadMatch",
                         type: resource.type,
                         value: resource.label,
+                        lang: resource.lang,
                         quality: resource.quality
                     });
 
@@ -226,10 +228,12 @@ angular.module('labelsApp')
             label.narrowMatch.forEach(function(match) {
                 ExternalResourcesService.get(match.url, function(resource) {
                     // success
+                    console.log(resource);
                     $scope.boxes.push({
                         category: "narrowMatch",
                         type: resource.type,
                         value: resource.label,
+                        lang: resource.lang,
                         quality: resource.quality
                     });
                 }, function(errorMessage) {
@@ -247,6 +251,7 @@ angular.module('labelsApp')
                         category: "closeMatch",
                         type: resource.type,
                         value: resource.label,
+                        lang: resource.lang,
                         quality: resource.quality
                     });
                 }, function(errorMessage) {
@@ -265,6 +270,7 @@ angular.module('labelsApp')
                         category: "relatedMatch",
                         type: resource.type,
                         value: resource.label,
+                        lang: resource.lang,
                         quality: resource.quality
                     });
                 }, function(errorMessage) {
@@ -283,6 +289,7 @@ angular.module('labelsApp')
                         category: "exactMatch",
                         type: resource.type,
                         value: resource.label,
+                        lang: resource.lang,
                         quality: resource.quality
                     });
 
@@ -373,8 +380,19 @@ angular.module('labelsApp')
         });
     };
 
-    $scope.onAddScopeNote = function() {
+    $scope.onAddDescription = function() {
         //console.log("add scopeNote");
+        $scope.description = "insert label description here ...";
+        ngDialog.open({
+            template: 'views/dialogs/description-detail.html',
+            disableAnimation: true,
+            showClose: false,
+            closeByDocument: false,
+
+            //className: "smalldialog",
+            scope: $scope
+        });
+
         $scope.boxes.push({
             category: "attribute",
             type: "description",

@@ -8,7 +8,7 @@
  * Controller of the labelsApp
  */
 angular.module('labelsApp')
-  .controller('LabelsCtrl', function ($scope, $routeParams, $location, AuthService, LabelService, VocabService) {
+  .controller('LabelsCtrl', function ($scope, $routeParams, $location, AuthService, LabelService, VocabService, TooltipService) {
 
     // authentication
     if ($location.path().indexOf("admin/") > -1) {  // is admin view
@@ -20,6 +20,8 @@ angular.module('labelsApp')
             $scope.user = AuthService.getUser();
         }
     }
+
+    $scope.tooltips = TooltipService;
 
     $scope.placeholder = "loading labels...";
 
@@ -37,5 +39,7 @@ angular.module('labelsApp')
     $scope.onLabelClick = function(id) {
         $location.path("admin/vocabularies/" + $scope.vocabulary.id + "/labels/" + id);
     };
+
+
 
   });
