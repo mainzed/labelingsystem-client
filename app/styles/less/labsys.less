@@ -62,6 +62,7 @@ html {				height: 100%;	}
 body {				height: 100%;	}
 h1 {				font-size: @headlines; font-weight: normal; }
 button {			border: 0; background: transparent;}
+input:focus {		outline:none; }
 
 #header {			color: white; height: 100px; position: relative; background: @background;	}
 #viewport {			height: 100%; background: @background;}
@@ -89,7 +90,8 @@ button {			border: 0; background: transparent;}
 					background: none; border: none; color: gray; width: 200px; }				 
 
 #breadcrumb {		float: left; display: block; height: 100px; }
-#breadcrumb a {		color: white; margin-top: 64px; display: block; float: left;  margin-right: @marginoutboxsmall; }
+#breadcrumb a {		color: white; margin-top: 64px; display: block; float: left; padding-bottom: 2px; 
+					text-decoration: none; border-bottom: 1px solid white; margin-right: @marginoutboxsmall; }
 #breadcrumb a.outside  {
 					margin-left: calc(@marginoutside + @marginoutboxsmall); }
 #breadcrumb span span 
@@ -102,11 +104,13 @@ button {			border: 0; background: transparent;}
 .insidewrapper { 	background: @middle; float: left; min-height: 100%; }
 
 /* box */
-.box 	{ 			float: left; min-height: @boxheight; }
+.box 	{ 			float: left; min-height: @boxheight; cursor: pointer; }
 .small 	{			margin-bottom: @marginbottombox; margin-left: @marginoutboxsmall; position: relative; }
 .bigbox {			width: calc(100% - @marginoutside - @marginoutboxsmall); margin-bottom: @marginbottombox; margin-left: @marginoutboxsmall; position: relative;	}
 #labellist .bigbox {
 					margin-left: @marginoutside; width: calc(100% - @marginoutside * 2); }
+.listbox .thumbnail {
+					font-size: @headlines; }
 /* box color types */
 .getty	{			background: @high;	}
 .heritagedata	{	background: @high;	}

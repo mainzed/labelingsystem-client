@@ -32,6 +32,9 @@ button {
   border: 0;
   background: transparent;
 }
+input:focus {
+  outline: none;
+}
 #header {
   color: white;
   height: 100px;
@@ -133,6 +136,9 @@ button {
   margin-top: 64px;
   display: block;
   float: left;
+  padding-bottom: 2px;
+  text-decoration: none;
+  border-bottom: 1px solid white;
   margin-right: 9px;
 }
 #breadcrumb a.outside {
@@ -171,6 +177,7 @@ button {
 .box {
   float: left;
   min-height: 60px;
+  cursor: pointer;
 }
 .small {
   margin-bottom: 3px;
@@ -186,6 +193,9 @@ button {
 #labellist .bigbox {
   margin-left: 20px;
   width: calc(100% - 20px * 2);
+}
+.listbox .thumbnail {
+  font-size: 32px;
 }
 /* box color types */
 .getty {
