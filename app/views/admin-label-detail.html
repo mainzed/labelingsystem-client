@@ -57,7 +57,7 @@
 	<div id="separator">
 		<h1>Enrich</h1>
 		<div id="enrichmentsearch">
-			<input type="search" placeholder="Search in Thesauri" ng-model="searchValue"></input>
+			<input type="text" placeholder="Search in Thesauri" ng-model="searchValue"></input>
       <button type="button" name="button" ng-click="onSearchClick()" ng-disabled="!searchValue">search</button>
 		</div>
 	</div>
@@ -88,7 +88,7 @@
 	<div class="col threequarter">
 	<div id="enrichmentbrowser" class="nano">
 	<div class="nano-content">
-    <search-result-box ng-repeat="box in resultBoxes" data="box" vocab="vocabulary"></search-result-box>
+    <search-result-box ng-repeat="box in resultBoxes | orderBy: ['quality', 'type']" data="box" vocab="vocabulary"></search-result-box>
 	</div>
 	</div>
 	</div>
