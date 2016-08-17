@@ -1,27 +1,57 @@
 <h2>Enrich current label</h2>
 
-<div id="enrichbuttons">
-	<div class="col five leftout">
-		<button class="enrichbutton-ow" type="button" name="button">broad Match</button>
-		<p>Beispieltext Das ist ein Beispieltext</p>
-	</div>
-	<div class="col five">
-		<button class="enrichbutton-ow" type="button" name="button">exact Match</button>
-		<p>Beispieltext Das ist ein Beispieltext</p>
-	</div>
-	<div class="col five">
-		<button class="enrichbutton-ow" type="button" name="button">related Match</button>
-		<p>Beispieltext Das ist ein Beispieltext</p>
-	</div>
-	<div class="col five">
-		<button class="enrichbutton-ow" type="button" name="button">close Match</button>
-		<p>Beispieltext Das ist ein Beispieltext</p>
-	</div>
-	<div class="col five rightout">
-		<button class="enrichbutton-ow" type="button" name="button">narrow Match</button>
-		<p>Beispieltext Das ist ein Beispieltext</p>
+<div id="selectedbox">
+	<div class="box bigbox getty" ng-click="onBoxClick()">
+
+	  <!-- relation icon -->
+	  <span class="relation" ng-bind-html="relation"></span>
+
+	  <span class="thumbnail" ng-bind="text">test</span>
+
+	  <!-- type icon -->
+	  <span class="type" ng-bind-html="type" title="{{ tooltip }}"></span>
+
+	  <span class="language" ng-bind="language">en</span>
 	</div>
 </div>
+
+<div id="enrichbuttons">
+	<div class="col five leftout">
+		<button class="enrichbutton-ow" type="button" name="button">
+			<span class="buttontext-ow">broad Match</span>
+		</button>
+		<p class="enrichinfo">Beispieltext Das ist ein Beispieltext</p>
+	</div>
+	<div class="col five">
+		<button class="enrichbutton-ow" type="button" name="button">
+			<span class="buttontext-ow">exact Match</span>
+			<span class="icon-exact icon"></span>
+		</button>
+		<p class="enrichinfo">Beispieltext Das ist ein Beispieltext</p>
+	</div>
+	<div class="col five">
+		<button class="enrichbutton-ow" type="button" name="button">
+			<span class="buttontext-ow">related Match</span>
+			<span class="icon-related icon"></span>
+		</button>
+		<p class="enrichinfo">Beispieltext Das ist ein Beispieltext</p>
+	</div>
+	<div class="col five">
+		<button class="enrichbutton-ow" type="button" name="button">
+			<span class="buttontext-ow">close Match</span>
+			<span class="icon-close icon"></span>
+		</button>
+		<p class="enrichinfo">Beispieltext Das ist ein Beispieltext</p>
+	</div>
+	<div class="col five rightout">
+		<button class="enrichbutton-ow" type="button" name="button">
+			<span class="buttontext-ow">narrow Match</span>
+		</button>
+		<p class="enrichinfo">Beispieltext Das ist ein Beispieltext</p>
+	</div>
+</div>
+
+<div class="cancel">Cancel</div>
 
 
 

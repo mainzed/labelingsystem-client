@@ -17,7 +17,7 @@
   margin: 0;
   padding: 0;
   font-family: Roboto, Arial, sans-serif;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
 }
 html {
   height: 100%;
@@ -37,6 +37,10 @@ h1 {
 h2 {
   font-size: 32px;
   font-weight: normal;
+  margin-bottom: 50px;
+  margin-top: 20px;
+  margin-left: 20px;
+  display: block;
 }
 @media screen and (max-width: 1600px) {
   h2 {
@@ -85,6 +89,11 @@ input:focus {
   #header h1 {
     margin-top: 53px;
   }
+}
+.cancel {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
 }
 .enrichmentswrapper {
   height: calc(100% - 50px);
@@ -211,6 +220,14 @@ input:focus {
   position: relative;
 }
 #labellist .bigbox {
+  margin-left: 20px;
+  width: calc(100% - 20px * 2);
+}
+#selectedbox {
+  display: block;
+  margin-bottom: 20px;
+}
+#selectedbox .bigbox {
   margin-left: 20px;
   width: calc(100% - 20px * 2);
 }
@@ -367,6 +384,17 @@ input:focus {
   height: 100px;
   text-align: left;
   width: 100%;
+  position: relative;
+}
+.enrichbutton-ow .icon {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+}
+.enrichinfo {
+  padding: 8px;
+  margin-top: 30px;
+  display: block;
 }
 .middle {
   background: #333333;
@@ -396,6 +424,12 @@ input:focus {
   margin-left: 8px;
   float: left;
   margin-top: 4px;
+}
+.buttontext-ow {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  font-size: 22px;
 }
 #header .language {
   font-size: 16px;

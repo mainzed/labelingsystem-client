@@ -66,12 +66,12 @@
 /*-------------------------------------------------- css ------------------------------------------------------------*/
 /*------------------- Do not edit this css file directly. Edit the LESS file-----------------------------------------*/
 
-* {					font-size: @regular; margin: 0; padding: 0; font-family: Roboto, Arial, sans-serif; letter-spacing: 0.02em;	}
+* {					font-size: @regular; margin: 0; padding: 0; font-family: Roboto, Arial, sans-serif; letter-spacing: 0.01em;	}
 html {				height: 100%;	}
 body {				height: 100%;	}
 h1 {				font-size: @headlines; font-weight: normal;
 					@media screen and (max-width: 1600px) {font-size: @headlines-small; } }
-h2 {				font-size: @headlines; font-weight: normal;
+h2 {				font-size: @headlines; font-weight: normal; margin-bottom: 50px; margin-top: @marginoutside; margin-left: @marginoutside; display: block;
 					@media screen and (max-width: 1600px) {font-size: @headlines-small; } }
 button {			border: 0; background: transparent;}
 input:focus {		outline: none; }
@@ -84,6 +84,7 @@ input:focus {		outline: none; }
 #header h1 {		margin-top: 50px; float: left;
 					@media screen and (max-width: 1600px) { margin-top: 53px;} }
 .nano {				 	}
+.cancel {			position: absolute; bottom: @marginoutside; right: @marginoutside;}
 .enrichmentswrapper {
 					height: calc(100% - 50px);
 }
@@ -121,6 +122,10 @@ input:focus {		outline: none; }
 .small 	{			margin-bottom: @marginbottombox; margin-left: @marginoutboxsmall; position: relative; }
 .bigbox {			width: calc(100% - @marginoutside - @marginoutboxsmall); margin-bottom: @marginbottombox; margin-left: @marginoutboxsmall; position: relative;	}
 #labellist .bigbox {
+					margin-left: @marginoutside; width: calc(100% - @marginoutside * 2); }
+
+#selectedbox 	{	display: block; margin-bottom: 20px;}
+#selectedbox .bigbox {
 					margin-left: @marginoutside; width: calc(100% - @marginoutside * 2); }
 .listbox .thumbnail {
 					font-size: @emphasize; }
@@ -176,7 +181,10 @@ input:focus {		outline: none; }
 .enrichbutton	{	margin-left: @marginoutside; margin-right: @marginoutboxsmall; width: calc(100% - @marginoutboxsmall - @marginoutside);
 					height: 40px; background: @middle; border: 0; text-align: left; color: white; margin-bottom: @marginbottombox;
 					cursor: pointer; }
-.enrichbutton-ow {	background: @label; height: 100px; text-align: left; width: 100%; }
+.enrichbutton-ow {	background: @label; height: 100px; text-align: left; width: 100%; position: relative; }
+.enrichbutton-ow .icon {
+					position: absolute; top: @margininboxsmall; left: @margininboxsmall; }
+.enrichinfo	 {		padding: @margininboxsmall; margin-top: 30px; display: block; }
 .middle {			background: @middle;	}
 
 .threequarter {		width: calc(100% - ( @quartersize + @marginoutside + @marginoutboxsmall ) ); position: relative; height: calc(100% - 75px);	}
@@ -191,6 +199,7 @@ input:focus {		outline: none; }
 
 .buttonicon {		margin-right: @margininboxsmall; float: right;}
 .buttontext {		margin-left: @margininboxsmall; float: left; margin-top: 4px;			}
+.buttontext-ow {	 position: absolute; left: @margininboxsmall; bottom: @margininboxsmall; font-size: @emphasize; 			}
 #header .language {	font-size: @regular; margin-right: calc(@margininboxsmall * 2); bottom: 12px; }
 
 .boxextension {		margin-top: -3px; border-top: 1px solid black; }

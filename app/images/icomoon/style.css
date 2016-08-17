@@ -25,8 +25,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-note:before {
+.icon-search:before {
   content: "\e901";
+}
+.icon-note:before {
+  content: "\e905";
 }
 .icon-folder:before {
   content: "\e900";
@@ -46,13 +49,9 @@
 .icon-label:before {
   content: "\e902";
 }
-.icon-preflabel:before {
+.icon-altlabel:before {
   content: "\e903";
 }
-.icon-altlabel:before {
+.icon-preflabel:before {
   content: "\e904";
 }
-.icon-search:before {
-  content: "\e905";
-}
-
