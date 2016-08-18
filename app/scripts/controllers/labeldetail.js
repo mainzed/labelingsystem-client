@@ -24,6 +24,8 @@ angular.module('labelsApp')
 
     $scope.boxes = [];
 
+    $scope.showEnrichment = true;
+
     // init nanoscroll
     $(".nano").nanoScroller();
 

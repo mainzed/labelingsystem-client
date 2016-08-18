@@ -15,7 +15,7 @@
 @ls:				#A9D2FF;
 @pleiades:			#FFCCE1;
 /*unused*/
-@aaaaa:				#FCE2CA;		
+@aaaaa:				#FCE2CA;
 @aaaaaa:			#EFCAFF;
 
 
@@ -91,7 +91,7 @@ input:focus {		outline: none; }
 					height: calc(100% - 50px);
 }
 #enrichment-ov {	width: 100%; float: left; background: @workareas; height: calc(50% - 90px);	}
-.fullheight		{	height: calc(100% - 90px - 40px);}
+.fullheight		{	height: calc(100% - 90px - 40px) !important;}
 #enrichment-src {	width: 100%; float: left; background: @workareas; height: calc(50% - 40px); margin-top: 2px; }
 #enrichment-src-min {
 					width: 100%; float: left; background: blue; height: 40px; margin-top: 2px; }
@@ -106,14 +106,14 @@ input:focus {		outline: none; }
 				 {	background: none; border: none; color: gray; width: 200px; }
 #filtersearch {		margin-left: @marginoutside; color: white; }
 #filtersearch input {
-					background: none; border: none; color: gray; width: 200px; }				 
+					background: none; border: none; color: gray; width: 200px; }
 
 #breadcrumb {		float: left; display: block; height: 100px; }
-#breadcrumb a {		color: white; margin-top: 60px; display: block; float: left; padding-bottom: 2px; 
+#breadcrumb a {		color: white; margin-top: 60px; display: block; float: left; padding-bottom: 2px;
 					text-decoration: none; border-bottom: 1px solid white; margin-right: @marginoutboxsmall; }
 #breadcrumb a.outside  {
 					margin-left: calc(@marginoutside + @marginoutboxsmall); }
-#breadcrumb span span 
+#breadcrumb span span
 				{	display: block; float: left; margin-top: 56px; margin-right: @marginoutboxsmall; }
 .tablehead {		float: left; height: 50px; color: white;	}
 .tablehead span {	margin-top: 15px; margin-left: calc(@tableheadmargin); display: block; }
@@ -212,7 +212,7 @@ input:focus {		outline: none; }
 
 
 /* mini preview */
-.minipreview {		height: calc(@boxheight - @margininboxsmall * 2 - 10px); margin-top: @margininboxsmall; 
+.minipreview {		height: calc(@boxheight - @margininboxsmall * 2 - 10px); margin-top: @margininboxsmall;
 					background: black; width: 100px; float: left; padding: 4px 2px 6px 2px;
 					overflow: hidden;	}
 .minicol	 {		width: calc(25% - 4px); padding: 0 2px; float: left; height: 100%;	}
@@ -238,5 +238,3 @@ input:focus {		outline: none; }
 #header .icon-label, #header .icon-folder {
 					position: absolute; right: 50px; font-size: 110px; top: 2px;
 }
-
-

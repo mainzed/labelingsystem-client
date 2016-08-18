@@ -119,7 +119,7 @@ input:focus {
   height: calc(50% - 90px);
 }
 .fullheight {
-  height: calc(100% - 90px - 40px);
+  height: calc(100% - 90px - 40px) !important;
 }
 #enrichment-src {
   width: 100%;
