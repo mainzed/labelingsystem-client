@@ -1,0 +1,18 @@
+<h3>add preferred term</h3>
+
+<div>
+  term:
+  <input type="text" ng-model="term">
+</div>
+
+<div>
+  language:
+  <select ng-model="lang">
+    <option ng-repeat="language in languages" value="{{language.value}}">{{ language.name }}</option>
+  </select>
+</div>
+
+<p>
+  <button type="button" name="button" ng-click="onAddPrefLabelConfirm(term, lang); closeThisDialog()">Confirm</button>
+  <button type="button" name="button" ng-click="closeThisDialog()">Cancel</button>
+</p>

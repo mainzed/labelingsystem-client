@@ -382,13 +382,29 @@ angular.module('labelsApp')
     };
 
     $scope.onAddPrefLabel = function() {
-        //console.log("add prefLabel");
-        $scope.boxes.push({
-            category: "attribute",
-            type: "prefLabel",
-            value: "new prefLabel",
-            lang: "en"
+        $scope.languages = [
+            { name: "German", value: "DE" },
+            { name: "English", value: "EN" },
+            { name: "Spanish", value: "ES" },
+            { name: "Italian", value: "IT" }
+        ];
+        $scope.lang = "EN";  // default
+        ngDialog.open({
+            template: 'views/dialogs/add-preflabel.html',
+            showClose: false,
+            closeByDocument: false,
+            disableAnimation: true,
+            scope: $scope
         });
+
+        $scope.onAddPrefLabelConfirm = function(term, lang) {
+            $scope.boxes.push({
+                category: "attribute",
+                type: "prefLabel",
+                value: term,
+                lang: lang
+            });
+        };
     };
 
     $scope.onAddAltLabel = function() {
@@ -422,10 +438,8 @@ angular.module('labelsApp')
     };
 
     $scope.onAddLink = function() {
-
         $scope.url = "http://";
         $scope.validWaybackLink = false;
-
         ngDialog.open({
             template: 'views/dialogs/add-wayback-link.html',
             disableAnimation: true,
@@ -438,7 +452,6 @@ angular.module('labelsApp')
 
         $http.get('http://143.93.114.135/api/v1/resourcewayback?url=' + url).then(function(res) {
             // success
-
             // replace url with generated wayback-link
             $scope.url = res.data.url;
 
