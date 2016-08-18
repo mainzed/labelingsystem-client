@@ -53,7 +53,8 @@ angular
       })
       .when('/admin/vocabularies/:vID/labels/:lID', {
         templateUrl: 'views/admin-label-detail.html',
-        controller: 'LabelDetailCtrl'
+        controller: 'LabelDetailCtrl',
+        controllerAs: 'LabelDetailCtrl'
       })
       .when('/cssTest', {
         templateUrl: 'views/matthias.html',

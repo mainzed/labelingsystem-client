@@ -36,10 +36,6 @@ angular.module('labelsApp')
              * opens a type-specific dialog
              */
             scope.onClick = function() {
-                console.log(scope.type);
-                if (scope.type === "label") {
-
-                }
                 ngDialog.open({
                     template: 'views/dialogs/add-resource.html',
                     className: 'bigdialog',
