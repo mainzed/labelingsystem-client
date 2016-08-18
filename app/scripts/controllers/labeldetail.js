@@ -35,7 +35,7 @@ angular.module('labelsApp')
     // load label for the current vocabulary
     LabelService.get({id: $routeParams.lID}, function(label) {
         $scope.label = label;
-        //console.log(label);
+
 
         // broader, narrower and related gathered later
         label.prefLabels.forEach(function(prefLabel) {
@@ -44,13 +44,7 @@ angular.module('labelsApp')
             }
         });
 
-        // add description to attributeBoxes
-        $scope.getLabelAttributes(label);
-
-        // append to broaderBoxes etc
-        $scope.getLabelRelations(label);
-        $scope.getLabelMatches(label);
-        $scope.getExternalResources(label);
+        $scope.loadBoxes();
     });
 
     // filters
@@ -469,6 +463,20 @@ angular.module('labelsApp')
         });
     };
 
+    /**
+     * gather information and generate box objects
+     */
+    $scope.loadBoxes = function() {
+        console.log($scope.label);
+        $scope.boxes = [];
+        // add description to attributeBoxes
+        $scope.getLabelAttributes($scope.label);
+
+        // append to broaderBoxes etc
+        $scope.getLabelRelations($scope.label);
+        $scope.getLabelMatches($scope.label);
+        $scope.getExternalResources($scope.label);
+    };
     // hotkeys
     $document.keydown(function(e) {
         if (e.keyCode === 13) {  // enter
