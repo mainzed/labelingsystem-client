@@ -9,13 +9,13 @@
 	<span class="language">{{ prefLabel.lang.split("-")[0] }}</span>
 </div>
 
-<div id="enrichment-ov">
+<div id="enrichment-ov" ng-class="fullheight">
 	<!-- fixed table header -->
 	<div class="tableheadwrapper">
 		<div class="tablehead left"><span>Broader</span></div>
 		<div class="insidewrapper half">
-			<div class="tablehead halfleft"><span>Text</span></div>
-			<div class="tablehead halfright"><span>Relations</span></div>
+			<div class="tablehead halfleft"><span>Descriptive</span></div>
+			<div class="tablehead halfright"><span>Similar</span></div>
 		</div>
 		<div class="tablehead right"><span>Narrower</span></div>
 	</div>
@@ -86,11 +86,13 @@
 
 	</div>
 	<div class="col threequarter">
-	<div id="enrichmentbrowser" class="nano">
-	<div class="nano-content">
-    <search-result-box ng-repeat="box in resultBoxes | orderBy: ['quality', 'type']" data="box" vocab="vocabulary" action="loadBoxes()" label="label"></search-result-box>
-	</div>
-	</div>
+		<div id="enrichmentbrowser" class="nano">
+		<div class="nano-content">
+			<span class="noresult" ng-show="!resultBoxes">Add enrichment sources by searching</span>
+		    <search-result-box ng-repeat="box in resultBoxes | orderBy: ['quality', 'type']" data="box" vocab="vocabulary" action="loadBoxes()" label="label"></search-result-box>
+		</div>
+		</div>
 	</div>
 
 </div>
+<div id="enrichment-src-min"></div>
