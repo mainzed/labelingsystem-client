@@ -26,8 +26,10 @@ angular.module('labelsApp')
 
     $scope.showEnrichment = true;
 
-    // init nanoscroll
-    $(".nano").nanoScroller();
+    // recalc nano-scroller
+    $scope.nano = function() {
+        $(".nano").nanoScroller();
+    };
 
     VocabService.get({id: $routeParams.vID}, function(vocabulary) {
         $scope.vocabulary = vocabulary;
@@ -37,7 +39,6 @@ angular.module('labelsApp')
     // load label for the current vocabulary
     LabelService.get({id: $routeParams.lID}, function(label) {
         $scope.label = label;
-
 
         // broader, narrower and related gathered later
         label.prefLabels.forEach(function(prefLabel) {
@@ -67,7 +68,7 @@ angular.module('labelsApp')
     };
 
     // get all thesauri associated with this vocabulary, preload these for search function
-    $scope.thesauri = ["Local Labeling System"];
+    $scope.thesauri = [];
     function getVocabThesauri(vocabID) {
         //console.log(vocabID);
 
@@ -230,7 +231,7 @@ angular.module('labelsApp')
         if (label.broadMatch) {
             label.broadMatch.forEach(function(match) {
                 ExternalResourcesService.get(match.url, function(resource) {
-                    console.log(resource);
+                    //console.log(resource);
                     // success
                     $scope.boxes.push({
                         category: "broadMatch",
@@ -251,7 +252,7 @@ angular.module('labelsApp')
             label.narrowMatch.forEach(function(match) {
                 ExternalResourcesService.get(match.url, function(resource) {
                     // success
-                    console.log(resource);
+                    //console.log(resource);
                     $scope.boxes.push({
                         category: "narrowMatch",
                         type: resource.type,

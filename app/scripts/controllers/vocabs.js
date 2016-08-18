@@ -43,21 +43,8 @@ angular.module('labelsApp')
         }
 
         // get thesauri for vocabulary
-        // TODO: change that to query onl yvocab retcat
-        $http.get('http://143.93.114.135/api/v1/retcat').then(function(res) {
-            // success
-            $scope.vocabThesauri = res.data.slice(0,3);
-        }, function() {
-            // error
-        });
-
-        // get all available thesauri to add
-        $http.get('http://143.93.114.135/api/v1/retcat').then(function(res) {
-            // success
-            $scope.thesauri = res.data;
-        }, function() {
-            // error
-        });
+        $scope.thesauri = [];
+        getVocabThesauri($scope.vocab.id);
 
         ngDialog.open({
             template: 'views/dialogs/vocabulary-edit.html',
@@ -76,5 +63,18 @@ angular.module('labelsApp')
         }
         $scope.vocabThesauri.push(thesaurus);
     };
+
+    function getVocabThesauri(vocabID) {
+
+        $http.get('http://143.93.114.135/api/v1/retcat/vocabulary/' + vocabID).then(function(res) {
+            // success
+            res.data.forEach(function(item) {
+                $scope.thesauri.push(item);
+            });
+
+        }, function() {
+            // error
+        });
+    }
 
   });

@@ -1,0 +1,16 @@
+<div class="box bigbox label listbox" ng-click="onLabelClick(label.id)">
+
+  <span class="thumbnail" ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: 'true'}">
+    <button class="showadditionalcontent">+</button>
+    {{ prefLabel.value}}
+  </span>
+
+  <mini-preview label="label"></mini-preview>
+
+  <span class="type"><span class="icon-label"></span></span>
+
+  <span class="language" ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: 'true'}">
+    {{ prefLabel.lang.split("-")[0] }}
+  </span>
+
+</div>

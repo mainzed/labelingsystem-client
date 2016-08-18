@@ -1,0 +1,23 @@
+<span class="minipreview">
+
+  <!-- broader -->
+  <span class="minileft minicol">
+    <span ng-repeat="box in miniBoxes | filter: broaderFilter" class="minibox {{box.type}}"></span>
+  </span>
+
+  <!-- text -->
+  <span class="minihalfleft minicol">
+    <span ng-repeat="box in miniBoxes | filter: attributeFilter" class="minibox {{box.type}}"></span>
+  </span>
+
+  <!-- relations -->
+  <span class="minihalfright minicol">
+    <span ng-repeat="box in miniBoxes | filter: relatedFilter" class="minibox {{box.type}}"></span>
+  </span>
+
+  <!-- narrower -->
+  <span class="miniright minicol">
+    <span ng-repeat="box in miniBoxes | filter: narrowerFilter" class="minibox {{box.type}}"></span>
+  </span>
+
+</span>

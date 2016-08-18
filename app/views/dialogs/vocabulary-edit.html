@@ -5,7 +5,7 @@
   <li>Beschreibung: {{ vocab.description.value }}</li>
   <li>Referenzthesauri:</li>
   <ul>
-    <li ng-repeat="vocabThesaurus in vocabThesauri">{{ vocabThesaurus.name }} ({{ vocabThesaurus.group }})</li>
+    <li ng-repeat="thesaurus in thesauri">{{ thesaurus.name }}</li>
     <li ng-show="showSelection">
       <select ng-model="choice" ng-change="onSelectionChange(choice); showSelection = false">
         <option value="" disabled selected>Select thesaurus</option>
