@@ -1,7 +1,11 @@
 <div class="box bigbox label listbox" ng-click="onLabelClick(label.id)">
 
   <span class="thumbnail" ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: 'true'}">
-    <button class="showadditionalcontent">+</button>
+
+    <button class="showadditionalcontent" ng-click="toggleExtension(); $event.stopPropagation()">
+      <span ng-show="!showMore">+</span>
+      <span ng-show="showMore">-</span>
+    </button>
     {{ prefLabel.value}}
   </span>
 
@@ -13,4 +17,9 @@
     {{ prefLabel.lang.split("-")[0] }}
   </span>
 
+</div>
+
+<div ng-if="showMore" class="box boxextension bigbox label high">
+  <span class="note">{{ label.scopeNote.value }}</span>
+  <span>Created by: {{ label.creator }}</span>
 </div>

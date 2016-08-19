@@ -1,33 +1,42 @@
-<div class="box bigbox {{ type }} {{ data.quality }}" ng-init="showMore === false" ng-click="onClick()">
+<div class="box bigbox {{ type }} {{ data.quality }}" ng-click="onClick()">
   <span class="thumbnail">
-    <button class="showadditionalcontent" ng-click="showMore = true">
-      <!-- <span ng-show="!showMore">+</span> -->
-      <!-- <span ng-show="showMore">-</span> -->
+    <button class="showadditionalcontent" ng-click="showMore = !showMore; $event.stopPropagation()">
+      <span ng-show="!showMore">+</span>
+      <span ng-show="showMore">-</span>
     </button>
     {{ data.label }}
   </span>
-  <!-- <span class="note">{{ data.description }}</span> -->
   <span class="type" ng-bind-html="icon"></span>
-  <!-- <span class="language">{{ data.lang.split("-")[0] }}</span> -->
+
 </div>
 
 <!-- show details -->
-<!-- <div ng-show="showMore" class="box boxextension bigbox {{ data.type }} {{ data.quality }}">
+<div ng-if="showMore" class="box boxextension bigbox {{ data.type }} {{ data.quality }}">
 
-  <div class="broader" ng-show="data.broaderTerms.length">
+  <!-- description -->
+  <div ng-show="data.description">
+    <h4>Description</h4>
+    <span class="note">{{ data.description }}</span>
+  </div>
+
+  <!-- broader -->
+  <div ng-show="data.broaderTerms.length">
     <span class='icon-broader'></span>
-    broader
+    <h4>broader</h4>
     <ul>
       <li ng-repeat="term in data.broaderTerms">{{ term.label }}</li>
     </ul>
   </div>
 
-  <div class="narrower" ng-show="data.narrowerTerms.length">
+  <!-- narrower -->
+  <div ng-show="data.narrowerTerms.length">
     <span class='icon-broader'></span>
-    narrower
+    <h4>narrower</h4>
     <ul>
       <li ng-repeat="term in data.narrowerTerms">{{ term.label }}</li>
     </ul>
   </div>
 
-</div> -->
+  <span class="language">{{ data.lang.split("-")[0] }}</span>
+
+</div>

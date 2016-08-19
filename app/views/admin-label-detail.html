@@ -5,11 +5,18 @@
 
   <breadcrumbs></breadcrumbs>
 
+  <!-- loop over all prefLabels, so it autofreshes on change -->
+  <h1 ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}" ng-click="onLabelHeadingClick()">
+    {{ prefLabel.value }}
+  </h1>
+
 	<span class="icon-label"></span>
-	<span class="language">{{ prefLabel.lang.split("-")[0] }}</span>
+
+  <!-- loop over all prefLabels, so it autofreshes on change -->
+	<span ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}" class="language">{{ prefLabel.lang.split("-")[0] }}</span>
 </div>
 
-<div id="enrichment-ov" ng-class="{ 'fullheight': !showEnrichment }">
+<div id="enrichment-ov" ng-class="{ 'fullheight': !showEnrichments }">
 	<!-- fixed table header -->
 	<div class="tableheadwrapper">
 		<div class="tablehead left"><span>Broader</span></div>
@@ -53,14 +60,14 @@
 	</div>
 </div>
 
-<div id="enrichment-src" ng-show="showEnrichment">
+<div id="enrichment-src" ng-show="showEnrichments">
 	<div id="separator">
 		<h1>Enrich</h1>
 		<div id="enrichmentsearch">
 			<input type="text" placeholder="Search in Thesauri" ng-model="searchValue"></input>
       <button type="button" name="button" ng-click="onSearchClick()" ng-disabled="!searchValue">search</button>
 		</div>
-    <button type="button" name="button" ng-click="showEnrichment = false">hide</button>
+    <button type="button" name="button" ng-click="hideEnrichmentBrowser()">hide</button>
 	</div>
 
   <div class="col left">
@@ -90,10 +97,10 @@
 		<div id="enrichmentbrowser" class="nano">
 		<div class="nano-content">
 			<span class="noresult" ng-show="!resultBoxes">Add enrichment sources by searching</span>
-		    <search-result-box ng-repeat="box in resultBoxes | orderBy: ['quality', 'type']" data="box" vocab="vocabulary" action="loadBoxes()" label="label"></search-result-box>
+		    <search-result-box ng-repeat="box in resultBoxes | orderBy: ['quality', 'type']" data="box" vocab="vocabulary" action="loadBoxes()" label="label" boxes="resultBoxes"></search-result-box>
 		</div>
 		</div>
 	</div>
 
 </div>
-<div id="enrichment-src-min" ng-show="!showEnrichment" ng-click="showEnrichment = true"></div>
+<div id="enrichment-src-min" ng-show="!showEnrichments" ng-click="showEnrichmentBrowser()"></div>

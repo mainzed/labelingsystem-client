@@ -9,63 +9,22 @@
 angular.module('labelsApp')
   .directive('breadcrumbs', function ($location, $routeParams) {
     return {
-      template: [
-          '<div id="breadcrumb">',
-
-            // vocabulary
-            '<span ng-show="showVocabulary">',
-                '<a class="outside" ng-show="!showVocabularies" href="#/admin/vocabularies">{{ user.name }}</a>',
-                '<span class="icon-arrow"></span>',
-                '<h1>',
-                  '{{ vocabulary.title.value }}',
-                '</h1>',
-            '</span>',
-
-            // label detail
-            '<span ng-show="showLabelDetail">',
-                '<a class="outside" ng-show="!showVocabularies" href="#/admin/vocabularies">{{ user.name }}</a>',
-                '<span class="icon-arrow"></span>',
-                '<a href="#/admin/vocabularies/{{ vocabulary.id }}/labels">',
-                    '{{ vocabulary.title.value }}',
-                '</a>',
-                '<span class="icon-arrow"></span>',
-                '<h1 ng-repeat="prefLabel in label.prefLabels" ng-show="prefLabel.isThumbnail">',
-                  '{{ prefLabel.value }}',
-                '</h1>',
-            '</span>',
-
-          '</div>',
-
-
-      ].join(""),
+      templateUrl: "views/directives/breadcrumbs.html",
       restrict: 'E',
       link: function postLink(scope, element, attrs) {
-        //element.text('this is the breadcrumb directive');
-        var path = $location.path();
 
-        // get label from url
-        // var labelID = $routeParams.lID
-        // console.log(scope.label);
-        // for (var i = 0; i < scope.label.prefLabels.length; i++) {
-        //     var label = scope.label.prefLabels[i];
-        //     if (label.isThumbnail) {
-        //         scope.prefLabel = label;
-        //     }
-        // }
+        var path = $location.path();
 
         // check view and decide what breadcrumbs to show
         if (path.indexOf("/labels/") > -1) {
             scope.showLabelDetail = true;
-            //console.log(scope.label);
-            // get label by id
-
 
         } else if (path.indexOf("/vocabularies/") > -1) {
             scope.showVocabulary = true;
-
         } else {
             scope.showVocabulary = false;
         }
+
       }
     };
   });

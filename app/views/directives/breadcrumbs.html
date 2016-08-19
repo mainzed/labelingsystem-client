@@ -1,0 +1,23 @@
+<div id="breadcrumb">
+
+  <!-- vocabulary -->
+  <span ng-show="showVocabulary">
+    <a class="outside" ng-show="!showVocabularies" href="#/admin/vocabularies">{{ user.name }}</a>
+    <span class="icon-arrow"></span>
+    <h1>
+     {{ vocabulary.title.value }}
+    </h1>
+  </span>
+
+  <!-- label detail -->
+  <span ng-show="showLabelDetail">
+    <a class="outside" ng-show="!showVocabularies" href="#/admin/vocabularies">{{ user.name }}</a>
+    <span class="icon-arrow"></span>
+    <a href="#/admin/vocabularies/{{ vocabulary.id }}/labels">
+     {{ vocabulary.title.value }}
+    </a>
+    <span class="icon-arrow"></span>
+
+  </span>
+
+</div>

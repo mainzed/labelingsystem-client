@@ -1,9 +1,14 @@
-<h3>{{ ngModel.type }}</h3>
-<p>
-  {{ ngModel.value }}
-</p>
-<p>
-  {{ ngModel.relation }}
-</p>
+<h3>{{ ngModel.value }} </h3>
+
+<ul>
+  <li>Type: {{ ngModel.resource.type }}</li>
+  <li>
+    Relation:
+    <select ng-model="ngModel.relation">
+      <option ng-repeat="category in categories">{{ category }}</option>
+    </select>
+  </li>
+  <li>Link: missing url attribute</li>
+</ul>
 
 <button type="button" name="button" ng-click="onDeleteClick()">delete</button>

@@ -1,7 +1,7 @@
 <div id="header" class="box full">
 	<div id="breadcrumb"></div>
   <breadcrumbs></breadcrumbs>
-	<!-- <h1>LBK phase 14 (Lindig)</h1> -->
+
 	<span class="icon-folder"></span>
 	<span class="language">{{ vocabulary.title.lang }}</span>
 </div>
@@ -13,10 +13,21 @@
 	</div>
 </div>
 
-<div id="labellistwrapper">
+<div id="labellistwrapper" ng-init="labelLimit = 25">
 	<div class="nano">
 	   <div id="labellist" class="nano-content">
-       <list-box ng-repeat="label in labels | filter: labelFilter | limitTo: 30"></list-box>
+       <list-box ng-repeat="label in filteredLabels = (labels | filter: labelFilter | orderBy: 'prefLabels[0].value' | limitTo: labelLimit)"></list-box>
+
+       <!-- message when no labels found -->
+       <!-- <span class="box bigbox label listbox" ng-show="filteredLabels.length > 30">
+         No labels found, <a href="#/vocabularies">browse vocabularies!</a>
+       </span> -->
+
+       <!-- when search empty and more labels available show option to load more -->
+       <span class="box bigbox label listbox" ng-show="!labelFilter && labels.length > labelLimit" ng-click="labelLimit = labelLimit + 25">
+         show more
+       </span>
+
 		</div>
 	</div>
 </div>

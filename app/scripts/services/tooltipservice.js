@@ -20,10 +20,10 @@ angular.module('labelsApp')
 
     this.icons = {
         types: {
-            label: "this is the label icon!",
-            description: "this is the scopeNote icon!",
-            prefLabel: "this is the preflabel icon!",
-            altLabel: "this is the altlabel icon!"
+            label: "this is a label!",
+            description: "This is a description!",
+            prefLabel: "this is a preferred term!",
+            altLabel: "this is an alternative term!"
         },
         relations: {
             closeMatch: "closeMatch!",

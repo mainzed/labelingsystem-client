@@ -8,7 +8,7 @@
  * Controller of the labelsApp
  */
 angular.module('labelsApp')
-  .controller('LabelDetailCtrl', function ($scope, $routeParams, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ExternalResourcesService, TooltipService) {
+  .controller('LabelDetailCtrl', function ($scope, $routeParams, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ExternalResourcesService, TooltipService, UserSettingsService) {
 
     // authentication
     if ($location.path().indexOf("admin/") > -1) {  // is admin view
@@ -24,12 +24,7 @@ angular.module('labelsApp')
 
     $scope.boxes = [];
 
-    $scope.showEnrichment = true;
-
-    // recalc nano-scroller
-    $scope.nano = function() {
-        $(".nano").nanoScroller();
-    };
+    $scope.showEnrichments = UserSettingsService.showEnrichments;
 
     VocabService.get({id: $routeParams.vID}, function(vocabulary) {
         $scope.vocabulary = vocabulary;
@@ -40,31 +35,26 @@ angular.module('labelsApp')
     LabelService.get({id: $routeParams.lID}, function(label) {
         $scope.label = label;
 
-        // broader, narrower and related gathered later
-        label.prefLabels.forEach(function(prefLabel) {
-            if (prefLabel.isThumbnail) {
-                $scope.prefLabel = prefLabel;
-            }
-        });
+        $scope.prefLabel = _.find($scope.label.prefLabels, {isThumbnail: true});
 
-        $scope.loadBoxes();
+        //$scope.loadBoxes();
     });
 
     // filters
     $scope.attributeFilter = function(box) {
-        return box.category === "attribute";
+        return box.relation === "attribute";
     };
 
     $scope.broaderFilter = function(box) {
-        return box.category === "broader" || box.category === "broadMatch";
+        return box.relation === "broader" || box.relation === "broadMatch";
     };
 
     $scope.narrowerFilter = function(box) {
-        return box.category === "narrower" || box.category === "narrowMatch";
+        return box.relation === "narrower" || box.relation === "narrowMatch";
     };
 
     $scope.relatedFilter = function(box) {
-        return box.category === "related" || box.category === "closeMatch" || box.category === "relatedMatch" || box.category === "exactMatch" || box.category === "seeAlso";
+        return box.relation === "related" || box.relation === "closeMatch" || box.relation === "relatedMatch" || box.relation === "exactMatch" || box.relation === "seeAlso";
     };
 
     // get all thesauri associated with this vocabulary, preload these for search function
@@ -93,42 +83,35 @@ angular.module('labelsApp')
         $scope.thesauri.forEach(function(thesaurus) {
 
             $http.get('http://143.93.114.135/api/v1/resourcequery?retcat=' + thesaurus + '&query=' + $scope.searchValue).then(function(res) {
-                // append results
-                //console.log("results for " + thesaurus + ": " + res.data.length);
-
-                //$scope.resultBoxes.concat(res.data);
                 $.merge($scope.resultBoxes, res.data);
-
-                //console.log(res.data[0]);
 
             }, function() {
                 // error
                 console.log("something went wrong trying to get label search results!");
             });
         });
-
     };
 
     $scope.getLabelAttributes = function(label) {
 
         if (label.scopeNote) {
             $scope.boxes.push({
-                category: "attribute",
-                type: "description",
-                value: label.scopeNote.value,
-                lang: label.scopeNote.lang
+                relation: "attribute",
+                boxType: "description",
+                resource: label.scopeNote
             });
+
         }
+
 
         // add prefLabels to attributeBoxes
         if (label.prefLabels) {
             label.prefLabels.forEach(function(prefLabel) {
                 if (!prefLabel.isThumbnail) {  // ignore thumbnail preflabel
                     $scope.boxes.push({
-                        category: "attribute",
-                        type: "prefLabel",
-                        value: prefLabel.value,
-                        lang: prefLabel.lang
+                        relation: "attribute",
+                        boxType: "prefLabel",
+                        resource: prefLabel
                     });
                 }
             });
@@ -137,12 +120,11 @@ angular.module('labelsApp')
         // add altLabels to attributeBoxes
         if (label.altLabels) {
             label.altLabels.forEach(function(altLabel) {
-
+                altLabel.type = "text";
                 $scope.boxes.push({
-                    category: "attribute",
-                    type: "altLabel",
-                    value: altLabel.value,
-                    lang: altLabel.lang
+                    relation: "attribute",
+                    boxType: "altLabel",
+                    resource: altLabel
                 });
             });
         }
@@ -165,11 +147,9 @@ angular.module('labelsApp')
                     }
                     // append to boxes
                     $scope.boxes.push({
-                        category: "broader",
-                        type: "label",
-                        value: prefLabel.value,
-                        lang: prefLabel.lang,
-                        quality: "high"
+                        relation: "broader",
+                        boxType: "label",
+                        resource: prefLabel
                     });
                 });
             });
@@ -189,11 +169,9 @@ angular.module('labelsApp')
 
                     // append to boxes
                     $scope.boxes.push({
-                        category: "narrower",
-                        type: "label",
-                        value: prefLabel.value,
-                        lang: prefLabel.lang,
-                        quality: "high"
+                        relation: "narrower",
+                        boxType: "label",
+                        resource: prefLabel
                     });
                 });
             });
@@ -213,11 +191,9 @@ angular.module('labelsApp')
 
                     // append to boxes
                     $scope.boxes.push({
-                        category: "related",
-                        type: "label",
-                        value: prefLabel.value,
-                        lang: prefLabel.lang,
-                        quality: "high"
+                        relation: "related",
+                        boxType: "label",
+                        resource: prefLabel
                     });
                 });
             });
@@ -231,14 +207,12 @@ angular.module('labelsApp')
         if (label.broadMatch) {
             label.broadMatch.forEach(function(match) {
                 ExternalResourcesService.get(match.url, function(resource) {
-                    //console.log(resource);
+
                     // success
                     $scope.boxes.push({
-                        category: "broadMatch",
-                        type: resource.type,
-                        value: resource.label,
-                        lang: resource.lang,
-                        quality: resource.quality
+                        relation: "broadMatch",
+                        boxType: resource.type,
+                        resource: resource
                     });
 
                 }, function(errorMessage) {
@@ -254,11 +228,9 @@ angular.module('labelsApp')
                     // success
                     //console.log(resource);
                     $scope.boxes.push({
-                        category: "narrowMatch",
-                        type: resource.type,
-                        value: resource.label,
-                        lang: resource.lang,
-                        quality: resource.quality
+                        relation: "narrowMatch",
+                        boxType: resource.type,
+                        resource: resource
                     });
                 }, function(errorMessage) {
                     // error
@@ -272,11 +244,13 @@ angular.module('labelsApp')
                 ExternalResourcesService.get(match.url, function(resource) {
                     // success
                     $scope.boxes.push({
-                        category: "closeMatch",
-                        type: resource.type,
-                        value: resource.label,
-                        lang: resource.lang,
-                        quality: resource.quality
+                        relation: "closeMatch",
+                        boxType: resource.type,
+                        resource: resource
+                        // type: resource.type,
+                        // value: resource.label,
+                        // lang: resource.lang,
+                        // quality: resource.quality
                     });
                 }, function(errorMessage) {
                     // error
@@ -291,11 +265,9 @@ angular.module('labelsApp')
                 ExternalResourcesService.get(match.url, function(resource) {
                     // success
                     $scope.boxes.push({
-                        category: "relatedMatch",
-                        type: resource.type,
-                        value: resource.label,
-                        lang: resource.lang,
-                        quality: resource.quality
+                        relation: "relatedMatch",
+                        boxType: resource.type,
+                        resource: resource
                     });
                 }, function(errorMessage) {
                     // error
@@ -310,11 +282,9 @@ angular.module('labelsApp')
                 ExternalResourcesService.get(match.url, function(resource) {
                     // success
                     $scope.boxes.push({
-                        category: "exactMatch",
-                        type: resource.type,
-                        value: resource.label,
-                        lang: resource.lang,
-                        quality: resource.quality
+                        relation: "exactMatch",
+                        boxType: resource.type,
+                        resource: resource
                     });
 
                 }, function(errorMessage) {
@@ -332,11 +302,9 @@ angular.module('labelsApp')
                 ExternalResourcesService.get(resource.url, function(externalResource) {
                     //$scope.seeAlsoResources.push(externalResource);//
                     $scope.boxes.push({
-                        category: "seeAlso",
-                        type: externalResource.type,
-                        value: externalResource.label,
-                        quality: "low"
-
+                        relation: "seeAlso",
+                        boxType: "wayback",
+                        resource: externalResource
                     });
                 }, function(errorMessage) {
                     // failure
@@ -346,52 +314,16 @@ angular.module('labelsApp')
         }
     };
 
-    $scope.onNarrowerClick = function(label) {
-
-        // prevent from adding label as broader and narrower
-        if ($scope.label.broader) {
-            if ($scope.label.broader.indexOf(label.id) > -1) {
-                return false;
-            }
-        }
-
-        if (!$scope.label.narrower) {
-            $scope.label.narrower = [label.id];
-        } else if ($scope.label.narrower.indexOf(label.id) === -1) {
-            $scope.label.narrower.push(label.id);
-        }
-
-        // refresh
-        $scope.getLabelRelations($scope.label);
-    };
-
-    $scope.onBroaderClick = function(label) {
-
-        // prevent from adding label as broader and narrower
-        if ($scope.label.narrower) {
-            if ($scope.label.narrower.indexOf(label.id) > -1) {
-                return false;
-            }
-        }
-
-        if (!$scope.label.broader) {
-            $scope.label.broader = [label.id];
-        } else if ($scope.label.broader.indexOf(label.id) === -1) {
-            $scope.label.broader.push(label.id);
-        }
-
-        // refresh
-        $scope.getLabelRelations($scope.label);
-    };
+    $scope.languages = [
+        { name: "German", value: "de" },
+        { name: "English", value: "en" },
+        { name: "Spanish", value: "es" },
+        { name: "Italian", value: "it" }
+    ];
+    $scope.lang = "EN";  // default
 
     $scope.onAddPrefLabel = function() {
-        $scope.languages = [
-            { name: "German", value: "DE" },
-            { name: "English", value: "EN" },
-            { name: "Spanish", value: "ES" },
-            { name: "Italian", value: "IT" }
-        ];
-        $scope.lang = "EN";  // default
+
         ngDialog.open({
             template: 'views/dialogs/add-preflabel.html',
             showClose: false,
@@ -428,16 +360,26 @@ angular.module('labelsApp')
             disableAnimation: true,
             showClose: false,
             closeByDocument: false,
-            //className: "smalldialog",
             scope: $scope
         });
 
-        $scope.boxes.push({
-            category: "attribute",
-            type: "description",
-            value: "this is a new description",
-            lang: "en"
-        });
+        $scope.onAddDescriptionConfirm = function(text) {
+            //console.log($scope.label);
+
+            if (!$scope.label.scopeNote) {
+                $scope.label.scopeNote = {};
+            }
+
+            // just push box, send to server silently
+            $scope.label.scopeNote = {
+                value: text,
+                lang: $scope.prefLabel.lang
+            };
+
+            // listener on $scope.label will update automatically
+        };
+
+
     };
 
     $scope.onAddLink = function() {
@@ -446,6 +388,8 @@ angular.module('labelsApp')
         ngDialog.open({
             template: 'views/dialogs/add-wayback-link.html',
             disableAnimation: true,
+            showClose: false,
+            closeByDocument: false,
             scope: $scope
         });
     };
@@ -483,7 +427,7 @@ angular.module('labelsApp')
      * gather information and generate box objects
      */
     $scope.loadBoxes = function() {
-        console.log($scope.label);
+
         $scope.boxes = [];
         // add description to attributeBoxes
         $scope.getLabelAttributes($scope.label);
@@ -493,6 +437,57 @@ angular.module('labelsApp')
         $scope.getLabelMatches($scope.label);
         $scope.getExternalResources($scope.label);
     };
+
+    $scope.showEnrichmentBrowser = function() {
+        $scope.showEnrichments = true;
+        UserSettingsService.showEnrichments = $scope.showEnrichments;
+    };
+
+    $scope.hideEnrichmentBrowser = function() {
+        $scope.showEnrichments = false;
+        UserSettingsService.showEnrichments = $scope.showEnrichments;
+    };
+
+    // open dialog with label-metadata
+    $scope.onLabelHeadingClick = function() {
+
+        var thumbnail = _.find($scope.label.prefLabels, function(o) { return o.isThumbnail === true; });
+        // putting values in new object prevents auto-update in breadcrumbs
+        $scope.thumbnail = {
+            value: thumbnail.value,
+            lang: thumbnail.lang
+        };
+
+        $scope.status = $scope.label.statusType;
+
+        ngDialog.open({
+            template: 'views/dialogs/label-metadata.html',
+            disableAnimation: true,
+            showClose: false,
+            closeByDocument: false,
+            scope: $scope
+        });
+    };
+
+    $scope.onThumbnailPrefLabelEdit = function() {
+        // Find item index using indexOf+find
+        var index = _.indexOf($scope.label.prefLabels, _.find($scope.label.prefLabels, {isThumbnail: true}));
+
+        $scope.label.prefLabels.splice(index, 1, {
+            isThumbnail: true,
+            value: $scope.thumbnail.value,
+            lang: $scope.thumbnail.lang
+        });
+    };
+
+    // listen to changes to the label
+    $scope.$watchCollection("label", function(newVal) {
+        //TODO: get differences and update boxes accordingly
+        if (typeof newVal === 'object') {  // skip when label is not loaded yet
+            $scope.loadBoxes();
+        }
+    });
+
     // hotkeys
     $document.keydown(function(e) {
         if (e.keyCode === 13) {  // enter
@@ -502,5 +497,7 @@ angular.module('labelsApp')
         }
     });
 
+    // init nano-scroller (gets refreshed in directives after render)
+    $(".nano").nanoScroller();
 
   });

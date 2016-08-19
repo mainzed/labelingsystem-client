@@ -7,7 +7,7 @@
  * # searchResultBox
  */
 angular.module('labelsApp')
-  .directive('searchResultBox', function (ngDialog) {
+  .directive('searchResultBox', function (ngDialog, LabelService) {
     return {
         templateUrl: "views/directives/search-result-box.html",
         restrict: 'E',
@@ -15,12 +15,15 @@ angular.module('labelsApp')
             data: "=",  // data attribute available as scope.data (two-way-binding)
             vocabulary: "=vocab",
             label: "=",  // need label to append new data to
+            boxes: "=",  // need to append new box and prevent reloading all boxes
             action: "&"  // get action to refresh boxes
         },
         link: function postLink(scope, element, attrs) {
             //scope.showMore = false;
-            //console.log(scope);
+
             scope.type = scope.data.type;
+
+            //scope.labelLimit = 25;
 
             if (scope.data.type === "ls" && scope.data.scheme === scope.vocabulary.title.value) {  // ls same vocab
                 scope.icon = "<span class='icon-label'></span>";
@@ -48,18 +51,43 @@ angular.module('labelsApp')
 
             scope.onAddClick = function(relation) {
                 // TODO: check everywhere if resource is already linked to this label somehow
+
                 if (!scope.label[relation]) {
                     scope.label[relation] = [];
                 }
 
-                scope.label[relation].push({
-                    type: scope.data.type,
-                    url: scope.data.uri
-                });
+                if (relation === "broader" || relation === "related" || relation === "narrower") {  // same vocab
+                    // just push label-id to array
+                    var labelID = scope.data.uri.split("/").pop();
+                    scope.label[relation].push(labelID);
+
+                } else {
+                    scope.label[relation].push({
+                        type: scope.data.type,
+                        url: scope.data.uri
+                    });
+                }
 
                 // refesh boxes via controller function
                 scope.action();
+
+                // var putObject = {
+                //     "item": scope.label,
+                //     "user": "fakeUser"
+                // };
+                // LabelService.update(scope.label.id, putObject, function(res) {
+                //     // success
+                //     console.log(res);
+                // }, function(res) {
+                //     console.log("error");
+                //     console.log(res);
+                // });
+                // send changed label to server, get result for just this one change and update just one box
+
             };
+
+            // reload nanoscroller when directive rendered
+            $(".nano").nanoScroller();
         }
     };
   });

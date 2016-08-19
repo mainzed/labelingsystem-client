@@ -1,0 +1,30 @@
+<h1>label metadata</h1>
+
+<ul>
+  <li>
+    main term:
+    <input type="text" ng-model="thumbnail.value">
+    <select ng-model="thumbnail.lang">
+      <option ng-repeat="language in languages" value="{{ language.value }}">{{ language.name }}</option>
+    </select>
+  </li>
+
+  <li>
+    Status:
+    <select ng-model="status">
+      <option>active</option>
+      <option>deprecated</option>
+    </select>
+
+  </li>
+  <li>License: {{ label.license }}</li>
+  <li>Created by: {{ label.creator }}</li>
+  <li>Created on: {{ label.created | date: 'dd.MM.yyyy' }}</li>
+  <li>Contributors:</li>
+  <ul>
+    <li ng-repeat="contributor in label.contributors">{{ contributor }}</li>
+  </ul>
+</ul>
+
+<button type="button" name="button" ng-click="onThumbnailPrefLabelEdit(); closeThisDialog()">Confirm</button>
+<button type="button" name="button" ng-click="closeThisDialog()">Cancel</button>
