@@ -446,6 +446,7 @@ angular.module('labelsApp')
     $scope.hideEnrichmentBrowser = function() {
         $scope.showEnrichments = false;
         UserSettingsService.showEnrichments = $scope.showEnrichments;
+        //$(".nano").nanoScroller();
     };
 
     // open dialog with label-metadata
