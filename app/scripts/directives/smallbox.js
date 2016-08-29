@@ -93,6 +93,9 @@ angular.module('labelsApp')
             }
             ngDialog.open({
                 template: 'views/dialogs/small-box-detail.html',
+                className: 'bigdialog',
+                showClose: false,
+                closeByDocument: false,
                 disableAnimation: true,
                 scope: scope
             });

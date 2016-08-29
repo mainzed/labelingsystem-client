@@ -47,6 +47,19 @@ h2 {
     font-size: 26px;
   }
 }
+h3 {
+  font-size: 22px;
+  font-weight: normal;
+  margin-bottom: 5px;
+  margin-top: 20px;
+  margin-left: 20px;
+  display: block;
+}
+@media screen and (max-width: 1600px) {
+  h3 {
+    font-size: 20px;
+  }
+}
 button {
   border: 0;
   background: transparent;
@@ -76,7 +89,7 @@ input:focus {
   clear: left;
 }
 #separator h1 {
-  margin-left: calc(8px + 20px);
+  margin-left: calc(20px + 9px);
   margin-top: 20px;
   float: left;
   width: calc((100% - 9px * 5 - 20px * 2) / 4);
@@ -131,8 +144,8 @@ input:focus {
 #enrichment-src-min {
   width: 100%;
   float: left;
-  background: blue;
-  height: 40px;
+  background: #333333;
+  height: 38px;
   margin-top: 2px;
 }
 .tableheadwrapper {
@@ -162,13 +175,20 @@ input:focus {
 }
 #enrichmentsearch {
   float: left;
-  margin-top: 30px;
+  margin-top: 0px;
+  background: #333333;
+  height: 100%;
 }
 #enrichmentsearch input {
   background: none;
   border: none;
   color: gray;
   width: 200px;
+  margin-top: 32px;
+  margin-left: calc(8px + 9px);
+}
+.hideenrichment {
+  float: right;
 }
 #filtersearch {
   margin-left: 20px;
@@ -285,6 +305,9 @@ input:focus {
   background: #513C00;
 }
 .dbpedia {
+  background: #2B4400;
+}
+.geonames {
   background: #2B4400;
 }
 .wayback {
@@ -492,6 +515,17 @@ input:focus {
   display: block;
 }
 /* dialogs */
+/* dialog grid */
+.dialog-half {
+  width: 50%;
+}
+.dialog-quarter {
+  width: 25%;
+}
+.dialog-full {
+  width: calc(100% - 20px * 2);
+  margin-left: 20px;
+}
 .bigdialog .ngdialog-content {
   width: 60%;
   position: absolute;
@@ -499,6 +533,24 @@ input:focus {
   margin-left: calc((60% * -1) / 2);
   height: 80%;
   top: 10%;
+}
+.dialogwrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+.dialogheader {
+  width: 100%;
+  min-height: 100px;
+}
+.dialogbox {
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  min-height: 100px;
+}
+.typeinformation {
+  margin-left: calc(20px);
+  font-style: italic;
 }
 /* icon corrections */
 .small .icon-label,
@@ -527,4 +579,10 @@ input:focus {
   right: 50px;
   font-size: 110px;
   top: 2px;
+}
+.ngdialog-overlay {
+  background: rgba(0, 0, 0, 0.8);
+}
+.selectedbutton {
+  background: gray;
 }

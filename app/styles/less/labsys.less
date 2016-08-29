@@ -73,6 +73,8 @@ h1 {				font-size: @headlines; font-weight: normal;
 					@media screen and (max-width: 1600px) {font-size: @headlines-small; } }
 h2 {				font-size: @headlines; font-weight: normal; margin-bottom: 50px; margin-top: @marginoutside; margin-left: @marginoutside; display: block;
 					@media screen and (max-width: 1600px) {font-size: @headlines-small; } }
+h3 {				font-size: @emphasize; font-weight: normal; margin-bottom: 5px; margin-top: @marginoutside; margin-left: @marginoutside; display: block;
+					@media screen and (max-width: 1600px) {font-size: @emphasize-small; } }
 button {			border: 0; background: transparent;}
 input:focus {		outline: none; }
 
@@ -80,7 +82,7 @@ input:focus {		outline: none; }
 #viewport {			height: 100%; background: @background;}
 #separator {		color: white; height: 75px; }
 .separatorsmall {	height: 40px; float: left; width: 100%; background: @workareas; clear: left;}
-#separator h1 {		margin-left: calc(@tableheadmarginleft); margin-top: 20px; float: left; width: calc(@quartersize);  }
+#separator h1 {		margin-left: calc(@marginoutside + @marginoutboxsmall); margin-top: 20px; float: left; width: calc(@quartersize);  }
 #header h1 {		margin-top: 45px; float: left;
 					@media screen and (max-width: 1600px) { margin-top: 53px;} }
 .nano {				 	}
@@ -94,16 +96,17 @@ input:focus {		outline: none; }
 .fullheight		{	height: calc(100% - 90px - 40px) !important;}
 #enrichment-src {	width: 100%; float: left; background: @workareas; height: calc(50% - 40px); margin-top: 2px; }
 #enrichment-src-min {
-					width: 100%; float: left; background: blue; height: 40px; margin-top: 2px; }
+					width: 100%; float: left; background: @middle; height: 38px; margin-top: 2px; }
 .tableheadwrapper {	width: 100%; float: left; }
 #enrichments {		overflow-y: scroll; overflow-x: hidden; float: left; background: @workareas;}
 #labellistwrapper {	height: 80%;}
 #labellist {		overflow-y: scroll; overflow-x: hidden; float: left; background: @workareas;}
 #enrichmentbrowser {
 					overflow-x: hidden; float: left; height: 100%; background: @middle; }
-#enrichmentsearch {	float: left; margin-top: 30px; }
+#enrichmentsearch {	float: left; margin-top: 0px; background: @middle; height: 100%; }
 #enrichmentsearch input
-				 {	background: none; border: none; color: gray; width: 200px; }
+				 {	background: none; border: none; color: gray; width: 200px; margin-top: 32px; margin-left: calc(@tableheadmargin); }
+.hideenrichment {	float: right;}
 #filtersearch {		margin-left: @marginoutside; color: white; }
 #filtersearch input {
 					background: none; border: none; color: gray; width: 200px; }
@@ -146,6 +149,7 @@ input:focus {		outline: none; }
 .finto {			background: @categorytwo; }
 .fao {				background: @categorytwo;	}
 .dbpedia {			background: @categorythree; }
+.geonames {			background: @categorythree; }
 .wayback {			background: @text; }
 
 .text	{			background: @text; color: white;	}
@@ -173,8 +177,8 @@ input:focus {		outline: none; }
 .half {				width: calc(@quartersize * 2 + @marginoutboxsmall * 3);		}
 .five {				width: calc(((100% - @marginoutside * 2) - @marginoutboxsmall * 4) / 5); margin-right: @marginoutboxsmall; 		}
 .three {			width: calc(((100% - @marginoutside * 2) - @marginoutboxsmall * 2) / 3); margin-right: @marginoutboxsmall; 		}
-.leftout {			margin-left: @marginoutside; 		}
-.rightout {			margin-right: @marginoutside;		}
+.leftout {			margin-left: @marginoutside; 	}
+.rightout {			margin-right: @marginoutside;	}
 
 .halfleft {			width: calc((100% - @marginoutboxsmall * 3) / 2 + @marginoutboxsmall * 2 ); }
 .halfright {		width: calc((100% - @marginoutboxsmall * 3) / 2 + @marginoutboxsmall ); }
@@ -221,10 +225,18 @@ input:focus {		outline: none; }
 
 
 /* dialogs */
+/* dialog grid */
+.dialog-half {		width: 50%; }
+.dialog-quarter {	width: 25%; }
+.dialog-full	{	width: calc(100% - @marginoutside * 2); margin-left: @marginoutside; }
+
 .bigdialog .ngdialog-content {
 					width: @bigdialogwidth; position: absolute; left: 50%; margin-left: calc(( @bigdialogwidth * -1 ) / 2);
 					height: 80%; top: 10%; }
-
+.dialogwrapper {	width: 100%; height: 100%; position: absolute;}
+.dialogheader { 	width: 100%; min-height: 100px; }
+.dialogbox		{	border-top: 1px solid black; border-bottom: 1px solid black; min-height: 100px;  }
+.typeinformation {	margin-left: calc(@marginoutside); font-style: italic; }
 
 
 
@@ -238,3 +250,7 @@ input:focus {		outline: none; }
 #header .icon-label, #header .icon-folder {
 					position: absolute; right: 50px; font-size: 110px; top: 2px;
 }
+
+
+.ngdialog-overlay { background: rgba(0, 0, 0, 0.8); }
+.selectedbutton {	background: gray; }
