@@ -15,19 +15,32 @@
 
 <div id="labellistwrapper" ng-init="labelLimit = 25">
 	<div class="nano">
-	   <div id="labellist" class="nano-content">
-       <list-box ng-repeat="label in filteredLabels = (labels | filter: labelFilter | orderBy: 'prefLabels[0].value' | limitTo: labelLimit)"></list-box>
+    <div id="labellist" class="nano-content">
 
-       <!-- message when no labels found -->
-       <!-- <span class="box bigbox label listbox" ng-show="filteredLabels.length > 30">
-         No labels found, <a href="#/vocabularies">browse vocabularies!</a>
-       </span> -->
+      <!-- dummy to hold sort buttons -->
+      <span class="box bigbox label listbox">
+        <button type="button" ng-click="labelOrder = 'created'">(sort by date)</button>
+        <button type="button" ng-click="labelOrder = '-created'">(sort by date - reversed)</button>
+        <button type="button" ng-click="labelOrder = 'prefLabels[0].value'">(sort by preflabel)</button>
+        <button type="button" ng-click="labelOrder = ''">(reset order)</button>
+      </span>
 
-       <!-- when search empty and more labels available show option to load more -->
-       <span class="box bigbox label listbox" ng-show="!labelFilter && labels.length > labelLimit" ng-click="labelLimit = labelLimit + 25">
-         show more
-       </span>
 
-		</div>
+      <list-box ng-repeat="label in filteredLabels = (labels | filter: labelFilter | orderBy: labelOrder | limitTo: labelLimit)"></list-box>
+
+
+      <!-- message when no labels found -->
+      <!-- <span class="box bigbox label listbox" ng-show="filteredLabels.length > 30">
+       No labels found, <a href="#/vocabularies">browse vocabularies!</a>
+      </span> -->
+
+      <!-- when search empty and more labels available show option to load more -->
+      <span class="box bigbox label listbox" ng-show="!labelFilter && labels.length > labelLimit" ng-click="labelLimit = labelLimit + 25">
+        show more
+      </span>
+
+      <span class="box bigbox label listbox" ng-click="onCreateLabelClick()">Create label</span>
+
+	</div>
 	</div>
 </div>

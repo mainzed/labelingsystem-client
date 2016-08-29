@@ -8,7 +8,7 @@
  * Controller of the labelsApp
  */
 angular.module('labelsApp')
-  .controller('LabelsCtrl', function ($scope, $routeParams, $location, AuthService, LabelService, VocabService, TooltipService) {
+  .controller('LabelsCtrl', function ($scope, $routeParams, $location, ngDialog, AuthService, LabelService, VocabService, TooltipService) {
 
     // authentication
     if ($location.path().indexOf("admin/") > -1) {  // is admin view
@@ -32,15 +32,41 @@ angular.module('labelsApp')
     // load all labels for the current vocabulary
     LabelService.query({'vocab': $routeParams.vID}, function(labels) {
         $scope.labels = labels;
+        console.log(labels);
 
-        console.log(labels[0]);
         $scope.placeholder = "filter";
     });
 
     $scope.onLabelClick = function(id) {
         $location.path("admin/vocabularies/" + $scope.vocabulary.id + "/labels/" + id);
     };
+    $scope.onCreateLabelClick = function() {
+        ///labels/user/:user
+        //console.log("create label!");
 
+        ngDialog.open({
+            template: 'views/dialogs/create-label.html',
+            showClose: false,
+            closeByDocument: false,
+            disableAnimation: true,
+            scope: $scope
+        });
 
+        $scope.onCreateLabelConfirm = function(term) {
+
+            LabelService.save({
+                "vocabID": $scope.vocabulary.id,
+                "prefLabels": [{
+                    "isThumbnail": true,
+                    "lang": $scope.vocabulary.title.lang,
+                    "value": term
+                }]
+            }, function(label) {
+                if (label.id) {
+                    $scope.labels.push(label);
+                }
+            });
+        };
+    };
 
   });

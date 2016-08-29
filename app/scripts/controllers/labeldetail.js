@@ -26,6 +26,8 @@ angular.module('labelsApp')
 
     $scope.showEnrichments = UserSettingsService.showEnrichments;
 
+    //$scope.mapCounter = 0;
+
     VocabService.get({id: $routeParams.vID}, function(vocabulary) {
         $scope.vocabulary = vocabulary;
         getVocabThesauri(vocabulary.id);
@@ -103,7 +105,6 @@ angular.module('labelsApp')
 
         }
 
-
         // add prefLabels to attributeBoxes
         if (label.prefLabels) {
             label.prefLabels.forEach(function(prefLabel) {
@@ -132,167 +133,54 @@ angular.module('labelsApp')
 
     // relations = ls internal
     $scope.getLabelRelations = function(label) {
+        var relations = ["broader", "narrower", "related"];
+        relations.forEach(function(relation) {
+            if (label[relation]) {
+                label[relation].forEach(function(id) {
 
-        // get all broader ls labels
-        if (label.broader) {
-            label.broader.forEach(function(broaderID) {
-                LabelService.get({id: broaderID}, function(label) {
-
-                    // get thumbnail preflabel
-                    var prefLabel;
-                    for (var i = 0; i < label.prefLabels.length; i++) {
-                        if (label.prefLabels[i].isThumbnail) {
-                            prefLabel = label.prefLabels[i];
+                    LabelService.get({id: id}, function(label) {
+                        // get thumbnail preflabel
+                        var prefLabel;
+                        for (var i = 0; i < label.prefLabels.length; i++) {
+                            if (label.prefLabels[i].isThumbnail) {
+                                prefLabel = label.prefLabels[i];
+                            }
                         }
-                    }
-                    // append to boxes
-                    $scope.boxes.push({
-                        relation: "broader",
-                        boxType: "label",
-                        resource: prefLabel
+                        // append to boxes
+                        $scope.boxes.push({
+                            relation: relation,
+                            boxType: "label",
+                            resource: prefLabel
+                        });
                     });
                 });
-            });
-        }
-
-        if (label.narrower) {
-            label.narrower.forEach(function(narrowerID) {
-                LabelService.get({id: narrowerID}, function(label) {
-
-                    // get thumbnail preflabel
-                    var prefLabel;
-                    for (var i = 0; i < label.prefLabels.length; i++) {
-                        if (label.prefLabels[i].isThumbnail) {
-                            prefLabel = label.prefLabels[i];
-                        }
-                    }
-
-                    // append to boxes
-                    $scope.boxes.push({
-                        relation: "narrower",
-                        boxType: "label",
-                        resource: prefLabel
-                    });
-                });
-            });
-        }
-
-        if (label.related) {
-            label.related.forEach(function(relatedID) {
-                LabelService.get({id: relatedID}, function(label) {
-
-                    // get thumbnail preflabel
-                    var prefLabel;
-                    for (var i = 0; i < label.prefLabels.length; i++) {
-                        if (label.prefLabels[i].isThumbnail) {
-                            prefLabel = label.prefLabels[i];
-                        }
-                    }
-
-                    // append to boxes
-                    $scope.boxes.push({
-                        relation: "related",
-                        boxType: "label",
-                        resource: prefLabel
-                    });
-                });
-            });
-        }
-
+            }
+        });
     };
 
     // external labels
     $scope.getLabelMatches = function(label) {
+        var matchTypes = ["broadMatch", "narrowMatch", "closeMatch", "relatedMatch", "exactMatch"];
 
-        if (label.broadMatch) {
-            label.broadMatch.forEach(function(match) {
-                ExternalResourcesService.get(match.url, function(resource) {
+        matchTypes.forEach(function(matchType) {
+            if (label[matchType]) {
+                label[matchType].forEach(function(match) {
+                    ExternalResourcesService.get(match.url, function(resource) {
 
-                    // success
-                    $scope.boxes.push({
-                        relation: "broadMatch",
-                        boxType: resource.type,
-                        resource: resource
+                        // success
+                        $scope.boxes.push({
+                            relation: matchType,
+                            boxType: resource.type,
+                            resource: resource
+                        });
+
+                    }, function(errorMessage) {
+                        // error
+                        console.log(errorMessage);
                     });
-
-                }, function(errorMessage) {
-                    // error
-                    console.log(errorMessage);
                 });
-            });
-        }
-
-        if (label.narrowMatch) {
-            label.narrowMatch.forEach(function(match) {
-                ExternalResourcesService.get(match.url, function(resource) {
-                    // success
-                    //console.log(resource);
-                    $scope.boxes.push({
-                        relation: "narrowMatch",
-                        boxType: resource.type,
-                        resource: resource
-                    });
-                }, function(errorMessage) {
-                    // error
-                    console.log(errorMessage);
-                });
-            });
-        }
-
-        if (label.closeMatch) {
-            label.closeMatch.forEach(function(match) {
-                ExternalResourcesService.get(match.url, function(resource) {
-                    // success
-                    $scope.boxes.push({
-                        relation: "closeMatch",
-                        boxType: resource.type,
-                        resource: resource
-                        // type: resource.type,
-                        // value: resource.label,
-                        // lang: resource.lang,
-                        // quality: resource.quality
-                    });
-                }, function(errorMessage) {
-                    // error
-                    console.log(errorMessage);
-                });
-            });
-        }
-
-        //$scope.relatedMatches = [];
-        if (label.relatedMatch) {
-            label.relatedMatch.forEach(function(match) {
-                ExternalResourcesService.get(match.url, function(resource) {
-                    // success
-                    $scope.boxes.push({
-                        relation: "relatedMatch",
-                        boxType: resource.type,
-                        resource: resource
-                    });
-                }, function(errorMessage) {
-                    // error
-                    console.log(errorMessage);
-                });
-            });
-        }
-
-        //$scope.exactMatches = [];
-        if (label.exactMatch) {
-            label.exactMatch.forEach(function(match) {
-                ExternalResourcesService.get(match.url, function(resource) {
-                    // success
-                    $scope.boxes.push({
-                        relation: "exactMatch",
-                        boxType: resource.type,
-                        resource: resource
-                    });
-
-                }, function(errorMessage) {
-                    // error
-                    console.log(errorMessage);
-                });
-            });
-        }
+            }
+        });
     };
 
     // wayback links
@@ -320,9 +208,10 @@ angular.module('labelsApp')
         { name: "Spanish", value: "es" },
         { name: "Italian", value: "it" }
     ];
-    $scope.lang = "EN";  // default
+    $scope.lang = "en";  // default
 
     $scope.onAddPrefLabel = function() {
+
 
         ngDialog.open({
             template: 'views/dialogs/add-preflabel.html',
@@ -333,23 +222,39 @@ angular.module('labelsApp')
         });
 
         $scope.onAddPrefLabelConfirm = function(term, lang) {
+
             $scope.boxes.push({
-                category: "attribute",
-                type: "prefLabel",
-                value: term,
-                lang: lang
+                relation: "attribute",
+                boxType: "prefLabel",
+                resource: {
+                    isThumbnail: false,
+                    value: term,
+                    lang: lang,
+                }
             });
         };
     };
 
     $scope.onAddAltLabel = function() {
-        //console.log("add altLabel");
-        $scope.boxes.push({
-            category: "attribute",
-            type: "altLabel",
-            value: "new altLabel",
-            lang: "en"
+        ngDialog.open({
+            template: 'views/dialogs/add-altlabel.html',
+            showClose: false,
+            closeByDocument: false,
+            disableAnimation: true,
+            scope: $scope
         });
+
+        $scope.onAddAltLabelConfirm = function(term, lang) {
+
+            $scope.boxes.push({
+                relation: "attribute",
+                boxType: "altLabel",
+                resource: {
+                    value: term,
+                    lang: lang,
+                }
+            });
+        };
     };
 
     $scope.onAddDescription = function() {
@@ -375,6 +280,10 @@ angular.module('labelsApp')
                 value: text,
                 lang: $scope.prefLabel.lang
             };
+
+            LabelService.update({id: $scope.label.id}, $scope.label, function(res) {
+                console.log(res);
+            });
 
             // listener on $scope.label will update automatically
         };
@@ -424,6 +333,22 @@ angular.module('labelsApp')
     };
 
     /**
+     * filter results to ommit current label
+     */
+    $scope.resultFilter = function(box) {
+
+        if (box.type === "ls" && box.scheme === $scope.vocabulary.title.value) {
+            if (box.uri.split("/").pop() === $routeParams.lID) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+    };
+
+    /**
      * gather information and generate box objects
      */
     $scope.loadBoxes = function() {
@@ -470,15 +395,20 @@ angular.module('labelsApp')
         });
     };
 
-    $scope.onThumbnailPrefLabelEdit = function() {
-        // Find item index using indexOf+find
-        var index = _.indexOf($scope.label.prefLabels, _.find($scope.label.prefLabels, {isThumbnail: true}));
-
-        $scope.label.prefLabels.splice(index, 1, {
-            isThumbnail: true,
-            value: $scope.thumbnail.value,
-            lang: $scope.thumbnail.lang
+    $scope.onThumbnailPrefLabelEdit = function(label) {
+        //console.log(label);
+        LabelService.update({id: label.id }, label, function(res) {
+            console.log(res);
         });
+
+        // // Find item index using indexOf+find
+        // var index = _.indexOf($scope.label.prefLabels, _.find($scope.label.prefLabels, {isThumbnail: true}));
+        //
+        // $scope.label.prefLabels.splice(index, 1, {
+        //     isThumbnail: true,
+        //     value: $scope.thumbnail.value,
+        //     lang: $scope.thumbnail.lang
+        // });
     };
 
     // listen to changes to the label

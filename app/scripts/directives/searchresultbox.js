@@ -20,9 +20,12 @@ angular.module('labelsApp')
         },
         link: function postLink(scope, element, attrs) {
             //scope.showMore = false;
-
             scope.type = scope.data.type;
 
+            if (scope.type === "geonames") {
+                //scope.mapID = "map-geonames-" + scope.data.uri.split("/").pop();
+                scope.mapID = scope.data.uri.split("/").pop();
+            }
             //scope.labelLimit = 25;
 
             if (scope.data.type === "ls" && scope.data.scheme === scope.vocabulary.title.value) {  // ls same vocab
@@ -85,6 +88,32 @@ angular.module('labelsApp')
                 // send changed label to server, get result for just this one change and update just one box
 
             };
+
+            //
+            scope.initMap = function(data) {
+
+                if (data.type === "geonames") {
+                    var regExp = /\[([^)]+)\]/;
+                    var match = regExp.exec(data.description)[1];
+
+                    var coords = match.split(" ");
+                    //console.log(coords);
+                    console.log(scope.mapID);
+                    var map = L.map("map").setView([parseFloat(coords[0]), parseFloat(coords[1])], 13);
+
+                    L.marker([parseFloat(coords[0]), parseFloat(coords[1])]).addTo(map).bindPopup(data.description);
+
+                    var key = "pk.eyJ1Ijoic2hhbnl1YW4iLCJhIjoiY2lmcWd1cnFlMDI0dXRqbHliN2FzdW9kNyJ9.wPkC7amwS2ma4qKWmmWuqQ";
+
+                    L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v9/' + 'tiles/256/{z}/{x}/{y}?access_token=' + key, {
+                    }).addTo(map);
+
+                    //matches[1] contains the value between the parentheses
+                    //console.log(matches[1]);
+                }
+
+
+            }
 
             // reload nanoscroller when directive rendered
             $(".nano").nanoScroller();

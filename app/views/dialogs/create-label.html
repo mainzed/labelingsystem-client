@@ -1,0 +1,10 @@
+<h3>Create new label</h3>
+
+<div>
+  <input type="text" placeholder="insert preferred term" ng-model="term">
+</div>
+
+<div>
+  <button type="button" ng-click="onCreateLabelConfirm(term); closeThisDialog()" ng-disabled="!term">Confirm</button>
+  <button type="button" ng-click="closeThisDialog()">Cancel</button>
+</div>

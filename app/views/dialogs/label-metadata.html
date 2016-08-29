@@ -1,10 +1,10 @@
 <h1>label metadata</h1>
 
 <ul>
-  <li>
+  <li ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}">
     main term:
-    <input type="text" ng-model="thumbnail.value">
-    <select ng-model="thumbnail.lang">
+    <input type="text" ng-model="prefLabel.value">
+    <select ng-model="prefLabel.lang">
       <option ng-repeat="language in languages" value="{{ language.value }}">{{ language.name }}</option>
     </select>
   </li>
@@ -26,5 +26,5 @@
   </ul>
 </ul>
 
-<button type="button" name="button" ng-click="onThumbnailPrefLabelEdit(); closeThisDialog()">Confirm</button>
+<button type="button" name="button" ng-click="onThumbnailPrefLabelEdit(label); closeThisDialog()">Confirm</button>
 <button type="button" name="button" ng-click="closeThisDialog()">Cancel</button>

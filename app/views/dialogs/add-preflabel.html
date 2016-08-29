@@ -13,6 +13,6 @@
 </div>
 
 <p>
-  <button type="button" name="button" ng-click="onAddPrefLabelConfirm(term, lang); closeThisDialog()">Confirm</button>
+  <button type="button" name="button" ng-click="onAddPrefLabelConfirm(term, lang); closeThisDialog()" ng-disabled="!term">Confirm</button>
   <button type="button" name="button" ng-click="closeThisDialog()">Cancel</button>
 </p>

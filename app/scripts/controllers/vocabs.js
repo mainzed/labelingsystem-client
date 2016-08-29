@@ -64,6 +64,32 @@ angular.module('labelsApp')
         $scope.vocabThesauri.push(thesaurus);
     };
 
+    $scope.onCreateClick = function() {
+
+        $scope.newVocab = {
+            title: {},
+            description: {}
+        };
+
+        ngDialog.open({
+            template: 'views/dialogs/create-vocabulary.html',
+            showClose: false,
+            disableAnimation: true,
+            closeByDocument: false,
+            scope: $scope
+        });
+
+        $scope.onCreateConfirm = function() {
+            $scope.newVocab.description.lang = $scope.newVocab.title.lang;
+            console.log($scope.newVocab);
+
+            // VocabService.save($scope.newVocab, function(res) {
+            //     //$scope.vocabularies = vocabularies;
+            //     console.log(res);
+            // });
+        };
+    };
+
     function getVocabThesauri(vocabID) {
 
         $http.get('http://143.93.114.135/api/v1/retcat/vocabulary/' + vocabID).then(function(res) {
