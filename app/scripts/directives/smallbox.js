@@ -7,7 +7,7 @@
  * # smallBox
  */
 angular.module('labelsApp')
-  .directive('smallBox', function (ngDialog, TooltipService) {
+  .directive('smallBox', function (ngDialog, $routeParams, LabelService, TooltipService) {
     return {
       templateUrl: "views/directives/small-box.html",
       restrict: 'E',
@@ -74,6 +74,7 @@ angular.module('labelsApp')
         scope.language = resource.lang;
 
         scope.onBoxClick = function() {
+            console.log(boxType);
             if (boxType === "label") {
                 scope.categories = [
                     "broader",
@@ -82,6 +83,8 @@ angular.module('labelsApp')
                 ];
             } else if (boxType === "wayback") {
                 scope.categories = ["seeAlso"];
+            } else if (boxType === "prefLabel" || boxType === "altlabel" || boxType === "description") {
+                scope.categories = [];
             } else {
                 scope.categories = [
                     "broadMatch",
@@ -103,9 +106,27 @@ angular.module('labelsApp')
 
         scope.onDeleteClick = function() {
 
-            console.log(scope.ngModel);
+            // get current label
+            LabelService.get({id: $routeParams.lID}, function(label) {
 
-            console.log(scope.boxes);
+                console.log();
+                if (boxType === "prefLabel") {
+                    // Find item index using indexOf+find
+                    var index = _.indexOf(label.prefLabels, _.find(label.prefLabels, resource));
+
+                    // Replace item at index using native splice
+                    label.prefLabels.splice(index, 1);
+
+                    console.log(label);
+                    LabelService.update({id: $routeParams.lID}, label, function(res) {
+                        // success
+                        console.log(res);
+                    })
+                }
+
+            });
+
+
 
         };
 

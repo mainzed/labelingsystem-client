@@ -81,12 +81,19 @@ angular.module('labelsApp')
 
         $scope.onCreateConfirm = function() {
             $scope.newVocab.description.lang = $scope.newVocab.title.lang;
-            console.log($scope.newVocab);
+            if ($scope.public) {
+                $scope.newVocab.releaseType = "public";
+            } else {
+                $scope.newVocab.releaseType = "draft";
+            }
 
-            // VocabService.save($scope.newVocab, function(res) {
-            //     //$scope.vocabularies = vocabularies;
-            //     console.log(res);
-            // });
+            //console.log($scope.newVocab);
+
+
+            VocabService.save($scope.newVocab, function(res) {
+                $scope.vocabularies.push(res);
+                //console.log(res);
+            });
         };
     };
 
