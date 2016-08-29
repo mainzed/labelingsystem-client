@@ -202,6 +202,12 @@ angular.module('labelsApp')
         }
     };
 
+    // $scope.onDeleteClick = function() {
+    //     console.log("works!");
+    //
+    //
+    // };
+
     $scope.languages = [
         { name: "German", value: "de" },
         { name: "English", value: "en" },
@@ -211,8 +217,6 @@ angular.module('labelsApp')
     $scope.lang = "en";  // default
 
     $scope.onAddPrefLabel = function() {
-
-
         ngDialog.open({
             template: 'views/dialogs/add-preflabel.html',
             showClose: false,
@@ -223,13 +227,27 @@ angular.module('labelsApp')
 
         $scope.onAddPrefLabelConfirm = function(term, lang) {
 
-            $scope.boxes.push({
-                relation: "attribute",
-                boxType: "prefLabel",
-                resource: {
-                    isThumbnail: false,
-                    value: term,
-                    lang: lang,
+            var newPrefLabel = {
+                isThumbnail: false,
+                value: term,
+                lang: lang
+            };
+
+            // append new prefLabel to label
+            $scope.label.prefLabels.push(newPrefLabel);
+
+            LabelService.update({ id: $routeParams.lID }, {
+                item: $scope.label,
+                user: $scope.user.name
+            }, function(label) {
+                console.log("update successfull");
+                console.log(label);
+                if (label.id) {
+                    $scope.boxes.push({
+                        relation: "attribute",
+                        boxType: "prefLabel",
+                        resource: newPrefLabel
+                    });
                 }
             });
         };
@@ -246,12 +264,28 @@ angular.module('labelsApp')
 
         $scope.onAddAltLabelConfirm = function(term, lang) {
 
-            $scope.boxes.push({
-                relation: "attribute",
-                boxType: "altLabel",
-                resource: {
-                    value: term,
-                    lang: lang,
+            var newaltLabel = {
+                value: term,
+                lang: lang
+            };
+
+            // append new prefLabel to label
+            if (!$scope.label.altLabels) {
+                $scope.label.altLabels = [];
+            }
+
+            $scope.label.altLabels.push(newaltLabel);
+
+            LabelService.update({ id: $routeParams.lID }, {
+                item: $scope.label,
+                user: "demo", //$scope.user.name
+            }, function(label) {
+                if (label.id) {
+                    $scope.boxes.push({
+                        relation: "attribute",
+                        boxType: "altLabel",
+                        resource: newaltLabel
+                    });
                 }
             });
         };
@@ -281,11 +315,18 @@ angular.module('labelsApp')
                 lang: $scope.prefLabel.lang
             };
 
-            LabelService.update({id: $scope.label.id}, $scope.label, function(res) {
-                console.log(res);
+            LabelService.update({ id: $routeParams.lID }, {
+                item: $scope.label,
+                user: $scope.user.name
+            }, function(label) {
+                if (label.id) {
+                    $scope.boxes.push({
+                        relation: "attribute",
+                        boxType: "description",
+                        resource: $scope.label.scopeNote
+                    });
+                }
             });
-
-            // listener on $scope.label will update automatically
         };
 
 

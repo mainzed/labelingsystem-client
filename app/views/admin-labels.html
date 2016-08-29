@@ -1,6 +1,9 @@
 <div id="header" class="box full">
-	<div id="breadcrumb"></div>
+	<!-- <div id="breadcrumb"></div> -->
   <breadcrumbs></breadcrumbs>
+
+  <!-- loop over all prefLabels, so it autofreshes on change -->
+  <h1 ng-click="onVocabTitleClick()">{{ vocabulary.title.value }}</h1>
 
 	<span class="icon-folder"></span>
 	<span class="language">{{ vocabulary.title.lang }}</span>

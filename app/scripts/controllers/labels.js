@@ -54,13 +54,18 @@ angular.module('labelsApp')
 
         $scope.onCreateLabelConfirm = function(term) {
 
-            LabelService.save({
+            var newLabel = {
                 "vocabID": $scope.vocabulary.id,
                 "prefLabels": [{
                     "isThumbnail": true,
                     "lang": $scope.vocabulary.title.lang,
                     "value": term
                 }]
+            };
+
+            LabelService.save({
+                item: newLabel,
+                user: $scope.user.name
             }, function(label) {
                 if (label.id) {
                     $scope.labels.push(label);
@@ -70,7 +75,7 @@ angular.module('labelsApp')
     };
 
     $scope.orderByThumbnail = function(label) {
-        console.log(label.prefLabels.length);
+        //console.log(label.prefLabels.length);
         if (label.prefLabels) {
             for (var i = 0; i < label.prefLabels.length; i++) {
                 if (label.prefLabels[i].isThumbnail) {

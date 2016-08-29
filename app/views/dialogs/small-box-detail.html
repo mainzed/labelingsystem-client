@@ -1,8 +1,8 @@
 <h3>{{ ngModel.value }} </h3>
 
 <ul>
-  <li>Type: {{ ngModel.resource.type }}</li>
-  <li>
+  <li>Type: {{ ngModel.boxType }}</li>
+  <li ng-show="ngModel.categories">
     Relation:
     <select ng-model="ngModel.relation">
       <option ng-repeat="category in categories">{{ category }}</option>
