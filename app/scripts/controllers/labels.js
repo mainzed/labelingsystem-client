@@ -32,7 +32,7 @@ angular.module('labelsApp')
     // load all labels for the current vocabulary
     LabelService.query({'vocab': $routeParams.vID}, function(labels) {
         $scope.labels = labels;
-        console.log(labels);
+        //console.log(labels);
 
         $scope.placeholder = "filter";
     });
@@ -67,6 +67,22 @@ angular.module('labelsApp')
                 }
             });
         };
+    };
+
+    $scope.orderByThumbnail = function(label) {
+        console.log(label.prefLabels.length);
+        if (label.prefLabels) {
+            for (var i = 0; i < label.prefLabels.length; i++) {
+                if (label.prefLabels[i].isThumbnail) {
+                    var thumbnail = label.prefLabels[i];
+                    var name = thumbnail.value.toLowerCase();
+                    return name.charCodeAt(0);
+                }
+            }
+        } else {
+            return -9999;
+        }
+
     };
 
   });
