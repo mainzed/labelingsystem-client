@@ -5,7 +5,7 @@
 @workareas: 		#1c1c1c;
 @middle: 			#333333;
 @text: 				#3f3f3f;
-@label: 			#f5f5f5;
+@label: 			#e5e5e5;
 
 /* high quality */
 @high: 				#31CAFF;
@@ -34,7 +34,7 @@
 
 /* font-sizes */
 @headlines: 		32px;
-@emphasize:			22px;
+@emphasize:			21px;
 @regular: 			16px;
 @small: 			12px;
 
@@ -82,7 +82,7 @@ input:focus {		outline: none; }
 #viewport {			height: 100%; background: @background;}
 #separator {		color: white; height: 75px; }
 .separatorsmall {	height: 40px; float: left; width: 100%; background: @workareas; clear: left;}
-#separator h1 {		margin-left: calc(@marginoutside + @marginoutboxsmall); margin-top: 20px; float: left; width: calc(@quartersize);  }
+#separator h1 {		padding-left: calc(@marginoutside + @marginoutboxsmall); padding-top: 20px; float: left; width: calc(@quartersize);    }
 #header h1 {		margin-top: 45px; float: left;
 					@media screen and (max-width: 1600px) { margin-top: 53px;} }
 .nano {				 	}
@@ -94,16 +94,17 @@ input:focus {		outline: none; }
 }
 #enrichment-ov {	width: 100%; float: left; background: @workareas; height: calc(50% - 90px);	}
 .fullheight		{	height: calc(100% - 90px - 40px) !important;}
-#enrichment-src {	width: 100%; float: left; background: @workareas; height: calc(50% - 40px); margin-top: 2px; }
+#enrichment-src {	width: 100%; float: left; position: absolute; height: calc(50% - 40px); margin-top: 3px; 
+					box-shadow: 2px -4px 13px black; top: 50%; background: @workareas; }
 #enrichment-src-min {
-					width: 100%; float: left; background: @middle; height: 38px; margin-top: 2px; }
+					width: 100%; position: absolute; bottom: 0; background: @middle; height: 36px; margin-top: 3px; box-shadow: 2px -4px 13px black;  }
 .tableheadwrapper {	width: 100%; float: left; }
 #enrichments {		overflow-y: scroll; overflow-x: hidden; float: left; background: @workareas;}
 #labellistwrapper {	height: 80%;}
 #labellist {		overflow-y: scroll; overflow-x: hidden; float: left; background: @workareas;}
 #enrichmentbrowser {
 					overflow-x: hidden; float: left; height: 100%; background: @middle; }
-#enrichmentsearch {	float: left; margin-top: 0px; background: @middle; height: 100%; }
+#enrichmentsearch {	float: left; margin-top: 0px; background: @middle; height: 100%;  }
 #enrichmentsearch input
 				 {	background: none; border: none; color: gray; width: 200px; margin-top: 32px; margin-left: calc(@tableheadmargin); }
 .hideenrichment {	float: right;}
@@ -131,6 +132,7 @@ input:focus {		outline: none; }
 .bigbox {			width: calc(100% - @marginoutside - @marginoutboxsmall); margin-bottom: @marginbottombox; margin-left: @marginoutboxsmall; position: relative;	}
 #labellist .bigbox {
 					margin-left: @marginoutside; width: calc(100% - @marginoutside * 2); }
+.plusposition 	{	position: absolute; left: 50%; bottom: 10%; width: 50px; margin-left: -25px; cursor: pointer; }
 
 #selectedbox 	{	display: block; margin-bottom: 20px;}
 #selectedbox .bigbox {
