@@ -87,6 +87,111 @@ angular.module('labelsApp')
         } else {
             return -9999;
         }
+    };
+
+    $scope.orderByQuality = function(label) {
+
+        var grayScore = 1;
+        var greenScore = 3;
+        var blueScore = 5;
+
+        var greenTypes = ["fao", "finto", "dbpedia"];
+        var blueTypes = ["ls", "getty", "heritagedata", "chronontology"];
+
+        var qualityScore = 0;
+
+        // gray boxes
+        if (label.prefLabels) {
+            qualityScore += label.prefLabels.length * grayScore;
+        }
+        if (label.altLabels) {
+            qualityScore += label.altLabels.length * grayScore;
+        }
+        if (label.scopeNote) {
+            qualityScore += grayScore;
+        }
+        if (label.seeAlso) {
+            qualityScore += grayScore;
+        }
+
+        if (label.broadMatch) {
+            console.log(label.broadMatch[0]);
+            //qualityScore += label.broader.length * blueScore;
+        }
+
+        if (label.exactMatch) {
+            label.exactMatch.forEach(function(match) {
+                if (greenTypes.indexOf(match.type) > -1) {
+                    qualityScore += greenScore;
+                } else if (blueTypes.indexOf(match.type) > -1) {
+                    qualityScore += blueScore;
+                } else {
+                    console.log("unknown score type for: " + match.type);
+                }
+            });
+        }
+
+        if (label.closeMatch) {
+            label.closeMatch.forEach(function(match) {
+                if (greenTypes.indexOf(match.type) > -1) {
+                    qualityScore += greenScore;
+                } else if (blueTypes.indexOf(match.type) > -1) {
+                    qualityScore += blueScore;
+                } else {
+                    console.log("unknown score type for: " + match.type);
+                }
+            });
+        }
+
+        if (label.relatedMatch) {
+            label.relatedMatch.forEach(function(match) {
+                if (greenTypes.indexOf(match.type) > -1) {
+                    qualityScore += greenScore;
+                } else if (blueTypes.indexOf(match.type) > -1) {
+                    qualityScore += blueScore;
+                } else {
+                    console.log("unknown score type for: " + match.type);
+                }
+            });
+        }
+
+        if (label.broadMatch) {
+            label.broadMatch.forEach(function(match) {
+                if (greenTypes.indexOf(match.type) > -1) {
+                    qualityScore += greenScore;
+                } else if (blueTypes.indexOf(match.type) > -1) {
+                    qualityScore += blueScore;
+                } else {
+                    console.log("unknown score type for: " + match.type);
+                }
+            });
+        }
+
+        if (label.narrowMatch) {
+            label.narrowMatch.forEach(function(match) {
+                if (greenTypes.indexOf(match.type) > -1) {
+                    qualityScore += greenScore;
+                } else if (blueTypes.indexOf(match.type) > -1) {
+                    qualityScore += blueScore;
+                } else {
+                    console.log("unknown score type for: " + match.type);
+                }
+            });
+        }
+
+        // blue boxes
+        if (label.broader) {
+            qualityScore += label.broader.length * blueScore;
+        }
+        if (label.related) {
+            qualityScore += label.related.length * blueScore;
+        }
+        if (label.narrower) {
+            qualityScore += label.narrower.length * blueScore;
+        }
+
+        //console.log(qualityScore);
+        return -1 * qualityScore;
 
     };
 

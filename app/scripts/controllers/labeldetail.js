@@ -203,12 +203,6 @@ angular.module('labelsApp')
         }
     };
 
-    // $scope.onDeleteClick = function() {
-    //     console.log("works!");
-    //
-    //
-    // };
-
     $scope.languages = [
         { name: "German", value: "de" },
         { name: "English", value: "en" },
@@ -349,6 +343,16 @@ angular.module('labelsApp')
             closeByDocument: false,
             scope: $scope
         });
+
+        $scope.onLinkAddConfirm = function() {
+            $scope.boxes.push({
+                category: "seeAlso",
+                type: "wayback",
+                value: "Page title",
+                quality: "low"
+                //lang: "en"
+            });
+        };
     };
 
     // todo: put that in dialog-controller
@@ -370,21 +374,10 @@ angular.module('labelsApp')
         });
     };
 
-    $scope.onLinkAddConfirm = function() {
-        $scope.boxes.push({
-            category: "seeAlso",
-            type: "wayback",
-            value: "Page title",
-            quality: "low"
-            //lang: "en"
-        });
-    };
-
     /**
      * filter results to ommit current label
      */
     $scope.resultFilter = function(box) {
-
         if (box.type === "ls" && box.scheme === $scope.vocabulary.title.value) {
             if (box.uri.split("/").pop() === $routeParams.lID) {
                 return false;

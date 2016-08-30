@@ -1,12 +1,16 @@
-<div class="box bigbox {{ type }} {{ data.quality }}" ng-click="onClick()">
+
+<div class="box bigbox {{ data.type }} {{ data.quality }}" ng-click="onClick()">
   <span class="thumbnail">
     <button class="showadditionalcontent" ng-click="showMore = !showMore; $event.stopPropagation()">
-      <span ng-show="!showMore">+</span>
+      <span ng-show="!showMore && data.description">+</span>
       <span ng-show="showMore">-</span>
     </button>
     {{ data.label }}
   </span>
-  <span class="type" ng-bind-html="icon"></span>
+
+  <!-- icon -->
+  <span ng-show="data.type === 'label'" class='type icon-label'></span>
+  <span ng-show="data.type !== 'label'" class="type">({{ data.type }})</span>
 
 </div>
 
@@ -36,12 +40,6 @@
       <li ng-repeat="term in data.narrowerTerms">{{ term.label }}</li>
     </ul>
   </div>
-
-  <!-- show map for geonames -->
-  <!-- <div ng-show="data.type === 'geonames'">
-    <h4>Map</h4>
-    <div id="map2" class="map"></div>
-  </div> -->
 
   <span class="language">{{ data.lang.split("-")[0] }}</span>
 
