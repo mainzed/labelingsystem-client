@@ -1,11 +1,12 @@
-
-<button type="button" name="button" ng-click="onLogoutClick()">logout</button>
+<div id="header" class="box full">
+<div class="box small" type="button" name="button" ng-click="onLogoutClick()">logout</div>
 
 <h1>User: {{ user.name }}</h1>
+</div>
 
 <input type="text" name="search" value="search" ng-model="vocabFilter" placeholder="filter">
 
-<div ng-repeat="vocab in vocabularies | filter: vocabFilter" style="border: 1px solid; margin: 10px;">
+<div class="box full low" ng-repeat="vocab in vocabularies | filter: vocabFilter" style="border: 1px solid; margin: 10px;">
   <a href="#/admin/vocabularies/{{ vocab.id }}/labels/">
     {{ vocab.title.value }}
   </a>
@@ -17,4 +18,4 @@
   <button type="button" name="button" ng-click="onEditClick(vocab.id)">edit</button>
 </div>
 
-<button type="button" class="text" ng-click="onCreateClick()">Create new vocabulary</button>
+<span type="button" class="plusposition" ng-click="onCreateClick()">+</span>

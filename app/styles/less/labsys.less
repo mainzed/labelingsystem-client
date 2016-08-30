@@ -67,6 +67,7 @@
 /*------------------- Do not edit this css file directly. Edit the LESS file-----------------------------------------*/
 
 * {					font-size: @regular; margin: 0; padding: 0; font-family: Roboto, Arial, sans-serif; letter-spacing: 0.01em;	}
+a {					color: inherit; text-decoration: underline; }
 html {				height: 100%;	}
 body {				height: 100%;	}
 h1 {				font-size: @headlines; font-weight: normal;
@@ -75,13 +76,14 @@ h2 {				font-size: @headlines; font-weight: normal; margin-bottom: 50px; margin-
 					@media screen and (max-width: 1600px) {font-size: @headlines-small; } }
 h3 {				font-size: @emphasize; font-weight: normal; margin-bottom: 5px; margin-top: @marginoutside; margin-left: @marginoutside; display: block;
 					@media screen and (max-width: 1600px) {font-size: @emphasize-small; } }
+li {				list-style: none; }
 button {			border: 0; background: transparent;}
 input:focus {		outline: none; }
 
 #header {			color: white; height: 90px; position: relative; background: @background;	}
 #viewport {			height: 100%; background: @background;}
 #separator {		color: white; height: 75px; }
-.separatorsmall {	height: 40px; float: left; width: 100%; background: @workareas; clear: left;}
+.separatorsmall {	height: 50px; float: left; width: 100%; background: @workareas; clear: left;}
 #separator h1 {		padding-left: calc(@marginoutside + @marginoutboxsmall); padding-top: 20px; float: left; width: calc(@quartersize);    }
 #header h1 {		margin-top: 45px; float: left;
 					@media screen and (max-width: 1600px) { margin-top: 53px;} }
@@ -90,8 +92,7 @@ input:focus {		outline: none; }
 					text-align: center; position: absolute; left: 50%; top: 50%; margin-left: -100px; margin-top: -50px; }
 .cancel {			position: absolute; bottom: @marginoutside; right: @marginoutside;}
 .enrichmentswrapper {
-					height: calc(100% - 50px);
-}
+					height: calc(100% - 50px); }
 #enrichment-ov {	width: 100%; float: left; background: @workareas; height: calc(50% - 90px);	}
 .fullheight		{	height: calc(100% - 90px - 40px) !important;}
 #enrichment-src {	width: 100%; float: left; position: absolute; height: calc(50% - 40px); margin-top: 3px; 
@@ -100,7 +101,7 @@ input:focus {		outline: none; }
 					width: 100%; position: absolute; bottom: 0; background: @middle; height: 36px; margin-top: 3px; box-shadow: 2px -4px 13px black;  }
 .tableheadwrapper {	width: 100%; float: left; }
 #enrichments {		overflow-y: scroll; overflow-x: hidden; float: left; background: @workareas;}
-#labellistwrapper {	height: 80%;}
+#labellistwrapper {	height: calc(100% - 90px - 50px - 38px); float: left; clear: left; display: block; width: 100%;}
 #labellist {		overflow-y: scroll; overflow-x: hidden; float: left; background: @workareas;}
 #enrichmentbrowser {
 					overflow-x: hidden; float: left; height: 100%; background: @middle; }
@@ -108,7 +109,7 @@ input:focus {		outline: none; }
 #enrichmentsearch input
 				 {	background: none; border: none; color: gray; width: 200px; margin-top: 32px; margin-left: calc(@tableheadmargin); }
 .hideenrichment {	float: right;}
-#filtersearch {		margin-left: @marginoutside; color: white; }
+#filtersearch {		margin-left: @marginoutside; margin-top: 10px; color: white; width: 60%; float: left; }
 #filtersearch input {
 					background: none; border: none; color: gray; width: 200px; }
 
@@ -132,7 +133,21 @@ input:focus {		outline: none; }
 .bigbox {			width: calc(100% - @marginoutside - @marginoutboxsmall); margin-bottom: @marginbottombox; margin-left: @marginoutboxsmall; position: relative;	}
 #labellist .bigbox {
 					margin-left: @marginoutside; width: calc(100% - @marginoutside * 2); }
-.plusposition 	{	position: absolute; left: 50%; bottom: 10%; width: 50px; margin-left: -25px; cursor: pointer; }
+.plusposition 	{	position: fixed; left: 50%; bottom: 20%; width: 50px; margin-left: -25px; cursor: pointer;
+					display: block;
+   
+    height: 25px;
+    width: 25px;
+    padding: 6px 6px;
+    font-size: 30px;
+    line-height: 23px;
+    color: #555;
+    text-align: center;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-shadow: 0 3px 15px black; }
 
 #selectedbox 	{	display: block; margin-bottom: 20px;}
 #selectedbox .bigbox {
@@ -167,7 +182,7 @@ input:focus {		outline: none; }
 .note {				float: left; margin-top: @margininboxsmall;		}
 .bigbox .thumbnail {
 					position: static; float: left; margin-left: @margininboxsmall;
-					margin-top: @margininboxsmall; bottom: auto; left: auto; top: auto; width: 50%;  }
+					margin-top: @margininboxsmall; bottom: auto; left: auto; top: auto; width: 60%;  }
 
 
 
@@ -218,7 +233,7 @@ input:focus {		outline: none; }
 
 
 /* mini preview */
-.minipreview {		height: calc(@boxheight - @margininboxsmall * 2 - 10px); margin-top: @margininboxsmall;
+.minipreview {		height: calc(@boxheight - @margininboxsmall * 2 - 10px); margin: @margininboxsmall 0;
 					background: black; width: 100px; float: left; padding: 4px 2px 6px 2px;
 					overflow: hidden;	}
 .minicol	 {		width: calc(25% - 4px); padding: 0 2px; float: left; height: 100%;	}
@@ -249,10 +264,10 @@ input:focus {		outline: none; }
 	{ 				margin-right: -6px; margin-top: -5px; display: block; }
 .small .icon-exact, .small .icon-close, .small .icon-related
 	{ 				margin-left: -5px; margin-top: -5px; display: block; }
-#header .icon-label, #header .icon-folder {
-					position: absolute; right: 50px; font-size: 110px; top: 2px;
-}
-
+#header .icon-label {
+					position: absolute; right: 50px; font-size: 100px; top: 8px; }
+#header .icon-folder {
+					position: absolute; right: 50px; font-size: 100px; top: 2px; }
 
 .ngdialog-overlay { background: rgba(0, 0, 0, 0.8); }
 .selectedbutton {	background: gray; }
