@@ -54,25 +54,26 @@ angular.module('labelsApp')
 
             scope.onAddClick = function(relation) {
                 // TODO: check everywhere if resource is already linked to this label somehow
+                var updatedLabel = scope.label;
 
-                if (!scope.label[relation]) {
-                    scope.label[relation] = [];
+                if (!updatedLabel[relation]) {
+                    updatedLabel[relation] = [];
                 }
 
                 if (relation === "broader" || relation === "related" || relation === "narrower") {  // same vocab
                     // just push label-id to array
                     var labelID = scope.data.uri.split("/").pop();
-                    scope.label[relation].push(labelID);
+                    updatedLabel[relation].push(labelID);
 
                 } else {
-                    scope.label[relation].push({
+                    updatedLabel[relation].push({
                         type: scope.data.type,
                         url: scope.data.uri
                     });
                 }
 
-                console.log(scope.label);
-                LabelService.update({id: scope.label.id}, scope.label, function(res) {
+                console.log(updatedLabel);
+                LabelService.update({id: updatedLabel.id}, updatedLabel, function(res) {
                     // success
                     console.log("success");
                     console.log(res);

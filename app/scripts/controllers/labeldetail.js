@@ -217,6 +217,12 @@ angular.module('labelsApp')
     $scope.lang = "en";  // default
 
     $scope.onAddPrefLabel = function() {
+        // block existing languages
+        // angular.forEach($scope.label.prefLabels, function(prefLabel) {
+        //     _.find()
+        //     console.log(prefLabel);
+        // });
+
         ngDialog.open({
             template: 'views/dialogs/add-preflabel.html',
             showClose: false,
