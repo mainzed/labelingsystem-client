@@ -25,7 +25,14 @@
 	<div class="nano">
     <div id="labellist" class="nano-content">
 
-  
+      <!-- dummy to hold sort buttons -->
+      <span class="box bigbox label listbox" ng-init="labelOrder = orderByThumbnail">
+        <button type="button" ng-click="labelOrder = 'created'" ng-disabled="labelOrder === 'created'">(sort by date)</button>
+        <button type="button" ng-click="labelOrder = orderByThumbnail" ng-disabled="labelOrder === orderByThumbnail">(sort alphabetically)</button>
+        <button type="button" ng-click="labelOrder = orderByQuality" ng-disabled="labelOrder === orderByQuality">(sort by quality)</button>
+
+      </span>
+
 
       <list-box ng-repeat="label in filteredLabels = (labels | filter: labelFilter | orderBy: labelOrder | limitTo: labelLimit)"></list-box>
 

@@ -11,31 +11,17 @@ angular.module('labelsApp')
     return {
         templateUrl: "views/directives/search-result-box.html",
         restrict: 'E',
-        scope: {
-            data: "=",  // data attribute available as scope.data (two-way-binding)
-            vocabulary: "=vocab",
-            label: "=",  // need label to append new data to
-            boxes: "=",  // need to append new box and prevent reloading all boxes
-            action: "&"  // get action to refresh boxes
-        },
+
         link: function postLink(scope, element, attrs) {
-            //scope.showMore = false;
-            scope.type = scope.data.type;
 
-            if (scope.type === "geonames") {
-                //scope.mapID = "map-geonames-" + scope.data.uri.split("/").pop();
-                scope.mapID = scope.data.uri.split("/").pop();
-            }
-            //scope.labelLimit = 25;
+            scope.isSameVocab = function() {
+                return scope.data.type === 'ls' && scope.data.scheme === scope.vocabulary.title.value;
+            };
 
-            if (scope.data.type === "ls" && scope.data.scheme === scope.vocabulary.title.value) {  // ls same vocab
-                scope.icon = "<span class='icon-label'></span>";
-                scope.type = "label";
+            scope.data = scope.box;
 
-            } else if (scope.data.type === "ls" && scope.data.scheme !== scope.vocabulary.title.value) {  // ls other vocabs
-                scope.icon = "(" + scope.data.type + ")";
-            } else {
-                scope.icon = "(" + scope.data.type + ")";
+            if (scope.isSameVocab()) {
+                scope.data.type = "label";
             }
 
             /**
@@ -80,41 +66,12 @@ angular.module('labelsApp')
 
                 LabelService.update({id: updatedLabel.id}, updateObject, function(res) {
                     // success
-                    console.log("success!");
-                    console.log(res);
-                    scope.label = updatedLabel;
+                    //scope.label = updatedLabel;
 
                 }, function(res) {
                     console.log(res);
                 });
-                //scope.action;
-
             };
-
-            
-
-            scope.initMap = function(data) {
-
-                if (data.type === "geonames") {
-                    var regExp = /\[([^)]+)\]/;
-                    var match = regExp.exec(data.description)[1];
-
-                    var coords = match.split(" ");
-                    //console.log(coords);
-                    console.log(scope.mapID);
-                    var map = L.map("map").setView([parseFloat(coords[0]), parseFloat(coords[1])], 13);
-
-                    L.marker([parseFloat(coords[0]), parseFloat(coords[1])]).addTo(map).bindPopup(data.description);
-
-                    var key = "pk.eyJ1Ijoic2hhbnl1YW4iLCJhIjoiY2lmcWd1cnFlMDI0dXRqbHliN2FzdW9kNyJ9.wPkC7amwS2ma4qKWmmWuqQ";
-
-                    L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v9/' + 'tiles/256/{z}/{x}/{y}?access_token=' + key, {
-                    }).addTo(map);
-
-                    //matches[1] contains the value between the parentheses
-                    //console.log(matches[1]);
-                }
-            }
 
             // reload nanoscroller when directive rendered
             $(".nano").nanoScroller();

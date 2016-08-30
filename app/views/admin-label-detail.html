@@ -95,7 +95,7 @@
 		<div id="enrichmentbrowser" class="nano">
 		<div class="nano-content">
 			<span class="noresult" ng-show="!resultBoxes">Add enrichment sources by searching</span>
-		    <search-result-box ng-repeat="box in resultBoxes | filter: resultFilter | orderBy: ['quality', 'type']" data="box" vocab="vocabulary" action="loadBoxes()" label="label" boxes="resultBoxes"></search-result-box>
+		    <search-result-box ng-repeat="box in resultBoxes | filter: resultFilter | orderBy: ['quality', 'type']" action="loadBoxes()"></search-result-box>
 		</div>
 		</div>
 	</div>

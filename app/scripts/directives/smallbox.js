@@ -153,8 +153,6 @@ angular.module('labelsApp')
 
             });
 
-
-
         };
 
 
