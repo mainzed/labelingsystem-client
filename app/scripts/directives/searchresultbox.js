@@ -7,7 +7,7 @@
  * # searchResultBox
  */
 angular.module('labelsApp')
-  .directive('searchResultBox', function (ngDialog, LabelService) {
+  .directive('searchResultBox', function (ngDialog, LabelService, ExternalResourcesService) {
     return {
         templateUrl: "views/directives/search-result-box.html",
         restrict: 'E',
@@ -66,6 +66,25 @@ angular.module('labelsApp')
 
                 LabelService.update({id: updatedLabel.id}, updateObject, function(res) {
                     // success
+                    //console.log("update funktioniert!");
+
+                    // get all infos and add box temporarily
+                    ExternalResourcesService.get(scope.data.uri, function(resource) {
+
+                        // success
+                        scope.boxes.push({
+                            relation: relation,
+                            boxType: scope.data.type,
+                            resource: resource
+                        });
+
+                    }, function(errorMessage) {
+                        // error
+                        console.log(errorMessage);
+                    });
+
+
+
                     //scope.label = updatedLabel;
 
                 }, function(res) {
