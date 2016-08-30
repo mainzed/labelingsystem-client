@@ -37,12 +37,21 @@ angular.module('labelsApp')
         $scope.placeholder = "filter";
     });
 
+    $scope.onVocabTitleClick = function() {
+
+        ngDialog.open({
+            template: 'views/dialogs/vocab-metadata.html',
+            showClose: false,
+            closeByDocument: false,
+            disableAnimation: true,
+            scope: $scope
+        });
+    };
+
     $scope.onLabelClick = function(id) {
         $location.path("admin/vocabularies/" + $scope.vocabulary.id + "/labels/" + id);
     };
     $scope.onCreateLabelClick = function() {
-        ///labels/user/:user
-        //console.log("create label!");
 
         ngDialog.open({
             template: 'views/dialogs/create-label.html',
@@ -52,7 +61,7 @@ angular.module('labelsApp')
             scope: $scope
         });
 
-        $scope.onCreateLabelConfirm = function(term) {
+        $scope.onCreateLabelConfirm = function(term, description) {
 
             var newLabel = {
                 "vocabID": $scope.vocabulary.id,
@@ -62,6 +71,13 @@ angular.module('labelsApp')
                     "value": term
                 }]
             };
+
+            if (description) {
+                newLabel.scopeNote = {
+                    value: description,
+                    lang: $scope.vocabulary.title.lang,
+                };
+            }
 
             LabelService.save({
                 item: newLabel,

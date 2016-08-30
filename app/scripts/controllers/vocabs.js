@@ -87,12 +87,13 @@ angular.module('labelsApp')
                 $scope.newVocab.releaseType = "draft";
             }
 
-            //console.log($scope.newVocab);
+            var jsonObj = {
+                item: $scope.newVocab,
+                user: $scope.user.name
+            };
 
-
-            VocabService.save($scope.newVocab, function(res) {
+            VocabService.save(jsonObj, function(res) {
                 $scope.vocabularies.push(res);
-                //console.log(res);
             });
         };
     };

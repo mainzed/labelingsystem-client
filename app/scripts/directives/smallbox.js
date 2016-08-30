@@ -149,8 +149,6 @@ angular.module('labelsApp')
                     console.log(res);
                 });
 
-
-
             });
 
         };

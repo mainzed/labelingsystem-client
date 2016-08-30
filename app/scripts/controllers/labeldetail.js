@@ -241,8 +241,7 @@ angular.module('labelsApp')
                 item: $scope.label,
                 user: $scope.user.name
             }, function(label) {
-                console.log("update successfull");
-                console.log(label);
+
                 if (label.id) {
                     $scope.boxes.push({
                         relation: "attribute",

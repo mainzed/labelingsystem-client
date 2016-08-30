@@ -10,7 +10,7 @@
 <div id="enrichbuttons">
 
   <!-- resource columns -->
-  <div ng-show="type !== 'label'">
+  <div ng-show="data.type !== 'label'">
     <div class="col five leftout">
   		<button class="enrichbutton-ow" type="button" name="button" ng-click="onAddClick('broadMatch'); closeThisDialog()">
   			<span class="buttontext-ow">broad Match</span>
@@ -51,15 +51,15 @@
   </div>
 
   <!-- label columns -->
-  <div class="">
-    <div class="col three leftout" ng-show="type === 'label'">
+  <div ng-show="data.type === 'label'">
+    <div class="col three leftout" ng-show="data.type === 'label'">
   		<button class="enrichbutton-ow" type="button" name="button" ng-click="onAddClick('broader'); closeThisDialog()">
   			<span class="buttontext-ow">broader</span>
   		</button>
   		<p class="enrichinfo">skos:broader relates a concept to a concept that is more general in meaning.</p>
   	</div>
 
-    <div class="col three" ng-show="type === 'label'">
+    <div class="col three" ng-show="data.type === 'label'">
   		<button class="enrichbutton-ow" type="button" name="button" ng-click="onAddClick('related'); closeThisDialog()">
   			<span class="buttontext-ow">related</span>
   			<span class="icon-close icon"></span>
@@ -67,7 +67,7 @@
   		<p class="enrichinfo">skos:related relates a concept to a concept with which there is an associative semantic relationship.</p>
   	</div>
 
-    <div class="col three rightout" ng-show="type === 'label'">
+    <div class="col three rightout" ng-show="data.type === 'label'">
   		<button class="enrichbutton-ow" type="button" name="button" ng-click="onAddClick('narrower'); closeThisDialog()">
   			<span class="buttontext-ow">narrower</span>
   		</button>
