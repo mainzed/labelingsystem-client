@@ -72,20 +72,27 @@ angular.module('labelsApp')
                     });
                 }
 
-                console.log(updatedLabel);
-                LabelService.update({id: updatedLabel.id}, updatedLabel, function(res) {
+                //console.log(updatedLabel);
+                var updateObject = {
+                    item: updatedLabel,
+                    user: "demo"
+                };
+
+                LabelService.update({id: updatedLabel.id}, updateObject, function(res) {
                     // success
-                    console.log("success");
+                    console.log("success!");
                     console.log(res);
+                    scope.label = updatedLabel;
+
                 }, function(res) {
-                    console.log("error");
                     console.log(res);
                 });
                 //scope.action;
 
             };
 
-            //
+            
+
             scope.initMap = function(data) {
 
                 if (data.type === "geonames") {
