@@ -71,21 +71,16 @@ angular.module('labelsApp')
                     });
                 }
 
-                // refesh boxes via controller function
-                scope.action();
-
-                // var putObject = {
-                //     "item": scope.label,
-                //     "user": "fakeUser"
-                // };
-                // LabelService.update(scope.label.id, putObject, function(res) {
-                //     // success
-                //     console.log(res);
-                // }, function(res) {
-                //     console.log("error");
-                //     console.log(res);
-                // });
-                // send changed label to server, get result for just this one change and update just one box
+                console.log(scope.label);
+                LabelService.update({id: scope.label.id}, scope.label, function(res) {
+                    // success
+                    console.log("success");
+                    console.log(res);
+                }, function(res) {
+                    console.log("error");
+                    console.log(res);
+                });
+                //scope.action;
 
             };
 
@@ -111,8 +106,6 @@ angular.module('labelsApp')
                     //matches[1] contains the value between the parentheses
                     //console.log(matches[1]);
                 }
-
-
             }
 
             // reload nanoscroller when directive rendered
