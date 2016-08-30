@@ -15,7 +15,6 @@ angular.module('labelsApp')
     return $resource(host + '/api/v1/labels/:id', null, {
         'update': {
             method: 'PUT'
-            //url: host + '/api/v1/labels/:id'
         }
     });
 

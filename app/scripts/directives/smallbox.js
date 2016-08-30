@@ -7,15 +7,17 @@
  * # smallBox
  */
 angular.module('labelsApp')
-  .directive('smallBox', function (ngDialog, $routeParams, LabelService, TooltipService) {
+  .directive('smallBox', function (ngDialog, $routeParams, $rootScope, LabelService, TooltipService) {
     return {
       templateUrl: "views/directives/small-box.html",
       restrict: 'E',
       //replace: true,
-      scope: {
-        ngModel: '='
-      },
+    //   scope: {
+    //     ngModel: '='
+    //   },
       link: function postLink(scope, element, attrs) {
+
+        scope.ngModel = scope.box;
 
         scope.tooltip = TooltipService.icons.types[scope.ngModel.type];
 
@@ -74,7 +76,7 @@ angular.module('labelsApp')
         scope.language = resource.lang;
 
         scope.onBoxClick = function() {
-            console.log(boxType);
+            //console.log(boxType);
             if (boxType === "label") {
                 scope.categories = [
                     "broader",
@@ -106,23 +108,48 @@ angular.module('labelsApp')
 
         scope.onDeleteClick = function() {
 
+            var updatedlabel;
+
             // get current label
             LabelService.get({id: $routeParams.lID}, function(label) {
 
-                console.log();
-                if (boxType === "prefLabel") {
+                updatedlabel = label;
+
+                if (boxType === "description") {
+                    delete updatedlabel.scopeNote;
+
+                } else {
+                    var removeArray;
+                    if (boxType === "prefLabel") {
+                        removeArray = "prefLabels"
+                    } else if (boxType === "altLabel") {
+                        removeArray = "altLabels"
+                    } else if (boxType === "description") {
+                        removeArray = "scopeNote"
+                    } else {
+                        removeArray = relation;
+                    }
+
                     // Find item index using indexOf+find
-                    var index = _.indexOf(label.prefLabels, _.find(label.prefLabels, resource));
-
-                    // Replace item at index using native splice
-                    label.prefLabels.splice(index, 1);
-
-                    console.log(label);
-                    LabelService.update({id: $routeParams.lID}, label, function(res) {
-                        // success
-                        console.log(res);
-                    })
+                    var index = _.indexOf(updatedlabel[removeArray], _.find(updatedlabel[removeArray], resource));
+                    updatedlabel[removeArray].splice(index, 1);
                 }
+
+                // send updated label to server
+                var jsonObject = {
+                    item: updatedlabel,
+                    user: "demo"
+                };
+
+                LabelService.update({id: $routeParams.lID}, jsonObject, function(res) {
+                    // when successfull, remove current box
+                    var index = _.indexOf(scope.boxes, _.find(scope.boxes, scope.box));
+                    scope.boxes.splice(index, 1);
+                }, function(res) {
+                    console.log(res);
+                });
+
+
 
             });
 

@@ -54,42 +54,45 @@ angular.module('labelsApp')
 
             scope.onAddClick = function(relation) {
                 // TODO: check everywhere if resource is already linked to this label somehow
+                var updatedLabel = scope.label;
 
-                if (!scope.label[relation]) {
-                    scope.label[relation] = [];
+                if (!updatedLabel[relation]) {
+                    updatedLabel[relation] = [];
                 }
 
                 if (relation === "broader" || relation === "related" || relation === "narrower") {  // same vocab
                     // just push label-id to array
                     var labelID = scope.data.uri.split("/").pop();
-                    scope.label[relation].push(labelID);
+                    updatedLabel[relation].push(labelID);
 
                 } else {
-                    scope.label[relation].push({
+                    updatedLabel[relation].push({
                         type: scope.data.type,
                         url: scope.data.uri
                     });
                 }
 
-                // refesh boxes via controller function
-                scope.action();
+                //console.log(updatedLabel);
+                var updateObject = {
+                    item: updatedLabel,
+                    user: "demo"
+                };
 
-                // var putObject = {
-                //     "item": scope.label,
-                //     "user": "fakeUser"
-                // };
-                // LabelService.update(scope.label.id, putObject, function(res) {
-                //     // success
-                //     console.log(res);
-                // }, function(res) {
-                //     console.log("error");
-                //     console.log(res);
-                // });
-                // send changed label to server, get result for just this one change and update just one box
+                LabelService.update({id: updatedLabel.id}, updateObject, function(res) {
+                    // success
+                    console.log("success!");
+                    console.log(res);
+                    scope.label = updatedLabel;
+
+                }, function(res) {
+                    console.log(res);
+                });
+                //scope.action;
 
             };
 
-            //
+            
+
             scope.initMap = function(data) {
 
                 if (data.type === "geonames") {
@@ -111,8 +114,6 @@ angular.module('labelsApp')
                     //matches[1] contains the value between the parentheses
                     //console.log(matches[1]);
                 }
-
-
             }
 
             // reload nanoscroller when directive rendered

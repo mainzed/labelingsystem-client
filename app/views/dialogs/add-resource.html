@@ -1,17 +1,9 @@
-<h2>Enrich current label</h2>  
+<h2>Enrich current label</h2>
 
 <div id="selectedbox">
 	<div class="box bigbox {{ data.type }} {{ data.quality }}" ng-click="onBoxClick()">
-
-	  <!-- relation icon -->
-	  <!-- <span class="relation" ng-bind-html="relation"></span> -->
-
 	  <span class="thumbnail">{{ data.label }}</span>
-
-	  <!-- type icon -->
 	  <span class="type" ng-bind-html="icon" title="{{ tooltip }}"></span>
-
-	  <span class="language">{{ data.lang }}</span>
 	</div>
 </div>
 

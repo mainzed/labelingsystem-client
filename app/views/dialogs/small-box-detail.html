@@ -1,8 +1,8 @@
 <div class="dialogwrapper getty">
 	<div class="dialogheader">
-		<h3>{{text}}</h3> 
+		<h3>{{text}}</h3>
 		<p class="typeinformation">Getty Source - <a href="#">open in new tab</a></p>
-	</div> 
+	</div>
 	<div class="dialogbox dialog-full">
 
 	</div>
@@ -77,11 +77,13 @@
 
 	</div>
 
+  <div ng-click="onDeleteClick(); closeThisDialog()">delete</div>
+
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
 </div>
 <!--
 
-<h3>{{ ngModel.value }} </h3> 
+<h3>{{ ngModel.value }} </h3>
 
 <ul>
   <li>Type: {{ ngModel.boxType }}</li>

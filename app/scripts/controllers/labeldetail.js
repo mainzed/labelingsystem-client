@@ -36,6 +36,7 @@ angular.module('labelsApp')
     // load label for the current vocabulary
     LabelService.get({id: $routeParams.lID}, function(label) {
         $scope.label = label;
+        $scope.loadBoxes();
 
         $scope.prefLabel = _.find($scope.label.prefLabels, {isThumbnail: true});
 
@@ -217,6 +218,12 @@ angular.module('labelsApp')
     $scope.lang = "en";  // default
 
     $scope.onAddPrefLabel = function() {
+        // block existing languages
+        // angular.forEach($scope.label.prefLabels, function(prefLabel) {
+        //     _.find()
+        //     console.log(prefLabel);
+        // });
+
         ngDialog.open({
             template: 'views/dialogs/add-preflabel.html',
             showClose: false,
@@ -453,12 +460,12 @@ angular.module('labelsApp')
     };
 
     // listen to changes to the label
-    $scope.$watchCollection("label", function(newVal) {
-        //TODO: get differences and update boxes accordingly
-        if (typeof newVal === 'object') {  // skip when label is not loaded yet
-            $scope.loadBoxes();
-        }
-    });
+    // $scope.$watchCollection("label", function(newVal) {
+    //     //TODO: get differences and update boxes accordingly
+    //     if (typeof newVal === 'object') {  // skip when label is not loaded yet
+    //         $scope.loadBoxes();
+    //     }
+    // });
 
     // hotkeys
     $document.keydown(function(e) {
