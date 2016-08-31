@@ -2,6 +2,7 @@
 
 <ul>
   <li>title: {{ vocabulary.title.value }}</li>
+  <li>language: {{ vocabulary.title.lang }}</li>
   <li>description: {{ vocabulary.description.value }}</li>
   <li>license: {{ vocabulary.license }}</li>
   <li>creator: {{ vocabulary.creator }}</li>
@@ -9,5 +10,18 @@
 </ul>
 
 <!-- <button type="button" name="button" ng-click="closeThisDialog()">Confirm</button> -->
-<button type="button" name="button" ng-click="onDeleteClick()">Delete</button>
+<button type="button" name="button" ng-click="onVocabDeleteClick(); closeThisDialog()">Delete</button>
 <button type="button" name="button" ng-click="closeThisDialog()">Cancel</button>
+
+
+  <!-- <li>Referenzthesauri:</li>
+  <ul>
+    <li ng-repeat="thesaurus in thesauri">{{ thesaurus.name }}</li>
+    <li ng-show="showSelection">
+      <select ng-model="choice" ng-change="onSelectionChange(choice); showSelection = false">
+        <option value="" disabled selected>Select thesaurus</option>
+        <option ng-repeat="thesaurus in thesauri">{{ thesaurus.name }}</option>
+      </select>
+    </li>
+  </ul>
+  <button type="button" name="button" ng-click="showSelection = true">+</button>-->

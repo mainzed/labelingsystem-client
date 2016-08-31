@@ -32,26 +32,6 @@ angular.module('labelsApp')
         });
     };
 
-    $scope.onEditClick = function(id) {
-        // get vocabulary
-        for (var i = 0; i < $scope.vocabularies.length; i++) {
-            var vocab = $scope.vocabularies[i];
-            if (vocab.id === id) {
-                $scope.vocab = vocab;
-                break;
-            }
-        }
-
-        // get thesauri for vocabulary
-        $scope.thesauri = [];
-        getVocabThesauri($scope.vocab.id);
-
-        ngDialog.open({
-            template: 'views/dialogs/vocabulary-edit.html',
-            scope: $scope
-        });
-    };
-
     $scope.onSelectionChange = function(name) {
         // get thesaurus by name
         var thesaurus;
@@ -93,7 +73,11 @@ angular.module('labelsApp')
             };
 
             VocabService.save(jsonObj, function(res) {
+                // success
+                console.log(res);
                 $scope.vocabularies.push(res);
+            }, function(res) {
+                console.log(res);
             });
         };
     };

@@ -18,6 +18,7 @@ angular.module('labelsApp')
             };
 
             // reload nanoscroller when directive rendered
+            //console.log("reload!");
             $(".nano").nanoScroller();  // doesnt work
         }
     };
