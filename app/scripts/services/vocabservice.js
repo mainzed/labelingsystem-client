@@ -15,7 +15,8 @@ angular.module('labelsApp')
         'query': { method: 'GET', params: { draft: true }, isArray: true },
         'getPublicOnly': { method: 'GET', isArray: true },
         'update': { method:'PUT' },
-        'remove': { method: 'DELETE', params: { user: AuthService.getUser().name, type: "delete" }}
+        'remove': { method: 'DELETE', params: { user: AuthService.getUser().name, type: "delete" }},
+        'deprecated': { method: 'DELETE', params: { user: AuthService.getUser().name, type: "deprecated" }}
     });
 
   });

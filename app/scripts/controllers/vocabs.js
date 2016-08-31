@@ -84,6 +84,9 @@ angular.module('labelsApp')
 
     function getVocabThesauri(vocabID) {
 
+
+
+
         $http.get('http://143.93.114.135/api/v1/retcat/vocabulary/' + vocabID).then(function(res) {
             // success
             res.data.forEach(function(item) {

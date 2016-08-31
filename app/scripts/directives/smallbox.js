@@ -27,7 +27,7 @@ angular.module('labelsApp')
         var relation = scope.ngModel.relation;
         var boxType = scope.ngModel.boxType;
         //console.log(scope.ngModel);
-
+        console.log(boxType);
         // determine text
         if (resource.label) {
             scope.text = resource.label;
