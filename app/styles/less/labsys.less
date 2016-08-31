@@ -142,20 +142,9 @@ input:focus {		outline: none; }
 #labellist .bigbox {
 					margin-left: @marginoutside; width: calc(100% - @marginoutside * 2); }
 .plusposition 	{	position: fixed; left: 50%; bottom: 20%; width: 50px; margin-left: -25px; cursor: pointer;
-					display: block;
-   
-    height: 25px;
-    width: 25px;
-    padding: 6px 6px;
-    font-size: 30px;
-    line-height: 23px;
-    color: #555;
-    text-align: center;
-    background-color: #fff;
-    background-image: none;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    box-shadow: 0 3px 15px black; }
+					display: block; height: 25px; width: 25px; padding: 6px 6px; font-size: 30px; line-height: 23px;
+    				color: #555; text-align: center; background-color: #fff; background-image: none; border: 1px solid #ccc;
+					border-radius: 20px; box-shadow: 0 3px 15px black; }
 
 #selectedbox 	{	display: block; margin-bottom: 20px;}
 #selectedbox .bigbox {
@@ -190,7 +179,7 @@ input:focus {		outline: none; }
 .note {				float: left; margin-top: @margininboxsmall;		}
 .bigbox .thumbnail {
 					position: static; float: left; margin-left: @margininboxsmall;
-					margin-top: 14px; bottom: auto; left: auto; top: auto; width: 60%;  }
+					margin-top: 8px; bottom: auto; left: auto; top: auto; width: 60%;  }
 
 
 
@@ -228,7 +217,10 @@ input:focus {		outline: none; }
 
 /* nano slider details */
 .nano-slider {		background: white !important; border-radius: 0 !important; width: 5px !important; }
-.nano-pane {		right: 1px !important;	}
+.nano-pane {		right: 1px !important; background: transparent !important;	}
+.dialogscroll .nano-slider {
+					background: black !important;
+}
 
 .paddingbottom {	padding-bottom: 10px;	}
 
@@ -260,8 +252,9 @@ input:focus {		outline: none; }
 					height: 80%; top: 10%; overflow: hidden; }
 .dialogwrapper {	width: 100%; height: 100%; position: absolute;}
 .dialogheader { 	width: 100%; height: 100px; }
-.dialogscroll {		height: calc(100% - 150px); float: left; clear: both; display: block; overflow: hidden; width: 100%}
-.dialogbox		{	border-top: 1px solid black; border-bottom: 1px solid black; min-height: 100px;  }
+.dialogscroll {		height: calc(100% - 150px); float: left; clear: both; display: block; overflow: hidden; width: 100%; 
+					margin-bottom: 100px; }
+.dialogbox		{	border-top: 1px solid black; border-bottom: 1px solid black; float: left; padding-top: 10px;  }
 .typeinformation {	margin-left: calc(@marginoutside); font-style: italic; }
 
 

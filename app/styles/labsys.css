@@ -418,7 +418,7 @@ input:focus {
   position: static;
   float: left;
   margin-left: 8px;
-  margin-top: 14px;
+  margin-top: 8px;
   bottom: auto;
   left: auto;
   top: auto;
@@ -522,6 +522,10 @@ input:focus {
 }
 .nano-pane {
   right: 1px !important;
+  background: transparent !important;
+}
+.dialogscroll .nano-slider {
+  background: black !important;
 }
 .paddingbottom {
   padding-bottom: 10px;
@@ -609,11 +613,13 @@ input:focus {
   display: block;
   overflow: hidden;
   width: 100%;
+  margin-bottom: 100px;
 }
 .dialogbox {
   border-top: 1px solid black;
   border-bottom: 1px solid black;
-  min-height: 100px;
+  float: left;
+  padding-top: 10px;
 }
 .typeinformation {
   margin-left: calc(20px);
