@@ -8,5 +8,6 @@
   <!-- type icon -->
   <span class="type" ng-bind-html="type" title="{{ tooltip }}"></span>
 
-  <span class="language" ng-bind="language"></span>
+  <span class="language" ng-bind="language" ng-show="box.boxType === 'prefLabel' || box.boxType === 'altLabel'"></span>
+
 </div>

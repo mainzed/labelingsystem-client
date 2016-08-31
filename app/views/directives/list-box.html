@@ -13,9 +13,9 @@
 
   <span class="type"><span class="icon-label"></span></span>
 
-  <span class="language" ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: 'true'}" ng-show="!showMore">
+  <!-- <span class="language" ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: 'true'}" ng-show="!showMore">
     {{ prefLabel.lang }}
-  </span>
+  </span> -->
 
 </div>
 
@@ -23,7 +23,7 @@
   <span class="line-ext"></span>
   <span class="note-ext"><span class="italic">Description</span><br>{{ label.scopeNote.value }}</span>
   <span class="creator-ext"><span class="italic">Created by</span><br> {{ label.creator }}</span>
-  <span class="language" ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: 'true'}">
+  <!-- <span class="language" ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: 'true'}">
     {{ prefLabel.lang }}
-  </span>
+  </span> -->
 </div>

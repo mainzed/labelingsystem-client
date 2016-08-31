@@ -8,7 +8,7 @@
  * Controller of the labelsApp
  */
 angular.module('labelsApp')
-  .controller('LabelsCtrl', function ($scope, $routeParams, $location, ngDialog, AuthService, LabelService, VocabService, TooltipService) {
+  .controller('LabelsCtrl', function ($scope, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService) {
 
     // authentication
     if ($location.path().indexOf("admin/") > -1) {  // is admin view
@@ -27,6 +27,14 @@ angular.module('labelsApp')
 
     VocabService.get({id: $routeParams.vID}, function(vocabulary) {
         $scope.vocabulary = vocabulary;
+
+        ThesauriService.query({id: vocabulary.id}, function(thesauri) {
+            $scope.thesauri = thesauri;
+
+        }, function(res) {
+            // failure
+            console.log(res);
+        });
     });
 
     // load all labels for the current vocabulary
@@ -56,10 +64,15 @@ angular.module('labelsApp')
         });
 
         $scope.onVocabDeleteClick = function () {
-            VocabService.remove({id: $routeParams.vID},  function(res) {
+            VocabService.remove({id: $routeParams.vID},  function() {
                 $location.path("/admin/vocabularies");
             });
+        };
 
+        $scope.onVocabDeprecatedClick = function () {
+            VocabService.deprecated({id: $routeParams.vID},  function() {
+                $location.path("/admin/vocabularies");
+            });
         };
     };
 
