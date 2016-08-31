@@ -3,8 +3,8 @@
   <span class="thumbnail" ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: 'true'}">
 
     <button class="showadditionalcontent" ng-click="toggleExtension(); $event.stopPropagation()">
-      <span ng-show="!showMore">+</span>
-      <span ng-show="showMore">-</span>
+      <span class="showmore" ng-show="!showMore">+</span>
+      <span class="showmore" ng-show="showMore">-</span>
     </button>
     {{ prefLabel.value}}
   </span>
@@ -20,6 +20,7 @@
 </div>
 
 <div ng-if="showMore" class="box boxextension bigbox label high">
-  <span class="note">{{ label.scopeNote.value }}</span>
-  <span>Created by: {{ label.creator }}</span>
+  <span class="line-ext"></span>
+  <span class="note-ext"><span class="italic">Description</span><br>{{ label.scopeNote.value }}</span>
+  <span class="creator-ext"><span class="italic">Created by</span><br> {{ label.creator }}</span>
 </div>

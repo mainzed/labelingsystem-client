@@ -33,7 +33,7 @@
 
 
 /* font-sizes */
-@headlines: 		32px;
+@headlines: 		30px;
 @emphasize:			21px;
 @regular: 			16px;
 @small: 			12px;
@@ -66,7 +66,7 @@
 /*-------------------------------------------------- css ------------------------------------------------------------*/
 /*------------------- Do not edit this css file directly. Edit the LESS file-----------------------------------------*/
 
-* {					font-size: @regular; margin: 0; padding: 0; font-family: Roboto, Arial, sans-serif; letter-spacing: 0.01em;	}
+* {					font-size: @regular; margin: 0; padding: 0; font-family: Roboto, Arial, sans-serif; letter-spacing: 0.02em;	}
 a {					color: inherit; text-decoration: underline; }
 html {				height: 100%;	}
 body {				height: 100%;	}
@@ -84,6 +84,11 @@ input:focus {		outline: none; }
 #viewport {			height: 100%; background: @background;}
 #separator {		color: white; height: 75px; }
 .separatorsmall {	height: 50px; float: left; width: 100%; background: @workareas; clear: left;}
+.separatorsmall button {
+					color: white; margin-left: 20px; margin-top: 10px; text-decoration: underline;
+}
+.separatorsmall .pre {
+					color: white; margin-top: 10px; border-left: 1px solid white; padding-left: 10px; }
 #separator h1 {		padding-left: calc(@marginoutside + @marginoutboxsmall); padding-top: 20px; float: left; width: calc(@quartersize);    }
 #header h1 {		margin-top: 45px; float: left;
 					@media screen and (max-width: 1600px) { margin-top: 53px;} }
@@ -110,8 +115,11 @@ input:focus {		outline: none; }
 				 {	background: none; border: none; color: gray; width: 200px; margin-top: 32px; margin-left: calc(@tableheadmargin); }
 .hideenrichment {	float: right;}
 #filtersearch {		margin-left: @marginoutside; margin-top: 10px; color: white; width: 60%; float: left; }
+#filtersearch .icon-search {
+					float: left;
+}
 #filtersearch input {
-					background: none; border: none; color: gray; width: 200px; }
+					background: none; border: none; color: gray; width: 200px; float: left; height: 30px; }
 
 #breadcrumb {		float: left; display: block; height: 100px; }
 #breadcrumb a {		color: white; margin-top: 60px; display: block; float: left; padding-bottom: 2px;
@@ -182,7 +190,7 @@ input:focus {		outline: none; }
 .note {				float: left; margin-top: @margininboxsmall;		}
 .bigbox .thumbnail {
 					position: static; float: left; margin-left: @margininboxsmall;
-					margin-top: @margininboxsmall; bottom: auto; left: auto; top: auto; width: 60%;  }
+					margin-top: 14px; bottom: auto; left: auto; top: auto; width: 60%;  }
 
 
 
@@ -229,7 +237,7 @@ input:focus {		outline: none; }
 .buttontext-ow {	 position: absolute; left: @margininboxsmall; bottom: @margininboxsmall; font-size: @emphasize; 			}
 #header .language {	font-size: @regular; margin-right: calc(@margininboxsmall * 2); bottom: 12px; }
 
-.boxextension {		margin-top: -3px; border-top: 1px solid black; }
+.boxextension {		margin-top: -3px; padding-bottom: @margininboxsmall;  }
 
 
 /* mini preview */
@@ -249,7 +257,7 @@ input:focus {		outline: none; }
 
 .bigdialog .ngdialog-content {
 					width: @bigdialogwidth; position: absolute; left: 50%; margin-left: calc(( @bigdialogwidth * -1 ) / 2);
-					height: 80%; top: 10%; }
+					height: 80%; top: 10%; overflow: hidden; }
 .dialogwrapper {	width: 100%; height: 100%; position: absolute;}
 .dialogheader { 	width: 100%; min-height: 100px; }
 .dialogbox		{	border-top: 1px solid black; border-bottom: 1px solid black; min-height: 100px;  }
@@ -271,3 +279,14 @@ input:focus {		outline: none; }
 
 .ngdialog-overlay { background: rgba(0, 0, 0, 0.8); }
 .selectedbutton {	background: gray; }
+
+/* extension content */
+.line-ext {			height: 1px; width: calc(100% - @margininboxsmall * 2); margin-left: @margininboxsmall; display: block; background: black; }
+.note-ext {			float: left; margin-left: 100px; width: 15%; margin-top: @margininboxsmall; }
+.creator-ext {		float: left; margin-left: @margininboxsmall; margin-top: @margininboxsmall; }
+
+.italic {			font-style: italic; }
+.showadditionalcontent {			
+					width: 20px; height: 20px; display: block; float: left; margin-top: 2px; }
+.showadditionalcontent:hover {		
+					text-decoration: underline; cursor: pointer; } 
