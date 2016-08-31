@@ -16,7 +16,7 @@ angular.module('labelsApp')
     }
 
     $scope.onLoginClick = function() {
-        console.log("login");
+        //console.log("login");
         AuthService.login($scope.username, $scope.password, function() {
             // success
             $location.path('/admin/vocabularies');
