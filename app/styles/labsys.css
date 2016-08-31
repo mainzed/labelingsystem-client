@@ -99,7 +99,8 @@ input:focus {
   color: white;
   margin-left: 20px;
   margin-top: 10px;
-  text-decoration: underline;
+  border-bottom: 1px solid white;
+  padding-bottom: 2px;
 }
 .separatorsmall .pre {
   color: white;
@@ -599,7 +600,15 @@ input:focus {
 }
 .dialogheader {
   width: 100%;
-  min-height: 100px;
+  height: 100px;
+}
+.dialogscroll {
+  height: calc(100% - 150px);
+  float: left;
+  clear: both;
+  display: block;
+  overflow: hidden;
+  width: 100%;
 }
 .dialogbox {
   border-top: 1px solid black;
