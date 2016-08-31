@@ -11,15 +11,18 @@ angular.module('labelsApp')
     return {
         templateUrl: "views/directives/list-box.html",
         restrict: 'E',
-        link: function postLink(scope, element, attrs) {
+        link: function postLink(scope) {
+
+            scope.$watch("extentAll", function() {
+                scope.showMore = scope.extentAll;
+            });
 
             scope.toggleExtension = function() {
                 scope.showMore = !scope.showMore;
             };
 
             // reload nanoscroller when directive rendered
-            //console.log("reload!");
-            $(".nano").nanoScroller();  // doesnt work
+            $(".nano").nanoScroller();
         }
     };
   });

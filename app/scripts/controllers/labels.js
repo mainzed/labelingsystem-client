@@ -36,6 +36,15 @@ angular.module('labelsApp')
         $scope.placeholder = "filter";
     });
 
+    $scope.onExtendClick = function() {
+        $scope.extentAll = !$scope.extentAll;
+        if ($scope.extentAll) {
+            $scope.collapseText = "collapse all";
+        } else {
+            $scope.collapseText = "";
+        }
+    };
+
     $scope.onVocabTitleClick = function() {
 
         ngDialog.open({
@@ -49,36 +58,15 @@ angular.module('labelsApp')
         $scope.onVocabDeleteClick = function () {
             VocabService.remove({id: $routeParams.vID},  function(res) {
                 $location.path("/admin/vocabularies");
-                console.log(res);
             });
 
         };
     };
 
-    // $scope.onVocabTitleClick = function(id) {
-    //     // get vocabulary
-    //     for (var i = 0; i < $scope.vocabularies.length; i++) {
-    //         var vocab = $scope.vocabularies[i];
-    //         if (vocab.id === id) {
-    //             $scope.vocab = vocab;
-    //             break;
-    //         }
-    //     }
-    //
-    //     // get thesauri for vocabulary
-    //     $scope.thesauri = [];
-    //     getVocabThesauri($scope.vocab.id);
-    //
-    //     ngDialog.open({
-    //         template: 'views/dialogs/vocabulary-edit.html',
-    //         scope: $scope
-    //     });
-    // };
-
-
     $scope.onLabelClick = function(id) {
         $location.path("admin/vocabularies/" + $scope.vocabulary.id + "/labels/" + id);
     };
+
     $scope.onCreateLabelClick = function() {
 
         ngDialog.open({
