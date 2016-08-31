@@ -96,7 +96,7 @@ angular.module('labelsApp')
                     "narrowMatch"
                 ];
             }
-            ngDialog.open({
+            var dialog = ngDialog.open({
                 template: 'views/dialogs/small-box-detail.html',
                 className: 'bigdialog',
                 showClose: false,
@@ -104,6 +104,14 @@ angular.module('labelsApp')
                 disableAnimation: true,
                 scope: scope
             });
+
+            // reload nanoscroll when this dialog is opened
+            $rootScope.$on('ngDialog.opened', function (e, $dialog) {
+                if ($dialog.attr('id') === dialog.id) {
+                    $(".nano").nanoScroller();
+                }
+            });
+
         };
 
         scope.onDeleteClick = function() {
@@ -152,8 +160,6 @@ angular.module('labelsApp')
             });
 
         };
-
-
 
         // reload nanoscroller when directive rendered
         $(".nano").nanoScroller();

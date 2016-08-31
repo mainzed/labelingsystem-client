@@ -11,7 +11,7 @@ angular.module('labelsApp')
     return {
       template: [
           '<span class="icon-search" ng-click="focusSearch = true"></span>',
-          '<input type="search" ng-model="labelFilter" ng-blur="true"></input>'
+          '<input type="text" ng-model="labelFilter" ng-blur="true"></input>'
       ].join(""),
       restrict: 'E',
       link: function postLink(scope, element, attrs) {

@@ -17,7 +17,7 @@
   margin: 0;
   padding: 0;
   font-family: Roboto, Arial, sans-serif;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
 }
 a {
   color: inherit;
@@ -30,7 +30,7 @@ body {
   height: 100%;
 }
 h1 {
-  font-size: 32px;
+  font-size: 30px;
   font-weight: normal;
 }
 @media screen and (max-width: 1600px) {
@@ -39,7 +39,7 @@ h1 {
   }
 }
 h2 {
-  font-size: 32px;
+  font-size: 30px;
   font-weight: normal;
   margin-bottom: 50px;
   margin-top: 20px;
@@ -95,6 +95,18 @@ input:focus {
   background: #1c1c1c;
   clear: left;
 }
+.separatorsmall button {
+  color: white;
+  margin-left: 20px;
+  margin-top: 10px;
+  text-decoration: underline;
+}
+.separatorsmall .pre {
+  color: white;
+  margin-top: 10px;
+  border-left: 1px solid white;
+  padding-left: 10px;
+}
 #separator h1 {
   padding-left: calc(20px + 9px);
   padding-top: 20px;
@@ -113,7 +125,7 @@ input:focus {
 .noresult {
   width: 200px;
   height: 100px;
-  font-size: 32px;
+  font-size: 30px;
   font-style: italic;
   color: #1c1c1c;
   font-weight: 300;
@@ -213,11 +225,16 @@ input:focus {
   width: 60%;
   float: left;
 }
+#filtersearch .icon-search {
+  float: left;
+}
 #filtersearch input {
   background: none;
   border: none;
   color: gray;
   width: 200px;
+  float: left;
+  height: 30px;
 }
 #breadcrumb {
   float: left;
@@ -400,7 +417,7 @@ input:focus {
   position: static;
   float: left;
   margin-left: 8px;
-  margin-top: 8px;
+  margin-top: 14px;
   bottom: auto;
   left: auto;
   top: auto;
@@ -530,7 +547,7 @@ input:focus {
 }
 .boxextension {
   margin-top: -3px;
-  border-top: 1px solid black;
+  padding-bottom: 8px;
 }
 /* mini preview */
 .minipreview {
@@ -573,6 +590,7 @@ input:focus {
   margin-left: calc((60% * -1) / 2);
   height: 80%;
   top: 10%;
+  overflow: hidden;
 }
 .dialogwrapper {
   width: 100%;
@@ -630,4 +648,37 @@ input:focus {
 }
 .selectedbutton {
   background: gray;
+}
+/* extension content */
+.line-ext {
+  height: 1px;
+  width: calc(100% - 8px * 2);
+  margin-left: 8px;
+  display: block;
+  background: black;
+}
+.note-ext {
+  float: left;
+  margin-left: 100px;
+  width: 15%;
+  margin-top: 8px;
+}
+.creator-ext {
+  float: left;
+  margin-left: 8px;
+  margin-top: 8px;
+}
+.italic {
+  font-style: italic;
+}
+.showadditionalcontent {
+  width: 20px;
+  height: 20px;
+  display: block;
+  float: left;
+  margin-top: 2px;
+}
+.showadditionalcontent:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }
