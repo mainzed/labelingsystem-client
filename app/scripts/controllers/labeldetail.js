@@ -8,7 +8,7 @@
  * Controller of the labelsApp
  */
 angular.module('labelsApp')
-  .controller('LabelDetailCtrl', function ($scope, $routeParams, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ExternalResourcesService, TooltipService, UserSettingsService) {
+  .controller('LabelDetailCtrl', function ($scope, $routeParams, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ExternalResourcesService, TooltipService, SearchService, UserSettingsService, ThesauriService, LangService) {
 
     // authentication
     if ($location.path().indexOf("admin/") > -1) {  // is admin view
@@ -30,7 +30,16 @@ angular.module('labelsApp')
 
     VocabService.get({id: $routeParams.vID}, function(vocabulary) {
         $scope.vocabulary = vocabulary;
-        getVocabThesauri(vocabulary.id);
+
+        // get all thesauri associated with this vocabulary, preload these for search function
+        $scope.thesauri = [];
+        ThesauriService.query({id: vocabulary.id}, function(thesauri) {
+            $scope.thesauri = thesauri;
+        }, function(res) {
+            // failure
+            console.log(res);
+        });
+
     });
 
     // load label for the current vocabulary
@@ -60,22 +69,6 @@ angular.module('labelsApp')
         return box.relation === "related" || box.relation === "closeMatch" || box.relation === "relatedMatch" || box.relation === "exactMatch" || box.relation === "seeAlso";
     };
 
-    // get all thesauri associated with this vocabulary, preload these for search function
-    $scope.thesauri = [];
-    function getVocabThesauri(vocabID) {
-        //console.log(vocabID);
-
-        $http.get('http://143.93.114.135/api/v1/retcat/vocabulary/' + vocabID).then(function(res) {
-            // success
-            res.data.forEach(function(item) {
-                $scope.thesauri.push(item.name);
-            });
-
-        }, function() {
-            // error
-        });
-    }
-
     // when searching, append search results
     // search when something is entered,
     // ls results are cached anyway, everything else gets searched on change
@@ -85,12 +78,12 @@ angular.module('labelsApp')
         // search in all thesauri and append as soon as they're found!
         $scope.thesauri.forEach(function(thesaurus) {
 
-            $http.get('http://143.93.114.135/api/v1/resourcequery?retcat=' + thesaurus + '&query=' + $scope.searchValue).then(function(res) {
-                $.merge($scope.resultBoxes, res.data);
+            SearchService.search(thesaurus.name, $scope.searchValue, function(results) {
+                $.merge($scope.resultBoxes, results);
 
-            }, function() {
+            }, function(res) {
                 // error
-                console.log("something went wrong trying to get label search results!");
+                console.log(res);
             });
         });
     };
@@ -203,20 +196,11 @@ angular.module('labelsApp')
         }
     };
 
-    $scope.languages = [
-        { name: "German", value: "de" },
-        { name: "English", value: "en" },
-        { name: "Spanish", value: "es" },
-        { name: "Italian", value: "it" }
-    ];
+    // used by views
+    $scope.languages = LangService.get();
     $scope.lang = "en";  // default
 
     $scope.onAddPrefLabel = function() {
-        // block existing languages
-        // angular.forEach($scope.label.prefLabels, function(prefLabel) {
-        //     _.find()
-        //     console.log(prefLabel);
-        // });
 
         ngDialog.open({
             template: 'views/dialogs/add-preflabel.html',
@@ -440,24 +424,7 @@ angular.module('labelsApp')
         LabelService.update({id: label.id }, label, function(res) {
             console.log(res);
         });
-
-        // // Find item index using indexOf+find
-        // var index = _.indexOf($scope.label.prefLabels, _.find($scope.label.prefLabels, {isThumbnail: true}));
-        //
-        // $scope.label.prefLabels.splice(index, 1, {
-        //     isThumbnail: true,
-        //     value: $scope.thumbnail.value,
-        //     lang: $scope.thumbnail.lang
-        // });
     };
-
-    // listen to changes to the label
-    // $scope.$watchCollection("label", function(newVal) {
-    //     //TODO: get differences and update boxes accordingly
-    //     if (typeof newVal === 'object') {  // skip when label is not loaded yet
-    //         $scope.loadBoxes();
-    //     }
-    // });
 
     // hotkeys
     $document.keydown(function(e) {

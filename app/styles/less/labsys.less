@@ -76,7 +76,8 @@ h2 {				font-size: @headlines; font-weight: normal; margin-bottom: 50px; margin-
 					@media screen and (max-width: 1600px) {font-size: @headlines-small; } }
 h3 {				font-size: @emphasize; font-weight: normal; margin-bottom: 5px; margin-top: @marginoutside; margin-left: @marginoutside; display: block;
 					@media screen and (max-width: 1600px) {font-size: @emphasize-small; } }
-li {				list-style: none; }
+h4 {				font-size: @regular; font-weight: normal; margin-left: @marginoutside; display: block; margin-bottom: 20px;}
+li {				margin-left: 14px; }
 button {			border: 0; background: transparent;}
 input:focus {		outline: none; }
 
@@ -90,12 +91,13 @@ input:focus {		outline: none; }
 .separatorsmall .pre {
 					color: white; margin-top: 10px; border-left: 1px solid white; padding-left: 10px; }
 #separator h1 {		padding-left: calc(@marginoutside + @marginoutboxsmall); padding-top: 20px; float: left; width: calc(@quartersize);    }
-#header h1 {		margin-top: 45px; float: left;
+#header h1 {		margin-top: 45px; float: left; border-bottom: 1px solid white;
 					@media screen and (max-width: 1600px) { margin-top: 53px;} }
 .nano {				 	}
 .noresult {			width: 200px; height: 100px; font-size: @headlines; font-style: italic; color: @workareas; font-weight: 300;
 					text-align: center; position: absolute; left: 50%; top: 50%; margin-left: -100px; margin-top: -50px; }
 .cancel {			position: absolute; bottom: @marginoutside; right: @marginoutside;}
+.apply {			position: absolute; bottom: @marginoutside; left: @marginoutside;}
 .enrichmentswrapper {
 					height: calc(100% - 50px); }
 #enrichment-ov {	width: 100%; float: left; background: @workareas; height: calc(50% - 90px);	}
@@ -180,6 +182,9 @@ input:focus {		outline: none; }
 .bigbox .thumbnail {
 					position: static; float: left; margin-left: @margininboxsmall;
 					margin-top: 8px; bottom: auto; left: auto; top: auto; width: 60%;  }
+#labellistwrapper .bigbox .thumbnail {
+					margin-top: 15px;
+}
 
 
 
@@ -202,16 +207,26 @@ input:focus {		outline: none; }
 .right .box {		margin-right: @marginoutside; margin-left: @marginoutboxsmall; width: calc(100% - @marginoutboxsmall - @marginoutside); }
 .halfleft .box {	margin-right: @marginoutboxsmall; margin-left: @marginoutboxsmall; width: calc(100% - @marginoutboxsmall * 2);  }
 .halfright .box {	margin-right: @marginoutboxsmall; margin-left: 0; width: calc(100% - @marginoutboxsmall); }
+
+.middle {			background: @middle;	}
+.threequarter {		width: calc(100% - ( @quartersize + @marginoutside + @marginoutboxsmall ) ); position: relative; height: calc(100% - 75px);	}
+
+
+/*enrichbuttons*/
 .enrichbutton	{	margin-left: @marginoutside; margin-right: @marginoutboxsmall; width: calc(100% - @marginoutboxsmall - @marginoutside);
 					height: 40px; background: @middle; border: 0; text-align: left; color: white; margin-bottom: @marginbottombox;
 					cursor: pointer; }
 .enrichbutton-ow {	background: @label; height: 100px; text-align: left; width: 100%; position: relative; }
 .enrichbutton-ow .icon {
 					position: absolute; top: @margininboxsmall; left: @margininboxsmall; }
+.enrichbuttons-min .enrichbutton-ow {
+					height: 30px; }	
+.enrichbuttons-min .enrichbutton-ow .icon {
+					top: @margininboxsmall; left: auto; right: @margininboxsmall; }	
 .enrichinfo	 {		padding: @margininboxsmall; margin-top: 30px; display: block; }
-.middle {			background: @middle;	}
+.enrichbuttons-min .enrichinfo {
+					display: none; }
 
-.threequarter {		width: calc(100% - ( @quartersize + @marginoutside + @marginoutboxsmall ) ); position: relative; height: calc(100% - 75px);	}
 
 
 
@@ -219,23 +234,18 @@ input:focus {		outline: none; }
 .nano-slider {		background: white !important; border-radius: 0 !important; width: 5px !important; }
 .nano-pane {		right: 1px !important; background: transparent !important;	}
 .dialogscroll .nano-slider {
-					background: black !important;
-}
-
+					background: black !important; }
 .paddingbottom {	padding-bottom: 10px;	}
-
 .buttonicon {		margin-right: @margininboxsmall; float: right;}
 .buttontext {		margin-left: @margininboxsmall; float: left; margin-top: 4px;			}
-.buttontext-ow {	 position: absolute; left: @margininboxsmall; bottom: @margininboxsmall; font-size: @emphasize; 			}
+.buttontext-ow {	position: absolute; left: @margininboxsmall; bottom: @margininboxsmall; font-size: @emphasize; 			}
 #header .language {	font-size: @regular; margin-right: calc(@margininboxsmall * 2); bottom: 12px; }
-
 .boxextension {		margin-top: -3px; padding-bottom: @margininboxsmall;  }
 
 
 /* mini preview */
-.minipreview {		height: calc(@boxheight - @margininboxsmall * 2 - 10px); margin: @margininboxsmall 0;
-					background: black; width: 100px; float: left; padding: 4px 2px 6px 2px;
-					overflow: hidden;	}
+.minipreview {		height: calc(@boxheight - @margininboxsmall * 2 - 10px); margin: @margininboxsmall 0; background: black; 
+					width: 100px; float: left; padding: 4px 2px 6px 2px; overflow: hidden;	}
 .minicol	 {		width: calc(25% - 4px); padding: 0 2px; float: left; height: 100%;	}
 .minibox 	{		width: 100%; height: 6px; margin-bottom: 4px; display: block;}
 
@@ -243,18 +253,21 @@ input:focus {		outline: none; }
 
 /* dialogs */
 /* dialog grid */
-.dialog-half {		width: 50%; }
-.dialog-quarter {	width: 25%; }
-.dialog-full	{	width: calc(100% - @marginoutside * 2); margin-left: @marginoutside; }
+.dialog-half {		width: calc((100% - ( @marginoutboxsmall * 2  + @marginoutside * 2)) / 2 ); margin-left: @marginoutside; }
+.dialog-quarter {	width: calc((100% - ( @marginoutboxsmall * 2  + @marginoutside * 2)) / 4 ); margin-left: @marginoutboxsmall; }
+.dialog-full	{	width: 100%;  }
+.line-dialog {		height: 1px; width: calc(100% - @marginoutside * 2); margin-left: @marginoutside; float: left; 
+					display: block; background: black; margin-bottom: @margininboxsmall; margin-top: 50px; }
+.line-bottom {		height: 1px; width: calc(100% - @marginoutside * 2); left: @marginoutside; position: absolute; bottom: 0; display: block; background: black; }
 
 .bigdialog .ngdialog-content {
 					width: @bigdialogwidth; position: absolute; left: 50%; margin-left: calc(( @bigdialogwidth * -1 ) / 2);
 					height: 80%; top: 10%; overflow: hidden; }
 .dialogwrapper {	width: 100%; height: 100%; position: absolute;}
-.dialogheader { 	width: 100%; height: 100px; }
-.dialogscroll {		height: calc(100% - 150px); float: left; clear: both; display: block; overflow: hidden; width: 100%; 
+.dialogheader { 	width: 100%; height: 100px; position: relative; }
+.dialogscroll {		height: calc(100% - 180px); float: left; clear: both; display: block; overflow: hidden; width: 100%; 
 					margin-bottom: 100px; }
-.dialogbox		{	border-top: 1px solid black; border-bottom: 1px solid black; float: left; padding-top: 10px;  }
+.dialogbox		{	 float: left; padding-top: 10px;  }
 .typeinformation {	margin-left: calc(@marginoutside); font-style: italic; }
 
 
