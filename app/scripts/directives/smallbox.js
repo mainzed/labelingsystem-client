@@ -21,13 +21,11 @@ angular.module('labelsApp')
 
         scope.tooltip = TooltipService.icons.types[scope.ngModel.type];
 
-        var boxes;
-
         var resource = scope.ngModel.resource;
         var relation = scope.ngModel.relation;
         var boxType = scope.ngModel.boxType;
-        //console.log(scope.ngModel);
-        console.log(boxType);
+
+
         // determine text
         if (resource.label) {
             scope.text = resource.label;
@@ -96,8 +94,16 @@ angular.module('labelsApp')
                     "narrowMatch"
                 ];
             }
+
+            var templateURL;
+            if (relation.indexOf("Match") > -1) {
+                templateURL = 'views/dialogs/small-box-resource.html';
+            } else {
+                templateURL = 'views/dialogs/small-box-' + boxType + '.html';
+            }
+
             var dialog = ngDialog.open({
-                template: 'views/dialogs/small-box-detail.html',
+                template: templateURL,
                 className: 'bigdialog',
                 showClose: false,
                 closeByDocument: false,
@@ -129,11 +135,11 @@ angular.module('labelsApp')
                 } else {
                     var removeArray;
                     if (boxType === "prefLabel") {
-                        removeArray = "prefLabels"
+                        removeArray = "prefLabels";
                     } else if (boxType === "altLabel") {
-                        removeArray = "altLabels"
+                        removeArray = "altLabels";
                     } else if (boxType === "description") {
-                        removeArray = "scopeNote"
+                        removeArray = "scopeNote";
                     } else {
                         removeArray = relation;
                     }
