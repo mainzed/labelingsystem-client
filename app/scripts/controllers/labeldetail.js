@@ -8,7 +8,7 @@
  * Controller of the labelsApp
  */
 angular.module('labelsApp')
-  .controller('LabelDetailCtrl', function ($scope, $routeParams, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ExternalResourcesService, TooltipService, SearchService, UserSettingsService, ThesauriService, LangService) {
+  .controller('LabelDetailCtrl', function ($scope, $routeParams, $timeout, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ExternalResourcesService, TooltipService, SearchService, UserSettingsService, ThesauriService, LangService) {
 
     // authentication
     if ($location.path().indexOf("admin/") > -1) {  // is admin view
@@ -390,6 +390,7 @@ angular.module('labelsApp')
     $scope.showEnrichmentBrowser = function() {
         $scope.showEnrichments = true;
         UserSettingsService.showEnrichments = $scope.showEnrichments;
+        //$(".nano").nanoScroller();
     };
 
     $scope.hideEnrichmentBrowser = function() {
@@ -397,6 +398,13 @@ angular.module('labelsApp')
         UserSettingsService.showEnrichments = $scope.showEnrichments;
         //$(".nano").nanoScroller();
     };
+
+    // listener to reload nanoscroller when menu is hidden or shown
+    $scope.$watch("showEnrichments", function() {
+        $timeout(function() {
+            $(".nano").nanoScroller();
+        }, 0);
+    });
 
     // open dialog with label-metadata
     $scope.onLabelHeadingClick = function() {

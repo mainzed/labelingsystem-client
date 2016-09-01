@@ -15,14 +15,13 @@ angular.module('labelsApp')
 
             scope.$watch("extentAll", function() {
                 scope.showMore = scope.extentAll;
+                $(".nano").nanoScroller();
             });
 
             scope.toggleExtension = function() {
                 scope.showMore = !scope.showMore;
             };
 
-            // reload nanoscroller when directive rendered
-            $(".nano").nanoScroller();
         }
     };
   });
