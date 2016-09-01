@@ -70,6 +70,8 @@
 a {					color: inherit; text-decoration: underline; }
 html {				height: 100%;	}
 body {				height: 100%;	}
+textarea {			margin-left: @marginoutside; width: calc(100% - 2 * @marginoutside); display: block; resize: vertical; 
+					height: 100px; border-radius: 3px; background: @label; padding: @margininboxsmall; }
 h1 {				font-size: @headlines; font-weight: normal;
 					@media screen and (max-width: 1600px) {font-size: @headlines-small; } }
 h2 {				font-size: @headlines; font-weight: normal; margin-bottom: 50px; margin-top: @marginoutside; margin-left: @marginoutside; display: block;
@@ -80,6 +82,8 @@ h4 {				font-size: @regular; font-weight: normal; margin-left: @marginoutside; d
 li {				margin-left: 14px; }
 button {			border: 0; background: transparent;}
 input:focus {		outline: none; }
+button:focus {		outline: none; }
+textarea:focus {	outline: none; }
 
 #header {			color: white; height: 90px; position: relative; background: @background;	}
 #viewport {			height: 100%; background: @background;}
@@ -91,7 +95,7 @@ input:focus {		outline: none; }
 .separatorsmall .pre {
 					color: white; margin-top: 10px; border-left: 1px solid white; padding-left: 10px; }
 #separator h1 {		padding-left: calc(@marginoutside + @marginoutboxsmall); padding-top: 20px; float: left; width: calc(@quartersize);    }
-#header h1 {		margin-top: 45px; float: left; border-bottom: 1px solid white;
+#header h1 {		margin-top: 45px; float: left; 
 					@media screen and (max-width: 1600px) { margin-top: 53px;} }
 .nano {				 	}
 .noresult {			width: 200px; height: 100px; font-size: @headlines; font-style: italic; color: @workareas; font-weight: 300;
@@ -159,6 +163,7 @@ input:focus {		outline: none; }
 .ls {				background: @high; }
 .pleiades {			background: @high; }
 .chronontology {	background: @high; }
+.unesco		{		background: @high; }
 
 .label {			background: @label; }
 
@@ -267,7 +272,12 @@ input:focus {		outline: none; }
 .dialogheader { 	width: 100%; height: 100px; position: relative; }
 .dialogscroll {		height: calc(100% - 180px); float: left; clear: both; display: block; overflow: hidden; width: 100%; 
 					margin-bottom: 100px; }
-.dialogbox		{	 float: left; padding-top: 10px;  }
+.dialogbox		{	float: left; padding-top: 10px;  }
+.dialogbox input {	width: calc(100% - 2 * @marginoutside); margin-left: @marginoutside; border-radius: 3px; 
+					padding: @margininboxsmall; background: @middle; color: white; border: 0; }
+.dialogbox select { width: calc(100% - 2 * @marginoutside); margin-left: @marginoutside; background: @middle; 
+					padding: @margininboxsmall; border: 1px solid black; color: white; }
+.label .dialogbox input {background: @label; border: 1px solid gray; }
 .typeinformation {	margin-left: calc(@marginoutside); font-style: italic; }
 
 

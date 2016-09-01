@@ -204,6 +204,7 @@ angular.module('labelsApp')
 
         ngDialog.open({
             template: 'views/dialogs/add-preflabel.html',
+            className: 'bigdialog',
             showClose: false,
             closeByDocument: false,
             disableAnimation: true,
@@ -240,6 +241,7 @@ angular.module('labelsApp')
     $scope.onAddAltLabel = function() {
         ngDialog.open({
             template: 'views/dialogs/add-altlabel.html',
+            className: 'bigdialog',
             showClose: false,
             closeByDocument: false,
             disableAnimation: true,
@@ -280,6 +282,7 @@ angular.module('labelsApp')
         $scope.description = "insert label description here ...";
         ngDialog.open({
             template: 'views/dialogs/description-detail.html',
+            className: 'bigdialog',
             disableAnimation: true,
             showClose: false,
             closeByDocument: false,
@@ -321,6 +324,7 @@ angular.module('labelsApp')
         $scope.validWaybackLink = false;
         ngDialog.open({
             template: 'views/dialogs/add-wayback-link.html',
+            className: 'bigdialog',
             disableAnimation: true,
             showClose: false,
             closeByDocument: false,
@@ -420,6 +424,7 @@ angular.module('labelsApp')
 
         ngDialog.open({
             template: 'views/dialogs/label-metadata.html',
+            className: 'bigdialog',
             disableAnimation: true,
             showClose: false,
             closeByDocument: false,
