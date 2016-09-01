@@ -1,0 +1,150 @@
+<div class="dialogwrapper getty">
+	<div class="dialogheader">
+		<h3>SAME-VOCAB-LABEL: {{text}}</h3>
+		<p class="typeinformation">Getty Source - <a href="#">open in new tab</a></p>
+		<div class="line-bottom"></div>
+	</div>
+	<div class="dialogscroll">
+	<div class="nano">
+	<div class="nano-content">
+		<div class="dialogbox dialog-full">
+			<div class="dialog-half col">
+				<span class="italic">Description</span><br>
+				The bone that connects the humerus (upper arm bone) with the clavicle (collar bone)Description
+				The bone that connects the humerus (upper arm bone) with the clavicle (collar bone)Description
+				The bone that connects the humerus (upper arm bone) with the clavicle (collar bone)Description
+				The bone that connects the humerus (upper arm bone) with the clavicle (collar bone)Description
+				The bone that connects the humerus (upper arm bone) with the clavicle (collar bone)Description
+				The bone that connects the humerus (upper arm bone) with the clavicle (collar bone)Description
+				The bone that connects the humerus (upper arm bone) with the clavicle (collar bone)Description
+				The bone that connects the humerus (upper arm bone) with the clavicle (collar bone)Description
+				The bone that connects the humerus (upper arm bone) with the clavicle (collar bone)Description
+				The bone that connects the humerus (upper arm bone) with the clavicle (collar bone)Description
+
+			</div>
+			<div class="dialog-quarter col">
+				<span class="italic">Broader</span><br>
+				<ul>
+					<li>The bone that connects the humerus</li>
+					<li>The bone that connects the humerus</li>
+					<li>The bone that connects the humerus</li>
+					<li>The bone that connects the humerus</li>
+					<li>The bone that connects the humerus</li>
+				</ul>
+			</div>
+			<div class="dialog-quarter col">
+				<span class="italic">Narrower</span><br>
+				<ul>
+					<li>The bone that connects the humerus</li>
+					<li>The bone that connects the humerus</li>
+					<li>The bone that connects the humerus</li>
+					<li>The bone that connects the humerus</li>
+					<li>The bone that connects the humerus</li>
+				</ul>
+			</div>
+		</div>
+		<div class="line-dialog"></div>
+		<h4>Connection</h4>
+		<div class="enrichbuttons enrichbuttons-min">
+
+		  <!-- resource columns -->
+		  <div ng-show="type !== 'label'">
+		    <div class="col five leftout">
+		  		<button class="enrichbutton-ow selectedbutton" type="button" name="button" ng-click="onAddClick('broadMatch'); closeThisDialog()">
+		  			<span class="buttontext-ow">broad Match</span>
+		  		</button>
+		  		<p class="enrichinfo">skos:broadMatch is used to state a hierarchical mapping link between two conceptual resources in different concept schemes.</p>
+		  	</div>
+
+		    <div class="col five">
+		  		<button class="enrichbutton-ow" type="button" name="button" ng-click="onAddClick('exactMatch'); closeThisDialog()">
+		  			<span class="buttontext-ow">exact Match</span>
+		  			<span class="icon-exact icon"></span>
+		  		</button>
+		  		<p class="enrichinfo">skos:exactMatch is used to link two concepts, indicating a high degree of confidence that the concepts can be used interchangeably across a wide range of information retrieval applications.</p>
+		  	</div>
+
+		    <div class="col five">
+		  		<button class="enrichbutton-ow" type="button" name="button" ng-click="onAddClick('relatedMatch'); closeThisDialog()">
+		  			<span class="buttontext-ow">related Match</span>
+		  			<span class="icon-related icon"></span>
+		  		</button>
+		  		<p class="enrichinfo">skos:relatedMatch is used to state an associative mapping link between two conceptual resources in different concept schemes.</p>
+		  	</div>
+
+		    <div class="col five">
+		  		<button class="enrichbutton-ow" type="button" name="button" ng-click="onAddClick('closeMatch'); closeThisDialog()">
+		  			<span class="buttontext-ow">close Match</span>
+		  			<span class="icon-close icon"></span>
+		  		</button>
+		  		<p class="enrichinfo">skos:closeMatch is used to link two concepts that are sufficiently similar that they can be used interchangeably in some information retrieval applications.</p>
+		  	</div>
+
+		    <div class="col five rightout">
+		  		<button class="enrichbutton-ow" type="button" name="button" ng-click="onAddClick('narrowMatch'); closeThisDialog()">
+		  			<span class="buttontext-ow">narrow Match</span>
+		  		</button>
+		  		<p class="enrichinfo">skos:narrowMatch is used to state a hierarchical mapping link between two conceptual resources in different concept schemes.</p>
+		  	</div>
+		  </div>
+
+		  <!-- label columns -->
+		  <div class="">
+		    <div class="col three leftout" ng-show="type === 'label'">
+		  		<button class="enrichbutton-ow" type="button" name="button" ng-click="onAddClick('broader'); closeThisDialog()">
+		  			<span class="buttontext-ow">broader</span>
+		  		</button>
+		  		<p class="enrichinfo">skos:broader relates a concept to a concept that is more general in meaning.</p>
+		  	</div>
+
+		    <div class="col three" ng-show="type === 'label'">
+		  		<button class="enrichbutton-ow" type="button" name="button" ng-click="onAddClick('related'); closeThisDialog()">
+		  			<span class="buttontext-ow">related</span>
+		  			<span class="icon-close icon"></span>
+		  		</button>
+		  		<p class="enrichinfo">skos:related relates a concept to a concept with which there is an associative semantic relationship.</p>
+		  	</div>
+
+		    <div class="col three rightout" ng-show="type === 'label'">
+		  		<button class="enrichbutton-ow" type="button" name="button" ng-click="onAddClick('narrower'); closeThisDialog()">
+		  			<span class="buttontext-ow">narrower</span>
+		  		</button>
+		  		<p class="enrichinfo">skos:narrower relates a concept to a concept that is more specific in meaning.</p>
+		  	</div>
+		  </div>
+
+		</div>
+		<div class="line-dialog"></div>
+		<div class="dialogbox dialog-full">
+			<h4 ng-click="onDeleteClick(); closeThisDialog()">Delete</h4>
+		</div>
+		<div class="line-dialog"></div>
+		<h4>meta data </h4>
+
+	</div>
+	</div>
+	</div>
+
+
+
+	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
+	<div class="apply" ng-click="closeThisDialog()">Apply</div>
+</div>
+<!--
+
+<h3>{{ ngModel.value }} </h3>
+
+<ul>
+  <li>Type: {{ ngModel.boxType }}</li>
+  <li ng-show="ngModel.categories">
+    Relation:
+    <select ng-model="ngModel.relation">
+      <option ng-repeat="category in categories">{{ category }}</option>
+    </select>
+  </li>
+  <li>Link: missing url attribute</li>
+</ul>
+
+<button type="button" name="button" ng-click="onDeleteClick()">delete</button>
+
+-->
