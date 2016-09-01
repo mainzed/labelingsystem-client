@@ -48,7 +48,8 @@ angular.module('labelsApp')
 
         $scope.newVocab = {
             title: {},
-            description: {}
+            description: {},
+            releaseType: "draft"
         };
 
         ngDialog.open({
@@ -61,11 +62,6 @@ angular.module('labelsApp')
 
         $scope.onCreateConfirm = function() {
             $scope.newVocab.description.lang = $scope.newVocab.title.lang;
-            if ($scope.public) {
-                $scope.newVocab.releaseType = "public";
-            } else {
-                $scope.newVocab.releaseType = "draft";
-            }
 
             var jsonObj = {
                 item: $scope.newVocab,
@@ -73,29 +69,11 @@ angular.module('labelsApp')
             };
 
             VocabService.save(jsonObj, function(res) {
-                // success
-                console.log(res);
                 $scope.vocabularies.push(res);
             }, function(res) {
                 console.log(res);
             });
         };
     };
-
-    function getVocabThesauri(vocabID) {
-
-
-
-
-        $http.get('http://143.93.114.135/api/v1/retcat/vocabulary/' + vocabID).then(function(res) {
-            // success
-            res.data.forEach(function(item) {
-                $scope.thesauri.push(item);
-            });
-
-        }, function() {
-            // error
-        });
-    }
 
   });

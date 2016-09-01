@@ -11,8 +11,9 @@
     {{ vocab.title.value }}
   </a>
   <ul>
-    <li>Beschreibung: {{ vocab.description.value }}</li>
-    <li>Erstellt von {{ vocab.creator }} am {{ vocab.created | date: 'dd.MM.yyyy' }}
+    <li>{{ vocab.releaseType }}</li>
+    <li>Description: {{ vocab.description.value }}</li>
+    <li>Created by {{ vocab.creator }} on {{ vocab.created | date: 'dd.MM.yyyy' }}
     <li>license: {{ vocab.license }}</li>
   </ul>
 

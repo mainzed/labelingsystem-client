@@ -1,6 +1,8 @@
 <h1>vocab metadata</h1>
 
 <ul>
+  <li>releaseType: {{ vocabulary.releaseType }}</li>
+  <li>statusType: {{ vocabulary.statusType }}</li>
   <li>title: {{ vocabulary.title.value }}</li>
   <li>language: {{ vocabulary.title.lang }}</li>
   <li>description: {{ vocabulary.description.value }}</li>
@@ -22,11 +24,8 @@
 </ul>
 
 
-
-  <!-- <button type="button" name="button" ng-click="showSelection = true">+</button> -->
-
-
 <!-- <button type="button" name="button" ng-click="closeThisDialog()">Confirm</button> -->
+
 <button type="button" name="button" ng-click="onVocabDeleteClick(); closeThisDialog()" ng-show="vocabulary.releaseType === 'draft'">Delete</button>
 <button type="button" name="button" ng-click="onVocabDeprecatedClick(); closeThisDialog()" ng-show="vocabulary.releaseType === 'public'">Deprecated</button>
 
