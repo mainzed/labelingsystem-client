@@ -17,30 +17,21 @@
 <!-- show details -->
 <div ng-if="showMore" class="box boxextension bigbox {{ data.type }} {{ data.quality }}">
 
-  <!-- description -->
-  <div ng-show="data.description">
-    <h4>Description</h4>
-    <span class="note">{{ data.description }}</span>
-  </div>
-
-  <!-- broader -->
-  <div ng-show="data.broaderTerms.length">
-    <span class='icon-broader'></span>
-    <h4>broader</h4>
+  <span class="line-ext"></span>
+  <span class="note-ext"><span class="italic">Description</span><br>{{ data.description }}</span>
+  <span class="note-ext"><span class="italic">broader</span><br>
     <ul>
       <li ng-repeat="term in data.broaderTerms">{{ term.label }}</li>
-    </ul>
-  </div>
-
-  <!-- narrower -->
-  <div ng-show="data.narrowerTerms.length">
-    <span class='icon-broader'></span>
-    <h4>narrower</h4>
+    </ul></span>
+  <span class="note-ext"><span class="italic">narrower</span><br>
     <ul>
       <li ng-repeat="term in data.narrowerTerms">{{ term.label }}</li>
     </ul>
-  </div>
+  </span>
+ 
 
+  
+<!--
   <span class="language">{{ data.lang.split("-")[0] }}</span>
-
+  -->
 </div>

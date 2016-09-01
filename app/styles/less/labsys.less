@@ -58,7 +58,7 @@
 
 /*------------------- grid --------------------- */
 @quartersize: 		(100% - @marginoutboxsmall * 5 - @marginoutside * 2) / 4;
-@bigdialogwidth: 	60%;
+@bigdialogwidth: 	800px;
 
 
 
@@ -109,7 +109,7 @@ input:focus {		outline: none; }
 .tableheadwrapper {	width: 100%; float: left; }
 #enrichments {		overflow-y: scroll; overflow-x: hidden; float: left; background: @workareas;}
 #labellistwrapper {	height: calc(100% - 90px - 50px - 38px); float: left; clear: left; display: block; width: 100%;}
-#labellist {		overflow-y: scroll; overflow-x: hidden; float: left; background: @workareas;}
+#labellist {		overflow-y: scroll; overflow-x: hidden; float: left; background: @workareas; padding-bottom: @marginoutside; }
 #enrichmentbrowser {
 					overflow-x: hidden; float: left; height: 100%; background: @middle; }
 #enrichmentsearch {	float: left; margin-top: 0px; background: @middle; height: 100%;  }
@@ -231,8 +231,8 @@ input:focus {		outline: none; }
 
 
 /* nano slider details */
-.nano-slider {		background: white !important; border-radius: 0 !important; width: 5px !important; }
-.nano-pane {		right: 1px !important; background: transparent !important;	}
+.nano-slider {		background: @label !important; border-radius: 0 !important; width: 5px !important; }
+.nano-pane {		right: 2px !important; background: transparent !important;	}
 .dialogscroll .nano-slider {
 					background: black !important; }
 .paddingbottom {	padding-bottom: 10px;	}
