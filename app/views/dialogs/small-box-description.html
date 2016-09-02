@@ -24,5 +24,5 @@
 	</div>
 
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="updateDescription(newValue); closeThisDialog()" ng-class="{'inactive': newValue === text}">Apply</div>
+	<div class="apply" ng-click="updateDescription(newValue); closeThisDialog()" ng-disabled="newValue === text" ng-class="{'inactive': newValue === text}">Apply</div>
 </div>
