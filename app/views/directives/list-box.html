@@ -19,7 +19,7 @@
 
 </div>
 
-<div ng-if="showMore" class="box boxextension bigbox label high">
+<div ng-if="showMore" class="box boxextension bigbox label high" ng-click="onLabelClick(label.id)">
   <span class="line-ext"></span>
   <span class="note-ext"><span class="italic">Description</span><br>{{ label.scopeNote.value }}</span>
   <span class="creator-ext"><span class="italic">Created by</span><br> {{ label.creator }}</span>

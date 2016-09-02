@@ -133,15 +133,7 @@ angular.module('labelsApp')
                 label[relation].forEach(function(id) {
 
                     LabelService.get({id: id}, function(label) {
-                        //console.log(label);
-                        // get thumbnail preflabel
-                        // var prefLabel;
-                        // for (var i = 0; i < label.prefLabels.length; i++) {
-                        //     if (label.prefLabels[i].isThumbnail) {
-                        //         prefLabel = label.prefLabels[i];
-                        //     }
-                        // }
-                        // append to boxes
+
                         $scope.boxes.push({
                             relation: relation,
                             boxType: "label",
@@ -161,8 +153,6 @@ angular.module('labelsApp')
             if (label[matchType]) {
                 label[matchType].forEach(function(match) {
                     ResourcesService.get(match.url, function(resource) {
-                        //resource.url = match.url;
-                        console.log(resource);
 
                         // success
                         $scope.boxes.push({
@@ -208,6 +198,7 @@ angular.module('labelsApp')
 
         ngDialog.open({
             template: 'views/dialogs/add-preflabel.html',
+            className: 'bigdialog',
             showClose: false,
             closeByDocument: false,
             disableAnimation: true,
@@ -244,6 +235,7 @@ angular.module('labelsApp')
     $scope.onAddAltLabel = function() {
         ngDialog.open({
             template: 'views/dialogs/add-altlabel.html',
+            className: 'bigdialog',
             showClose: false,
             closeByDocument: false,
             disableAnimation: true,
@@ -284,6 +276,7 @@ angular.module('labelsApp')
         $scope.description = "insert label description here ...";
         ngDialog.open({
             template: 'views/dialogs/description-detail.html',
+            className: 'bigdialog',
             disableAnimation: true,
             showClose: false,
             closeByDocument: false,
@@ -325,6 +318,7 @@ angular.module('labelsApp')
         $scope.validWaybackLink = false;
         ngDialog.open({
             template: 'views/dialogs/add-wayback-link.html',
+            className: 'bigdialog',
             disableAnimation: true,
             showClose: false,
             closeByDocument: false,
@@ -424,6 +418,7 @@ angular.module('labelsApp')
 
         ngDialog.open({
             template: 'views/dialogs/label-metadata.html',
+            className: 'bigdialog',
             disableAnimation: true,
             showClose: false,
             closeByDocument: false,

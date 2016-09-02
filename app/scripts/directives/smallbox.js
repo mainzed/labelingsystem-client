@@ -7,40 +7,38 @@
  * # smallBox
  */
 angular.module('labelsApp')
-  .directive('smallBox', function (ngDialog, $routeParams, $rootScope, LabelService, TooltipService, ResourcesService) {
+  .directive('smallBox', function (ngDialog, $routeParams, $window, $rootScope, $location, LabelService, TooltipService, HelperService, ResourcesService) {
     return {
       templateUrl: "views/directives/small-box.html",
       restrict: 'E',
-      //replace: true,
-    //   scope: {
-    //     ngModel: '='
-    //   },
+
       link: function postLink(scope, element, attrs) {
 
         scope.ngModel = scope.box;
-        //console.log(scope.box);
+        console.log(scope.box);
         scope.tooltip = TooltipService.icons.types[scope.ngModel.type];
 
         var resource = scope.ngModel.resource;
         var relation = scope.ngModel.relation;
         var boxType = scope.ngModel.boxType;
 
-        // request infos
-        //ExternalResourcesService
+        // determine names
+        if (boxType === "altlabel" || boxType === "prefLabel") {
+            scope.text = resource.value;
 
-        // get prefLabel if resource is an internal label
-
-        // determine text
-        if (resource.prefLabels) {
-            //var prefLabel;
+        } else if (resource.prefLabels) {  // for internal labels
             for (var i = 0; i < resource.prefLabels.length; i++) {
                 if (resource.prefLabels[i].isThumbnail) {
                     scope.text = resource.prefLabels[i].value;
                 }
             }
-            //scope.text = resource.label;
         } else {
-            scope.text = resource.value;
+            scope.text = scope.box.resource.label;
+        }
+
+        // determine description
+        if (resource.scopeNote) {
+            scope.description = resource.scopeNote;
         }
 
         // determine css
@@ -177,8 +175,60 @@ angular.module('labelsApp')
 
         };
 
+        scope.openLabel = function() {
+            $location.path('/admin/vocabularies/' + scope.box.resource.vocabID + '/labels/' + scope.box.resource.id);
+        };
+
+        scope.openResource = function() {
+            var url;
+            if (scope.box.resource.type === "getty") {
+                var id = scope.box.resource.uri.split('/').pop();
+                url = 'http://www.getty.edu/vow/AATFullDisplay?find=&logic=AND&note=&subjectid=' + id;
+            } else {
+                url = scope.box.resource.uri;
+            }
+            // open url in new tab
+            $window.open(url, "_blank");
+        };
+
+        /**
+         * apply modified preferred term to label
+         */
+        scope.onPrefTermApplyClick = function(newValue, oldValue) {
+            // get old label
+            var query = { value: oldValue }
+            var oldPrefLabel = _.find(scope.label.prefLabels, query);
+
+            // remove it from prefLabels array
+            _.remove(scope.label.prefLabels, query);
+
+            // build updated prefLabel
+            var updatedPrefLabel = oldPrefLabel;
+            updatedPrefLabel.value = newValue;
+
+            scope.label.prefLabels.push(updatedPrefLabel);
+
+            var jsonObject = {
+                item: scope.label,
+                user: scope.user.name
+            };
+            LabelService.update({ id: $routeParams.lID }, jsonObject, function(res) {
+                // update current small box temporarily
+                scope.box.resource = updatedPrefLabel;
+
+                console.log();
+            }, function(res) {
+                console.log(res);
+            });
+        };
+
         // reload nanoscroller when directive rendered
         $(".nano").nanoScroller();
+
+        // listeners to update boxes when modified
+        scope.$watch("box", function(newValue) {
+            console.log("box updated");
+        });
     }
   };
 });

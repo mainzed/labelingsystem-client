@@ -60,6 +60,7 @@ angular.module('labelsApp')
 
         ngDialog.open({
             template: 'views/dialogs/vocab-metadata.html',
+            className: 'bigdialog',
             showClose: false,
             closeByDocument: false,
             disableAnimation: true,
@@ -87,6 +88,7 @@ angular.module('labelsApp')
 
         ngDialog.open({
             template: 'views/dialogs/create-label.html',
+            className: 'bigdialog',
             showClose: false,
             closeByDocument: false,
             disableAnimation: true,

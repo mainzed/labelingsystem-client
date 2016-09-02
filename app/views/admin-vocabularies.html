@@ -6,7 +6,7 @@
 
 <input type="text" name="search" value="search" ng-model="vocabFilter" placeholder="filter">
 
-<div class="box full low" ng-repeat="vocab in vocabularies | filter: vocabFilter" style="border: 1px solid; margin: 10px;">
+<div class="box small high label" ng-repeat="vocab in vocabularies | filter: vocabFilter" style="border: 1px solid; margin: 10px;">
   <a href="#/admin/vocabularies/{{ vocab.id }}/labels/">
     {{ vocab.title.value }}
   </a>

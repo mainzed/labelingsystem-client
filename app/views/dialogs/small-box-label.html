@@ -1,7 +1,9 @@
-<div class="dialogwrapper getty">
+<div class="dialogwrapper label">
 	<div class="dialogheader">
-		<h3>SAME-VOCAB-LABEL: {{ text }}</h3>
-		<p class="typeinformation">Getty Source - <a href="#">open in new tab</a></p>
+
+		<h3>SAME-VOCAB-LABEL: {{text}}</h3>
+		<p class="typeinformation">label - <span ng-click="openLabel(); closeThisDialog()">open in same tab</span></p>
+
 		<div class="line-bottom"></div>
 	</div>
 	<div class="dialogscroll">
@@ -10,27 +12,18 @@
 		<div class="dialogbox dialog-full">
 			<div class="dialog-half col">
 				<span class="italic">Description</span><br>
-				{{ box }}
-
+        {{ description.value }}
 			</div>
 			<div class="dialog-quarter col">
 				<span class="italic">Broader</span><br>
 				<ul>
-					<li>The bone that connects the humerus</li>
-					<li>The bone that connects the humerus</li>
-					<li>The bone that connects the humerus</li>
-					<li>The bone that connects the humerus</li>
-					<li>The bone that connects the humerus</li>
+					<li ng-repeat="broaderlabelID in box.resource.broader">{{ broaderlabelID }}</li>
 				</ul>
 			</div>
 			<div class="dialog-quarter col">
 				<span class="italic">Narrower</span><br>
 				<ul>
-					<li>The bone that connects the humerus</li>
-					<li>The bone that connects the humerus</li>
-					<li>The bone that connects the humerus</li>
-					<li>The bone that connects the humerus</li>
-					<li>The bone that connects the humerus</li>
+          <li ng-repeat="narrowerlabelID in box.resource.narrower">{{ narrowerlabelID }}</li>
 				</ul>
 			</div>
 		</div>
