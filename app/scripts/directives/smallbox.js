@@ -7,7 +7,7 @@
  * # smallBox
  */
 angular.module('labelsApp')
-  .directive('smallBox', function (ngDialog, $routeParams, $window, $rootScope, $location, LabelService, TooltipService, HelperService, ResourcesService) {
+  .directive('smallBox', function (ngDialog, $routeParams, $window, $rootScope, $location, LabelService, TooltipService) {
     return {
       templateUrl: "views/directives/small-box.html",
       restrict: 'E',
@@ -184,6 +184,9 @@ angular.module('labelsApp')
 
         };
 
+        /**
+         * redirect to new label path
+         */
         scope.openLabel = function() {
             $location.path('/admin/vocabularies/' + scope.box.resource.vocabID + '/labels/' + scope.box.resource.id);
         };
@@ -287,6 +290,37 @@ angular.module('labelsApp')
 
             LabelService.update({ id: $routeParams.lID }, jsonObject, function() {
                 scope.box.relation = newRelation;  // update relation
+            }, function(res) {
+                console.log(res);
+            });
+
+        };
+
+        /**
+         * change the relation of a label.
+         * @param {string} newRelation - updated label-to-label relation
+         * @param {string} oldRelation - original label-to-label relation
+         */
+        scope.changeLabelRelation = function(newRelation, oldRelation) {
+            // remove id from old relation array
+            _.remove(scope.label[oldRelation], function(n) {
+              return n === scope.box.resource.id;
+            });
+
+            // add to new relation array
+            if (!scope.label[newRelation]) {
+                scope.label[newRelation] = [];
+            }
+            scope.label[newRelation].push(scope.box.resource.id);
+
+            // update on server
+            var jsonObject = {
+                item: scope.label,
+                user: scope.user.name
+            };
+
+            LabelService.update({ id: $routeParams.lID }, jsonObject, function() {
+                scope.box.relation = newRelation;  // update relation
 
             }, function(res) {
                 console.log(res);
@@ -297,8 +331,11 @@ angular.module('labelsApp')
         // listeners to update boxes when modified
         scope.$watchCollection("box.resource", function() {
             getBoxVariables();
+            $(".nano").nanoScroller();
+        });
 
-            // reload nanoscroller when directive rendered
+        scope.$watchCollection("box.relation", function() {
+            getBoxVariables();
             $(".nano").nanoScroller();
         });
     }
