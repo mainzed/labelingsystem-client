@@ -8,22 +8,20 @@
 	<div class="nano">
 	<div class="nano-content">
 		<div class="dialogbox dialog-full">
-			<input value="{{text}}"></input>
+      <input ng-model="newValue" ng-init="newValue = text"></input>
 		</div>
-		
-		
+
+
 		<div class="line-dialog"></div>
 		<div class="dialogbox dialog-full">
 			<h4 ng-click="onDeleteClick(); closeThisDialog()">Delete</h4>
 		</div>
-		
+
 
 	</div>
 	</div>
 	</div>
-
-
 
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="closeThisDialog()">Apply</div>
+	<div class="apply" ng-click="updateTerm('altLabel', newValue, text); closeThisDialog()" ng-class="{'inactive': newValue === text}">Apply</div>
 </div>

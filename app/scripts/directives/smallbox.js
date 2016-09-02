@@ -13,73 +13,82 @@ angular.module('labelsApp')
       restrict: 'E',
 
       link: function postLink(scope, element, attrs) {
+        var boxType;
+        var resource;
+        var relation;
 
-        scope.ngModel = scope.box;
-        console.log(scope.box);
-        scope.tooltip = TooltipService.icons.types[scope.ngModel.type];
+        // init
+        getBoxVariables();
 
-        var resource = scope.ngModel.resource;
-        var relation = scope.ngModel.relation;
-        var boxType = scope.ngModel.boxType;
+        function getBoxVariables() {
 
-        // determine names
-        if (boxType === "altlabel" || boxType === "prefLabel") {
-            scope.text = resource.value;
+            scope.ngModel = scope.box;
+            //console.log(scope.box);
+            scope.tooltip = TooltipService.icons.types[scope.ngModel.type];
 
-        } else if (resource.prefLabels) {  // for internal labels
-            for (var i = 0; i < resource.prefLabels.length; i++) {
-                if (resource.prefLabels[i].isThumbnail) {
-                    scope.text = resource.prefLabels[i].value;
+            resource = scope.ngModel.resource;
+            relation = scope.ngModel.relation;
+            boxType = scope.ngModel.boxType;
+
+            // determine names
+            //console.log(scope.box);
+            if (boxType === "altLabel" || boxType === "prefLabel" || boxType === "description") {
+                scope.text = resource.value;
+            } else if (resource.prefLabels) {  // for internal labels
+                for (var i = 0; i < resource.prefLabels.length; i++) {
+                    if (resource.prefLabels[i].isThumbnail) {
+                        scope.text = resource.prefLabels[i].value;
+                    }
                 }
+            } else {
+                scope.text = scope.box.resource.label;
             }
-        } else {
-            scope.text = scope.box.resource.label;
+
+            // determine description
+            if (resource.scopeNote) {
+                scope.description = resource.scopeNote;
+            }
+
+            // determine css
+            if (relation === "attribute") {
+                scope.cssClass = "text";
+            } else if (boxType === "label") {
+                scope.cssClass = boxType + " " + "high";
+            } else {
+                scope.cssClass = boxType + " " + resource.quality;
+            }
+            //console.log(scope.cssClass);
+
+            // determine type icon
+            if (boxType === "description") {
+                scope.type = "<span class='icon-note'></span>";
+            } else if (boxType === "prefLabel") {
+                scope.type = "<span class='icon-preflabel'></span>";
+            } else if (boxType === "altLabel") {
+                scope.type = "<span class='icon-altlabel'></span>";
+            } else if (boxType === "label") {
+                scope.type = "<span class='icon-label'></span>";
+            } else if (boxType === "wayback") {
+                scope.type = "(" + boxType + ")";
+            } else {
+                scope.type = "(" + resource.type + ")";
+            }
+
+            // determine relation icon
+            if (relation === "exactMatch") {
+                scope.relation = "<span class='icon-exact'></span>";
+
+            } else if (relation === "closeMatch") {
+                scope.relation = "<span class='icon-close'></span>";
+
+            } else if (relation === "relatedMatch" || relation === "seeAlso" || relation === "related") {
+                scope.relation = "<span class='icon-related'></span>";
+
+            }
+
+            // determine language
+            scope.language = resource.lang;
         }
-
-        // determine description
-        if (resource.scopeNote) {
-            scope.description = resource.scopeNote;
-        }
-
-        // determine css
-        if (relation === "attribute") {
-            scope.cssClass = "text";
-        } else if (boxType === "label") {
-            scope.cssClass = boxType + " " + "high";
-        } else {
-            scope.cssClass = boxType + " " + resource.quality;
-        }
-        //console.log(scope.cssClass);
-
-        // determine type icon
-        if (boxType === "description") {
-            scope.type = "<span class='icon-note'></span>";
-        } else if (boxType === "prefLabel") {
-            scope.type = "<span class='icon-preflabel'></span>";
-        } else if (boxType === "altLabel") {
-            scope.type = "<span class='icon-altlabel'></span>";
-        } else if (boxType === "label") {
-            scope.type = "<span class='icon-label'></span>";
-        } else if (boxType === "wayback") {
-            scope.type = "(" + boxType + ")";
-        } else {
-            scope.type = "(" + resource.type + ")";
-        }
-
-        // determine relation icon
-        if (relation === "exactMatch") {
-            scope.relation = "<span class='icon-exact'></span>";
-
-        } else if (relation === "closeMatch") {
-            scope.relation = "<span class='icon-close'></span>";
-
-        } else if (relation === "relatedMatch" || relation === "seeAlso" || relation === "related") {
-            scope.relation = "<span class='icon-related'></span>";
-
-        }
-
-        // determine language
-        scope.language = resource.lang;
 
         scope.onBoxClick = function() {
             //console.log(boxType);
@@ -179,6 +188,9 @@ angular.module('labelsApp')
             $location.path('/admin/vocabularies/' + scope.box.resource.vocabID + '/labels/' + scope.box.resource.id);
         };
 
+        /**
+         * open resource-url in new tab
+         */
         scope.openResource = function() {
             var url;
             if (scope.box.resource.type === "getty") {
@@ -192,42 +204,67 @@ angular.module('labelsApp')
         };
 
         /**
-         * apply modified preferred term to label
+         * Updates an alt- or prefLabel with a newer term.
+         * @param {string} type - type of the term ("altLabel" or "prefLabel")
+         * @param {string} newValue - updated term text
+         * @param {string} oldValue - original term text
          */
-        scope.onPrefTermApplyClick = function(newValue, oldValue) {
+        scope.updateTerm = function(type, newValue, oldValue) {
+            var key = type + "s";
+
             // get old label
-            var query = { value: oldValue }
-            var oldPrefLabel = _.find(scope.label.prefLabels, query);
+            var query = { value: oldValue };
+            var originalTerm = _.find(scope.label[key], query);
 
             // remove it from prefLabels array
-            _.remove(scope.label.prefLabels, query);
+            _.remove(scope.label[key], query);
 
             // build updated prefLabel
-            var updatedPrefLabel = oldPrefLabel;
-            updatedPrefLabel.value = newValue;
+            var updatedTerm = originalTerm;
+            updatedTerm.value = newValue;
 
-            scope.label.prefLabels.push(updatedPrefLabel);
+            scope.label[key].push(updatedTerm);
 
             var jsonObject = {
                 item: scope.label,
                 user: scope.user.name
             };
-            LabelService.update({ id: $routeParams.lID }, jsonObject, function(res) {
+            LabelService.update({ id: $routeParams.lID }, jsonObject, function() {
                 // update current small box temporarily
-                scope.box.resource = updatedPrefLabel;
+                scope.box.resource = updatedTerm;
 
-                console.log();
             }, function(res) {
                 console.log(res);
             });
         };
 
-        // reload nanoscroller when directive rendered
-        $(".nano").nanoScroller();
+        /**
+         * Updates the label description.
+         * @param {string} newValue - updated term text
+         */
+        scope.updateDescription = function(newValue) {
+
+            scope.label.scopeNote.value = newValue;
+
+            var jsonObject = {
+                item: scope.label,
+                user: scope.user.name
+            };
+            LabelService.update({ id: $routeParams.lID }, jsonObject, function() {
+                // update current small box temporarily
+                scope.box.resource = scope.label.scopeNote;
+
+            }, function(res) {
+                console.log(res);
+            });
+        };
 
         // listeners to update boxes when modified
-        scope.$watch("box", function(newValue) {
-            console.log("box updated");
+        scope.$watchCollection("box.resource", function() {
+            getBoxVariables();
+
+            // reload nanoscroller when directive rendered
+            $(".nano").nanoScroller();
         });
     }
   };

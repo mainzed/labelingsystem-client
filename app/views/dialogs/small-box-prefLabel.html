@@ -25,23 +25,5 @@
 
 
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="onPrefTermApplyClick(newValue, text); closeThisDialog()">Apply</div>
+	<div class="apply" ng-click="updateTerm('prefLabel', newValue, text); closeThisDialog()" ng-class="{'inactive': newValue === text}">Apply</div>
 </div>
-<!--
-
-<h3>{{ ngModel.value }} </h3>
-
-<ul>
-  <li>Type: {{ ngModel.boxType }}</li>
-  <li ng-show="ngModel.categories">
-    Relation:
-    <select ng-model="ngModel.relation">
-      <option ng-repeat="category in categories">{{ category }}</option>
-    </select>
-  </li>
-  <li>Link: missing url attribute</li>
-</ul>
-
-<button type="button" name="button" ng-click="onDeleteClick()">delete</button>
-
--->
