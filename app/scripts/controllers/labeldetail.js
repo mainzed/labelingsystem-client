@@ -275,7 +275,7 @@ angular.module('labelsApp')
         //console.log("add scopeNote");
         $scope.description = "insert label description here ...";
         ngDialog.open({
-            template: 'views/dialogs/description-detail.html',
+            template: 'views/dialogs/add-description.html',
             className: 'bigdialog',
             disableAnimation: true,
             showClose: false,

@@ -25,14 +25,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-search:before {
-  content: "\e901";
-}
+
 .icon-note:before {
-  content: "\e905";
+  content: "\e900";
 }
 .icon-folder:before {
-  content: "\e900";
+  content: "\e906";
+}
+.icon-trash:before {
+  content: "\e90c";
+}
+.icon-search:before {
+  content: "\e901";
 }
 .icon-arrow:before {
   content: "\e90a";
@@ -55,3 +59,4 @@
 .icon-preflabel:before {
   content: "\e904";
 }
+
