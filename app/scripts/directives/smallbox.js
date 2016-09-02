@@ -7,7 +7,7 @@
  * # smallBox
  */
 angular.module('labelsApp')
-  .directive('smallBox', function (ngDialog, $routeParams, $rootScope, LabelService, TooltipService) {
+  .directive('smallBox', function (ngDialog, $routeParams, $rootScope, LabelService, TooltipService, ResourcesService) {
     return {
       templateUrl: "views/directives/small-box.html",
       restrict: 'E',
@@ -18,17 +18,27 @@ angular.module('labelsApp')
       link: function postLink(scope, element, attrs) {
 
         scope.ngModel = scope.box;
-
+        //console.log(scope.box);
         scope.tooltip = TooltipService.icons.types[scope.ngModel.type];
 
         var resource = scope.ngModel.resource;
         var relation = scope.ngModel.relation;
         var boxType = scope.ngModel.boxType;
 
+        // request infos
+        //ExternalResourcesService
+
+        // get prefLabel if resource is an internal label
 
         // determine text
-        if (resource.label) {
-            scope.text = resource.label;
+        if (resource.prefLabels) {
+            //var prefLabel;
+            for (var i = 0; i < resource.prefLabels.length; i++) {
+                if (resource.prefLabels[i].isThumbnail) {
+                    scope.text = resource.prefLabels[i].value;
+                }
+            }
+            //scope.text = resource.label;
         } else {
             scope.text = resource.value;
         }

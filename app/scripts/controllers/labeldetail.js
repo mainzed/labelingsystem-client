@@ -8,7 +8,7 @@
  * Controller of the labelsApp
  */
 angular.module('labelsApp')
-  .controller('LabelDetailCtrl', function ($scope, $routeParams, $timeout, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ExternalResourcesService, TooltipService, SearchService, UserSettingsService, ThesauriService, LangService) {
+  .controller('LabelDetailCtrl', function ($scope, $routeParams, $timeout, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ResourcesService, TooltipService, SearchService, UserSettingsService, ThesauriService, LangService) {
 
     // authentication
     if ($location.path().indexOf("admin/") > -1) {  // is admin view
@@ -133,18 +133,19 @@ angular.module('labelsApp')
                 label[relation].forEach(function(id) {
 
                     LabelService.get({id: id}, function(label) {
+                        //console.log(label);
                         // get thumbnail preflabel
-                        var prefLabel;
-                        for (var i = 0; i < label.prefLabels.length; i++) {
-                            if (label.prefLabels[i].isThumbnail) {
-                                prefLabel = label.prefLabels[i];
-                            }
-                        }
+                        // var prefLabel;
+                        // for (var i = 0; i < label.prefLabels.length; i++) {
+                        //     if (label.prefLabels[i].isThumbnail) {
+                        //         prefLabel = label.prefLabels[i];
+                        //     }
+                        // }
                         // append to boxes
                         $scope.boxes.push({
                             relation: relation,
                             boxType: "label",
-                            resource: prefLabel
+                            resource: label
                         });
                     });
                 });
@@ -159,7 +160,9 @@ angular.module('labelsApp')
         matchTypes.forEach(function(matchType) {
             if (label[matchType]) {
                 label[matchType].forEach(function(match) {
-                    ExternalResourcesService.get(match.url, function(resource) {
+                    ResourcesService.get(match.url, function(resource) {
+                        //resource.url = match.url;
+                        console.log(resource);
 
                         // success
                         $scope.boxes.push({
@@ -181,8 +184,9 @@ angular.module('labelsApp')
     $scope.getExternalResources = function(label) {
         if (label.seeAlso) {
             label.seeAlso.forEach(function(resource) {
-                ExternalResourcesService.get(resource.url, function(externalResource) {
+                ResourcesService.get(resource.url, function(externalResource) {
                     //$scope.seeAlsoResources.push(externalResource);//
+                    externalResource.url = resource.url;
                     $scope.boxes.push({
                         relation: "seeAlso",
                         boxType: "wayback",
