@@ -261,7 +261,10 @@ textarea:focus {	outline: none; }
 .dialog-half {		width: calc((100% - ( @marginoutboxsmall * 2  + @marginoutside * 2)) / 2 ); margin-left: @marginoutside; }
 .dialog-quarter {	width: calc((100% - ( @marginoutboxsmall * 2  + @marginoutside * 2)) / 4 ); margin-left: @marginoutboxsmall; }
 .dialog-full	{	width: 100%;  }
-.deletebutton { 	width: 100%; height: 50px; background: red;	}
+.deletebutton { 	width: calc(100% - @marginoutside * 2 ); height: 50px; margin-left: @marginoutside; position: relative;	}
+.deletebutton .icon {position: absolute; margin-top: 13px; font-size: 70px; line-height: 25px; left: 50%; margin-left: -36px; }
+.deletebutton .buttontext {
+					margin: 0; }
 .line-dialog {		height: 1px; width: calc(100% - @marginoutside * 2); margin-left: @marginoutside; float: left; 
 					display: block; background: black; margin-bottom: @margininboxsmall; margin-top: 50px; }
 .line-bottom {		height: 1px; width: calc(100% - @marginoutside * 2); left: @marginoutside; position: absolute; bottom: 0; display: block; background: black; }
@@ -278,7 +281,8 @@ textarea:focus {	outline: none; }
 					padding: @margininboxsmall; background: @middle; color: white; border: 0; }
 .dialogbox select { width: calc(100% - 2 * @marginoutside); margin-left: @marginoutside; background: @middle; 
 					padding: @margininboxsmall; border: 1px solid black; color: white; }
-.label .dialogbox input {background: @label; border: 1px solid gray; }
+.label .dialogbox input {
+					background: @label; border: 1px solid gray; }
 .typeinformation {	margin-left: calc(@marginoutside); font-style: italic; }
 
 
@@ -308,3 +312,6 @@ textarea:focus {	outline: none; }
 					width: 20px; height: 20px; display: block; float: left; margin-top: 2px; }
 .showadditionalcontent:hover {		
 					text-decoration: underline; cursor: pointer; } 
+
+.pointer		{	cursor: pointer; }
+.inactive {			color: gray; }
