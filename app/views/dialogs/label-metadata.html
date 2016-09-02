@@ -1,30 +1,61 @@
-<h1>label metadata</h1>
+<div class="dialogwrapper label">
+  <div class="dialogheader">
+    <h3>label metadata</h3>
+    <div class="line-bottom"></div>
+  </div>
 
-<ul>
-  <li ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}">
-    main term:
-    <input type="text" ng-model="prefLabel.value">
-    <select ng-model="prefLabel.lang">
-      <option ng-repeat="language in languages" value="{{ language.value }}">{{ language.name }}</option>
-    </select>
-  </li>
+  <div class="dialogscroll">
+  <div class="nano">
+  <div class="nano-content">
+    <div class="dialogbox dialog-full" ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}">
+     
+      <h4>main term:</h4>
+      <input type="text" ng-model="prefLabel.value"></input>
+      
+    </div>  
 
-  <li>
-    Status:
-    <select ng-model="status">
-      <option>active</option>
-      <option>deprecated</option>
-    </select>
 
-  </li>
-  <li>License: {{ label.license }}</li>
-  <li>Created by: {{ label.creator }}</li>
-  <li>Created on: {{ label.created | date: 'dd.MM.yyyy' }}</li>
-  <li>Contributors:</li>
-  <ul>
-    <li ng-repeat="contributor in label.contributors">{{ contributor }}</li>
-  </ul>
-</ul>
+    <div class="line-dialog"></div>
+    <div class="dialogbox dialog-full">
+      <h4 ng-click="onDeleteClick(); closeThisDialog()">Delete</h4>
+    </div>  
 
-<button type="button" name="button" ng-click="onThumbnailPrefLabelEdit(label); closeThisDialog()">Confirm</button>
-<button type="button" name="button" ng-click="closeThisDialog()">Cancel</button>
+    <div class="line-dialog"></div>
+    <div class="dialogbox dialog-full">
+      <h4 >meta data</h4>
+      <ul>
+        <li>License: {{ label.license }}</li>
+        <li>Created by: {{ label.creator }}</li>
+        <li>Created on: {{ label.created | date: 'dd.MM.yyyy' }}</li>
+        <li>Contributors:</li>
+        <ul>
+          <li ng-repeat="contributor in label.contributors">{{ contributor }}</li>
+        </ul>
+      </ul>
+    </div>  
+
+        
+    
+
+       
+      
+
+
+    
+    
+    
+    
+    
+
+  </div>
+  </div>
+  </div>
+
+
+
+  <div class="cancel" ng-click="closeThisDialog()">Cancel</div>
+  <div class="apply" ng-click="onThumbnailPrefLabelEdit(label); closeThisDialog()">Apply</div>
+</div>
+
+
+

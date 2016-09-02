@@ -1,7 +1,7 @@
 <div class="dialogwrapper label">
 	<div class="dialogheader">
-		<h3>SAME-VOCAB-LABEL: {{text}}</h3>
-		<p class="typeinformation">label - <a href="#">open in new tab</a></p>
+		<h3>{{text}}</h3>
+		<p class="typeinformation">label - <a href="#">open</a></p>
 		<div class="line-bottom"></div>
 	</div>
 	<div class="dialogscroll">
@@ -116,7 +116,10 @@
 		</div>
 		<div class="line-dialog"></div>
 		<div class="dialogbox dialog-full">
-			<h4 ng-click="onDeleteClick(); closeThisDialog()">Delete</h4>
+			<div class="deletebutton">
+				<h4 ng-click="onDeleteClick(); closeThisDialog()">Delete</h4>
+				<span class="icon-trash icon"></span>
+			</div>
 		</div>
 		<div class="line-dialog"></div>
 		<h4>meta data </h4>
