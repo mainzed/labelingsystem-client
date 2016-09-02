@@ -10,7 +10,7 @@
 angular.module('labelsApp')
   .controller('LabelsCtrl', function ($scope, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService) {
 
-    // init nanoscroller here to prevent default scrollbar while loading boxes 
+    // init nanoscroller here to prevent default scrollbar while loading boxes
     $(".nano").nanoScroller();
 
     // authentication

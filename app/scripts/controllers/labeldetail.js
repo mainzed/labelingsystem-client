@@ -45,6 +45,7 @@ angular.module('labelsApp')
     // load label for the current vocabulary
     LabelService.get({id: $routeParams.lID}, function(label) {
         $scope.label = label;
+        console.log(label);
         $scope.loadBoxes();
 
         $scope.prefLabel = _.find($scope.label.prefLabels, {isThumbnail: true});

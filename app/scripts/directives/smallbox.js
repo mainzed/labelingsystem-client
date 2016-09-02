@@ -189,7 +189,7 @@ angular.module('labelsApp')
         };
 
         /**
-         * open resource-url in new tab
+         * open resource-url in new tab.
          */
         scope.openResource = function() {
             var url;
@@ -257,6 +257,41 @@ angular.module('labelsApp')
             }, function(res) {
                 console.log(res);
             });
+        };
+
+        /**
+         * change the relation of a resource.
+         * @param {string} newRelation - updated label-to-resource relation
+         * @param {string} oldRelation - original label-to-resource relation
+         */
+        scope.changeResourceRelation = function(newRelation, oldRelation) {
+            // get resource
+            var query = { url: scope.box.resource.uri };
+            var resource = _.find(scope.label[oldRelation], query);
+
+            // remove it from the array (e.g. remove a narrowMatch from the narrowWatch array)
+            _.remove(scope.label[oldRelation], query);
+
+            // push resource to the corresponding array (e.g. to the broaderMatch array)
+            if (!scope.label[newRelation]) {
+                scope.label[newRelation] = [];
+            }
+
+            scope.label[newRelation].push(resource);
+
+            // update on server
+            var jsonObject = {
+                item: scope.label,
+                user: scope.user.name
+            };
+
+            LabelService.update({ id: $routeParams.lID }, jsonObject, function() {
+                scope.box.relation = newRelation;  // update relation
+
+            }, function(res) {
+                console.log(res);
+            });
+
         };
 
         // listeners to update boxes when modified

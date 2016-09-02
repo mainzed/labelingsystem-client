@@ -17,10 +17,14 @@
   <!-- dummy to hold sort buttons -->
   <span class="" ng-init="labelOrder = orderByThumbnail">
     <span class="pre">sort -</span>
-    <button type="button" ng-click="labelOrder = 'created'" ng-disabled="labelOrder === 'created'">by date</button>
-    <button type="button" ng-click="labelOrder = orderByThumbnail" ng-disabled="labelOrder === orderByThumbnail">alphabetically</button>
-    <button type="button" ng-click="labelOrder = orderByQuality" ng-disabled="labelOrder === orderByQuality">by quality</button>
+
+    <button type="button" ng-click="labelOrder = 'lastModfied'" ng-disabled="labelOrder === 'lastModfied'" ng-class="{'active': labelOrder === 'lastModfied'}">by lastModified</button>
+
+    <button type="button" ng-click="labelOrder = orderByThumbnail" ng-disabled="labelOrder === orderByThumbnail" ng-class="{'active': labelOrder === orderByThumbnail}">alphabetically</button>
+
+    <button type="button" ng-click="labelOrder = orderByQuality" ng-disabled="labelOrder === orderByQuality" ng-class="{'active': labelOrder === orderByQuality}">by quality</button>
     <button type="button" ng-click="onExtendClick()">{{ collapseText || "extend all" }}</button>
+
   </span>
 </div>
 
