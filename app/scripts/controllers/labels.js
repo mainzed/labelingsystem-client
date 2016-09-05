@@ -43,10 +43,13 @@ angular.module('labelsApp')
     // load all labels for the current vocabulary
     LabelService.query({'vocab': $routeParams.vID}, function(labels) {
         $scope.labels = labels;
-
         $scope.placeholder = "filter";
     });
 
+    /**
+     * Toggles (collapses or extends) all list boxes by setting a variable they
+     * all share.
+     */
     $scope.onExtendClick = function() {
         $scope.extentAll = !$scope.extentAll;
         if ($scope.extentAll) {
@@ -56,7 +59,13 @@ angular.module('labelsApp')
         }
     };
 
+    /**
+     * Opens the metadata and settings dialog of a vocabulary.
+     */
     $scope.onVocabTitleClick = function() {
+        // init new changeble values
+        $scope.newValue = $scope.vocabulary.title.value;
+        $scope.newDescription = $scope.vocabulary.description.value;
 
         ngDialog.open({
             template: 'views/dialogs/vocab-metadata.html',
@@ -66,26 +75,88 @@ angular.module('labelsApp')
             disableAnimation: true,
             scope: $scope
         });
-
-        $scope.onVocabDeleteClick = function () {
-            VocabService.remove({id: $routeParams.vID},  function() {
-                $location.path("/admin/vocabularies");
-            });
-        };
-
-        $scope.onVocabDeprecatedClick = function () {
-            VocabService.deprecated({id: $routeParams.vID},  function() {
-                $location.path("/admin/vocabularies");
-            });
-        };
     };
 
+    /**
+     * Updates the vocabulary's title and description.
+     * @param {object} vocab - Vocabulary object
+     * @param {string} newValue - New vocabulary title value
+     * @param {string} newDescription - New vocabulary description value
+     */
+    $scope.onVocabEditClick = function(vocab, newValue, newDescription) {
+        var updatedVocab = vocab;
+        updatedVocab.title.value = newValue;
+        updatedVocab.description.value = newDescription;
+
+        VocabService.update({id: vocab.id}, {
+            user: $scope.user.name,
+            item: updatedVocab
+        }, function() {
+            // no need to update display, since dialog gets closed when this
+            // function is called
+        }, function(error) {
+            console.log(error);
+        });
+    };
+
+    /**
+     * Deletes a vocabulary permanently using the API's 'delete' or 'deprecated'
+     * option and redirects to the vocabularies view if successfull. Gets the
+     * vocabulary ID from the url using Angular's $routeParams.
+     * @param {string} deleteMode="delete" - What request parameter to use ("delete" or "deprecated")
+     */
+    $scope.onVocabDeleteClick = function (deleteMode) {
+        deleteMode = deleteMode || "delete";
+        if (deleteMode === "delete") {
+            VocabService.remove({id: $routeParams.vID},  function() {
+                $location.path("/admin/vocabularies");
+            }, function(error) {
+                console.log(error);
+            });
+        } else if (deleteMode === "deprecated") {
+            VocabService.deprecated({id: $routeParams.vID},  function() {
+                $location.path("/admin/vocabularies");
+            }, function(error) {
+                console.log(error);
+            });
+        }
+    };
+
+    /**
+     * Redirects to the specified label view.
+     * @param {string} id - Label ID
+     */
     $scope.onLabelClick = function(id) {
         $location.path("admin/vocabularies/" + $scope.vocabulary.id + "/labels/" + id);
     };
 
-    $scope.onCreateLabelClick = function() {
+    /**
+     * Changes a vocabulary's releaseType from "draft" to "public".
+     * @param {object} vocab - Vocabulary object
+     */
+    $scope.onPublicClick = function(vocab) {
+        if (vocab.releaseType === "draft") {
+            var updatedVocab = vocab;
+            updatedVocab.releaseType = "public";
 
+            VocabService.update({id: vocab.id}, {
+                user: $scope.user.name,
+                item: updatedVocab
+            }, function() {
+                vocab.releaseType = "public";  // update on success
+            }, function(error) {
+                console.log(error);
+            });
+        } else {
+            console.log("vocabulary is not of statusType = 'draft'");
+        }
+
+    };
+
+    /**
+     * Opens a dialog to create a new label.
+     */
+    $scope.onCreateLabelClick = function() {
         ngDialog.open({
             template: 'views/dialogs/create-label.html',
             className: 'bigdialog',
@@ -94,38 +165,49 @@ angular.module('labelsApp')
             disableAnimation: true,
             scope: $scope
         });
-
-        $scope.onCreateLabelConfirm = function(term, description) {
-
-            var newLabel = {
-                "vocabID": $scope.vocabulary.id,
-                "prefLabels": [{
-                    "isThumbnail": true,
-                    "lang": $scope.vocabulary.title.lang,
-                    "value": term
-                }]
-            };
-
-            if (description) {
-                newLabel.scopeNote = {
-                    value: description,
-                    lang: $scope.vocabulary.title.lang,
-                };
-            }
-
-            LabelService.save({
-                item: newLabel,
-                user: $scope.user.name
-            }, function(label) {
-                if (label.id) {
-                    $scope.labels.push(label);
-                }
-            });
-        };
     };
 
+    /**
+     * Creates a new label by sending a new label object to the api.
+     * @param {string} term - The new label's thumbnail prefLabel
+     * @param {string} description - The new label's scopeNote of the new label
+     */
+    $scope.onCreateLabelConfirm = function(term, description) {
+
+        var newLabel = {
+            "vocabID": $scope.vocabulary.id,
+            "prefLabels": [{
+                "isThumbnail": true,
+                "lang": $scope.vocabulary.title.lang,
+                "value": term
+            }]
+        };
+
+        if (description) {
+            newLabel.scopeNote = {
+                value: description,
+                lang: $scope.vocabulary.title.lang,
+            };
+        }
+
+        LabelService.save({
+            item: newLabel,
+            user: $scope.user.name
+        }, function(label) {
+            if (label.id) {
+                $scope.labels.push(label);
+            }
+        });
+    };
+
+    /**
+     * Order function for the use with the ng-repeat directive to order labels
+     * alphabetically by their thumbnail prefLabel by returning their charCode
+     * number.
+     * @param {object} label - Label object
+     * @returns {number}
+     */
     $scope.orderByThumbnail = function(label) {
-        //console.log(label.prefLabels.length);
         if (label.prefLabels) {
             for (var i = 0; i < label.prefLabels.length; i++) {
                 if (label.prefLabels[i].isThumbnail) {
@@ -139,6 +221,12 @@ angular.module('labelsApp')
         }
     };
 
+    /**
+     * Order function for the use with the ng-repeat directive. Grades a label
+     * by how many connections it has to internal or external resources.
+     * @param {object} label - Label object
+     * @returns {number}
+     */
     $scope.orderByQuality = function(label) {
 
         var grayScore = 1;
@@ -148,7 +236,31 @@ angular.module('labelsApp')
         var greenTypes = ["fao", "finto", "dbpedia"];
         var blueTypes = ["ls", "getty", "heritagedata", "chronontology"];
 
+        var matchTypes = [
+            "closeMatch",
+            "exactMatch",
+            "relatedMatch",
+            "broadMatch",
+            "narrowMatch"
+        ];
+
         var qualityScore = 0;
+
+        function getMatchScore(matchType) {
+            var score = 0;
+            if (label[matchType]) {
+                label[matchType].forEach(function(match) {
+                    if (greenTypes.indexOf(match.type) > -1) {
+                        score += greenScore;
+                    } else if (blueTypes.indexOf(match.type) > -1) {
+                        score += blueScore;
+                    } else {
+                        console.log("unknown score type for: " + match.type);
+                    }
+                });
+            }
+            return score;
+        }
 
         // gray boxes
         if (label.prefLabels) {
@@ -164,70 +276,10 @@ angular.module('labelsApp')
             qualityScore += grayScore;
         }
 
-        if (label.broadMatch) {
-            console.log(label.broadMatch[0]);
-            //qualityScore += label.broader.length * blueScore;
-        }
-
-        if (label.exactMatch) {
-            label.exactMatch.forEach(function(match) {
-                if (greenTypes.indexOf(match.type) > -1) {
-                    qualityScore += greenScore;
-                } else if (blueTypes.indexOf(match.type) > -1) {
-                    qualityScore += blueScore;
-                } else {
-                    console.log("unknown score type for: " + match.type);
-                }
-            });
-        }
-
-        if (label.closeMatch) {
-            label.closeMatch.forEach(function(match) {
-                if (greenTypes.indexOf(match.type) > -1) {
-                    qualityScore += greenScore;
-                } else if (blueTypes.indexOf(match.type) > -1) {
-                    qualityScore += blueScore;
-                } else {
-                    console.log("unknown score type for: " + match.type);
-                }
-            });
-        }
-
-        if (label.relatedMatch) {
-            label.relatedMatch.forEach(function(match) {
-                if (greenTypes.indexOf(match.type) > -1) {
-                    qualityScore += greenScore;
-                } else if (blueTypes.indexOf(match.type) > -1) {
-                    qualityScore += blueScore;
-                } else {
-                    console.log("unknown score type for: " + match.type);
-                }
-            });
-        }
-
-        if (label.broadMatch) {
-            label.broadMatch.forEach(function(match) {
-                if (greenTypes.indexOf(match.type) > -1) {
-                    qualityScore += greenScore;
-                } else if (blueTypes.indexOf(match.type) > -1) {
-                    qualityScore += blueScore;
-                } else {
-                    console.log("unknown score type for: " + match.type);
-                }
-            });
-        }
-
-        if (label.narrowMatch) {
-            label.narrowMatch.forEach(function(match) {
-                if (greenTypes.indexOf(match.type) > -1) {
-                    qualityScore += greenScore;
-                } else if (blueTypes.indexOf(match.type) > -1) {
-                    qualityScore += blueScore;
-                } else {
-                    console.log("unknown score type for: " + match.type);
-                }
-            });
-        }
+        // blue and green boxes
+        matchTypes.forEach(function(matchType) {
+            qualityScore += getMatchScore(matchType);
+        });
 
         // blue boxes
         if (label.broader) {
@@ -242,7 +294,6 @@ angular.module('labelsApp')
 
         //console.log(qualityScore);
         return -1 * qualityScore;
-
     };
 
   });
