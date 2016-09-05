@@ -9,9 +9,19 @@
  */
 angular.module('labelsApp')
   .factory('ThesauriService', function ($resource) {
-    // AngularJS will instantiate a singleton by calling "new" on this function
-    var host = "http://143.93.114.135";
 
-    return $resource(host + '/api/v1/retcat/vocabulary/:id');
+    var host = "http://143.93.114.135/api/v1";
 
-  });
+    return $resource(host + '/retcat/vocabulary/:id', null, {
+        'query': {
+            method: 'GET',
+            url: host + '/retcat',
+            isArray: true
+        },
+        'get': { isArray: true },
+        'update': {
+            method:'PUT',
+            isArray: true
+        }
+    });
+});

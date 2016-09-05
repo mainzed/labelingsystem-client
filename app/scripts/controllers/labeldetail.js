@@ -26,26 +26,21 @@ angular.module('labelsApp')
 
     $scope.showEnrichments = UserSettingsService.showEnrichments;
 
-    //$scope.mapCounter = 0;
-
     VocabService.get({id: $routeParams.vID}, function(vocabulary) {
         $scope.vocabulary = vocabulary;
 
-        // get all thesauri associated with this vocabulary, preload these for search function
-        $scope.thesauri = [];
-        ThesauriService.query({id: vocabulary.id}, function(thesauri) {
+        // get this vocabulary's associated thesauri for search function
+        ThesauriService.get({id: $routeParams.vID}, function(thesauri) {
             $scope.thesauri = thesauri;
-        }, function(res) {
-            // failure
-            console.log(res);
+        }, function(err) {
+            console.log(err);
         });
-
     });
 
     // load label for the current vocabulary
     LabelService.get({id: $routeParams.lID}, function(label) {
         $scope.label = label;
-        console.log(label);
+        //console.log(label);
         $scope.loadBoxes();
 
         $scope.prefLabel = _.find($scope.label.prefLabels, {isThumbnail: true});

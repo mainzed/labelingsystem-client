@@ -23,7 +23,6 @@ angular.module('labelsApp')
         function getBoxVariables() {
 
             scope.ngModel = scope.box;
-            //console.log(scope.box);
             scope.tooltip = TooltipService.icons.types[scope.ngModel.type];
 
             resource = scope.ngModel.resource;

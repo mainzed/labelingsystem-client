@@ -60,66 +60,18 @@ angular.module('labelsApp')
     };
 
     /**
-     * Opens the metadata and settings dialog of a vocabulary.
+     * Opens the metadata/settings dialog of a vocabulary.
      */
-    $scope.onVocabTitleClick = function() {
-        // init new changeble values
-        $scope.newValue = $scope.vocabulary.title.value;
-        $scope.newDescription = $scope.vocabulary.description.value;
-
+    $scope.openVocabDialog = function() {
         ngDialog.open({
             template: 'views/dialogs/vocab-metadata.html',
             className: 'bigdialog',
             showClose: false,
             closeByDocument: false,
             disableAnimation: true,
+            controller: 'VocabDialogCtrl',
             scope: $scope
         });
-    };
-
-    /**
-     * Updates the vocabulary's title and description.
-     * @param {object} vocab - Vocabulary object
-     * @param {string} newValue - New vocabulary title value
-     * @param {string} newDescription - New vocabulary description value
-     */
-    $scope.onVocabEditClick = function(vocab, newValue, newDescription) {
-        var updatedVocab = vocab;
-        updatedVocab.title.value = newValue;
-        updatedVocab.description.value = newDescription;
-
-        VocabService.update({id: vocab.id}, {
-            user: $scope.user.name,
-            item: updatedVocab
-        }, function() {
-            // no need to update display, since dialog gets closed when this
-            // function is called
-        }, function(error) {
-            console.log(error);
-        });
-    };
-
-    /**
-     * Deletes a vocabulary permanently using the API's 'delete' or 'deprecated'
-     * option and redirects to the vocabularies view if successfull. Gets the
-     * vocabulary ID from the url using Angular's $routeParams.
-     * @param {string} deleteMode="delete" - What request parameter to use ("delete" or "deprecated")
-     */
-    $scope.onVocabDeleteClick = function (deleteMode) {
-        deleteMode = deleteMode || "delete";
-        if (deleteMode === "delete") {
-            VocabService.remove({id: $routeParams.vID},  function() {
-                $location.path("/admin/vocabularies");
-            }, function(error) {
-                console.log(error);
-            });
-        } else if (deleteMode === "deprecated") {
-            VocabService.deprecated({id: $routeParams.vID},  function() {
-                $location.path("/admin/vocabularies");
-            }, function(error) {
-                console.log(error);
-            });
-        }
     };
 
     /**
@@ -128,29 +80,6 @@ angular.module('labelsApp')
      */
     $scope.onLabelClick = function(id) {
         $location.path("admin/vocabularies/" + $scope.vocabulary.id + "/labels/" + id);
-    };
-
-    /**
-     * Changes a vocabulary's releaseType from "draft" to "public".
-     * @param {object} vocab - Vocabulary object
-     */
-    $scope.onPublicClick = function(vocab) {
-        if (vocab.releaseType === "draft") {
-            var updatedVocab = vocab;
-            updatedVocab.releaseType = "public";
-
-            VocabService.update({id: vocab.id}, {
-                user: $scope.user.name,
-                item: updatedVocab
-            }, function() {
-                vocab.releaseType = "public";  // update on success
-            }, function(error) {
-                console.log(error);
-            });
-        } else {
-            console.log("vocabulary is not of statusType = 'draft'");
-        }
-
     };
 
     /**
