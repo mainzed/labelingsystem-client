@@ -1,21 +1,25 @@
 <div class="dialogwrapper text">
 	<div class="dialogheader">
 		<h3>Description</h3>
-		<p class="typeinformation">Describe current label with a few, clear words.</p>
-		<div class="line-bottom"></div>
+		<p class="typeinformation">{{tooltips.explainations.scopenote}}</p>
+		<div class="line-dialog"></div>
 	</div>
 
 	<div class="dialogscroll">
 	<div class="nano">
 	<div class="nano-content">
 		<div class="dialogbox dialog-full">
+			<h4>Edit</h4>
 			<textarea ng-model="newValue" ng-init="newValue = text"></textarea>
 		</div>
 
 
 		<div class="line-dialog"></div>
 		<div class="dialogbox dialog-full">
-			<h4 ng-click="onDeleteClick(); closeThisDialog()">Delete</h4>
+			<div class="deletebutton pointer" ng-click="onDeleteClick(); closeThisDialog()">
+				<span class="buttontext">Delete description</span>
+				<span class="icon-trash icon"></span>
+			</div>
 		</div>
 
 
