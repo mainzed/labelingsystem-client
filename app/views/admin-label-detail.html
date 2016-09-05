@@ -97,8 +97,11 @@
 	<div class="col threequarter">
 		<div id="enrichmentbrowser" class="nano">
 		<div class="nano-content">
-			<span class="noresult" ng-show="!resultBoxes">Add enrichment sources by searching</span>
-		    <search-result-box ng-repeat="box in resultBoxes | filter: resultFilter | orderBy: ['quality', 'type']" action="loadBoxes()"></search-result-box>
+
+      <span class="noresult" ng-show="!resultBoxes">Add enrichment sources by searching</span>
+
+      <search-result-box ng-repeat="box in resultBoxes | filter: resultFilter | orderBy: ['quality', 'type']" action="loadBoxes()"></search-result-box>
+
 		</div>
 		</div>
 	</div>
