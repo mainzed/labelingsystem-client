@@ -1,21 +1,23 @@
 <div class="dialogwrapper text">
 	<div class="dialogheader">
-		<h3>Alternative label</h3>
-		<div class="line-bottom"></div>
+		<h3>{{text}}</h3>
+		<p class="typeinformation">Alternative term</p>
+		
 	</div>
 
 	<div class="dialogscroll">
 	<div class="nano">
 	<div class="nano-content">
 		<div class="dialogbox dialog-full">
-      <input ng-model="newValue" ng-init="newValue = text"></input>
+			<h4>Edit</h4>
+      		<input ng-model="newValue" ng-init="newValue = text"></input>
 		</div>
 
 
 		<div class="line-dialog"></div>
 		<div class="dialogbox dialog-full">
 			<div class="deletebutton pointer" ng-click="onDeleteClick(); closeThisDialog()">
-				<span class="buttontext">Delete</span>
+				<span class="buttontext">Delete this alternative label</span>
 				<span class="icon-trash icon"></span>
 			</div>
 		</div>

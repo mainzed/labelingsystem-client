@@ -32,4 +32,8 @@ angular.module('labelsApp')
         }
     };
 
+    this.explainations = {
+        scopenote: "Describe current label with a few, clear words."
+    }
+
   });

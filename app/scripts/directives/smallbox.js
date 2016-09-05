@@ -24,6 +24,7 @@ angular.module('labelsApp')
 
             scope.ngModel = scope.box;
             scope.tooltip = TooltipService.icons.types[scope.ngModel.type];
+            
 
             resource = scope.ngModel.resource;
             relation = scope.ngModel.relation;

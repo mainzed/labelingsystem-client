@@ -25,7 +25,15 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
+.icon-hide:before {
+  content: "\e905";
+}
+.icon-checked:before {
+  content: "\e90b";
+}
+.icon-unchecked:before {
+  content: "\e90d";
+}
 .icon-note:before {
   content: "\e900";
 }

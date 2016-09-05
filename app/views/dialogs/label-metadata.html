@@ -18,7 +18,7 @@
     <div class="line-dialog"></div>
     <div class="dialogbox dialog-full">
       <div class="deletebutton pointer" ng-click="onDeleteClick(); closeThisDialog()">
-        <span class="buttontext">Delete</span>
+        <span class="buttontext">Delete this label</span>
         <span class="icon-trash icon"></span>
       </div>
     </div>
@@ -26,15 +26,24 @@
     <div class="line-dialog"></div>
     <div class="dialogbox dialog-full">
       <h4 >meta data</h4>
-      <ul>
-        <li>License: {{ label.license }}</li>
-        <li>Created by: {{ label.creator }}</li>
-        <li>Created on: {{ label.created | date: 'dd.MM.yyyy' }}</li>
-        <li>Contributors:</li>
-        <ul>
-          <li ng-repeat="contributor in label.contributors">{{ contributor }}</li>
-        </ul>
-      </ul>
+     
+        <span class="listtype">License</span>
+        <span class="listcontent">{{ label.license }}</span>
+
+        <span class="listtype">Creator</span>
+        <span class="listcontent">{{ label.creator }}</span>
+
+        <span class="listtype">Date of creation</span>
+        <span class="listcontent">{{ label.created | date: 'dd.MM.yyyy' }}</span>
+
+        
+        <span class="listtype">Contributors:</span>
+        <span class="listcontent">
+          <ul>
+            <li ng-repeat="contributor in label.contributors">{{ contributor }}</li>
+          </ul>
+        </span>
+     
     </div>  
 
         
