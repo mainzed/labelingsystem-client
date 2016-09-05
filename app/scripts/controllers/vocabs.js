@@ -5,7 +5,8 @@
  * @name labelsApp.controller:VocabsCtrl
  * @description
  * # VocabsCtrl
- * Controller of the labelsApp
+ * Controller of the labelsApp. contains functions for pages with vocabulary
+ * overviews
  */
 angular.module('labelsApp')
   .controller('VocabsCtrl', function ($scope, $location, $http, ngDialog, AuthService, VocabService) {

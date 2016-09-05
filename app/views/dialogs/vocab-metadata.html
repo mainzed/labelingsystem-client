@@ -1,32 +1,47 @@
-<h1>vocab metadata</h1>
+<h1>metdata/settings</h1>
 
-<ul>
-  <li>releaseType: {{ vocabulary.releaseType }}</li>
-  <li>statusType: {{ vocabulary.statusType }}</li>
-  <li>title: {{ vocabulary.title.value }}</li>
-  <li>language: {{ vocabulary.title.lang }}</li>
-  <li>description: {{ vocabulary.description.value }}</li>
-  <li>license: {{ vocabulary.license }}</li>
-  <li>creator: {{ vocabulary.creator }}</li>
-  <li>created: {{ vocabulary.created }}</li>
+<div>
+  title: <input type="text" ng-model="newValue">
+</div>
 
-  <li>Referenzthesauri:</li>
+<div>
+  description
+  <textarea rows="8" cols="40" ng-model="newDescription"></textarea>
+</div>
+
+<div>
+  language: {{ vocabulary.title.lang }}
+</div>
+
+<div>
+  releaseType: {{ vocabulary.releaseType }}
+  <button type="button" ng-show="vocabulary.releaseType === 'draft'" ng-click="onPublicClick(vocabulary)">make public</button>
+</div>
+
+<div>
+  license: {{ vocabulary.license }}
+  creator: {{ vocabulary.creator }}
+  created: {{ vocabulary.created }}
+</div>
+
+<div>
+  Referenzthesauri:
   <ul>
     <li ng-repeat="thesaurus in thesauri">{{ thesaurus.name }}</li>
-    <!-- <li ng-show="showSelection">
-      <select ng-model="choice" ng-change="onSelectionChange(choice); showSelection = false">
-        <option value="" disabled selected>Select thesaurus</option>
-        <option ng-repeat="thesaurus in thesauri">{{ thesaurus.name }}</option>
-      </select>
-    </li> -->
   </ul>
+</div>
 
-</ul>
 
+<!-- delete -->
+<button type="button" name="button" ng-click="showConfirm = true" ng-show="!showConfirm && (vocabulary.releaseType === 'draft' || vocabulary.releaseType === 'public')">Delete</button>
 
-<!-- <button type="button" name="button" ng-click="closeThisDialog()">Confirm</button> -->
+<!-- confirm delete or deprecated -->
+<button type="button" name="button" ng-click="onVocabDeleteClick(); closeThisDialog()" ng-show="showConfirm && vocabulary.releaseType === 'draft'">Confirm</button>
 
-<button type="button" name="button" ng-click="onVocabDeleteClick(); closeThisDialog()" ng-show="vocabulary.releaseType === 'draft'">Delete</button>
-<button type="button" name="button" ng-click="onVocabDeprecatedClick(); closeThisDialog()" ng-show="vocabulary.releaseType === 'public'">Deprecated</button>
+<button type="button" name="button" ng-click="onVocabDeleteClick('deprecated'); closeThisDialog()" ng-show="showConfirm && vocabulary.releaseType === 'public'">Confirm</button>
 
+<!-- apply -->
+<button type="button" name="button" ng-click="onVocabEditClick(vocabulary, newValue, newDescription); closeThisDialog()" ng-class="{'inactive': newValue === vocabulary.title.value && newDescription === vocabulary.description.value}">Apply</button>
+
+<!-- cancel -->
 <button type="button" name="button" ng-click="closeThisDialog()">Cancel</button>
