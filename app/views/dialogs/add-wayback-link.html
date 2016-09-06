@@ -9,22 +9,14 @@
 	<div class="nano-content">
 		<div class="dialogbox dialog-full">
 			<h4>url</h4>
-			<input type="text" name="name" ng-model="url" ng-disabled="validWaybackLink">
-  			<button type="button" name="button" ng-click="onGenerateClick(url)" ng-disabled="validWaybackLink">get wayback link for this url</button>
+			<input type="text" placeholder="https://www.example.de" ng-model="url">
 		</div>
-		
-		
-		
-		
 
 	</div>
 	</div>
 	</div>
-
 
 
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-disabled="!validWaybackLink" ng-click="onLinkAddConfirm(); closeThisDialog()" >Apply</div>
+	<div class="apply" ng-class="{'inactive': !url}" ng-click="addLinkConfirm(url); closeThisDialog()">Apply</div>
 </div>
-
-

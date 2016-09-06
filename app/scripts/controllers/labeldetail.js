@@ -8,7 +8,7 @@
  * Controller of the labelsApp
  */
 angular.module('labelsApp')
-  .controller('LabelDetailCtrl', function ($scope, $routeParams, $timeout, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ResourcesService, TooltipService, SearchService, UserSettingsService, ThesauriService, LangService) {
+  .controller('LabelDetailCtrl', function ($scope, $routeParams, $timeout, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ResourcesService, TooltipService, SearchService, UserSettingsService, ThesauriService, LangService, WaybackService) {
 
     // authentication
     if ($location.path().indexOf("admin/") > -1) {  // is admin view
@@ -310,8 +310,6 @@ angular.module('labelsApp')
     };
 
     $scope.onAddLink = function() {
-        $scope.url = "http://";
-        $scope.validWaybackLink = false;
         ngDialog.open({
             template: 'views/dialogs/add-wayback-link.html',
             className: 'bigdialog',
@@ -320,34 +318,41 @@ angular.module('labelsApp')
             closeByDocument: false,
             scope: $scope
         });
-
-        $scope.onLinkAddConfirm = function() {
-            $scope.boxes.push({
-                category: "seeAlso",
-                type: "wayback",
-                value: "Page title",
-                quality: "low"
-                //lang: "en"
-            });
-        };
     };
 
-    // todo: put that in dialog-controller
-    $scope.onGenerateClick = function(url) {
+    $scope.addLinkConfirm = function(url) {
 
-        $http.get('http://143.93.114.135/api/v1/resourcewayback?url=' + url).then(function(res) {
-            // success
-            // replace url with generated wayback-link
-            $scope.url = res.data.url;
+        WaybackService.get(url, function(waybackUrl) {
 
-            $scope.validWaybackLink = true;
+            if (!$scope.label.seeAlso) {
+                $scope.label.seeAlso = [];
+            }
 
-        }, function(res) {
-            // error
-            console.log("error");
-            console.log(res.data.error);
-            $scope.url = "http://";
-            $scope.validWaybackLink = false;
+            // append wayback link as seeAlso
+            $scope.label.seeAlso.push({
+                type: "wayback",
+                url: waybackUrl
+            });
+
+            LabelService.update({id: $routeParams.lID}, {
+                item: $scope.label,
+                user: $scope.user.name
+            }, function() {
+
+                // TODO: add temporary box
+                // add new box
+                // $scope.boxes.push({
+                //     category: "seeAlso",
+                //     type: "wayback",
+                //     //value: "Page title",
+                //     quality: "low"
+                // });
+
+            }, function(err) {
+                console.log(err);
+            });
+        }, function(err) {
+            console.log(err);
         });
     };
 
