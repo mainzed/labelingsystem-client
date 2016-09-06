@@ -4,19 +4,30 @@
 <h1>User: {{ user.name }}</h1>
 </div>
 
-<input type="text" name="search" value="search" ng-model="vocabFilter" placeholder="filter">
+<div class="separatorsmall">
 
-<div class="box small high label" ng-repeat="vocab in vocabularies | filter: vocabFilter" style="border: 1px solid; margin: 10px;">
-  <a href="#/admin/vocabularies/{{ vocab.id }}/labels/">
-    {{ vocab.title.value }}
-  </a>
-  <ul>
-    <li>{{ vocab.releaseType }}</li>
-    <li>Description: {{ vocab.description.value }}</li>
-    <li>Created by {{ vocab.creator }} on {{ vocab.created | date: 'dd.MM.yyyy' }}
-    <li>license: {{ vocab.license }}</li>
-  </ul>
+	<div id="filtersearch">
+    		<input type="text" name="search" value="search" ng-model="vocabFilter" placeholder="filter">
+	</div>
+</div>
 
+<div id="listwrapper">
+	<div class="nano">
+    <div id="boxcontainer" class="nano-content voc-box" ng-click="$location.path('/admin/vocabularies/' + vocab.id + '/labels/')">
+		<div class="box vocabulary high label" ng-repeat="vocab in vocabularies | filter: vocabFilter">
+		  <a href="#/admin/vocabularies/{{ vocab.id }}/labels/">
+		    {{ vocab.title.value }}
+		  </a>
+		  <ul>
+		    <li>{{ vocab.releaseType }}</li>
+		    <li>Description: {{ vocab.description.value }}</li>
+		    <li>Created by {{ vocab.creator }} on {{ vocab.created | date: 'dd.MM.yyyy' }}
+		    <li>license: {{ vocab.license }}</li>
+		  </ul>
+
+		</div>
+	</div>
+	</div>
 </div>
 
 <span type="button" class="plusposition" ng-click="onCreateClick()">+</span>

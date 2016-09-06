@@ -28,9 +28,9 @@
   </span>
 </div>
 
-<div id="labellistwrapper" ng-init="labelLimit = 25">
+<div id="listwrapper" ng-init="labelLimit = 25">
 	<div class="nano">
-    <div id="labellist" class="nano-content">
+    <div id="boxcontainer" class="nano-content">
 
       <list-box ng-repeat="label in filteredLabels = (labels | filter: labelFilter | orderBy: labelOrder | limitTo: labelLimit)"></list-box>
 
