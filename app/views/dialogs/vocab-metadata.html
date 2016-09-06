@@ -1,6 +1,6 @@
 <div class="dialogwrapper label">
   <div class="dialogheader">
-    <h3>{{vocabulary.title.value}}</h3>
+    <h3>{{ vocabulary.title.value }}</h3>
     <p class="typeinformation"> metadata/settings</p>
     <div class="line-bottom"></div>
   </div>
@@ -8,9 +8,9 @@
   <div class="dialogscroll">
     <div class="nano">
       <div class="nano-content">
-       
+
         <div class="dialogbox dialog-full">
-          <h4>edit</h4> 
+          <h4>edit</h4>
           <input type="text" ng-model="newValue">
         </div>
 
@@ -39,21 +39,18 @@
 
           <span class="listtype">creation date</span>
           <span class="listcontent">{{ vocabulary.created }}</span>
-         
-        
+
+
 
         </div>
 
-       
-        
-         
-       
         <div class="line-dialog"></div>
         <div class="dialogbox dialog-full">
           <h4>Referenzthesauri</h4>
           <div class="thesaurus" ng-repeat="thesaurus in thesauri" ng-class="{'checked': thesaurus.checked}">
-           
-              <input class="checkbox" type="checkbox" ng-change="onCheckChange()" ng-model="thesaurus.checked" ng-disabled="thesaurus.description === 'this vocabulary'">
+
+              <checkbox></checkbox>
+
             <h5>
               {{ thesaurus.name }}
             </h5>

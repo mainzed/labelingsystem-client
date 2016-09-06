@@ -4,21 +4,17 @@
     <h3>{{ box.resource.label }}</h3>
 		<p class="typeinformation">Wayback Link - <span ng-click="openResource(box.resource)">open in new tab</span></p>
 
-
     <div class="line-bottom"></div>
 	</div>
-	<div class="dialogscroll">
-	<div class="nano">
-	<div class="nano-content">
 
-		<div class="dialogbox dialog-full">
-      <confirm-button on-confirm="onDeleteClick(); closeThisDialog()"></confirm-button>
-		</div>
-		<div class="line-dialog"></div>
-		<h4>meta data </h4>
-
-	</div>
-	</div>
+  <div class="dialogscroll">
+	  <div class="nano">
+	    <div class="nano-content">
+    		<div class="dialogbox dialog-full">
+          <confirm-button on-confirm="onDeleteClick(); closeThisDialog()"></confirm-button>
+    		</div>
+	    </div>
+	  </div>
 	</div>
 
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>

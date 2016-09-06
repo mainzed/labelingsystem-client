@@ -149,7 +149,7 @@ angular.module('labelsApp')
             if (label[matchType]) {
                 label[matchType].forEach(function(match) {
 
-                    ResourcesService.get(match.url, function(resource) {
+                    ResourcesService.get(match.uri, function(resource) {
                         //console.log(resource);
                         // success
                         $scope.boxes.push({
@@ -171,9 +171,9 @@ angular.module('labelsApp')
     $scope.getExternalResources = function(label) {
         if (label.seeAlso) {
             label.seeAlso.forEach(function(resource) {
-                ResourcesService.get(resource.url, function(externalResource) {
+                ResourcesService.get(resource.uri, function(externalResource) {
                     //$scope.seeAlsoResources.push(externalResource);//
-                    externalResource.url = resource.url;
+                    //externalResource.url = resource.url;
                     $scope.boxes.push({
                         relation: "seeAlso",
                         boxType: "wayback",
