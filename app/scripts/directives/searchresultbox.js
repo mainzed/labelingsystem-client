@@ -20,12 +20,15 @@ angular.module('labelsApp')
 
             scope.data = scope.box;
 
+
             if (scope.isSameVocab()) {
                 scope.data.type = "label";
+                console.log(scope.data);
             }
 
             /**
-             * opens a type-specific dialog
+             * Opens a type-specific dialog that shows the connection (relation)
+             * options for each type to link to the label.
              */
             scope.onClick = function() {
                 ngDialog.open({
@@ -38,8 +41,12 @@ angular.module('labelsApp')
                 });
             };
 
+            /**
+             * Link a search result to the current label by added the resource's
+             * information to the according relation-array of the label.
+             * @param {string} relation - Label-to-Resource relation  (e.g. "broader" or "exactMatch")
+             */
             scope.onAddClick = function(relation) {
-                // TODO: check everywhere if resource is already linked to this label somehow
                 var updatedLabel = scope.label;
 
                 if (!updatedLabel[relation]) {
@@ -58,16 +65,12 @@ angular.module('labelsApp')
                     });
                 }
 
-                //console.log(updatedLabel);
                 var updateObject = {
                     item: updatedLabel,
                     user: "demo"
                 };
 
-                LabelService.update({id: updatedLabel.id}, updateObject, function(res) {
-                    // success
-                    //console.log("update funktioniert!");
-
+                LabelService.update({id: updatedLabel.id}, updateObject, function() {
                     // get all infos and add box temporarily
                     ResourcesService.get(scope.data.uri, function(resource) {
 
@@ -78,17 +81,11 @@ angular.module('labelsApp')
                             resource: resource
                         });
 
-                    }, function(errorMessage) {
-                        // error
-                        console.log(errorMessage);
+                    }, function(err) {
+                        console.log(err);
                     });
-
-
-
-                    //scope.label = updatedLabel;
-
-                }, function(res) {
-                    console.log(res);
+                }, function(err) {
+                    console.log(err);
                 });
             };
 

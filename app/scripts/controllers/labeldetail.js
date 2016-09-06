@@ -40,7 +40,7 @@ angular.module('labelsApp')
     // load label for the current vocabulary
     LabelService.get({id: $routeParams.lID}, function(label) {
         $scope.label = label;
-        //console.log(label);
+        console.log(label);
         $scope.loadBoxes();
 
         $scope.prefLabel = _.find($scope.label.prefLabels, {isThumbnail: true});
@@ -148,8 +148,9 @@ angular.module('labelsApp')
         matchTypes.forEach(function(matchType) {
             if (label[matchType]) {
                 label[matchType].forEach(function(match) {
-                    ResourcesService.get(match.url, function(resource) {
 
+                    ResourcesService.get(match.url, function(resource) {
+                        //console.log(resource);
                         // success
                         $scope.boxes.push({
                             relation: matchType,
