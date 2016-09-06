@@ -79,6 +79,7 @@ h2 {				font-size: @headlines; font-weight: normal; margin-bottom: 50px; margin-
 h3 {				font-size: @emphasize; font-weight: normal; margin-bottom: 5px; margin-top: @marginoutside; margin-left: @marginoutside; display: block;
 					@media screen and (max-width: 1600px) {font-size: @emphasize-small; } }
 h4 {				font-size: @regular; font-weight: normal; margin-left: @marginoutside; display: block; margin-bottom: 20px;}
+h5 {				float: left; }
 li {				margin-left: 14px; }
 button {			border: 0; background: transparent;}
 input:focus {		outline: none; }
@@ -124,7 +125,7 @@ textarea:focus {	outline: none; }
 #enrichmentsearch .icon {
 					margin-left: 12px; margin-top: 25px; float: left; 
 }
-.hideenrichment {	float: right; margin-right: @marginoutside; padding-top: 40px; padding-bottom: 15px; }
+.hideenrichment {	float: right; margin-right: 10px; padding-top: 10px; padding-bottom: 15px; }
 #filtersearch {		margin-left: @marginoutside; margin-top: 10px; color: white; width: 60%; float: left; }
 #filtersearch .icon-search {
 					float: left;
@@ -303,6 +304,12 @@ textarea:focus {	outline: none; }
 .typeinformation {	margin-left: calc(@marginoutside); font-style: italic; }
 .listtype {			float: left; width: 150px; clear: left; margin-left: @marginoutside; font-style: italic; }
 .listcontent {		float: left; width: calc(100% - 150px - @marginoutside); }
+.thesaurus {		width: calc(100% - @marginoutside * 2); margin-left: @marginoutside; display: block; float: left; margin-bottom: 30px;
+					border-top: 1px solid black; padding-top: @margininboxsmall;  }
+.dialogbox input.checkbox {			
+					float: left; margin-left: 0; width: 20px; }
+.thesaurus p {		float: left; clear: left; }
+.checked {			color: green; border-color: green; }
 
 
 
@@ -328,7 +335,9 @@ textarea:focus {	outline: none; }
 
 .italic {			font-style: italic; }
 .showadditionalcontent {
-					width: 20px; height: 20px; display: block; float: left; margin-top: 2px; }
+					width: 20px; height: 20px; display: block; float: left; margin-top: 2px; color: white; }
+.label .showadditionalcontent, .high .showadditionalcontent {
+					color: black; }
 .showadditionalcontent:hover {
 					text-decoration: underline; cursor: pointer; }
 
@@ -342,6 +351,8 @@ textarea:focus {	outline: none; }
 
 .inactive {			color: gray; pointer-events:none; }
 .paddingbottom {	padding-bottom: 10px;	}
+.loudlink {			text-decoration: underline; }
+.label .loudlink {	color: blue; }
 
 
 .icon-hide {		color: white; }
