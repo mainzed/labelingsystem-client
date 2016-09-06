@@ -73,7 +73,7 @@ angular.module('labelsApp')
      * @param {string} newDescription - New vocabulary description value
      */
     $scope.onEditClick = function(vocab, newValue, newDescription) {
-        console.log("edit title and description");
+
         var updatedVocab = vocab;
         updatedVocab.title.value = newValue;
         updatedVocab.description.value = newDescription;
@@ -95,7 +95,7 @@ angular.module('labelsApp')
      * vocabulary ID from the url using Angular's $routeParams.
      * @param {string} deleteMode="delete" - What request parameter to use ("delete" or "deprecated")
     */
-    $scope.onDeleteClick = function (deleteMode) {
+    $scope.deleteVocab = function (deleteMode) {
         deleteMode = deleteMode || "delete";
         if (deleteMode === "delete") {
             VocabService.remove({id: $routeParams.vID},  function() {

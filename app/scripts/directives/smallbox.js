@@ -24,7 +24,7 @@ angular.module('labelsApp')
 
             scope.ngModel = scope.box;
             scope.tooltip = TooltipService.icons.types[scope.ngModel.type];
-            
+            console.log(scope.box);
 
             resource = scope.ngModel.resource;
             relation = scope.ngModel.relation;
@@ -172,12 +172,12 @@ angular.module('labelsApp')
                     user: "demo"
                 };
 
-                LabelService.update({id: $routeParams.lID}, jsonObject, function(res) {
+                LabelService.update({id: $routeParams.lID}, jsonObject, function() {
                     // when successfull, remove current box
                     var index = _.indexOf(scope.boxes, _.find(scope.boxes, scope.box));
                     scope.boxes.splice(index, 1);
-                }, function(res) {
-                    console.log(res);
+                }, function(err) {
+                    console.log(err);
                 });
 
             });
@@ -193,14 +193,18 @@ angular.module('labelsApp')
 
         /**
          * open resource-url in new tab.
+         * @param {Object} resource - Resource object
+         * @param {string} resource.type - Resource type (e.g. "getty")
+         * @param {string} resource.uri - Link url
          */
-        scope.openResource = function() {
+        scope.openResource = function(resource) {
+            console.log(resource);
             var url;
-            if (scope.box.resource.type === "getty") {
-                var id = scope.box.resource.uri.split('/').pop();
+            if (resource.type === "getty") {
+                var id = resource.uri.split('/').pop();
                 url = 'http://www.getty.edu/vow/AATFullDisplay?find=&logic=AND&note=&subjectid=' + id;
             } else {
-                url = scope.box.resource.uri;
+                url = resource.uri || resource.url;
             }
             // open url in new tab
             $window.open(url, "_blank");

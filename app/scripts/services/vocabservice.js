@@ -8,8 +8,7 @@
  * Service in the labelsApp.
  */
 angular.module('labelsApp')
-  .service('VocabService', function ($resource, AuthService) {
-    // AngularJS will instantiate a singleton by calling "new" on this function
+  .factory('VocabService', function ($resource, AuthService) {
 
     return $resource('http://143.93.114.135/api/v1/vocabs/:id', null, {
         'query': { method: 'GET', params: { draft: true }, isArray: true },

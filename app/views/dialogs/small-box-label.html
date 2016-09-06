@@ -56,10 +56,7 @@
 
 		<div class="line-dialog"></div>
 		<div class="dialogbox dialog-full">
-			<div class="deletebutton pointer" ng-click="onDeleteClick(); closeThisDialog()">
-				<span class="buttontext">Delete</span>
-				<span class="icon-trash icon"></span>
-			</div>
+      <confirm-button on-confirm="onDeleteClick(); closeThisDialog()"></confirm-button>
 		</div>
 		<div class="line-dialog"></div>
 		<h4>meta data </h4>

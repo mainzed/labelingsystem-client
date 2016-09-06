@@ -1,7 +1,9 @@
 <div class="dialogwrapper {{cssClass}}">
 	<div class="dialogheader">
 		<h3>{{ box.resource.label }}</h3>
-		<p class="typeinformation">{{resource.type}} Source - <span class="loudlink" ng-click="openResource()">open in new tab</span></p>
+
+		<p class="typeinformation">{{resource.type}} Source - <span class="loudlink" ng-click="openResource(box.resource)">open in new tab</span></p>
+
 		<div class="line-bottom"></div>
 	</div>
 	<div class="dialogscroll">
@@ -74,10 +76,7 @@
 		</div>
 		<div class="line-dialog"></div>
 		<div class="dialogbox dialog-full">
-			<div class="deletebutton pointer" ng-click="onDeleteClick(); closeThisDialog()">
-				<span class="buttontext">Delete connection</span>
-				<span class="icon-trash icon"></span>
-			</div>
+      <confirm-button on-confirm="onDeleteClick(); closeThisDialog()"></confirm-button>
 		</div>
 		<div class="line-dialog"></div>
 		<h4>meta data </h4>

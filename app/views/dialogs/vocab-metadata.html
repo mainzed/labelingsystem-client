@@ -64,14 +64,11 @@
         </div>
 
 
-        <!-- delete -->
-        <button type="button" ng-click="showConfirm = true" ng-show="!showConfirm && (vocabulary.releaseType === 'draft' || vocabulary.releaseType === 'public')">Delete</button>
+        <!-- delete draft vocab -->
+        <confirm-button on-confirm="deleteVocab(); closeThisDialog()" ng-show="vocabulary.releaseType === 'draft'"></confirm-button>
 
-        <!-- confirm delete or deprecated -->
-        <button type="button" ng-click="onDeleteClick(); closeThisDialog()" ng-show="showConfirm && vocabulary.releaseType === 'draft'">Confirm</button>
-
-        <button type="button" ng-click="onDeleteClick('deprecated'); closeThisDialog()" ng-show="showConfirm && vocabulary.releaseType === 'public'">Confirm</button>
-
+        <!-- delete public vocab -->
+        <confirm-button on-confirm="deleteVocab('deprecated'); closeThisDialog()" ng-show="vocabulary.releaseType === 'public'"></confirm-button>
 
       </div><!-- end nano-content -->
     </div><!-- end nano -->
