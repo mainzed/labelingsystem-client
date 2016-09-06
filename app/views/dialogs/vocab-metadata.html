@@ -1,43 +1,65 @@
-<div class="dialogwrapper">
+<div class="dialogwrapper label">
   <div class="dialogheader">
-    <h3>metdata/settings</h3>
+    <h3>{{vocabulary.title.value}}</h3>
+    <p class="typeinformation"> metadata/settings</p>
+    <div class="line-bottom"></div>
   </div>
 
   <div class="dialogscroll">
     <div class="nano">
       <div class="nano-content">
-        <div>
-          title: <input type="text" ng-model="newValue">
+       
+        <div class="dialogbox dialog-full">
+          <h4>edit</h4> 
+          <input type="text" ng-model="newValue">
         </div>
 
-        <div>
-          description
-          <textarea rows="8" cols="40" ng-model="newDescription"></textarea>
-        </div>
-
-        <div>
-          language: {{ vocabulary.title.lang }}
-        </div>
-
-        <div>
+         <div>
           releaseType: {{ vocabulary.releaseType }}
           <button type="button" ng-show="vocabulary.releaseType === 'draft'" ng-click="onPublicClick(vocabulary)">make public</button>
         </div>
 
-        <div>
-          license: {{ vocabulary.license }}
-          creator: {{ vocabulary.creator }}
-          created: {{ vocabulary.created }}
+        <div class="line-dialog"></div>
+        <div class="dialogbox dialog-full">
+          <h4>description</h4>
+          <textarea rows="8" cols="40" ng-model="newDescription"></textarea>
         </div>
 
-        <div>
-          Referenzthesauri:
-          <div ng-repeat="thesaurus in thesauri">
+        <div class="line-dialog"></div>
+        <div class="dialogbox dialog-full">
+          <h4 >meta data</h4>
+          <span class="listtype">language</span>
+          <span class="listcontent">{{ vocabulary.title.lang }}</span>
+
+          <span class="listtype">license</span>
+          <span class="listcontent">{{ vocabulary.license }}</span>
+
+          <span class="listtype">creator</span>
+          <span class="listcontent">{{ vocabulary.creator }}</span>
+
+          <span class="listtype">creation date</span>
+          <span class="listcontent">{{ vocabulary.created }}</span>
+         
+        
+
+        </div>
+
+       
+        
+         
+       
+        <div class="line-dialog"></div>
+        <div class="dialogbox dialog-full">
+          <h4>Referenzthesauri</h4>
+          <div class="thesaurus" ng-repeat="thesaurus in thesauri" ng-class="{'checked': thesaurus.checked}">
+           
+              <input class="checkbox" type="checkbox" ng-change="onCheckChange()" ng-model="thesaurus.checked" ng-disabled="thesaurus.description === 'this vocabulary'">
             <h5>
-              <input type="checkbox" ng-change="onCheckChange()" ng-model="thesaurus.checked" ng-disabled="thesaurus.description === 'this vocabulary'">
               {{ thesaurus.name }}
             </h5>
-            {{ thesaurus.description }}
+            <p>
+              {{ thesaurus.description }}
+            </p>
           </div>
         </div>
 
