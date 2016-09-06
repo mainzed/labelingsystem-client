@@ -2,7 +2,7 @@
 	<div class="dialogheader">
 		<h3>{{text}}</h3>
 		<p class="typeinformation">Alternative term</p>
-		
+
 	</div>
 
 	<div class="dialogscroll">
@@ -16,10 +16,7 @@
 
 		<div class="line-dialog"></div>
 		<div class="dialogbox dialog-full">
-			<div class="deletebutton pointer" ng-click="onDeleteClick(); closeThisDialog()">
-				<span class="buttontext">Delete this alternative label</span>
-				<span class="icon-trash icon"></span>
-			</div>
+      <confirm-button on-confirm="onDeleteClick(); closeThisDialog()"></confirm-button>
 		</div>
 
 
