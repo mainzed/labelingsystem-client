@@ -89,6 +89,13 @@ angular.module('labelsApp')
                 });
             };
 
+            /**
+             * Watcher that updates nanoscroller when box is extended.
+             */
+            scope.$watch("showMore", function() {
+                console.log("showMore changed!");
+            });
+
             // reload nanoscroller when directive rendered
             $(".nano").nanoScroller();
         }

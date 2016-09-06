@@ -7,7 +7,7 @@
  * # smallBox
  */
 angular.module('labelsApp')
-  .directive('smallBox', function (ngDialog, $routeParams, $window, $rootScope, $location, LabelService, TooltipService) {
+  .directive('smallBox', function (ngDialog, $routeParams, $window, $timeout, $rootScope, $location, LabelService, TooltipService) {
     return {
       templateUrl: "views/directives/small-box.html",
       restrict: 'E',
@@ -17,11 +17,7 @@ angular.module('labelsApp')
         var resource;
         var relation;
 
-        // init
-        getBoxVariables();
-
-        function getBoxVariables() {
-
+        scope.init = function() {
             scope.ngModel = scope.box;
             scope.tooltip = TooltipService.icons.types[scope.ngModel.type];
 
@@ -88,10 +84,15 @@ angular.module('labelsApp')
 
             // determine language
             scope.language = resource.lang;
-        }
 
+            // refresh nanoscroller
+            $(".nano").nanoScroller();
+        };
+
+        /**
+         * Opens a dialog with details on the selected resource, label, etc.
+         */
         scope.onBoxClick = function() {
-            //console.log(boxType);
             if (boxType === "label") {
                 scope.categories = [
                     "broader",
@@ -131,12 +132,17 @@ angular.module('labelsApp')
             // reload nanoscroll when this dialog is opened
             $rootScope.$on('ngDialog.opened', function (e, $dialog) {
                 if ($dialog.attr('id') === dialog.id) {
-                    $(".nano").nanoScroller();
+                    $timeout(function() {
+                        $(".nano").nanoScroller();
+                    }, 0);
                 }
             });
 
         };
 
+        /**
+         * Deletes the selected resource, description, prefLabel or altLabel.
+         */
         scope.onDeleteClick = function() {
 
             var updatedlabel;
@@ -332,15 +338,15 @@ angular.module('labelsApp')
 
         };
 
+        scope.init();
+
         // listeners to update boxes when modified
         scope.$watchCollection("box.resource", function() {
-            getBoxVariables();
-            $(".nano").nanoScroller();
+            scope.init();
         });
 
         scope.$watchCollection("box.relation", function() {
-            getBoxVariables();
-            $(".nano").nanoScroller();
+            scope.init();
         });
     }
   };
