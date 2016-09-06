@@ -21,13 +21,11 @@ angular.module('labelsApp')
             scope.ngModel = scope.box;
             scope.tooltip = TooltipService.icons.types[scope.ngModel.type];
 
-
             resource = scope.ngModel.resource;
             relation = scope.ngModel.relation;
             boxType = scope.ngModel.boxType;
 
             // determine names
-            //console.log(scope.box);
             if (boxType === "altLabel" || boxType === "prefLabel" || boxType === "description") {
                 scope.text = resource.value;
             } else if (resource.prefLabels) {  // for internal labels
@@ -279,7 +277,7 @@ angular.module('labelsApp')
          */
         scope.changeResourceRelation = function(newRelation, oldRelation) {
             // get resource
-            var query = { url: scope.box.resource.uri };
+            var query = { uri: scope.box.resource.uri };
             var resource = _.find(scope.label[oldRelation], query);
 
             // remove it from the array (e.g. remove a narrowMatch from the narrowWatch array)

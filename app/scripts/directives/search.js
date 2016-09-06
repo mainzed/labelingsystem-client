@@ -9,10 +9,7 @@
 angular.module('labelsApp')
   .directive('search', function () {
     return {
-      template: [
-          '<span class="icon-search" ng-click="focusSearch = true"></span>',
-          '<input type="text" ng-model="labelFilter" placeholder="filter results" ng-blur="true"></input>'
-      ].join(""),
+      templateUrl: 'views/directives/search.html',
       restrict: 'E',
       link: function postLink(scope, element, attrs) {
           //console.log(element[1]);

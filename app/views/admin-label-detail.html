@@ -62,11 +62,14 @@
 		<h1>Enrich</h1>
 		<div id="enrichmentsearch" class="threequarter">
 			<span class="icon-search icon"></span>
-			<input type="text" placeholder="Search in Thesauri" ng-model="searchValue"></input>
-      		<button type="button" name="button" ng-click="onSearchClick()" ng-disabled="!searchValue">search</button>
-      		<button class="hideenrichment pointer" type="button" name="button" ng-click="hideEnrichmentBrowser()">
-      			<span class="icon-hide"></span>
-      		</button>
+
+      <input type="text" placeholder="Search in Thesauri" ng-model="searchValue"></input>
+
+      <button type="button" name="button" ng-click="onSearchClick(); searching = true" ng-disabled="!searchValue" ng-init="searching = false">search</button>
+
+      <button class="hideenrichment pointer" type="button" name="button" ng-click="hideEnrichmentBrowser()">
+  			<span class="icon-hide"></span>
+  		</button>
 		</div>
 
 	</div>
@@ -94,13 +97,21 @@
 		</button>
 
 	</div>
+
 	<div class="col threequarter">
 		<div id="enrichmentbrowser" class="nano">
 		<div class="nano-content">
 
-      <span class="noresult" ng-show="!resultBoxes">Add enrichment sources by searching</span>
+      <!-- placeholder when not searching -->
+      <span class="noresult" ng-show="!searching && !resultBoxes">Add enrichment sources by searching</span>
+
+      <!-- placeholder when searching -->
+      <span class="noresult" ng-show="searching && !resultBoxes">Searching ...</span>
 
       <search-result-box ng-repeat="box in resultBoxes | filter: resultFilter | orderBy: ['quality', 'type']" action="loadBoxes()"></search-result-box>
+      <p>
+        {{ results.length }}
+      </p>
 
 		</div>
 		</div>

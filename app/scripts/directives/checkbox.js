@@ -9,10 +9,11 @@
 angular.module('labelsApp')
   .directive('checkbox', function () {
     return {
-      templateUrl: 'views/directives/checkbox.html',
-      restrict: 'E',
-      link: function postLink(scope, element, attrs) {
-        //element.text('this is the checkbox directive');
-      }
+        templateUrl: 'views/directives/checkbox.html',
+        restrict: 'E',
+        scope: {
+            ngModel: '=',  // two-way binding
+            onCheck: '&'  // references parent-scope function
+        }
     };
-  });
+});

@@ -40,8 +40,6 @@
           <span class="listtype">creation date</span>
           <span class="listcontent">{{ vocabulary.created }}</span>
 
-
-
         </div>
 
         <div class="line-dialog"></div>
@@ -49,7 +47,7 @@
           <h4>Referenzthesauri</h4>
           <div class="thesaurus" ng-repeat="thesaurus in thesauri" ng-class="{'checked': thesaurus.checked}">
 
-              <checkbox></checkbox>
+            <checkbox ng-model="thesaurus.checked" on-check="onCheckChange()" ng-class="{'inactive': thesaurus.description === 'this vocabulary'}"></checkbox>
 
             <h5>
               {{ thesaurus.name }}

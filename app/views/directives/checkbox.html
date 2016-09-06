@@ -1,4 +1,6 @@
-<!-- <input class="checkbox" type="checkbox" ng-change="onCheckChange()" ng-model="thesaurus.checked" ng-disabled="thesaurus.description === 'this vocabulary'"> -->
 
-<span class='icon icon-checked'></span>
-<span class='icon icon-unchecked'></span>
+<!-- unchecked box -->
+<span class='icon icon-unchecked' ng-show="!ngModel" ng-click="ngModel = !ngModel; onCheck()"></span>
+
+<!-- checked box -->
+<span class='icon icon-checked' ng-show="ngModel" ng-click="ngModel = !ngModel; onCheck()" ></span>
