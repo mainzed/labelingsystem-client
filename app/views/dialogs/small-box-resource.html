@@ -1,8 +1,11 @@
 <div class="dialogwrapper {{cssClass}}">
 	<div class="dialogheader">
-		<h3>{{ box.resource.label }}</h3>
+		<h3 ng-bind="box.resource.label"></h3>
 
-		<p class="typeinformation">{{ box.resource.type }} Source - <span class="loudlink" ng-click="openResource(box.resource)">open in new tab</span></p>
+		<p class="typeinformation">
+      {{ box.resource.type }} Concept -
+      <span class="loudlink" ng-click="openResource(box.resource)">open in new tab</span>
+    </p>
 
 		<div class="line-bottom"></div>
 	</div>
@@ -17,13 +20,13 @@
 			<div class="dialog-quarter col">
 				<span class="italic">Broader</span><br>
 				<ul>
-					<li ng-repeat="term in box.resource.broaderTerms">{{ term.label }}</li>
+					<li ng-repeat="term in box.resource.broaderTerms" ng-bind="term.label"></li>
 				</ul>
 			</div>
 			<div class="dialog-quarter col">
 				<span class="italic">Narrower</span><br>
 				<ul>
-					<li ng-repeat="term in box.resource.narrowerTerms">{{ term.label }}</li>
+					<li ng-repeat="term in box.resource.narrowerTerms" ng-bind="term.label"></li>
 				</ul>
 			</div>
 		</div>
@@ -37,7 +40,7 @@
 		  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'broadMatch'" ng-class="{'selectedbutton': newRelation === 'broadMatch'}">
 		  			<span class="buttontext-ow">broad Match</span>
 		  		</button>
-		  		<p class="enrichinfo">skos:broadMatch is used to state a hierarchical mapping link between two conceptual resources in different concept schemes.</p>
+		  		<p class="enrichinfo" ng-bind="tooltips.comments.broadMatch"></p>
 		  	</div>
 
 		    <div class="col five">
@@ -45,7 +48,7 @@
 		  			<span class="buttontext-ow">exact Match</span>
 		  			<span class="icon-exact icon"></span>
 		  		</button>
-		  		<p class="enrichinfo">skos:exactMatch is used to link two concepts, indicating a high degree of confidence that the concepts can be used interchangeably across a wide range of information retrieval applications.</p>
+		  		<p class="enrichinfo" ng-bind="tooltips.comments.exactMatch"></p>
 		  	</div>
 
 		    <div class="col five">
@@ -53,7 +56,7 @@
 		  			<span class="buttontext-ow">related Match</span>
 		  			<span class="icon-related icon"></span>
 		  		</button>
-		  		<p class="enrichinfo">skos:relatedMatch is used to state an associative mapping link between two conceptual resources in different concept schemes.</p>
+		  		<p class="enrichinfo" ng-bind="tooltips.comments.relatedMatch"></p>
 		  	</div>
 
 		    <div class="col five">
@@ -61,14 +64,14 @@
 		  			<span class="buttontext-ow">close Match</span>
 		  			<span class="icon-close icon"></span>
 		  		</button>
-		  		<p class="enrichinfo">skos:closeMatch is used to link two concepts that are sufficiently similar that they can be used interchangeably in some information retrieval applications.</p>
+		  		<p class="enrichinfo" ng-bind="tooltips.comments.closeMatch"></p>
 		  	</div>
 
 		    <div class="col five rightout">
 		  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'narrowMatch'" ng-class="{'selectedbutton': newRelation === 'narrowMatch'}">
 		  			<span class="buttontext-ow">narrow Match</span>
 		  		</button>
-		  		<p class="enrichinfo">skos:narrowMatch is used to state a hierarchical mapping link between two conceptual resources in different concept schemes.</p>
+		  		<p class="enrichinfo" ng-bind="tooltips.comments.narrowMatch"></p>
 		  	</div>
 		  </div>
 

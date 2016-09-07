@@ -24,6 +24,7 @@
     "grunt-newer": "^1.1.0",
     "grunt-ng-annotate": "^0.9.2",
     "grunt-postcss": "^0.5.5",
+    "grunt-protractor-runner": "^3.2.0",
     "grunt-svgmin": "^2.0.0",
     "grunt-usemin": "^3.0.0",
     "grunt-wiredep": "^2.0.0",
@@ -31,9 +32,12 @@
     "jit-grunt": "^0.9.1",
     "jshint-stylish": "^1.0.0",
     "karma": "^1.1.1",
+    "karma-chrome-launcher": "^2.0.0",
     "karma-jasmine": "^1.0.2",
+    "karma-ng-scenario": "^1.0.0",
     "karma-phantomjs-launcher": "^1.0.1",
     "phantomjs-prebuilt": "^2.1.7",
+    "protractor": "^4.0.4",
     "time-grunt": "^1.0.0"
   },
   "engines": {

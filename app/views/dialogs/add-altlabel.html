@@ -1,6 +1,6 @@
 <div class="dialogwrapper text">
 	<div class="dialogheader">
-		<h3>add alternative term</h3>
+		<h3>add alternative label</h3>
 		<div class="line-bottom"></div>
 	</div>
 
@@ -8,18 +8,18 @@
 	<div class="nano">
 	<div class="nano-content">
 		<div class="dialogbox dialog-full">
-			<input value="term name" type="text" ng-model="term">
+			<input type="text" placeholder="alternative label" ng-model="term">
 		</div>
-		
-		
+
+
 		<div class="line-dialog"></div>
 		<h4>language</h4>
 		<div class="dialogbox dialog-full">
 			<select ng-model="lang">
-	    		<option ng-repeat="language in languages" value="{{language.value}}">{{ language.name }}</option>
+	    		<option ng-repeat="language in languages" value="{{language.value}}" ng-bind="language.name"></option>
 	  		</select>
 		</div>
-		
+
 
 	</div>
 	</div>
@@ -30,7 +30,3 @@
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
 	<div class="apply" ng-click="onAddAltLabelConfirm(term, lang); closeThisDialog()" ng-disabled="!term" >Apply</div>
 </div>
-
-
-
-

@@ -1,7 +1,7 @@
 <div class="dialogwrapper label">
 	<div class="dialogheader">
-		<h3>{{text}}</h3>
-		<p class="typeinformation">label - <span class="loudlink" ng-click="openLabel(); closeThisDialog()">open in same tab</span></p>
+		<h3 ng-bind="text"></h3>
+		<p class="typeinformation">Concept - <span class="loudlink" ng-click="openLabel(); closeThisDialog()">open in same tab</span></p>
 		<div class="line-bottom"></div>
 	</div>
 	<div class="dialogscroll">
@@ -34,7 +34,7 @@
 	  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'broader'" ng-class="{'selectedbutton': newRelation === 'broader'}">
 	  			<span class="buttontext-ow">broader</span>
 	  		</button>
-	  		<p class="enrichinfo">skos:broader relates a concept to a concept that is more general in meaning.</p>
+	  		<p class="enrichinfo" ng-bind="tooltips.comments.broader"></p>
 	  	</div>
 
 	    <div class="col three">
@@ -42,14 +42,14 @@
 	  			<span class="buttontext-ow">related</span>
 	  			<span class="icon-close icon"></span>
 	  		</button>
-	  		<p class="enrichinfo">skos:related relates a concept to a concept with which there is an associative semantic relationship.</p>
+	  		<p class="enrichinfo" ng-bind="tooltips.comments.related"></p>
 	  	</div>
 
 	    <div class="col three rightout">
 	  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'narrower'" ng-class="{'selectedbutton': newRelation === 'narrower'}">
 	  			<span class="buttontext-ow">narrower</span>
 	  		</button>
-	  		<p class="enrichinfo">skos:narrower relates a concept to a concept that is more specific in meaning.</p>
+	  		<p class="enrichinfo" ng-bind="tooltips.comments.narrower"></p>
 	  	</div>
 	  </div>
 
@@ -62,12 +62,10 @@
 		<div class="line-dialog"></div>
 
     <h4>meta data</h4>
-    <ul>
-      <li>id: {{ box.resource.id }}</li>
-      <li>creator: {{ box.resource.creator }}</li>
-      <li>lastModified: {{ box.resource.lastModified }}</li>
-      <li>license: {{ box.resource.license }}</li>
-    </ul>
+    <div ng-bind-template="id: {{ box.resource.id }}"></div>
+    <div ng-bind-template="creator: {{ box.resource.creator }}"></div>
+    <div ng-bind-template="lastModified: {{ box.resource.lastModified }}"></div>
+    <div ng-bind-template="license: {{ box.resource.license }}"></div>
 
 	</div>
 	</div>

@@ -10,6 +10,7 @@
 module.exports = function (grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-protractor-runner');
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
@@ -61,6 +62,10 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/styles/less/*.less'],
         tasks: ['less']
       },
+      protractor: {
+        files: ['app/**/*.js', 'test/e2e/**/*.js'],
+        tasks: ['protractor:continuous']
+      },
       livereload: {
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -102,7 +107,26 @@ module.exports = function (grunt) {
       },
       test: {
         options: {
+            //base: ['app'],  // not sure if this works
           port: 9001,
+          middleware: function (connect) {
+            return [
+              connect.static('.tmp'),
+              connect.static('test'),
+              connect().use(
+                '/bower_components',
+                connect.static('./bower_components')
+              ),
+              connect.static(appConfig.app)
+            ];
+          }
+        }
+      },
+      e2e: {
+        options: {
+            //base: ['app'],  // not sure if this works
+          port: 9001,
+          //base: ['app']
           middleware: function (connect) {
             return [
               connect.static('.tmp'),
@@ -140,7 +164,7 @@ module.exports = function (grunt) {
         options: {
           jshintrc: 'test/.jshintrc'
         },
-        src: ['test/spec/{,*/}*.js']
+        src: ['test/unit/{,*/}*.js']
       }
     },
 
@@ -157,7 +181,7 @@ module.exports = function (grunt) {
         ]
       },
       test: {
-        src: ['test/spec/{,*/}*.js']
+        src: ['test/unit/{,*/}*.js']
       }
     },
 
@@ -361,10 +385,6 @@ module.exports = function (grunt) {
           paths: ['<%= yeoman.app %>/styles/less'],
           strictMath: true
         },
-        // files: {
-        //   '<%= yeoman.app %>/styles/main.css': '<%= yeoman.app %>/styles/less/main.less',
-        //   '<%= yeoman.app %>/styles/labsys.css': '<%= yeoman.app %>/styles/less/labsys.less'
-        // }
         files: [{
             expand: true,
             cwd: '<%= yeoman.app %>/styles/less',
@@ -439,12 +459,42 @@ module.exports = function (grunt) {
       ]
     },
 
-    // Test settings
+    // Unit test settings
     karma: {
       unit: {
         configFile: 'test/karma.conf.js',
         singleRun: false
       }
+    },
+
+    // e2e test settings
+    protractor: {
+        options: {
+            // Location of your protractor config file
+            configFile: "test/protractor-conf.js",
+
+            // Do you want the output to use fun colors?
+            noColor: false,
+
+            // Set to true if you would like to use the Protractor command line debugging tool
+            // debug: true,
+
+            // Additional arguments that are passed to the webdriver command
+            args: { }
+        },
+        // single run mode
+        e2e: {
+            options: {
+                // Stops Grunt process if a test fails
+                keepAlive: false
+            }
+        },
+        // continuous mode
+        continuous: {
+            options: {
+                keepAlive: true
+            }
+        }
     }
   });
 
@@ -472,13 +522,20 @@ module.exports = function (grunt) {
 
   grunt.registerTask('test', [
     'clean:server',
-    'wiredep',
+    'wiredep:test',
     'less',
     'concurrent:test',
     'postcss',
     'connect:test',
-    'karma'
+    'karma:unit'
   ]);
+
+  grunt.registerTask('e2e-test', [
+    'connect:e2e',
+    'protractor:continuous',
+    'watch:protractor'
+  ]);
+
 
   grunt.registerTask('build', [
     'clean:dist',

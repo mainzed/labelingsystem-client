@@ -18,13 +18,24 @@ angular.module('labelsApp')
         var relation;
 
         scope.init = function() {
+            scope.tooltips = TooltipService;  // used for exactMatch comments etc
+
             scope.ngModel = scope.box;
-            scope.tooltip = TooltipService.icons.types[scope.ngModel.type];
 
             resource = scope.ngModel.resource;
             relation = scope.ngModel.relation;
             boxType = scope.ngModel.boxType;
 
+            if (scope.ngModel.boxType === "label") {
+                scope.tooltip = TooltipService.icons.types.concept;
+            } else {
+                scope.tooltip = TooltipService.icons.types[scope.ngModel.boxType];
+            }
+
+
+            //console.log(scope.ngModel);
+
+            //console.log(scope.tooltip);
             // determine names
             if (boxType === "altLabel" || boxType === "prefLabel" || boxType === "description") {
                 scope.text = resource.value;
@@ -202,7 +213,6 @@ angular.module('labelsApp')
          * @param {string} resource.uri - Link url
          */
         scope.openResource = function(resource) {
-            console.log(resource);
             var url;
             if (resource.type === "getty") {
                 var id = resource.uri.split('/').pop();

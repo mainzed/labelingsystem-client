@@ -1,63 +1,65 @@
 <div class="dialogwrapper label">
+
   <div class="dialogheader">
-    <h3>label metadata</h3>
+    <h3 ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}" ng-bind="prefLabel.value"></h3>
+    <p class="typeinformation"> metadata/settings</p>
     <div class="line-bottom"></div>
-  </div> 
+  </div>
+
 
   <div class="dialogscroll">
   <div class="nano">
   <div class="nano-content">
-    <div class="dialogbox dialog-full" ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}">
-     
+
+    <!-- <div class="dialogbox dialog-full" ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}">
+
       <h4>main term:</h4>
       <input type="text" ng-model="prefLabel.value"></input>
-      
-    </div>  
+
+    </div> -->
 
 
-    <div class="line-dialog"></div>
+    <!-- <div class="line-dialog"></div> -->
+
     <div class="dialogbox dialog-full">
-      <div class="deletebutton pointer" ng-click="onDeleteClick(); closeThisDialog()">
-        <span class="buttontext">Delete this label</span>
-        <span class="icon-trash icon"></span>
-      </div>
+      <confirm-button on-confirm="deleteConcept(label.id); closeThisDialog()"></confirm-button>
     </div>
 
     <div class="line-dialog"></div>
     <div class="dialogbox dialog-full">
       <h4 >meta data</h4>
-     
+
         <span class="listtype">License</span>
-        <span class="listcontent">{{ label.license }}</span>
+        <span class="listcontent" ng-bind="label.license"></span>
 
         <span class="listtype">Creator</span>
-        <span class="listcontent">{{ label.creator }}</span>
+        <span class="listcontent" ng-bind="label.creator"></span>
 
         <span class="listtype">Date of creation</span>
-        <span class="listcontent">{{ label.created | date: 'dd.MM.yyyy' }}</span>
+        <span class="listcontent" ng-bind-template="{{ label.created | date: 'dd.MM.yyyy' }}"></span>
 
-        
+
         <span class="listtype">Contributors:</span>
         <span class="listcontent">
           <ul>
-            <li ng-repeat="contributor in label.contributors">{{ contributor }}</li>
+            <li ng-repeat="contributor in label.contributors" ng-bind="contributor"></li>
           </ul>
         </span>
-     
-    </div>  
 
-        
-    
-
-       
-      
+    </div>
 
 
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
 
   </div>
   </div>
@@ -68,6 +70,3 @@
   <div class="cancel" ng-click="closeThisDialog()">Cancel</div>
   <div class="apply" ng-click="onThumbnailPrefLabelEdit(label); closeThisDialog()">Apply</div>
 </div>
-
-
-

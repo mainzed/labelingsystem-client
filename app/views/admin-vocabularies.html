@@ -13,17 +13,14 @@
 
 <div id="listwrapper">
 	<div class="nano">
-    <div id="boxcontainer" class="nano-content voc-box" ng-click="$location.path('/admin/vocabularies/' + vocab.id + '/labels/')">
-		<div class="box vocabulary high label" ng-repeat="vocab in vocabularies | filter: vocabFilter">
-		  <a href="#/admin/vocabularies/{{ vocab.id }}/labels/">
-		    {{ vocab.title.value }}
-		  </a>
-		  <ul>
-		    <li>{{ vocab.releaseType }}</li>
-		    <li>Description: {{ vocab.description.value }}</li>
-		    <li>Created by {{ vocab.creator }} on {{ vocab.created | date: 'dd.MM.yyyy' }}
-		    <li>license: {{ vocab.license }}</li>
-		  </ul>
+
+    <div id="boxcontainer" class="nano-content voc-box">
+		<div class="box vocabulary high label" ng-repeat="vocab in vocabularies | filter: vocabFilter" ng-click="onVocabClick(vocab.id)">
+      <div ng-bind="vocab.title.value"></div>
+      <div ng-bind="vocab.releaseType"></div>
+      <div ng-bind-template="Description: {{ vocab.description.value }}"></div>
+      <div ng-bind-template="Created by {{ vocab.creator }} on {{ vocab.created | date: 'dd.MM.yyyy' }}"></div>
+      <div ng-bind-template="license: {{ vocab.license }}"></div>
 
 		</div>
 	</div>

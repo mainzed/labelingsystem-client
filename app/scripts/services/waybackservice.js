@@ -15,7 +15,7 @@ angular.module('labelsApp')
     this.get = function(url, success, failure) {
         $http.get(host + '/resourcewayback?url=' + url).then(function(res) {
             // return wayback link
-            success(res.data.url);
+            success(res.data.uri);
         }, function(err) {
             failure(err);
         });
