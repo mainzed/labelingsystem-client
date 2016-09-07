@@ -79,7 +79,7 @@ angular.module('labelsApp')
      * @param {string} id - Label ID
      */
     $scope.onLabelClick = function(id) {
-        $location.path("admin/vocabularies/" + $scope.vocabulary.id + "/labels/" + id);
+        $location.path("admin/vocabularies/" + $scope.vocabulary.id + "/concepts/" + id);
     };
 
     /**
@@ -124,7 +124,9 @@ angular.module('labelsApp')
             user: $scope.user.name
         }, function(label) {
             if (label.id) {
-                $scope.labels.push(label);
+                //$scope.labels.push(label);
+                //console.log("/admin/vocabularies/" + $routeParams.vID + "/concepts/" + label.id);
+                $location.path("/admin/vocabularies/" + $routeParams.vID + "/concepts/" + label.id);
             }
         });
     };
