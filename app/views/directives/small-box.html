@@ -6,7 +6,7 @@
   <span class="thumbnail" ng-bind="text"></span>
 
   <!-- type icon -->
-  <span class="type" ng-bind-html="type" title="{{ tooltip }}"></span>
+  <span class="type" ng-bind-html="type" title="{{ tooltip }}" ng-show="ngModel.boxType !== 'label'"></span>
 
   <mini-preview label="ngModel.resource" size="micro" ng-show="ngModel.boxType === 'label'"></mini-preview>
 

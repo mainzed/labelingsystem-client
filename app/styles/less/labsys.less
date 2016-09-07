@@ -151,12 +151,13 @@ textarea:focus {	outline: none; }
 .box 	{ 			float: left;  cursor: pointer; }
 .small 	{			margin-bottom: @marginbottombox; margin-left: @marginoutboxsmall; position: relative; min-height: @boxheight; }
 .bigbox {			width: calc(100% - @marginoutside - @marginoutboxsmall); margin-bottom: @marginbottombox; margin-left: @marginoutboxsmall; position: relative;	}
+.bigbox:hover {		background: gray; }
 .vocabulary {		width: calc((100% - @marginoutside * 2 - @marginoutboxsmall * 3) / 5); margin-left: @marginoutboxsmall; height: 200px; 
 					margin-bottom: @marginoutboxsmall; }
 .voc-box {			padding-left: calc(@marginoutside - @marginoutboxsmall); }
 #boxcontainer .bigbox {
 					margin-left: @marginoutside; width: calc(100% - @marginoutside * 2); }
-.plusposition 	{	position: fixed; left: 50%; bottom: 20%; width: 50px; margin-left: -25px; cursor: pointer;
+.plusposition 	{	position: fixed; left: 50%; bottom: 10%; width: 50px; margin-left: -25px; cursor: pointer;
 					display: block; height: 25px; width: 25px; padding: 6px 6px; font-size: 30px; line-height: 23px;
     				color: #555; text-align: center; background-color: #fff; background-image: none; border: 1px solid #ccc;
 					border-radius: 20px; box-shadow: 0 3px 15px black; }
@@ -272,8 +273,8 @@ textarea:focus {	outline: none; }
 .minibox 	{		width: 100%; height: 6px; margin-bottom: 4px; display: block;}
 
 
-.micropreview {		height: calc(@boxheight - @margininboxsmall * 2 - 10px); margin: @margininboxsmall; background: black;
-					width: 40px; float: left; padding: 4px 2px 6px 2px; overflow: hidden;	}
+.micropreview {		height: 20px; margin: @margininboxsmall; background: black;
+					width: 40px; position: absolute; top: 0; right: 0; padding: 4px 2px 6px 2px; overflow: hidden;	}
 .microcol	 {		width: calc(25% - 2px); padding: 0 2px; float: left; height: 100%;	}
 .microbox 	{		width: 100%; height: 6px; margin-bottom: 4px; display: block;}
 
@@ -331,6 +332,9 @@ textarea:focus {	outline: none; }
 					position: absolute; right: 50px; font-size: 100px; top: 8px; }
 #header .icon-folder {
 					position: absolute; right: 50px; font-size: 100px; top: 2px; }
+#filtersearch .icon-search	{
+					font-size: 24px; margin-top: 4px; color: gray;
+}				
 
 .ngdialog-overlay { background: rgba(0, 0, 0, 0.8); }
 .selectedbutton {	background: gray; }
