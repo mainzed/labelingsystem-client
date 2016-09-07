@@ -40,7 +40,7 @@ angular.module('labelsApp')
     // load label for the current vocabulary
     LabelService.get({id: $routeParams.lID}, function(label) {
         $scope.label = label;
-        console.log(label);
+        //console.log(label);
         $scope.loadBoxes();
 
         $scope.prefLabel = _.find($scope.label.prefLabels, {isThumbnail: true});
@@ -84,22 +84,28 @@ angular.module('labelsApp')
         });
     };
 
-    $scope.getLabelAttributes = function(label) {
+    /**
+     * Get all of the concept's prefLabels, altLabels and description.
+     * @param {Object} concept - Concept object
+     * @param {Object} concept.scopeNote - Concept description
+     * @param {Object} concept.prefLabels
+     * @param {Object} concept.altLabels
+     */
+    $scope.getConceptAttributes = function(concept) {
+        var attributeList = [];
 
-        if (label.scopeNote) {
-            $scope.boxes.push({
+        if (concept.scopeNote) {
+            attributeList.push({
                 relation: "attribute",
                 boxType: "description",
-                resource: label.scopeNote
+                resource: concept.scopeNote
             });
-
         }
 
-        // add prefLabels to attributeBoxes
-        if (label.prefLabels) {
-            label.prefLabels.forEach(function(prefLabel) {
+        if (concept.prefLabels) {
+            concept.prefLabels.forEach(function(prefLabel) {
                 if (!prefLabel.isThumbnail) {  // ignore thumbnail preflabel
-                    $scope.boxes.push({
+                    attributeList.push({
                         relation: "attribute",
                         boxType: "prefLabel",
                         resource: prefLabel
@@ -108,17 +114,16 @@ angular.module('labelsApp')
             });
         }
 
-        // add altLabels to attributeBoxes
-        if (label.altLabels) {
-            label.altLabels.forEach(function(altLabel) {
-                altLabel.type = "text";
-                $scope.boxes.push({
+        if (concept.altLabels) {
+            concept.altLabels.forEach(function(altLabel) {
+                attributeList.push({
                     relation: "attribute",
                     boxType: "altLabel",
                     resource: altLabel
                 });
             });
         }
+        return attributeList;
     };
 
     // relations = ls internal
@@ -378,7 +383,10 @@ angular.module('labelsApp')
 
         $scope.boxes = [];
         // add description to attributeBoxes
-        $scope.getLabelAttributes($scope.label);
+        var attributes = $scope.getConceptAttributes($scope.label);
+        attributes.forEach(function(attr) {
+            $scope.boxes.push(attr);
+        });
 
         // append to broaderBoxes etc
         $scope.getLabelRelations($scope.label);
@@ -397,13 +405,6 @@ angular.module('labelsApp')
         UserSettingsService.showEnrichments = $scope.showEnrichments;
         //$(".nano").nanoScroller();
     };
-
-    // listener to reload nanoscroller when menu is hidden or shown
-    $scope.$watch("showEnrichments", function() {
-        $timeout(function() {
-            $(".nano").nanoScroller();
-        }, 0);
-    });
 
     // open dialog with label-metadata
     $scope.onLabelHeadingClick = function() {
@@ -433,6 +434,21 @@ angular.module('labelsApp')
             console.log(res);
         });
     };
+
+    /**
+     * Deletes a concept based on its ID.
+     * @param {string} id - Concept ID
+     */
+    $scope.deleteConcept = function(id) {
+        console.log("delete concept: " + id);
+    };
+
+    // listener to reload nanoscroller when menu is hidden or shown
+    $scope.$watch("showEnrichments", function() {
+        $timeout(function() {
+            $(".nano").nanoScroller();
+        }, 0);
+    });
 
     // hotkeys
     $document.keydown(function(e) {
