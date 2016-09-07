@@ -203,7 +203,7 @@ angular.module('labelsApp')
          * redirect to new label path
          */
         scope.openLabel = function() {
-            $location.path('/admin/vocabularies/' + scope.box.resource.vocabID + '/labels/' + scope.box.resource.id);
+            $location.path('/admin/vocabularies/' + scope.box.resource.vocabID + '/concepts/' + scope.box.resource.id);
         };
 
         /**
