@@ -61,7 +61,7 @@ angular.module('labelsApp')
             } else if (boxType === "altLabel") {
                 scope.type = "<span class='icon-altlabel'></span>";
             } else if (boxType === "label") {
-                scope.type = "<span class='icon-label'></span>";
+                scope.type = "<span class='icon-concept'></span>";
             } else if (boxType === "wayback") {
                 scope.type = "(" + boxType + ")";
             } else {

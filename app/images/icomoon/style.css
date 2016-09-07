@@ -25,11 +25,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-hide:before {
-  content: "\e905";
+
+.icon-concept:before {
+  content: "\e904";
 }
 .icon-checked:before {
-  content: "\e90b";
+  content: "\e903";
+}
+.icon-altlabel:before {
+  content: "\e90e";
+}
+.icon-hide:before {
+  content: "\e905";
 }
 .icon-unchecked:before {
   content: "\e90d";
@@ -58,13 +65,7 @@
 .icon-close:before {
   content: "\e909";
 }
-.icon-label:before {
-  content: "\e902";
-}
-.icon-altlabel:before {
-  content: "\e903";
-}
 .icon-preflabel:before {
-  content: "\e904";
+  content: "\e902";
 }
 
