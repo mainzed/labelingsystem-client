@@ -2,6 +2,7 @@
 	<div class="dialogheader">
 		<h3 ng-bind="text"></h3>
 		<p class="typeinformation">Concept - <span class="loudlink" ng-click="openLabel(); closeThisDialog()">open in same tab</span></p>
+      <mini-preview label="box.resource" ng-show="box.boxType === 'label'"></mini-preview>
 		<div class="line-bottom"></div>
 	</div>
 	<div class="dialogscroll">
@@ -11,6 +12,7 @@
 			<div class="dialog-half col">
 				<span class="italic"><span class="icon-note"></span>Description</span><br>
         {{ description.value }}
+
 			</div>
 			<div class="dialog-quarter col">
 				<span class="italic">Broader</span><br>

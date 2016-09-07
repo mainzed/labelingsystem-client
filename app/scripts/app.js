@@ -47,7 +47,7 @@ angular
         templateUrl: 'views/admin-vocabularies.html',
         controller: 'VocabsCtrl'
       })
-      .when('/admin/vocabularies/:vID/labels', {
+      .when('/admin/vocabularies/:vID/concepts', {
         templateUrl: 'views/admin-labels.html',
         controller: 'LabelsCtrl'
       })

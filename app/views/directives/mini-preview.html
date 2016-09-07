@@ -2,22 +2,22 @@
 
   <!-- broader -->
   <span ng-class="{'micro': 'microcol', 'mini': 'minicol'}[size]">
-    <span ng-repeat="box in miniBoxes | filter: broaderFilter" class="minibox {{box.type}}"></span>
+    <span ng-repeat="box in miniBoxes | filter: broaderFilter" class="{{box.type}}" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[size]"></span>
   </span>
 
   <!-- text -->
   <span ng-class="{'micro': 'microcol', 'mini': 'minicol'}[size]">
-    <span ng-repeat="box in miniBoxes | filter: attributeFilter" class="minibox {{box.type}}"></span>
+    <span ng-repeat="box in miniBoxes | filter: attributeFilter" class="{{box.type}}" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[size]"></span>
   </span>
 
   <!-- relations -->
   <span ng-class="{'micro': 'microcol', 'mini': 'minicol'}[size]">
-    <span ng-repeat="box in miniBoxes | filter: relatedFilter" class="minibox {{box.type}}"></span>
+    <span ng-repeat="box in miniBoxes | filter: relatedFilter" class="{{box.type}}" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[size]"></span>
   </span>
 
   <!-- narrower -->
   <span ng-class="{'micro': 'microcol', 'mini': 'minicol'}[size]">
-    <span ng-repeat="box in miniBoxes | filter: narrowerFilter" class="minibox {{box.type}}"></span>
+    <span ng-repeat="box in miniBoxes | filter: narrowerFilter" class="{{box.type}}" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[size]"></span>
   </span>
 
 </span>

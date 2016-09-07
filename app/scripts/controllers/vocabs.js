@@ -31,7 +31,7 @@ angular.module('labelsApp')
      * @param {string} id - Vocabulary ID
      */
     $scope.onVocabClick = function(id) {
-        $location.path('/admin/vocabularies/' + id + '/labels/');
+        $location.path('/admin/vocabularies/' + id + '/concepts');
     };
 
     /**
