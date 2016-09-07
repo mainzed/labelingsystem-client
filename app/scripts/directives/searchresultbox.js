@@ -61,7 +61,7 @@ angular.module('labelsApp')
                 } else {
                     updatedLabel[relation].push({
                         type: scope.data.type,
-                        url: scope.data.uri
+                        uri: scope.data.uri
                     });
                 }
 

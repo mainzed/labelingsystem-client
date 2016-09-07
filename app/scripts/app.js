@@ -54,14 +54,10 @@ angular
       .when('/admin/vocabularies/:vID', {
         redirectTo: '/admin/vocabularies/:vID/concepts'
       })
-      .when('/admin/vocabularies/:vID/labels/:lID', {
+      .when('/admin/vocabularies/:vID/concepts/:lID', {
         templateUrl: 'views/admin-label-detail.html',
         controller: 'LabelDetailCtrl',
         controllerAs: 'LabelDetailCtrl'
-      })
-      .when('/cssTest', {
-        templateUrl: 'views/matthias.html',
-        controller: 'RandomCtrl'
       })
       .otherwise({
         redirectTo: '/'
