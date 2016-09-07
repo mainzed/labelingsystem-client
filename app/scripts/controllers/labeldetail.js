@@ -321,10 +321,9 @@ angular.module('labelsApp')
         });
     };
 
-    $scope.addLinkConfirm = function(url) {
+    $scope.addLinkConfirm = function(url) {//
 
-        WaybackService.get(url, function(waybackUrl) {
-
+        WaybackService.get(url, function(waybackUri) {
             if (!$scope.label.seeAlso) {
                 $scope.label.seeAlso = [];
             }
@@ -332,7 +331,7 @@ angular.module('labelsApp')
             // append wayback link as seeAlso
             $scope.label.seeAlso.push({
                 type: "wayback",
-                url: waybackUrl
+                uri: waybackUri
             });
 
             LabelService.update({id: $routeParams.lID}, {

@@ -2,7 +2,7 @@
 <div class="box bigbox {{ data.type }} {{ data.quality }}" ng-click="onClick()">
   <span class="thumbnail">
     <button class="showadditionalcontent" ng-click="showMore = !showMore; $event.stopPropagation()">
-      <span ng-show="!showMore && data.description">+</span>
+      <span ng-show="!showMore">+</span>
       <span ng-show="showMore">-</span>
     </button>
     {{ data.label }}
@@ -22,6 +22,7 @@
   <span class="note-ext">
     <span class="italic">Description</span><br>
     {{ data.description }}
+    <a ng-href="{{ data.uri }}" target="_blank">link</a>
   </span>
 
   <span class="note-ext">
@@ -36,6 +37,7 @@
       <li ng-repeat="term in data.narrowerTerms">{{ term.label }}</li>
     </ul>
   </span>
+
 
 
 </div>

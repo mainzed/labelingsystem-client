@@ -1,6 +1,6 @@
 <div class="dialogwrapper label">
   <div class="dialogheader">
-    <h3>{{ vocabulary.title.value }}</h3>
+    <h3 ng-bind="vocabulary.title.value"></h3>
     <p class="typeinformation"> metadata/settings</p>
     <div class="line-bottom"></div>
   </div>
@@ -29,32 +29,28 @@
         <div class="dialogbox dialog-full">
           <h4 >meta data</h4>
           <span class="listtype">language</span>
-          <span class="listcontent">{{ vocabulary.title.lang }}</span>
+          <span class="listcontent" ng-bind="vocabulary.title.lang"></span>
 
           <span class="listtype">license</span>
-          <span class="listcontent">{{ vocabulary.license }}</span>
+          <span class="listcontent" ng-bind="vocabulary.license"></span>
 
           <span class="listtype">creator</span>
-          <span class="listcontent">{{ vocabulary.creator }}</span>
+          <span class="listcontent" ng-bind="vocabulary.creator"></span>
 
           <span class="listtype">creation date</span>
-          <span class="listcontent">{{ vocabulary.created }}</span>
+          <span class="listcontent" ng-bind="vocabulary.created"></span>
 
         </div>
 
         <div class="line-dialog"></div>
         <div class="dialogbox dialog-full">
           <h4>Referenzthesauri</h4>
-          <div class="thesaurus" ng-repeat="thesaurus in thesauri" ng-class="{'checked': thesaurus.checked}">
+          <div class="thesaurus" ng-repeat="thesaurus in thesauri" ng-if="thesaurus.name.indexOf('this.') < 0" ng-class="{'checked': thesaurus.checked}">
 
             <checkbox ng-model="thesaurus.checked" on-check="onCheckChange()" ng-class="{'inactive': thesaurus.description === 'this vocabulary'}"></checkbox>
 
-            <h5>
-              {{ thesaurus.name }}
-            </h5>
-            <p>
-              {{ thesaurus.description }}
-            </p>
+            <h5 ng-bind="thesaurus.name"></h5>
+            <p ng-bind="thesaurus.description"></p>
           </div>
         </div>
 

@@ -202,7 +202,6 @@ angular.module('labelsApp')
          * @param {string} resource.uri - Link url
          */
         scope.openResource = function(resource) {
-            console.log(resource);
             var url;
             if (resource.type === "getty") {
                 var id = resource.uri.split('/').pop();

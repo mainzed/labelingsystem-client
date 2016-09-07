@@ -145,4 +145,10 @@ angular.module('labelsApp')
         });
     };
 
+    /**
+     * Watcher to refresh nanoscroller when thesauri are loaded
+     */
+    $scope.$watch("thesauri", function() {
+        $(".nano").nanoScroller();
+    });
 });

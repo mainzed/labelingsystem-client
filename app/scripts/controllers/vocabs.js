@@ -26,10 +26,22 @@ angular.module('labelsApp')
         $scope.vocabularies = vocabularies;
     });
 
+    /**
+     * Redirects to the label overview of the specified vocabulary.
+     * @param {string} id - Vocabulary ID
+     */
+    $scope.onVocabClick = function(id) {
+        $location.path('/admin/vocabularies/' + id + '/labels/');
+    };
+
+    /**
+     * Logout current user and redirect to login page if successfull.
+     */
     $scope.onLogoutClick = function() {
         AuthService.logout(function() {
-            // success
             $location.path('/admin/login');
+        }, function(err) {
+            console.log(err);
         });
     };
 
