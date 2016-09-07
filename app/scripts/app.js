@@ -51,6 +51,9 @@ angular
         templateUrl: 'views/admin-labels.html',
         controller: 'LabelsCtrl'
       })
+      .when('/admin/vocabularies/:vID', {
+        redirectTo: '/admin/vocabularies/:vID/concepts'
+      })
       .when('/admin/vocabularies/:vID/labels/:lID', {
         templateUrl: 'views/admin-label-detail.html',
         controller: 'LabelDetailCtrl',
