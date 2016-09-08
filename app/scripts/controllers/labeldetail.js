@@ -40,7 +40,7 @@ angular.module('labelsApp')
     // load label for the current vocabulary
     LabelService.get({id: $routeParams.lID}, function(label) {
         $scope.label = label;
-        
+
         $scope.loadBoxes();
 
         $scope.prefLabel = _.find($scope.label.prefLabels, {isThumbnail: true});
@@ -104,13 +104,12 @@ angular.module('labelsApp')
 
         if (concept.prefLabels) {
             concept.prefLabels.forEach(function(prefLabel) {
-                if (!prefLabel.isThumbnail) {  // ignore thumbnail preflabel
-                    attributeList.push({
-                        relation: "attribute",
-                        boxType: "prefLabel",
-                        resource: prefLabel
-                    });
-                }
+                //if (!prefLabel.isThumbnail) {  // ignore thumbnail preflabel
+                attributeList.push({
+                    relation: "attribute",
+                    boxType: "prefLabel",
+                    resource: prefLabel
+                });
             });
         }
 
@@ -428,19 +427,17 @@ angular.module('labelsApp')
         });
     };
 
-    $scope.onThumbnailPrefLabelEdit = function(label) {
-        //console.log(label);
-        LabelService.update({id: label.id }, label, function(res) {
-            console.log(res);
-        });
-    };
-
     /**
      * Deletes a concept based on its ID.
      * @param {string} id - Concept ID
      */
     $scope.deleteConcept = function(id) {
-        console.log("delete concept: " + id);
+        LabelService.remove({id: id}, function() {
+            // redirect to concept overview
+            $location.path("/admin/vocabularies/" + $scope.vocabulary.id + "/concepts");
+        }, function(err) {
+            console.log(err);
+        });
     };
 
     // listener to reload nanoscroller when menu is hidden or shown

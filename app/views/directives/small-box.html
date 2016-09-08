@@ -1,4 +1,4 @@
-<div class="box small {{ cssClass }} {{ quality }}" ng-click="onBoxClick()">
+<div class="box small {{ cssClass }} {{ quality }}" ng-click="onBoxClick()" ng-class="{'inactive': isPublicThumbnail}">
 
   <!-- relation icon -->
   <span class="relation" ng-bind-html="relation"></span>
