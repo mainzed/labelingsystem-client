@@ -238,7 +238,7 @@ textarea:focus {	outline: none; }
 .enrichbutton-ow .icon {
 					position: absolute; top: @margininboxsmall; left: @margininboxsmall; }
 .enrichbuttons-min .enrichbutton-ow {
-					height: 30px; }
+					height: 40px; }
 .enrichbuttons-min .enrichbutton-ow .icon {
 					top: 2px; left: auto; right: 2px; }
 .enrichinfo	 {		padding: @margininboxsmall; margin-top: 30px; display: block; }
@@ -294,10 +294,12 @@ textarea:focus {	outline: none; }
 .dialog-half {		width: calc((100% - ( @marginoutboxsmall * 2  + @marginoutside * 2)) / 2 ); margin-left: @marginoutside; }
 .dialog-quarter {	width: calc((100% - ( @marginoutboxsmall * 2  + @marginoutside * 2)) / 4 ); margin-left: @marginoutboxsmall; }
 .dialog-full	{	width: 100%;  }
-.deletebutton { 	width: calc(100% - @marginoutside * 2 ); height: 50px; margin-left: @marginoutside; position: relative; background: @workareas;	}
+.deletebutton { 	width: calc(100% - @marginoutside * 2 ); height: 40px; margin-left: @marginoutside; position: relative; background: @middle; color: white;	}
 .deletebutton .icon {position: absolute;  line-height: 25px; right: @marginoutboxsmall; }
+.label .deletebutton {
+					color: black; background: #d6d6d6; }
 .deletebutton .buttontext {
-					margin: 0; }
+					margin: @margininboxsmall; }
 .line-dialog {		height: 1px; width: calc(100% - @marginoutside * 2); margin-left: @marginoutside; float: left;
 					display: block; background: black; margin-bottom: @margininboxsmall; margin-top: 50px; }
 .line-bottom {		height: 1px; width: calc(100% - @marginoutside * 2); left: @marginoutside; position: absolute; bottom: 0; display: block; background: black; }

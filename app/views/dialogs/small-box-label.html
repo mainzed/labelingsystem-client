@@ -64,11 +64,19 @@
 		<div class="line-dialog"></div>
 
     <h4>meta data</h4>
-    <div ng-bind-template="id: {{ box.resource.id }}"></div>
-    <div ng-bind-template="creator: {{ box.resource.creator }}"></div>
-    <div ng-bind-template="lastModified: {{ box.resource.lastModified }}"></div>
-    <div ng-bind-template="license: {{ box.resource.license }}"></div>
+    	<span class="listtype">id</span>
+        <span class="listcontent" ng-bind="box.resource.id"></span>
 
+        <span class="listtype">Creator</span>
+        <span class="listcontent" ng-bind="box.resource.creator"></span>
+
+        <span class="listtype">Last modified</span>
+        <span class="listcontent" ng-bind="box.resource.lastModified"></span>
+
+        <span class="listtype">License</span>
+        <span class="listcontent" ng-bind="box.resource.license"></span>
+
+    
 	</div>
 	</div>
 	</div>
