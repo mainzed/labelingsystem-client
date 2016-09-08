@@ -8,7 +8,7 @@
  * Controller of the labelsApp
  */
 angular.module('labelsApp')
-  .controller('LabelsCtrl', function ($scope, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService, ConfigService) {
+  .controller('LabelsCtrl', function ($scope, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService, ConfigService, UserSettingsService) {
 
     // init nanoscroller here to prevent default scrollbar while loading boxes
     $(".nano").nanoScroller();
@@ -24,9 +24,10 @@ angular.module('labelsApp')
         }
     }
 
+    // initial values
     $scope.tooltips = TooltipService;
-
     $scope.placeholder = "loading labels...";
+    $scope.extendAll = UserSettingsService.extendAll;
 
     VocabService.get({id: $routeParams.vID}, function(vocabulary) {
         $scope.vocabulary = vocabulary;
@@ -44,19 +45,6 @@ angular.module('labelsApp')
         $scope.labels = labels;
         $scope.placeholder = "filter";
     });
-
-    /**
-     * Toggles (collapses or extends) all list boxes by setting a variable they
-     * all share.
-     */
-    $scope.onExtendClick = function() {
-        $scope.extentAll = !$scope.extentAll;
-        if ($scope.extentAll) {
-            $scope.collapseText = "collapse all";
-        } else {
-            $scope.collapseText = "";
-        }
-    };
 
     /**
      * Opens the metadata/settings dialog of a vocabulary.
@@ -208,5 +196,29 @@ angular.module('labelsApp')
         //console.log(qualityScore);
         return -1 * qualityScore;
     };
+
+    // UserSettingsService watchers
+    $scope.$watch("labelOrder", function(newValue) {
+        UserSettingsService.labelOrder = newValue;
+    });
+
+    /**
+     * Watch if boxes are extended or not and updated text accordingly.
+     */
+    $scope.$watch("extendAll", function(newVal) {
+        // update service
+        UserSettingsService.extendAll = $scope.extendAll;
+
+        // update button text
+        if (newVal) {
+            $scope.extendButtonText = "collapse all";
+        } else {
+            $scope.extendButtonText = "extend all";
+        }
+    });
+
+    // set inital labelOrder to a function, has to be defined before this line
+    // TODO: sort button highlights dont work because of the returned functions
+    $scope.labelOrder = UserSettingsService.labelOrder || $scope.orderByThumbnail;
 
   });

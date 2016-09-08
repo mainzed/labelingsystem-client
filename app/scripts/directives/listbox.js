@@ -40,7 +40,7 @@ angular.module('labelsApp')
              * Watcher that resets nanoscroll each time the extentAll property
              * changes (e.g. by a button click on "extent all").
              */
-            scope.$parent.$watch("extentAll", function(newVal) {
+            scope.$parent.$watch("extendAll", function(newVal) {
                 scope.showMore = newVal;
                 $(".nano").nanoScroller();
             });//
