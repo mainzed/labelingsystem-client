@@ -72,28 +72,42 @@ angular.module('labelsApp')
 
                 LabelService.update({id: updatedLabel.id}, updateObject, function() {
                     // get all infos and add box temporarily
-                    ResourcesService.get(scope.data.uri, function(resource) {
+                    if (labelID) {
+                        LabelService.get({id: labelID}, function(concept) {
 
-                        // success
-                        scope.boxes.push({
-                            relation: relation,
-                            boxType: scope.data.type,
-                            resource: resource
+                            scope.boxes.push({
+                                relation: relation,
+                                boxType: scope.data.type,
+                                resource: concept
+                            });
+                        }, function(err) {
+                            console.log(err);
                         });
+                    } else {
+                        // get external resource
+                        ResourcesService.get(scope.data.uri, function(resource) {
+                            scope.boxes.push({
+                                relation: relation,
+                                boxType: scope.data.type,
+                                resource: resource
+                            });
+                        }, function(err) {
+                            console.log(err);
+                        });
+                    }
 
-                    }, function(err) {
-                        console.log(err);
-                    });
                 }, function(err) {
                     console.log(err);
                 });
+
+
             };
 
             /**
              * Watcher that updates nanoscroller when box is extended.
              */
             scope.$watch("showMore", function() {
-                console.log("showMore changed!");
+                $(".nano").nanoScroller();
             });
 
             // reload nanoscroller when directive rendered
