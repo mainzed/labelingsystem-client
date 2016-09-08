@@ -94,6 +94,11 @@ angular.module('labelsApp')
             // determine language
             scope.language = resource.lang;
 
+            // prevent editing of thumbnail preflabel when vocabulary is public
+            if (scope.ngModel.boxType === "prefLabel" && scope.ngModel.resource.isThumbnail && scope.vocabulary.releaseType === "public") {
+                scope.isPublicThumbnail = true;
+            }
+
             // refresh nanoscroller
             $(".nano").nanoScroller();
         };
