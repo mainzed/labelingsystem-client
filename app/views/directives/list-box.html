@@ -13,25 +13,25 @@
 
   <span class="type">(internal)</span>
 
-  <!-- <span class="language" ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: 'true'}" ng-show="!showMore">
-    {{ prefLabel.lang }}
-  </span> -->
-
 </div>
 
 <div ng-if="showMore" class="box boxextension bigbox label high" ng-click="onLabelClick(label.id)">
   <span class="line-ext"></span>
-  <span class="note-ext"><span class="italic"><span class="icon-note"></span>Description</span><br>{{ label.scopeNote.value }}</span>
+  <span class="note-ext">
+    <span class="italic">
+      <span class="icon-note"></span>
+      Description
+    </span><br>
+    {{ label.scopeNote.value }}
+  </span>
   <span class="note-ext"><span class="italic">broader</span><br>
     <ul>
-      <li ng-repeat="id in label.broader">{{ id }}</li>
+      <li ng-repeat="id in label.broader" ng-bind="id"></li>
     </ul></span>
   <span class="note-ext"><span class="italic">narrower</span><br>
     <ul>
-      <li ng-repeat="id in label.narrower">{{ id }}</li>
+      <li ng-repeat="id in label.narrower" ng-bind="id"></li>
     </ul>
   </span>
-  <!-- <span class="language" ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: 'true'}">
-    {{ prefLabel.lang }}
-  </span> -->
+
 </div>

@@ -16,7 +16,7 @@ angular.module('labelsApp')
         var path = $location.path();
 
         // check view and decide what breadcrumbs to show
-        if (path.indexOf("/labels/") > -1) {
+        if (path.indexOf("/concepts/") > -1) {
             scope.showLabelDetail = true;
 
         } else if (path.indexOf("/vocabularies/") > -1) {

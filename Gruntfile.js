@@ -62,10 +62,10 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/styles/less/*.less'],
         tasks: ['less']
       },
-      protractor: {
-        files: ['app/**/*.js', 'test/e2e/**/*.js'],
-        tasks: ['protractor:continuous']
-      },
+    //   protractor: {
+    //     files: ['app/**/*.js', 'test/e2e/**/*.js'],
+    //     tasks: ['protractor:continuous']
+    //   },
       livereload: {
         options: {
           livereload: '<%= connect.options.livereload %>'

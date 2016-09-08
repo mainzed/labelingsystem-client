@@ -34,9 +34,8 @@ angular.module('labelsApp')
         ThesauriService.query({id: vocabulary.id}, function(thesauri) {
             $scope.thesauri = thesauri;
 
-        }, function(res) {
-            // failure
-            console.log(res);
+        }, function(err) {
+            console.log(err);
         });
     });
 
