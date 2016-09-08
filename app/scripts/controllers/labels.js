@@ -34,19 +34,14 @@ angular.module('labelsApp')
         ThesauriService.query({id: vocabulary.id}, function(thesauri) {
             $scope.thesauri = thesauri;
 
-        }, function(res) {
-            // failure
-            console.log(res);
+        }, function(err) {
+            console.log(err);
         });
     });
 
     // load all labels for the current vocabulary
     LabelService.query({'vocab': $routeParams.vID}, function(labels) {
         $scope.labels = labels;
-        //console.log();
-        $scope.labels.forEach(function(label) {
-            console.log(label.prefLabels[0].value, label.lastModified);
-        });
         $scope.placeholder = "filter";
     });
 

@@ -18,7 +18,7 @@
   <span class="" ng-init="labelOrder = orderByThumbnail">
     <span class="pre">sort -</span>
 
-    <button type="button" ng-click="labelOrder = 'lastModfied'" ng-disabled="labelOrder === 'lastModfied'" ng-class="{'active': labelOrder === 'lastModfied'}">by lastModified</button>
+    <button type="button" ng-click="labelOrder = '-lastModified'" ng-disabled="labelOrder === '-lastModified'" ng-class="{'active': labelOrder === 'lastModfied'}">by lastModified</button>
 
     <button type="button" ng-click="labelOrder = orderByThumbnail" ng-disabled="labelOrder === orderByThumbnail" ng-class="{'active': labelOrder === orderByThumbnail}">alphabetically</button>
 
