@@ -10,14 +10,14 @@
 	<div class="nano-content">
 		<div class="dialogbox dialog-full">
 			<h4>Edit</h4>
-			<input ng-model="newValue" ng-init="newValue = text"></input>
+			<input ng-model="newValue" ng-init="newValue = data.value"></input>
 		</div>
 
 
 		<div class="line-dialog"></div>
 		<div class="dialogbox dialog-full">
       <!-- prevent thumbnail label from being deleted -->
-      <confirm-button on-confirm="onDeleteClick(); closeThisDialog()" ng-class="{'inactive': isThumbnail}"></confirm-button>
+      <confirm-button on-confirm="onDeleteClick(); closeThisDialog()"></confirm-button>
 		</div>
 
 
@@ -28,5 +28,5 @@
 
 
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="updateTerm('prefLabel', newValue, text); closeThisDialog()" ng-class="{'inactive': newValue === text}">Apply</div>
+	<div class="apply" ng-click="updateTerm('prefLabel', newValue, data.value); closeThisDialog()" ng-class="{'inactive': newValue === text}">Apply</div>
 </div>
