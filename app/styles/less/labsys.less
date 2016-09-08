@@ -10,34 +10,17 @@
 
 /* high quality */
 @high: 				#31CAFF;
-@getty: 			#FFF8A6;
-@eh: 				#CFFFA1;
-@chronontology: 	#C0FFE8;
-@ls:				#A9D2FF;
-@pleiades:			#FFCCE1;
-/*unused*/
-@aaaaa:				#FCE2CA;
-@aaaaaa:			#EFCAFF;
-
 
 /* low quality */
 @categorytwo:		#513C00;
 @categorythree:		#2B4400;
-@dbpedia:			#170056;
-@finto:				#513C00;
-@fao: 				#013642;
-@geonames:			#2B4400;
-@wayback:			#5E0101;
-/*unused*/
-@bbb:				#47003A;
-@bbbb:				#422200;
 
 
 /* font-sizes */
 @headlines: 		30px;
 @emphasize:			21px;
 @regular: 			16px;
-@small: 			12px;
+@small: 			14px;
 
 
 /* laptop font-sizes */
@@ -72,15 +55,15 @@ a {					color: inherit; text-decoration: underline; }
 html {				height: 100%;	}
 body {				height: 100%;	}
 textarea {			margin-left: @marginoutside; width: calc(100% - 2 * @marginoutside); display: block; resize: vertical;
-					height: 150px; border-radius: 3px; background: #d6d6d6; padding: @margininboxsmall; }
+					height: 150px; border-radius: 3px; background: #d6d6d6; padding: @margininboxsmall; border: 0; }
 h1 {				font-size: @headlines; font-weight: normal;
 					@media screen and (max-width: 1600px) {font-size: @headlines-small; } }
 h2 {				font-size: @headlines; font-weight: normal; margin-bottom: 50px; margin-top: @marginoutside; margin-left: @marginoutside; display: block;
 					@media screen and (max-width: 1600px) {font-size: @headlines-small; } }
-h3 {				font-size: @emphasize; font-weight: normal; margin-bottom: 5px; margin-top: @marginoutside; margin-left: @marginoutside; 
+h3 {				font-size: @emphasize; margin-bottom: 5px; margin-top: @marginoutside; margin-left: @marginoutside; 
 					display: block; float: left;
 					@media screen and (max-width: 1600px) {font-size: @emphasize-small; } }
-h4 {				font-size: @regular; font-weight: normal; margin-left: @marginoutside; display: block; margin-bottom: 20px;}
+h4 {				font-size: @regular; margin-left: @marginoutside; display: block; margin-bottom: 20px;}
 h5 {				float: left; }
 li {				margin-left: 14px; }
 button {			border: 0; background: transparent;}
@@ -164,7 +147,7 @@ textarea:focus {	outline: none; }
     				color: #555; text-align: center; background-color: #fff; background-image: none; border: 1px solid #ccc;
 					border-radius: 20px; box-shadow: 0 3px 15px black; }
 
-#selectedbox 	{	display: block; margin-bottom: 20px;}
+#selectedbox 	{	display: block; margin-bottom: 30px; float: left; width: 100%;}
 #selectedbox .bigbox {
 					margin-left: @marginoutside; width: calc(100% - @marginoutside * 2); }
 .listbox .thumbnail {
@@ -260,9 +243,9 @@ textarea:focus {	outline: none; }
 
 .buttonicon {		margin-right: @margininboxsmall; float: right;}
 .buttontext {		margin-left: @margininboxsmall; float: left; margin-top: 4px;			}
-.buttontext-ow {	position: absolute; left: @margininboxsmall; bottom: @margininboxsmall; font-size: @emphasize; 			}
+.buttontext-ow {	position: absolute; left: @margininboxsmall; bottom: @margininboxsmall; font-size: @regular; 			}
 .enrichbuttons-min .buttontext-ow {
-					font-size: @regular;
+					font-size: @regular; bottom: auto; top: @margininboxsmall;
 }
 #header .language {	font-size: @regular; margin-right: calc(@margininboxsmall * 2); bottom: 12px; }
 .boxextension {		margin-top: -3px; padding-bottom: @margininboxsmall;  }
@@ -291,11 +274,11 @@ textarea:focus {	outline: none; }
 
 /* dialogs */
 /* dialog grid */
-.dialog-half {		width: calc((100% - ( @marginoutboxsmall * 2  + @marginoutside * 2)) / 2 ); margin-left: @marginoutside; }
-.dialog-quarter {	width: calc((100% - ( @marginoutboxsmall * 2  + @marginoutside * 2)) / 4 ); margin-left: @marginoutboxsmall; }
+.dialog-half {		width: calc((100% - ( @marginoutboxsmall * 4  + @marginoutside * 2)) / 2 ); margin-left: @marginoutside; }
+.dialog-quarter {	width: calc((100% - ( @marginoutboxsmall * 4  + @marginoutside * 2)) / 4 ); margin-left: calc(@marginoutboxsmall * 2); }
 .dialog-full	{	width: 100%;  }
 .deletebutton { 	width: calc(100% - @marginoutside * 2 ); height: 40px; margin-left: @marginoutside; position: relative; background: @middle; color: white;	}
-.deletebutton .icon {position: absolute;  line-height: 25px; right: @marginoutboxsmall; }
+.deletebutton .icon {position: absolute;  line-height: 25px; right: @marginoutboxsmall; top: @margininboxsmall; }
 .label .deletebutton {
 					color: black; background: #d6d6d6; }
 .deletebutton .buttontext {
@@ -329,6 +312,9 @@ textarea:focus {	outline: none; }
 .thesaurus p {		float: left; clear: left; }
 .thesaurus .icon {	float: left; }
 .checked {			color: green; border-color: green; }
+.hierarchie li { 	 line-height: 18px; width: 100%; padding: 4px 0; font-size: @small; letter-spacing: 0.03em;
+					border-top: 1px solid black; list-style: none; margin-left: 0;  }
+
 
 
 
@@ -348,14 +334,15 @@ textarea:focus {	outline: none; }
 }				
 
 .ngdialog-overlay { background: rgba(0, 0, 0, 0.8); }
-.selectedbutton {	background: gray; }
+.selectedbutton {	background: @workareas; color: white; }
 
 /* extension content */
 .line-ext {			height: 1px; width: calc(100% - @margininboxsmall * 2); margin-left: @margininboxsmall; display: block; background: black; }
 .note-ext {			float: left; margin-left: 100px; width: 15%; margin-top: @margininboxsmall; }
 .creator-ext {		float: left; margin-left: @margininboxsmall; margin-top: @margininboxsmall; }
 
-.italic {			font-style: italic; }
+.italic {			font-weight: bold; }
+.italic .icon-note {line-height: 10px; line-height: 10px; margin-top: 2px; display: block; float: left;}
 .showadditionalcontent {
 					width: 20px; height: 20px; display: block; float: left; margin-top: 2px; color: white; }
 .label .showadditionalcontent, .high .showadditionalcontent {

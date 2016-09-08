@@ -16,13 +16,13 @@
 			</div>
 			<div class="dialog-quarter col">
 				<span class="italic">Broader</span><br>
-				<ul>
+				<ul class="hierarchie">
 					<li ng-repeat="broaderlabelID in box.resource.broader">{{ broaderlabelID }}</li>
 				</ul>
 			</div>
 			<div class="dialog-quarter col">
 				<span class="italic">Narrower</span><br>
-				<ul>
+				<ul class="hierarchie">
           <li ng-repeat="narrowerlabelID in box.resource.narrower">{{ narrowerlabelID }}</li>
 				</ul>
 			</div>
@@ -56,10 +56,7 @@
 	  </div>
 
 
-		<div class="line-dialog"></div>
-		<div class="dialogbox dialog-full">
-      <confirm-button on-confirm="onDeleteClick(); closeThisDialog()"></confirm-button>
-		</div>
+		
 
 		<div class="line-dialog"></div>
 
@@ -75,6 +72,11 @@
 
         <span class="listtype">License</span>
         <span class="listcontent" ng-bind="box.resource.license"></span>
+
+    <div class="line-dialog"></div>
+	<div class="dialogbox dialog-full">
+  		<confirm-button on-confirm="onDeleteClick(); closeThisDialog()"></confirm-button>
+	</div>
 
     
 	</div>

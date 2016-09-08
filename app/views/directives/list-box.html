@@ -25,11 +25,11 @@
     {{ label.scopeNote.value }}
   </span>
   <span class="note-ext"><span class="italic">broader</span><br>
-    <ul>
+    <ul class="hierarchie">
       <li ng-repeat="id in label.broader" ng-bind="id"></li>
     </ul></span>
   <span class="note-ext"><span class="italic">narrower</span><br>
-    <ul>
+    <ul class="hierarchie">
       <li ng-repeat="id in label.narrower" ng-bind="id"></li>
     </ul>
   </span>
