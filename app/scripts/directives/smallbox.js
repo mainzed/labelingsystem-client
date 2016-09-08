@@ -11,15 +11,20 @@ angular.module('labelsApp')
     return {
       templateUrl: "views/directives/small-box.html",
       restrict: 'E',
-
+      scope: {
+        data: "=",
+        type: "@"
+      },
       link: function postLink(scope) {
-        var boxType;
-        var resource;
-        var relation;
+        //var boxType;
+        //var resource;
+        //var relation;
+
+
 
         scope.init = function() {
             scope.tooltips = TooltipService;  // used for exactMatch comments etc
-
+            console.log("getting infs");
             scope.ngModel = scope.box;
 
             resource = scope.ngModel.resource;
@@ -39,6 +44,8 @@ angular.module('labelsApp')
                 for (var i = 0; i < resource.prefLabels.length; i++) {
                     if (resource.prefLabels[i].isThumbnail) {
                         scope.text = resource.prefLabels[i].value;
+                        scope.thumbnail = resource.prefLabels[i];
+                        console.log("found thumbnail");
                     }
                 }
             } else {
@@ -353,15 +360,15 @@ angular.module('labelsApp')
 
         };
 
-        scope.init();
+        //scope.init();
 
         // listeners to update boxes when modified
         scope.$watchCollection("box.resource", function() {
-            scope.init();
+            //scope.init();
         });
 
         scope.$watchCollection("box.relation", function() {
-            scope.init();
+            //scope.init();
         });
     }
   };
