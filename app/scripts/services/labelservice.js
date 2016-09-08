@@ -8,11 +8,9 @@
  * Service in the labelsApp.
  */
 angular.module('labelsApp')
-  .factory('LabelService', function ($resource, AuthService) {
-    // AngularJS will instantiate a singleton by calling "new" on this function
-    var host = "http://143.93.114.135";
+  .factory('LabelService', function ($resource, AuthService, ConfigService) {
 
-    return $resource(host + '/api/v1/labels/:id', null, {
+    return $resource(ConfigService.host + '/labels/:id', null, {
         'update': {
             method: 'PUT'
         },

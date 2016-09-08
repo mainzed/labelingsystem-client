@@ -7,7 +7,7 @@
  * # smallBox
  */
 angular.module('labelsApp')
-  .directive('smallBox', function (ngDialog, $routeParams, $window, $timeout, $rootScope, $location, LabelService, TooltipService) {
+  .directive('smallBox', function (ngDialog, $routeParams, $window, $timeout, $rootScope, $location, LabelService, TooltipService, ConfigService) {
     return {
       templateUrl: "views/directives/small-box.html",
       restrict: 'E',
@@ -96,7 +96,9 @@ angular.module('labelsApp')
 
             // prevent editing of thumbnail preflabel when vocabulary is public
             if (scope.ngModel.boxType === "prefLabel" && scope.ngModel.resource.isThumbnail && scope.vocabulary.releaseType === "public") {
-                scope.isPublicThumbnail = true;
+                if (!ConfigService.allowThumbnailEdit) {
+                    scope.isPublicThumbnail = true;
+                }
             }
 
             // refresh nanoscroller

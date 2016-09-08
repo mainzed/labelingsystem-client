@@ -8,12 +8,11 @@
  * Service in the labelsApp.
  */
 angular.module('labelsApp')
-  .service('ResourcesService', function ($http) {
+  .service('ResourcesService', function ($http, ConfigService) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     this.get = function(url, success, failure) {
-        var host = "http://143.93.114.135";
 
-        $http.get(host + "/api/v1/resourceinfo?uri=" + encodeURI(url)).then(function(response) {
+        $http.get(ConfigService.host + "/resourceinfo?uri=" + encodeURI(url)).then(function(response) {
             // success
             success(response.data);
         }, function(response) {

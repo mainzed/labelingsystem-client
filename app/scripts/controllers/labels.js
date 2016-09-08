@@ -74,14 +74,6 @@ angular.module('labelsApp')
     };
 
     /**
-     * Redirects to the specified label view.
-     * @param {string} id - Label ID
-     */
-    $scope.onLabelClick = function(id) {
-        $location.path("admin/vocabularies/" + $scope.vocabulary.id + "/concepts/" + id);
-    };
-
-    /**
      * Opens a dialog to create a new label.
      */
     $scope.onCreateLabelClick = function() {
