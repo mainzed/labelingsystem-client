@@ -8,7 +8,7 @@
  * Controller of the labelsApp
  */
 angular.module('labelsApp')
-  .controller('LabelsCtrl', function ($scope, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService) {
+  .controller('LabelsCtrl', function ($scope, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService, ConfigService) {
 
     // init nanoscroller here to prevent default scrollbar while loading boxes
     $(".nano").nanoScroller();
@@ -151,13 +151,6 @@ angular.module('labelsApp')
      */
     $scope.orderByQuality = function(label) {
 
-        var grayScore = 1;
-        var greenScore = 3;
-        var blueScore = 5;
-
-        var greenTypes = ["fao", "finto", "dbpedia"];
-        var blueTypes = ["ls", "getty", "heritagedata", "chronontology"];
-
         var matchTypes = [
             "closeMatch",
             "exactMatch",
@@ -168,34 +161,18 @@ angular.module('labelsApp')
 
         var qualityScore = 0;
 
-        function getMatchScore(matchType) {
-            var score = 0;
-            if (label[matchType]) {
-                label[matchType].forEach(function(match) {
-                    if (greenTypes.indexOf(match.type) > -1) {
-                        score += greenScore;
-                    } else if (blueTypes.indexOf(match.type) > -1) {
-                        score += blueScore;
-                    } else {
-                        console.log("unknown score type for: " + match.type);
-                    }
-                });
-            }
-            return score;
-        }
-
         // gray boxes
         if (label.prefLabels) {
-            qualityScore += label.prefLabels.length * grayScore;
+            qualityScore += label.prefLabels.length * ConfigService.scores.prefLabel;
         }
         if (label.altLabels) {
-            qualityScore += label.altLabels.length * grayScore;
+            qualityScore += label.altLabels.length * ConfigService.scores.altLabel;
         }
         if (label.scopeNote) {
-            qualityScore += grayScore;
+            qualityScore += ConfigService.scores.scopeNote;
         }
         if (label.seeAlso) {
-            qualityScore += grayScore;
+            qualityScore += ConfigService.scores.wayback;
         }
 
         // blue and green boxes
@@ -205,13 +182,27 @@ angular.module('labelsApp')
 
         // blue boxes
         if (label.broader) {
-            qualityScore += label.broader.length * blueScore;
+            qualityScore += label.broader.length * ConfigService.scores.concept;
         }
         if (label.related) {
-            qualityScore += label.related.length * blueScore;
+            qualityScore += label.related.length * ConfigService.scores.concept;
         }
         if (label.narrower) {
-            qualityScore += label.narrower.length * blueScore;
+            qualityScore += label.narrower.length * ConfigService.scores.concept;
+        }
+
+        function getMatchScore(matchType) {
+            var score = 0;
+            if (label[matchType]) {
+                label[matchType].forEach(function(match) {
+                    if (ConfigService.scores[match.type]) {
+                        score += ConfigService.scores[match.type];
+                    } else {
+                        console.log("unknown match type: " + match.type + ". add score for this type in ConfigService!");
+                    }
+                });
+            }
+            return score;
         }
 
         //console.log(qualityScore);

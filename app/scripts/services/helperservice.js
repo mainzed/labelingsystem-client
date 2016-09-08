@@ -8,7 +8,7 @@
  * Service in the labelsApp.
  */
 angular.module('labelsApp')
-  .service('HelperService', function (LabelService) {
+  .service('HelperService', function (LabelService, ResourcesService) {
     // helper functions
     this.findAndReplace = function(arr, query, newObj) {
         var index = _.indexOf(arr, _.find(arr, query));
@@ -45,25 +45,39 @@ angular.module('labelsApp')
      * Gets all of a concept's broader, narrower and related concepts and
      * returns a list of objects.
      * @param {Object} concept - A Labeling System concept (formerly 'label')
-     * @returns {Array}
+     * @param {String} relation - Relation to get concepts for
+     * @param {function} callback - Callback that returns the related concepts
      */
-    this.getConceptRelations = function(concept, success) {
-        var relations = ["broader", "narrower", "related"];
-        var results = [];
-        relations.forEach(function(relation) {
-            if (concept[relation]) {
-                concept[relation].forEach(function(id) {
+    this.getRelatedConcepts = function(concept, relation, callback) {
+        var relatedConcepts = [];
+        if (concept[relation]) {
+            concept[relation].forEach(function(resource, index, array) {
 
-                    LabelService.get({id: id}, function(relatedConcept) {
-                        results.push({
-                            relation: relation,
-                            resource: relatedConcept
-                        });
+                if (_.isString(resource)) {  // is internal concept ID
+                    LabelService.get({id: resource}, function(relatedConcept) {
+                        relatedConcepts.push(relatedConcept);
+                        // callback when all done
+                        if (index === array.length - 1) {
+                            callback(relatedConcepts);
+                        }
                     });
-                });
-            }
-        });
-        success(results);
+                } else if (resource.uri) {  // is external resource
+                    ResourcesService.get(resource.uri, function(relatedConcept) {
+                        relatedConcepts.push(relatedConcept);
+
+                        // callback when all done
+                        if (index === array.length - 1) {
+                            callback(relatedConcepts);
+                        }
+                    });
+                } else {
+                    console.log("unknown resource:");
+                    console.log(resource);
+                }
+            });
+        } else {
+            callback(relatedConcepts);
+        }
     };
 
   });

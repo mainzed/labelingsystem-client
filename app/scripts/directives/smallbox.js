@@ -12,7 +12,7 @@ angular.module('labelsApp')
       templateUrl: "views/directives/small-box.html",
       restrict: 'E',
 
-      link: function postLink(scope, element, attrs) {
+      link: function postLink(scope) {
         var boxType;
         var resource;
         var relation;
@@ -32,10 +32,6 @@ angular.module('labelsApp')
                 scope.tooltip = TooltipService.icons.types[scope.ngModel.boxType];
             }
 
-
-            //console.log(scope.ngModel);
-
-            //console.log(scope.tooltip);
             // determine names
             if (boxType === "altLabel" || boxType === "prefLabel" || boxType === "description") {
                 scope.text = resource.value;

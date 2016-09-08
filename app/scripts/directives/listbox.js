@@ -16,8 +16,6 @@ angular.module('labelsApp')
         },
         link: function postLink(scope) {
 
-            scope.gotInfos = false;
-
             /**
              * Shows the box's extension with additional information about the
              * specified concept.
@@ -42,8 +40,8 @@ angular.module('labelsApp')
              * Watcher that resets nanoscroll each time the extentAll property
              * changes (e.g. by a button click on "extent all").
              */
-            scope.$watch("extentAll", function() {
-                scope.showMore = scope.extentAll;
+            scope.$parent.$watch("extentAll", function(newVal) {
+                scope.showMore = newVal;
                 $(".nano").nanoScroller();
             });//
 
@@ -52,6 +50,7 @@ angular.module('labelsApp')
              * to show additional details.
              */
             scope.$watch("showMore", function(newValue) {
+                //console.log("showMore");
                 // get additional infos if showMore is true
                 if (newValue && !scope.broaderTerms && !scope.narrowerConcepts) {
 
@@ -59,37 +58,20 @@ angular.module('labelsApp')
                     scope.narrowerConcepts = [];
 
                     // internal
-                    if (scope.concept.broader) {
-                        scope.concept.broader.forEach(function(broaderConceptID) {
-                            LabelService.get({id: broaderConceptID}, function(concept) {
-                                scope.broaderConcepts.push(concept);
-                            });
-                        });
-                    }
-                    // external
-                    if (ConfigService.showMatches && scope.concept.broadMatch) {
-                        scope.concept.broadMatch.forEach(function(broadMatch) {
-                            ResourcesService.get(broadMatch.uri, function(match) {
-                                scope.broaderConcepts.push(match);
-                            });
-                        });
-                    }
-
-                    // internal
-                    if (ConfigService.showMatches && scope.concept.narrower) {
-                        scope.concept.narrower.forEach(function(narrowerConceptID) {
-                            LabelService.get({id: narrowerConceptID}, function(concept) {
-                                scope.narrowerConcepts.push(concept);
-                            });
-                        });
-                    }
+                    HelperService.getRelatedConcepts(scope.concept, "broader", function(relatedConcepts) {
+                        scope.broaderConcepts = scope.broaderConcepts.concat(relatedConcepts);
+                    });
+                    HelperService.getRelatedConcepts(scope.concept, "narrower", function(relatedConcepts) {
+                        scope.narrowerConcepts = scope.narrowerConcepts.concat(relatedConcepts);
+                    });
 
                     // external
-                    if (scope.concept.narrowMatch) {
-                        scope.concept.narrowMatch.forEach(function(narrowMatch) {
-                            ResourcesService.get(narrowMatch.uri, function(match) {
-                                scope.narrowerConcepts.push(match);
-                            });
+                    if (ConfigService.showMatches) {
+                        HelperService.getRelatedConcepts(scope.concept, "broadMatch", function(relatedConcepts) {
+                            scope.broaderConcepts = scope.broaderConcepts.concat(relatedConcepts);
+                        });
+                        HelperService.getRelatedConcepts(scope.concept, "narrowMatch", function(relatedConcepts) {
+                            scope.narrowerConcepts = scope.narrowerConcepts.concat(relatedConcepts);
                         });
                     }
 
@@ -100,4 +82,4 @@ angular.module('labelsApp')
 
         }
     };
-  });
+});

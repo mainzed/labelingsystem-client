@@ -22,4 +22,26 @@ angular.module('labelsApp')
     // and narrowMatches in concept overviews or small box details. false shows
     // only internal relations.
     this.showMatches = true;
-  });
+
+    // score values for a concept's properties and links to grade it's quality
+    this.scores = {
+        // property
+        prefLabel: 1,
+        altLabel: 1,
+        scopeNote: 1,
+
+        // linked internal concept (broader, narrower, related)
+        concept: 5,
+
+        // linked resource (broadMatch, narrowmatch etc.)
+        wayback: 1,
+        fao: 3,
+        finto: 3,
+        dbpedia: 3,
+        ls: 5,
+        getty: 5,
+        heritagedata: 5,
+        chronontology: 5
+    };
+
+});
