@@ -3,10 +3,10 @@
   <breadcrumbs></breadcrumbs>
 
   <!-- loop over all prefLabels, so it autofreshes on change -->
-  <h1 ng-click="openVocabDialog()">{{ vocabulary.title.value }}</h1>
+  <h1 ng-click="openVocabDialog()" ng-bind="vocabulary.title.value"></h1>
 
 	<span class="icon-folder"></span>
-	<span class="language">{{ vocabulary.title.lang }}</span>
+	<span class="language" ng-bind="vocabulary.title.lang"></span>
 </div>
 
 <div class="separatorsmall">
@@ -14,16 +14,16 @@
 	<div id="filtersearch">
     <search></search>
 	</div>
-  <!-- dummy to hold sort buttons -->
-  <span class="" ng-init="labelOrder = orderByThumbnail">
+
+  <span>
     <span class="pre">sort -</span>
 
-    <button type="button" ng-click="labelOrder = '-lastModified'" ng-disabled="labelOrder === '-lastModified'" ng-class="{'active': labelOrder === 'lastModfied'}">by lastModified</button>
+    <button type="button" ng-click="labelOrder = '-lastModified'" ng-disabled="labelOrder === '-lastModified'" ng-class="{'active': labelOrder === '-lastModified'}">by lastModified</button>
 
     <button type="button" ng-click="labelOrder = orderByThumbnail" ng-disabled="labelOrder === orderByThumbnail" ng-class="{'active': labelOrder === orderByThumbnail}">alphabetically</button>
 
     <button type="button" ng-click="labelOrder = orderByQuality" ng-disabled="labelOrder === orderByQuality" ng-class="{'active': labelOrder === orderByQuality}">by quality</button>
-    <button type="button" ng-click="onExtendClick()">{{ collapseText || "extend all" }}</button>
+    <button type="button" ng-click="extendAll = !extendAll" ng-bind="extendButtonText"></button>
 
   </span>
 </div>
@@ -32,7 +32,7 @@
 	<div class="nano">
     <div id="boxcontainer" class="nano-content">
 
-      <list-box ng-repeat="label in filteredLabels = (labels | filter: labelFilter | orderBy: labelOrder | limitTo: labelLimit)"></list-box>
+      <list-box ng-repeat="label in filteredLabels = (labels | filter: labelFilter | orderBy: labelOrder | limitTo: labelLimit)" concept="label"></list-box>
 
       <!-- message when no labels found -->
       <!-- <span class="box bigbox label listbox" ng-show="filteredLabels.length > 30">

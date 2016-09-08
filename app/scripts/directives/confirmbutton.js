@@ -14,7 +14,7 @@ angular.module('labelsApp')
         scope: {
             onConfirm: '&'  // passes on-confirm attribute to this scope
         },
-        link: function postLink(scope, element, attrs) {
+        link: function postLink(scope) {
             scope.showConfirm = false;
         }
     };

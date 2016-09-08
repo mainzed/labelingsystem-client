@@ -7,12 +7,12 @@
  * # smallBox
  */
 angular.module('labelsApp')
-  .directive('smallBox', function (ngDialog, $routeParams, $window, $timeout, $rootScope, $location, LabelService, TooltipService) {
+  .directive('smallBox', function (ngDialog, $routeParams, $window, $timeout, $rootScope, $location, LabelService, TooltipService, ConfigService) {
     return {
       templateUrl: "views/directives/small-box.html",
       restrict: 'E',
 
-      link: function postLink(scope, element, attrs) {
+      link: function postLink(scope) {
         var boxType;
         var resource;
         var relation;
@@ -32,10 +32,6 @@ angular.module('labelsApp')
                 scope.tooltip = TooltipService.icons.types[scope.ngModel.boxType];
             }
 
-
-            //console.log(scope.ngModel);
-
-            //console.log(scope.tooltip);
             // determine names
             if (boxType === "altLabel" || boxType === "prefLabel" || boxType === "description") {
                 scope.text = resource.value;
@@ -96,7 +92,9 @@ angular.module('labelsApp')
 
             // prevent editing of thumbnail preflabel when vocabulary is public
             if (scope.ngModel.boxType === "prefLabel" && scope.ngModel.resource.isThumbnail && scope.vocabulary.releaseType === "public") {
-                scope.isPublicThumbnail = true;
+                if (!ConfigService.allowThumbnailEdit) {
+                    scope.isPublicThumbnail = true;
+                }
             }
 
             // refresh nanoscroller
@@ -196,6 +194,10 @@ angular.module('labelsApp')
                     // when successfull, remove current box
                     var index = _.indexOf(scope.boxes, _.find(scope.boxes, scope.box));
                     scope.boxes.splice(index, 1);
+
+                    // when description, unlock "add description button" by removing label.scopeNote property
+                    scope.label.scopeNote = "";
+
                 }, function(err) {
                     console.log(err);
                 });

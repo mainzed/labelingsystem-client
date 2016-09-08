@@ -8,14 +8,12 @@
  * Service in the labelsApp.
  */
 angular.module('labelsApp')
-  .factory('ThesauriService', function ($resource) {
+  .factory('ThesauriService', function ($resource, ConfigService) {
 
-    var host = "http://143.93.114.135/api/v1";
-
-    return $resource(host + '/retcat/vocabulary/:id', null, {
+    return $resource(ConfigService.host + '/retcat/vocabulary/:id', null, {
         'query': {
             method: 'GET',
-            url: host + '/retcat',
+            url: ConfigService.host + '/retcat',
             isArray: true
         },
         'get': { isArray: true },

@@ -7,7 +7,7 @@
     {{ prefLabel.value }}
   </h1>
 
-	
+
 
   <!-- loop over all prefLabels, so it autofreshes on change -->
 	<span ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}" class="language">{{ prefLabel.lang.split("-")[0] }}</span>
@@ -88,7 +88,7 @@
 			<span class="buttonicon"><span class="icon-altlabel"></span></span>
 		</button>
 
-    <button class="enrichbutton" ng-click="onAddDescription()" ng-disabled="label.scopeNote">
+    <button class="enrichbutton" ng-click="onAddDescription()" ng-class="{'inactive': label.scopeNote}" ng-disabled="label.scopeNote">
 			<span class="buttontext">Add description</span>
 			<span class="buttonicon"><span class="icon-note"></span></span>
 		</button>

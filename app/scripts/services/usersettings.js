@@ -9,7 +9,12 @@
  */
 angular.module('labelsApp')
   .service('UserSettingsService', function () {
-    // AngularJS will instantiate a singleton by calling "new" on this function
+
     this.showEnrichments = true;
+
+    this.labelOrder;
+
+    this.extendAll = false;
+
 
   });

@@ -1,36 +1,40 @@
-<div class="box bigbox label listbox" ng-click="onLabelClick(label.id)">
+<div class="box bigbox label listbox" ng-click="onClick(concept.id)">
 
-  <span class="thumbnail" ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: 'true'}">
+  <span class="thumbnail" ng-repeat="prefLabel in concept.prefLabels | filter: {isThumbnail: 'true'}">
 
-    <button class="showadditionalcontent" ng-click="toggleExtension(); $event.stopPropagation()">
+    <button class="showadditionalcontent" ng-click="toggleExtension(concept.id); $event.stopPropagation()">
       <span class="showmore" ng-show="!showMore">+</span>
       <span class="showmore" ng-show="showMore">-</span>
     </button>
     {{ prefLabel.value}}
   </span>
 
-  <mini-preview label="label"></mini-preview>
+  <mini-preview label="concept"></mini-preview>
 
   <span class="type">(internal)</span>
 
 </div>
 
-<div ng-if="showMore" class="box boxextension bigbox label high" ng-click="onLabelClick(label.id)">
+<!-- extension that open on button click -->
+<div ng-if="showMore" class="box boxextension bigbox label high" ng-click="onClick(concept.id)">
   <span class="line-ext"></span>
   <span class="note-ext">
     <span class="italic">
       <span class="icon-note"></span>
       Description
     </span><br>
-    {{ label.scopeNote.value }}
+    {{ concept.scopeNote.value }}
   </span>
   <span class="note-ext"><span class="italic">broader</span><br>
+
     <ul class="hierarchie">
-      <li ng-repeat="id in label.broader" ng-bind="id"></li>
-    </ul></span>
+      <li ng-repeat="broaderConcept in broaderConcepts">{{ getTerm(broaderConcept) }}</li>
+    </ul>
+  </span>
+
   <span class="note-ext"><span class="italic">narrower</span><br>
     <ul class="hierarchie">
-      <li ng-repeat="id in label.narrower" ng-bind="id"></li>
+      <li ng-repeat="narrowerConcept in narrowerConcepts">{{ getTerm(narrowerConcept) }}</li>
     </ul>
   </span>
 

@@ -8,9 +8,9 @@
  * Service in the labelsApp.
  */
 angular.module('labelsApp')
-  .factory('VocabService', function ($resource, AuthService) {
+  .factory('VocabService', function ($resource, AuthService, ConfigService) {
 
-    return $resource('http://143.93.114.135/api/v1/vocabs/:id', null, {
+    return $resource(ConfigService.host + '/vocabs/:id', null, {
         'query': { method: 'GET', params: { draft: true }, isArray: true },
         'getPublicOnly': { method: 'GET', isArray: true },
         'update': { method:'PUT' },
