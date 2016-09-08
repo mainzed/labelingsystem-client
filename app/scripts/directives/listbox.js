@@ -22,6 +22,14 @@ angular.module('labelsApp')
                 scope.showMore = !scope.showMore;
             };
 
+            /**
+             * Watcher that resets nanoscroll each time a concept is extended
+             * to show additional details.
+             */
+            scope.$watch("showMore", function() {
+                $(".nano").nanoScroller();
+            });
+
         }
     };
   });

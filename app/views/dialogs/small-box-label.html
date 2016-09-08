@@ -71,12 +71,12 @@
         <span class="listcontent" ng-bind="box.resource.creator"></span>
 
         <span class="listtype">Last modified</span>
-        <span class="listcontent" ng-bind="box.resource.lastModified"></span>
+        <span class="listcontent" ng-bind-template="{{ box.resource.lastModified | date: 'dd.MM.yyyy hh:mm'}}"></span>
 
         <span class="listtype">License</span>
         <span class="listcontent" ng-bind="box.resource.license"></span>
 
-    
+
 	</div>
 	</div>
 	</div>

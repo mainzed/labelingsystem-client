@@ -196,6 +196,10 @@ angular.module('labelsApp')
                     // when successfull, remove current box
                     var index = _.indexOf(scope.boxes, _.find(scope.boxes, scope.box));
                     scope.boxes.splice(index, 1);
+
+                    // when description, unlock "add description button" by removing label.scopeNote property
+                    scope.label.scopeNote = "";
+
                 }, function(err) {
                     console.log(err);
                 });
