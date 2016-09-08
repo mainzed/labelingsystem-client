@@ -43,6 +43,10 @@ angular.module('labelsApp')
     // load all labels for the current vocabulary
     LabelService.query({'vocab': $routeParams.vID}, function(labels) {
         $scope.labels = labels;
+        //console.log();
+        $scope.labels.forEach(function(label) {
+            console.log(label.prefLabels[0].value, label.lastModified);
+        });
         $scope.placeholder = "filter";
     });
 
