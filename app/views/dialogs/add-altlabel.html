@@ -15,7 +15,7 @@
 		<div class="line-dialog"></div>
 		<h4>language</h4>
 		<div class="dialogbox dialog-full">
-			<select ng-model="lang">
+			<select ng-model="selectedLang">
 	    		<option ng-repeat="language in languages" value="{{language.value}}" ng-bind="language.name"></option>
 	  		</select>
 		</div>
@@ -28,5 +28,5 @@
 
 
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="onAddAltLabelConfirm(term, lang); closeThisDialog()" ng-disabled="!term" >Apply</div>
+	<div class="apply" ng-click="onAddAltLabelConfirm(term, selectedLang); closeThisDialog()" ng-class="{'inactive': !term || !selectedLang}">Apply</div>
 </div>

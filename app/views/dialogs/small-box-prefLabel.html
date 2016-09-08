@@ -1,6 +1,6 @@
 <div class="dialogwrapper text">
 	<div class="dialogheader">
-		<h3>{{text}}</h3>
+		<h3 ng-bind="text"></h3>
 		<p class="typeinformation">Preferred term</p>
 		<div class="line-bottom"></div>
 	</div>
@@ -16,7 +16,8 @@
 
 		<div class="line-dialog"></div>
 		<div class="dialogbox dialog-full">
-      <confirm-button on-confirm="onDeleteClick(); closeThisDialog()"></confirm-button>
+      <!-- prevent thumbnail label from being deleted -->
+      <confirm-button on-confirm="onDeleteClick(); closeThisDialog()" ng-class="{'inactive': isThumbnail}"></confirm-button>
 		</div>
 
 

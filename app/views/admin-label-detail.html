@@ -2,15 +2,9 @@
 
   <breadcrumbs></breadcrumbs>
 
-  <!-- loop over all prefLabels, so it autofreshes on change -->
-  <h1 ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}" ng-click="onLabelHeadingClick()">
-    {{ prefLabel.value }}
-  </h1>
+  <h1 ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}" ng-click="onLabelHeadingClick()" ng-bind="prefLabel.value"></h1>
+	<span ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}" class="language" ng-bind="prefLabel.lang"></span>
 
-
-
-  <!-- loop over all prefLabels, so it autofreshes on change -->
-	<span ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}" class="language">{{ prefLabel.lang.split("-")[0] }}</span>
 </div>
 
 <div id="enrichment-ov" ng-class="{ 'fullheight': !showEnrichments }">
@@ -38,12 +32,15 @@
 
         <!-- text column -->
   			<div class="col halfleft">
-          <small-box ng-repeat="box in boxes | filter: attributeFilter"></small-box>
+
+          <!-- gray boxes with prefLabels, altLabels and description -->
+          <pref-label-box ng-repeat="prefLabel in label.prefLabels" data="prefLabel"></pref-label-box>
+
   			</div>
 
   			<!-- relations column -->
   			<div class="col halfright">
-          <small-box ng-repeat="box in boxes | filter: relatedFilter"></small-box>
+          <!-- <small-box ng-repeat="box in boxes | filter: relatedFilter"></small-box> -->
   			</div>
 
   		</div>
@@ -51,6 +48,7 @@
   		<!-- narrower column -->
   		<div class="col right">
         <small-box ng-repeat="box in boxes | filter: narrowerFilter"></small-box>
+
   		</div>
 
   	</div>

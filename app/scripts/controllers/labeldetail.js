@@ -193,7 +193,7 @@ angular.module('labelsApp')
 
     // used by views
     $scope.languages = LangService.get();
-    $scope.lang = "en";  // default
+    //$scope.lang = "en";  // default
 
     $scope.onAddPrefLabel = function() {
 
@@ -386,6 +386,8 @@ angular.module('labelsApp')
         attributes.forEach(function(attr) {
             $scope.boxes.push(attr);
         });
+
+         
 
         // append to broaderBoxes etc
         $scope.getLabelRelations($scope.label);
