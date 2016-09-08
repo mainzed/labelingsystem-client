@@ -2,17 +2,19 @@
 
   <!-- vocabulary -->
   <span ng-show="showVocabulary">
-    <a class="outside" ng-show="!showVocabularies" href="#/admin/vocabularies">{{ user.name }}</a>
+    <a class="outside" ng-show="!showVocabularies" href="#/admin/vocabularies" ng-bind="user.name"></a>
     <span class="icon-arrow"></span>
   </span>
 
   <!-- label detail -->
   <span ng-show="showLabelDetail">
-    <a class="outside" ng-show="!showVocabularies" href="#/admin/vocabularies">{{ user.name }}</a>
+
+    <a class="outside" ng-show="!showVocabularies" href="#/admin/vocabularies" ng-bind="user.name"></a>
+
     <span class="icon-arrow"></span>
-    <a href="#/admin/vocabularies/{{ vocabulary.id }}/concepts">
-     {{ vocabulary.title.value }}
-    </a>
+
+    <a ng-href="#/admin/vocabularies/{{ vocabulary.id }}/concepts" ng-bind="vocabulary.title.value"></a>
+    
     <span class="icon-arrow"></span>
 
   </span>
