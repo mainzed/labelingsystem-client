@@ -9,7 +9,7 @@
  * overviews
  */
 angular.module('labelsApp')
-  .controller('VocabsCtrl', function ($scope, $location, $http, ngDialog, AuthService, VocabService) {
+  .controller('VocabsCtrl', function ($scope, $location, $http, ngDialog, AuthService, VocabService, ConfigService) {
 
     if (!AuthService.isLoggedIn()) {
         $location.path("admin/login");
@@ -17,6 +17,8 @@ angular.module('labelsApp')
 
     // dont use that, vulnerable
     $scope.user = AuthService.getUser();
+
+    $scope.languages = ConfigService.languages;
 
     VocabService.query({ creator: $scope.user.username }, function(vocabularies) {
         $scope.vocabularies = vocabularies;

@@ -8,7 +8,7 @@
  * Controller of the labelsApp
  */
 angular.module('labelsApp')
-  .controller('LabelDetailCtrl', function ($scope, $routeParams, $timeout, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ResourcesService, TooltipService, SearchService, UserSettingsService, ThesauriService, LangService, WaybackService) {
+  .controller('LabelDetailCtrl', function ($scope, $routeParams, $timeout, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ResourcesService, TooltipService, SearchService, UserSettingsService, ThesauriService, WaybackService, ConfigService) {
 
     if (!AuthService.isLoggedIn()) {
         $location.path("admin/login");
@@ -60,8 +60,7 @@ angular.module('labelsApp')
     };
 
     // used by views
-    $scope.languages = LangService.get();
-    //$scope.lang = "en";  // default
+    $scope.languages = ConfigService.languages;
 
     $scope.onAddPrefLabel = function() {
 

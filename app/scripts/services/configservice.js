@@ -48,4 +48,14 @@ angular.module('labelsApp')
         chronontology: 5
     };
 
+    // available  languages
+    this.languages = [
+        { name: "German", value: "de" },
+        { name: "English", value: "en" },
+        { name: "Spanish", value: "es" },
+        { name: "Italian", value: "it" },
+        { name: "French", value: "fr" },
+        { name: "Dutch", value: "nl"},
+        { name: "Hebrew", value: "he"}
+    ];
 });
