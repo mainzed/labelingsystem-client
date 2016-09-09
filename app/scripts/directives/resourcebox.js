@@ -17,6 +17,15 @@ angular.module('labelsApp')
         },
         link: function postLink(scope, element) {
 
+            // temporary
+            scope.resource = {
+                label: "...",
+                type: scope.data.type
+            };
+
+            //{{ resource.type }} {{ resource.quality }}
+
+            console.log(scope.data);
             // get resource data from uri
             ResourcesService.get(scope.data.uri, function(resource) {
                 scope.resource = resource;
@@ -70,56 +79,6 @@ angular.module('labelsApp')
                     });
                 });
             };
-
-              /**
-               * change the relation of a concept.
-               * @param {string} newRelation - updated label-to-label relation
-               * @param {string} oldRelation - original label-to-label relation
-               */
-              scope.changeRelation2 = function(newRelation, oldRelation) {
-
-                  // get current parent concept
-                  LabelService.get({id: $routeParams.lID}, function(parentConcept) {
-
-                      // remove id from old relation array
-                      _.remove(parentConcept[oldRelation], function(n) {
-                          return n === scope.concept.id;
-                      });
-
-                      // add concept ID to new relation array
-                      if (!parentConcept[newRelation]) {
-                          parentConcept[newRelation] = [];
-                      }
-                      parentConcept[newRelation].push(scope.concept.id);
-
-                      // update parent concept
-                      var jsonObject = {
-                          item: parentConcept,
-                          user: AuthService.getUser().name
-                      };
-
-                      LabelService.update({ id: $routeParams.lID }, jsonObject, function() {
-
-                          // temporarily push changes to parentConcept without refreshing everything
-                          // TODO: find cleaner solution
-                          _.remove(scope.$parent.label[oldRelation], function(n) {
-                              return n === scope.concept.id;
-                          });
-                          if (!scope.$parent.label[newRelation]) {
-                              scope.$parent.label[newRelation] = [];
-                          }
-                          scope.$parent.label[newRelation].push(scope.concept.id);
-
-                          // remove from current relation, gets created automatically in new column
-                          element.remove();
-
-                      }, function(res) {
-                          console.log(res);
-                      });
-
-                  });
-
-              };
 
             /**
               * change the relation of a resource.
