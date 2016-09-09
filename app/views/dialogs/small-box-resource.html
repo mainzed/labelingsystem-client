@@ -1,10 +1,10 @@
-<div class="dialogwrapper {{cssClass}}">
+<div class="dialogwrapper {{ resource.type }}">
 	<div class="dialogheader">
 		<h3 ng-bind="box.resource.label"></h3>
 
 		<p class="typeinformation">
-      {{ box.resource.type }} Concept -
-      <span class="loudlink" ng-click="openResource(box.resource)">open in new tab</span>
+      {{ resource.type }} Concept -
+      <span class="loudlink" ng-click="openResource()">open in new tab</span>
     </p>
 
 		<div class="line-bottom"></div>
@@ -12,21 +12,21 @@
 	<div class="dialogscroll">
 	<div class="nano">
 	<div class="nano-content">
-		<div class="dialogbox dialog-full" ng-hide="!box.resource.description && !box.resource.broaderTerms && !box.resource.narrowerTerms">
+		<div class="dialogbox dialog-full">
 			<div class="dialog-half col">
 				<span class="italic">Description</span><br>
-        {{ box.resource.description }}
+        {{ resource.description }}
 			</div>
 			<div class="dialog-quarter col">
 				<span class="italic">Broader</span><br>
 				<ul>
-					<li ng-repeat="term in box.resource.broaderTerms" ng-bind="term.label"></li>
+					<li ng-repeat="term in resource.broaderTerms" ng-bind="term.label"></li>
 				</ul>
 			</div>
 			<div class="dialog-quarter col">
 				<span class="italic">Narrower</span><br>
 				<ul>
-					<li ng-repeat="term in box.resource.narrowerTerms" ng-bind="term.label"></li>
+					<li ng-repeat="term in resource.narrowerTerms" ng-bind="term.label"></li>
 				</ul>
 			</div>
 		</div>
@@ -35,7 +35,7 @@
 		<div class="enrichbuttons enrichbuttons-min">
 
 		  <!-- resource columns -->
-		  <div ng-init="newRelation = box.relation">
+		  <div ng-init="newRelation = relation">
 		    <div class="col five leftout">
 		  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'broadMatch'" ng-class="{'selectedbutton': newRelation === 'broadMatch'}">
 		  			<span class="buttontext-ow">broad Match</span>
@@ -89,5 +89,5 @@
 	</div>
 
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="changeResourceRelation(newRelation, box.relation); closeThisDialog()" ng-class="{'inactive': newRelation === box.relation}">Apply</div>
+	<div class="apply" ng-click="changeRelation(newRelation, relation); closeThisDialog()" ng-class="{'inactive': newRelation === relation}">Apply</div>
 </div>

@@ -213,23 +213,6 @@ angular.module('labelsApp')
 
         };
 
-        /**
-         * open resource-url in new tab.
-         * @param {Object} resource - Resource object
-         * @param {string} resource.type - Resource type (e.g. "getty")
-         * @param {string} resource.uri - Link url
-         */
-        scope.openResource = function(resource) {
-            var url;
-            if (resource.type === "getty") {
-                var id = resource.uri.split('/').pop();
-                url = 'http://www.getty.edu/vow/AATFullDisplay?find=&logic=AND&note=&subjectid=' + id;
-            } else {
-                url = resource.uri || resource.url;
-            }
-            // open url in new tab
-            $window.open(url, "_blank");
-        };
 
         /**
          * Updates an alt- or prefLabel with a newer term.
@@ -266,41 +249,9 @@ angular.module('labelsApp')
             });
         };
 
-        /**
-         * change the relation of a resource.
-         * @param {string} newRelation - updated label-to-resource relation
-         * @param {string} oldRelation - original label-to-resource relation
-         */
-        scope.changeResourceRelation = function(newRelation, oldRelation) {
-            // get resource
-            var query = { uri: scope.box.resource.uri };
-            var resource = _.find(scope.label[oldRelation], query);
-
-            // remove it from the array (e.g. remove a narrowMatch from the narrowWatch array)
-            _.remove(scope.label[oldRelation], query);
-
-            // push resource to the corresponding array (e.g. to the broaderMatch array)
-            if (!scope.label[newRelation]) {
-                scope.label[newRelation] = [];
-            }
-
-            scope.label[newRelation].push(resource);
-
-            // update on server
-            var jsonObject = {
-                item: scope.label,
-                user: scope.user.name
-            };
-
-            LabelService.update({ id: $routeParams.lID }, jsonObject, function() {
-                scope.box.relation = newRelation;  // update relation
-            }, function(res) {
-                console.log(res);
-            });
-
-        };
-
         
+
+
 
         //scope.init();
 

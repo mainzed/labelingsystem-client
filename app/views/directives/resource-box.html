@@ -1,0 +1,13 @@
+<div class="box small {{ resource.type }} {{ resource.quality }}" ng-click="openDialog()">
+
+  <!-- relation icon (exactMatch etc) -->
+  <span class="relation" ng-bind-html="relationIcon"></span>
+
+  <span class="thumbnail" ng-bind="resource.label"></span>
+
+  <!-- resource type icon (getty, wayback etc) -->
+  <span class="type" title="{{ tooltip }}" ng-bind-template="{{ '(' + resource.type + ')' }}"></span>
+
+  <span class="language" ng-bind="resource.lang"></span>
+
+</div>

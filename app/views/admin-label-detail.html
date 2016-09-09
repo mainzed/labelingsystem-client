@@ -24,8 +24,8 @@
 
       <!-- broader column -->
   		<div class="col left">
-        <concept-box ng-repeat="broaderConcept in label.broader" data="broaderConcept" relation="broader" parentConcept="label"></concept-box>
-        <!-- insert broadMatches here -->
+        <concept-box ng-repeat="broaderConcept in label.broader" data="broaderConcept" relation="broader"></concept-box>
+        <resource-box ng-repeat="broadMatch in label.broadMatch" data="broadMatch" relation="broadMatch"></resource-box>
   		</div>
 
       <!-- middle column -->
@@ -43,16 +43,19 @@
 
   			<!-- relations column -->
   			<div class="col halfright">
-          <concept-box ng-repeat="relatedConcept in label.related" data="relatedConcept" relation="related" parentConcept="label"></concept-box>
-          <!-- <small-box ng-repeat="box in boxes | filter: relatedFilter"></small-box> -->
+          <concept-box ng-repeat="relatedConcept in label.related" data="relatedConcept" relation="related"></concept-box>
+          <resource-box ng-repeat="relatedMatch in label.relatedMatch" data="relatedMatch" relation="relatedMatch"></resource-box>
+          <resource-box ng-repeat="closeMatch in label.closeMatch" data="closeMatch" relation="closeMatch"></resource-box>
+          <resource-box ng-repeat="exactMatch in label.exactMatch" data="exactMatch" relation="exactMatch"></resource-box>
+          <!-- <link-box ng-repeat="seeAlso in label.seeAlso" data="seeAlso" relation="seeAlso"></link-box> -->
   			</div>
 
   		</div>
 
   		<!-- narrower column -->
   		<div class="col right">
-        <concept-box ng-repeat="narrowerConcept in label.narrower" data="narrowerConcept" relation="narrower" parentConcept="label"></concept-box>
-        <!-- insert broadMatches here -->
+        <concept-box ng-repeat="narrowerConcept in label.narrower" data="narrowerConcept" relation="narrower"></concept-box>
+        <resource-box ng-repeat="narrowMatch in label.narrowMatch" data="narrowMatch" relation="narrowMatch"></resource-box>
   		</div>
 
   	</div>
