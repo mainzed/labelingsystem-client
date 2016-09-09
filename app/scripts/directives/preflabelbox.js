@@ -34,7 +34,6 @@ angular.module('labelsApp')
              * Deletes the current prefLabel.
              */
             scope.onDeleteClick = function() {
-
                 // get current concept
                 LabelService.get({id: $routeParams.lID}, function(concept) {
 
@@ -56,10 +55,49 @@ angular.module('labelsApp')
                     }, function(err) {
                         console.log(err);
                     });
-
                 });
-
             };
+
+            /**
+             * Updates the current prefLabel with a newer term.
+             * @param {string} newValue - updated term text
+             */
+            scope.updateLabel = function(newValue) {
+
+                // get current concept
+                LabelService.get({id: $routeParams.lID}, function(concept) {
+
+                    // get old prefLabel and remove it from concept
+                    var oldPrefLabel = _.find(concept.prefLabels, {
+                        "value": scope.data.value,
+                        "lang": scope.data.lang,
+                        "isThumbnail": scope.data.isThumbnail
+                    });
+                    concept.prefLabels = _.filter(concept.prefLabels, function(o) {
+                        return o.value !== scope.data.value && o.lang !== scope.data.lang;
+                    });
+
+                    // insert updated prefLabel
+                    var updatedPrefLabel = oldPrefLabel;
+                    updatedPrefLabel.value = newValue;
+                    concept.prefLabels.push(updatedPrefLabel);
+
+                    // send updated label to server
+                    var jsonObject = {
+                        item: concept,
+                        user: AuthService.getUser().name
+                    };
+
+                    LabelService.update({id: $routeParams.lID}, jsonObject, function() {
+                        // temporarily update current element
+                        scope.data.value = newValue;
+
+                    }, function(err) {
+                        console.log(err);
+                    });
+                });
+            };
+
         }
-  };
+    };
 });
