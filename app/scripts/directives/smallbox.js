@@ -274,27 +274,6 @@ angular.module('labelsApp')
         };
 
         /**
-         * Updates the label description.
-         * @param {string} newValue - updated term text
-         */
-        scope.updateDescription = function(newValue) {
-
-            scope.label.scopeNote.value = newValue;
-
-            var jsonObject = {
-                item: scope.label,
-                user: scope.user.name
-            };
-            LabelService.update({ id: $routeParams.lID }, jsonObject, function() {
-                // update current small box temporarily
-                scope.box.resource = scope.label.scopeNote;
-
-            }, function(res) {
-                console.log(res);
-            });
-        };
-
-        /**
          * change the relation of a resource.
          * @param {string} newRelation - updated label-to-resource relation
          * @param {string} oldRelation - original label-to-resource relation

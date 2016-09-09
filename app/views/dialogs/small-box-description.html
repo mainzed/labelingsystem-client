@@ -10,7 +10,7 @@
 	<div class="nano-content">
 		<div class="dialogbox dialog-full">
 			<h4>Edit</h4>
-			<textarea ng-model="newValue" ng-init="newValue = text"></textarea>
+			<textarea ng-model="newValue" ng-init="newValue = data.value"></textarea>
 		</div>
 
 
@@ -25,5 +25,5 @@
 	</div>
 
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="updateDescription(newValue); closeThisDialog()" ng-disabled="newValue === text" ng-class="{'inactive': newValue === text}">Apply</div>
+	<div class="apply" ng-click="updateDescription(newValue); closeThisDialog()" ng-disabled="newValue === text" ng-class="{'inactive': newValue === data.value}">Apply</div>
 </div>

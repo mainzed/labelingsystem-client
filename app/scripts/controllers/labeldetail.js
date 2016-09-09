@@ -40,7 +40,7 @@ angular.module('labelsApp')
     // load label for the current vocabulary
     LabelService.get({id: $routeParams.lID}, function(label) {
         $scope.label = label;
-
+        console.log(label);
         $scope.loadBoxes();
 
         $scope.prefLabel = _.find($scope.label.prefLabels, {isThumbnail: true});
@@ -273,8 +273,7 @@ angular.module('labelsApp')
     };
 
     $scope.onAddDescription = function() {
-        //console.log("add scopeNote");
-        $scope.description = "";
+        //$scope.description = "";
         ngDialog.open({
             template: 'views/dialogs/add-description.html',
             className: 'bigdialog',
@@ -283,35 +282,32 @@ angular.module('labelsApp')
             closeByDocument: false,
             scope: $scope
         });
+    };
 
-        $scope.onAddDescriptionConfirm = function(text) {
-            //console.log($scope.label);
+    /**
+     * Adds a description to the current concept.
+     */
+    $scope.onAddDescriptionConfirm = function(description) {
 
-            if (!$scope.label.scopeNote) {
-                $scope.label.scopeNote = {};
-            }
-
-            // just push box, send to server silently
-            $scope.label.scopeNote = {
-                value: text,
-                lang: $scope.prefLabel.lang
-            };
-
-            LabelService.update({ id: $routeParams.lID }, {
-                item: $scope.label,
-                user: $scope.user.name
-            }, function(label) {
-                if (label.id) {
-                    $scope.boxes.push({
-                        relation: "attribute",
-                        boxType: "description",
-                        resource: $scope.label.scopeNote
-                    });
-                }
-            });
+        var updatedConcept = $scope.label;
+        updatedConcept.scopeNote = {
+            value: description,
+            lang: $scope.prefLabel.lang
         };
 
+        var jsonObj = {
+            item: $scope.label,
+            user: AuthService.getUser().name
+        };
 
+        LabelService.update({ id: $routeParams.lID }, jsonObj, function(concept) {
+            console.log("success");
+            // temporarily update concept on success
+            $scope.label.scopeNote = concept.scopeNote;
+
+        }, function(err) {
+            console.log(err);
+        });
     };
 
     $scope.onAddLink = function() {
@@ -387,7 +383,7 @@ angular.module('labelsApp')
             $scope.boxes.push(attr);
         });
 
-         
+
 
         // append to broaderBoxes etc
         $scope.getLabelRelations($scope.label);
@@ -447,6 +443,10 @@ angular.module('labelsApp')
         $timeout(function() {
             $(".nano").nanoScroller();
         }, 0);
+    });
+
+    $scope.$on('removed-description', function() {
+        delete $scope.label.scopeNote;
     });
 
     // hotkeys
