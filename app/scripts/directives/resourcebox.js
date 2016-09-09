@@ -23,9 +23,6 @@ angular.module('labelsApp')
                 type: scope.data.type
             };
 
-            //{{ resource.type }} {{ resource.quality }}
-
-            console.log(scope.data);
             // get resource data from uri
             ResourcesService.get(scope.data.uri, function(resource) {
                 scope.resource = resource;
