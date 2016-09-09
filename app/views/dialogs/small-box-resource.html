@@ -19,14 +19,16 @@
 			</div>
 			<div class="dialog-quarter col">
 				<span class="italic">Broader</span><br>
-				<ul>
+				<ul class="hierarchie">
 					<li ng-repeat="term in resource.broaderTerms" ng-bind="term.label"></li>
+
 				</ul>
 			</div>
 			<div class="dialog-quarter col">
 				<span class="italic">Narrower</span><br>
-				<ul>
+				<ul class="hierarchie">
 					<li ng-repeat="term in resource.narrowerTerms" ng-bind="term.label"></li>
+
 				</ul>
 			</div>
 		</div>

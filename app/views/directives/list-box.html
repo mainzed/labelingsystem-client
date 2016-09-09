@@ -26,13 +26,14 @@
     {{ concept.scopeNote.value }}
   </span>
   <span class="note-ext"><span class="italic">broader</span><br>
-    <ul>
+
+    <ul class="hierarchie">
       <li ng-repeat="broaderConcept in broaderConcepts">{{ getTerm(broaderConcept) }}</li>
     </ul>
   </span>
 
   <span class="note-ext"><span class="italic">narrower</span><br>
-    <ul>
+    <ul class="hierarchie">
       <li ng-repeat="narrowerConcept in narrowerConcepts">{{ getTerm(narrowerConcept) }}</li>
     </ul>
   </span>
