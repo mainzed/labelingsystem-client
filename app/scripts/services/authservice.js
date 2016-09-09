@@ -8,50 +8,66 @@
  * Service in the labelsApp.
  */
 angular.module('labelsApp')
-  .service('AuthService', function ($location, $cookies, $http, ConfigService) {
+  .service('AuthService', function ($location, $cookies, $http, $httpParamSerializerJQLike, ConfigService) {
     var user = {};
+
+    // set inital user object
+    if ($cookies.getObject("lsCookie")) {
+        user.name = $cookies.getObject("lsCookie").name;
+        // get additonal infos
+
+        // role
+    }
 
     /**
      * Login using the labeling system /auth api
      */
     this.login = function(username, password, successCallback, errorCallback) {
 
-        // $http.post(ConfigService.host + "/auth/status" + "user=demo&pwd=demo",).then(function(res) {
-        //     console.log(res);
-        // });
+        var data = {
+            "user": username,
+            "pwd": password
+        };
+        $http.post(ConfigService.host + "/auth/login", $httpParamSerializerJQLike(data)).then(function() {
 
-        // TODO: validate username/password
-        if (username && password) {
-            user.name = username;
-
-            $cookies.put('labelsUser', username);
-
+            user.name = username;  // only used for config like "role" etc
+            $cookies.putObject("lsCookie", {
+                "username": username,
+                "secret": "my-super-secret-token"  // TODO: store custom access token in cookie
+            });
             successCallback();
-        } else {
-            errorCallback("username or password missing!");
-        }
+
+        }, function(err) {
+            console.log("login failed");
+            this.logout();
+            errorCallback(err);
+        });
     };
 
     this.logout = function() {
         user = {};
-        $cookies.put('labelsUser', undefined);
+        $cookies.remove("lsCookie");
         $location.path('/admin/login');
     };
 
     this.getUser = function() {
-        var userCookie = $cookies.get("labelsUser");
-        if (userCookie) {
-            user.name = userCookie;
-            return user;
-        } else {
-            return false;
-        }
+        return user;
     };
 
     this.isLoggedIn = function() {
-        if ($cookies.get("labelsUser")) {
+        var cookie = $cookies.getObject("lsCookie");
+
+        if (cookie) {  // TODO: check token on server
+
+            //console.log(cookie.username);
+            //console.log(cookie.secret);
+
+            user.name = cookie.username;
+            // get userinfo
+            //this.getUserInfo();
             return true;
         } else {
+            // no cookie, not logged in
             return false;
         }
     };

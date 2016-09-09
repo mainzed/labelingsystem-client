@@ -11,9 +11,11 @@ angular.module('labelsApp')
   .controller('LoginCtrl', function ($scope, $location, $document, AuthService) {
 
     // skip login if authenticated
-    if (!AuthService.isLoggedIn()) {
-        $location.path("admin/login");
+    if (AuthService.isLoggedIn()) {
+        $location.path("admin/vocabularies");
     }
+
+    //AuthService.status();
 
     $scope.user = AuthService.getUser();
 
