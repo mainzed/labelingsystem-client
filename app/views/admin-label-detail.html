@@ -24,7 +24,8 @@
 
       <!-- broader column -->
   		<div class="col left">
-        <small-box ng-repeat="box in boxes | filter: broaderFilter"></small-box>
+        <concept-box ng-repeat="broaderConcept in label.broader" data="broaderConcept" relation="broader" parentConcept="label"></concept-box>
+        <!-- insert broadMatches here -->
   		</div>
 
       <!-- middle column -->
@@ -42,6 +43,7 @@
 
   			<!-- relations column -->
   			<div class="col halfright">
+          <concept-box ng-repeat="relatedConcept in label.related" data="relatedConcept" relation="related" parentConcept="label"></concept-box>
           <!-- <small-box ng-repeat="box in boxes | filter: relatedFilter"></small-box> -->
   			</div>
 
@@ -49,8 +51,8 @@
 
   		<!-- narrower column -->
   		<div class="col right">
-        <small-box ng-repeat="box in boxes | filter: narrowerFilter"></small-box>
-
+        <concept-box ng-repeat="narrowerConcept in label.narrower" data="narrowerConcept" relation="narrower" parentConcept="label"></concept-box>
+        <!-- insert broadMatches here -->
   		</div>
 
   	</div>

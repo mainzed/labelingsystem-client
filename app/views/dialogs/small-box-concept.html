@@ -1,8 +1,8 @@
 <div class="dialogwrapper label">
 	<div class="dialogheader">
-		<h3 ng-bind="text"></h3>
-		<p class="typeinformation">Concept - <span class="loudlink" ng-click="openLabel(); closeThisDialog()">open in same tab</span></p>
-      <mini-preview label="box.resource" ng-show="box.boxType === 'label'"></mini-preview>
+		<h3 ng-bind="thumbnail.value"></h3>
+		<p class="typeinformation">Concept - <span class="loudlink" ng-click="openConcept(); closeThisDialog()">open in same tab</span></p>
+      <mini-preview label="concept"></mini-preview>
 		<div class="line-bottom"></div>
 	</div>
 	<div class="dialogscroll">
@@ -11,19 +11,19 @@
 		<div class="dialogbox dialog-full">
 			<div class="dialog-half col">
 				<span class="italic"><span class="icon-note"></span>Description</span><br>
-        {{ description.value }}
+        {{ concept.scopeNote.value }}
 
 			</div>
 			<div class="dialog-quarter col">
 				<span class="italic">Broader</span><br>
 				<ul>
-					<li ng-repeat="broaderlabelID in box.resource.broader">{{ broaderlabelID }}</li>
+					<li ng-repeat="broaderConceptID in concept.broader">{{ broaderConceptID }}</li>
 				</ul>
 			</div>
 			<div class="dialog-quarter col">
 				<span class="italic">Narrower</span><br>
 				<ul>
-          <li ng-repeat="narrowerlabelID in box.resource.narrower">{{ narrowerlabelID }}</li>
+          <li ng-repeat="narrowerConceptID in concept.narrower">{{ narrowerConceptID }}</li>
 				</ul>
 			</div>
 		</div>
@@ -32,7 +32,7 @@
 		<div class="enrichbuttons enrichbuttons-min">
 
 		  <!-- label columns -->
-	    <div class="col three leftout" ng-init="newRelation = box.relation">
+	    <div class="col three leftout" ng-init="newRelation = relation">
 	  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'broader'" ng-class="{'selectedbutton': newRelation === 'broader'}">
 	  			<span class="buttontext-ow">broader</span>
 	  		</button>
@@ -65,16 +65,16 @@
 
     <h4>meta data</h4>
     	<span class="listtype">id</span>
-        <span class="listcontent" ng-bind="box.resource.id"></span>
+        <span class="listcontent" ng-bind="concept.id"></span>
 
         <span class="listtype">Creator</span>
-        <span class="listcontent" ng-bind="box.resource.creator"></span>
+        <span class="listcontent" ng-bind="concept.creator"></span>
 
         <span class="listtype">Last modified</span>
-        <span class="listcontent" ng-bind-template="{{ box.resource.lastModified | date: 'dd.MM.yyyy hh:mm'}}"></span>
+        <span class="listcontent" ng-bind-template="{{ concept.lastModified | date: 'dd.MM.yyyy hh:mm'}}"></span>
 
         <span class="listtype">License</span>
-        <span class="listcontent" ng-bind="box.resource.license"></span>
+        <span class="listcontent" ng-bind="concept.license"></span>
 
 
 	</div>
@@ -84,5 +84,5 @@
 
 
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="changeLabelRelation(newRelation, box.relation); closeThisDialog()" ng-class="{'inactive': newRelation === box.relation}">Apply</div>
+	<div class="apply" ng-click="changeRelation(newRelation, relation); closeThisDialog()" ng-class="{'inactive': newRelation === relation}">Apply</div>
 </div>

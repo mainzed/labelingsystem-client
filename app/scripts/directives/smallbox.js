@@ -214,13 +214,6 @@ angular.module('labelsApp')
         };
 
         /**
-         * redirect to new label path
-         */
-        scope.openLabel = function() {
-            $location.path('/admin/vocabularies/' + scope.box.resource.vocabID + '/concepts/' + scope.box.resource.id);
-        };
-
-        /**
          * open resource-url in new tab.
          * @param {Object} resource - Resource object
          * @param {string} resource.type - Resource type (e.g. "getty")
@@ -307,37 +300,7 @@ angular.module('labelsApp')
 
         };
 
-        /**
-         * change the relation of a label.
-         * @param {string} newRelation - updated label-to-label relation
-         * @param {string} oldRelation - original label-to-label relation
-         */
-        scope.changeLabelRelation = function(newRelation, oldRelation) {
-            // remove id from old relation array
-            _.remove(scope.label[oldRelation], function(n) {
-              return n === scope.box.resource.id;
-            });
-
-            // add to new relation array
-            if (!scope.label[newRelation]) {
-                scope.label[newRelation] = [];
-            }
-            scope.label[newRelation].push(scope.box.resource.id);
-
-            // update on server
-            var jsonObject = {
-                item: scope.label,
-                user: scope.user.name
-            };
-
-            LabelService.update({ id: $routeParams.lID }, jsonObject, function() {
-                scope.box.relation = newRelation;  // update relation
-
-            }, function(res) {
-                console.log(res);
-            });
-
-        };
+        
 
         //scope.init();
 

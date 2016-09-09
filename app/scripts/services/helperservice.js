@@ -23,7 +23,7 @@ angular.module('labelsApp')
     this.getThumbnail = function(concept) {
         for (var i = 0; i < concept.prefLabels.length; i++) {
             if (concept.prefLabels[i].isThumbnail) {
-                return concept.prefLabels[i].value;
+                return concept.prefLabels[i];
             }
         }
     };

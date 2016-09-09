@@ -1,0 +1,15 @@
+<div class="box small label high" ng-click="openDialog()">
+
+  <!-- relation icon -->
+  <span class="relation"><span ng-class="{'icon-related': relation === 'related'}"></span></span>
+
+  <span class="thumbnail" ng-bind="thumbnail.value"></span>
+
+  <!-- type icon -->
+  <span class="type" title="{{ tooltip }}"><span class='icon-concept'></span></span>
+
+  <mini-preview label="concept" size="micro"></mini-preview>
+
+  <span class="language" ng-bind="thumbnail.lang"></span>
+
+</div>
