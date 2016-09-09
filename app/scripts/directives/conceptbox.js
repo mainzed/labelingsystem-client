@@ -7,7 +7,7 @@
  * # conceptBox
  */
 angular.module('labelsApp')
-  .directive('conceptBox', function ($location, ngDialog, LabelService, HelperService, $routeParams, AuthService) {
+  .directive('conceptBox', function ($location, ngDialog, LabelService, HelperService, $routeParams, AuthService, ConfigService) {
     return {
         templateUrl: "views/directives/concept-box.html",
         restrict: 'E',
@@ -26,10 +26,50 @@ angular.module('labelsApp')
                 console.log(err);
             });
 
+            // obj can be resource or concept
+            scope.getLabel = function(obj) {
+                if (obj.id) {  // is concept
+                    return HelperService.getThumbnail(obj).value;
+                } else {  // is resource
+                    return obj.label;
+                }
+            };
+
             /**
              * Opens a dialog with detailed information.
              */
             scope.openDialog = function() {
+
+
+                // get this concept's broader concepts
+                scope.broaderConcepts = [];
+                scope.narrowerConcepts = [];
+
+                HelperService.getRelatedConcepts(scope.concept, "broader", function(broaderConcepts) {
+                    scope.broaderConcepts = scope.broaderConcepts.concat(broaderConcepts);
+                });
+                HelperService.getRelatedConcepts(scope.concept, "narrower", function(narrowerConcepts) {
+                    scope.narrowerConcepts = scope.narrowerConcepts.concat(narrowerConcepts);
+                });
+
+                if (ConfigService.showMatches) {
+                    HelperService.getRelatedConcepts(scope.concept, "broadMatch", function(broaderConcepts) {
+                        scope.broaderConcepts = scope.broaderConcepts.concat(broaderConcepts);
+                    });
+                    HelperService.getRelatedConcepts(scope.concept, "narrowMatch", function(narrowMatch) {
+                        scope.narrowerConcepts = scope.narrowerConcepts.concat(narrowMatch);
+                    });
+                }
+
+
+                // scope.broaderConcepts = [];
+                // HelperService.getRelatedConcepts(scope.concept, "broader", function(broaderConcepts) {
+                //     scope.broaderConcepts = scope.broaderConcepts.concat(broaderConcepts);
+                // });
+                // HelperService.getRelatedConcepts(scope.concept, "broadMatch", function(broaderResources) {
+                //     scope.broaderConcepts = scope.broaderConcepts.concat(broaderResources);
+                // });
+
                 ngDialog.open({
                     template: "views/dialogs/small-box-concept.html",
                     className: 'bigdialog',

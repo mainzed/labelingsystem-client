@@ -7,7 +7,7 @@
  * # smallBox
  */
 angular.module('labelsApp')
-  .directive('prefLabelBox', function ($routeParams, ngDialog, LabelService, AuthService) {
+  .directive('prefLabelBox', function ($routeParams, ngDialog, VocabService, LabelService, AuthService, ConfigService) {
     return {
         templateUrl: "views/directives/prefLabel-box.html",
         restrict: 'E',
@@ -15,6 +15,19 @@ angular.module('labelsApp')
             data: "="
         },
         link: function postLink(scope, element) {
+
+            // check if public thumbnail if this option is true
+            if (ConfigService.preventThumbnailEdit) {
+                // check if the current concept's vocab is public
+                VocabService.get({id: $routeParams.vID}, function(vocab) {
+                    if (vocab.releaseType === "public") {
+                        scope.isPublicThumbnail = true;
+                    }
+                }, function(err) {
+                    console.log(err);
+                });
+            }
+
 
             /**
              * Opens a dialog with detailed information.

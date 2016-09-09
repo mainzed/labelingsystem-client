@@ -71,35 +71,10 @@ angular.module('labelsApp')
                 };
 
                 LabelService.update({id: updatedLabel.id}, updateObject, function() {
-                    // get all infos and add box temporarily
-                    if (labelID) {
-                        LabelService.get({id: labelID}, function(concept) {
-
-                            scope.boxes.push({
-                                relation: relation,
-                                boxType: scope.data.type,
-                                resource: concept
-                            });
-                        }, function(err) {
-                            console.log(err);
-                        });
-                    } else {
-                        // get external resource
-                        ResourcesService.get(scope.data.uri, function(resource) {
-                            scope.boxes.push({
-                                relation: relation,
-                                boxType: scope.data.type,
-                                resource: resource
-                            });
-                        }, function(err) {
-                            console.log(err);
-                        });
-                    }
-
+                    // adds new box automatically
                 }, function(err) {
                     console.log(err);
                 });
-
 
             };
 

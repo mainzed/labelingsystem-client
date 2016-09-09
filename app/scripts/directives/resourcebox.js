@@ -140,12 +140,21 @@ angular.module('labelsApp')
             };
 
             // scope.$watchCollection("resource", function() {
-            //     console.log("changed");
             //     // refresh nanoscroller
+            //     console.log("resource refresh");
             //     $timeout(function() {
             //         $(".nano").nanoScroller();
-            //     }, 0);
+            //     }, 5);
             //
+            //
+            // });
+            //
+            // scope.$watchCollection("data", function() {
+            //     // refresh nanoscroller
+            //     console.log("data refresh");
+            //     $timeout(function() {
+            //         $(".nano").nanoScroller();
+            //     }, 100);
             // });
 
         }

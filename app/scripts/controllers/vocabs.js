@@ -11,18 +11,14 @@
 angular.module('labelsApp')
   .controller('VocabsCtrl', function ($scope, $location, $http, ngDialog, AuthService, VocabService) {
 
-    // authentication
-    if ($location.path().indexOf("admin/") > -1) {  // is admin view
-        if (!AuthService.getUser()) {
-            // redirect if not logged in
-            $location.path("admin/login");
-        } else {
-            // if logged in, get user name
-            $scope.user = AuthService.getUser();
-        }
+    if (!AuthService.isLoggedIn()) {
+        $location.path("admin/login");
     }
 
-    VocabService.query(function(vocabularies) {
+    // dont use that, vulnerable
+    $scope.user = AuthService.getUser();
+
+    VocabService.query({ creator: $scope.user.username }, function(vocabularies) {
         $scope.vocabularies = vocabularies;
     });
 
@@ -45,17 +41,28 @@ angular.module('labelsApp')
         });
     };
 
-    $scope.onSelectionChange = function(name) {
-        // get thesaurus by name
-        var thesaurus;
-        for (var i = 0; i < $scope.thesauri.length; i++) {
-            if ($scope.thesauri[i].name === name) {
-                thesaurus = $scope.thesauri[i];
-                break;
-            }
-        }
-        $scope.vocabThesauri.push(thesaurus);
+    $scope.openUserDialog = function() {
+        ngDialog.open({
+            template: 'views/dialogs/user-metadata.html',
+            className: 'bigdialog',
+            showClose: false,
+            closeByDocument: false,
+            disableAnimation: true,
+            scope: $scope
+        });
     };
+
+    // $scope.onSelectionChange = function(name) {
+    //     // get thesaurus by name
+    //     var thesaurus;
+    //     for (var i = 0; i < $scope.thesauri.length; i++) {
+    //         if ($scope.thesauri[i].name === name) {
+    //             thesaurus = $scope.thesauri[i];
+    //             break;
+    //         }
+    //     }
+    //     $scope.vocabThesauri.push(thesaurus);
+    // };
 
     $scope.onCreateClick = function() {
 

@@ -1,7 +1,7 @@
 <div id="header" class="box full">
 <div class="box small" type="button" name="button" ng-click="onLogoutClick()">logout</div>
 
-<h1>User: {{ user.name }}</h1>
+<h1 ng-bind="user.name" ng-click="openUserDialog()"></h1>
 </div>
 
 <div class="separatorsmall">
@@ -15,7 +15,7 @@
 	<div class="nano">
 
     <div id="boxcontainer" class="nano-content voc-box">
-		<div class="box vocabulary high label" ng-repeat="vocab in vocabularies | filter: vocabFilter" ng-click="onVocabClick(vocab.id)">
+		<div class="box vocabulary high label" ng-repeat="vocab in vocabularies | filter: {'creator': user.name} | filter: vocabFilter" ng-click="onVocabClick(vocab.id)">
       <div ng-bind="vocab.title.value"></div>
       <div ng-bind="vocab.releaseType"></div>
       <div ng-bind-template="Description: {{ vocab.description.value }}"></div>

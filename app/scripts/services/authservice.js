@@ -8,20 +8,27 @@
  * Service in the labelsApp.
  */
 angular.module('labelsApp')
-  .service('AuthService', function ($location, $cookies) {
-    // AngularJS will instantiate a singleton by calling "new" on this function
+  .service('AuthService', function ($location, $cookies, $http, ConfigService) {
     var user = {};
 
-    this.login = function(username, password, success, failure) {
+    /**
+     * Login using the labeling system /auth api
+     */
+    this.login = function(username, password, successCallback, errorCallback) {
+
+        // $http.post(ConfigService.host + "/auth/status" + "user=demo&pwd=demo",).then(function(res) {
+        //     console.log(res);
+        // });
+
         // TODO: validate username/password
         if (username && password) {
             user.name = username;
 
             $cookies.put('labelsUser', username);
 
-            success();
+            successCallback();
         } else {
-            failure("username or password missing!");
+            errorCallback("username or password missing!");
         }
     };
 
@@ -36,6 +43,16 @@ angular.module('labelsApp')
         if (userCookie) {
             user.name = userCookie;
             return user;
+        } else {
+            return false;
+        }
+    };
+
+    this.isLoggedIn = function() {
+        if ($cookies.get("labelsUser")) {
+            return true;
+        } else {
+            return false;
         }
     };
 

@@ -18,7 +18,7 @@
 				<span class="italic">Broader</span><br>
 
 				<ul class="hierarchie">
-					<li ng-repeat="broaderConceptID in concept.broader">{{ broaderConceptID }}</li>
+					<li ng-repeat="broaderConcept in broaderConcepts">{{ getLabel(broaderConcept) }}</li>
 
 				</ul>
 			</div>
@@ -26,7 +26,7 @@
 				<span class="italic">Narrower</span><br>
 
 				<ul class="hierarchie">
-          <li ng-repeat="narrowerConceptID in concept.narrower">{{ narrowerConceptID }}</li>
+          <li ng-repeat="narrowerConcept in narrowerConcepts">{{  getLabel(narrowerConcept) }}</li>
 
 				</ul>
 			</div>

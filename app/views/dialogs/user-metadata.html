@@ -1,0 +1,53 @@
+<div class="dialogwrapper label">
+  <div class="dialogheader">
+    <h3 ng-bind="user.name"></h3>
+    <p class="typeinformation">metadata/settings</p>
+    <div class="line-bottom"></div>
+  </div>
+
+  <div class="dialogscroll">
+    <div class="nano">
+      <div class="nano-content">
+
+        <!-- email -->
+        <div class="dialogbox dialog-full">
+          <h4>Edit</h4>
+          <input type="email" placeholder="email" ng-model="email">
+        </div>
+
+          <!-- first name -->
+        <div class="dialogbox dialog-full">
+          <input type="text" placeholder="first name" ng-model="firstName">
+        </div>
+
+          <!-- family name -->
+        <div class="dialogbox dialog-full">
+          <input type="text" placeholder="family name" ng-model="familyName">
+        </div>
+
+
+
+
+        <div class="line-dialog"></div>
+        <div class="dialogbox dialog-full">
+          <h4 >meta data</h4>
+          <span class="listtype">ID</span>
+          <span class="listcontent" ng-bind="user.id"></span>
+
+          <span class="listtype">URI</span>
+          <span class="listcontent" ng-bind="user.uri"></span>
+
+        </div>
+
+
+      </div><!-- end nano-content -->
+    </div><!-- end nano -->
+  </div><!-- end dialog scroll -->
+
+
+  <!-- apply -->
+  <button type="button" class="apply" ng-click="updateUser()" ng-disabled="!email || !firstName || !familyName" ng-class="{'inactive': !email || !firstName || !familyName}">Apply</button>
+
+  <!-- cancel -->
+  <button type="button" class="cancel" ng-click="closeThisDialog()">Cancel</button>
+</div>

@@ -13,14 +13,18 @@ angular.module('labelsApp')
     // host adress of the used labeling system api
     this.host = "http://143.93.114.135/api/v1";
 
-    // true allows a thumbnail-prefLabel to be edited even if it's vocabulary
-    // releaseType is 'public'. false prevents public thumbnail-prefLabels from
-    // being edited.
-    this.allowThumbnailEdit = false;
+    /**
+     * If true, prevents users from editing the thumbnail prefLabel of a concept
+     * if it's vocabulary has the releaseType "public". If false, allows editing
+     * even if a vocabulary is public.
+     */
+    this.preventThumbnailEdit = true;
 
-    // true shows internal broader and narrower as well as external broadMatches
-    // and narrowMatches in concept overviews or small box details. false shows
-    // only internal relations.
+    /**
+     * If true, shows broadMatches and narrowMatches in broader/narrower columns
+     * in the concept detail box. If false, only shows broader and narrower
+     * concepts of the same vocabulary.
+     */
     this.showMatches = true;
 
     // score values for a concept's properties and links to grade it's quality

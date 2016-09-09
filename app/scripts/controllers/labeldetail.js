@@ -10,16 +10,15 @@
 angular.module('labelsApp')
   .controller('LabelDetailCtrl', function ($scope, $routeParams, $timeout, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ResourcesService, TooltipService, SearchService, UserSettingsService, ThesauriService, LangService, WaybackService) {
 
-    // authentication
-    if ($location.path().indexOf("admin/") > -1) {  // is admin view
-        if (!AuthService.getUser()) {
-            // redirect if not logged in
-            $location.path("admin/login");
-        } else {
-            // if logged in, get user name
-            $scope.user = AuthService.getUser();
-        }
+    if (!AuthService.isLoggedIn()) {
+        $location.path("admin/login");
     }
+
+    // init nanoscroller here to prevent default scrollbar while loading boxes
+    $(".nano").nanoScroller();
+
+    $scope.user = AuthService.getUser();
+
     $scope.tooltips = TooltipService;
 
     $scope.showEnrichments = UserSettingsService.showEnrichments;
