@@ -7,6 +7,7 @@
 @text: 				#3f3f3f;
 @label: 			#e5e5e5;
 @hovergray: 		#d5d5d5;
+@linegray:			#c5c5c5;
 
 /* high quality */
 @high: 				#31CAFF;
@@ -73,7 +74,7 @@ textarea:focus {	outline: none; }
 
 #header {			color: white; height: 90px; position: relative; background: @background;	}
 #footer {			position: fixed; bottom: @margininboxsmall; left: @marginoutside; color: @label; font-size: @small; 
-					font-style: italic; letter-spacing: 0.1em; }
+					 }
 #viewport {			height: 100%; background: @background;}
 #separator {		color: white; height: 75px; }
 .separatorsmall {	height: 50px; float: left; width: 100%; background: @workareas; clear: left;}
@@ -116,7 +117,7 @@ textarea:focus {	outline: none; }
 					float: left;
 }
 #filtersearch input {
-					background: none; border: none; color: gray; width: 200px; float: left; height: 30px; }
+					background: none; border: none; width: 200px; float: left; height: 30px; }
 
 #breadcrumb {		float: left; display: block; height: 100px; }
 #breadcrumb a {		color: white; margin-top: 60px; display: block; float: left; padding-bottom: 2px;
@@ -184,7 +185,7 @@ textarea:focus {	outline: none; }
 					position: static; float: left; margin-left: @margininboxsmall;
 					margin-top: 8px; bottom: auto; left: auto; top: auto; width: 60%;  }
 #listwrapper .bigbox .thumbnail {
-					margin-top: 15px;
+					margin-top: 12px;
 }
 
 
@@ -252,7 +253,7 @@ textarea:focus {	outline: none; }
 
 
 /* mini preview */
-.minipreview {		height: calc(@boxheight - @margininboxsmall * 2 - 10px); margin: @margininboxsmall 0; background: black;
+.minipreview {		height: calc(@boxheight - @margininboxsmall * 2 - 10px); margin: 4px 0; background: black;
 					width: 100px; float: left; padding: 4px 2px 6px 2px; overflow: hidden;	}
 .minicol	 {		width: calc(25% - 4px); padding: 0 2px; float: left; height: 100%;	}
 .minibox 	{		width: 100%; height: 6px; margin-bottom: 4px; display: block;}
@@ -283,11 +284,14 @@ textarea:focus {	outline: none; }
 					color: black; background: #d6d6d6; }
 .deletebutton .buttontext {
 					margin: @margininboxsmall; }
+.deletebutton.confirm {		
+					background: tomato;}
+.confirmtext {		position: absolute; left: 50%; margin-left: -50px !important; text-align: center; width: 100px;}
 .line-dialog {		height: 1px; width: calc(100% - @marginoutside * 2); margin-left: @marginoutside; float: left;
 					display: block; margin-bottom: @margininboxsmall; margin-top: 50px; }
 .line-bottom {		height: 1px; width: calc(100% - @marginoutside * 2); left: @marginoutside; position: absolute; bottom: 0; display: block;  }
 .line 	{			background: black;}
-.label .line {		background: #d3d3d3; }
+.label .line {		background: @linegray; }
 
 
 .bigdialog .ngdialog-content {
@@ -299,12 +303,12 @@ textarea:focus {	outline: none; }
 					margin-bottom: 100px; }
 .dialogbox		{	float: left; padding-top: 10px;  }
 .dialogbox input {	width: calc(100% - 2 * @marginoutside); margin-left: @marginoutside; 
-					padding: @margininboxsmall; background: white; color: black; border: 0; }
+					padding: @margininboxsmall; background: white; color: black; border: 0; height: 35px; }
 .dialogbox select { width: calc(100% - 2 * @marginoutside); margin-left: @marginoutside; background: @middle;
 					padding: calc( @margininboxsmall / 2); border: 1px solid @workareas; color: white; }
 .label .dialogbox input {
 					 color: black; }
-.text textarea {	background: @middle; border: black; color: white;}					
+.text textarea {	background: white;  }					
 .typeinformation {	margin-left: calc(@marginoutside); font-style: italic; float: left; clear: left; }
 .listtype {			float: left; width: 150px; clear: left; margin-left: @marginoutside; font-style: italic; }
 .listcontent {		float: left; width: calc(100% - 150px - @marginoutside); }
@@ -321,6 +325,7 @@ textarea:focus {	outline: none; }
 
 
 
+
 /* icon corrections */
 .small .icon-concept, .bigbox .icon-concept
 	{ 				margin-right: -2px; margin-top: -5px; display: block; }
@@ -333,14 +338,15 @@ textarea:focus {	outline: none; }
 #header .icon-folder {
 					position: absolute; right: 50px; font-size: 100px; top: 2px; }
 #filtersearch .icon-search	{
-					font-size: 24px; margin-top: 4px; color: gray;
+					font-size: 24px; margin-top: 4px; 
 }				
 
 .ngdialog-overlay { background: rgba(0, 0, 0, 0.8); }
-.selectedbutton {	background: @workareas; color: white; }
+.selectedbutton {	background: @middle; color: white; }
 
 /* extension content */
 .line-ext {			height: 1px; width: calc(100% - @margininboxsmall * 2); margin-left: @margininboxsmall; display: block; background: black; }
+.label .line-ext {	background: @linegray; }
 .note-ext {			float: left; margin-left: 100px; width: 15%; margin-top: @margininboxsmall; }
 .creator-ext {		float: left; margin-left: @margininboxsmall; margin-top: @margininboxsmall; }
 
@@ -361,7 +367,7 @@ textarea:focus {	outline: none; }
 
 .active {			font-weight: bold; }
 
-.inactive {			color: #111111; background: #222222; pointer-events:none; }
+.inactive {			color: #555555; background: #222222; pointer-events:none; }
 .paddingbottom {	padding-bottom: 10px;	}
 .loudlink {			text-decoration: underline; background: #d3d3d3; border-radius: 3px; padding: 4px; color: blue; cursor: pointer; }
 
