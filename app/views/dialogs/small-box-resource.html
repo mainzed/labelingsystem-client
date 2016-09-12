@@ -7,7 +7,7 @@
       <span class="loudlink" ng-click="openResource()">open in new tab</span>
     </p>
 
-		<div class="line-bottom"></div>
+		<div class="line-bottom line"></div>
 	</div>
 	<div class="dialogscroll">
 	<div class="nano">
@@ -18,23 +18,23 @@
         {{ resource.description }}
 			</div>
 			<div class="dialog-quarter col">
-				<span class="italic">Broader</span><br>
+				<span class="italic smalltype">Broader</span><br>
 				<ul class="hierarchie">
 					<li ng-repeat="term in resource.broaderTerms" ng-bind="term.label"></li>
 
 				</ul>
 			</div>
 			<div class="dialog-quarter col">
-				<span class="italic">Narrower</span><br>
+				<span class="italic smalltype">Narrower</span><br>
 				<ul class="hierarchie">
 					<li ng-repeat="term in resource.narrowerTerms" ng-bind="term.label"></li>
 
 				</ul>
 			</div>
 		</div>
-		<div class="line-dialog"></div>
+		<div class="line-dialog line"></div>
 		<h4>Connection</h4>
-		<div class="enrichbuttons enrichbuttons-min">
+		<div class="enrichbuttons">
 
 		  <!-- resource columns -->
 		  <div ng-init="newRelation = relation">
@@ -79,7 +79,7 @@
 
 
 		</div>
-		<div class="line-dialog"></div>
+		<div class="line-dialog line"></div>
 		<div class="dialogbox dialog-full">
       <confirm-button on-confirm="onDeleteClick(); closeThisDialog()"></confirm-button>
 		</div>

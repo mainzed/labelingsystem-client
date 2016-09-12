@@ -12,8 +12,8 @@
 @high: 				#31CAFF;
 
 /* low quality */
-@categorytwo:		#513C00;
-@categorythree:		#2B4400;
+@categorytwo:		#3b5450;
+@categorythree:		#544d3b;
 
 
 /* font-sizes */
@@ -55,7 +55,7 @@ a {					color: inherit; text-decoration: underline; }
 html {				height: 100%;	}
 body {				height: 100%;	}
 textarea {			margin-left: @marginoutside; width: calc(100% - 2 * @marginoutside); display: block; resize: vertical;
-					height: 150px; border-radius: 3px; background: #d6d6d6; padding: @margininboxsmall; border: 0; }
+					height: 150px; background: white; padding: @margininboxsmall; border: 0; }
 h1 {				font-size: @headlines; font-weight: normal;
 					@media screen and (max-width: 1600px) {font-size: @headlines-small; } }
 h2 {				font-size: @headlines; font-weight: normal; margin-bottom: 50px; margin-top: @marginoutside; margin-left: @marginoutside; display: block;
@@ -126,7 +126,7 @@ textarea:focus {	outline: none; }
 #breadcrumb span span
 				{	display: block; float: left; margin-top: 56px; margin-right: @marginoutboxsmall; }
 .tablehead {		float: left; height: 50px; color: white;	}
-.tablehead span {	margin-top: 15px; margin-left: calc(@tableheadmargin); display: block; }
+.tablehead span {	margin-top: 14px; margin-left: calc(@tableheadmargin); display: block; }
 .tablehead.left span {
 					margin-left: calc(@tableheadmarginleft); display: block; }
 .col {				float: left; min-height: 10px;	}
@@ -216,8 +216,8 @@ textarea:focus {	outline: none; }
 /*enrichbuttons*/
 .enrichbutton	{	margin-left: @marginoutside; margin-right: @marginoutboxsmall; width: calc(100% - @marginoutboxsmall - @marginoutside);
 					height: 40px; background: @middle; border: 0; text-align: left; color: white; margin-bottom: @marginbottombox;
-					cursor: pointer; }
-.enrichbutton-ow {	background: #d6d6d6; height: 100px; text-align: left; width: 100%; position: relative; cursor: pointer; }
+					cursor: pointer; border-radius: 3px; }
+.enrichbutton-ow {	background: #d6d6d6; height: 65px; text-align: left; width: 100%; position: relative; cursor: pointer; border-radius: 3px; }
 .enrichbutton-ow .icon {
 					position: absolute; top: @margininboxsmall; left: @margininboxsmall; }
 .enrichbuttons-min .enrichbutton-ow {
@@ -242,7 +242,7 @@ textarea:focus {	outline: none; }
 
 
 .buttonicon {		margin-right: @margininboxsmall; float: right;}
-.buttontext {		margin-left: @margininboxsmall; float: left; margin-top: 4px;			}
+.buttontext {		margin-left: @margininboxsmall; float: left; margin-top: 5px;			}
 .buttontext-ow {	position: absolute; left: @margininboxsmall; bottom: @margininboxsmall; font-size: @regular; 			}
 .enrichbuttons-min .buttontext-ow {
 					font-size: @regular; bottom: auto; top: @margininboxsmall;
@@ -277,15 +277,18 @@ textarea:focus {	outline: none; }
 .dialog-half {		width: calc((100% - ( @marginoutboxsmall * 4  + @marginoutside * 2)) / 2 ); margin-left: @marginoutside; }
 .dialog-quarter {	width: calc((100% - ( @marginoutboxsmall * 4  + @marginoutside * 2)) / 4 ); margin-left: calc(@marginoutboxsmall * 2); }
 .dialog-full	{	width: 100%;  }
-.deletebutton { 	width: calc(100% - @marginoutside * 2 ); height: 40px; margin-left: @marginoutside; position: relative; background: @middle; color: white;	}
+.deletebutton { 	width: calc(100% - @marginoutside * 2 ); border-radius: 3px; height: 40px; margin-left: @marginoutside; position: relative; background: @middle; color: white;	}
 .deletebutton .icon {position: absolute;  line-height: 25px; right: @marginoutboxsmall; top: @margininboxsmall; }
 .label .deletebutton {
 					color: black; background: #d6d6d6; }
 .deletebutton .buttontext {
 					margin: @margininboxsmall; }
 .line-dialog {		height: 1px; width: calc(100% - @marginoutside * 2); margin-left: @marginoutside; float: left;
-					display: block; background: black; margin-bottom: @margininboxsmall; margin-top: 50px; }
-.line-bottom {		height: 1px; width: calc(100% - @marginoutside * 2); left: @marginoutside; position: absolute; bottom: 0; display: block; background: black; }
+					display: block; margin-bottom: @margininboxsmall; margin-top: 50px; }
+.line-bottom {		height: 1px; width: calc(100% - @marginoutside * 2); left: @marginoutside; position: absolute; bottom: 0; display: block;  }
+.line 	{			background: black;}
+.label .line {		background: #d3d3d3; }
+
 
 .bigdialog .ngdialog-content {
 					width: @bigdialogwidth; position: absolute; left: 50%; margin-left: calc(( @bigdialogwidth * -1 ) / 2);
@@ -295,12 +298,12 @@ textarea:focus {	outline: none; }
 .dialogscroll {		height: calc(100% - 180px); float: left; clear: both; display: block; overflow: hidden; width: 100%;
 					margin-bottom: 100px; }
 .dialogbox		{	float: left; padding-top: 10px;  }
-.dialogbox input {	width: calc(100% - 2 * @marginoutside); margin-left: @marginoutside; border-radius: 3px;
-					padding: @margininboxsmall; background: @middle; color: white; border: 0; }
+.dialogbox input {	width: calc(100% - 2 * @marginoutside); margin-left: @marginoutside; 
+					padding: @margininboxsmall; background: white; color: black; border: 0; }
 .dialogbox select { width: calc(100% - 2 * @marginoutside); margin-left: @marginoutside; background: @middle;
 					padding: calc( @margininboxsmall / 2); border: 1px solid @workareas; color: white; }
 .label .dialogbox input {
-					background: #d6d6d6; color: black; }
+					 color: black; }
 .text textarea {	background: @middle; border: black; color: white;}					
 .typeinformation {	margin-left: calc(@marginoutside); font-style: italic; float: left; clear: left; }
 .listtype {			float: left; width: 150px; clear: left; margin-left: @marginoutside; font-style: italic; }
@@ -312,8 +315,8 @@ textarea:focus {	outline: none; }
 .thesaurus p {		float: left; clear: left; }
 .thesaurus .icon {	float: left; }
 .checked {			color: green; border-color: green; }
-.hierarchie li { 	 line-height: 18px; width: 100%; padding: 4px 0; font-size: @small; letter-spacing: 0.03em;
-					border-top: 1px solid black; list-style: none; margin-left: 0;  }
+.hierarchie li { 	 width: 100%; font-size: @small; letter-spacing: 0.03em;
+					 list-style: none; margin-left: 0;  }
 
 
 
@@ -354,14 +357,14 @@ textarea:focus {	outline: none; }
 .icon-min {			width: 20px; height: 3px; background: white; display: block;  }
 
 .pointer		{	cursor: pointer; }
-
+.smalltype {		font-size: @small;}
 
 .active {			font-weight: bold; }
 
-.inactive {			color: gray; pointer-events:none; }
+.inactive {			color: #111111; background: #222222; pointer-events:none; }
 .paddingbottom {	padding-bottom: 10px;	}
-.loudlink {			text-decoration: underline; }
-.label .loudlink {	color: blue; }
+.loudlink {			text-decoration: underline; background: #d3d3d3; border-radius: 3px; padding: 4px; color: blue; cursor: pointer; }
+
 
 
 .icon-hide {		color: white; }
