@@ -1,5 +1,7 @@
 <div class="dialogwrapper text">
-  <h3>Enrich current label</h3>
+  <div class="dialogheader">
+    <h3>Enrich current label</h3>
+  </div>
 
   <div id="selectedbox">
   	<div class="box bigbox {{ data.type }} {{ data.quality }}" ng-click="onBoxClick()">
@@ -30,7 +32,7 @@
       <div class="col five">
     		<button class="enrichbutton-ow" type="button" name="button" ng-click="onAddClick('relatedMatch'); closeThisDialog()">
     			<span class="buttontext-ow">related Match</span>
-    			<span class="icon-related icon"></span>
+    			<span class="icon-arrow icon"></span>
     		</button>
     		<p class="enrichinfo">skos:relatedMatch is used to state an associative mapping link between two conceptual resources in different concept schemes.</p>
     	</div>

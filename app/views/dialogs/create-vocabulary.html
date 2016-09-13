@@ -1,18 +1,39 @@
-<h3>Create new vocabulary</h3>
+<div class="dialogwrapper label">
+	<div class="dialogheader">
+		<h3>Create new vocabulary</h3>
+		<div class="line-bottom"></div>
+	</div>
 
-<div>
-  <select ng-model="newVocab.title.lang">
-    <option ng-repeat="language in languages | orderBy: 'name'" value="{{language.value}}" ng-bind="language.name"></option>
-  </select>
+	<div class="dialogscroll">
+	<div class="nano">
+	<div class="nano-content">
+		<h4>name</h4>
+		<div class="dialogbox dialog-full">
+			  <input type="text" placeholder="title" ng-model="newVocab.title.value">
+		</div>
+
+
+		<div class="line-dialog"></div>
+		<h4>description</h4>
+		<div class="dialogbox dialog-full">
+			 <input type="text" placeholder="description" ng-model="newVocab.description.value">
+		</div>
+
+		<div class="line-dialog"></div>
+		<h4>Language</h4>
+		<div class="dialogbox dialog-full">
+			 <select ng-model="newVocab.title.lang">
+			    <option ng-repeat="language in languages | orderBy: 'name'" value="{{language.value}}" ng-bind="language.name"></option>
+			  </select>
+		</div>
+
+
+	</div>
+	</div>
+	</div>
+
+
+	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
+	<div class="apply" ng-click="onCreateConfirm(); closeThisDialog()" ng-disabled="!term" ng-class="{'inactive': !newVocab.title.value || !newVocab.title.lang}">Apply</div>
 </div>
 
-<div>
-  <input type="text" placeholder="title" ng-model="newVocab.title.value">
-</div>
-
-<div>
-  <input type="text" placeholder="description" ng-model="newVocab.description.value">
-</div>
-
-<button type="button" ng-click="onCreateConfirm(); closeThisDialog()" ng-class="{'inactive': !newVocab.title.value || !newVocab.title.lang}">Confirm</button>
-<button type="button" ng-click="closeThisDialog()">Cancel</button>

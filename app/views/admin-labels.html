@@ -16,13 +16,22 @@
 	</div>
 
   <span>
-    <span class="pre">sort -</span>
+    <ul>
+      <li ng-click="showOptions=!showOptions">sort
+        <ul ng-show="showOptions" class="invisible">
+          <li ng-click="labelOrder = '-lastModified'" ng-class="{'active': labelOrder === '-lastModified'}">by lastModified</li>
+          <li ng-click="labelOrder = orderByThumbnail" ng-class="{'active': labelOrder === orderByThumbnail}">alphabetically</li>
+          <li ng-click="labelOrder = orderByQuality" ng-class="{'active': labelOrder === orderByQuality}">by quality</li>
+        </ul>
+      </li>
+    </ul>
+    
 
-    <button type="button" ng-click="labelOrder = '-lastModified'" ng-disabled="labelOrder === '-lastModified'" ng-class="{'active': labelOrder === '-lastModified'}">by lastModified</button>
+    
 
-    <button type="button" ng-click="labelOrder = orderByThumbnail" ng-disabled="labelOrder === orderByThumbnail" ng-class="{'active': labelOrder === orderByThumbnail}">alphabetically</button>
+    
 
-    <button type="button" ng-click="labelOrder = orderByQuality" ng-disabled="labelOrder === orderByQuality" ng-class="{'active': labelOrder === orderByQuality}">by quality</button>
+ 
     <button type="button" ng-click="extendAll = !extendAll" ng-bind="extendButtonText"></button>
 
   </span>

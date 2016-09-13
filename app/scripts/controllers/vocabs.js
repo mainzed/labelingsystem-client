@@ -76,9 +76,10 @@ angular.module('labelsApp')
 
         ngDialog.open({
             template: 'views/dialogs/create-vocabulary.html',
+            className: 'bigdialog',
+            closeByDocument: false,
             showClose: false,
             disableAnimation: true,
-            closeByDocument: false,
             scope: $scope
         });
 

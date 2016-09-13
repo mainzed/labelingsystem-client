@@ -34,9 +34,9 @@ angular.module('labelsApp')
             if (scope.relation === "closeMatch") {
                 scope.relationIcon = "<span class='icon-close'></span>";
             } else if (scope.relation === "exactMatch") {
-                scope.relationIcon = "<span class='icon-exact'></span>";
+                scope.relationIcon = "<span title='exact Match' class='icon-exact'></span>";
             } else if (scope.relation === "relatedMatch") {
-                scope.relationIcon = "<span class='icon-related'></span>";
+                scope.relationIcon = "<span class='icon-arrow'></span>";
             }
 
             /**
