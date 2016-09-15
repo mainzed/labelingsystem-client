@@ -1,0 +1,46 @@
+
+<div class="box bigbox label high" ng-click="openDialog()">
+  <span class="thumbnail">
+    <button class="showadditionalcontent" ng-click="showMore = !showMore; $event.stopPropagation()">
+      <span ng-show="!showMore">+</span>
+      <span ng-show="showMore">-</span>
+    </button>
+    <span ng-repeat="prefLabel in data.prefLabels | filter: {isThumbnail: true}" ng-bind="prefLabel.value"></span>
+  </span>
+
+  <!-- icon -->
+  <span class='type icon-label'></span>
+
+</div>
+
+<!-- show details -->
+<div ng-if="showMore" class="box boxextension bigbox label high" ng-click="openDialog()">
+
+  <span class="line-ext"></span>
+
+  <span class="note-ext">
+    <span class="italic">Description</span><br>
+    {{ data.scopeNote.value }}
+  </span>
+
+  <span class="note-ext">
+    <span class="italic smalltype">broader</span><br>
+    <ul class="hierarchie">
+      <li ng-repeat="id in data.broader">{{ id }}</li>
+    </ul>
+  </span>
+
+  <span class="note-ext"><span class="italic smalltype">narrower</span><br>
+    <ul class="hierarchie">
+      <li ng-repeat="id in data.narrower">{{ id }}</li>
+    </ul>
+  </span>
+   <span class="note-ext"><span class="italic smalltype">link</span><br>
+    <a ng-href="{{ data.uri }}" target="_blank">link</a>
+
+  </span>
+
+
+
+
+</div>

@@ -15,14 +15,14 @@
     <!-- resource columns -->
     <div ng-show="data.type !== 'label'">
       <div class="col five leftout">
-    		<button class="enrichbutton-ow" type="button" name="button" ng-click="onAddClick('broadMatch'); closeThisDialog()">
+    		<button class="enrichbutton-ow" type="button" name="button" ng-click="addResource(data, 'broadMatch'); closeThisDialog()">
     			<span class="buttontext-ow">broad Match</span>
     		</button>
     		<p class="enrichinfo">skos:broadMatch is used to state a hierarchical mapping link between two conceptual resources in different concept schemes.</p>
     	</div>
 
       <div class="col five">
-    		<button class="enrichbutton-ow" type="button" name="button" ng-click="onAddClick('exactMatch'); closeThisDialog()">
+    		<button class="enrichbutton-ow" type="button" name="button" ng-click="addResource(data, 'exactMatch'); closeThisDialog()">
     			<span class="buttontext-ow">exact Match</span>
     			<span class="icon-exact icon"></span>
     		</button>
@@ -30,7 +30,7 @@
     	</div>
 
       <div class="col five">
-    		<button class="enrichbutton-ow" type="button" name="button" ng-click="onAddClick('relatedMatch'); closeThisDialog()">
+    		<button class="enrichbutton-ow" type="button" name="button" ng-click="addResource(data, 'relatedMatch'); closeThisDialog()">
     			<span class="buttontext-ow">related Match</span>
     			<span class="icon-arrow icon"></span>
     		</button>
@@ -38,7 +38,7 @@
     	</div>
 
       <div class="col five">
-    		<button class="enrichbutton-ow" type="button" name="button" ng-click="onAddClick('closeMatch'); closeThisDialog()">
+    		<button class="enrichbutton-ow" type="button" name="button" ng-click="addResource(data, 'closeMatch'); closeThisDialog()">
     			<span class="buttontext-ow">close Match</span>
     			<span class="icon-close icon"></span>
     		</button>
@@ -46,7 +46,7 @@
     	</div>
 
       <div class="col five rightout">
-    		<button class="enrichbutton-ow" type="button" name="button" ng-click="onAddClick('narrowMatch'); closeThisDialog()">
+    		<button class="enrichbutton-ow" type="button" name="button" ng-click="addResource(data, 'narrowMatch'); closeThisDialog()">
     			<span class="buttontext-ow">narrow Match</span>
     		</button>
     		<p class="enrichinfo">skos:narrowMatch is used to state a hierarchical mapping link between two conceptual resources in different concept schemes.</p>
@@ -55,23 +55,23 @@
 
     <!-- label columns -->
     <div ng-show="data.type === 'label'">
-      <div class="col three leftout" ng-show="data.type === 'label'">
-    		<button class="enrichbutton-ow" type="button" name="button" ng-click="onAddClick('broader'); closeThisDialog()">
+      <div class="col three leftout">
+    		<button class="enrichbutton-ow" type="button" name="button" ng-click="addResource(data, 'broader'); closeThisDialog()">
     			<span class="buttontext-ow">broader</span>
     		</button>
     		<p class="enrichinfo">skos:broader relates a concept to a concept that is more general in meaning.</p>
     	</div>
 
-      <div class="col three" ng-show="data.type === 'label'">
-    		<button class="enrichbutton-ow" type="button" name="button" ng-click="onAddClick('related'); closeThisDialog()">
+      <div class="col three">
+    		<button class="enrichbutton-ow" type="button"ng-click="addResource(data, 'related'); closeThisDialog()">
     			<span class="buttontext-ow">related</span>
     			<span class="icon-close icon"></span>
     		</button>
     		<p class="enrichinfo">skos:related relates a concept to a concept with which there is an associative semantic relationship.</p>
     	</div>
 
-      <div class="col three rightout" ng-show="data.type === 'label'">
-    		<button class="enrichbutton-ow" type="button" name="button" ng-click="onAddClick('narrower'); closeThisDialog()">
+      <div class="col three rightout">
+    		<button class="enrichbutton-ow" type="button" name="button" ng-click="addResource(data, 'narrower'); closeThisDialog()">
     			<span class="buttontext-ow">narrower</span>
     		</button>
     		<p class="enrichinfo">skos:narrower relates a concept to a concept that is more specific in meaning.</p>

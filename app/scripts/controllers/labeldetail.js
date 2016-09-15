@@ -26,6 +26,9 @@ angular.module('labelsApp')
     VocabService.get({id: $routeParams.vID}, function(vocabulary) {
         $scope.vocabulary = vocabulary;
 
+        // get this vocabularies labels to show in enrichment tab
+        $scope.getVocabLabels();
+
         // get this vocabulary's associated thesauri for search function
         ThesauriService.get({id: $routeParams.vID}, function(thesauri) {
             $scope.thesauri = thesauri;
@@ -39,6 +42,14 @@ angular.module('labelsApp')
         $scope.label = label;
         $scope.prefLabel = _.find($scope.label.prefLabels, {isThumbnail: true});
     });
+
+    // gets all vocab labels to show in vocab tab
+    $scope.getVocabLabels = function() {
+        LabelService.query({'vocab': $routeParams.vID}, function(labels) {
+            $scope.labels = labels;
+            //$scope.placeholder = "filter";
+        });
+    };
 
     // when searching, append search results
     // search when something is entered,
@@ -283,6 +294,52 @@ angular.module('labelsApp')
         }, function(err) {
             console.log(err);
         });
+    };
+
+    /**
+     * Link a search result to the current label by added the resource's
+     * information to the according relation-array of the label.
+     * @param {Object} resource - resource object
+     * @param {string} relation - Label-to-Resource relation  (e.g. "broader" or "exactMatch")
+     */
+    $scope.addResource = function(resource, relation) {
+
+        // get current label
+        var updatedLabel = $scope.label;
+
+        if (!updatedLabel[relation]) {
+            updatedLabel[relation] = [];
+        }
+
+        if (relation === "broader" || relation === "related" || relation === "narrower") {  // same vocab
+            //console.log(resource);
+            var labelID;
+            if (resource.uri) {
+                labelID = resource.uri.split("/").pop();
+            } else {
+                labelID = resource.id;
+            }
+            // just push label-id to array
+            updatedLabel[relation].push(labelID);
+
+        } else {
+            updatedLabel[relation].push({
+                type: resource.type,
+                uri: resource.uri
+            });
+        }
+
+        var updateObject = {
+            item: updatedLabel,
+            user: "demo"
+        };
+
+        LabelService.update({id: updatedLabel.id}, updateObject, function() {
+            // adds new box automatically
+        }, function(err) {
+            console.log(err);
+        });
+
     };
 
     // listener to reload nanoscroller when menu is hidden or shown

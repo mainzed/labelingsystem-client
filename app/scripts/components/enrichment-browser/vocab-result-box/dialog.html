@@ -1,0 +1,43 @@
+<div class="dialogwrapper text">
+  <div class="dialogheader">
+    <h3>Enrich current label</h3>
+  </div>
+
+  <div id="selectedbox">
+  	<div class="box bigbox label high" ng-click="onBoxClick()">
+  	  <span class="thumbnail" ng-repeat="prefLabel in data.prefLabels | filter: {isThumbnail: true}" ng-bind="prefLabel.value"></span>
+  	  <span class="type" ng-bind-html="icon" title="{{ tooltip }}"></span>
+  	</div>
+  </div>
+
+  <div id="enrichbuttons">
+
+    <!-- broader -->
+    <div>
+      <div class="col three leftout">
+    		<button class="enrichbutton-ow" type="button" name="button" ng-click="addResource(data, 'broader'); closeThisDialog()">
+    			<span class="buttontext-ow">broader</span>
+    		</button>
+    		<p class="enrichinfo">skos:broader relates a concept to a concept that is more general in meaning.</p>
+    	</div>
+
+      <div class="col three">
+    		<button class="enrichbutton-ow" type="button"ng-click="addResource(data, 'related'); closeThisDialog()">
+    			<span class="buttontext-ow">related</span>
+    			<span class="icon-close icon"></span>
+    		</button>
+    		<p class="enrichinfo">skos:related relates a concept to a concept with which there is an associative semantic relationship.</p>
+    	</div>
+
+      <div class="col three rightout">
+    		<button class="enrichbutton-ow" type="button" name="button" ng-click="addResource(data, 'narrower'); closeThisDialog()">
+    			<span class="buttontext-ow">narrower</span>
+    		</button>
+    		<p class="enrichinfo">skos:narrower relates a concept to a concept that is more specific in meaning.</p>
+    	</div>
+    </div>
+
+  </div>
+
+  <div class="cancel" ng-click="closeThisDialog()">Cancel</div>
+</div>
