@@ -1,4 +1,4 @@
-<div class="dialogwrapper label"> 
+<div class="dialogwrapper label">
 	<div class="dialogheader">
 		<h3 ng-bind="thumbnail.value"></h3>
 		<p class="typeinformation">Concept - <span class="loudlink" ng-click="openConcept(); closeThisDialog()">open in same tab</span></p>
@@ -77,13 +77,9 @@
 
 
 
-
-	
-
-
     <div class="line-dialog line"></div>
 	<div class="dialogbox dialog-full">
-  		<confirm-button on-confirm="onDeleteClick(); closeThisDialog()"></confirm-button>
+  		<ls-confirm-button on-confirm="onDeleteClick(); closeThisDialog()"></ls-confirm-button>
 	</div>
 
 

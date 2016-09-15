@@ -7,9 +7,9 @@
  * # confirmButton
  */
 angular.module('labelsApp')
-  .directive('confirmButton', function () {
+  .directive('lsConfirmButton', function () {
     return {
-        templateUrl: "views/directives/confirm-button.html",
+        templateUrl: "scripts/components/shared/confirm-button/confirm-button.html",
         restrict: 'E',
         scope: {
             onConfirm: '&'  // passes on-confirm attribute to this scope

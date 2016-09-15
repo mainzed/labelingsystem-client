@@ -96,6 +96,10 @@ angular.module('labelsApp')
         });
     };
 
+    $scope.onUsersClick = function() {
+        console.log("create user");
+    };
+
     // $scope.onSelectionChange = function(name) {
     //     // get thesaurus by name
     //     var thesaurus;
@@ -133,8 +137,9 @@ angular.module('labelsApp')
                 user: $scope.user.name
             };
 
-            VocabService.save(jsonObj, function(res) {
-                $scope.vocabularies.push(res);
+            VocabService.save(jsonObj, function(vocab) {
+                //$scope.vocabularies.push(res);
+                $location.path("/admin/vocabularies/" + vocab.id);
             }, function(res) {
                 console.log(res);
             });

@@ -20,7 +20,7 @@ angular.module('labelsApp')
             if (ConfigService.preventThumbnailEdit) {
                 // check if the current concept's vocab is public
                 VocabService.get({id: $routeParams.vID}, function(vocab) {
-                    if (vocab.releaseType === "public") {
+                    if (scope.data.isThumbnail && vocab.releaseType === "public") {
                         scope.isPublicThumbnail = true;
                     }
                 }, function(err) {

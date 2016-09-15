@@ -55,11 +55,8 @@
         </div>
 
 
-        <!-- delete draft vocab -->
-        <confirm-button on-confirm="deleteVocab(); closeThisDialog()" ng-show="vocabulary.releaseType === 'draft'"></confirm-button>
-
-        <!-- delete public vocab -->
-        <confirm-button on-confirm="deleteVocab('deprecated'); closeThisDialog()" ng-show="vocabulary.releaseType === 'public'"></confirm-button>
+        <!-- delete draft vocab (not allowed to delete public vocab) -->
+        <ls-confirm-button on-confirm="deleteVocab(); closeThisDialog()" ng-show="vocabulary.releaseType === 'draft'"></ls-confirm-button>
 
       </div><!-- end nano-content -->
     </div><!-- end nano -->
