@@ -292,7 +292,7 @@ textarea:focus {	outline: none; }
 					background: tomato;}
 .confirmtext {		position: absolute; left: 50%; margin-left: -50px !important; text-align: center; width: 100px;}
 .line-dialog {		height: 1px; width: calc(100% - @marginoutside * 2); margin-left: @marginoutside; float: left;
-					display: block; margin-bottom: @margininboxsmall; margin-top: 50px; }
+					display: block; margin-top: 50px; }
 .line-bottom {		height: 1px; width: calc(100% - @marginoutside * 2); left: @marginoutside; position: absolute; bottom: 0; display: block;  }
 .line 	{			background: black;}
 .label .line {		background: @linegray; }
@@ -322,7 +322,7 @@ textarea:focus {	outline: none; }
 .dialogbox input.checkbox {			
 					float: left; margin-left: 0; width: 20px; }
 .thesaurus p {		float: left; clear: left; }
-.thesaurus .icon {	float: left; }
+.thesaurus .icon {	float: left; line-height: 18px; margin-left: -8px;}
 .checked {			color: green; border-color: green; }
 .hierarchie li { 	 width: 100%; font-size: @small; letter-spacing: 0.03em;
 					 list-style: none; margin-left: 0;  }
@@ -335,7 +335,7 @@ textarea:focus {	outline: none; }
 .vocabulary .listcontent {
 					 }
 .vocabulary .icon {	position: absolute; right: @margininboxsmall; top: @margininboxsmall; }
-.vocabheading {		margin-left: @marginoutside; }
+.vocabheading {		margin-left: calc(@marginoutside + @margininboxsmall); }
 
 
 
@@ -354,22 +354,21 @@ textarea:focus {	outline: none; }
 #header .icon-folder {
 					position: absolute; right: 50px; font-size: 100px; top: 2px; }
 #filtersearch .icon-search	{
-					font-size: 24px; margin-top: 4px; margin-left: 3px; 
-}				
-
+					margin-left: 3px; margin-right: 2px; }
 .ngdialog-overlay { background: rgba(0, 0, 0, 0.8); }
 .selectedbutton {	background: @middle; color: white; }
 
 /* extension content */
 .line-ext {			height: 1px; width: calc(100% - @margininboxsmall * 2); margin-left: @margininboxsmall; display: block; background: black; }
 .label .line-ext {	background: @linegray; }
-.note-ext {			float: left; margin-left: 80px; width: calc((100% / 4) - 80px); margin-top: @margininboxsmall; }
+.note-ext {			float: left; margin: 14px; margin-left: 34px; width: calc((100% / 4) - 80px);    }
+.note-ext.small {	width: calc((100% / 8) - 80px); }
 .creator-ext {		float: left; margin-left: @margininboxsmall; margin-top: @margininboxsmall; }
 
-.italic {			font-weight: bold; }
+.italic {			font-style: italic; line-height: 20px; }
 .italic .icon-note {line-height: 10px; line-height: 10px; margin-top: 2px; display: block; float: left;}
 .showadditionalcontent {
-					width: 20px; height: 20px; display: block; float: left; margin-top: 2px; color: white; }
+					width: 26px; height: 20px; display: block; float: left; margin-top: 2px; color: white; }
 .label .showadditionalcontent, .high .showadditionalcontent {
 					color: black; }
 .showadditionalcontent:hover {
