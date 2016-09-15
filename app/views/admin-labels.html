@@ -3,9 +3,9 @@
   <breadcrumbs></breadcrumbs>
 
   <!-- loop over all prefLabels, so it autofreshes on change -->
-  <h1 ng-click="openVocabDialog()" ng-bind="vocabulary.title.value"></h1>
+  <h1 ng-bind="vocabulary.title.value"></h1>
 
-	<span class="icon-folder"></span>
+	<span class="icon-preferences" ng-click="openVocabDialog()"></span>
 	<span class="language" ng-bind="vocabulary.title.lang"></span>
 </div>
 
