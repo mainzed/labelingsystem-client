@@ -2,8 +2,9 @@
 
   <breadcrumbs></breadcrumbs>
 
-  <h1 ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}" ng-click="onLabelHeadingClick()" ng-bind="prefLabel.value"></h1>
+  <h1 ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}" ng-bind="prefLabel.value"></h1>
 	<span ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}" class="language" ng-bind="prefLabel.lang"></span>
+  <span ng-click="onLabelHeadingClick()" class="icon-preferences icon"></span>
 
 </div>
 

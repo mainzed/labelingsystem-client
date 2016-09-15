@@ -26,20 +26,20 @@
 }
 
 
-.icon-concept:before {
-  content: "\e904";
-}
 .icon-checked:before {
   content: "\e903";
+}
+.icon-unchecked:before {
+  content: "\e904";
+}
+.icon-preferences:before {
+  content: "\e90b";
 }
 .icon-altlabel:before {
   content: "\e90e";
 }
 .icon-hide:before {
   content: "\e905";
-}
-.icon-unchecked:before {
-  content: "\e90d";
 }
 .icon-note:before {
   content: "\e900";

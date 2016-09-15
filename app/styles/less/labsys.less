@@ -11,6 +11,7 @@
 
 /* high quality */
 @high: 				#31CAFF;
+@ls:				#FF80B3;
 
 /* low quality */
 @categorytwo:		#3b5450;
@@ -157,18 +158,18 @@ textarea:focus {	outline: none; }
 /* box color types */
 .getty	{			background: @high;	}
 .heritagedata	{	background: @high;	}
-.ls {				background: @high; }
+.ls {				background: @ls; }
 .pleiades {			background: @high; }
 .chronontology {	background: @high; }
 .unesco		{		background: @high; }
 
 .label {			background: @label; }
 
-.finto {			background: @categorytwo; }
-.fao {				background: @categorytwo;	}
-.dbpedia {			background: @categorythree; }
-.geonames {			background: @categorythree; }
-.wayback {			background: @text; }
+.finto {			background: @high; }
+.fao {				background: @high; }
+.dbpedia {			background: @high; }
+.geonames {			background: @high; }
+.wayback {			background: @categorythree; }
 
 .text	{			background: @text; color: white;	}
 
@@ -249,7 +250,9 @@ textarea:focus {	outline: none; }
 .enrichbuttons-min .buttontext-ow {
 					font-size: @regular; bottom: auto; top: @margininboxsmall;
 }
-#header .language {	font-size: @regular; margin-right: calc(@margininboxsmall * 2); bottom: 12px; }
+#header .language {	font-size: @small; float: left; position: relative; margin-left: 30px; margin-top: 68px; }
+#header .icon-preferences {
+					position: absolute; right: 12px; top: 45px; font-size: 38px; }
 .boxextension {		margin-top: -3px; padding-bottom: @margininboxsmall;  }
 
 
