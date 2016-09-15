@@ -43,7 +43,8 @@
         <span class="listcontent" ng-bind-template="{{ concept.lastModified | date: 'dd.MM.yyyy hh:mm'}}"></span>
 
         <span class="listtype">License</span>
-        <span class="listcontent" ng-bind="concept.license"></span>
+        <span class="listcontent"><a ng-href="{{concept.license}}" target="_blank">CC BY</a></span>
+
 
 
 
