@@ -9,7 +9,7 @@
  * overviews
  */
 angular.module('labelsApp')
-  .controller('VocabsCtrl', function ($scope, $location, $http, ngDialog, AuthService, VocabService, ConfigService) {
+  .controller('VocabsCtrl', function ($scope, $q, $location, $http, ngDialog, AuthService, VocabService, LabelService, ConfigService) {
 
     if (!AuthService.isLoggedIn()) {
         $location.path("admin/login");
@@ -22,7 +22,65 @@ angular.module('labelsApp')
 
     VocabService.query({ creator: $scope.user.username }, function(vocabularies) {
         $scope.vocabularies = vocabularies;
+
+        // get vocabulary stats
+        $scope.stats = {};
+
+        run(vocabularies);
+
+        function run(vocabs) {
+            var counter = 0;
+            function next() {
+                if (counter < vocabs.length) {
+                    var vocab = vocabs[counter];
+                    LabelService.query({'vocab': vocab.id}, function(labels) {
+                        $scope.stats[vocab.id] = {
+                            concepts: labels.length
+                        };
+                        counter++;
+                        next();  // wait for response before starting next one
+                    });
+                }
+            }
+            next();
+        }
     });
+
+    /**
+     * Get concept stats for a vocabulary.
+     * @param {string} id - Vocabulary ID
+     */
+    $scope.getVocabStats = function(id) {
+        VocabService.get({id: id}, function(vocab) {
+            return vocab;
+
+        });
+    };
+
+    /**
+     * Get skos of vocabulary and trigger downlaod
+     * @param {string} id - Vocabulary ID
+     */
+    $scope.download = function(id) {
+        console.log("get file");
+        VocabService.download({id: id}, function(res) {
+            console.log(res);
+            // trigger download
+            var blob = new Blob(res, { type:"application/rdf+xml;charset=UTF-8;" });
+			var downloadLink = angular.element('<a></a>');
+            downloadLink.attr('href',window.URL.createObjectURL(blob));
+            downloadLink.attr('download', 'vocab.skos');
+			downloadLink[0].click();
+            //console.log(res);
+        });
+    };
+
+    $scope.saveJSON = function () {
+			$scope.toJSON = '';
+			$scope.toJSON = angular.toJson($scope.data);
+
+		};
+
 
     /**
      * Redirects to the label overview of the specified vocabulary.
