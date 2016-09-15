@@ -2,8 +2,9 @@
 
   <breadcrumbs></breadcrumbs>
 
-  <h1 ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}" ng-click="onLabelHeadingClick()" ng-bind="prefLabel.value"></h1>
+  <h1 ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}" ng-bind="prefLabel.value"></h1>
 	<span ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}" class="language" ng-bind="prefLabel.lang"></span>
+  <span ng-click="onLabelHeadingClick()" class="icon-preferences icon"></span>
 
 </div>
 
@@ -24,7 +25,8 @@
 
       <!-- broader column -->
   		<div class="col left">
-        <small-box ng-repeat="box in boxes | filter: broaderFilter"></small-box>
+        <concept-box ng-repeat="broaderConcept in label.broader" data="broaderConcept" relation="broader"></concept-box>
+        <resource-box ng-repeat="broadMatch in label.broadMatch" data="broadMatch" relation="broadMatch"></resource-box>
   		</div>
 
       <!-- middle column -->
@@ -35,20 +37,26 @@
 
           <!-- gray boxes with prefLabels, altLabels and description -->
           <pref-label-box ng-repeat="prefLabel in label.prefLabels" data="prefLabel"></pref-label-box>
+          <!-- <alt-label-box ng-repeat="altLabel in label.altLabels" data="altLabel"></alt-label-box> -->
+          <description-box data="label.scopeNote" ng-show="label.scopeNote"></description-box>
 
   			</div>
 
   			<!-- relations column -->
   			<div class="col halfright">
-          <!-- <small-box ng-repeat="box in boxes | filter: relatedFilter"></small-box> -->
+          <concept-box ng-repeat="relatedConcept in label.related" data="relatedConcept" relation="related"></concept-box>
+          <resource-box ng-repeat="relatedMatch in label.relatedMatch" data="relatedMatch" relation="relatedMatch"></resource-box>
+          <resource-box ng-repeat="closeMatch in label.closeMatch" data="closeMatch" relation="closeMatch"></resource-box>
+          <resource-box ng-repeat="exactMatch in label.exactMatch" data="exactMatch" relation="exactMatch"></resource-box>
+          <link-box ng-repeat="seeAlso in label.seeAlso" data="seeAlso"></link-box>
   			</div>
 
   		</div>
 
   		<!-- narrower column -->
   		<div class="col right">
-        <small-box ng-repeat="box in boxes | filter: narrowerFilter"></small-box>
-
+        <concept-box ng-repeat="narrowerConcept in label.narrower" data="narrowerConcept" relation="narrower"></concept-box>
+        <resource-box ng-repeat="narrowMatch in label.narrowMatch" data="narrowMatch" relation="narrowMatch"></resource-box>
   		</div>
 
   	</div>
@@ -81,10 +89,10 @@
 			<span class="buttonicon"><span class="icon-preflabel"></span></span>
 		</button>
 
-    <button class="enrichbutton" ng-click="onAddAltLabel()">
+    <!-- <button class="enrichbutton" ng-click="onAddAltLabel()">
 			<span class="buttontext">Add alternative label</span>
 			<span class="buttonicon"><span class="icon-altlabel"></span></span>
-		</button>
+		</button> -->
 
     <button class="enrichbutton" ng-click="onAddDescription()" ng-class="{'inactive': label.scopeNote}" ng-disabled="label.scopeNote">
 			<span class="buttontext">Add description</span>

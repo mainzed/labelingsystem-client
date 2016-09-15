@@ -7,13 +7,15 @@
 @text: 				#3f3f3f;
 @label: 			#e5e5e5;
 @hovergray: 		#d5d5d5;
+@linegray:			#c5c5c5;
 
 /* high quality */
 @high: 				#31CAFF;
+@ls:				#FF80B3;
 
 /* low quality */
-@categorytwo:		#513C00;
-@categorythree:		#2B4400;
+@categorytwo:		#3b5450;
+@categorythree:		#544d3b;
 
 
 /* font-sizes */
@@ -55,7 +57,7 @@ a {					color: inherit; text-decoration: underline; }
 html {				height: 100%;	}
 body {				height: 100%;	}
 textarea {			margin-left: @marginoutside; width: calc(100% - 2 * @marginoutside); display: block; resize: vertical;
-					height: 150px; border-radius: 3px; background: #d6d6d6; padding: @margininboxsmall; border: 0; }
+					height: 150px; background: white; padding: @margininboxsmall; border: 0; }
 h1 {				font-size: @headlines; font-weight: normal;
 					@media screen and (max-width: 1600px) {font-size: @headlines-small; } }
 h2 {				font-size: @headlines; font-weight: normal; margin-bottom: 50px; margin-top: @marginoutside; margin-left: @marginoutside; display: block;
@@ -73,7 +75,7 @@ textarea:focus {	outline: none; }
 
 #header {			color: white; height: 90px; position: relative; background: @background;	}
 #footer {			position: fixed; bottom: @margininboxsmall; left: @marginoutside; color: @label; font-size: @small; 
-					font-style: italic; letter-spacing: 0.1em; }
+					 }
 #viewport {			height: 100%; background: @background;}
 #separator {		color: white; height: 75px; }
 .separatorsmall {	height: 50px; float: left; width: 100%; background: @workareas; clear: left;}
@@ -106,7 +108,7 @@ textarea:focus {	outline: none; }
 					overflow-x: hidden; float: left; height: 100%; background: @middle; }
 #enrichmentsearch {	float: left; margin-top: 0px; background: @middle; height: 100%;  }
 #enrichmentsearch input
-				 {	background: none; border: none; color: gray; width: 200px; margin-top: 32px; margin-left: @margininboxsmall; }
+				 {	background: none; border: none; color: white; width: 200px; margin-top: 32px; margin-left: @margininboxsmall; }
 #enrichmentsearch .icon {
 					margin-left: 12px; margin-top: 25px; float: left; 
 }
@@ -116,7 +118,7 @@ textarea:focus {	outline: none; }
 					float: left;
 }
 #filtersearch input {
-					background: none; border: none; color: gray; width: 200px; float: left; height: 30px; }
+					background: none; border: none; width: 200px; float: left; height: 30px; color: white; }
 
 #breadcrumb {		float: left; display: block; height: 100px; }
 #breadcrumb a {		color: white; margin-top: 60px; display: block; float: left; padding-bottom: 2px;
@@ -126,7 +128,7 @@ textarea:focus {	outline: none; }
 #breadcrumb span span
 				{	display: block; float: left; margin-top: 56px; margin-right: @marginoutboxsmall; }
 .tablehead {		float: left; height: 50px; color: white;	}
-.tablehead span {	margin-top: 15px; margin-left: calc(@tableheadmargin); display: block; }
+.tablehead span {	margin-top: 14px; margin-left: calc(@tableheadmargin); display: block; }
 .tablehead.left span {
 					margin-left: calc(@tableheadmarginleft); display: block; }
 .col {				float: left; min-height: 10px;	}
@@ -137,8 +139,9 @@ textarea:focus {	outline: none; }
 .small 	{			margin-bottom: @marginbottombox; margin-left: @marginoutboxsmall; position: relative; min-height: @boxheight; }
 .bigbox {			width: calc(100% - @marginoutside - @marginoutboxsmall); margin-bottom: @marginbottombox; margin-left: @marginoutboxsmall; position: relative;	}
 
-.vocabulary {		width: calc((100% - @marginoutside * 2 - @marginoutboxsmall * 3) / 5); margin-left: @marginoutboxsmall; height: 200px; 
-					margin-bottom: @marginoutboxsmall; }
+.vocabulary {		width: calc((100% - @marginoutside * 2 - @marginoutboxsmall * 2) / 4); margin-left: @marginoutboxsmall; height: 250px; 
+					margin-bottom: @marginoutboxsmall; position: relative;  
+					@media screen and (max-width: 1600px) {width: calc((100% - @marginoutside * 2 - @marginoutboxsmall) / 3); }}
 .voc-box {			padding-left: calc(@marginoutside - @marginoutboxsmall); }
 #boxcontainer .bigbox {
 					margin-left: @marginoutside; width: calc(100% - @marginoutside * 2); }
@@ -155,18 +158,18 @@ textarea:focus {	outline: none; }
 /* box color types */
 .getty	{			background: @high;	}
 .heritagedata	{	background: @high;	}
-.ls {				background: @high; }
+.ls {				background: @ls; }
 .pleiades {			background: @high; }
 .chronontology {	background: @high; }
 .unesco		{		background: @high; }
 
 .label {			background: @label; }
 
-.finto {			background: @categorytwo; }
-.fao {				background: @categorytwo;	}
-.dbpedia {			background: @categorythree; }
-.geonames {			background: @categorythree; }
-.wayback {			background: @text; }
+.finto {			background: @high; }
+.fao {				background: @high; }
+.dbpedia {			background: @high; }
+.geonames {			background: @high; }
+.wayback {			background: @categorythree; }
 
 .text	{			background: @text; color: white;	}
 
@@ -184,7 +187,7 @@ textarea:focus {	outline: none; }
 					position: static; float: left; margin-left: @margininboxsmall;
 					margin-top: 8px; bottom: auto; left: auto; top: auto; width: 60%;  }
 #listwrapper .bigbox .thumbnail {
-					margin-top: 15px;
+					margin-top: 12px;
 }
 
 
@@ -216,15 +219,15 @@ textarea:focus {	outline: none; }
 /*enrichbuttons*/
 .enrichbutton	{	margin-left: @marginoutside; margin-right: @marginoutboxsmall; width: calc(100% - @marginoutboxsmall - @marginoutside);
 					height: 40px; background: @middle; border: 0; text-align: left; color: white; margin-bottom: @marginbottombox;
-					cursor: pointer; }
-.enrichbutton-ow {	background: #d6d6d6; height: 100px; text-align: left; width: 100%; position: relative; cursor: pointer; }
+					cursor: pointer; border-radius: 3px; }
+.enrichbutton-ow {	background: #d6d6d6; height: 65px; text-align: left; width: 100%; position: relative; cursor: pointer; border-radius: 3px; }
 .enrichbutton-ow .icon {
 					position: absolute; top: @margininboxsmall; left: @margininboxsmall; }
 .enrichbuttons-min .enrichbutton-ow {
 					height: 40px; }
 .enrichbuttons-min .enrichbutton-ow .icon {
 					top: 2px; left: auto; right: 2px; }
-.enrichinfo	 {		padding: @margininboxsmall; margin-top: 30px; display: block; }
+.enrichinfo	 {		padding: @margininboxsmall; margin-top: 10px; display: block; font-size: @small; background: @middle; height: 300px; }
 .enrichbuttons-min .enrichinfo {
 					display: none; }
 
@@ -242,17 +245,19 @@ textarea:focus {	outline: none; }
 
 
 .buttonicon {		margin-right: @margininboxsmall; float: right;}
-.buttontext {		margin-left: @margininboxsmall; float: left; margin-top: 4px;			}
+.buttontext {		margin-left: @margininboxsmall; float: left; margin-top: 5px;			}
 .buttontext-ow {	position: absolute; left: @margininboxsmall; bottom: @margininboxsmall; font-size: @regular; 			}
 .enrichbuttons-min .buttontext-ow {
 					font-size: @regular; bottom: auto; top: @margininboxsmall;
 }
-#header .language {	font-size: @regular; margin-right: calc(@margininboxsmall * 2); bottom: 12px; }
+#header .language {	font-size: @small; float: left; position: relative; margin-left: 30px; margin-top: 68px; }
+#header .icon-preferences {
+					position: absolute; right: 12px; top: 45px; font-size: 38px; }
 .boxextension {		margin-top: -3px; padding-bottom: @margininboxsmall;  }
 
 
 /* mini preview */
-.minipreview {		height: calc(@boxheight - @margininboxsmall * 2 - 10px); margin: @margininboxsmall 0; background: black;
+.minipreview {		height: calc(@boxheight - @margininboxsmall * 2 - 10px); margin: 4px 0; background: black;
 					width: 100px; float: left; padding: 4px 2px 6px 2px; overflow: hidden;	}
 .minicol	 {		width: calc(25% - 4px); padding: 0 2px; float: left; height: 100%;	}
 .minibox 	{		width: 100%; height: 6px; margin-bottom: 4px; display: block;}
@@ -277,15 +282,22 @@ textarea:focus {	outline: none; }
 .dialog-half {		width: calc((100% - ( @marginoutboxsmall * 4  + @marginoutside * 2)) / 2 ); margin-left: @marginoutside; }
 .dialog-quarter {	width: calc((100% - ( @marginoutboxsmall * 4  + @marginoutside * 2)) / 4 ); margin-left: calc(@marginoutboxsmall * 2); }
 .dialog-full	{	width: 100%;  }
-.deletebutton { 	width: calc(100% - @marginoutside * 2 ); height: 40px; margin-left: @marginoutside; position: relative; background: @middle; color: white;	}
+.deletebutton { 	width: calc(100% - @marginoutside * 2 ); border-radius: 3px; height: 40px; margin-left: @marginoutside; position: relative; background: @middle; color: white;	}
 .deletebutton .icon {position: absolute;  line-height: 25px; right: @marginoutboxsmall; top: @margininboxsmall; }
 .label .deletebutton {
 					color: black; background: #d6d6d6; }
 .deletebutton .buttontext {
 					margin: @margininboxsmall; }
+.deletebutton.confirm {		
+					background: tomato;}
+.confirmtext {		position: absolute; left: 50%; margin-left: -50px !important; text-align: center; width: 100px;}
 .line-dialog {		height: 1px; width: calc(100% - @marginoutside * 2); margin-left: @marginoutside; float: left;
-					display: block; background: black; margin-bottom: @margininboxsmall; margin-top: 50px; }
-.line-bottom {		height: 1px; width: calc(100% - @marginoutside * 2); left: @marginoutside; position: absolute; bottom: 0; display: block; background: black; }
+					display: block; margin-bottom: @margininboxsmall; margin-top: 50px; }
+.line-bottom {		height: 1px; width: calc(100% - @marginoutside * 2); left: @marginoutside; position: absolute; bottom: 0; display: block;  }
+.line 	{			background: black;}
+.label .line {		background: @linegray; }
+.low .line {		background: white; }
+
 
 .bigdialog .ngdialog-content {
 					width: @bigdialogwidth; position: absolute; left: 50%; margin-left: calc(( @bigdialogwidth * -1 ) / 2);
@@ -295,15 +307,15 @@ textarea:focus {	outline: none; }
 .dialogscroll {		height: calc(100% - 180px); float: left; clear: both; display: block; overflow: hidden; width: 100%;
 					margin-bottom: 100px; }
 .dialogbox		{	float: left; padding-top: 10px;  }
-.dialogbox input {	width: calc(100% - 2 * @marginoutside); margin-left: @marginoutside; border-radius: 3px;
-					padding: @margininboxsmall; background: @middle; color: white; border: 0; }
+.dialogbox input {	width: calc(100% - 2 * @marginoutside); margin-left: @marginoutside; 
+					padding: @margininboxsmall; background: white; color: black; border: 0; height: 35px; }
 .dialogbox select { width: calc(100% - 2 * @marginoutside); margin-left: @marginoutside; background: @middle;
 					padding: calc( @margininboxsmall / 2); border: 1px solid @workareas; color: white; }
 .label .dialogbox input {
-					background: #d6d6d6; color: black; }
-.text textarea {	background: @middle; border: black; color: white;}					
+					 color: black; }
+.text textarea {	background: white;  }					
 .typeinformation {	margin-left: calc(@marginoutside); font-style: italic; float: left; clear: left; }
-.listtype {			float: left; width: 150px; clear: left; margin-left: @marginoutside; font-style: italic; }
+.listtype {			float: left; width: 120px; margin-right: 20px; clear: left; margin-left: @marginoutside; font-style: italic; font-size: @small;  }
 .listcontent {		float: left; width: calc(100% - 150px - @marginoutside); }
 .thesaurus {		width: calc(100% - @marginoutside * 2); margin-left: @marginoutside; display: block; float: left; margin-bottom: 30px;
 					border-top: 1px solid black; padding-top: @margininboxsmall;  }
@@ -312,8 +324,20 @@ textarea:focus {	outline: none; }
 .thesaurus p {		float: left; clear: left; }
 .thesaurus .icon {	float: left; }
 .checked {			color: green; border-color: green; }
-.hierarchie li { 	 line-height: 18px; width: 100%; padding: 4px 0; font-size: @small; letter-spacing: 0.03em;
-					border-top: 1px solid black; list-style: none; margin-left: 0;  }
+.hierarchie li { 	 width: 100%; font-size: @small; letter-spacing: 0.03em;
+					 list-style: none; margin-left: 0;  }
+
+/* Vocabulary */
+.vocabname {		margin: @margininboxsmall 0 0 @margininboxsmall; font-size: @emphasize; float: left; display: block;  }
+.vocabrelease {		float: left; clear: left; margin-bottom: 40px; margin-left: @margininboxsmall; font-style: italic; font-size: @small; }
+.vocabulary .listtype {
+					margin-left: @margininboxsmall; width: 100px; font-size: @small; }
+.vocabulary .listcontent {
+					 }
+.vocabulary .icon {	position: absolute; right: @margininboxsmall; top: @margininboxsmall; }
+.vocabheading {		margin-left: @marginoutside; }
+
+
 
 
 
@@ -321,7 +345,7 @@ textarea:focus {	outline: none; }
 /* icon corrections */
 .small .icon-concept, .bigbox .icon-concept
 	{ 				margin-right: -2px; margin-top: -5px; display: block; }
-.small .icon-preflabel, .small .icon-altlabel, .small .icon-note
+.small .icon-preflabel, .small .icon-altlabel, .small .icon-note, .small .icon-arrow
 	{ 				margin-right: -6px; margin-top: -5px; display: block; }
 .small .icon-exact, .small .icon-close, .small .icon-related
 	{ 				margin-left: -5px; margin-top: -5px; display: block; }
@@ -330,15 +354,16 @@ textarea:focus {	outline: none; }
 #header .icon-folder {
 					position: absolute; right: 50px; font-size: 100px; top: 2px; }
 #filtersearch .icon-search	{
-					font-size: 24px; margin-top: 4px; color: gray;
+					font-size: 24px; margin-top: 4px; margin-left: 3px; 
 }				
 
 .ngdialog-overlay { background: rgba(0, 0, 0, 0.8); }
-.selectedbutton {	background: @workareas; color: white; }
+.selectedbutton {	background: @middle; color: white; }
 
 /* extension content */
 .line-ext {			height: 1px; width: calc(100% - @margininboxsmall * 2); margin-left: @margininboxsmall; display: block; background: black; }
-.note-ext {			float: left; margin-left: 100px; width: 15%; margin-top: @margininboxsmall; }
+.label .line-ext {	background: @linegray; }
+.note-ext {			float: left; margin-left: 80px; width: calc((100% / 4) - 80px); margin-top: @margininboxsmall; }
 .creator-ext {		float: left; margin-left: @margininboxsmall; margin-top: @margininboxsmall; }
 
 .italic {			font-weight: bold; }
@@ -353,15 +378,18 @@ textarea:focus {	outline: none; }
 /* vector icon */
 .icon-min {			width: 20px; height: 3px; background: white; display: block;  }
 
-.pointer		{	cursor: pointer; }
 
+.pointer		{	cursor: pointer; }
+.smalltype {		font-size: @small;}
+.wordbreak {		overflow-wrap: break-word; word-wrap: break-word; -webkit-hyphens: auto;
+                    -ms-hyphens: auto; -moz-hyphens: auto; hyphens: auto; }
 
 .active {			font-weight: bold; }
 
-.inactive {			color: gray; pointer-events:none; }
+.inactive {			color: #555555; background: #222222; pointer-events:none; }
 .paddingbottom {	padding-bottom: 10px;	}
-.loudlink {			text-decoration: underline; }
-.label .loudlink {	color: blue; }
+.loudlink {			text-decoration: underline; background: #d3d3d3; border-radius: 6px; padding: 2px 8px; color: blue; cursor: pointer; }
+
 
 
 .icon-hide {		color: white; }

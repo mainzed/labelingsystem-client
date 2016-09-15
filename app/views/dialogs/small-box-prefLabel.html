@@ -1,8 +1,8 @@
 <div class="dialogwrapper text">
 	<div class="dialogheader">
-		<h3 ng-bind="text"></h3>
-		<p class="typeinformation">Preferred term</p>
-		<div class="line-bottom"></div>
+		<h3 ng-bind="data.value"></h3>
+		<p class="typeinformation">Preferred label</p>
+		<div class="line-bottom line"></div>
 	</div>
 
 	<div class="dialogscroll">
@@ -10,14 +10,14 @@
 	<div class="nano-content">
 		<div class="dialogbox dialog-full">
 			<h4>Edit</h4>
-			<input ng-model="newValue" ng-init="newValue = text"></input>
+			<input ng-model="newValue" ng-init="newValue = data.value"></input>
 		</div>
 
 
-		<div class="line-dialog"></div>
-		<div class="dialogbox dialog-full">
+		<div class="line-dialog line" ng-show="!data.isThumbnail"></div>
+		<div class="dialogbox dialog-full" ng-show="!data.isThumbnail">
       <!-- prevent thumbnail label from being deleted -->
-      <confirm-button on-confirm="onDeleteClick(); closeThisDialog()" ng-class="{'inactive': isThumbnail}"></confirm-button>
+      <confirm-button on-confirm="onDeleteClick(); closeThisDialog()"></confirm-button>
 		</div>
 
 
@@ -28,5 +28,5 @@
 
 
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="updateTerm('prefLabel', newValue, text); closeThisDialog()" ng-class="{'inactive': newValue === text}">Apply</div>
+	<div class="apply" ng-click="updateLabel(newValue); closeThisDialog()" ng-class="{'inactive': newValue === data.value}">Apply</div>
 </div>

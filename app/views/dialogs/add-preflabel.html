@@ -17,7 +17,7 @@
 		<div class="dialogbox dialog-full">
 			<select ng-model="selectedLang">
         <!-- prevent adding of prefLabel in vocab language (has to exist anyway) -->
-	    	<option ng-repeat="language in languages" value="{{language.value}}" ng-bind="language.name" ng-disabled="language.value === vocabulary.title.lang"></option>
+	    	<option ng-repeat="language in languages | orderBy: 'name'" value="{{language.value}}" ng-bind="language.name" ng-disabled="language.value === vocabulary.title.lang"></option>
 	  		</select>
 		</div>
 

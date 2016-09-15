@@ -1,7 +1,7 @@
 <div id="header" class="box full">
-<div class="box small" type="button" name="button" ng-click="onLogoutClick()">logout</div>
-
-<h1>User: {{ user.name }}</h1>
+	<div style="position: fixed; right: 0; bottom: 0;" type="button" name="button" ng-click="onLogoutClick()">logout</div>
+	<h1 class="vocabheading" ng-bind="user.name + ' - all vocabularies'"></h1>
+	<span ng-click="openUserDialog()" class="icon-preferences icon"></span>
 </div>
 
 <div class="separatorsmall">
@@ -15,12 +15,30 @@
 	<div class="nano">
 
     <div id="boxcontainer" class="nano-content voc-box">
-		<div class="box vocabulary high label" ng-repeat="vocab in vocabularies | filter: vocabFilter" ng-click="onVocabClick(vocab.id)">
-      <div ng-bind="vocab.title.value"></div>
-      <div ng-bind="vocab.releaseType"></div>
-      <div ng-bind-template="Description: {{ vocab.description.value }}"></div>
-      <div ng-bind-template="Created by {{ vocab.creator }} on {{ vocab.created | date: 'dd.MM.yyyy' }}"></div>
-      <div ng-bind-template="license: {{ vocab.license }}"></div>
+		<div class="box vocabulary label" ng-repeat="vocab in vocabularies | filter: {'creator': user.name} | filter: vocabFilter" ng-click="onVocabClick(vocab.id)">
+	      <span class="vocabname" ng-bind="vocab.title.value"></span>
+	      <span class="vocabrelease" ng-bind="vocab.releaseType + ' vocabulary'"></span>
+
+	      <span class="listtype">Description</span>
+          <span class="listcontent wordbreak" ng-bind="vocab.description.value"></span>
+
+          <!--
+          <span class="listtype">Creator</span>
+          <span class="listcontent" ng-bind="vocab.creator"></span>
+          -->
+
+          <span class="listtype">Creation date</span>
+          <span class="listcontent" ng-bind="vocab.created | date: 'dd.MM.yyyy'"></span>
+
+	      <!-- <span class="listtype">License</span>
+        <span class="listcontent wordbreak" ng-bind="vocab.license"></span> -->
+
+        <span class="listtype">concepts</span>
+        <span class="listcontent">{{ stats[vocab.id].concepts }}</span>
+
+        <span class="listtype" ng-click="download(vocab.id); $event.stopPropagation()">download</span>
+
+	      <span class="icon-folder icon"></span>
 
 		</div>
 	</div>

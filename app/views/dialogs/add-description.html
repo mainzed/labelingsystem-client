@@ -21,5 +21,5 @@
 
 
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="onAddDescriptionConfirm(description); closeThisDialog()" ng-disabled="!term" >Apply</div>
+	<div class="apply" ng-click="onAddDescriptionConfirm(description); closeThisDialog()" ng-class="{'inactive': !description}">Apply</div>
 </div>

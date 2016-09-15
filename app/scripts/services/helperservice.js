@@ -8,12 +8,12 @@
  * Service in the labelsApp.
  */
 angular.module('labelsApp')
-  .service('HelperService', function (LabelService, ResourcesService) {
+  .service('HelperService', function ($window, LabelService, ResourcesService) {
     // helper functions
-    this.findAndReplace = function(arr, query, newObj) {
-        var index = _.indexOf(arr, _.find(arr, query));
-        arr.splice(index, 1, newObj);
-    };
+    // this.findAndReplace = function(arr, query, newObj) {
+    //     var index = _.indexOf(arr, _.find(arr, query));
+    //     arr.splice(index, 1, newObj);
+    // };
 
     /**
      * Determines the thumbnail prefLabel of a concept.
@@ -23,7 +23,7 @@ angular.module('labelsApp')
     this.getThumbnail = function(concept) {
         for (var i = 0; i < concept.prefLabels.length; i++) {
             if (concept.prefLabels[i].isThumbnail) {
-                return concept.prefLabels[i].value;
+                return concept.prefLabels[i];
             }
         }
     };
@@ -78,6 +78,14 @@ angular.module('labelsApp')
         } else {
             callback(relatedConcepts);
         }
+    };
+
+    /**
+     * Opens a url in new tab.
+     * @param {string} url
+    */
+    this.openLinkInNewTab = function(url) {
+        $window.open(url, "_blank");
     };
 
   });

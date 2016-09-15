@@ -1,0 +1,98 @@
+<div class="dialogwrapper label"> 
+	<div class="dialogheader">
+		<h3 ng-bind="thumbnail.value"></h3>
+		<p class="typeinformation">Concept - <span class="loudlink" ng-click="openConcept(); closeThisDialog()">open in same tab</span></p>
+      <mini-preview label="concept"></mini-preview>
+		<div class="line-bottom line"></div>
+	</div>
+	<div class="dialogscroll">
+	<div class="nano">
+	<div class="nano-content">
+		<div class="dialogbox dialog-full">
+			<div class="dialog-half col">
+				<span class="italic"><span class="icon-note"></span>Description</span><br>
+        {{ concept.scopeNote.value }}
+
+			</div>
+			<div class="dialog-quarter col">
+				<span class="italic smalltype">Broader</span><br>
+
+				<ul class="hierarchie">
+					<li ng-repeat="broaderConcept in broaderConcepts">{{ getLabel(broaderConcept) }}</li>
+
+				</ul>
+			</div>
+			<div class="dialog-quarter col">
+				<span class="italic smalltype">Narrower</span><br>
+
+				<ul class="hierarchie">
+          			<li ng-repeat="narrowerConcept in narrowerConcepts">{{  getLabel(narrowerConcept) }}</li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="line-dialog line"></div>
+    	<h4>meta data</h4>
+    	<span class="listtype">id</span>
+        <span class="listcontent" ng-bind="concept.id"></span>
+
+        <span class="listtype">Creator</span>
+        <span class="listcontent" ng-bind="concept.creator"></span>
+
+        <span class="listtype">Last modified</span>
+        <span class="listcontent" ng-bind-template="{{ concept.lastModified | date: 'dd.MM.yyyy hh:mm'}}"></span>
+
+        <span class="listtype">License</span>
+        <span class="listcontent" ng-bind="concept.license"></span>
+
+
+
+		<div class="line-dialog line"></div>
+		<h4>Connection</h4>
+		<div class="enrichbuttons">
+
+		  <!-- label columns -->
+	    <div class="col three leftout" ng-init="newRelation = relation">
+	  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'broader'" ng-class="{'selectedbutton': newRelation === 'broader'}">
+	  			<span class="buttontext-ow">broader</span>
+	  		</button>
+	  		<!--<p class="enrichinfo" ng-bind="tooltips.comments.broader"></p>-->
+	  	</div>
+
+	    <div class="col three">
+	  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'related'" ng-class="{'selectedbutton': newRelation === 'related'}">
+	  			<span class="buttontext-ow">related</span>
+	  			<span class="icon-arrow icon"></span>
+	  		</button>
+	  		<!--<p class="enrichinfo" ng-bind="tooltips.comments.related"></p>-->
+	  	</div>
+
+	    <div class="col three rightout">
+	  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'narrower'" ng-class="{'selectedbutton': newRelation === 'narrower'}">
+	  			<span class="buttontext-ow">narrower</span>
+	  		</button>
+	  		<!--<p class="enrichinfo" ng-bind="tooltips.comments.narrower"></p>-->
+	  	</div>
+	  </div>
+
+
+
+
+	
+
+
+    <div class="line-dialog line"></div>
+	<div class="dialogbox dialog-full">
+  		<confirm-button on-confirm="onDeleteClick(); closeThisDialog()"></confirm-button>
+	</div>
+
+
+	</div>
+	</div>
+	</div>
+
+
+
+	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
+	<div class="apply" ng-click="changeRelation(newRelation, relation); closeThisDialog()" ng-class="{'inactive': newRelation === relation}">Apply</div>
+</div>

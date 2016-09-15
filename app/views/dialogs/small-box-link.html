@@ -1,8 +1,8 @@
 <div class="dialogwrapper text">
 	<div class="dialogheader">
 
-    <h3>{{ box.resource.label }}</h3>
-		<p class="typeinformation">Wayback Link - <span ng-click="openResource(box.resource)">open in new tab</span></p>
+    <h3 ng-bind="resource.label"></h3>
+		<p class="typeinformation">Wayback Link - <span class="loudlink" ng-click="openResource()">open in new tab</span></p>
 
     <div class="line-bottom"></div>
 	</div>

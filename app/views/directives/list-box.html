@@ -21,20 +21,20 @@
   <span class="note-ext">
     <span class="italic">
       <span class="icon-note"></span>
-      Description
+      
     </span><br>
     {{ concept.scopeNote.value }}
   </span>
-  <span class="note-ext"><span class="italic">broader</span><br>
+  <span class="note-ext"><span class="italic smalltype">broader</span><br>
 
     <ul class="hierarchie">
-      <li ng-repeat="broaderConcept in broaderConcepts">{{ getTerm(broaderConcept) }}</li>
+      <li ng-repeat="broaderConcept in broaderConcepts">{{ getTerm(broaderConcept).value }}</li>
     </ul>
   </span>
 
-  <span class="note-ext"><span class="italic">narrower</span><br>
+  <span class="note-ext"><span class="italic smalltype">narrower</span><br>
     <ul class="hierarchie">
-      <li ng-repeat="narrowerConcept in narrowerConcepts">{{ getTerm(narrowerConcept) }}</li>
+      <li ng-repeat="narrowerConcept in narrowerConcepts">{{ getTerm(narrowerConcept).value }}</li>
     </ul>
   </span>
 
