@@ -19,20 +19,20 @@
 <div ng-if="showMore" class="box boxextension bigbox label high" ng-click="onClick(concept.id)">
   <span class="line-ext"></span>
   <span class="note-ext">
-    <span class="italic">
-      <span class="icon-note"></span>
 
-    </span><br>
+  <span class="italic smalltype">Description</span><br>
+   
+
     {{ concept.scopeNote.value }}
   </span>
-  <span class="note-ext"><span class="italic smalltype">broader</span><br>
+  <span class="note-ext small"><span class="italic smalltype">broader</span><br>
 
     <ul class="hierarchie">
       <li ng-repeat="broaderConcept in broaderConcepts">{{ getTerm(broaderConcept) }}</li>
     </ul>
   </span>
 
-  <span class="note-ext"><span class="italic smalltype">narrower</span><br>
+  <span class="note-ext small"><span class="italic smalltype">narrower</span><br>
     <ul class="hierarchie">
       <li ng-repeat="narrowerConcept in narrowerConcepts">{{ getTerm(narrowerConcept) }}</li>
     </ul>

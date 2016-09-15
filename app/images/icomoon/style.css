@@ -26,14 +26,17 @@
 }
 
 
+.icon-language:before {
+  content: "\e90d";
+}
+.icon-preferences:before {
+  content: "\e90f";
+}
 .icon-checked:before {
   content: "\e903";
 }
 .icon-unchecked:before {
   content: "\e904";
-}
-.icon-preferences:before {
-  content: "\e90b";
 }
 .icon-altlabel:before {
   content: "\e90e";

@@ -3,7 +3,7 @@
   <div class="dialogheader">
     <h3 ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}" ng-bind="prefLabel.value"></h3>
     <p class="typeinformation"> metadata/settings</p>
-    <div class="line-bottom"></div>
+    <div class="line-bottom line"></div>
   </div>
 
 
@@ -21,13 +21,10 @@
 
     <!-- <div class="line-dialog"></div> -->
 
-    <div class="dialogbox dialog-full">
-      <confirm-button on-confirm="deleteConcept(label.id); closeThisDialog()"></confirm-button>
-    </div>
 
-    <div class="line-dialog"></div>
+    
     <div class="dialogbox dialog-full">
-      <h4>meta data</h4>
+      <h4>Meta data</h4>
 
         <span class="listtype">License</span>
         <span class="listcontent" ng-bind="label.license"></span>
@@ -46,6 +43,12 @@
           </ul>
         </span>
 
+    </div>
+
+    <div class="line-dialog line"></div>
+    <div class="dialogbox dialog-full">
+      <h4>Functions</h4>
+      <confirm-button on-confirm="deleteConcept(label.id); closeThisDialog()"></confirm-button>
     </div>
 
 
