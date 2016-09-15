@@ -58,29 +58,13 @@ angular.module('labelsApp')
     };
 
     /**
-     * Get skos of vocabulary and trigger downlaod
+     * Get skos of vocabulary url
      * @param {string} id - Vocabulary ID
+     * @return {string} url to download vocab in skos format
      */
-    $scope.download = function(id) {
-        console.log("get file");
-        VocabService.download({id: id}, function(res) {
-            console.log(res);
-            // trigger download
-            var blob = new Blob(res, { type:"application/rdf+xml;charset=UTF-8;" });
-			var downloadLink = angular.element('<a></a>');
-            downloadLink.attr('href',window.URL.createObjectURL(blob));
-            downloadLink.attr('download', 'vocab.skos');
-			downloadLink[0].click();
-            //console.log(res);
-        });
+    $scope.getDownloadUrl = function(id) {
+        return ConfigService.host + "/vocabs/" + id + ".skos";
     };
-
-    $scope.saveJSON = function () {
-			$scope.toJSON = '';
-			$scope.toJSON = angular.toJson($scope.data);
-
-		};
-
 
     /**
      * Redirects to the label overview of the specified vocabulary.
