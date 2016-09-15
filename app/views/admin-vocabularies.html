@@ -18,7 +18,7 @@
 		<div class="box vocabulary label" ng-repeat="vocab in vocabularies | filter: {'creator': user.name} | filter: vocabFilter" ng-click="onVocabClick(vocab.id)">
 	      <span class="vocabname" ng-bind="vocab.title.value"></span>
 	      <span class="vocabrelease" ng-bind="vocab.releaseType + ' vocabulary'"></span>
-	      
+
 	      <span class="listtype">Description</span>
           <span class="listcontent wordbreak" ng-bind="vocab.description.value"></span>
 
@@ -30,11 +30,16 @@
           <span class="listtype">Creation date</span>
           <span class="listcontent" ng-bind="vocab.created | date: 'dd.MM.yyyy'"></span>
 
-	      <span class="listtype">License</span>
-          <span class="listcontent wordbreak" ng-bind="vocab.license"></span>
-	      
+	      <!-- <span class="listtype">License</span>
+        <span class="listcontent wordbreak" ng-bind="vocab.license"></span> -->
+
+        <span class="listtype">concepts</span>
+        <span class="listcontent">{{ stats[vocab.id].concepts }}</span>
+
+        <span class="listtype"><a ng-href="{{getDownloadUrl(vocab.id)}}" ng-click="$event.stopPropagation()">download</a></span>
+
 	      <span class="icon-folder icon"></span>
-	      
+
 		</div>
 	</div>
 	</div>

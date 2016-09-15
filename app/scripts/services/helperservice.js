@@ -35,7 +35,7 @@ angular.module('labelsApp')
      */
     this.getTerm = function(obj) {
         if (obj.prefLabels) {  // is concept object
-            return this.getThumbnail(obj);
+            return this.getThumbnail(obj).value;
         } else {  // is match
             return obj.label;
         }

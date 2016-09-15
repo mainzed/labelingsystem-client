@@ -15,6 +15,7 @@ angular.module('labelsApp')
             concept: "="
         },
         link: function postLink(scope) {
+            //console.log(scope.concept);
 
             /**
              * Shows the box's extension with additional information about the
@@ -46,6 +47,29 @@ angular.module('labelsApp')
             });//
 
             /**
+             * checks if concept has broader concepts
+             */
+            scope.hasBroader = function(concept) {
+                if (ConfigService.showMatches) {
+                    return concept.broadMatch || concept.broader;
+                } else {
+                    return concept.broader;
+                }
+            };
+
+            /**
+             * checks if concept has narrower concepts
+             */
+            scope.hasNarrower = function(concept) {
+                if (ConfigService.showMatches) {
+                    return concept.narrowMatch || concept.narrower;
+                } else {
+                    return concept.narrower;
+                }
+            };
+
+
+            /**
              * Watcher that resets nanoscroll each time a concept is extended
              * to show additional details.
              */
@@ -63,6 +87,7 @@ angular.module('labelsApp')
                     });
                     HelperService.getRelatedConcepts(scope.concept, "narrower", function(relatedConcepts) {
                         scope.narrowerConcepts = scope.narrowerConcepts.concat(relatedConcepts);
+                        //console.log("add narrower to: " + scope.concept.prefLabels[0].value);
                     });
 
                     // external
@@ -74,8 +99,8 @@ angular.module('labelsApp')
                             scope.narrowerConcepts = scope.narrowerConcepts.concat(relatedConcepts);
                         });
                     }
-
                 }
+
                 // reset nanoscroll
                 $(".nano").nanoScroller();
             });

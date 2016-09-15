@@ -9,7 +9,7 @@
  * overviews
  */
 angular.module('labelsApp')
-  .controller('VocabsCtrl', function ($scope, $location, $http, ngDialog, AuthService, VocabService, ConfigService) {
+  .controller('VocabsCtrl', function ($scope, $q, $location, $http, ngDialog, AuthService, VocabService, LabelService, ConfigService) {
 
     if (!AuthService.isLoggedIn()) {
         $location.path("admin/login");
@@ -22,7 +22,49 @@ angular.module('labelsApp')
 
     VocabService.query({ creator: $scope.user.username }, function(vocabularies) {
         $scope.vocabularies = vocabularies;
+
+        // get vocabulary stats
+        $scope.stats = {};
+
+        run(vocabularies);
+
+        function run(vocabs) {
+            var counter = 0;
+            function next() {
+                if (counter < vocabs.length) {
+                    var vocab = vocabs[counter];
+                    LabelService.query({'vocab': vocab.id}, function(labels) {
+                        $scope.stats[vocab.id] = {
+                            concepts: labels.length
+                        };
+                        counter++;
+                        next();  // wait for response before starting next one
+                    });
+                }
+            }
+            next();
+        }
     });
+
+    /**
+     * Get concept stats for a vocabulary.
+     * @param {string} id - Vocabulary ID
+     */
+    $scope.getVocabStats = function(id) {
+        VocabService.get({id: id}, function(vocab) {
+            return vocab;
+
+        });
+    };
+
+    /**
+     * Get skos of vocabulary url
+     * @param {string} id - Vocabulary ID
+     * @return {string} url to download vocab in skos format
+     */
+    $scope.getDownloadUrl = function(id) {
+        return ConfigService.host + "/vocabs/" + id + ".skos";
+    };
 
     /**
      * Redirects to the label overview of the specified vocabulary.
