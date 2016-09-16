@@ -7,24 +7,37 @@
  * # searchResultBox
  */
 angular.module('labelsApp')
-  .directive('lsVocabResultBox', function (ngDialog, LabelService, ResourcesService) {
+  .directive('lsSearchResultBox', function (ngDialog, LabelService, ResourcesService) {
     return {
-        templateUrl: "scripts/components/enrichment-browser/vocab-result-box/vocab-result-box.html",
+        templateUrl: "scripts/components/label-details/enrichment-browser/search-result-box/search-result-box.html",
         restrict: 'E',
         // scope: {
-        //     data: "="
+        //     data: "=",
+        //     action: "&"  // call function when add confirmed
         // },
-        link: function postLink(scope) {
+        link: function postLink(scope, element, attrs) {
 
-            // TODO: workaround for isolated scope
-            scope.data = scope.label;
+            // workaround for global scope
+            scope.data = scope.box;
+
+            //console.log(scope.data);
+
+            // TODO: check if same vocab! with isolated scope
+            scope.isSameVocab = function() {
+                return scope.data.type === 'ls' && scope.data.scheme === scope.vocabulary.title.value;
+            };
+
+            if (scope.isSameVocab()) {
+                scope.data.type = "label";
+            }
+
             /**
              * Opens a type-specific dialog that shows the connection (relation)
              * options for each type to link to the label.
              */
-            scope.openDialog = function() {
+            scope.onClick = function() {
                 ngDialog.open({
-                    template: 'scripts/components/enrichment-browser/vocab-result-box/dialog.html',
+                    template: 'scripts/components/label-details/enrichment-browser/search-result-box/dialog.html',
                     className: 'bigdialog',
                     showClose: false,
                     closeByDocument: false,

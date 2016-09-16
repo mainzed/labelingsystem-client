@@ -66,16 +66,22 @@ angular.module('labelsApp')
     $scope.onSearchClick = function() {
         $scope.resultBoxes = [];
 
+        // rcheck if entire ls gets searched, ignore own vocab results if so
+        var result = _.find($scope.thesauri, { type: "ls"});
+
         // search in all thesauri and append as soon as they're found!
         $scope.thesauri.forEach(function(thesaurus) {
+            if (!(result && thesaurus.name.indexOf("this.") > -1)) {  // ignore local vocab
+                //console.log(thesaurus.name);
+                SearchService.search(thesaurus.name, $scope.searchValue, function(results) {
+                    $.merge($scope.resultBoxes, results);
 
-            SearchService.search(thesaurus.name, $scope.searchValue, function(results) {
-                $.merge($scope.resultBoxes, results);
+                }, function(res) {
+                    // error
+                    console.log(res);
+                });
+            }
 
-            }, function(res) {
-                // error
-                console.log(res);
-            });
         });
     };
 

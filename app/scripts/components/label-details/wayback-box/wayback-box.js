@@ -9,7 +9,7 @@
 angular.module('labelsApp')
   .directive('linkBox', function (ngDialog, $routeParams, ResourcesService, LabelService, HelperService, AuthService) {
     return {
-        templateUrl: 'views/directives/link-box.html',
+        templateUrl: 'scripts/components/label-details/wayback-box/wayback-box.html',
         restrict: 'E',
         scope: {
             data: "="
@@ -31,7 +31,7 @@ angular.module('labelsApp')
              */
             scope.openDialog = function() {
                 ngDialog.open({
-                    template: "views/dialogs/small-box-link.html",
+                    template: "scripts/components/label-details/wayback-box/dialog.html",
                     className: 'bigdialog',
                     showClose: false,
                     closeByDocument: false,
