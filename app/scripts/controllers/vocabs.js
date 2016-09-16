@@ -22,40 +22,7 @@ angular.module('labelsApp')
 
     VocabService.query({ creator: $scope.user.username }, function(vocabularies) {
         $scope.vocabularies = vocabularies;
-
-        // get vocabulary stats
-        $scope.stats = {};
-
-        run(vocabularies);
-
-        function run(vocabs) {
-            var counter = 0;
-            function next() {
-                if (counter < vocabs.length) {
-                    var vocab = vocabs[counter];
-                    LabelService.query({'vocab': vocab.id}, function(labels) {
-                        $scope.stats[vocab.id] = {
-                            concepts: labels.length
-                        };
-                        counter++;
-                        next();  // wait for response before starting next one
-                    });
-                }
-            }
-            next();
-        }
     });
-
-    /**
-     * Get concept stats for a vocabulary.
-     * @param {string} id - Vocabulary ID
-     */
-    $scope.getVocabStats = function(id) {
-        VocabService.get({id: id}, function(vocab) {
-            return vocab;
-
-        });
-    };
 
     /**
      * Get skos of vocabulary url

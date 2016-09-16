@@ -37,8 +37,14 @@
 	      <!-- <span class="listtype">License</span>
         <span class="listcontent wordbreak" ng-bind="vocab.license"></span> -->
 
-        <span class="listtype">concepts</span>
-        <span class="listcontent">{{ stats[vocab.id].concepts }}</span>
+        <span class="listtype">labels</span>
+        <span class="listcontent">{{ vocab.statistics.labelCount }}</span>
+
+        <span class="listtype">internal links</span>
+        <span class="listcontent">{{ vocab.statistics.internalLinks }}</span>
+
+        <span class="listtype">external links</span>
+        <span class="listcontent">{{ vocab.statistics.externalLinks }}</span>
 
         <span class="listtype"><a ng-href="{{getDownloadUrl(vocab.id)}}" ng-click="$event.stopPropagation()">download</a></span>
 
