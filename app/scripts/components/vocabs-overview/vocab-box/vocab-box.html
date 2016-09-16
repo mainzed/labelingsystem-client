@@ -1,0 +1,23 @@
+<div class="box vocabulary label" ng-click="onClick(data.id)">
+
+    <span class="vocabname" ng-bind="data.title.value"></span>
+    <span class="vocabrelease" ng-bind="data.releaseType + ' vocabulary'"></span>
+
+    <span class="listtype">Description</span>
+    <span class="listcontent wordbreak" ng-bind="data.description.value"></span>
+
+    <span class="listtype">Creation date</span>
+    <span class="listcontent" ng-bind="data.created | date: 'dd.MM.yyyy'"></span>
+
+    <span class="listtype">labels</span>
+    <span class="listcontent">{{ data.statistics.labelCount }}</span>
+
+    <span class="listtype">internal links</span>
+    <span class="listcontent">{{ data.statistics.internalLinks }}</span>
+
+    <span class="listtype">external links</span>
+    <span class="listcontent">{{ data.statistics.externalLinks }}</span>
+
+    <span class="icon-folder icon"></span>
+
+</div>

@@ -25,23 +25,6 @@ angular.module('labelsApp')
     });
 
     /**
-     * Get skos of vocabulary url
-     * @param {string} id - Vocabulary ID
-     * @return {string} url to download vocab in skos format
-     */
-    $scope.getDownloadUrl = function(id) {
-        return ConfigService.host + "/vocabs/" + id + ".skos";
-    };
-
-    /**
-     * Redirects to the label overview of the specified vocabulary.
-     * @param {string} id - Vocabulary ID
-     */
-    $scope.onVocabClick = function(id) {
-        $location.path('/admin/vocabularies/' + id + '/concepts');
-    };
-
-    /**
      * Logout current user and redirect to login page if successfull.
      */
     $scope.onLogoutClick = function() {
