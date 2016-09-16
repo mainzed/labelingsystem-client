@@ -7,9 +7,9 @@
  * # conceptBox
  */
 angular.module('labelsApp')
-  .directive('conceptBox', function ($location, ngDialog, LabelService, HelperService, $routeParams, AuthService, ConfigService) {
+  .directive('lsLabelBox', function ($location, ngDialog, LabelService, HelperService, $routeParams, AuthService, ConfigService) {
     return {
-        templateUrl: "views/directives/concept-box.html",
+        templateUrl: "scripts/components/label-details/label-box/label-box.html",
         restrict: 'E',
         scope: {
             data: "=",  // concept ID
@@ -71,7 +71,7 @@ angular.module('labelsApp')
                 // });
 
                 ngDialog.open({
-                    template: "views/dialogs/small-box-concept.html",
+                    template: "scripts/components/label-details/label-box/dialog.html",
                     className: 'bigdialog',
                     showClose: false,
                     closeByDocument: false,
