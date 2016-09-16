@@ -7,9 +7,9 @@
 * # resourceBox
 */
 angular.module('labelsApp')
-.directive('resourceBox', function ($location, $timeout, $window, ngDialog, LabelService, HelperService, $routeParams, AuthService, ResourcesService) {
+.directive('lsResourceBox', function ($location, $timeout, $window, ngDialog, LabelService, HelperService, $routeParams, AuthService, ResourcesService) {
   return {
-        templateUrl: "views/directives/resource-box.html",
+        templateUrl: "scripts/components/label-details/resource-box/resource-box.html",
         restrict: 'E',
         scope: {
             data: "=",  // concept ID
@@ -44,7 +44,7 @@ angular.module('labelsApp')
              */
             scope.openDialog = function() {
                 ngDialog.open({
-                    template: "views/dialogs/small-box-resource.html",
+                    template: "scripts/components/label-details/resource-box/dialog.html",
                     className: 'bigdialog',
                     showClose: false,
                     closeByDocument: false,

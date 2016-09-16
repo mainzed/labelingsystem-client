@@ -6,7 +6,7 @@
   <span class="thumbnail" ng-bind="resource.label"></span>
 
   <!-- resource type icon (getty, wayback etc) -->
-  <span class="type" title="{{ tooltip }}" ng-bind-template="{{ '(' + resource.type + ')' }}"></span>
+  <span class="type" title="{{ resource.type + ' - ' + resource.scheme }}" ng-bind-template="{{ '(' + resource.type + ')' }}"></span>
 
   <span class="language" ng-bind="resource.lang"></span>
 
