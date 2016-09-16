@@ -20,19 +20,18 @@
   <span class="line-ext"></span>
   <span class="note-ext">
 
-  <span class="italic smalltype">Description</span><br>
-   
-
+  <span class="italic smalltype" ng-show="concept.scopeNote">Description</span><br>
     {{ concept.scopeNote.value }}
   </span>
-  <span class="note-ext small"><span class="italic smalltype">broader</span><br>
+
+  <span class="note-ext small"><span class="italic smalltype" ng-show="broaderConcepts.length > 0">broader</span><br>
 
     <ul class="hierarchie">
       <li ng-repeat="broaderConcept in broaderConcepts">{{ getTerm(broaderConcept) }}</li>
     </ul>
   </span>
 
-  <span class="note-ext small"><span class="italic smalltype">narrower</span><br>
+  <span class="note-ext small"><span class="italic smalltype" ng-show="narrowerConcepts.length > 0">narrower</span><br>
     <ul class="hierarchie">
       <li ng-repeat="narrowerConcept in narrowerConcepts">{{ getTerm(narrowerConcept) }}</li>
     </ul>

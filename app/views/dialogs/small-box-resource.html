@@ -13,19 +13,21 @@
 	<div class="nano">
 	<div class="nano-content">
 		<div class="dialogbox dialog-full">
-			<div class="dialog-half col">
-				<span class="italic">Description</span><br>
+
+      <div class="dialog-half col">
+				<span class="italic" ng-show="resource.description">Description</span><br>
         {{ resource.description }}
 			</div>
+
 			<div class="dialog-quarter col">
-				<span class="italic smalltype">Broader</span><br>
+				<span class="italic smalltype" ng-show="resource.broaderTerms.length > 0">Broader</span><br>
 				<ul class="hierarchie">
 					<li ng-repeat="term in resource.broaderTerms" ng-bind="term.label"></li>
 
 				</ul>
 			</div>
 			<div class="dialog-quarter col">
-				<span class="italic smalltype">Narrower</span><br>
+				<span class="italic smalltype" ng-show="resource.narrowerTerms.length > 0">Narrower</span><br>
 				<ul class="hierarchie">
 					<li ng-repeat="term in resource.narrowerTerms" ng-bind="term.label"></li>
 

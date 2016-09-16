@@ -10,12 +10,12 @@
 	<div class="nano-content">
 		<div class="dialogbox dialog-full">
 			<div class="dialog-half col">
-				<span class="italic">Description</span><br>
+				<span class="italic" ng-show="concept.scopeNote">Description</span><br>
         {{ concept.scopeNote.value }}
 
 			</div>
 			<div class="dialog-quarter col">
-				<span class="italic smalltype">Broader</span><br>
+				<span class="italic smalltype" ng-show="broaderConcepts.length > 0">Broader</span><br>
 
 				<ul class="hierarchie">
 					<li ng-repeat="broaderConcept in broaderConcepts">{{ getLabel(broaderConcept) }}</li>
@@ -23,7 +23,7 @@
 				</ul>
 			</div>
 			<div class="dialog-quarter col">
-				<span class="italic smalltype">Narrower</span><br>
+				<span class="italic smalltype" ng-show="narrowerConcepts.length > 0">Narrower</span><br>
 
 				<ul class="hierarchie">
           			<li ng-repeat="narrowerConcept in narrowerConcepts">{{  getLabel(narrowerConcept) }}</li>
