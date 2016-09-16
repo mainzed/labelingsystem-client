@@ -26,11 +26,14 @@
 }
 
 
+.icon-preferences:before {
+  content: "\e90b";
+}
+.icon-breadcrumb:before {
+  content: "\e910";
+}
 .icon-language:before {
   content: "\e90d";
-}
-.icon-preferences:before {
-  content: "\e90f";
 }
 .icon-checked:before {
   content: "\e903";
@@ -71,3 +74,4 @@
 .icon-preflabel:before {
   content: "\e902";
 }
+

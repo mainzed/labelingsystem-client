@@ -71,32 +71,25 @@
 		<h1>Enrich</h1>
 
     <!-- search tab -->
-    <div id="enrichmentsearch" class="threequarter" ng-show="showSearch">
-			<span class="icon-search icon"></span>
+    <div id="enrichmentsearch" class="threequarter">
+			
+      <div class="tab">
+        <span class="icon-search icon"></span>
+        <input type="text" placeholder="Search in Thesauri" ng-model="searchValue"></input>
+        <button type="button" name="button" ng-click="onSearchClick(); searching = true" ng-disabled="!searchValue" ng-init="searching = false">search</button>
+      </div>
 
-      <input type="text" placeholder="Search in Thesauri" ng-model="searchValue"></input>
-
-      <button type="button" name="button" ng-click="onSearchClick(); searching = true" ng-disabled="!searchValue" ng-init="searching = false">search</button>
-
-      <!-- button to switch tab -->
-      <button type="button" ng-click="showSearch = false"> own concepts</button>
-
-      <button class="hideenrichment pointer" type="button" name="button" ng-click="hideEnrichmentBrowser()">
-  			<span class="icon-hide"></span>
-  		</button>
-		</div>
-
-    <!-- own vocab tab -->
-    <div id="enrichmentsearch" class="threequarter" ng-show="!showSearch">
-
-      <!-- button to switch tab -->
-      <button type="button" ng-click="showSearch = true">search</button>
-
+      <div class="tab">
+        <!-- button to switch tab -->
+        <span>own concepts</span>
+      </div>
 
       <button class="hideenrichment pointer" type="button" name="button" ng-click="hideEnrichmentBrowser()">
   			<span class="icon-hide"></span>
   		</button>
 		</div>
+
+    
 
 	</div>
 
@@ -132,7 +125,7 @@
 
 
       <!-- search results -->
-      <div ng-show="showSearch">
+      <div>
         <!-- placeholder when not searching -->
         <span class="noresult" ng-show="!searching && !resultBoxes">Add enrichment sources by searching</span>
 
