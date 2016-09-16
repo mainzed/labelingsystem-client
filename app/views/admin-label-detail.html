@@ -73,15 +73,15 @@
     <!-- search tab -->
     <div id="enrichmentsearch" class="threequarter" ng-init="showSearch = true">
 
-      <div class="tab" ng-click="showSearch = true">
+      <div class="tab lefttab" ng-click="showSearch = true" ng-class="{'active': showSearch}">
         <span class="icon-search icon"></span>
         <input type="text" placeholder="Search in Thesauri" ng-model="searchValue"></input>
         <button type="button" ng-click="onSearchClick(); searching = true" ng-init="searching = false">search</button>
       </div>
 
       <!-- labels tab -->
-      <div class="tab" ng-click="showSearch = false">
-        <span>own concepts</span>
+      <div class="tab" ng-click="showSearch = false" ng-class="{'active': !showSearch}">
+        <span class="tablabel">Labels of {{vocabulary.title.value}}</span>
       </div>
 
       <!-- hide icon -->
@@ -114,7 +114,7 @@
 		</button>
 
     <button class="enrichbutton" ng-click="onAddLink()">
-			<span class="buttontext">Add wayback link</span>
+			<span class="buttontext">Add link to Wayback Machine</span>
 			<span class="buttonicon"><span class="icon-arrow"></span></span>
 		</button>
 
