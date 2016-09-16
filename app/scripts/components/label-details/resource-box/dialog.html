@@ -17,9 +17,9 @@
 	<div class="nano-content">
 		<div class="dialogbox dialog-full">
 
-      <div class="dialog-half col">
+      		<div class="dialog-half col">
 				<span class="italic" ng-show="resource.description">Description</span><br>
-        {{ resource.description }}
+       			 {{ resource.description }}
 			</div>
 
 			<div class="dialog-quarter col">
@@ -38,43 +38,45 @@
 			</div>
 		</div>
 		<div class="line-dialog line"></div>
-		<h4>Connection</h4>
-		<div class="enrichbuttons">
+		<div class="dialogbox dialog-full">
+			<h4>Connection</h4>
+			<div class="enrichbuttons">
 
-		  <!-- resource columns -->
-		  <div ng-init="newRelation = relation">
-		    <div class="col five leftout">
-		  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'broadMatch'" ng-class="{'selectedbutton': newRelation === 'broadMatch'}" titel="tooltips.comments.broadMatch">
-		  			<span class="buttontext-ow">broad Match</span>
-		  		</button>
-		  	</div>
+			  <!-- resource columns -->
+			  <div ng-init="newRelation = relation">
+			    <div class="col five leftout">
+			  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'broadMatch'" ng-class="{'selectedbutton': newRelation === 'broadMatch'}" titel="tooltips.comments.broadMatch">
+			  			<span class="buttontext-ow">broad Match</span>
+			  		</button>
+			  	</div>
 
-		    <div class="col five">
-		  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'exactMatch'" ng-class="{'selectedbutton': newRelation === 'exactMatch'}" title="tooltips.comments.exactMatch">
-		  			<span class="buttontext-ow">exact Match</span>
-		  			<span class="icon-exact icon"></span>
-		  		</button>
-		  	</div>
+			    <div class="col five">
+			  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'exactMatch'" ng-class="{'selectedbutton': newRelation === 'exactMatch'}" title="tooltips.comments.exactMatch">
+			  			<span class="buttontext-ow">exact Match</span>
+			  			<span class="icon-exact icon"></span>
+			  		</button>
+			  	</div>
 
-		    <div class="col five">
-		  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'relatedMatch'" ng-class="{'selectedbutton': newRelation === 'relatedMatch'}" title="tooltips.comments.relatedMatch">
-		  			<span class="buttontext-ow">related Match</span>
-		  			<span class="icon-related icon"></span>
-		  		</button>
-		  	</div>
+			    <div class="col five">
+			  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'relatedMatch'" ng-class="{'selectedbutton': newRelation === 'relatedMatch'}" title="tooltips.comments.relatedMatch">
+			  			<span class="buttontext-ow">related Match</span>
+			  			<span class="icon-related icon"></span>
+			  		</button>
+			  	</div>
 
-		    <div class="col five">
-		  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'closeMatch'" ng-class="{'selectedbutton': newRelation === 'closeMatch'}" title="tooltips.comments.closeMatch">
-		  			<span class="buttontext-ow">close Match</span>
-		  			<span class="icon-close icon"></span>
-		  		</button>
-		  	</div>
+			    <div class="col five">
+			  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'closeMatch'" ng-class="{'selectedbutton': newRelation === 'closeMatch'}" title="tooltips.comments.closeMatch">
+			  			<span class="buttontext-ow">close Match</span>
+			  			<span class="icon-close icon"></span>
+			  		</button>
+			  	</div>
 
-		    <div class="col five rightout">
-		  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'narrowMatch'" ng-class="{'selectedbutton': newRelation === 'narrowMatch'}" title="tooltips.comments.narrowMatch">
-		  			<span class="buttontext-ow">narrow Match</span>
-		  		</button>
-		  	</div>
+			    <div class="col five rightout">
+			  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'narrowMatch'" ng-class="{'selectedbutton': newRelation === 'narrowMatch'}" title="tooltips.comments.narrowMatch">
+			  			<span class="buttontext-ow">narrow Match</span>
+			  		</button>
+			  	</div>
+			  </div>
 		  </div>
 
 
