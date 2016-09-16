@@ -66,30 +66,31 @@
 </div>
 
 
-<div id="enrichment-src" ng-show="showEnrichments" ng-init="showSearch = true">
+<div id="enrichment-src" ng-show="showEnrichments">
 	<div id="separator">
 		<h1>Enrich</h1>
 
     <!-- search tab -->
-    <div id="enrichmentsearch" class="threequarter">
-			
-      <div class="tab">
+    <div id="enrichmentsearch" class="threequarter" ng-init="showSearch = true">
+
+      <div class="tab" ng-click="showSearch = true">
         <span class="icon-search icon"></span>
         <input type="text" placeholder="Search in Thesauri" ng-model="searchValue"></input>
-        <button type="button" name="button" ng-click="onSearchClick(); searching = true" ng-disabled="!searchValue" ng-init="searching = false">search</button>
+        <button type="button" ng-click="onSearchClick(); searching = true" ng-init="searching = false">search</button>
       </div>
 
-      <div class="tab">
-        <!-- button to switch tab -->
+      <!-- labels tab -->
+      <div class="tab" ng-click="showSearch = false">
         <span>own concepts</span>
       </div>
 
+      <!-- hide icon -->
       <button class="hideenrichment pointer" type="button" name="button" ng-click="hideEnrichmentBrowser()">
   			<span class="icon-hide"></span>
   		</button>
 		</div>
 
-    
+
 
 	</div>
 
@@ -125,7 +126,7 @@
 
 
       <!-- search results -->
-      <div>
+      <div ng-show="showSearch">
         <!-- placeholder when not searching -->
         <span class="noresult" ng-show="!searching && !resultBoxes">Add enrichment sources by searching</span>
 
