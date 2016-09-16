@@ -51,6 +51,15 @@ angular.module('labelsApp')
         });
     };
 
+    /**
+     * Get skos of label url
+     * @param {string} id - label ID
+     * @return {string} url to download vocab in skos format
+     */
+    $scope.getDownloadUrl = function(id) {
+        return ConfigService.host + "/labels/" + id;
+    };
+
     // when searching, append search results
     // search when something is entered,
     // ls results are cached anyway, everything else gets searched on change
