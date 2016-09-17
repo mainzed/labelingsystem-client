@@ -7,9 +7,9 @@
  * # smallBox
  */
 angular.module('labelsApp')
-  .directive('prefLabelBox', function ($routeParams, ngDialog, VocabService, LabelService, AuthService, ConfigService) {
+  .directive('lsTranslationBox', function ($routeParams, ngDialog, VocabService, LabelService, AuthService, ConfigService) {
     return {
-        templateUrl: "views/directives/prefLabel-box.html",
+        templateUrl: "scripts/components/label-details/translation-box/translation-box.html",
         restrict: 'E',
         scope: {
             data: "="
@@ -28,13 +28,12 @@ angular.module('labelsApp')
                 });
             }
 
-
             /**
              * Opens a dialog with detailed information.
              */
             scope.openDialog = function() {
                 ngDialog.open({
-                    template: "views/dialogs/small-box-prefLabel.html",
+                    template: "scripts/components/label-details/translation-box/dialog.html",
                     className: 'bigdialog',
                     showClose: false,
                     closeByDocument: false,

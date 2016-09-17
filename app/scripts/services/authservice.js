@@ -51,7 +51,10 @@ angular.module('labelsApp')
     };
 
     this.getUser = function() {
-        return user;
+        return {
+            name: "demo"
+        };
+        //return user;
     };
 
     this.isLoggedIn = function() {

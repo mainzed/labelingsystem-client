@@ -1,6 +1,6 @@
 <div class="dialogwrapper text">
 	<div class="dialogheader">
-		<h3>add preferred label</h3>
+		<h3>add translation</h3>
 		<!--<div class="line-bottom"></div>-->
 	</div>
 
@@ -8,7 +8,7 @@
 	<div class="nano">
 	<div class="nano-content">
 		<div class="dialogbox dialog-full">
-			<input type="text" placeholder="preferred label" ng-model="term">
+			<input type="text" placeholder="translation" ng-model="term">
 		</div>
 
 
@@ -17,7 +17,7 @@
 		<div class="dialogbox dialog-full">
 			<select ng-model="selectedLang">
         <!-- prevent adding of prefLabel in vocab language (has to exist anyway) -->
-	    	<option ng-repeat="language in languages | orderBy: 'name'" value="{{language.value}}" ng-bind="language.name" ng-disabled="language.value === vocabulary.title.lang"></option>
+	    	<option ng-repeat="language in languages | orderBy: 'name'" value="{{language.value}}" ng-bind="language.name" ng-disabled="language.used"></option>
 	  		</select>
 		</div>
 
@@ -28,5 +28,5 @@
 
 
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="onAddPrefLabelConfirm(term, selectedLang); closeThisDialog()" ng-class="{'inactive': !term || !selectedLang}">Apply</div>
+	<div class="apply" ng-click="$ctrl.onConfirm({$term: term, $lang: selectedLang}); closeThisDialog()" ng-class="{'inactive': !term || !selectedLang}">Apply</div>
 </div>

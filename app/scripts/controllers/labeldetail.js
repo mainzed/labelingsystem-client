@@ -10,10 +10,6 @@
 angular.module('labelsApp')
   .controller('LabelDetailCtrl', function ($scope, $routeParams, $timeout, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ResourcesService, TooltipService, SearchService, UserSettingsService, ThesauriService, WaybackService, ConfigService) {
 
-    if (!AuthService.isLoggedIn()) {
-        $location.path("admin/login");
-    }
-
     // init nanoscroller here to prevent default scrollbar while loading boxes
     $(".nano").nanoScroller();
 
@@ -40,6 +36,7 @@ angular.module('labelsApp')
     // load label for the current vocabulary
     LabelService.get({id: $routeParams.lID}, function(label) {
         $scope.label = label;
+        //console.log(label);
         $scope.prefLabel = _.find($scope.label.prefLabels, {isThumbnail: true});
     });
 
@@ -72,7 +69,7 @@ angular.module('labelsApp')
         // search in all thesauri and append as soon as they're found!
         $scope.thesauri.forEach(function(thesaurus) {
             if (!(result && thesaurus.name.indexOf("this.") > -1)) {  // ignore local vocab
-                //console.log(thesaurus.name);
+
                 SearchService.search(thesaurus.name, $scope.searchValue, function(results) {
                     $.merge($scope.resultBoxes, results);
 
@@ -88,83 +85,6 @@ angular.module('labelsApp')
     // used by views
     $scope.languages = ConfigService.languages;
 
-    $scope.onAddPrefLabel = function() {
-
-        ngDialog.open({
-            template: 'views/dialogs/add-preflabel.html',
-            className: 'bigdialog',
-            showClose: false,
-            closeByDocument: false,
-            disableAnimation: true,
-            scope: $scope
-        });
-
-        $scope.onAddPrefLabelConfirm = function(term, lang) {
-
-            var newPrefLabel = {
-                isThumbnail: false,
-                value: term,
-                lang: lang
-            };
-
-            // append new prefLabel to label
-            $scope.label.prefLabels.push(newPrefLabel);
-
-            LabelService.update({ id: $routeParams.lID }, {
-                item: $scope.label,
-                user: $scope.user.name
-            }, function(label) {
-
-                if (label.id) {
-                    $scope.boxes.push({
-                        relation: "attribute",
-                        boxType: "prefLabel",
-                        resource: newPrefLabel
-                    });
-                }
-            });
-        };
-    };
-
-    $scope.onAddAltLabel = function() {
-        ngDialog.open({
-            template: 'views/dialogs/add-altlabel.html',
-            className: 'bigdialog',
-            showClose: false,
-            closeByDocument: false,
-            disableAnimation: true,
-            scope: $scope
-        });
-
-        $scope.onAddAltLabelConfirm = function(term, lang) {
-
-            var newaltLabel = {
-                value: term,
-                lang: lang
-            };
-
-            // append new prefLabel to label
-            if (!$scope.label.altLabels) {
-                $scope.label.altLabels = [];
-            }
-
-            $scope.label.altLabels.push(newaltLabel);
-
-            LabelService.update({ id: $routeParams.lID }, {
-                item: $scope.label,
-                user: "demo", //$scope.user.name
-            }, function(label) {
-                if (label.id) {
-                    $scope.boxes.push({
-                        relation: "attribute",
-                        boxType: "altLabel",
-                        resource: newaltLabel
-                    });
-                }
-            });
-        };
-    };
-
     $scope.onAddDescription = function() {
         //$scope.description = "";
         ngDialog.open({
@@ -174,6 +94,28 @@ angular.module('labelsApp')
             showClose: false,
             closeByDocument: false,
             scope: $scope
+        });
+    };
+
+    // TODO: put that in component controller
+    $scope.addTranslation = function(term, lang) {
+        console.log("on cofmirm!");
+        console.log(term, lang);
+
+        var newPrefLabel = {
+            isThumbnail: false,
+            value: term,
+            lang: lang
+        };
+
+        // append new prefLabel to label
+        $scope.label.prefLabels.push(newPrefLabel);
+
+        LabelService.update({ id: $routeParams.lID }, {
+            item: $scope.label,
+            user: $scope.user.name
+        }, function(label) {
+            console.log("success");
         });
     };
 

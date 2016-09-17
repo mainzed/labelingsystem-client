@@ -33,15 +33,10 @@
       <!-- middle column -->
   		<div class="insidewrapper half paddingbottom">
 
-        <!-- text column -->
+        <!-- descriptive -->
   			<div class="col halfleft">
-
-          <!-- gray boxes with prefLabels, altLabels and description -->
-          <pref-label-box ng-repeat="prefLabel in label.prefLabels" data="prefLabel"></pref-label-box>
-
-          <!-- <alt-label-box ng-repeat="altLabel in label.altLabels" data="altLabel"></alt-label-box> -->
+          <ls-translation-box ng-repeat="prefLabel in label.prefLabels" data="prefLabel"></ls-translation-box>
           <description-box data="label.scopeNote" ng-show="label.scopeNote"></description-box>
-
   			</div>
 
   			<!-- relations column -->
@@ -97,17 +92,7 @@
 
   <div class="col left">
 
-    <button class="enrichbutton" ng-click="onAddPrefLabel()">
-			<span class="buttontext">Add translation</span>
-			<span class="buttonicon"><span class="icon-language"></span></span>
-		</button>
-
-
-    <!-- <button class="enrichbutton" ng-click="onAddAltLabel()">
-			<span class="buttontext">Add alternative label</span>
-			<span class="buttonicon"><span class="icon-altlabel"></span></span>
-		</button> -->
-
+    <ls-translation-button data="label.prefLabels" on-confirm="addTranslation($term, $lang)"></ls-translation-button>
 
     <button class="enrichbutton" ng-click="onAddDescription()" ng-class="{'inactive': label.scopeNote}" ng-disabled="label.scopeNote">
 			<span class="buttontext">Add description</span>
