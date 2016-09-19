@@ -4,7 +4,7 @@
 
   <h1 ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}" ng-bind="prefLabel.value"></h1>
 	<span ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}" class="language" ng-bind="prefLabel.lang"></span>
-  <span ng-click="onLabelHeadingClick()" class="icon-preferences icon"></span>
+  <span ng-click="onLabelHeadingClick()" class="icon-edit icon"></span>
 
 </div>
 
@@ -64,7 +64,7 @@
 
 <div id="enrichment-src" ng-show="showEnrichments">
 	<div id="separator">
-		<h1>Enrich</h1>
+		<h1><!--Enrich--></h1>
 
     <!-- search tab -->
     <div id="enrichmentsearch" class="threequarter" ng-init="showSearch = true">
@@ -72,7 +72,7 @@
       <div class="tab lefttab" ng-click="showSearch = true" ng-class="{'active': showSearch}">
         <span class="icon-search icon"></span>
         <input type="text" placeholder="Search in Thesauri" ng-model="searchValue"></input>
-        <button type="button" ng-click="onSearchClick(); searching = true" ng-init="searching = false">search</button>
+        <button type="button" ng-click="onSearchClick(); searching = true" ng-init="searching = false"><span class="icon-arrow"></span></button>
       </div>
 
       <!-- labels tab -->

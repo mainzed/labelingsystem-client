@@ -26,14 +26,23 @@
 }
 
 
+.icon-exact:before {
+  content: "\e90f";
+}
+.icon-language:before {
+  content: "\e911";
+}
+.icon-edit:before {
+  content: "\e912";
+}
+.icon-config:before {
+  content: "\e913";
+}
 .icon-preferences:before {
   content: "\e90b";
 }
 .icon-breadcrumb:before {
   content: "\e910";
-}
-.icon-language:before {
-  content: "\e90d";
 }
 .icon-checked:before {
   content: "\e903";
@@ -65,13 +74,9 @@
 .icon-related:before {
   content: "\e907";
 }
-.icon-exact:before {
-  content: "\e908";
-}
 .icon-close:before {
   content: "\e909";
 }
 .icon-preflabel:before {
   content: "\e902";
 }
-
