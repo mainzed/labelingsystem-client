@@ -8,7 +8,7 @@
  * Service in the labelsApp.
  */
 angular.module('labelsApp')
-  .service('HelperService', function ($window, LabelService, ResourcesService) {
+  .service('HelperService', function ($window, LabelService, ResourcesService, VocabService, AuthService) {
     // helper functions
     // this.findAndReplace = function(arr, query, newObj) {
     //     var index = _.indexOf(arr, _.find(arr, query));
@@ -86,6 +86,25 @@ angular.module('labelsApp')
     */
     this.openLinkInNewTab = function(url) {
         $window.open(url, "_blank");
+    };
+
+    /**
+     * Changes a vocabulary's releaseType from "draft" to "public".
+     * @param {object} vocab - Vocabulary object
+     */
+    this.publishVocab = function(vocab) {
+        return new Promise(function(resolve, reject) {
+            var updatedVocab = vocab;
+            updatedVocab.releaseType = "public";
+            VocabService.update({id: vocab.id}, {
+                user: "demo",
+                item: updatedVocab
+            }, function() {
+                resolve();
+            }, function(error) {
+                reject(error);
+            });
+        });
     };
 
   });
