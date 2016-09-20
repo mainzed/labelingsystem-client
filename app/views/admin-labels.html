@@ -5,7 +5,7 @@
   <!-- loop over all prefLabels, so it autofreshes on change -->
   <h1 ng-bind="vocabulary.title.value"></h1>
 
-	<span class="icon-preferences" ng-click="openVocabDialog()"></span>
+	<span class="icon-edit" ng-click="openVocabDialog()"></span>
 	<span class="language" ng-bind="vocabulary.title.lang"></span>
 </div>
 
@@ -16,9 +16,9 @@
 	</div>
 
   <span>
-    <ul>
+    <ul class="sortlist">
       <li ng-click="showOptions=!showOptions">sort
-        <ul ng-show="showOptions" class="invisible">
+        <ul ng-show="showOptions" class="sortoptions">
           <li ng-click="labelOrder = '-lastModified'" ng-class="{'active': labelOrder === '-lastModified'}">by lastModified</li>
           <li ng-click="labelOrder = orderByThumbnail" ng-class="{'active': labelOrder === orderByThumbnail}">alphabetically</li>
           <li ng-click="labelOrder = orderByQuality" ng-class="{'active': labelOrder === orderByQuality}">by quality</li>
@@ -26,7 +26,7 @@
       </li>
     </ul>
 
-    <button type="button" ng-click="extendAll = !extendAll" ng-bind="extendButtonText"></button>
+    <button class="extendbutton" type="button" ng-click="extendAll = !extendAll" ng-bind="extendButtonText"></button>
 
   </span>
 </div>
