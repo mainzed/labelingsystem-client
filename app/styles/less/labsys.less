@@ -129,8 +129,11 @@ textarea:focus {	outline: none; }
 #filtersearch input {
 					background: none; border: none; width: 200px; float: left; height: 30px; color: white; }
 
-.sortlist	{		display: block; float: left; position: relative; color: white; }
-.sortoptions {		position: absolute; background: @workareas; width: 200px; padding: 10px; color: white; z-index: 9999999; }
+.sortlist	{		display: block; float: left; position: relative; color: white; margin-top: 13px; border-left: 1px solid white;
+					padding-left: 10px;  }
+.sortlist li {		list-style: none; }
+.sortlist .icon {	line-height: 0px; margin-top: 5px;}
+.sortoptions {		position: absolute; background: @workareas; width: 200px; padding: 10px; color: white; z-index: 9999999; margin-left: -23px; }
 .sortoptions li {	list-style: none; padding: 3px 0; }
 .extendbutton {		float: right; }
 

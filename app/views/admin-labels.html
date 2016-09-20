@@ -17,7 +17,7 @@
 
   <span>
     <ul class="sortlist">
-      <li ng-click="showOptions=!showOptions">sort
+      <li ng-click="showOptions=!showOptions">sort<span class="icon-breadcrumb icon"></span>
         <ul ng-show="showOptions" class="sortoptions">
           <li ng-click="labelOrder = '-lastModified'" ng-class="{'active': labelOrder === '-lastModified'}">by lastModified</li>
           <li ng-click="labelOrder = orderByThumbnail" ng-class="{'active': labelOrder === orderByThumbnail}">alphabetically</li>
