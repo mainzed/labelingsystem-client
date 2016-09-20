@@ -3,6 +3,9 @@
     <span class="vocabname" ng-bind="data.title.value"></span>
     <span class="vocabrelease" ng-bind="data.releaseType + ' vocabulary'"></span>
 
+    <span class="listtype">Language</span>
+    <span class="listcontent" ng-bind="data.description.lang"></span>
+
     <span class="listtype">Description</span>
     <span class="listcontent wordbreak" ng-bind="data.description.value"></span>
 
@@ -19,5 +22,9 @@
     <span class="listcontent">{{ data.statistics.externalLinks }}</span>
 
     <span class="icon-folder icon"></span>
+
+    <span class="listtype">
+      <span ng-click="openVocabDialog(data.id); $event.stopPropagation()">edit</span>
+    </span>
 
 </div>

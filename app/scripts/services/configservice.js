@@ -56,6 +56,7 @@ angular.module('labelsApp')
         { name: "Italian", value: "it" },
         { name: "French", value: "fr" },
         { name: "Dutch", value: "nl"},
+        { name: "Iceland", value: "is"},
         { name: "Hebrew", value: "he"}
     ];
 });

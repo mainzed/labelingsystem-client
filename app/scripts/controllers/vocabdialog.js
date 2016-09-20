@@ -133,6 +133,7 @@ angular.module('labelsApp')
             console.log("vocabulary is not of statusType = 'draft'");
         }
     };
+
     /**
      * Replace a vocabulary's thesauri with the currently selected ones.
      */

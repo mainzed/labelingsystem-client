@@ -15,8 +15,7 @@ angular.module('labelsApp')
         'getPublicOnly': { method: 'GET', isArray: true },
         'update': { method:'PUT' },
         'download' : { method: 'GET', url: ConfigService.host + '/vocabs/:id' + ".skos", isArray: false },
-        'remove': { method: 'DELETE', params: { user: AuthService.getUser().name, type: "delete" }},
-        'deprecated': { method: 'DELETE', params: { user: AuthService.getUser().name, type: "deprecated" }}
+        'remove': { method: 'DELETE', params: { user: "demo", type: "delete" }}
     });
 
   });
