@@ -80,16 +80,15 @@ textarea:focus {	outline: none; }
 #separator {		color: white; height: 75px; }
 .separatorsmall {	height: 50px; float: left; width: 100%; background: @workareas; clear: left;}
 .separatorsmall button {
-					color: white; margin-left: 20px; margin-top: 10px; border-bottom: 1px solid white; padding-bottom: 2px;
-}
+					color: white; margin-left: 20px; margin-top: 10px; padding-bottom: 2px; }
 .separatorsmall .pre {
 					color: white; margin-top: 10px; border-left: 1px solid white; padding-left: 10px; }
 #separator h1 {		padding-left: calc(@marginoutside + @marginoutboxsmall); padding-top: 20px; float: left; width: calc(@quartersize);    }
-#header h1 {		margin-top: 45px; float: left;
+#header h1 {		margin-top: 45px; float: left; font-weight: bold;
 					@media screen and (max-width: 1600px) { margin-top: 53px;} }
 .nano {				 	}
-.noresult {			width: 100%; height: 100%; font-size: @headlines; font-style: italic; color: @workareas; font-weight: 300;
-					text-align: center; position: absolute; margin-left: @marginoutboxsmall; background: @text; }
+.noresult {			width: calc(100% - @marginoutboxsmall * 2); height: 100%; font-size: @headlines; font-style: italic; color: @workareas; font-weight: 300;
+					text-align: center; position: absolute; margin-left: @marginoutboxsmall; background: @text; padding-top: 100px; }
 .cancel {			position: absolute; bottom: @marginoutside; left: @marginoutside; cursor: pointer; }
 .apply {			position: absolute; bottom: @marginoutside; right: @marginoutside; cursor: pointer; }
 .enrichmentswrapper {
@@ -108,21 +107,21 @@ textarea:focus {	outline: none; }
 					overflow-x: hidden; float: left; height: 100%; background: @middle; }
 #enrichmentsearch {	float: left; margin-top: 0px; background: @middle; height: 100%;  }
 #enrichmentsearch input
-				 {	background: none; border: none; color: white; width: 200px; margin-top: 8px; margin-left: @margininboxsmall; }
+				 {	background: none; border: none; color: black; width: 200px; margin-top: 8px; margin-left: 3px; }
 .tablabel	{		margin-top: 8px; display: block; padding: 0 @margininboxsmall;  }				 
 
 #enrichmentsearch .icon {
 					margin-left: 4px; margin-top: 4px; float: left; font-size: 28px;
 }
 .tab {				float: left; border-radius: 0 3px 0px 0; cursor: pointer; width: 310px; background: @text; 
-					margin-top: 28px; height: 36px; color: gray; border: 1px solid @text;  }
+					margin-top: 36px; height: 36px; color: gray;  }
 .lefttab {			margin-left: @marginoutboxsmall; border-radius: 3px 0 0 0px; }
-.tab.active {		color: white;  font-weight: normal; border-color: #d6d6d6;  }
+.tab.active {		color: black;  font-weight: normal; background: @label;  }
 .tab button {		margin-right: @margininboxsmall; float: right; color: white }
 
 
 .hideenrichment {	float: right; margin-right: 10px; padding-top: 10px; padding-bottom: 15px; }
-#filtersearch {		margin-left: @marginoutside; margin-top: 10px; color: white; width: 300px; float: left; }
+#filtersearch {		margin-left: calc(@marginoutside + @marginoutboxsmall); margin-top: 10px; color: white; width: 200px; float: left; }
 #filtersearch .icon-search {
 					float: left;
 }
@@ -131,19 +130,19 @@ textarea:focus {	outline: none; }
 
 .sortlist	{		display: block; float: left; position: relative; color: white; margin-top: 13px; border-left: 1px solid white;
 					padding-left: 10px;  }
-.sortlist li {		list-style: none; }
-.sortlist .icon {	line-height: 0px; margin-top: 5px;}
+.sortlist li {		list-style: none; margin-left: 5px; }
+.sortlist .icon {	line-height: 0px; margin-top: 10px; float: right; margin-left: -2px;}
 .sortoptions {		position: absolute; background: @workareas; width: 200px; padding: 10px; color: white; z-index: 9999999; margin-left: -23px; }
 .sortoptions li {	list-style: none; padding: 3px 0; }
-.extendbutton {		float: right; margin-right: @marginoutside; }
+.extendbutton {		float: left; margin-right: @marginoutside; border-bottom: 0; border-left: 1px solid white; }
 
 #breadcrumb {		float: left; display: block; height: 100px; }
 #breadcrumb a {		color: white; margin-top: 60px; display: block; float: left; padding-bottom: 2px;
-					text-decoration: none; border-bottom: 1px solid white; margin-right: @marginoutboxsmall; }
+					text-decoration: none; border-bottom: 1px solid white; margin-right: 5px; }
 #breadcrumb a.outside  {
 					margin-left: calc(@marginoutside + @marginoutboxsmall); }
 #breadcrumb span span
-				{	display: block; float: left; margin-top: 56px; margin-right: @marginoutboxsmall; }
+				{	display: block; float: left; margin-top: 56px; margin-right: 12px; width: 20px; }
 .tablehead {		float: left; height: 50px; color: white;	}
 .tablehead span {	margin-top: 14px; margin-left: calc(@tableheadmargin); display: block; }
 .tablehead.left span {
@@ -163,10 +162,10 @@ textarea:focus {	outline: none; }
 .voc-box {			padding-left: calc(@marginoutside - @marginoutboxsmall); }
 #boxcontainer .bigbox {
 					margin-left: @marginoutside; width: calc(100% - @marginoutside * 2); }
-.plusposition 	{	position: fixed; left: 50%; bottom: 10%; width: 50px; margin-left: -25px; cursor: pointer;
+.plusposition 	{	position: fixed; left: 50%; bottom: 10%; width: 50px; margin-left: -20px; cursor: pointer;
 					display: block; height: 25px; width: 25px; padding: 6px 6px; font-size: 30px; line-height: 23px;
-    				text-align: center; background-color: @workareas; background-image: none; 
-					border-radius: 20px; box-shadow: 0 3px 15px @label; color: white }
+    				text-align: center; background-color: gray; background-image: none; 
+					border-radius: 20px; box-shadow: 0 3px 15px black; color: white }
 
 #selectedbox 	{	display: block; margin-bottom: 30px; float: left; width: 100%;}
 #selectedbox .bigbox {
@@ -242,7 +241,7 @@ textarea:focus {	outline: none; }
 					height: 40px; }
 .enrichbuttons-min .enrichbutton-ow .icon {
 					top: 2px; left: auto; right: 2px; }
-.enrichinfo	 {		padding: @margininboxsmall; margin-top: 10px; display: block; font-size: @small; background: @middle; height: 300px; }
+.enrichinfo	 {		padding: @margininboxsmall; margin-top: 10px; display: block; font-size: @small; height: 300px; }
 .enrichbuttons-min .enrichinfo {
 					display: none; }
 
@@ -348,7 +347,14 @@ textarea:focus {	outline: none; }
 					margin-left: @margininboxsmall; width: 100px; font-size: @small; }
 .vocabulary .listcontent {
 					 }
-.vocabulary .icon {	position: absolute; right: @margininboxsmall; top: @margininboxsmall; }
+.vocabulary .icon-folder {	
+					position: absolute; right: @margininboxsmall; top: @margininboxsmall; }
+.vocabulary .icon-edit {
+					position: absolute; right: 40px; top: @margininboxsmall; display: none; }
+.vocabulary .icon-edit:hover {
+					color: blue; }
+.vocabulary:hover .icon-edit {
+					display: block; }
 .vocabheading {		margin-left: calc(@marginoutside + @margininboxsmall); }
 
 
@@ -368,7 +374,7 @@ textarea:focus {	outline: none; }
 #header .icon-folder {
 					position: absolute; right: 50px; font-size: 100px; top: 2px; }
 #filtersearch .icon-search	{
-					margin-left: 3px; margin-right: 2px; }
+					margin-left: 3px; margin-right: 2px; color: gray; }
 .ngdialog-overlay { background: rgba(0, 0, 0, 0.8); }
 .selectedbutton {	background: @middle; color: white; }
 
