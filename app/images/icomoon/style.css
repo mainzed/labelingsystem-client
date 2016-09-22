@@ -26,6 +26,9 @@
 }
 
 
+.icon-dropdown:before {
+  content: "\e902";
+}
 .icon-exact:before {
   content: "\e90f";
 }
@@ -77,6 +80,4 @@
 .icon-close:before {
   content: "\e909";
 }
-.icon-preflabel:before {
-  content: "\e902";
-}
+
