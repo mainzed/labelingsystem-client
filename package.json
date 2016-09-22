@@ -34,6 +34,7 @@
     "karma": "^1.1.1",
     "karma-chrome-launcher": "^2.0.0",
     "karma-jasmine": "^1.0.2",
+    "karma-mocha-reporter": "^2.2.0",
     "karma-ng-scenario": "^1.0.0",
     "karma-phantomjs-launcher": "^1.0.1",
     "phantomjs-prebuilt": "^2.1.7",

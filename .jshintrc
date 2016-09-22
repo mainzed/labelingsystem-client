@@ -11,7 +11,10 @@
   "undef": true,
   "unused": true,
   "globals": {
+    "expect": false,
+    "describe": false,
     "angular": false,
+    "it": false,
     "$": false,
     "_": false,
     "L": false
