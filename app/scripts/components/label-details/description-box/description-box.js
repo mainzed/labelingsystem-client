@@ -7,9 +7,9 @@
  * # descriptionBox
  */
 angular.module('labelsApp')
-  .directive('descriptionBox', function ($routeParams, $rootScope, ngDialog, LabelService, AuthService) {
+  .directive('lsDescriptionBox', function ($routeParams, $rootScope, ngDialog, LabelService, AuthService) {
     return {
-        templateUrl: 'views/directives/description-box.html',
+        templateUrl: 'scripts/components/label-details/description-box/description-box.html',
         restrict: 'E',
         scope: {
             data: "="
@@ -21,7 +21,7 @@ angular.module('labelsApp')
              */
             scope.openDialog = function() {
                 ngDialog.open({
-                    template: "views/dialogs/small-box-description.html",
+                    template: "scripts/components/label-details/description-box/dialog.html",
                     className: 'bigdialog',
                     showClose: false,
                     closeByDocument: false,
