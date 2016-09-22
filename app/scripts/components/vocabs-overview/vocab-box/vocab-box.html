@@ -1,28 +1,39 @@
 <div class="box vocabulary label {{ $ctrl.data.releaseType }}" ng-click="$ctrl.onClick($ctrl.data.id)">
 
     <span class="vocabname" ng-bind="$ctrl.data.title.value"></span>
-    <span class="vocabrelease" ng-bind="$ctrl.data.releaseType + ' vocabulary'"></span>
+    <!--<span class="vocabrelease" ng-bind="$ctrl.data.releaseType + ' vocabulary'"></span>-->
+    <span class="vocabsize" ng-show="$ctrl.data.statistics.labelCount > 1">{{ $ctrl.data.statistics.labelCount }} concepts</span>
+    <span class="vocabsize" ng-show="$ctrl.data.statistics.labelCount === 1">{{ $ctrl.data.statistics.labelCount }} concept</span>
+    <span class="vocabsize" ng-show="$ctrl.data.statistics.labelCount === 0">empty</span>
 
     <span class="language" ng-bind="$ctrl.data.description.lang"></span>
 
-    <span class="listtype">Description</span>
-    <span class="listcontent wordbreak" ng-bind="$ctrl.data.description.value"></span>
 
+    <span class="note" ng-bind="$ctrl.data.description.value"></span>
+
+    <!--
     <span class="listtype">Creation date</span>
     <span class="listcontent" ng-bind="$ctrl.data.created | date: 'dd.MM.yyyy'"></span>
-
-    <span class="listtype">labels</span>
-    <span class="listcontent">{{ $ctrl.data.statistics.labelCount }}</span>
-
-    <span class="listtype">internal links</span>
-    <span class="listcontent">{{ $ctrl.data.statistics.internalLinks }}</span>
-
-    <span class="listtype">external links</span>
-    <span class="listcontent">{{ $ctrl.data.statistics.externalLinks }}</span>
+    -->
 
     <span class="icon-folder icon"></span>
 
     <!-- <span ls-vocab-dialog data="$ctrl.data" class="icon-edit icon" ng-click="$event.stopPropagation()"></span> -->
     <ls-edit-vocab-button data="$ctrl.data" ng-click="$event.stopPropagation()"></ls-edit-vocab-button>
+
+    <span class="linksize">
+
+        <span ng-show="$ctrl.data.statistics.externalLinks > 0">
+          <span class="minibox ls"></span>
+          <span class="minibox getty"></span>
+          <span class="listcontent">{{ $ctrl.data.statistics.externalLinks }}</span>
+        </span>
+
+        <span ng-show="$ctrl.data.statistics.internalLinks > 0">
+          <span class="minibox concept"></span>
+          <span class="listcontent">{{ $ctrl.data.statistics.internalLinks }}</span>
+        </span>
+
+    </span>
 
 </div>

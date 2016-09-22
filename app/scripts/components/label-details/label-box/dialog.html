@@ -11,8 +11,7 @@
 		<div class="dialogbox dialog-full">
 			<div class="dialog-half col">
 				<span class="italic" ng-show="concept.scopeNote">Description</span><br>
-        {{ concept.scopeNote.value }}
-
+        		{{ concept.scopeNote.value }}
 			</div>
 			<div class="dialog-quarter col">
 				<span class="italic smalltype" ng-show="broaderConcepts.length > 0">Broader</span><br>
@@ -32,47 +31,51 @@
 		</div>
 
 		<div class="line-dialog line"></div>
-    	<h4>meta data</h4>
-    	<span class="listtype">id</span>
-        <span class="listcontent" ng-bind="concept.id"></span>
+		<div class="dialogbox dialog-full">
+	    	<h4>meta data</h4>
+	    	<span class="listtype">id</span>
+	        <span class="listcontent" ng-bind="concept.id"></span>
 
-        <span class="listtype">Creator</span>
-        <span class="listcontent" ng-bind="concept.creator"></span>
+	        <span class="listtype">Creator</span>
+	        <span class="listcontent" ng-bind="concept.creator"></span>
 
-        <span class="listtype">Last modified</span>
-        <span class="listcontent" ng-bind-template="{{ concept.lastModified | date: 'dd.MM.yyyy hh:mm'}}"></span>
+	        <span class="listtype">Last modified</span>
+	        <span class="listcontent" ng-bind-template="{{ concept.lastModified | date: 'dd.MM.yyyy hh:mm'}}"></span>
 
-        <span class="listtype">License</span>
-        <span class="listcontent"><a ng-href="{{concept.license}}" target="_blank">CC BY</a></span>
+	        <span class="listtype">License</span>
+	        <span class="listcontent"><a ng-href="{{concept.license}}" target="_blank">CC BY</a></span>
+	    </div>
 
 
 
 
 		<div class="line-dialog line"></div>
-		<h4>Connection</h4>
-		<div class="enrichbuttons">
+		<div class="dialogbox dialog-full">
+			<h4>Connection</h4>
+			<div class="enrichbuttons">
 
-		  <!-- label columns -->
-	    <div class="col three leftout" ng-init="newRelation = relation">
-	  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'broader'" ng-class="{'selectedbutton': newRelation === 'broader'}">
-	  			<span class="buttontext-ow">broader</span>
-	  		</button>
-	  		<!--<p class="enrichinfo" ng-bind="tooltips.comments.broader"></p>-->
-	  	</div>
+			  <!-- label columns -->
+		    <div class="col three leftout" ng-init="newRelation = relation">
+		  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'broader'" ng-class="{'selectedbutton': newRelation === 'broader'}">
+		  			<span class="buttontext-ow">broader</span>
+		  		</button>
+		  		<!--<p class="enrichinfo" ng-bind="tooltips.comments.broader"></p>-->
+		  	</div>
 
-	    <div class="col three">
-	  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'related'" ng-class="{'selectedbutton': newRelation === 'related'}">
-	  			<span class="buttontext-ow">related</span>
-	  			<span class="icon-arrow icon"></span>
-	  		</button>
-	  		<!--<p class="enrichinfo" ng-bind="tooltips.comments.related"></p>-->
-	  	</div>
+		    <div class="col three">
+		  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'related'" ng-class="{'selectedbutton': newRelation === 'related'}">
+		  			<span class="buttontext-ow">related</span>
+		  			<span class="icon-arrow icon"></span>
+		  		</button>
+		  		<!--<p class="enrichinfo" ng-bind="tooltips.comments.related"></p>-->
+		  	</div>
 
-	    <div class="col three rightout">
-	  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'narrower'" ng-class="{'selectedbutton': newRelation === 'narrower'}">
-	  			<span class="buttontext-ow">narrower</span>
-	  		</button>
-	  		<!--<p class="enrichinfo" ng-bind="tooltips.comments.narrower"></p>-->
+		    <div class="col three rightout">
+		  		<button class="enrichbutton-ow" type="button" name="button" ng-click="newRelation = 'narrower'" ng-class="{'selectedbutton': newRelation === 'narrower'}">
+		  			<span class="buttontext-ow">narrower</span>
+		  		</button>
+		  		<!--<p class="enrichinfo" ng-bind="tooltips.comments.narrower"></p>-->
+		  	</div>
 	  	</div>
 	  </div>
 
@@ -80,6 +83,7 @@
 
     <div class="line-dialog line"></div>
 	<div class="dialogbox dialog-full">
+		<h4>Functions</h4>
   		<ls-confirm-button on-confirm="onDeleteClick(); closeThisDialog()"></ls-confirm-button>
 	</div>
 

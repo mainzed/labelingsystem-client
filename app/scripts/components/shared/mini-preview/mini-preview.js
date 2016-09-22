@@ -9,7 +9,7 @@
 angular.module('labelsApp')
   .directive('miniPreview', function () {
     return {
-        templateUrl: 'views/directives/mini-preview.html',
+        templateUrl: 'scripts/components/shared/mini-preview/mini-preview.html',
         restrict: 'E',
         scope: {
             label: "=",  // uni-directional

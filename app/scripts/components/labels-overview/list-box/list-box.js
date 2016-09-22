@@ -9,7 +9,7 @@
 angular.module('labelsApp')
   .directive('listBox', function ($location, $routeParams, LabelService, ResourcesService, ConfigService, HelperService) {
     return {
-        templateUrl: "views/directives/list-box.html",
+        templateUrl: "scripts/components/labels-overview/list-box/list-box.html",
         restrict: 'E',
         scope: {
             concept: "="
