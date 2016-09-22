@@ -18,5 +18,5 @@
 
 
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-class="{'inactive': !url}" ng-click="addLinkConfirm(url); closeThisDialog()">Apply</div>
+	<div class="apply" ng-class="{'inactive': !url}" ng-click="$ctrl.onConfirm({$url: url}); closeThisDialog()">Apply</div>
 </div>

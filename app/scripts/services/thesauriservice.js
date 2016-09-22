@@ -18,7 +18,7 @@ angular.module('labelsApp')
         },
         'get': { isArray: true },
         'update': {
-            method:'PUT',
+            method: 'PUT',
             isArray: true
         }
     });

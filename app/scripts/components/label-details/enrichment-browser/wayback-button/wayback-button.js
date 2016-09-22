@@ -7,19 +7,18 @@
  * # smallBox
  */
  angular.module('labelsApp')
-  .component('lsDescriptionButton', {
+  .component('lsWaybackButton', {
     bindings: {
-        data: "=",
         onConfirm: "&"
     },
-    templateUrl: "scripts/components/label-details/enrichment-browser/description-button/description-button.html",
+    templateUrl: "scripts/components/label-details/enrichment-browser/wayback-button/wayback-button.html",
 
     // The controller that handles our component logic
-    controller: function ($scope, $rootScope, ngDialog) {
+    controller: function ($scope, ngDialog) {
 
         this.openDialog = function() {
             ngDialog.open({
-                template: 'scripts/components/label-details/enrichment-browser/description-button/dialog.html',
+                template: 'scripts/components/label-details/enrichment-browser/wayback-button/dialog.html',
                 className: 'bigdialog',
                 showClose: false,
                 closeByDocument: false,

@@ -87,9 +87,6 @@ angular.module('labelsApp')
 
     // TODO: put that in component controller
     $scope.addTranslation = function(term, lang) {
-        console.log("on cofmirm!");
-        console.log(term, lang);
-
         var newPrefLabel = {
             isThumbnail: false,
             value: term,
@@ -102,7 +99,7 @@ angular.module('labelsApp')
         LabelService.update({ id: $routeParams.lID }, {
             item: $scope.label,
             user: $scope.user.name
-        }, function(label) {
+        }, function (label) {
             console.log("success");
         });
     };
@@ -123,28 +120,18 @@ angular.module('labelsApp')
             user: AuthService.getUser().name
         };
 
-        LabelService.update({ id: $routeParams.lID }, jsonObj, function(concept) {
-            console.log("success");
+        LabelService.update({ id: $routeParams.lID }, jsonObj, function success(label) {
             // temporarily update concept on success
-            $scope.label.scopeNote = concept.scopeNote;
+            $scope.label.scopeNote = label.scopeNote;
 
-        }, function(err) {
-            console.log(err);
+        }, function error(res) {
+            console.log(res);
         });
     };
 
-    $scope.onAddLink = function() {
-        ngDialog.open({
-            template: 'views/dialogs/add-wayback-link.html',
-            className: 'bigdialog',
-            disableAnimation: true,
-            showClose: false,
-            closeByDocument: false,
-            scope: $scope
-        });
-    };
-
-    $scope.addLinkConfirm = function(url) {//
+    $scope.addLink = function(url) {
+        console.log("add link");
+        console.log(url);
 
         WaybackService.get(url, function(waybackUri) {
             if (!$scope.label.seeAlso) {
