@@ -22,7 +22,6 @@ angular.module('labelsApp')
             scope.init = function() {
                 scope.size = scope.size || "mini";
 
-                var attributes = ["prefLabels", "altLabels"];
                 var relations = ["broader", "narrower", "related"];
                 var matchTypes = ["narrowMatch", "broadMatch", "exactMatch", "closeMatch", "relatedMatch", "seeAlso"];
 
@@ -30,9 +29,6 @@ angular.module('labelsApp')
                 scope.miniBoxes = [];
 
                 if (scope.label) {
-                    attributes.forEach(function(attr) {
-                        getAttribute(attr);
-                    });
 
                     relations.forEach(function(relation) {
                         getRelation(relation);
@@ -47,18 +43,6 @@ angular.module('labelsApp')
                         scope.miniBoxes.push({
                             category: "attribute",
                             type: "text"
-                        });
-                    }
-                }
-
-
-                function getAttribute(attr) {
-                    if (scope.label[attr]) {
-                        scope.label[attr].forEach(function() {
-                            scope.miniBoxes.push({
-                                category: "attribute",
-                                type: "text"
-                            });
                         });
                     }
                 }
@@ -92,9 +76,6 @@ angular.module('labelsApp')
             });
 
             // filters
-            scope.attributeFilter = function(box) {
-                return box.category === "attribute";
-            };
 
             scope.broaderFilter = function(box) {
                 return box.category === "broader" || box.category === "broadMatch";
