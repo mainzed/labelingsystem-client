@@ -1,8 +1,9 @@
 <div class="box vocabulary label" ng-click="$ctrl.onClick($ctrl.data.id)">
 
     <span class="vocabname" ng-bind="$ctrl.data.title.value"></span>
-    <!--<span class="vocabrelease" ng-bind="$ctrl.data.releaseType + ' vocabulary'"></span>-->
+    
     <span class="vocabsize">{{ $ctrl.data.statistics.labelCount }} concepts</span>
+    <!--<span class="vocabrelease" ng-bind="$ctrl.data.releaseType"></span>-->
 
     <span class="language" ng-bind="$ctrl.data.description.lang"></span>
 
