@@ -98,7 +98,10 @@ textarea:focus {	outline: none; }
 #enrichment-src {	width: 100%; float: left; position: absolute; height: calc(50% - 40px); margin-top: 3px;
 					box-shadow: 2px -4px 13px black; top: 50%; background: @workareas; }
 #enrichment-src-min {
-					width: 100%; position: absolute; bottom: 40px; background: @middle; height: 36px; margin-top: 3px; box-shadow: 2px -4px 13px black;  }
+					width: 100%; position: absolute; bottom: 40px; background: @middle; height: 36px; margin-top: 3px; 
+					box-shadow: 2px -4px 13px black; cursor: pointer; color: white;  }
+				
+
 .tableheadwrapper {	width: 100%; float: left; }
 #enrichments {		overflow-y: scroll; overflow-x: hidden; float: left; background: @workareas;}
 #listwrapper {		height: calc(100% - 90px - 50px - 38px); float: left; clear: left; display: block; width: 100%;}
@@ -212,6 +215,9 @@ textarea:focus {	outline: none; }
 .bigbox .thumbnail {
 					position: static; float: left; margin-left: @margininboxsmall;
 					margin-top: 8px; bottom: auto; left: auto; top: auto; width: 60%;  }
+.bigbox .icon-edit {float: right; display: none; margin-right: @margininboxsmall; }
+.bigbox:hover .icon-edit {
+					display: block; }
 #listwrapper .bigbox .thumbnail {
 					margin-top: 12px; }
 
