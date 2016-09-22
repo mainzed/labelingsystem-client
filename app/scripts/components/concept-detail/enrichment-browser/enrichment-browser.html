@@ -13,13 +13,15 @@
           <span class="icon-arrow"></span>
         </button>
         -->
-        <span class="icon-config icon"></span>
+
+        <ls-edit-vocab-button data="vocab" shortcut="thesauri"></ls-edit-vocab-button>
       </div>
 
       <!-- labels tab -->
       <div class="tab" ng-click="showSearch = false" ng-class="{'active': !showSearch}">
         <span class="tablabel">Labels of {{vocabulary.title.value}}</span>
-        <span class="icon-config icon"></span>
+        <ls-edit-vocab-button data="vocab" shortcut="selectVocab"></ls-edit-vocab-button>
+
       </div>
 
 
@@ -62,7 +64,12 @@
 
       <!-- own vocabs -->
       <div ng-show="!showSearch">
-        <ls-vocab-result-box ng-repeat="label in labels" data="label" action="addResource()"></ls-vocab-result-box>
+        <ls-vocab-result-box ng-repeat="label in labels | limitTo: conceptsLimit" data="label" action="addResource()"></ls-vocab-result-box>
+
+        <!-- TODO: make component -->
+        <span class="box bigbox label listbox" ng-show="labels.length > conceptsLimit" ng-click="conceptsLimit = conceptsLimit * 2">
+          show more
+        </span>
       </div>
 
 		</div>

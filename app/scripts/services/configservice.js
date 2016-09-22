@@ -59,4 +59,7 @@ angular.module('labelsApp')
         { name: "Iceland", value: "is"},
         { name: "Hebrew", value: "he"}
     ];
+
+    // limit of concepts shown in concepts overview and enrichment-browser 'concepts'-tab
+    this.conceptsLimit = 25;
 });

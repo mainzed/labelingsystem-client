@@ -22,6 +22,7 @@
         $scope.tooltips = TooltipService;
         $scope.placeholder = "loading labels...";
         $scope.extendAll = UserSettingsService.extendAll;
+        $scope.conceptsLimit = ConfigService.conceptsLimit;
 
         VocabService.get({id: $routeParams.vID}, function(vocabulary) {
             $scope.vocabulary = vocabulary;

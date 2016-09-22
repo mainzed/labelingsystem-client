@@ -44,7 +44,7 @@
 
         <div class="line-dialog line"></div>
         <div class="dialogbox dialog-full">
-          <h4>Referenzthesauri</h4>
+          <h4 id="thesauri">Referenzthesauri</h4>
           <div class="thesaurus" ng-repeat="thesaurus in thesauri" ng-if="thesaurus.name.indexOf('this.') < 0" ng-class="{'checked': thesaurus.checked}">
 
             <checkbox ng-model="thesaurus.checked" on-check="onCheckChange()" ng-class="{'inactive': thesaurus.description === 'this vocabulary'}"></checkbox>
@@ -66,7 +66,7 @@
   <!-- apply -->
   <!-- updateVocabThesauri() -->
   <!-- onApplyChangesClick(vocabulary, newValue, newDescription); -->
-  <button type="button" class="apply" ng-click="updateVocabThesauri(); closeThisDialog()" ng-class="{'inactive': newValue === vocabulary.title.value && newDescription === vocabulary.description.value && !checkedSomething}">Apply</button>
+  <button id="someButton" type="button" class="apply" ng-click="updateVocabThesauri(); closeThisDialog()" ng-class="{'inactive': newValue === vocabulary.title.value && newDescription === vocabulary.description.value && !checkedSomething}">Apply</button>
 
   <!-- cancel -->
   <button type="button" class="cancel" ng-click="closeThisDialog()">Cancel</button>

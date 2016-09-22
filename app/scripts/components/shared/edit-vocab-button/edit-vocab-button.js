@@ -8,27 +8,58 @@
 */
 angular.module('labelsApp')
 
-.component('lsEditLabelButton', {
+.component('lsEditVocabButton', {
     bindings: {
         data: "=",  // concept object
+        shortcut: "@"  // "thesauri"
     },
-    template: '<span class="icon-edit icon" ng-click="$ctrl.openDialog()"></span>',
-    controller: function ($scope, ngDialog) {
+    template: '<span class="{{$ctrl.icon}} icon" ng-click="$ctrl.openDialog()"></span>',
+
+    controller: function ($scope, $location, $anchorScroll, $timeout, ngDialog, ThesauriService) {
         var ctrl = this;
 
-        /**
-         * Opens the metadata/settings dialog of a vocabulary.
-         */
+        // determine icon
+        this.icon = "icon-edit";
+        if (this.shortcut === "thesauri" || this.shortcut === "selectVocab") {
+            this.icon = "icon-config";
+        }
+
+
         this.openDialog = function() {
-            $scope.label = ctrl.data;
-            ngDialog.open({
-                template: 'scripts/components/shared/edit-label-button/dialog.html',
-                className: 'bigdialog',
-                showClose: false,
-                closeByDocument: false,
-                disableAnimation: true,
-                scope: $scope
+            $scope.vocabulary = ctrl.data;
+
+            // get all thesauri
+            ThesauriService.query(function(thesauri) {
+                $scope.thesauri = thesauri;
+
+                // get this vocabulary's associated thesauri
+                ThesauriService.get({id: $scope.vocabulary.id}, function(vocabThesauri) {
+
+                    $scope.vocabThesauri = vocabThesauri;
+
+                    // preselect all vocab thesauri
+                    angular.forEach($scope.vocabThesauri, function(thesaurus) {
+                        //console.log(thesaurus.name);
+                        var checkedThesaurus = _.find($scope.thesauri, { 'name': thesaurus.name });
+                        if (checkedThesaurus) {  // skips local vocab
+                            checkedThesaurus.checked = true;
+                        }
+                    });
+
+                }, function(error) {
+                        console.log(error);
+                });
+
+                ngDialog.open({
+                    template: 'scripts/components/shared/edit-vocab-button/dialog.html',
+                    className: 'bigdialog',
+                    showClose: false,
+                    closeByDocument: false,
+                    disableAnimation: true,
+                    scope: $scope
+                });
             });
+
         };
 
     }
