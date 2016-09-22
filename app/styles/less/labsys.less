@@ -65,7 +65,7 @@ h2 {				font-size: @headlines; font-weight: normal; margin-bottom: 50px; margin-
 h3 {				font-size: @emphasize; margin-bottom: 5px; margin-top: @marginoutside; margin-left: @marginoutside; 
 					display: block; float: left;
 					@media screen and (max-width: 1600px) {font-size: @emphasize-small; } }
-h4 {				font-size: @regular; margin-left: @marginoutside; display: block; margin-bottom: 20px;}
+h4 {				font-size: @regular; margin-left: @marginoutside; display: block; margin-bottom: 14px;}
 h5 {				float: left; }
 li {				margin-left: 14px; }
 button {			border: 0; background: transparent;}
@@ -98,7 +98,7 @@ textarea:focus {	outline: none; }
 #enrichment-src {	width: 100%; float: left; position: absolute; height: calc(50% - 40px); margin-top: 3px;
 					box-shadow: 2px -4px 13px black; top: 50%; background: @workareas; }
 #enrichment-src-min {
-					width: 100%; position: absolute; bottom: 0; background: @middle; height: 36px; margin-top: 3px; box-shadow: 2px -4px 13px black;  }
+					width: 100%; position: absolute; bottom: 40px; background: @middle; height: 36px; margin-top: 3px; box-shadow: 2px -4px 13px black;  }
 .tableheadwrapper {	width: 100%; float: left; }
 #enrichments {		overflow-y: scroll; overflow-x: hidden; float: left; background: @workareas;}
 #listwrapper {		height: calc(100% - 90px - 50px - 38px); float: left; clear: left; display: block; width: 100%;}
@@ -108,11 +108,11 @@ textarea:focus {	outline: none; }
 #enrichmentsearch {	float: left; margin-top: 0px; background: @middle; height: 100%;  }
 #enrichmentsearch input
 				 {	background: none; border: none; color: black; width: 200px; margin-top: 8px; margin-left: 3px; }
-.tablabel	{		margin-top: 8px; display: block; padding: 0 @margininboxsmall;  }				 
+.tablabel	{		margin-top: 8px; display: block; padding: 0 @margininboxsmall; float: left;  }				 
 
-#enrichmentsearch .icon {
-					margin-left: 4px; margin-top: 4px; float: left; font-size: 28px;
-}
+#enrichmentsearch .icon-search {
+					margin-left: 4px; margin-top: 3px; float: left;  }
+.icon-config {		float: right; margin-top: 4px; }
 .tab {				float: left; border-radius: 0 3px 0px 0; cursor: pointer; width: 310px; background: @text; 
 					margin-top: 36px; height: 36px; color: gray;  }
 .lefttab {			margin-left: @marginoutboxsmall; border-radius: 3px 0 0 0px; }
@@ -129,12 +129,12 @@ textarea:focus {	outline: none; }
 					background: none; border: none; width: 200px; float: left; height: 30px; color: white; }
 
 .sortlist	{		display: block; float: left; position: relative; color: white; margin-top: 13px; border-left: 1px solid white;
-					padding-left: 10px;  }
-.sortlist li {		list-style: none; margin-left: 5px; }
+					padding-left: @margininboxsmall;  }
+.sortlist li {		list-style: none; margin-left: 0; }
 .sortlist .icon {	line-height: 0px; margin-top: 10px; float: right; margin-left: -2px;}
 .sortoptions {		position: absolute; background: @workareas; width: 200px; padding: 10px; color: white; z-index: 9999999; margin-left: -23px; }
 .sortoptions li {	list-style: none; padding: 3px 0; }
-.extendbutton {		float: left; margin-right: @marginoutside; border-bottom: 0; border-left: 1px solid white; }
+.extendbutton {		float: left; margin-right: @marginoutside; border-bottom: 0; border-left: 1px solid white; padding-left: @margininboxsmall; }
 
 #breadcrumb {		float: left; display: block; height: 100px; }
 #breadcrumb a {		color: white; margin-top: 60px; display: block; float: left; padding-bottom: 2px;
@@ -156,10 +156,17 @@ textarea:focus {	outline: none; }
 .small 	{			margin-bottom: @marginbottombox; margin-left: @marginoutboxsmall; position: relative; min-height: @boxheight; }
 .bigbox {			width: calc(100% - @marginoutside - @marginoutboxsmall); margin-bottom: @marginbottombox; margin-left: @marginoutboxsmall; position: relative;	}
 
-.vocabulary {		width: calc((100% - @marginoutside * 2 - @marginoutboxsmall * 2) / 4); margin-left: @marginoutboxsmall; height: 250px; 
+.vocabulary {		width: calc((100% - @marginoutside * 2 - @marginoutboxsmall * 2) / 4); margin-left: @marginoutboxsmall; height: 200px; 
 					margin-bottom: @marginoutboxsmall; position: relative;  
 					@media screen and (max-width: 1600px) {width: calc((100% - @marginoutside * 2 - @marginoutboxsmall) / 3); }}
 .voc-box {			padding-left: calc(@marginoutside - @marginoutboxsmall); }
+.vocabulary .note {	clear: both; margin-left: @marginoutboxsmall; }
+.linksize {			position: absolute; bottom: @marginoutboxsmall; left: @marginoutboxsmall; }
+.linksize .minibox {width: 12px; float: left; margin-top: 5px;}
+.linksize .listcontent {
+					width: auto; font-size: @small; margin-left: 3px; }
+.linksize .concept {box-shadow: 1px 1px 1px black; margin-left: @marginoutboxsmall; }					
+
 #boxcontainer .bigbox {
 					margin-left: @marginoutside; width: calc(100% - @marginoutside * 2); }
 .plusposition 	{	position: fixed; left: 50%; bottom: 10%; width: 50px; margin-left: -20px; cursor: pointer;
@@ -305,7 +312,7 @@ textarea:focus {	outline: none; }
 					background: tomato;}
 .confirmtext {		position: absolute; left: 50%; margin-left: -50px !important; text-align: center; width: 100px;}
 .line-dialog {		height: 1px; width: calc(100% - @marginoutside * 2); margin-left: @marginoutside; float: left;
-					display: block; margin-top: 50px;  }
+					display: block; margin-top: 60px;  }
 .line-bottom {		height: 1px; width: calc(100% - @marginoutside * 2); left: @marginoutside; position: absolute; bottom: 0; display: block;  }
 .line 	{			background: black;}
 .label .line {		background: @linegray; }
@@ -319,7 +326,7 @@ textarea:focus {	outline: none; }
 .dialogheader { 	width: 100%; height: 120px; position: relative; }
 .dialogscroll {		height: calc(100% - 180px); float: left; clear: both; display: block; overflow: hidden; width: 100%;
 					margin-bottom: 100px; }
-.dialogbox		{	float: left; padding-top: 10px; }
+.dialogbox		{	float: left; padding-top: 6px; }
 .dialogbox input {	width: calc(100% - 2 * @marginoutside); margin-left: @marginoutside; 
 					padding: @margininboxsmall; background: white; color: black; border: 0; height: 35px; }
 .dialogbox select { width: calc(100% - 2 * @marginoutside); margin-left: @marginoutside; background: @middle;
@@ -328,7 +335,8 @@ textarea:focus {	outline: none; }
 					 color: black; }
 .text textarea {	background: white;  }					
 .typeinformation {	margin-left: calc(@marginoutside); font-style: italic; float: left; clear: left; }
-.listtype {			float: left; width: 120px; margin-right: 20px; clear: left; margin-left: @marginoutside; font-style: italic; font-size: @small;  }
+.listtype {			float: left; width: 120px; margin-right: 20px; clear: left; margin-left: @marginoutside; font-style: italic; 
+					padding-top: 2px; font-size: @small;  }
 .listcontent {		float: left; width: calc(100% - 150px - @marginoutside); }
 .thesaurus {		width: calc(100% - @marginoutside * 2); margin-left: @marginoutside; display: block; float: left; margin-bottom: 30px;
 					border-top: 1px solid black; padding-top: @margininboxsmall;  }
@@ -337,12 +345,17 @@ textarea:focus {	outline: none; }
 .thesaurus p {		float: left; clear: left; }
 .thesaurus .icon {	float: left; line-height: 18px; margin-left: -8px;}
 .checked {			color: green; border-color: green; }
-.hierarchie li { 	 width: 100%; font-size: @small; letter-spacing: 0.03em;
-					 list-style: none; margin-left: 0;  }
+.hierarchie li { 	width: 100%; font-size: @small; letter-spacing: 0.03em;
+					list-style: none; margin-left: 0;  }
+.downloadlist {		margin-left: @marginoutside; float: left; display: block; }
+.downloadlist a {	float: left; margin-right: @marginoutboxsmall; }
 
 /* Vocabulary */
 .vocabname {		margin: @margininboxsmall 0 0 @margininboxsmall; font-size: @emphasize; float: left; display: block;  }
 .vocabrelease {		float: left; clear: left; margin-bottom: 40px; margin-left: @margininboxsmall; font-style: italic; font-size: @small; }
+.vocabsize {		float: left; clear: left; margin-bottom: 40px; margin-left: @margininboxsmall; font-style: italic; font-size: @small; }
+
+
 .vocabulary .listtype {
 					margin-left: @margininboxsmall; width: 100px; font-size: @small; }
 .vocabulary .listcontent {

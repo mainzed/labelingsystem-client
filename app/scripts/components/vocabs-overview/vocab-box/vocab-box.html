@@ -1,27 +1,37 @@
-<div class="box vocabulary label" ng-click="onClick(data.id)">
+<div class="box vocabulary label" ng-click="$ctrl.onClick($ctrl.data.id)">
 
-    <span class="vocabname" ng-bind="data.title.value"></span>
-    <span class="vocabrelease" ng-bind="data.releaseType + ' vocabulary'"></span>
+    <span class="vocabname" ng-bind="$ctrl.data.title.value"></span>
+    <!--<span class="vocabrelease" ng-bind="$ctrl.data.releaseType + ' vocabulary'"></span>-->
+    <span class="vocabsize">{{ $ctrl.data.statistics.labelCount }} concepts</span>
 
-    <span class="language" ng-bind="data.description.lang"></span>
+    <span class="language" ng-bind="$ctrl.data.description.lang"></span>
 
-    <span class="listtype">Description</span>
-    <span class="listcontent wordbreak" ng-bind="data.description.value"></span>
+    
+    <span class="note" ng-bind="$ctrl.data.description.value"></span>
 
+    <!--
     <span class="listtype">Creation date</span>
-    <span class="listcontent" ng-bind="data.created | date: 'dd.MM.yyyy'"></span>
+    <span class="listcontent" ng-bind="$ctrl.data.created | date: 'dd.MM.yyyy'"></span>
+    -->
+   
+    
 
-    <span class="listtype">labels</span>
-    <span class="listcontent">{{ data.statistics.labelCount }}</span>
+    
+    
 
-    <span class="listtype">internal links</span>
-    <span class="listcontent">{{ data.statistics.internalLinks }}</span>
-
-    <span class="listtype">external links</span>
-    <span class="listcontent">{{ data.statistics.externalLinks }}</span>
+    
+    
 
     <span class="icon-folder icon"></span>
 
     <span class="icon-edit icon" ng-click="$event.stopPropagation()" ls-vocab-dialog></span>
-   
+
+    <span class="linksize">
+        <span class="minibox ls"></span>
+        <span class="minibox getty"></span>
+        <span class="listcontent">{{ $ctrl.data.statistics.externalLinks }}</span>
+        <span class="minibox concept"></span>
+        <span class="listcontent">{{ $ctrl.data.statistics.internalLinks }}</span>
+    </span>
+
 </div>

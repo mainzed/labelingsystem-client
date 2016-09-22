@@ -35,24 +35,29 @@
         <span class="listtype">Date of creation</span>
         <span class="listcontent" ng-bind-template="{{ label.created | date: 'dd.MM.yyyy' }}"></span>
 
-
+        <!--
         <span class="listtype">Contributors:</span>
         <span class="listcontent">
           <ul>
             <li ng-repeat="contributor in label.contributors" ng-bind="contributor"></li>
           </ul>
         </span>
+        -->
 
-        <span class="listtype">Download</span>
-        <span class="listcontent">
+        
+       
+
+    </div>
+
+    <div class="line-dialog line"></div>
+    <div class="dialogbox dialog-full">
+      <h4>Downloads</h4>
+       <span class="downloadlist">
           <a ng-href="{{getDownloadUrl(label.id) + '.jsonld'}}" target="_blank" ng-click="$event.stopPropagation()">JSONLD</a>
           <a ng-href="{{getDownloadUrl(label.id) + '.ttl'}}" target="_blank" ng-click="$event.stopPropagation()">Turtle</a>
           <a ng-href="{{getDownloadUrl(label.id) + '.rdf'}}" target="_blank" ng-click="$event.stopPropagation()">RDF/XML</a>
           <a ng-href="{{getDownloadUrl(label.id) + '.n3'}}" target="_blank" ng-click="$event.stopPropagation()">N-Triples</a>
         </span>
-
-        <span class="listcontent"><a ng-href="{{getDownloadUrl(label.id) + '.rdf'}}" ng-click="$event.stopPropagation()">as RDF/XML</a></span>
-
     </div>
 
     <div class="line-dialog line"></div>
