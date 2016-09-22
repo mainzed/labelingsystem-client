@@ -1,4 +1,4 @@
-<div class="box vocabulary label" ng-click="$ctrl.onClick($ctrl.data.id)">
+<div class="box vocabulary label {{ $ctrl.data.releaseType }}" ng-click="$ctrl.onClick($ctrl.data.id)">
 
     <span class="vocabname" ng-bind="$ctrl.data.title.value"></span>
     <span class="vocabrelease" ng-bind="$ctrl.data.releaseType + ' vocabulary'"></span>
@@ -22,6 +22,7 @@
 
     <span class="icon-folder icon"></span>
 
-    <span ls-vocab-dialog data="$ctrl.data" class="icon-edit icon" ng-click="$event.stopPropagation()"></span>
+    <!-- <span ls-vocab-dialog data="$ctrl.data" class="icon-edit icon" ng-click="$event.stopPropagation()"></span> -->
+    <ls-edit-vocab-button data="$ctrl.data" ng-click="$event.stopPropagation()"></ls-edit-vocab-button>
 
 </div>

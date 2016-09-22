@@ -15,6 +15,7 @@ angular.module('labelsApp')
     templateUrl: "scripts/components/vocabs-overview/vocab-box/vocab-box.html",
     controller: function ($location) {
         var ctrl = this;
+
         /**
          * Redirects to the label overview of the specified vocabulary.
          * @param {string} id - Vocabulary ID

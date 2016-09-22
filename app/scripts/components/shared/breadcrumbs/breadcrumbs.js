@@ -7,9 +7,9 @@
  * # breadcrumb
  */
 angular.module('labelsApp')
-  .directive('breadcrumbs', function ($location, $routeParams) {
+  .directive('lsBreadcrumbs', function ($location, $routeParams) {
     return {
-      templateUrl: "views/directives/breadcrumbs.html",
+      templateUrl: "scripts/components/shared/breadcrumbs/breadcrumbs.html",
       restrict: 'E',
       link: function postLink(scope, element, attrs) {
 

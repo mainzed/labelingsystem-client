@@ -1,6 +1,6 @@
 <div id="header" class="box full">
 
-  <breadcrumbs></breadcrumbs>
+  <ls-breadcrumbs></ls-breadcrumbs>
 
   <h1 ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}" ng-bind="prefLabel.value"></h1>
 	<span ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}" class="language" ng-bind="prefLabel.lang"></span>

@@ -46,54 +46,19 @@ angular.module('labelsApp')
         });
     };
 
-    $scope.onUsersClick = function() {
-        console.log("create user");
-    };
+    $scope.createVocab = function(newVocab) {
+        newVocab.description.lang = newVocab.title.lang;
 
-    // $scope.onSelectionChange = function(name) {
-    //     // get thesaurus by name
-    //     var thesaurus;
-    //     for (var i = 0; i < $scope.thesauri.length; i++) {
-    //         if ($scope.thesauri[i].name === name) {
-    //             thesaurus = $scope.thesauri[i];
-    //             break;
-    //         }
-    //     }
-    //     $scope.vocabThesauri.push(thesaurus);
-    // };
-
-    $scope.onCreateClick = function() {
-
-        $scope.newVocab = {
-            title: {},
-            description: {},
-            releaseType: "draft"
+        var jsonObj = {
+            item: newVocab,
+            user: $scope.user.name
         };
 
-        ngDialog.open({
-            template: 'views/dialogs/create-vocabulary.html',
-            className: 'bigdialog',
-            closeByDocument: false,
-            showClose: false,
-            disableAnimation: true,
-            scope: $scope
+        VocabService.save(jsonObj, function(vocab) {
+            //$scope.vocabularies.push(res);
+            $location.path("/admin/vocabularies/" + vocab.id);
+        }, function(res) {
+            console.log(res);
         });
-
-        $scope.onCreateConfirm = function() {
-            $scope.newVocab.description.lang = $scope.newVocab.title.lang;
-
-            var jsonObj = {
-                item: $scope.newVocab,
-                user: $scope.user.name
-            };
-
-            VocabService.save(jsonObj, function(vocab) {
-                //$scope.vocabularies.push(res);
-                $location.path("/admin/vocabularies/" + vocab.id);
-            }, function(res) {
-                console.log(res);
-            });
-        };
     };
-
   });

@@ -34,6 +34,5 @@
 
 
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="onCreateConfirm(); closeThisDialog()" ng-disabled="!term" ng-class="{'inactive': !newVocab.title.value || !newVocab.title.lang}">Apply</div>
+	<div class="apply" ng-click="$ctrl.onConfirm({$newVocab: newVocab}); closeThisDialog()" ng-disabled="!term" ng-class="{'inactive': !newVocab.title.value || !newVocab.title.lang}">Apply</div>
 </div>
-
