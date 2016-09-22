@@ -18,6 +18,8 @@ angular.module('labelsApp')
         //console.log(scope.data);
         scope.vocabulary = scope.data;
 
+        console.log(scope.vocabulary);
+
         // open dialog when element is clicked
         element.on('click', function () {
             scope.openVocabDialog(scope.vocabulary.id);
