@@ -1,6 +1,6 @@
 <div class="dialogwrapper label">
 	<div class="dialogheader">
-		<h3>Create new concept</h3>
+		<h3>Create new label</h3>
 		<div class="line-bottom line"></div>
 	</div>
 
@@ -26,5 +26,5 @@
 
 
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="onCreateLabelConfirm(term, description); closeThisDialog()" ng-disabled="!term" >Apply</div>
+	<div class="apply" ng-click="$ctrl.onConfirm({$term: term, $description: description}); closeThisDialog()" ng-disabled="!term" >Apply</div>
 </div>

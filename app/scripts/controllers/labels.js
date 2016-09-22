@@ -57,25 +57,11 @@ angular.module('labelsApp')
     };
 
     /**
-     * Opens a dialog to create a new label.
-     */
-    $scope.onCreateLabelClick = function() {
-        ngDialog.open({
-            template: 'views/dialogs/create-label.html',
-            className: 'bigdialog',
-            showClose: false,
-            closeByDocument: false,
-            disableAnimation: true,
-            scope: $scope
-        });
-    };
-
-    /**
      * Creates a new label by sending a new label object to the api.
      * @param {string} term - The new label's thumbnail prefLabel
      * @param {string} description - The new label's scopeNote of the new label
      */
-    $scope.onCreateLabelConfirm = function(term, description) {
+    $scope.createLabel = function(term, description) {
 
         var newLabel = {
             "vocabID": $scope.vocabulary.id,
