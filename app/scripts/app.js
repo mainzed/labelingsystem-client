@@ -21,24 +21,8 @@ angular
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/landing.html',
-        controller: 'LandingCtrl'
+        template: '<ls-landing></ls-landing>'
       })
-      .when('/vocabularies', {
-        templateUrl: 'views/vocabularies.html',
-        controller: 'VocabsCtrl'
-      })
-      .when('/vocabularies/:vID/labels', {
-        templateUrl: 'views/labels.html',
-        controller: 'LabelsCtrl'
-      })
-      .when('/vocabularies/:vID/labels/:lID', {
-        template: '<ls-label-details></ls-label-details>'
-      })
-
-
-
-
 
       .when('/admin', {
         redirectTo: '/admin/login'
@@ -47,12 +31,11 @@ angular
         template: '<ls-login></ls-login>'
       })
       .when('/admin/vocabularies', {
-        templateUrl: 'views/admin-vocabularies.html',
-        controller: 'VocabsCtrl'
+        template: '<ls-vocabs></ls-vocabs>'
       })
       // vocabulary's concepts overview
       .when('/admin/vocabularies/:vID/concepts', {
-        template: '<ls-labels-overview></ls-labels-overview>'
+        template: '<ls-concepts></ls-concepts>'
       })
       .when('/admin/vocabularies/:vID', {
         redirectTo: '/admin/vocabularies/:vID/concepts'
@@ -60,7 +43,7 @@ angular
 
       // concept details
       .when('/admin/vocabularies/:vID/concepts/:lID', {
-        template: '<ls-label-details></ls-label-details>'
+        template: '<ls-concept-detail></ls-concept-detail>'
       })
       .otherwise({
         redirectTo: '/'

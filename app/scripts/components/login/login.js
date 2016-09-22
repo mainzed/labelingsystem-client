@@ -13,11 +13,11 @@
     templateUrl: "scripts/components/login/login.html",
 
     controller: function ($scope, $location, $document, AuthService) {
-        // skip login if authenticated
-        // if (AuthService.isLoggedIn()) {
-        //     $location.path("admin/vocabularies");
-        // }
-        
+        //skip login if authenticated
+        if (AuthService.isLoggedIn()) {
+            $location.path("admin/vocabularies");
+        }
+
         //AuthService.status();
 
         $scope.user = AuthService.getUser();
