@@ -26,6 +26,9 @@
 }
 
 
+.icon-collapse:before {
+  content: "\e908";
+}
 .icon-dropdown:before {
   content: "\e902";
 }
