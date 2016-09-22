@@ -94,10 +94,7 @@
 
     <ls-translation-button data="label.prefLabels" on-confirm="addTranslation($term, $lang)"></ls-translation-button>
 
-    <button class="enrichbutton" ng-click="onAddDescription()" ng-class="{'inactive': label.scopeNote}" ng-disabled="label.scopeNote">
-			<span class="buttontext">Add description</span>
-			<span class="buttonicon"><span class="icon-note"></span></span>
-		</button>
+    <ls-description-button data="label.scopeNote" on-confirm="addDescription($description)"></ls-description-button>
 
     <button class="enrichbutton" ng-click="onAddLink()">
 			<span class="buttontext">Add link to Wayback Machine</span>

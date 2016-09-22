@@ -85,18 +85,6 @@ angular.module('labelsApp')
     // used by views
     $scope.languages = ConfigService.languages;
 
-    $scope.onAddDescription = function() {
-        //$scope.description = "";
-        ngDialog.open({
-            template: 'views/dialogs/add-description.html',
-            className: 'bigdialog',
-            disableAnimation: true,
-            showClose: false,
-            closeByDocument: false,
-            scope: $scope
-        });
-    };
-
     // TODO: put that in component controller
     $scope.addTranslation = function(term, lang) {
         console.log("on cofmirm!");
@@ -122,7 +110,7 @@ angular.module('labelsApp')
     /**
      * Adds a description to the current concept.
      */
-    $scope.onAddDescriptionConfirm = function(description) {
+    $scope.addDescription = function(description) {
 
         var updatedConcept = $scope.label;
         updatedConcept.scopeNote = {
