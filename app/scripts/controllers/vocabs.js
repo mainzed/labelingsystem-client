@@ -46,19 +46,4 @@ angular.module('labelsApp')
         });
     };
 
-    $scope.createVocab = function(newVocab) {
-        newVocab.description.lang = newVocab.title.lang;
-
-        var jsonObj = {
-            item: newVocab,
-            user: $scope.user.name
-        };
-
-        VocabService.save(jsonObj, function(vocab) {
-            //$scope.vocabularies.push(res);
-            $location.path("/admin/vocabularies/" + vocab.id);
-        }, function(res) {
-            console.log(res);
-        });
-    };
   });

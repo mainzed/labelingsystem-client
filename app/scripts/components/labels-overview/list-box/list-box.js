@@ -7,7 +7,7 @@
  * # listBox
  */
 angular.module('labelsApp')
-  .directive('listBox', function ($location, $routeParams, LabelService, ResourcesService, ConfigService, HelperService) {
+  .directive('lsListBox', function ($location, $routeParams, LabelService, ResourcesService, ConfigService, HelperService) {
     return {
         templateUrl: "scripts/components/labels-overview/list-box/list-box.html",
         restrict: 'E',

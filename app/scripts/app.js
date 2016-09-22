@@ -33,28 +33,26 @@ angular
         controller: 'LabelsCtrl'
       })
       .when('/vocabularies/:vID/labels/:lID', {
-        templateUrl: 'views/label-detail.html',
-        controller: 'LabelDetailCtrl'
+        template: '<ls-label-details></ls-label-details>'
       })
+
+
+
+
 
       .when('/admin', {
         redirectTo: '/admin/login'
       })
       .when('/admin/login', {
-        templateUrl: 'views/admin-login.html',
-        controller: 'LoginCtrl'
+        template: '<ls-login></ls-login>'
       })
-
-      // vocabularies
       .when('/admin/vocabularies', {
         templateUrl: 'views/admin-vocabularies.html',
         controller: 'VocabsCtrl'
       })
-
       // vocabulary's concepts overview
       .when('/admin/vocabularies/:vID/concepts', {
-        templateUrl: 'views/admin-labels.html',
-        controller: 'LabelsCtrl'
+        template: '<ls-labels-overview></ls-labels-overview>'
       })
       .when('/admin/vocabularies/:vID', {
         redirectTo: '/admin/vocabularies/:vID/concepts'
@@ -62,9 +60,7 @@ angular
 
       // concept details
       .when('/admin/vocabularies/:vID/concepts/:lID', {
-        templateUrl: 'views/admin-label-detail.html',
-        controller: 'LabelDetailCtrl',
-        controllerAs: 'LabelDetailCtrl'
+        template: '<ls-label-details></ls-label-details>'
       })
       .otherwise({
         redirectTo: '/'

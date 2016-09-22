@@ -5,7 +5,8 @@
   <!-- loop over all prefLabels, so it autofreshes on change -->
   <h1 ng-bind="vocabulary.title.value"></h1>
 
-	<span class="icon-edit" ng-click="openVocabDialog()"></span>
+  <ls-edit-vocab-button data="vocabulary"></ls-edit-vocab-button>
+
 	<span class="language" ng-bind="vocabulary.title.lang"></span>
 </div>
 
@@ -35,7 +36,7 @@
 	<div class="nano">
     <div id="boxcontainer" class="nano-content">
 
-      <list-box ng-repeat="label in filteredLabels = (labels | filter: labelFilter | orderBy: labelOrder | limitTo: labelLimit)" concept="label"></list-box>
+      <ls-list-box ng-repeat="label in filteredLabels = (labels | filter: labelFilter | orderBy: labelOrder | limitTo: labelLimit)" concept="label"></ls-list-box>
 
       <!-- message when no labels found -->
       <!-- <span class="box bigbox label listbox" ng-show="filteredLabels.length > 30">
