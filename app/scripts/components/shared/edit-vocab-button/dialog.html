@@ -16,7 +16,9 @@
 
          <div>
           releaseType: {{ vocabulary.releaseType }}
-          <button type="button" ng-show="vocabulary.releaseType === 'draft'" ng-click="publishVocab(vocabulary)">make public</button>
+          <button type="button" ng-show="vocabulary.releaseType === 'draft'">make public</button>
+
+          <ls-confirm-button on-confirm="publishVocab(vocabulary)" ng-show="vocabulary.releaseType === 'draft'" text="Publish" confirm-text="Publish all draft concepts"></ls-confirm-button>
         </div>
 
         <div class="line-dialog line"></div>
@@ -53,7 +55,6 @@
             <p ng-bind="thesaurus.description"></p>
           </div>
         </div>
-
 
         <!-- delete draft vocab (not allowed to delete public vocab) -->
         <ls-confirm-button on-confirm="deleteVocab(vocabulary.id); closeThisDialog()" ng-show="vocabulary.releaseType === 'draft'" text="Delete Vocabulary"></ls-confirm-button>

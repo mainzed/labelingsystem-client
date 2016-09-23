@@ -29,6 +29,8 @@ angular.module('labelsApp')
             $scope.vocabulary = ctrl.data;
 
             $scope.vocabulary.setThesauri(function() {  // sets this.thesauri
+                $scope.originalThesauri = $scope.vocabulary.thesauri;
+
                 $scope.dialog = ngDialog.open({
                     template: 'scripts/components/shared/edit-vocab-button/dialog.html',
                     className: 'bigdialog',

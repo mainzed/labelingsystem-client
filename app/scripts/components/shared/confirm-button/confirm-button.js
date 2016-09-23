@@ -13,11 +13,15 @@ angular.module('labelsApp')
         restrict: 'E',
         scope: {
             onConfirm: '&',  // passes on-confirm attribute to this scope
-            text: "@"  // custom delete text
+            text: "@",  // optional delete text
+            confirmText: "@",  // optional text on confirm
+            icon: "@"  // optional icon class
         },
         link: function postLink(scope) {
             scope.showConfirm = false;
             scope.text = scope.text || "Delete";
+            scope.confirmText = scope.confirmText || "Confirm";
+            scope.icon = scope.icon || "icon-trash";
         }
     };
   });

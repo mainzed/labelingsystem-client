@@ -1,10 +1,10 @@
 <!-- delete button -->
 <div class="deletebutton pointer" ng-click="showConfirm = true" ng-show="!showConfirm">
-  <span class="buttontext">{{ text }}</span>
-  <span class="icon-trash icon"></span>
+  <span class="buttontext" ng-bind="text"></span>
+  <span class="{{ icon }} icon"></span>
 </div>
 
 <!-- confirm button -->
 <div class="deletebutton confirm" ng-click="onConfirm()" ng-show="showConfirm">
-	 <span class="buttontext confirmtext">Confirm</span>
+	<span class="buttontext confirmtext" ng-bind="confirmText"></span>
 </div>
