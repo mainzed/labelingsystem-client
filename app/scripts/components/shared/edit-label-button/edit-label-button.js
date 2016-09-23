@@ -12,7 +12,7 @@ angular.module('labelsApp')
     bindings: {
         data: "=",
     },
-    template: '<span class="icon-edit icon" ng-click="$ctrl.openDialog()"></span>',
+    template: '<span class="icon-more icon" ng-click="$ctrl.openDialog()"></span>',
     controller: function ($scope, ngDialog, ThesauriService) {
         var ctrl = this;
 

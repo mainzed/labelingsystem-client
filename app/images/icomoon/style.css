@@ -26,6 +26,15 @@
 }
 
 
+.icon-user:before {
+  content: "\e912";
+}
+.icon-info:before {
+  content: "\e914";
+}
+.icon-more:before {
+  content: "\e915";
+}
 .icon-edit:before {
   content: "\e90d";
 }
@@ -83,3 +92,5 @@
 .icon-close:before {
   content: "\e909";
 }
+
+
