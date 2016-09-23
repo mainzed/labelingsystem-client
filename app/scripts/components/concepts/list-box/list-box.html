@@ -1,42 +1,42 @@
-<div class="box bigbox label listbox" ng-click="onClick(concept.id)">
+<div class="bigboxwrapper">
 
-  <span class="thumbnail" ng-repeat="prefLabel in concept.prefLabels | filter: {isThumbnail: 'true'}">
+  <div class="box bigbox label listbox" ng-click="onClick(concept.id)">
 
-    <button class="showadditionalcontent" ng-click="toggleExtension(concept.id); $event.stopPropagation()">
-      <span class="showmore" ng-show="!showMore && (concept.scopeNote || hasBroader(concept) || hasNarrower(concept))">+</span>
-      <span class="showmore" ng-show="showMore">-</span>
-    </button>
-    {{ prefLabel.value}}
-  </span>
-  <ls-edit-label-button data="concept" ng-click="$event.stopPropagation()"></ls-edit-label-button>
-  <mini-preview label="concept"></mini-preview>
+    <span class="thumbnail" ng-repeat="prefLabel in concept.prefLabels | filter: {isThumbnail: 'true'}">
 
-  
+      <button class="showadditionalcontent" ng-click="toggleExtension(concept.id); $event.stopPropagation()">
+        <span class="showmore" ng-show="!showMore && (concept.scopeNote || hasBroader(concept) || hasNarrower(concept))">+</span>
+        <span class="showmore" ng-show="showMore">-</span>
+      </button>
+      {{ prefLabel.value}}
+    </span>
+    <ls-edit-label-button data="concept" ng-click="$event.stopPropagation()"></ls-edit-label-button>
+    <mini-preview label="concept"></mini-preview>
 
-  <!--<span class="type">(internal)</span>-->
+  </div>
 
-</div>
+  <!-- extension that open on button click -->
+  <div ng-if="showMore" class="box boxextension bigbox label high" ng-click="onClick(concept.id)">
+    <span class="line-ext"></span>
+    <span class="note-ext">
 
-<!-- extension that open on button click -->
-<div ng-if="showMore" class="box boxextension bigbox label high" ng-click="onClick(concept.id)">
-  <span class="line-ext"></span>
-  <span class="note-ext">
+    <span class="italic smalltype" ng-show="concept.scopeNote">Description</span><br>
+      {{ concept.scopeNote.value }}
+    </span>
 
-  <span class="italic smalltype" ng-show="concept.scopeNote">Description</span><br>
-    {{ concept.scopeNote.value }}
-  </span>
+    <span class="note-ext small"><span class="italic smalltype" ng-show="broaderConcepts.length > 0">broader</span><br>
 
-  <span class="note-ext small"><span class="italic smalltype" ng-show="broaderConcepts.length > 0">broader</span><br>
+      <ul class="hierarchie">
+        <li ng-repeat="broaderConcept in broaderConcepts">{{ getTerm(broaderConcept) }}</li>
+      </ul>
+    </span>
 
-    <ul class="hierarchie">
-      <li ng-repeat="broaderConcept in broaderConcepts">{{ getTerm(broaderConcept) }}</li>
-    </ul>
-  </span>
+    <span class="note-ext small"><span class="italic smalltype" ng-show="narrowerConcepts.length > 0">narrower</span><br>
+      <ul class="hierarchie">
+        <li ng-repeat="narrowerConcept in narrowerConcepts">{{ getTerm(narrowerConcept) }}</li>
+      </ul>
+    </span>
 
-  <span class="note-ext small"><span class="italic smalltype" ng-show="narrowerConcepts.length > 0">narrower</span><br>
-    <ul class="hierarchie">
-      <li ng-repeat="narrowerConcept in narrowerConcepts">{{ getTerm(narrowerConcept) }}</li>
-    </ul>
-  </span>
+  </div>
 
 </div>
