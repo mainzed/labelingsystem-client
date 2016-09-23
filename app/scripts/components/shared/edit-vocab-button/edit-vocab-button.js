@@ -15,8 +15,10 @@ angular.module('labelsApp')
     },
     template: '<span class="{{$ctrl.icon}} icon" ng-click="$ctrl.openDialog()"></span>',
 
-    controller: function ($scope, $location, $anchorScroll, $timeout, ngDialog, ThesauriService) {
+    controller: function ($scope, $location, $document, $anchorScroll, $timeout, ngDialog) {
         var ctrl = this;
+
+
 
         // determine icon
         this.icon = "icon-edit";
@@ -24,33 +26,12 @@ angular.module('labelsApp')
             this.icon = "icon-config";
         }
 
-
         this.openDialog = function() {
+            // save original vocab object in case the dialog gets cancelled
             $scope.vocabulary = ctrl.data;
 
-            // get all thesauri
-            ThesauriService.query(function(thesauri) {
-                $scope.thesauri = thesauri;
-
-                // get this vocabulary's associated thesauri
-                ThesauriService.get({id: $scope.vocabulary.id}, function(vocabThesauri) {
-
-                    $scope.vocabThesauri = vocabThesauri;
-
-                    // preselect all vocab thesauri
-                    angular.forEach($scope.vocabThesauri, function(thesaurus) {
-                        //console.log(thesaurus.name);
-                        var checkedThesaurus = _.find($scope.thesauri, { 'name': thesaurus.name });
-                        if (checkedThesaurus) {  // skips local vocab
-                            checkedThesaurus.checked = true;
-                        }
-                    });
-
-                }, function(error) {
-                        console.log(error);
-                });
-
-                ngDialog.open({
+            $scope.vocabulary.setThesauri(function() {  // sets this.thesauri
+                $scope.dialog = ngDialog.open({
                     template: 'scripts/components/shared/edit-vocab-button/dialog.html',
                     className: 'bigdialog',
                     showClose: false,
@@ -59,8 +40,29 @@ angular.module('labelsApp')
                     scope: $scope
                 });
             });
-
         };
+
+        this.update = function(newTitle, newDescription) {
+            var updatedVocab = $scope.vocabulary;
+            updatedVocab.title.value = newTitle;
+            updatedVocab.description.value = newDescription;
+            $scope.vocabulary.update(function() {
+                //console.log("update successfull!");
+            }, function error(res) {
+                console.log(res);
+            });
+        };
+
+        // hotkey: press "esc" to cancel
+        $document.keydown(function(e) {
+            if (e.keyCode === 27) {  // esc
+                if ($scope.dialog) {
+                    $scope.dialog.close();
+                }
+            }
+        });
+
+        // TODO: hotkey: press "enter" to apply
 
     }
 });

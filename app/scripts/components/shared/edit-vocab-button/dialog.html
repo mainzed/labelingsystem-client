@@ -11,7 +11,7 @@
 
         <div class="dialogbox dialog-full">
           <h4>edit</h4>
-          <input type="text" ng-model="newValue" ng-init="newValue = vocabulary.title.value">
+          <input type="text" ng-model="newTitle" ng-init="newTitle = vocabulary.title.value">
         </div>
 
          <div>
@@ -45,9 +45,9 @@
         <div class="line-dialog line"></div>
         <div class="dialogbox dialog-full">
           <h4 id="thesauri">Referenzthesauri</h4>
-          <div class="thesaurus" ng-repeat="thesaurus in thesauri" ng-if="thesaurus.name.indexOf('this.') < 0" ng-class="{'checked': thesaurus.checked}">
+          <div class="thesaurus" ng-repeat="thesaurus in vocabulary.thesauri" ng-class="{'checked': thesaurus.checked}">
 
-            <checkbox ng-model="thesaurus.checked" on-check="onCheckChange()" ng-class="{'inactive': thesaurus.description === 'this vocabulary'}"></checkbox>
+            <checkbox ng-model="thesaurus.checked" on-check="onCheckChange()"></checkbox>
 
             <h5 ng-bind="thesaurus.name"></h5>
             <p ng-bind="thesaurus.description"></p>
@@ -56,7 +56,7 @@
 
 
         <!-- delete draft vocab (not allowed to delete public vocab) -->
-        <ls-confirm-button on-confirm="deleteVocab(vocabulary.id); closeThisDialog()" ng-show="vocabulary.releaseType === 'draft'"></ls-confirm-button>
+        <ls-confirm-button on-confirm="deleteVocab(vocabulary.id); closeThisDialog()" ng-show="vocabulary.releaseType === 'draft'" text="Delete Vocabulary"></ls-confirm-button>
 
       </div><!-- end nano-content -->
     </div><!-- end nano -->
@@ -66,7 +66,7 @@
   <!-- apply -->
   <!-- updateVocabThesauri() -->
   <!-- onApplyChangesClick(vocabulary, newValue, newDescription); -->
-  <button id="someButton" type="button" class="apply" ng-click="updateVocabThesauri(); closeThisDialog()" ng-class="{'inactive': newValue === vocabulary.title.value && newDescription === vocabulary.description.value && !checkedSomething}">Apply</button>
+  <button id="someButton" type="button" class="apply" ng-click="$ctrl.update(newTitle, newDescription); closeThisDialog()" ng-class="{'inactive': newTitle === vocabulary.title.value && newDescription === vocabulary.description.value}">Apply</button>
 
   <!-- cancel -->
   <button type="button" class="cancel" ng-click="closeThisDialog()">Cancel</button>
