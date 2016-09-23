@@ -14,14 +14,12 @@ angular.module('labelsApp')
         shortcut: "@"  // "thesauri"
     },
     template: '<span class="{{$ctrl.icon}} icon" ng-click="$ctrl.openDialog()"></span>',
-
     controller: function ($scope, $location, $document, $anchorScroll, $timeout, ngDialog) {
+
         var ctrl = this;
 
-
-
         // determine icon
-        this.icon = "icon-edit";
+        this.icon = "icon-more";
         if (this.shortcut === "thesauri" || this.shortcut === "selectVocab") {
             this.icon = "icon-config";
         }
