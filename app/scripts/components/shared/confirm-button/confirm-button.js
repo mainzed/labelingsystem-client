@@ -12,10 +12,12 @@ angular.module('labelsApp')
         templateUrl: "scripts/components/shared/confirm-button/confirm-button.html",
         restrict: 'E',
         scope: {
-            onConfirm: '&'  // passes on-confirm attribute to this scope
+            onConfirm: '&',  // passes on-confirm attribute to this scope
+            text: "@"  // custom delete text
         },
         link: function postLink(scope) {
             scope.showConfirm = false;
+            scope.text = scope.text || "Delete";
         }
     };
   });

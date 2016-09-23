@@ -36,7 +36,7 @@
 
         <!-- descriptive -->
   			<div class="col halfleft">
-          <ls-translation-box ng-repeat="prefLabel in label.prefLabels" data="prefLabel"></ls-translation-box>
+          <ls-translation-box ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: false}" data="prefLabel"></ls-translation-box>
           <ls-description-box data="label.scopeNote" ng-show="label.scopeNote"></ls-description-box>
   			</div>
 
@@ -62,79 +62,4 @@
 	</div>
 </div>
 
-
-<div id="enrichment-src" ng-show="showEnrichments">
-	<div id="separator">
-		<h1><!--Enrich--></h1>
-
-    <!-- search tab -->
-    <div id="enrichmentsearch" class="threequarter" ng-init="showSearch = true">
-
-      <div class="tab lefttab" ng-click="showSearch = true" ng-class="{'active': showSearch}">
-        <span class="icon-search icon"></span>
-        <input type="text" placeholder="Search in Thesauri" ng-model="searchValue"></input>
-        <!--
-        <button type="button" ng-click="onSearchClick(); searching = true" ng-init="searching = false">
-          <span class="icon-arrow"></span>
-        </button>
-        -->
-        <span class="icon-config icon"></span>
-      </div>
-
-      <!-- labels tab -->
-      <div class="tab" ng-click="showSearch = false" ng-class="{'active': !showSearch}">
-        <span class="tablabel">Labels of {{vocabulary.title.value}}</span>
-        <span class="icon-config icon"></span>
-      </div>
-
-
-      <span class="icon-info extendbutton"></span>
-
-      <!-- hide icon -->
-      <button class="hideenrichment pointer" type="button" name="button" ng-click="hideEnrichmentBrowser()">
-  			<span class="icon-hide"></span>
-  		</button>
-
-
-		</div>
-
-
-
-	</div>
-
-  <div class="col left">
-    <ls-translation-button data="label.prefLabels" on-confirm="addTranslation($term, $lang)"></ls-translation-button>
-    <ls-description-button data="label.scopeNote" on-confirm="addDescription($description)"></ls-description-button>
-    <ls-wayback-button on-confirm="addLink($url)"></ls-wayback-button>
-	</div>
-
-	<div class="col threequarter">
-		<div id="enrichmentbrowser" class="nano">
-		<div class="nano-content">
-
-
-      <!-- search results -->
-      <div ng-show="showSearch">
-        <!-- placeholder when not searching -->
-        <span class="noresult" ng-show="!searching && !resultBoxes">Add enrichment sources by searching</span>
-
-        <!-- placeholder when searching -->
-        <span class="noresult" ng-show="searching && !resultBoxes">Searching ...</span>
-
-        <ls-search-result-box ng-repeat="box in resultBoxes | filter: resultFilter | orderBy: ['quality', 'type']" data="box"></ls-search-result-box>
-
-      </div>
-
-      <!-- own vocabs -->
-      <div ng-show="!showSearch">
-        <ls-vocab-result-box ng-repeat="label in labels" data="label" action="addResource()"></ls-vocab-result-box>
-      </div>
-
-		</div>
-		</div>
-	</div>
-
-</div>
-
-<!-- minified enrichment bar -->
-<div id="enrichment-src-min" ng-show="!showEnrichments" ng-click="showEnrichmentBrowser()">Expand</div>
+<ls-enrichment-browser></ls-enrichment-browser>

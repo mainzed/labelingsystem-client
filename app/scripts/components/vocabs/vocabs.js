@@ -16,11 +16,9 @@
         // dont use that, vulnerable
         $scope.user = AuthService.getUser();
 
-        $scope.languages = ConfigService.languages;
+        //$scope.languages = ConfigService.languages;
 
-        VocabService.query({ creator: $scope.user.username }, function(vocabularies) {
-            $scope.vocabularies = vocabularies;
-        });
+        $scope.vocabularies = VocabService.query({ creator: $scope.user.username });
 
         /**
          * Logout current user and redirect to login page if successfull.
@@ -32,17 +30,5 @@
                 console.log(err);
             });
         };
-
-        $scope.openUserDialog = function() {
-            ngDialog.open({
-                template: 'views/dialogs/user-metadata.html',
-                className: 'bigdialog',
-                showClose: false,
-                closeByDocument: false,
-                disableAnimation: true,
-                scope: $scope
-            });
-        };
-
     }
 });

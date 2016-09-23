@@ -1,7 +1,6 @@
 <!-- delete button -->
-
 <div class="deletebutton pointer" ng-click="showConfirm = true" ng-show="!showConfirm">
-  <span class="buttontext">Delete</span>
+  <span class="buttontext">{{ text }}</span>
   <span class="icon-trash icon"></span>
 </div>
 
@@ -9,4 +8,3 @@
 <div class="deletebutton confirm" ng-click="onConfirm()" ng-show="showConfirm">
 	 <span class="buttontext confirmtext">Confirm</span>
 </div>
-

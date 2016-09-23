@@ -32,11 +32,11 @@
   </span>
 </div>
 
-<div id="listwrapper" ng-init="labelLimit = 25">
+<div id="listwrapper">
 	<div class="nano">
     <div id="boxcontainer" class="nano-content">
 
-      <ls-list-box ng-repeat="label in filteredLabels = (labels | filter: labelFilter | orderBy: labelOrder | limitTo: labelLimit)" concept="label"></ls-list-box>
+      <ls-list-box ng-repeat="label in filteredLabels = (labels | filter: labelFilter | orderBy: labelOrder | limitTo: conceptsLimit)" concept="label"></ls-list-box>
 
       <!-- message when no labels found -->
       <!-- <span class="box bigbox label listbox" ng-show="filteredLabels.length > 30">
@@ -44,7 +44,7 @@
       </span> -->
 
       <!-- when search empty and more labels available show option to load more -->
-      <span class="box bigbox label listbox" ng-show="!labelFilter && labels.length > labelLimit" ng-click="labelLimit = labelLimit + 25">
+      <span class="box bigbox label listbox" ng-show="!labelFilter && labels.length > conceptsLimit" ng-click="conceptsLimit = conceptsLimit * 2">
         show more
       </span>
 

@@ -16,6 +16,7 @@ angular.module('labelsApp')
     controller: function ($location) {
         var ctrl = this;
 
+        //console.log(ctrl.data.getSomething());
         /**
          * Redirects to the label overview of the specified vocabulary.
          * @param {string} id - Vocabulary ID

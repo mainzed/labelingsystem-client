@@ -2,22 +2,29 @@
 
   <!-- broader -->
   <span ng-class="{'micro': 'microcol', 'mini': 'minicol'}[size]">
-    <span ng-repeat="box in miniBoxes | filter: broaderFilter" class="{{box.type}}" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[size]"></span>
+    <span ng-repeat="broaderMatch in label.broadMatch" class="{{broaderMatch.type}}" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[size]"></span>
+    <span ng-repeat="broaderConcept in label.broader" class="label" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[size]"></span>
   </span>
 
   <!-- text -->
   <span ng-class="{'micro': 'microcol', 'mini': 'minicol'}[size]">
-    <span ng-repeat="box in miniBoxes | filter: attributeFilter" class="{{box.type}}" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[size]"></span>
+    <span ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: false}" class="text" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[size]"></span>
+    <span ng-show="label.scopeNote" class="text" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[size]"></span>
   </span>
 
   <!-- relations -->
   <span ng-class="{'micro': 'microcol', 'mini': 'minicol'}[size]">
-    <span ng-repeat="box in miniBoxes | filter: relatedFilter" class="{{box.type}}" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[size]"></span>
+    <span ng-repeat="exactMatch in label.exactMatch" class="{{exactMatch.type}}" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[size]"></span>
+    <span ng-repeat="relatedMatch in label.relatedMatch" class="{{relatedMatch.type}}" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[size]"></span>
+    <span ng-repeat="closeMatch in label.closeMatch" class="{{closeMatch.type}}" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[size]"></span>
+    <span ng-repeat="relatedConcept in label.related" class="label" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[size]"></span>
+    <span ng-repeat="link in label.seeAlso" class="text" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[size]"></span>
   </span>
 
   <!-- narrower -->
   <span ng-class="{'micro': 'microcol', 'mini': 'minicol'}[size]">
-    <span ng-repeat="box in miniBoxes | filter: narrowerFilter" class="{{box.type}}" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[size]"></span>
+    <span ng-repeat="narrowerMatch in label.narrowMatch" class="{{narrowerMatch.type}}" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[size]"></span>
+    <span ng-repeat="narrowerConcept in label.narrower" class="label" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[size]"></span>
   </span>
 
 </span>
