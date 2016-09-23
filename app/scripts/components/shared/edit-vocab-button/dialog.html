@@ -16,10 +16,10 @@
 
          <div>
           releaseType: {{ vocabulary.releaseType }}
-          <button type="button" ng-show="vocabulary.releaseType === 'draft'">make public</button>
-
-          <ls-confirm-button on-confirm="publishVocab(vocabulary)" ng-show="vocabulary.releaseType === 'draft'" text="Publish" confirm-text="Publish all draft concepts"></ls-confirm-button>
+          
+          <ls-confirm-button ng-show="vocabulary.releaseType === 'draft'" on-confirm="publishVocab(vocabulary)" ng-show="vocabulary.releaseType === 'draft'" text="Publish" confirm-text="Publish all draft concepts"></ls-confirm-button>
         </div>
+
 
         <div class="line-dialog line"></div>
         <div class="dialogbox dialog-full">
