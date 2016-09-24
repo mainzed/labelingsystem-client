@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('labelsApp')
-  .directive('lsEnrichmentBrowser', function ($routeParams, VocabService, ConfigService, SearchService) {
+  .directive('lsEnrichmentBrowser', function ($http, $routeParams, LabelService, VocabService, ConfigService, SearchService) {
     return {
         templateUrl: "scripts/components/concept-detail/enrichment-browser/enrichment-browser.html",
         restrict: 'E',
@@ -12,8 +12,10 @@ angular.module('labelsApp')
 
             // wait until resolved
             scope.label.$promise.then(function() {
-                scope.label.getSiblings().then(function(siblings) {
-                    scope.siblings = siblings;
+
+                // get siblings
+                LabelService.query({'vocab': $routeParams.vID}, function(concepts) {
+                    scope.siblings = concepts;
                 });
             });
 
@@ -54,20 +56,10 @@ angular.module('labelsApp')
                 });
             };
 
-            /**
-             * Ommit current concept when searching local labeling system.
-             */
-            scope.resultFilter = function(box) {
-                if (box.type === "ls" && box.scheme === scope.vocabulary.title.value) {
-                    if (box.uri.split("/").pop() === $routeParams.lID) {
-                        return false;
-                    } else {
-                        return true;
-                    }
-                } else {
-                    return true;
-                }
+            scope.orderByLabel = function(concept) {
+                return concept.getLabel().value;
             };
+
         }
     };
   });

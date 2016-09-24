@@ -124,18 +124,18 @@ angular.module('labelsApp')
         }
     };
 
-    Concept.prototype.getSiblings = function() {
-        var me = this;
-        return new Promise(function(resolve, reject) {
-            $http.get(ConfigService.host + '/labels?vocab=' + me.vocabID).then(function(res) {
-                resolve(res.data);
-            }, function error(res) {
-                reject(res);
-            });
-        });
-
-
-    };
+    // Concept.prototype.getSiblings = function() {
+    //     var me = this;
+    //     return new Promise(function(resolve, reject) {
+    //         $http.get(ConfigService.host + '/labels?vocab=' + me.vocabID).then(function(res) {
+    //             resolve(res.data);
+    //         }, function error(res) {
+    //             reject(res);
+    //         });
+    //     });
+    //
+    //
+    // };
 
     // var p1 = new Promise(
     //     // The resolver function is called with the ability to resolve or

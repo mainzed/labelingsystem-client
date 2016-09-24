@@ -80,21 +80,11 @@
          * Order function for the use with the ng-repeat directive to order labels
          * alphabetically by their thumbnail prefLabel by returning their charCode
          * number.
-         * @param {object} label - Label object
-         * @returns {number}
+         * @param {object} concept
+         * @returns {String}
          */
-        $scope.orderByThumbnail = function(label) {
-            if (label.prefLabels) {
-                for (var i = 0; i < label.prefLabels.length; i++) {
-                    if (label.prefLabels[i].isThumbnail) {
-                        var thumbnail = label.prefLabels[i];
-                        var name = thumbnail.value.toLowerCase();
-                        return name.charCodeAt(0);
-                    }
-                }
-            } else {
-                return -9999;
-            }
+        $scope.orderByLabel = function(concept) {
+            return concept.getLabel().value;
         };
 
         /**

@@ -39,7 +39,7 @@ angular.module('labelsApp')
 
                     //console.log(thesaurus.name);
                     var checkedThesaurus = _.find(thesauri, { 'name': thesaurus.name });
-                    if (checkedThesaurus) {  // skips local vocab
+                    if (checkedThesaurus) {  // skips local vocab 
                         checkedThesaurus.checked = true;
                     }
                 });
