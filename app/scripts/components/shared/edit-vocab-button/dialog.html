@@ -16,7 +16,7 @@
 
          <div>
           releaseType: {{ vocabulary.releaseType }}
-          
+
           <ls-confirm-button ng-show="vocabulary.releaseType === 'draft'" on-confirm="publishVocab(vocabulary)" ng-show="vocabulary.releaseType === 'draft'" text="Publish" confirm-text="Publish all draft concepts"></ls-confirm-button>
         </div>
 
@@ -46,15 +46,22 @@
 
         <div class="line-dialog line"></div>
         <div class="dialogbox dialog-full">
-          <h4 id="thesauri">Referenzthesauri</h4>
-          <div class="thesaurus" ng-repeat="thesaurus in vocabulary.thesauri" ng-class="{'checked': thesaurus.checked}">
+          <h4 id="thesauri">Reference thesauri</h4>
+          <div class="thesaurus" ng-repeat="thesaurus in thesauri" ng-class="{'checked': thesaurus.checked}">
 
-            <checkbox ng-model="thesaurus.checked" on-check="onCheckChange()"></checkbox>
+            <checkbox ng-model="thesaurus.checked" on-check="onCheck()"></checkbox>
 
             <h5 ng-bind="thesaurus.name"></h5>
             <p ng-bind="thesaurus.description"></p>
           </div>
         </div>
+
+        <div class="line-dialog line"></div>
+        <div class="dialogbox dialog-full">
+          <h4>Reference vocabulary</h4>
+          <div ng-bind="enrichmentVocabID"></div>
+        </div>
+
 
         <!-- delete draft vocab (not allowed to delete public vocab) -->
         <ls-confirm-button on-confirm="deleteVocab(vocabulary.id); closeThisDialog()" ng-show="vocabulary.releaseType === 'draft'" text="Delete Vocabulary"></ls-confirm-button>
@@ -67,7 +74,7 @@
   <!-- apply -->
   <!-- updateVocabThesauri() -->
   <!-- onApplyChangesClick(vocabulary, newValue, newDescription); -->
-  <button id="someButton" type="button" class="apply" ng-click="$ctrl.update(newTitle, newDescription); closeThisDialog()" ng-class="{'inactive': newTitle === vocabulary.title.value && newDescription === vocabulary.description.value}">Apply</button>
+  <button id="someButton" type="button" class="apply" ng-click="$ctrl.update(newTitle, newDescription); closeThisDialog()" ng-class="{'inactive': newTitle === vocabulary.title.value && newDescription === vocabulary.description.value && !changedThesauri}">Apply</button>
 
   <!-- cancel -->
   <button type="button" class="cancel" ng-click="closeThisDialog()">Cancel</button>

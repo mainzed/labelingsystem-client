@@ -22,7 +22,8 @@ angular.module('labelsApp')
 
             // get thesauri when label is available
             VocabService.get({id: $routeParams.vID}, function(vocab) {
-                vocab.getThesauri(function(thesauri) {
+                scope.vocab = vocab;
+                scope.vocab.getThesauri(function(thesauri) {
                     scope.thesauri = thesauri;
                 });
             });

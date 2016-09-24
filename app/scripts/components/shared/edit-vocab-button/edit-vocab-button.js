@@ -27,9 +27,10 @@ angular.module('labelsApp')
         this.openDialog = function() {
             // save original vocab object in case the dialog gets cancelled
             $scope.vocabulary = ctrl.data;
+            $scope.changedThesauri = false;
 
-            $scope.vocabulary.setThesauri(function() {  // sets this.thesauri
-                $scope.originalThesauri = $scope.vocabulary.thesauri;
+            $scope.vocabulary.getThesauri(function(thesauri) {
+                $scope.thesauri = thesauri;
 
                 $scope.dialog = ngDialog.open({
                     template: 'scripts/components/shared/edit-vocab-button/dialog.html',
@@ -40,14 +41,31 @@ angular.module('labelsApp')
                     scope: $scope
                 });
             });
+
+            $scope.vocabulary.getEnrichmentVocab(function(vocabID) {
+                $scope.enrichmentVocabID = vocabID;
+            });
+        };
+
+        $scope.onCheck = function() {
+            $scope.changedThesauri = true;
         };
 
         this.update = function(newTitle, newDescription) {
-            var updatedVocab = $scope.vocabulary;
-            updatedVocab.title.value = newTitle;
-            updatedVocab.description.value = newDescription;
-            $scope.vocabulary.update(function() {
-                //console.log("update successfull!");
+
+            // check if thesauri have been (de)selected
+            // updates automatically
+            if ($scope.changedThesauri) {
+                $scope.vocabulary.setThesauri($scope.thesauri, function() {
+                    console.log("successfully updated thesauri");
+                });
+            }
+
+            $scope.vocabulary.setTitle(newTitle);
+            $scope.vocabulary.setDescription(newDescription);
+
+            $scope.vocabulary.save(function() {
+                console.log("update successfull");
             }, function error(res) {
                 console.log(res);
             });

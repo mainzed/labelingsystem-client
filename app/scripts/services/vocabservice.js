@@ -19,6 +19,26 @@ angular.module('labelsApp')
         'remove': { method: 'DELETE', params: { user: "demo", type: "delete" }}
     });
 
+    // needs this.title to construct
+    // this.description is optional
+
+    Vocab.prototype.getLang = function() {
+        return this.description.lang || this.title.lang;
+    };
+
+    Vocab.prototype.setTitle = function(value) {
+        this.title.value = value;
+        this.title.lang = this.getLang();
+    };
+
+    Vocab.prototype.setDescription = function(value) {
+        if (!this.description) {
+            this.description = {};
+        }
+        this.description.value = value;
+        this.description.lang = this.getLang();
+    };
+
     /**
      * Adds the property "thesauri" to the vocab object that contains all
      * searchable thesauri for this vocab. Selected ones have the attribute
@@ -39,7 +59,7 @@ angular.module('labelsApp')
 
                     //console.log(thesaurus.name);
                     var checkedThesaurus = _.find(thesauri, { 'name': thesaurus.name });
-                    if (checkedThesaurus) {  // skips local vocab 
+                    if (checkedThesaurus) {  // skips local vocab
                         checkedThesaurus.checked = true;
                     }
                 });
@@ -48,11 +68,46 @@ angular.module('labelsApp')
         });
     };
 
-    Vocab.prototype.update = function(successCallback, errorCallback) {
+    /**
+     * Update this vocabs thesauri.
+     * @param {Object[]} thesauri - Array of thesaurus objects
+     */
+    Vocab.prototype.setThesauri = function(thesauri, successCallback, errorCallback) {
+        var me = this;
+
+        thesauri = _.filter(thesauri, function(o) {
+            return o.checked;
+        });
+
+        //console.log(thesauri);
+
+        // get all available thesauri
+        ThesauriService.update({id: me.id }, thesauri, function(res) {
+            console.log(res);
+            successCallback();
+        }, function error(res) {
+            errorCallback(res);
+        });
+    };
+
+    /**
+     * Gets the vocabulary ID of the vocab that is shown in the enrichment
+     * browser.
+     */
+    Vocab.prototype.getEnrichmentVocab = function(successCallback, errorCallback) {
+        var me = this;
+        $http.get(ConfigService.host + '/retcat/vocabulary/' + me.id + '/list').then(function(res) {
+            successCallback(res.data.id);  // return vocab ID
+        }, function error(res) {
+            errorCallback(res);
+        });
+    };
+
+    Vocab.prototype.save = function(successCallback, errorCallback) {
         var me = this;
 
         // remove thesauri (TODO: florian ignore this property)
-        delete me.thesauri;
+        //delete me.thesauri;
 
         var jsonObj = {
             item: me,

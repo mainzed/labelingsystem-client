@@ -90,67 +90,11 @@
         /**
          * Order function for the use with the ng-repeat directive. Grades a label
          * by how many connections it has to internal or external resources.
-         * @param {object} label - Label object
+         * @param {object} concept
          * @returns {number}
          */
-        $scope.orderByQuality = function(label) {
-
-            var matchTypes = [
-                "closeMatch",
-                "exactMatch",
-                "relatedMatch",
-                "broadMatch",
-                "narrowMatch"
-            ];
-
-            var qualityScore = 0;
-
-            // gray boxes
-            if (label.prefLabels) {
-                qualityScore += label.prefLabels.length * ConfigService.scores.prefLabel;
-            }
-            if (label.altLabels) {
-                qualityScore += label.altLabels.length * ConfigService.scores.altLabel;
-            }
-            if (label.scopeNote) {
-                qualityScore += ConfigService.scores.scopeNote;
-            }
-            if (label.seeAlso) {
-                qualityScore += ConfigService.scores.wayback;
-            }
-
-            // blue and green boxes
-            matchTypes.forEach(function(matchType) {
-                qualityScore += getMatchScore(matchType);
-            });
-
-            // blue boxes
-            if (label.broader) {
-                qualityScore += label.broader.length * ConfigService.scores.concept;
-            }
-            if (label.related) {
-                qualityScore += label.related.length * ConfigService.scores.concept;
-            }
-            if (label.narrower) {
-                qualityScore += label.narrower.length * ConfigService.scores.concept;
-            }
-
-            function getMatchScore(matchType) {
-                var score = 0;
-                if (label[matchType]) {
-                    label[matchType].forEach(function(match) {
-                        if (ConfigService.scores[match.type]) {
-                            score += ConfigService.scores[match.type];
-                        } else {
-                            console.log("unknown match type: " + match.type + ". add score for this type in ConfigService!");
-                        }
-                    });
-                }
-                return score;
-            }
-
-            //console.log(qualityScore);
-            return -1 * qualityScore;
+        $scope.orderByQuality = function(concept) {
+            return -1 * concept.getScore();
         };
 
         // UserSettingsService watchers

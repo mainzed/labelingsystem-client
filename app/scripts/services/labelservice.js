@@ -35,14 +35,16 @@ angular.module('labelsApp')
      * @returns {Object[]} Array of prefLabel Objects
      */
     Concept.prototype.getTranslations = function() {
-        return _.filter(this.prefLabels, {isThumbnail: false});
+        return _.filter(this.prefLabels, function(o) {
+            return !o.isThumbnail;
+        });
     };
 
     /**
      * Appends the new translation to the concept and calls the update function.
      */
     Concept.prototype.addTranslation = function(translation) {
-        translation.isThumbnail = false;  // so the user doesnt have to add it
+        //translation.isThumbnail = false;  // so the user doesnt have to add it
         this.prefLabels.push(translation);
     };
 
@@ -124,33 +126,74 @@ angular.module('labelsApp')
         }
     };
 
-    // Concept.prototype.getSiblings = function() {
-    //     var me = this;
-    //     return new Promise(function(resolve, reject) {
-    //         $http.get(ConfigService.host + '/labels?vocab=' + me.vocabID).then(function(res) {
-    //             resolve(res.data);
-    //         }, function error(res) {
-    //             reject(res);
-    //         });
-    //     });
-    //
-    //
-    // };
+    /**
+     * Returns a score based on how many links to other concepts it has.
+     */
+    Concept.prototype.getScore = function() {
+        var me = this;
 
-    // var p1 = new Promise(
-    //     // The resolver function is called with the ability to resolve or
-    //     // reject the promise
-    //     function(resolve, reject) {
-    //         log.insertAdjacentHTML('beforeend', thisPromiseCount +
-    //             ') Promise started (<small>Async code started</small>)<br/>');
-    //         // This is only an example to create asynchronism
-    //         window.setTimeout(
-    //             function() {
-    //                 // We fulfill the promise !
-    //                 resolve(thisPromiseCount);
-    //             }, Math.random() * 2000 + 1000);
-    //     }
-    // );
+        var qualityScore = 0;
+
+        // gray boxes
+        if (this.prefLabels) {
+            qualityScore += this.prefLabels.length * ConfigService.scores.prefLabel;
+        }
+        if (this.altLabels) {
+            qualityScore += this.altLabels.length * ConfigService.scores.altLabel;
+        }
+        if (this.scopeNote) {
+            qualityScore += ConfigService.scores.scopeNote;
+        }
+        if (this.seeAlso) {
+            qualityScore += ConfigService.scores.wayback;
+        }
+
+        // blue and green boxes
+        var matchType = [
+            "closeMatch",
+            "exactMatch",
+            "relatedMatch",
+            "broadMatch",
+            "narrowMatch"
+        ];
+        matchType.forEach(function(matchType) {
+            if (me[matchType]) {
+                me[matchType].forEach(function(match) {
+                    if (ConfigService.scores[match.type]) {
+                        qualityScore += ConfigService.scores[match.type];
+                    }
+                });
+            }
+        });
+
+        // blue boxes
+        if (this.broader) {
+            qualityScore += this.broader.length * ConfigService.scores.concept;
+        }
+        if (this.related) {
+            qualityScore += this.related.length * ConfigService.scores.concept;
+        }
+        if (this.narrower) {
+            qualityScore += this.narrower.length * ConfigService.scores.concept;
+        }
+
+        function getMatchScore(matchType) {
+            var score = 0;
+            if (me[matchType]) {
+                me[matchType].forEach(function(match) {
+                    if (ConfigService.scores[match.type]) {
+                        score += ConfigService.scores[match.type];
+                    } else {
+                        console.log("unknown match type: " + match.type + ". add score for this type in ConfigService!");
+                    }
+                });
+            }
+            return score;
+        }
+
+        //console.log(qualityScore);
+        return qualityScore;
+    };
 
     /**
      * Sends the current version of the concept tp the server to update it.

@@ -12,8 +12,10 @@
   "unused": true,
   "globals": {
     "expect": false,
+    "inject": false,
     "describe": false,
     "angular": false,
+    "beforeEach": false,
     "it": false,
     "$": false,
     "_": false,
