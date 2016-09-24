@@ -2,8 +2,8 @@
 
   <ls-breadcrumbs></ls-breadcrumbs>
 
-  <h1 ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}" ng-bind="prefLabel.value"></h1>
-	<span ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}" class="language" ng-bind="prefLabel.lang"></span>
+  <h1 ng-bind="label.getLabel().value"></h1>
+	<span class="language" ng-bind="label.getLabel().lang"></span>
 
   <ls-edit-label-button data="label"></ls-edit-label-button>
 
@@ -36,7 +36,7 @@
 
         <!-- descriptive -->
   			<div class="col halfleft">
-          <ls-translation-box ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: false}" data="prefLabel"></ls-translation-box>
+          <ls-translation-box ng-repeat="translation in label.getTranslations()" data="translation"></ls-translation-box>
           <ls-description-box data="label.scopeNote" ng-show="label.scopeNote"></ls-description-box>
   			</div>
 

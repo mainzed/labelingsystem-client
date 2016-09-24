@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('labelsApp')
-  .directive('lsEnrichmentBrowser', function ($routeParams, VocabService, ConfigService) {
+  .directive('lsEnrichmentBrowser', function ($routeParams, VocabService, ConfigService, SearchService) {
     return {
         templateUrl: "scripts/components/concept-detail/enrichment-browser/enrichment-browser.html",
         restrict: 'E',
@@ -10,10 +10,64 @@ angular.module('labelsApp')
             // limit for concepts shown in concepts tab
             scope.conceptsLimit = ConfigService.conceptsLimit;
 
-            // get vocab for search options
-            VocabService.get({id: $routeParams.vID}, function(vocab) {
-                scope.vocab = vocab;
+            // wait until resolved
+            scope.label.$promise.then(function() {
+                scope.label.getSiblings().then(function(siblings) {
+                    scope.siblings = siblings;
+                });
             });
+
+
+            // get thesauri when label is available
+            VocabService.get({id: $routeParams.vID}, function(vocab) {
+                vocab.getThesauri(function(thesauri) {
+                    scope.thesauri = thesauri;
+                });
+            });
+
+            // when searching, append search results
+            // search when something is entered,
+            // ls results are cached anyway, everything else gets searched on change
+            scope.onSearchClick = function() {
+                scope.resultBoxes = [];
+
+                // search in siblings
+                //$.merge(scope.resultBoxes, scope.siblings);
+
+                // search in all thesauri and append as soon as they're found!
+                scope.thesauri.forEach(function(thesaurus) {
+                    if (thesaurus.checked) {
+                        SearchService.search(thesaurus.name, scope.searchValue, function(results) {
+
+                            // omit all concepts of current vocab - loaded separately
+                            if (thesaurus.name === "Local Labeling System") {
+                                results = _.filter(results, function(o) {
+                                    return o.scheme !== scope.vocabulary.title.value;
+                                });
+                            }
+                            $.merge(scope.resultBoxes, results);
+
+                        }, function error(res) {
+                            console.log(res);
+                        });
+                    }
+                });
+            };
+
+            /**
+             * Ommit current concept when searching local labeling system.
+             */
+            scope.resultFilter = function(box) {
+                if (box.type === "ls" && box.scheme === scope.vocabulary.title.value) {
+                    if (box.uri.split("/").pop() === $routeParams.lID) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                } else {
+                    return true;
+                }
+            };
         }
     };
   });

@@ -60,13 +60,13 @@
         <!-- placeholder when searching -->
         <span class="noresult" ng-show="searching && !resultBoxes">Searching ...</span>
 
-        <ls-search-result-box ng-repeat="box in resultBoxes | filter: resultFilter | orderBy: ['quality', 'type']" data="box"></ls-search-result-box>
+        <ls-search-result-box ng-repeat="box in resultBoxes | orderBy: ['quality', 'type']" data="box"></ls-search-result-box>
 
       </div>
 
       <!-- own vocabs -->
       <div ng-show="!showSearch">
-        <ls-vocab-result-box ng-repeat="label in labels | limitTo: conceptsLimit" data="label" action="addResource()"></ls-vocab-result-box>
+        <ls-vocab-result-box ng-repeat="sibling in siblings | limitTo: conceptsLimit" data="sibling" on-confirm="addResource($concept, $relation)"></ls-vocab-result-box>
 
         <!-- TODO: make component -->
         <span class="box bigbox label listbox" ng-show="labels.length > conceptsLimit" ng-click="conceptsLimit = conceptsLimit * 2">

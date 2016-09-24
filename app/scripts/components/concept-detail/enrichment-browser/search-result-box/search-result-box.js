@@ -20,11 +20,9 @@ angular.module('labelsApp')
             // workaround for global scope
             scope.data = scope.box;
 
-            //console.log(scope.data);
-
             // TODO: check if same vocab! with isolated scope
             scope.isSameVocab = function() {
-                return scope.data.type === 'ls' && scope.data.scheme === scope.vocabulary.title.value;
+                return scope.data.id;
             };
 
             if (scope.isSameVocab()) {

@@ -5,7 +5,7 @@
       <span ng-show="!showMore">+</span>
       <span ng-show="showMore">-</span>
     </button>
-    {{ data.label }}
+    {{ data.label || data.getLabel() }}
   </span>
 
   <!-- TODO: micro-preview if label in same vocab -->

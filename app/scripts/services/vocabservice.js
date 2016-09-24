@@ -23,8 +23,9 @@ angular.module('labelsApp')
      * Adds the property "thesauri" to the vocab object that contains all
      * searchable thesauri for this vocab. Selected ones have the attribute
      * checked=true.
+     * skips local vocabs -> use LabelService instead to get siblings
      */
-    Vocab.prototype.setThesauri = function(success) {
+    Vocab.prototype.getThesauri = function(successCallback) {
         var me = this;
 
         // get all available thesauri
@@ -42,9 +43,7 @@ angular.module('labelsApp')
                         checkedThesaurus.checked = true;
                     }
                 });
-
-                me.thesauri = thesauri;
-                success();
+                successCallback(thesauri);
             });
         });
     };

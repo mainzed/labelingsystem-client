@@ -7,17 +7,16 @@
  * # searchResultBox
  */
 angular.module('labelsApp')
-  .directive('lsVocabResultBox', function (ngDialog, LabelService, ResourcesService) {
+  .directive('lsVocabResultBox', function (ngDialog) {
     return {
         templateUrl: "scripts/components/concept-detail/enrichment-browser/vocab-result-box/vocab-result-box.html",
         restrict: 'E',
-        // scope: {
-        //     data: "="
-        // },
+        scope: {
+            data: "=",
+            onConfirm: "&"
+        },
         link: function postLink(scope) {
 
-            // TODO: workaround for isolated scope
-            scope.data = scope.label;
             /**
              * Opens a type-specific dialog that shows the connection (relation)
              * options for each type to link to the label.

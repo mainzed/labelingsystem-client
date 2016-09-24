@@ -15,14 +15,14 @@
     <!-- broader -->
     <div>
       <div class="col three leftout">
-    		<button class="enrichbutton-ow" type="button" name="button" ng-click="addResource(data, 'broader'); closeThisDialog()">
+    		<button class="enrichbutton-ow" type="button" name="button" ng-click="onConfirm({$concept: data, $relation: 'broader'}); closeThisDialog()">
     			<span class="buttontext-ow">broader</span>
     		</button>
     		<p class="enrichinfo">skos:broader relates a concept to a concept that is more general in meaning.</p>
     	</div>
 
       <div class="col three">
-    		<button class="enrichbutton-ow" type="button"ng-click="addResource(data, 'related'); closeThisDialog()">
+    		<button class="enrichbutton-ow" type="button"ng-click="onConfirm({$concept: data, $relation: 'related'}); closeThisDialog()">
     			<span class="buttontext-ow">related</span>
     			<span class="icon-arrow icon"></span>
     		</button>
@@ -30,7 +30,7 @@
     	</div>
 
       <div class="col three rightout">
-    		<button class="enrichbutton-ow" type="button" name="button" ng-click="addResource(data, 'narrower'); closeThisDialog()">
+    		<button class="enrichbutton-ow" type="button" name="button" ng-click="onConfirm({$concept: data, $relation: 'narrower'}); closeThisDialog()">
     			<span class="buttontext-ow">narrower</span>
     		</button>
     		<p class="enrichinfo">skos:narrower relates a concept to a concept that is more specific in meaning.</p>

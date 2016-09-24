@@ -9,7 +9,8 @@
 	<div class="nano-content">
 		<div class="dialogbox dialog-full">
 			<h4>url</h4>
-			<input type="text" placeholder="https://www.example.de" ng-model="url">
+			<input type="text" placeholder="https://www.example.de" ng-model="url" ng-disabled="$ctrl.isValid">
+      <button type="button" ng-click="$ctrl.verifyLink(url)" ng-disabled="$ctrl.isValid">verify link</button>
 		</div>
 
 	</div>
@@ -18,5 +19,5 @@
 
 
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-class="{'inactive': !url}" ng-click="$ctrl.onConfirm({$url: url}); closeThisDialog()">Apply</div>
+	<div class="apply" ng-class="{'inactive': !$ctrl.isValid}" ng-click="$ctrl.onConfirm({$uri: url}); closeThisDialog()">Apply</div>
 </div>
