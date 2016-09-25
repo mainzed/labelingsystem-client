@@ -8,7 +8,7 @@
  * Service in the labelsApp.
  */
 angular.module('labelsApp')
-  .factory('LabelService', function ($resource, $http, AuthService, ConfigService) {
+  .factory('LabelService', function ($resource, $http, AuthService, ConfigService, ResourcesService) {
 
     var Concept = $resource(ConfigService.host + '/labels/:id', null, {
         'update': {
@@ -27,7 +27,12 @@ angular.module('labelsApp')
      * returns the concept's thumbnail prefLabel.
      */
     Concept.prototype.getLabel = function() {
-        return _.find(this.prefLabels, {isThumbnail: true});
+        var thumbnail = _.find(this.prefLabels, {isThumbnail: true});
+        if (thumbnail) {
+            return thumbnail.value;
+        } else {
+            return false;
+        }
     };
 
     /**
@@ -52,7 +57,12 @@ angular.module('labelsApp')
      * Gets this concepts language.
      */
     Concept.prototype.getLang = function() {
-        return this.getLabel().lang;
+        var thumbnail = _.find(this.prefLabels, {isThumbnail: true});
+        if (thumbnail) {
+            return thumbnail.lang;
+        } else {
+            return false;
+        }
     };
 
     Concept.prototype.delete = function(successCallback, errorCallback) {
@@ -76,6 +86,57 @@ angular.module('labelsApp')
             lang: this.getLang()
         };
     };
+
+    /**
+     * Gets all of a concept's broader, narrower and related concepts and
+     * returns a list of objects.
+     * @param {Object} concept - A Labeling System concept (formerly 'label')
+     * @param {String} relation - Relation to get concepts for
+     * @param {function} callback - Callback that returns the related concepts
+     */
+     Concept.prototype.getRelatedConcepts = function(relation) {
+         //console.log(Concept);
+         var concept = this;
+
+         // TODO: the concepts return dont have all the prototype functions
+         // because LabelService is not used!!!
+         // maybe its better to leave this as helperfunction for now
+
+         return new Promise(function(resolve, reject) {
+             var relatedConcepts = [];
+             if (concept[relation]) {
+                 concept[relation].forEach(function(resource, index, array) {
+
+                     if (_.isString(resource)) {  // is internal concept ID
+                        $http.get(ConfigService.host + '/labels/' + resource).then(function(res) {
+                             relatedConcepts.push(res.data);
+                             //console.log(res.data);
+                             // callback when all done
+                             if (index === array.length - 1) {
+                                 resolve(relatedConcepts);
+                             }
+                         });
+
+                     } else if (resource.uri) {  // is external resource
+                         ResourcesService.get(resource.uri, function(relatedConcept) {
+                             relatedConcepts.push(relatedConcept);
+
+                             // callback when all done
+                             if (index === array.length - 1) {
+                                 resolve(relatedConcepts);
+                             }
+                         });
+                     } else {
+                         console.log("unknown resource:");
+                         console.log(resource);
+                     }
+                 });
+             } else {
+                 resolve(relatedConcepts);
+             }
+         });
+
+     };
 
     /**
      * Adds another concept, resource or wayback link to this concept.

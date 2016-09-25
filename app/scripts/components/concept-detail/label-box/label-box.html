@@ -3,13 +3,13 @@
   <!-- relation icon -->
   <span class="relation"><span ng-class="{'icon-arrow': relation === 'related'}"></span></span>
 
-  <span class="thumbnail" ng-bind="thumbnail.value"></span>
+  <span class="thumbnail" ng-bind="concept.getLabel().value"></span>
 
   <!-- type icon -->
   <span class="type" title="{{ tooltip }}"></span>
 
   <mini-preview label="concept" size="micro"></mini-preview>
 
-  <span class="language" ng-bind="thumbnail.lang"></span>
+  <!-- <span class="language" ng-bind="concept.getLabel().lang"></span> -->
 
 </div>

@@ -16,30 +16,17 @@ angular.module('labelsApp')
     // };
 
     /**
-     * Determines the thumbnail prefLabel of a concept.
-     * @param {Object} concept
-     * @returns {Object} - prefLabel Object
-     */
-    this.getThumbnail = function(concept) {
-        for (var i = 0; i < concept.prefLabels.length; i++) {
-            if (concept.prefLabels[i].isThumbnail) {
-                return concept.prefLabels[i];
-            }
-        }
-    };
-
-    /**
      * Determines the term of a concept or match and returns it.
      * @param {Object} obj - concept or match
      * @returns {String} - concept thumbnail-prefLabel or match term
      */
-    this.getTerm = function(obj) {
-        if (obj.prefLabels) {  // is concept object
-            return this.getThumbnail(obj).value;
-        } else {  // is match
-            return obj.label;
-        }
-    };
+    // this.getTerm = function(obj) {
+    //     if (obj.prefLabels) {  // is concept object
+    //         return this.getThumbnail(obj).value;
+    //     } else {  // is match
+    //         return obj.label;
+    //     }
+    // };
 
     /**
      * Gets all of a concept's broader, narrower and related concepts and
@@ -92,6 +79,7 @@ angular.module('labelsApp')
      * Changes a vocabulary's releaseType from "draft" to "public".
      * @param {object} vocab - Vocabulary object
      */
+     // TODO: move to vocab
     this.publishVocab = function(vocab) {
         return new Promise(function(resolve, reject) {
             var updatedVocab = vocab;

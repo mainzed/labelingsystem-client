@@ -21,13 +21,13 @@ angular.module('labelsApp')
             scope.data = scope.box;
 
             // TODO: check if same vocab! with isolated scope
-            scope.isSameVocab = function() {
-                return scope.data.id;
-            };
-
-            if (scope.isSameVocab()) {
-                scope.data.type = "label";
-            }
+            // scope.isSameVocab = function() {
+            //     return scope.data.id;
+            // };
+            //
+            // if (scope.isSameVocab()) {
+            //     scope.data.type = "label";
+            // }
 
             /**
              * Opens a type-specific dialog that shows the connection (relation)

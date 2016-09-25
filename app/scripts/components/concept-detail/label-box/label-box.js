@@ -21,19 +21,9 @@ angular.module('labelsApp')
             // get concept data from ID
             LabelService.get({id: scope.data}, function(concept) {
                 scope.concept = concept;
-                scope.thumbnail = HelperService.getThumbnail(concept);
             }, function(err) {
                 console.log(err);
             });
-
-            // obj can be resource or concept
-            scope.getLabel = function(obj) {
-                if (obj.id) {  // is concept
-                    return HelperService.getThumbnail(obj).value;
-                } else {  // is resource
-                    return obj.label;
-                }
-            };
 
             /**
              * Opens a dialog with detailed information.
