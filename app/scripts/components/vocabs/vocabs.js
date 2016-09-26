@@ -13,12 +13,10 @@
     templateUrl: "scripts/components/vocabs/vocabs.html",
 
     controller: function ($scope, $q, $location, $http, ngDialog, AuthService, VocabService, LabelService, ConfigService) {
-        // dont use that, vulnerable
-        //$scope.user = AuthService.getUser();
 
-        //$scope.languages = ConfigService.languages;
-
-        $scope.vocabularies = VocabService.query({ creator: "demo" });
+        this.$onInit = function() {
+            $scope.vocabularies = VocabService.query({ creator: AuthService.getUser().id });
+        };
 
         /**
          * Logout current user and redirect to login page if successfull.
