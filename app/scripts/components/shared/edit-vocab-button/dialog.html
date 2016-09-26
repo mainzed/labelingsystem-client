@@ -1,4 +1,4 @@
-<div class="dialogwrapper label">
+<div class="dialogwrapper" ng-class="{ 'label': vocabulary.releaseType === 'public', 'draft': vocabulary.releaseType === 'draft' }">
   <div class="dialogheader">
     <h3 ng-bind="vocabulary.title.value"></h3>
     <p class="typeinformation"> metadata/settings</p>
