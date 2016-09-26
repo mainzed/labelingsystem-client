@@ -133,7 +133,7 @@ textarea:focus {	outline: none; }
 					background: none; border: none; width: 200px; float: left; height: 30px; color: white; }
 
 .sortlist	{		display: block; float: left; position: relative; color: white; margin-top: 13px; border-left: 1px solid white;
-					padding-left: @margininboxsmall;  }
+					padding-left: @margininboxsmall; cursor: pointer;  }
 .sortlist li {		list-style: none; margin-left: 0; }
 .sortlist .icon {	line-height: 0px; margin-top: 10px; float: right; margin-left: -2px;}
 .sortoptions {		position: absolute; background: @workareas; width: 200px; padding: 10px; color: white; z-index: 9999999; margin-left: -10px; }
@@ -172,9 +172,6 @@ textarea:focus {	outline: none; }
 					margin-bottom: @marginoutboxsmall; position: relative;  
 					@media screen and (max-width: 1600px) {width: calc((100% - @marginoutside * 2 - @marginoutboxsmall) / 3); }}
 .vocabulary.draft {	background: #FFFEC9; }
-.vocabulary.draft:hover {
-					}
-.vocabulary:hover {	background: white;}
 .voc-box {			padding-left: calc(@marginoutside - @marginoutboxsmall); }
 .vocabulary .note {	clear: both; margin-left: @marginoutboxsmall; border-top: 1px solid #c5c5c5; 
 					width: calc(100% - @marginoutboxsmall * 2); padding-top: 5px;  }
@@ -334,9 +331,7 @@ textarea:focus {	outline: none; }
 .line-dialog {		height: 1px; width: calc(100% - @marginoutside * 2); margin-left: @marginoutside; float: left;
 					display: block; margin-top: 60px;  }
 .line-bottom {		height: 1px; width: calc(100% - @marginoutside * 2); left: @marginoutside; position: absolute; bottom: 0; display: block;  }
-.line 	{			background: black;}
-.label .line {		background: @linegray; }
-.low .line {		background: white; }
+
 
 
 .bigdialog .ngdialog-content {
@@ -444,6 +439,27 @@ textarea:focus {	outline: none; }
 
 
 .icon-hide {		color: white; }
+
+
+
+/* hover states */
+.vocabulary.draft:hover {		
+					background: #FFFEDE; }	
+.vocabulary:hover { background: white; }
+
+/* line colors */
+.line 	{			background: black;}
+.label .line {		background: @linegray; }
+.low .line {		background: white; }
+.getty .line {		background: #24A4FF; }
+.text .line {		background: white; }
+.vocabulary.draft .note  {
+					border-top: 1px solid #D6CE60;
+}
+
+/* inactive colors */
+.getty .inactive {	color: #24A4FF; }
+
 
 
 /* placeholder */
