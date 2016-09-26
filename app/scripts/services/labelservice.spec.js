@@ -33,6 +33,14 @@ describe('Service: LabelService', function () {
                 ]
             }));
 
+            // $httpBackend.when('GET', 'http://143.93.114.135/api/v1/labels/some-broader-concept-id').respond(200, JSON.stringify({
+            //     id: 'some-broader-concept-id',
+            //     prefLabels: [
+            //         { value: "broader label", lang: "en", isThumbnail: true }
+            //     ],
+            //     scopeNote: { value: "a broader concept", lang: "en"}
+            // }));
+
             concept = LabelService.get({id: "36799281-7c6c-4251-a0c1-ef20ce07a8b9"});
             $httpBackend.flush();
         }));
@@ -43,8 +51,7 @@ describe('Service: LabelService', function () {
 
         it("getLabel() should return thumbnail prefLabel", function() {
             var label = concept.getLabel();
-            expect(label.value).toBe("english label");
-            expect(label.lang).toBe("en");
+            expect(label).toBe("english label");
         });
 
         it("getTranslations() should return all prefLabel, but thumbnail prefLabel", function() {
@@ -82,6 +89,8 @@ describe('Service: LabelService', function () {
             expect(concept.scopeNote.value).toBe("new description!");
             expect(concept.scopeNote.lang).toBe("en");
         });
+
+        it("getChildren() should return internal concepts");
 
         it("addChild() should add internal concept", function() {
             // narrower

@@ -8,71 +8,116 @@
  * Service in the labelsApp.
  */
 angular.module('labelsApp')
-  .service('AuthService', function ($location, $cookies, $http, $httpParamSerializerJQLike, ConfigService) {
-    var user = {};
+  .service('AuthService', function ($location, $q, $cookies, $http, $httpParamSerializerJQLike, ConfigService) {
 
-    // set inital user object
-    if ($cookies.getObject("lsCookie")) {
-        user.name = $cookies.getObject("lsCookie").name;
-        // get additonal infos
-
-        // role
-    }
-
-    /**
-     * Login using the labeling system /auth api
-     */
-    this.login = function(username, password, successCallback, errorCallback) {
-
-        var data = {
-            "user": username,
-            "pwd": password
-        };
-        $http.post(ConfigService.host + "/auth/login", $httpParamSerializerJQLike(data)).then(function() {
-
-            user.name = username;  // only used for config like "role" etc
-            $cookies.putObject("lsCookie", {
-                "username": username,
-                "secret": "my-super-secret-token"  // TODO: store custom access token in cookie
-            });
-            successCallback();
-
-        }, function(err) {
-            console.log("login failed");
-            this.logout();
-            errorCallback(err);
-        });
-    };
-
-    this.logout = function() {
-        user = {};
-        $cookies.remove("lsCookie");
-        $location.path('/admin/login');
-    };
-
-    this.getUser = function() {
-        return {
-            name: "demo"
-        };
-        //return user;
-    };
+    var user = null;
 
     this.isLoggedIn = function() {
-        var cookie = $cookies.getObject("lsCookie");
-
-        if (cookie) {  // TODO: check token on server
-
-            //console.log(cookie.username);
-            //console.log(cookie.secret);
-
-            user.name = cookie.username;
-            // get userinfo
-            //this.getUserInfo();
+        if (user) {
             return true;
         } else {
-            // no cookie, not logged in
             return false;
         }
     };
 
-  });
+    /**
+     * Gets on every route change and checs if user is logged in on server.
+     * Always resolves. this is async so the user object is set to use with
+     * other functions.
+     */
+    this.getUserStatus = function() {
+        var deferred = $q.defer();
+        // get username and token from cookie. if it doesnt exist, request
+        // will fail anyway
+        var cookie = $cookies.getObject("lsCookie");
+
+        if (cookie) {
+            $http.get(ConfigService.host + "/auth/status?user=" + cookie.userID + "&token=" + cookie.token)
+            // handle success
+            .success(function (data) {
+                if (data.status.verified) {
+                  user = data.user;  // update user object with response user object
+                  //console.log(user);
+                } else {
+                  user = false;
+                  $cookies.remove("lsCookie");
+                }
+                deferred.resolve();
+            })
+            .error(function () {
+                user = false;
+                $cookies.remove("lsCookie");
+                deferred.resolve();
+            });
+        } else {
+            deferred.resolve();
+        }
+
+        return deferred.promise;
+
+    };
+
+    this.login = function(username, password) {
+
+        // create a new instance of deferred
+        var deferred = $q.defer();
+
+        // send a post request to the server
+        $http.post(ConfigService.host + "/auth/login", $httpParamSerializerJQLike({ "user": username, "pwd": password }))
+        .success(function(data, status) {
+            // TODO Florian: dont return expection when login failed, but meaningful error message
+            if (status === 200 && data) {
+                user = data.user;
+                //user.role = data.status.role;
+
+                // set cookie to remember username and token
+                $cookies.putObject("lsCookie", {
+                    "userID": data.user.id,
+                    "token": data.status.token,
+                    "role": data.status.role
+                });
+                deferred.resolve();
+            } else {
+                user = false;
+                deferred.reject();
+            }
+        })
+        .error(function(res) {
+            console.log("error");
+            user = false;
+            deferred.reject(res.errors);
+        });
+
+        // return promise object
+        return deferred.promise;
+
+    };
+
+    this.logout = function() {
+
+        var deferred = $q.defer();
+
+        $http.post(ConfigService.host + "/auth/logout?user=" + user.id)
+        .success(function () {
+            user = false;  // remove user in any case
+            $cookies.remove("lsCookie");
+            deferred.resolve();
+        })
+        .error(function () {
+            user = false;  // remove user in any case
+            $cookies.remove("lsCookie");
+            deferred.reject();
+        });
+
+      // return promise object
+      return deferred.promise;
+    };
+
+    /**
+     * Returns the user object.
+     */
+    this.getUser = function() {
+        return user;
+    };
+
+});

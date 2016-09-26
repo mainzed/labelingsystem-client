@@ -15,7 +15,31 @@ angular.module('labelsApp')
             data: "=",
             onConfirm: "&"
         },
-        link: function postLink(scope) {
+        link: function postLink(scope, LabelService) {
+
+            // scope.getConceptLabel = function(id) {
+            //     return new Promise(function(resolve, reject) {
+            //         LabelService.get({id: id}, function(concept) {
+            //             console.log("inside");
+            //             console.log(concept.getLabel());
+            //             var label = concept.getLabel();
+            //             resolve(label);
+            //             //
+            //         }, function error(res) {
+            //             reject(res);
+            //         });
+            //     });
+            //     //scope.broaderConcepts = scope.data.getRelatedConcepts("broader");
+            // };
+            scope.getInfo = function() {
+                console.log("get info!");
+                scope.data.getRelatedConcepts("broader").then(function(concepts) {
+                    scope.broaderConcepts = concepts;
+                });
+                scope.narrowerConcepts = scope.data.getRelatedConcepts("narrower");
+
+            };
+
 
             /**
              * Opens a type-specific dialog that shows the connection (relation)
@@ -30,6 +54,10 @@ angular.module('labelsApp')
                     disableAnimation: true,
                     scope: scope
                 });
+            };
+
+            scope.getRelatedConcepts = function() {
+
             };
 
             /**

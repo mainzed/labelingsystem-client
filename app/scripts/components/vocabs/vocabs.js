@@ -14,20 +14,20 @@
 
     controller: function ($scope, $q, $location, $http, ngDialog, AuthService, VocabService, LabelService, ConfigService) {
         // dont use that, vulnerable
-        $scope.user = AuthService.getUser();
+        //$scope.user = AuthService.getUser();
 
         //$scope.languages = ConfigService.languages;
 
-        $scope.vocabularies = VocabService.query({ creator: $scope.user.username });
+        $scope.vocabularies = VocabService.query({ creator: "demo" });
 
         /**
          * Logout current user and redirect to login page if successfull.
          */
         $scope.onLogoutClick = function() {
-            AuthService.logout(function() {
+            AuthService.logout().then(function () {
                 $location.path('/admin/login');
-            }, function(err) {
-                console.log(err);
+            }, function() {
+                console.log("logout failed!!");
             });
         };
     }

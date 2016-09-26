@@ -5,16 +5,17 @@
       <span ng-show="!showMore">+</span>
       <span ng-show="showMore">-</span>
     </button>
-    <span ng-repeat="prefLabel in data.prefLabels | filter: {isThumbnail: true}" ng-bind="prefLabel.value"></span>
+    <span ng-bind="data.getLabel()"></span>
   </span>
 
   <!-- icon -->
   <span class='type icon-label'></span>
+  <mini-preview label="data" size="micro"></mini-preview>
 
 </div>
 
 <!-- show details -->
-<div ng-if="showMore" class="box boxextension bigbox label high" ng-click="openDialog()">
+<div ng-if="showMore" class="box boxextension bigbox label high" ng-click="openDialog()" ng-init="getInfo()">
 
   <span class="line-ext"></span>
 
@@ -23,21 +24,25 @@
     {{ data.scopeNote.value }}
   </span>
 
+  <!-- broader -->
   <span class="note-ext">
     <span class="italic smalltype" ng-show="data.broader">broader</span><br>
     <ul class="hierarchie">
-      <li ng-repeat="id in data.broader">{{ id }}</li>
+      <li ng-repeat="concept in broaderConcepts" ng-bind="concept.getLabel()"></li>
     </ul>
   </span>
 
-  <span class="note-ext"><span class="italic smalltype" ng-show="data.narrower">narrower</span><br>
+  <!-- narrower -->
+  <span class="note-ext">
+    <span class="italic smalltype" ng-show="data.narrower">narrower</span><br>
     <ul class="hierarchie">
-      <li ng-repeat="id in data.narrower">{{ id }}</li>
+      <li ng-repeat="concept in narrowerConcepts" ng-bind="concept.getLabel()"></li>
     </ul>
   </span>
-   <span class="note-ext"><span class="italic smalltype">link</span><br>
-    <a ng-href="{{ data.uri }}" target="_blank">link</a>
 
+  <!-- link -->
+  <span class="note-ext"><span class="italic smalltype">link</span><br>
+    <a ng-href="{{ data.uri }}" target="_blank">link</a>
   </span>
 
 

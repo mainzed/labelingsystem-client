@@ -15,7 +15,6 @@ angular.module('labelsApp')
             concept: "="
         },
         link: function postLink(scope) {
-            //console.log(scope.concept);
 
             /**
              * Shows the box's extension with additional information about the
@@ -23,10 +22,6 @@ angular.module('labelsApp')
              */
             scope.toggleExtension = function() {
                 scope.showMore = !scope.showMore;
-            };
-
-            scope.getTerm = function(obj) {
-                return HelperService.getTerm(obj);
             };
 
             /**

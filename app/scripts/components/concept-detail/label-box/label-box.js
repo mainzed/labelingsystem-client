@@ -21,19 +21,9 @@ angular.module('labelsApp')
             // get concept data from ID
             LabelService.get({id: scope.data}, function(concept) {
                 scope.concept = concept;
-                scope.thumbnail = HelperService.getThumbnail(concept);
             }, function(err) {
                 console.log(err);
             });
-
-            // obj can be resource or concept
-            scope.getLabel = function(obj) {
-                if (obj.id) {  // is concept
-                    return HelperService.getThumbnail(obj).value;
-                } else {  // is resource
-                    return obj.label;
-                }
-            };
 
             /**
              * Opens a dialog with detailed information.
@@ -98,17 +88,12 @@ angular.module('labelsApp')
                     // remove current concept ID from array of relation in parentConcept
                     parentConcept[scope.relation] = _.pull(parentConcept[scope.relation], scope.concept.id);
 
-                    // send updated label to server
-                    var jsonObject = {
-                        item: parentConcept,
-                        user: AuthService.getUser().name
-                    };
-                    LabelService.update({id: $routeParams.lID}, jsonObject, function() {
+                    // save to server
+                    parentConcept.save(function() {
                         // delete element from DOM
                         element.remove();
-
-                    }, function(err) {
-                        console.log(err);
+                    }, function error(res) {
+                        console.log(res);
                     });
                 });
             };
@@ -134,14 +119,7 @@ angular.module('labelsApp')
                     }
                     parentConcept[newRelation].push(scope.concept.id);
 
-                    // update parent concept
-                    var jsonObject = {
-                        item: parentConcept,
-                        user: AuthService.getUser().name
-                    };
-
-                    LabelService.update({ id: $routeParams.lID }, jsonObject, function() {
-
+                    parentConcept.save(function() {
                         // temporarily push changes to parentConcept without refreshing everything
                         // TODO: find cleaner solution
                         _.remove(scope.$parent.label[oldRelation], function(n) {
@@ -155,7 +133,7 @@ angular.module('labelsApp')
                         // remove from current relation, gets created automatically in new column
                         element.remove();
 
-                    }, function(res) {
+                    }, function error(res) {
                         console.log(res);
                     });
 
