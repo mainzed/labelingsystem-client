@@ -13,8 +13,8 @@
 
 
 		<div class="line-dialog line"></div>
-		<h4>language</h4>
 		<div class="dialogbox dialog-full">
+			<h4>language</h4>
 			<select ng-model="selectedLang">
         <!-- prevent adding of prefLabel in vocab language (has to exist anyway) -->
 	    	<option ng-repeat="language in languages | orderBy: 'name'" value="{{language.value}}" ng-bind="language.name" ng-disabled="language.used"></option>
