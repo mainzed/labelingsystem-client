@@ -14,20 +14,15 @@
 
     controller: function ($scope, $location, $document, AuthService) {
         //skip login if authenticated
-        // if (AuthService.isLoggedIn()) {
-        //     $location.path("admin/vocabularies");
-        // }
-
-        //AuthService.status();
-
-        //$scope.user = AuthService.getUser();
+        if (AuthService.isLoggedIn()) {
+            $location.path("admin/vocabularies");
+        }
 
         $scope.onLoginClick = function() {
             $scope.error = false;
             $scope.disabled = true;  // block another click
 
             AuthService.login($scope.username, $scope.password).then(function() {
-                //console.log("login worked! :)");
                 $location.path('/admin/vocabularies');
             })
             .catch(function() {

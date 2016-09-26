@@ -14,6 +14,8 @@
     template: '<span class="plusposition" ng-click="$ctrl.openDialog()">+</span>',
     controller: function ($scope, ngDialog) {
 
+        //console.log();
+
         this.openDialog = function() {
             ngDialog.open({
                 template: 'scripts/components/concepts/create-label-button/dialog.html',

@@ -7,7 +7,7 @@
  * # conceptBox
  */
 angular.module('labelsApp')
-  .directive('lsLabelBox', function ($location, ngDialog, LabelService, HelperService, $routeParams, AuthService, ConfigService) {
+  .directive('lsLabelBox', function ($location, $timeout, ngDialog, LabelService, HelperService, $routeParams, AuthService, ConfigService) {
     return {
         templateUrl: "scripts/components/concept-detail/label-box/label-box.html",
         restrict: 'E',
@@ -21,6 +21,7 @@ angular.module('labelsApp')
             // get concept data from ID
             LabelService.get({id: scope.data}, function(concept) {
                 scope.concept = concept;
+                $(".nano").nanoScroller();
             }, function(err) {
                 console.log(err);
             });
@@ -29,8 +30,6 @@ angular.module('labelsApp')
              * Opens a dialog with detailed information.
              */
             scope.openDialog = function() {
-
-
                 // get this concept's broader concepts
                 scope.broaderConcepts = [];
                 scope.narrowerConcepts = [];
@@ -138,13 +137,7 @@ angular.module('labelsApp')
                     });
 
                 });
-
-
-
-
-
             };
-
 
         }
     };
