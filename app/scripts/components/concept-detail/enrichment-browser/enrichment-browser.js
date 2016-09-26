@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('labelsApp')
-  .directive('lsEnrichmentBrowser', function ($http, $routeParams, LabelService, VocabService, ConfigService, SearchService) {
+  .directive('lsEnrichmentBrowser', function ($http, $document, $routeParams, LabelService, VocabService, ConfigService, SearchService) {
     return {
         templateUrl: "scripts/components/concept-detail/enrichment-browser/enrichment-browser.html",
         restrict: 'E',
@@ -61,6 +61,12 @@ angular.module('labelsApp')
                 return concept.getLabel().value;
             };
 
+            // press "enter" to start search
+            scope.onSearchKeyPress = function(e) {
+                if (e.keyCode === 13) {
+                    scope.onSearchClick();
+                }
+            };
         }
     };
   });

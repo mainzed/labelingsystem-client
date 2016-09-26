@@ -17,7 +17,7 @@
 		<div class="line-dialog line" ng-show="!data.isThumbnail"></div>
 		<div class="dialogbox dialog-full" ng-show="!data.isThumbnail">
       <!-- prevent thumbnail label from being deleted -->
-      <ls-confirm-button on-confirm="onDeleteClick(); closeThisDialog()"></ls-confirm-button>
+      <ls-confirm-button text="Delete Translation" on-confirm="onDeleteClick(); closeThisDialog()"></ls-confirm-button>
 		</div>
 
 
@@ -28,5 +28,5 @@
 
 
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="updateLabel(newValue); closeThisDialog()" ng-class="{'inactive': newValue === data.value}">Apply</div>
+	<div class="apply" ng-click="updateTranslation(newValue); closeThisDialog()" ng-class="{'inactive': newValue === data.value}">Apply</div>
 </div>

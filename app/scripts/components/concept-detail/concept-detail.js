@@ -123,15 +123,6 @@
             delete $scope.label.scopeNote;
         });
 
-        // hotkeys
-        $document.keydown(function(e) {
-            if (e.keyCode === 13) {  // enter
-                if ($scope.searchValue) {  // input is not empty
-                    $scope.onSearchClick();
-                }
-            }
-        });
-
         // init nano-scroller (gets refreshed in directives after render)
         $(".nano").nanoScroller();
     }
