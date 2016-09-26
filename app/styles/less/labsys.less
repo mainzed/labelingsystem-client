@@ -87,7 +87,7 @@ textarea:focus {	outline: none; }
 #header h1 {		margin-top: 45px; float: left; font-weight: bold;
 					@media screen and (max-width: 1600px) { margin-top: 53px;} }
 .nano {				 	}
-.noresult {			width: calc(100% - @marginoutboxsmall * 2); height: 100%; font-size: @headlines; font-style: italic; color: @workareas; font-weight: 300;
+.noresult {			width: calc(100% - @marginoutboxsmall - @marginoutside); height: 100%; font-size: @headlines; font-style: italic; color: @workareas; font-weight: 300;
 					text-align: center; position: absolute; margin-left: @marginoutboxsmall; background: @text; padding-top: 100px; }
 .cancel {			position: absolute; bottom: @marginoutside; left: @marginoutside; cursor: pointer; }
 .apply {			position: absolute; bottom: @marginoutside; right: @marginoutside; cursor: pointer; }
@@ -111,7 +111,8 @@ textarea:focus {	outline: none; }
 #enrichmentsearch {	float: left; margin-top: 0px; background: @middle; height: 100%; position: relative; }
 #enrichmentsearch input
 				 {	background: none; border: none; color: black; width: 200px; margin-top: 8px; margin-left: 3px; }
-.tablabel	{		margin-top: 8px; display: block; padding: 0 @margininboxsmall; float: left;  }				 
+.tablabel	{		margin-top: 8px; display: block; padding: 0 @margininboxsmall; float: left; width: 80%;
+					overflow: hidden; text-overflow: ellipsis; white-space: nowrap;  }				 
 
 #enrichmentsearch .icon-search {
 					margin-left: 4px; margin-top: 3px; float: left;  }
@@ -167,9 +168,12 @@ textarea:focus {	outline: none; }
 .bigboxwrapper:hover div {		
 					background: white; }
 .bigboxwrapper {}
-.vocabulary {		width: calc((100% - @marginoutside * 2 - @marginoutboxsmall * 3) / 5); margin-left: @marginoutboxsmall; height: 200px; 
+.vocabulary {		width: calc((100% - @marginoutside * 2 - @marginoutboxsmall * 3) / 5); margin-left: @marginoutboxsmall; height: 300px; 
 					margin-bottom: @marginoutboxsmall; position: relative;  
 					@media screen and (max-width: 1600px) {width: calc((100% - @marginoutside * 2 - @marginoutboxsmall) / 3); }}
+.vocabulary.draft {	background: #FFFEC9; }
+.vocabulary.draft:hover {
+					}
 .vocabulary:hover {	background: white;}
 .voc-box {			padding-left: calc(@marginoutside - @marginoutboxsmall); }
 .vocabulary .note {	clear: both; margin-left: @marginoutboxsmall; border-top: 1px solid #c5c5c5; 
@@ -178,7 +182,7 @@ textarea:focus {	outline: none; }
 .linksize .minibox {width: 12px; float: left; margin-top: 5px;}
 .linksize .listcontent {
 					width: auto; font-size: @small; margin-left: 3px; }
-.linksize .concept {box-shadow: 1px 1px 1px black; margin-left: @marginoutboxsmall; }					
+.linksize .concept {box-shadow: 1px 1px 1px black; margin-left: @marginoutboxsmall; background: white; }					
 
 #boxcontainer .bigbox {
 					margin-left: @marginoutside; width: calc(100% - @marginoutside * 2); }
@@ -367,7 +371,7 @@ textarea:focus {	outline: none; }
 .downloadlist a {	float: left; margin-right: @marginoutboxsmall; }
 
 /* Vocabulary */
-.vocabname {		margin: @margininboxsmall 0 0 @margininboxsmall; font-size: @emphasize; float: left; display: block;  }
+.vocabname {		margin: @margininboxsmall 0 0 @margininboxsmall; font-weight: bold; font-size: @emphasize; float: left; display: block;  }
 .vocabrelease {		float: left; clear: left; margin-left: @margininboxsmall; font-style: italic; font-size: @small; }
 .vocabsize {		float: left; clear: left; margin-bottom: 20px;  margin-left: @margininboxsmall; font-style: italic; font-size: @small; }
 
@@ -377,9 +381,9 @@ textarea:focus {	outline: none; }
 .vocabulary .listcontent {
 					 }
 .vocabulary .icon-folder {	
-					position: absolute; right: @margininboxsmall; top: @margininboxsmall; }
+					position: absolute; right: @margininboxsmall; top: @margininboxsmall; display: none; }
 .vocabulary .icon-more {
-					position: absolute; right: 30px; top: 5px;  }
+					position: absolute; right: 5px; top: 5px;  }
 .vocabulary .icon-edit:hover {
 					color: blue; }
 .vocabulary:hover .icon-edit {
