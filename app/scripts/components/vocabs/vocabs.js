@@ -12,13 +12,11 @@
     },
     templateUrl: "scripts/components/vocabs/vocabs.html",
 
-    controller: function ($scope, $q, $location, $http, ngDialog, AuthService, VocabService, LabelService, ConfigService) {
-        // dont use that, vulnerable
-        //$scope.user = AuthService.getUser();
+    controller: function ($scope, $q, $location, $http, ngDialog, AuthService, VocabService) {
 
-        //$scope.languages = ConfigService.languages;
-
-        $scope.vocabularies = VocabService.query({ creator: "demo" });
+        this.$onInit = function () {
+            $scope.vocabularies = VocabService.query({ creator: AuthService.getUser().id });
+        };
 
         /**
          * Logout current user and redirect to login page if successfull.
@@ -28,6 +26,19 @@
                 $location.path('/admin/login');
             }, function() {
                 console.log("logout failed!!");
+            });
+        };
+
+        $scope.createVocab = function(vocab) {
+            console.log(vocab);
+            var jsonObj = {
+                item: vocab,
+                user: AuthService.getUser().id
+            };
+            VocabService.save(jsonObj, function(res) {
+                $scope.vocabularies.push(res);
+            }, function error(res) {
+                console.log(res);
             });
         };
     }
