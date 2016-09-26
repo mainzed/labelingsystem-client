@@ -66,7 +66,7 @@ h3 {				font-size: @emphasize; margin-bottom: 5px; margin-top: @marginoutside; m
 					display: block; float: left;
 					@media screen and (max-width: 1600px) {font-size: @emphasize-small; } }
 h4 {				font-size: @regular; margin-left: @marginoutside; display: block; margin-bottom: 14px;}
-h5 {				float: left; }
+h5 {				float: left; font-weight: normal; font-style: italic; }
 li {				margin-left: 14px; }
 button {			border: 0; background: transparent;}
 input:focus {		outline: none; }
@@ -313,7 +313,7 @@ textarea:focus {	outline: none; }
 .dialog-quarter {	width: calc((100% - ( @marginoutboxsmall * 4  + @marginoutside * 2)) / 4 ); margin-left: calc(@marginoutboxsmall * 2); }
 .dialog-full	{	width: 100%;  }
 .deletebutton { 	width: calc(100% - @marginoutside * 2 ); border-radius: 3px; height: 40px; margin-left: @marginoutside; 
-					float: left; position: relative; background: @middle; color: white;	}
+					float: left; position: relative; background: @middle; color: white; margin-bottom: @marginbottombox;	}
 .deletebutton .icon {position: absolute;  line-height: 25px; right: @marginoutboxsmall; top: @margininboxsmall; }
 .label .deletebutton {
 					color: black; background: #d6d6d6; }
@@ -350,12 +350,12 @@ textarea:focus {	outline: none; }
 					padding-top: 2px; font-size: @small;  }
 .listcontent {		float: left; width: calc(100% - 150px - @marginoutside); }
 .thesaurus {		width: calc(100% - @marginoutside * 2); margin-left: @marginoutside; display: block; float: left; margin-bottom: 30px;
-					border-top: 1px solid #c5c5c5; padding-top: @margininboxsmall;  }
+					border-top: 1px solid #c5c5c5; padding-top: 4px; position: relative; }
 .dialogbox input.checkbox {			
 					float: left; margin-left: 0; width: 20px; }
 .thesaurus p {		float: left; clear: left; }
-.thesaurus .icon {	float: left; line-height: 18px; margin-left: -8px;}
-.checked {			color: green; border-color: green; }
+.thesaurus .icon {	float: left; line-height: 18px; margin-left: -8px; width: 26px; cursor: pointer;}
+.checked {			color: green;  }
 .hierarchie li { 	width: 100%; font-size: @small; letter-spacing: 0.03em;
 					list-style: none; margin-left: 0;  }
 .downloadlist {		margin-left: @marginoutside; float: left; display: block; }
