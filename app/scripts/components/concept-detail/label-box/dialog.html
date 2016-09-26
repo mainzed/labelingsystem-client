@@ -1,7 +1,7 @@
 <div class="dialogwrapper label">
 	<div class="dialogheader">
-		<h3 ng-bind="thumbnail.value"></h3>
-		<p class="typeinformation">Label - <span class="loudlink" ng-click="openConcept(); closeThisDialog()">open in same tab</span></p>
+		<h3 ng-bind="concept.getLabel()"></h3>
+		<p class="typeinformation">Concept - <span class="loudlink" ng-click="openConcept(); closeThisDialog()">open in same tab</span></p>
       <mini-preview label="concept"></mini-preview>
 		<div class="line-bottom line"></div>
 	</div>

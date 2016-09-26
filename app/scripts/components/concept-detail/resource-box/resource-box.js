@@ -26,8 +26,7 @@ angular.module('labelsApp')
             // get resource data from uri
             ResourcesService.get(scope.data.uri, function(resource) {
                 scope.resource = resource;
-                //console.log(scope.relation);
-                $(".nano").nanoScroller();  // not working currently
+                $(".nano").nanoScroller();
             });
 
             // determine relation icon

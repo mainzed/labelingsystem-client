@@ -3,9 +3,9 @@
     <span class="vocabname" ng-bind="$ctrl.data.title.value"></span>
 
     <!--<span class="vocabrelease" ng-bind="$ctrl.data.releaseType + ' vocabulary'"></span>-->
-    <span class="vocabsize" ng-show="$ctrl.data.statistics.labelCount > 1">{{ $ctrl.data.statistics.labelCount }} concepts</span>
-    <span class="vocabsize" ng-show="$ctrl.data.statistics.labelCount === 1">{{ $ctrl.data.statistics.labelCount }} concept</span>
-    <span class="vocabsize" ng-show="$ctrl.data.statistics.labelCount === 0">empty</span>
+    <span class="vocabsize" ng-show="$ctrl.data.statistics.labels.count > 1">{{ $ctrl.data.statistics.labels.count }} concepts</span>
+    <span class="vocabsize" ng-show="$ctrl.data.statistics.labels.count === 1">{{ $ctrl.data.statistics.labels.count }} concept</span>
+    <span class="vocabsize" ng-show="$ctrl.data.statistics.labels.count === 0">empty</span>
 
 
     <span class="language" ng-bind="$ctrl.data.description.lang"></span>
@@ -24,15 +24,15 @@
 
     <span class="linksize">
 
-        <span ng-show="$ctrl.data.statistics.externalLinks > 0">
+        <span ng-show="$ctrl.data.statistics.links.external > 0">
           <span class="minibox ls"></span>
           <span class="minibox getty"></span>
-          <span class="listcontent">{{ $ctrl.data.statistics.externalLinks }}</span>
+          <span class="listcontent">{{ $ctrl.data.statistics.links.external }}</span>
         </span>
 
-        <span ng-show="$ctrl.data.statistics.internalLinks > 0">
+        <span ng-show="$ctrl.data.statistics.links.external > 0">
           <span class="minibox concept"></span>
-          <span class="listcontent">{{ $ctrl.data.statistics.internalLinks }}</span>
+          <span class="listcontent">{{ $ctrl.data.statistics.links.internal }}</span>
         </span>
 
     </span>
