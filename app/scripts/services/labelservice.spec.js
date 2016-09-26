@@ -72,6 +72,16 @@ describe('Service: LabelService', function () {
             expect(translations[2].lang).toBe("es");
         });
 
+        it("updateTranslation() should update an existing translation", function() {
+            //var translations = concept.getTranslations();
+            //expect(translations.length).toBe(2);
+        });
+
+        it("getUrl() should return url", function() {
+            //var url = concept.getDownloadUrl();
+            //expect(url.split("/")).toBe("123");
+        });
+
         it("getLang() should return language", function() {
             // when only title available
             delete concept.scopeNote;

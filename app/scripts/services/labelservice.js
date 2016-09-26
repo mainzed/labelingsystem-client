@@ -53,6 +53,10 @@ angular.module('labelsApp')
         this.prefLabels.push(translation);
     };
 
+    Concept.prototype.getUrl = function() {
+        return ConfigService.host + "/labels/" + this.id;
+    };
+
     /**
      * Gets this concepts language.
      */

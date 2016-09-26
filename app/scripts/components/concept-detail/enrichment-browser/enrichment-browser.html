@@ -7,7 +7,7 @@
 
       <div class="tab lefttab" ng-click="showSearch = true" ng-class="{'active': showSearch}">
         <span class="icon-search icon"></span>
-        <input type="text" placeholder="Search in Thesauri" ng-model="searchValue"></input>
+        <input type="text" placeholder="Search in Thesauri" ng-model="searchValue" ng-keypress="onSearchKeyPress($event)"></input>
         <!--
         <button type="button" ng-click="onSearchClick(); searching = true" ng-init="searching = false">
           <span class="icon-arrow"></span>

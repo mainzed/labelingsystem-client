@@ -39,6 +39,10 @@ angular.module('labelsApp')
         this.description.lang = this.getLang();
     };
 
+    Vocab.prototype.getUrl = function() {
+        return ConfigService.host + "/vocabs/" + this.id;
+    };
+
     /**
      * Adds the property "thesauri" to the vocab object that contains all
      * searchable thesauri for this vocab. Selected ones have the attribute

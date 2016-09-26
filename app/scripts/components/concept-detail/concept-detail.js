@@ -31,15 +31,6 @@
         // load current label
         $scope.label = LabelService.get({id: $routeParams.lID});
 
-        /**
-         * Get skos of label url
-         * @param {string} id - label ID
-         * @return {string} url to download vocab in skos format
-         */
-        $scope.getDownloadUrl = function(id) {
-            return ConfigService.host + "/labels/" + id;
-        };
-
         // used by views
         $scope.languages = ConfigService.languages;
 
@@ -121,15 +112,6 @@
 
         $scope.$on('removed-description', function() {
             delete $scope.label.scopeNote;
-        });
-
-        // hotkeys
-        $document.keydown(function(e) {
-            if (e.keyCode === 13) {  // enter
-                if ($scope.searchValue) {  // input is not empty
-                    $scope.onSearchClick();
-                }
-            }
         });
 
         // init nano-scroller (gets refreshed in directives after render)
