@@ -16,8 +16,6 @@
         // init nanoscroller here to prevent default scrollbar while loading boxes
         $(".nano").nanoScroller();
 
-        //$scope.user = AuthService.getUser();
-
         // initial values
         $scope.tooltips = TooltipService;
         $scope.placeholder = "loading labels...";
@@ -26,13 +24,6 @@
 
         VocabService.get({id: $routeParams.vID}, function(vocabulary) {
             $scope.vocabulary = vocabulary;
-
-            ThesauriService.query({id: vocabulary.id}, function(thesauri) {
-                $scope.thesauri = thesauri;
-
-            }, function(err) {
-                console.log(err);
-            });
         });
 
         // load all labels for the current vocabulary
@@ -40,6 +31,16 @@
             $scope.labels = labels;
             $scope.placeholder = "filter";
         });
+
+        /**
+         * Order function for the use with the ng-repeat directive.
+         * @param {object} concept
+         * @returns {String}
+         */
+        $scope.orderByLabel = function(concept) {
+            return concept.getLabel();
+        };
+
 
         /**
          * Creates a new label by sending a new label object to the api.
@@ -66,23 +67,12 @@
 
             LabelService.save({
                 item: newLabel,
-                user: $scope.user.name
+                user: AuthService.getUser().id
             }, function(label) {
                 if (label.id) {
-                    //$scope.labels.push(label);
-                    //console.log("/admin/vocabularies/" + $routeParams.vID + "/concepts/" + label.id);
                     $location.path("/admin/vocabularies/" + $routeParams.vID + "/concepts/" + label.id);
                 }
             });
-        };
-
-        /**
-         * Order function for the use with the ng-repeat directive.
-         * @param {object} concept
-         * @returns {String}
-         */
-        $scope.orderByLabel = function(concept) {
-            return concept.getLabel();
         };
 
         /**
