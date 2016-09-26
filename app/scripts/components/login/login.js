@@ -29,6 +29,7 @@
                 $scope.error = true;
                 $scope.errorMessage = "some error message";  // res.userMessage
                 $scope.disabled = false;
+                console.log($scope.disabled);
                 $scope.username = "";
                 $scope.password = "";
             });

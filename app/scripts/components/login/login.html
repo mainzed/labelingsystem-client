@@ -1,9 +1,9 @@
 <div class="center">
 	<h3>Labeling System Admin Login</h3>
 
-	<input type="text" name="username" value="" ng-model="username" placeholder="Username"><br>
-	<input type="password" name="password" value="" ng-model="password" placeholder="Password"><br>
+	<input type="text" name="username" ng-model="username" placeholder="Username"><br>
+	<input type="password" name="password" ng-model="password" placeholder="Password"><br>
 
-	<button class="deletebutton" type="button" name="button" ng-click="onLoginClick()" ng-disabled="!username || !password || disabled">Login</button>
+	<button class="deletebutton" type="button" ng-click="onLoginClick()" ng-class="{'inactive': !username || !password || disabled }">Login</button>
 	<span ng-show="error" ng-bind="errorMessage"></span>
 </div>
