@@ -1,7 +1,7 @@
 <div class="dialogwrapper" ng-class="{ 'label': vocabulary.releaseType === 'public', 'draft': vocabulary.releaseType === 'draft' }">
   <div class="dialogheader">
     <h3 ng-bind="vocabulary.title.value"></h3>
-    <p class="typeinformation"> metadata/settings</p>
+    <p class="typeinformation"> metadata/settings<br>{{ vocabulary.releaseType }}</p>
     <div class="line-bottom line"></div>
   </div>
 
@@ -10,14 +10,14 @@
       <div class="nano-content">
 
         <div class="dialogbox dialog-full">
-          <h4>edit</h4>
+          <h4>Rename</h4>
           <input type="text" ng-model="newTitle" ng-init="newTitle = vocabulary.title.value">
         </div>
 
          <div>
-          releaseType: {{ vocabulary.releaseType }}
+         
 
-          <ls-confirm-button ng-show="vocabulary.releaseType === 'draft'" on-confirm="publishVocab(vocabulary)" ng-show="vocabulary.releaseType === 'draft'" text="Publish" confirm-text="Publish all draft concepts"></ls-confirm-button>
+         
         </div>
 
 
@@ -43,6 +43,17 @@
           <span class="listcontent" ng-bind="vocabulary.created"></span>
 
         </div>
+
+
+        <div class="line-dialog line"></div>
+        <div class="dialogbox dialog-full">
+        <h4>Actions</h4>
+          <!-- delete draft vocab (not allowed to delete public vocab) -->
+          <ls-confirm-button on-confirm="deleteVocab(vocabulary.id); closeThisDialog()" ng-show="vocabulary.releaseType === 'draft'" text="Delete Vocabulary"></ls-confirm-button>
+
+          <ls-confirm-button ng-show="vocabulary.releaseType === 'draft'" on-confirm="publishVocab(vocabulary)" ng-show="vocabulary.releaseType === 'draft'" text="Publish" confirm-text="Publish all draft concepts" icon="icon-more"></ls-confirm-button>
+        </div>
+
 
         <div class="line-dialog line"></div>
         <div class="dialogbox dialog-full">
@@ -71,9 +82,7 @@
           <div ng-bind="enrichmentVocabID"></div>
         </div>
 
-
-        <!-- delete draft vocab (not allowed to delete public vocab) -->
-        <ls-confirm-button on-confirm="deleteVocab(vocabulary.id); closeThisDialog()" ng-show="vocabulary.releaseType === 'draft'" text="Delete Vocabulary"></ls-confirm-button>
+        
 
       </div><!-- end nano-content -->
     </div><!-- end nano -->
