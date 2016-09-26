@@ -13,7 +13,7 @@ angular.module('labelsApp')
         data: "=",
     },
     template: '<span class="icon-more icon" ng-click="$ctrl.openDialog()"></span>',
-    controller: function ($scope, ngDialog, ConfigService) {
+    controller: function ($scope, $location, $routeParams, ngDialog, ConfigService, LabelService) {
         var ctrl = this;
 
         /**
@@ -38,6 +38,17 @@ angular.module('labelsApp')
          */
         $scope.getDownloadUrl = function(id) {
             return ConfigService.host + "/labels/" + id;
+        };
+
+        /**
+         * Deletes a concept.
+         */
+        $scope.deleteConcept = function(concept) {
+            LabelService.remove({id: concept.id}, function() {
+                $location.path("/admin/vocabularies/" + $routeParams.vID + "/concepts");
+            }, function(res) {
+                console.log(res);
+            });
         };
     }
 

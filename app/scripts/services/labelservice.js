@@ -69,17 +69,13 @@ angular.module('labelsApp')
         }
     };
 
-    Concept.prototype.delete = function(successCallback, errorCallback) {
-        var me = this;
-        $http.delete(ConfigService.host + '/labels/' + me.id, {
-            user: AuthService.getUser().id,
-            type: "delete"
-        }).then(function() {
-            successCallback();
-        }, function() {
-            errorCallback();
-        });
-    };
+    // Concept.prototype.delete = function(successCallback, errorCallback) {
+    //     var me = this;
+    //     console.log(ConfigService.host + '/labels/' + me.id);
+    //     console.log(AuthService.getUser().id);
+    //
+    //     LabelService.remove({id: })
+    // };
 
     /**
      * Sets the description and adds language automatically.
