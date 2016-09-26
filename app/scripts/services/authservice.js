@@ -32,21 +32,19 @@ angular.module('labelsApp')
         var cookie = $cookies.getObject("lsCookie");
 
         if (cookie) {
-            console.log(cookie);
-            $http.get(ConfigService.host + "/auth/status?user=" + cookie.username + "&token=" + cookie.token)
+            $http.get(ConfigService.host + "/auth/status?user=" + cookie.userID + "&token=" + cookie.token)
             // handle success
             .success(function (data) {
-                console.log(data);
-                if (data.varified){
-                  user = true;
+                if (data.status.verified) {
+                  user = data.user;  // update user object with response user object
+                  //console.log(user);
                 } else {
                   user = false;
                   $cookies.remove("lsCookie");
                 }
                 deferred.resolve();
             })
-            .error(function (res) {
-                console.log(res);
+            .error(function () {
                 user = false;
                 $cookies.remove("lsCookie");
                 deferred.resolve();
@@ -69,11 +67,14 @@ angular.module('labelsApp')
         .success(function(data, status) {
             // TODO Florian: dont return expection when login failed, but meaningful error message
             if (status === 200 && data) {
-                user = true;
+                user = data.user;
+                //user.role = data.status.role;
+
                 // set cookie to remember username and token
                 $cookies.putObject("lsCookie", {
-                    "username": username,
-                    "token": "my-super-secret-token"
+                    "userID": data.user.id,
+                    "token": data.status.token,
+                    "role": data.status.role
                 });
                 deferred.resolve();
             } else {
@@ -96,18 +97,27 @@ angular.module('labelsApp')
 
         var deferred = $q.defer();
 
-        $http.post(ConfigService.host + "/auth/logout?user=demo")
+        $http.post(ConfigService.host + "/auth/logout?user=" + user.id)
         .success(function () {
             user = false;  // remove user in any case
+            $cookies.remove("lsCookie");
             deferred.resolve();
         })
         .error(function () {
             user = false;  // remove user in any case
+            $cookies.remove("lsCookie");
             deferred.reject();
         });
 
       // return promise object
       return deferred.promise;
+    };
+
+    /**
+     * Returns the user object.
+     */
+    this.getUser = function() {
+        return user;
     };
 
 });
