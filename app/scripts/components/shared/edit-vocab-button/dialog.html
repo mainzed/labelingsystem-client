@@ -46,6 +46,15 @@
 
         <div class="line-dialog line"></div>
         <div class="dialogbox dialog-full">
+          <h4>Downloads</h4>
+          <span class="downloadlist">
+            <a ng-href="{{ vocabulary.getUrl() + '.rdf' }}" target="_blank" ng-click="$event.stopPropagation()">RDF</a>
+
+          </span>
+        </div>
+
+        <div class="line-dialog line"></div>
+        <div class="dialogbox dialog-full">
           <h4 id="thesauri">Reference thesauri</h4>
           <div class="thesaurus" ng-repeat="thesaurus in thesauri" ng-class="{'checked': thesaurus.checked}">
 

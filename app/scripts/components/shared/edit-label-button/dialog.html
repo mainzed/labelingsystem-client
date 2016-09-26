@@ -44,8 +44,8 @@
         </span>
         -->
 
-        
-       
+
+
 
     </div>
 
@@ -53,10 +53,10 @@
     <div class="dialogbox dialog-full">
       <h4>Downloads</h4>
        <span class="downloadlist">
-          <a ng-href="{{getDownloadUrl(label.id) + '.jsonld'}}" target="_blank" ng-click="$event.stopPropagation()">JSONLD</a>
-          <a ng-href="{{getDownloadUrl(label.id) + '.ttl'}}" target="_blank" ng-click="$event.stopPropagation()">Turtle</a>
-          <a ng-href="{{getDownloadUrl(label.id) + '.rdf'}}" target="_blank" ng-click="$event.stopPropagation()">RDF/XML</a>
-          <a ng-href="{{getDownloadUrl(label.id) + '.n3'}}" target="_blank" ng-click="$event.stopPropagation()">N-Triples</a>
+          <a ng-href="{{ label.getUrl() + '.jsonld' }}" target="_blank" ng-click="$event.stopPropagation()">JSONLD</a>
+          <a ng-href="{{ label.getUrl() + '.ttl' }}" target="_blank" ng-click="$event.stopPropagation()">Turtle</a>
+          <a ng-href="{{ label.getUrl() + '.rdf' }}" target="_blank" ng-click="$event.stopPropagation()">RDF/XML</a>
+          <a ng-href="{{ label.getUrl() + '.n3'}}" target="_blank" ng-click="$event.stopPropagation()">N-Triples</a>
         </span>
     </div>
 

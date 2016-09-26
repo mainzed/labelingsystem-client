@@ -31,15 +31,6 @@
         // load current label
         $scope.label = LabelService.get({id: $routeParams.lID});
 
-        /**
-         * Get skos of label url
-         * @param {string} id - label ID
-         * @return {string} url to download vocab in skos format
-         */
-        $scope.getDownloadUrl = function(id) {
-            return ConfigService.host + "/labels/" + id;
-        };
-
         // used by views
         $scope.languages = ConfigService.languages;
 

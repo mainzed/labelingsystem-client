@@ -14,7 +14,7 @@ angular.module('labelsApp')
         shortcut: "@"  // "thesauri"
     },
     template: '<span class="{{$ctrl.icon}} icon" ng-click="$ctrl.openDialog()"></span>',
-    controller: function ($scope, $location, $document, $anchorScroll, $timeout, ngDialog) {
+    controller: function ($scope, $location, $document, $anchorScroll, $timeout, ngDialog, ConfigService) {
 
         var ctrl = this;
 

@@ -59,8 +59,7 @@ angular.module('labelsApp').run(function ($rootScope, $location, $route, AuthSer
     // to prevent this for public routes use "access: {restricted: true}"
     $rootScope.$on('$routeChangeStart', function (event, next, current) {
 
-        if (next.access) {  // allow unit tests 
-
+        if (next.access) {  // allow unit tests
             // sets user object before everything else so that isLoggedIn is synchronous
             AuthService.getUserStatus().then(function() {
                 if (next.access.restricted && !AuthService.isLoggedIn()){

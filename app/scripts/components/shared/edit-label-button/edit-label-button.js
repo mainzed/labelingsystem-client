@@ -13,7 +13,7 @@ angular.module('labelsApp')
         data: "=",
     },
     template: '<span class="icon-more icon" ng-click="$ctrl.openDialog()"></span>',
-    controller: function ($scope, ngDialog) {
+    controller: function ($scope, ngDialog, ConfigService) {
         var ctrl = this;
 
         /**
@@ -29,6 +29,15 @@ angular.module('labelsApp')
                 disableAnimation: true,
                 scope: $scope
             });
+        };
+
+        /**
+         * Get skos of label url
+         * @param {string} id - label ID
+         * @return {string} url to download vocab in skos format
+         */
+        $scope.getDownloadUrl = function(id) {
+            return ConfigService.host + "/labels/" + id;
         };
     }
 
