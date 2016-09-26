@@ -8,14 +8,13 @@
 */
 angular.module('labelsApp')
 
-.component('lsEditlabelButton', {
+.component('lsEditLabelButton', {
     bindings: {
         data: "=",
     },
     template: '<span class="icon-more icon" ng-click="$ctrl.openDialog()"></span>',
-    controller: function ($scope, ngDialog, ThesauriService) {
+    controller: function ($scope, ngDialog) {
         var ctrl = this;
-
 
         /**
          * Opens the metadata/settings dialog of a vocabulary.

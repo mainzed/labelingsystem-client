@@ -68,7 +68,7 @@ angular.module('labelsApp')
     Concept.prototype.delete = function(successCallback, errorCallback) {
         var me = this;
         $http.delete(ConfigService.host + '/labels/' + me.id, {
-            user: "demo",
+            user: AuthService.getUser().id,
             type: "delete"
         }).then(function() {
             successCallback();
@@ -263,7 +263,7 @@ angular.module('labelsApp')
         var me = this;
         $http.put(ConfigService.host + '/labels/' + me.id, {
             item: me,
-            user: "demo"
+            user: AuthService.getUser().id
         }).then(function() {
             successCallback();
         }, function() {
