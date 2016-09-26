@@ -159,8 +159,10 @@ textarea:focus {	outline: none; }
 #header.box {		cursor: auto; }
 .small 	{			margin-bottom: @marginbottombox; margin-left: @marginoutboxsmall; position: relative; min-height: @boxheight; }
 .bigbox {			width: calc(100% - @marginoutside - @marginoutboxsmall); margin-bottom: @marginbottombox; margin-left: @marginoutboxsmall; position: relative;	}
-.bigbox:hover {		background: white; }
-.vocabulary {		width: calc((100% - @marginoutside * 2 - @marginoutboxsmall * 2) / 5); margin-left: @marginoutboxsmall; height: 250px; 
+.bigboxwrapper:hover div {		
+					background: white; }
+.bigboxwrapper {}
+.vocabulary {		width: calc((100% - @marginoutside * 2 - @marginoutboxsmall * 3) / 5); margin-left: @marginoutboxsmall; height: 250px; 
 					margin-bottom: @marginoutboxsmall; position: relative;  
 					@media screen and (max-width: 1600px) {width: calc((100% - @marginoutside * 2 - @marginoutboxsmall) / 3); }}
 .vocabulary:hover {	background: white;}
