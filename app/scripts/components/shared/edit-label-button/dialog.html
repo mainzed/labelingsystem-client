@@ -11,17 +11,6 @@
   <div class="nano">
   <div class="nano-content">
 
-    <!-- <div class="dialogbox dialog-full" ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}">
-
-      <h4>main term:</h4>
-      <input type="text" ng-model="prefLabel.value"></input>
-
-    </div> -->
-
-
-    <!-- <div class="line-dialog"></div> -->
-
-
 
     <div class="dialogbox dialog-full">
       <h4>Meta data</h4>
@@ -34,17 +23,6 @@
 
         <span class="listtype">Date of creation</span>
         <span class="listcontent" ng-bind-template="{{ label.created | date: 'dd.MM.yyyy' }}"></span>
-
-        <!--
-        <span class="listtype">Contributors:</span>
-        <span class="listcontent">
-          <ul>
-            <li ng-repeat="contributor in label.contributors" ng-bind="contributor"></li>
-          </ul>
-        </span>
-        -->
-
-
 
 
     </div>
@@ -63,20 +41,8 @@
     <div class="line-dialog line"></div>
     <div class="dialogbox dialog-full">
       <h4>Functions</h4>
-      <ls-confirm-button on-confirm="deleteConcept(label.id); closeThisDialog()"></ls-confirm-button>
+      <ls-confirm-button on-confirm="deleteConcept(label); closeThisDialog()"></ls-confirm-button>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   </div>

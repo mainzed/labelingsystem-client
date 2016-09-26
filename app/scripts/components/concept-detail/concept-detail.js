@@ -78,18 +78,6 @@
         };
 
         /**
-         * Deletes a concept based on its ID.
-         */
-        // $scope.deleteConcept = function() {
-        //     $scope.label.delete(function() {
-        //         console.log("successfully removed");
-        //         $location.path("/admin/vocabularies/" + $scope.vocabulary.id + "/concepts");
-        //     }, function error(res) {
-        //         console.log(res);
-        //     });
-        // };
-
-        /**
          * Link a search result as a child concept to the current concept.
          * @param {Object} concept - internal or external concept object
          * @param {string} relation - Concept-to-Concept relation  (e.g. "broader" or "exactMatch")

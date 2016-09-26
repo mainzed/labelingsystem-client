@@ -14,7 +14,7 @@ angular.module('labelsApp')
         shortcut: "@"  // "thesauri"
     },
     template: '<span class="{{$ctrl.icon}} icon" ng-click="$ctrl.openDialog()"></span>',
-    controller: function ($scope, $location, $document, $anchorScroll, $timeout, ngDialog, ConfigService) {
+    controller: function ($scope, $location, $document, $anchorScroll, $timeout, ngDialog, VocabService, ConfigService) {
 
         var ctrl = this;
 
@@ -49,6 +49,14 @@ angular.module('labelsApp')
 
         $scope.onCheck = function() {
             $scope.changedThesauri = true;
+        };
+
+        $scope.deleteVocab = function(id) {
+            VocabService.remove({id: id}, function() {
+                $location.path("/admin/vocabularies/");
+            }, function error(res) {
+                console.log(res);
+            });
         };
 
         this.update = function(newTitle, newDescription) {
