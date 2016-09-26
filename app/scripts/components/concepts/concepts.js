@@ -16,7 +16,7 @@
         // init nanoscroller here to prevent default scrollbar while loading boxes
         $(".nano").nanoScroller();
 
-        $scope.user = AuthService.getUser();
+        //$scope.user = AuthService.getUser();
 
         // initial values
         $scope.tooltips = TooltipService;

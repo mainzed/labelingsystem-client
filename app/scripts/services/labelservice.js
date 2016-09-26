@@ -17,7 +17,7 @@ angular.module('labelsApp')
         'remove': {
             method: 'DELETE',
             params: {
-                user: AuthService.getUser().name,
+                user: "demo",
                 type: "delete"
             }
         }
