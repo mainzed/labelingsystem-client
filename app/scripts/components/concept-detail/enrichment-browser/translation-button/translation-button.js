@@ -16,9 +16,14 @@
     templateUrl: "scripts/components/concept-detail/enrichment-browser/translation-button/translation-button.html",
 
     // The controller that handles our component logic
-    controller: function ($scope, ngDialog, ConfigService) {
+    controller: function ($scope, ngDialog, LanguageService) {
         var ctrl = this;
-        $scope.languages = ConfigService.languages;
+
+        $scope.languages = LanguageService.query().then(function(languages) {
+            $scope.languages = languages;
+        }, function(res) {
+            console.log(res);
+        });
 
         // watcher for data
         $scope.$watchCollection(function() {

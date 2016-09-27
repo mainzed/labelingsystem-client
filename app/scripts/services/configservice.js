@@ -51,18 +51,6 @@ angular.module('labelsApp')
         chronontology: 5
     };
 
-    // available  languages
-    this.languages = [
-        { name: "German", value: "de" },
-        { name: "English", value: "en" },
-        { name: "Spanish", value: "es" },
-        { name: "Italian", value: "it" },
-        { name: "French", value: "fr" },
-        { name: "Dutch", value: "nl"},
-        { name: "Iceland", value: "is"},
-        { name: "Hebrew", value: "he"}
-    ];
-
     // limit of concepts shown in concepts overview and enrichment-browser 'concepts'-tab
     this.conceptsLimit = 25;
 

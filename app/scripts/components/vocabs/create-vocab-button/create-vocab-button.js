@@ -12,9 +12,13 @@
         onConfirm: "&"
     },
     template: '<span type="button" class="plusposition" ng-click="$ctrl.openDialog()">+</span>',
-    controller: function ($scope, ngDialog, ConfigService) {
+    controller: function ($scope, ngDialog, ConfigService, LanguageService) {
 
-        $scope.languages = ConfigService.languages;
+        $scope.languages = LanguageService.query().then(function(languages) {
+            $scope.languages = languages;
+        }, function(res) {
+            console.log(res);
+        });
 
         $scope.maxLength = ConfigService.vocabDescriptionLength;
         this.openDialog = function() {

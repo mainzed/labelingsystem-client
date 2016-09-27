@@ -12,7 +12,7 @@
     },
     templateUrl: "scripts/components/concept-detail/concept-detail.html",
 
-    controller: function ($scope, $routeParams, $timeout, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ResourcesService, TooltipService, SearchService, UserSettingsService, ThesauriService, WaybackService, ConfigService) {
+    controller: function ($scope, $routeParams, $timeout, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ResourcesService, TooltipService, SearchService, UserSettingsService, LanguageService, ThesauriService, WaybackService, ConfigService) {
 
         // init nanoscroller here to prevent default scrollbar while loading boxes
         $(".nano").nanoScroller();
@@ -31,8 +31,6 @@
         // load current label
         $scope.label = LabelService.get({id: $routeParams.lID});
 
-        // used by views
-        $scope.languages = ConfigService.languages;
 
         $scope.addTranslation = function(term, lang) {
             var newTranslation = {

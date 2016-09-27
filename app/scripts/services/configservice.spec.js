@@ -35,9 +35,4 @@ describe('Service: ConfigService', function () {
         expect(ConfigService.scores.constructor).toBe(Object);
     });
 
-    it("should provide languages property", function() {
-        expect(ConfigService.hasOwnProperty("languages")).toBe(true);
-        expect(ConfigService.languages.constructor).toBe(Array);
-    });
-
 });
