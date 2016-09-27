@@ -38,11 +38,11 @@
 
         $scope.onDescriptionKeyPress = function(e) {
             //console.log();
-            if ($scope.newVocab.description.length > ConfigService.vocabDescriptionLength) {
+            if ($scope.newVocab.description.length > ConfigService.vocabDescriptionLength - 1) {
                 // prevent new characters from being added
                 e.preventDefault();
                 // shorten description back to allowed length
-                $scope.newVocab.description = $scope.newVocab.description.substring(0, ConfigService.vocabDescriptionLength + 1);
+                $scope.newVocab.description = $scope.newVocab.description.substring(0, ConfigService.vocabDescriptionLength);
             }
         };
     }
