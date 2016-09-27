@@ -11,10 +11,7 @@
     bindings: {
     },
     templateUrl: "scripts/components/vocabs/vocabs.html",
-    controller: function ($scope, $q, $location, $http, ngDialog, AuthService, VocabService) {
-        this.$onInit = function () {
-            $scope.vocabularies = VocabService.query({ creator: AuthService.getUser().id });
-        };
+    controller: function ($scope, $q, $location, $rootScope, $http, ngDialog, AuthService, VocabService) {
 
         /**
          * Logout current user and redirect to login page if successfull.
@@ -39,5 +36,10 @@
                 console.log(res);
             });
         };
+
+        $rootScope.$on("userReady", function() {
+            $scope.vocabularies = VocabService.query({ creator: AuthService.getUser().id });
+            //console.log("user ready!");
+        });
     }
 });

@@ -58,10 +58,10 @@ angular.module('labelsApp').run(function ($rootScope, $location, $route, AuthSer
     // do this before a route is changed
     // to prevent this for public routes use "access: {restricted: true}"
     $rootScope.$on('$routeChangeStart', function (event, next, current) {
-
         if (next.access) {  // allow unit tests
             // sets user object before everything else so that isLoggedIn is synchronous
             AuthService.getUserStatus().then(function() {
+                $rootScope.$broadcast('userReady');  // once its ready, data gets loaded since it depends on the username
                 if (next.access.restricted && !AuthService.isLoggedIn()) {
                     $location.path('/admin/login');
                     $route.reload();

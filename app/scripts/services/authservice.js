@@ -36,11 +36,11 @@ angular.module('labelsApp')
             // handle success
             .success(function (data) {
                 if (data.status.verified) {
-                  user = data.user;  // update user object with response user object
-                  //console.log(user);
+                    user = data.user;  // update user object with response user object
+                    //console.log(user);
                 } else {
-                  user = false;
-                  $cookies.remove("lsCookie");
+                    user = false;
+                    $cookies.remove("lsCookie");
                 }
                 deferred.resolve();
             })
