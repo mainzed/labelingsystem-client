@@ -21,7 +21,8 @@
         <div class="line-dialog line"></div>
         <div class="dialogbox dialog-full">
           <h4>description</h4>
-          <textarea rows="8" cols="40" ng-model="newDescription" ng-init="newDescription = vocabulary.description"></textarea>
+          <textarea rows="8" cols="40" ng-model="newDescription" ng-paste="onDescriptionKeyPress($event, newDescription)" ng-keypress="onDescriptionKeyPress($event, newDescription)"></textarea>
+
         </div>
 
         <div class="line-dialog line"></div>

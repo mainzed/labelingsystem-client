@@ -28,6 +28,7 @@ angular.module('labelsApp')
             // save original vocab object in case the dialog gets cancelled
             $scope.vocabulary = ctrl.data;
             $scope.changedThesauri = false;
+            $scope.newDescription = $scope.vocabulary.description;
 
             $scope.vocabulary.getThesauri(function(thesauri) {
                 $scope.thesauri = thesauri;
@@ -84,6 +85,15 @@ angular.module('labelsApp')
             }, function error(res) {
                 console.log(res);
             });
+        };
+
+        $scope.onDescriptionKeyPress = function(e, description) {
+            if (description.length > ConfigService.vocabDescriptionLength - 1) {
+                // prevent new characters from being added
+                e.preventDefault();
+                // shorten description back to allowed length
+                $scope.newDescription = description.substring(0, ConfigService.vocabDescriptionLength);
+            }
         };
 
     }
