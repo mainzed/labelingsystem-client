@@ -25,7 +25,6 @@
         };
 
         $scope.createVocab = function(vocab) {
-            console.log(vocab);
             var jsonObj = {
                 item: vocab,
                 user: AuthService.getUser().id

@@ -15,7 +15,9 @@ angular.module('labelsApp')
 
                 // get siblings
                 LabelService.query({'vocab': $routeParams.vID}, function(concepts) {
-                    scope.siblings = concepts;
+                    scope.siblings = _.filter(concepts, function(o) {
+                        return o.id !== $routeParams.lID;  // skip current concept
+                    });
                 });
             });
 
