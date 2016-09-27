@@ -49,7 +49,7 @@
          * Adds a description to the current concept.
          */
         $scope.addDescription = function(value) {
-            $scope.label.setDescription(value);
+            $scope.label.description = value;
             $scope.label.save(function() {
                 // success
             }, function(res) {
@@ -100,9 +100,9 @@
             }, 0);
         });
 
-        $scope.$on('removed-description', function() {
-            delete $scope.label.scopeNote;
-        });
+        // $scope.$on('removed-description', function() {
+        //     delete $scope.label.description;
+        // });
 
         // init nano-scroller (gets refreshed in directives after render)
         $(".nano").nanoScroller();

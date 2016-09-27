@@ -77,7 +77,13 @@
         <div class="line-dialog line"></div>
         <div class="dialogbox dialog-full">
           <h4>Reference vocabulary</h4>
-          <div ng-bind="enrichmentVocabID"></div>
+          <!-- <div ng-bind="enrichmentVocabID"></div> -->
+          <div class="thesaurus" ng-repeat="vocab in vocabularies | orderBy: 'title'">
+            <ls-radiobox ng-model="thesaurus.checked" on-check="onCheck()"></ls-radiobox>
+            <h5 ng-bind="vocab.title"></h5>
+            <!-- <p ng-bind="vocab.description"></p> -->
+          </div>
+
         </div>
 
 

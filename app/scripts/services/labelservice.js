@@ -27,23 +27,11 @@ angular.module('labelsApp')
      * returns the concept's thumbnail prefLabel.
      */
     Concept.prototype.getLabel = function() {
-        var thumbnail = _.find(this.prefLabels, {isThumbnail: true});
-        if (thumbnail) {
-            return thumbnail.value;
-        } else {
-            return false;
-        }
+        return this.thumbnail;
     };
 
     Concept.prototype.setLabel = function(value) {
-        var label = _.find(this.prefLabels, {isThumbnail: true});
-
-        // remove old label
-        _.remove(this.prefLabels, {isThumbnail: true});
-
-        // add new label
-        label.value = value;
-        this.prefLabels.push(label);
+        this.thumbnail = value;
     };
 
     /**
@@ -51,17 +39,14 @@ angular.module('labelsApp')
      * @returns {Object[]} Array of prefLabel Objects
      */
     Concept.prototype.getTranslations = function() {
-        return _.filter(this.prefLabels, function(o) {
-            return !o.isThumbnail;
-        });
+        return this.translations;
     };
 
     /**
      * Appends the new translation to the concept and calls the update function.
      */
     Concept.prototype.addTranslation = function(translation) {
-        //translation.isThumbnail = false;  // so the user doesnt have to add it
-        this.prefLabels.push(translation);
+        this.translations.push(translation);
     };
 
     Concept.prototype.getUrl = function() {
@@ -72,12 +57,7 @@ angular.module('labelsApp')
      * Gets this concepts language.
      */
     Concept.prototype.getLang = function() {
-        var thumbnail = _.find(this.prefLabels, {isThumbnail: true});
-        if (thumbnail) {
-            return thumbnail.lang;
-        } else {
-            return false;
-        }
+        return this.language;
     };
 
     // Concept.prototype.delete = function(successCallback, errorCallback) {
@@ -92,10 +72,7 @@ angular.module('labelsApp')
      * Sets the description and adds language automatically.
      */
     Concept.prototype.setDescription = function(value) {
-        this.scopeNote = {
-            value: value,
-            lang: this.getLang()
-        };
+        this.description = value;
     };
 
     /**
@@ -207,13 +184,10 @@ angular.module('labelsApp')
         var qualityScore = 0;
 
         // gray boxes
-        if (this.prefLabels) {
-            qualityScore += this.prefLabels.length * ConfigService.scores.prefLabel;
+        if (this.translations) {
+            qualityScore += this.translations.length * ConfigService.scores.prefLabel;
         }
-        if (this.altLabels) {
-            qualityScore += this.altLabels.length * ConfigService.scores.altLabel;
-        }
-        if (this.scopeNote) {
+        if (this.description) {
             qualityScore += ConfigService.scores.scopeNote;
         }
         if (this.seeAlso) {
@@ -272,10 +246,7 @@ angular.module('labelsApp')
      */
     Concept.prototype.save = function(successCallback, errorCallback) {
         var me = this;
-        $http.put(ConfigService.host + '/labels/' + me.id, {
-            item: me,
-            user: AuthService.getUser().id
-        }).then(function() {
+        $http.put(ConfigService.host + '/labels/' + me.id, me).then(function() {
             successCallback();
         }, function() {
             errorCallback();

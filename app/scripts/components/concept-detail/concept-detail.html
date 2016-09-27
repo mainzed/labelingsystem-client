@@ -36,8 +36,8 @@
 
         <!-- descriptive -->
   			<div class="col halfleft">
-          <ls-translation-box ng-repeat="translation in label.getTranslations()" data="translation"></ls-translation-box>
-          <ls-description-box data="label.scopeNote" ng-show="label.scopeNote"></ls-description-box>
+          <ls-translation-box ng-repeat="translation in label.translations" data="translation"></ls-translation-box>
+          <ls-description-box ng-show="label.description" data="label"></ls-description-box>
   			</div>
 
   			<!-- relations column -->

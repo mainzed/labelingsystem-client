@@ -22,12 +22,13 @@ describe('Service: LabelService', function () {
         beforeEach(inject(function($httpBackend) {
             $httpBackend.when('GET', 'http://143.93.114.135/api/v1/labels/36799281-7c6c-4251-a0c1-ef20ce07a8b9').respond(200, JSON.stringify({
                 id: '36799281-7c6c-4251-a0c1-ef20ce07a8b9',
-                prefLabels: [
-                    { value: "english label", lang: "en", isThumbnail: true },
-                    { value: "german translation", lang: "de", isThumbnail: false },
+                thumbnail: "english label",
+                translations: [
+                    { value: "german translation", lang: "de" },
                     { value: "icelandic translation", lang: "is" }
                 ],
-                scopeNote: { value: "a description", lang: "en"},
+                description: "a description",
+                language: "en",
                 broader: [
                     "some-broader-concept-id"
                 ]
@@ -49,12 +50,12 @@ describe('Service: LabelService', function () {
             expect(concept.id).toBe("36799281-7c6c-4251-a0c1-ef20ce07a8b9");
         });
 
-        it("getLabel() should return thumbnail prefLabel", function() {
+        it("getLabel() should return thumbnail", function() {
             var label = concept.getLabel();
             expect(label).toBe("english label");
         });
 
-        it("setLabel() should update thumbnail prefLabel", function() {
+        it("setLabel() should update thumbnail", function() {
             concept.setLabel("new label");
             expect(concept.getLabel()).toBe("new label");
         });
@@ -66,7 +67,7 @@ describe('Service: LabelService', function () {
             expect(translations[0].lang).toBe("de");
         });
 
-        it("addTranslation() should add prefLabel", function() {
+        it("addTranslation() should add translation", function() {
             var translations = concept.getTranslations();
             expect(translations.length).toBe(2);
 
@@ -89,20 +90,13 @@ describe('Service: LabelService', function () {
 
         it("getLang() should return language", function() {
             // when only title available
-            delete concept.scopeNote;
             var language = concept.getLang();
-            expect(language).toBe("en");
-
-            // when only description available
-            delete concept.title;
-            language = concept.getLang();
             expect(language).toBe("en");
         });
 
         it("setDescription() should set description", function() {
             concept.setDescription("new description!");
-            expect(concept.scopeNote.value).toBe("new description!");
-            expect(concept.scopeNote.lang).toBe("en");
+            expect(concept.description).toBe("new description!");
         });
 
         it("getChildren() should return internal concepts");
@@ -159,10 +153,10 @@ describe('Service: LabelService', function () {
         });
 
         it("getScore() should return the quality score number", function() {
-            expect(concept.getScore()).toBe(9);
+            expect(concept.getScore()).toBe(8);
 
             delete concept.broader;
-            expect(concept.getScore()).toBe(4);
+            expect(concept.getScore()).toBe(3);
         });
     });
 

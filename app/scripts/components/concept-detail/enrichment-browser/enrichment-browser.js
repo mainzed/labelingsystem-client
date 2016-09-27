@@ -65,7 +65,7 @@ angular.module('labelsApp')
             };
 
             scope.orderByLabel = function(concept) {
-                return concept.getLabel();
+                return concept.thumbnail;
             };
 
             // press "enter" to start search

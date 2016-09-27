@@ -45,7 +45,7 @@
 
         // "enter" to verify
         $document.keydown(function(e) {
-            if (ctrl.url.length > 0 && !ctrl.processing && e.keyCode === 13) {  // enter to verify
+            if (ctrl.url && ctrl.url.length > 0 && !ctrl.processing && e.keyCode === 13) {  // enter to verify
                 ctrl.verifyLink(ctrl.url);
             }
         });

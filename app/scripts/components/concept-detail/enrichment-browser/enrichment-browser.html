@@ -21,7 +21,7 @@
 
       <!-- labels tab -->
       <div class="tab" ng-click="showSearch = false" ng-class="{'active': !showSearch}">
-        <span class="tablabel">Concepts of {{vocabulary.title.value}}</span>
+        <span class="tablabel">Concepts of {{vocabulary.title}}</span>
         <ls-edit-vocab-button data="vocab" shortcut="selectVocab"></ls-edit-vocab-button>
 
       </div>
@@ -43,8 +43,12 @@
 	</div>
 
   <div class="col left">
+    <!-- add translation -->
     <ls-translation-button data="label.prefLabels" on-confirm="addTranslation($term, $lang)"></ls-translation-button>
-    <ls-description-button data="label.scopeNote" on-confirm="addDescription($description)"></ls-description-button>
+
+    <!-- add description, uses data to hide or show -->
+    <ls-description-button data="label.description" on-confirm="addDescription($description)"></ls-description-button>
+
     <ls-wayback-button on-confirm="addLink($uri)"></ls-wayback-button>
 	</div>
 

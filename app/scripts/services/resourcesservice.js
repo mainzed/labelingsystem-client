@@ -17,7 +17,7 @@ angular.module('labelsApp')
             success(response.data);
         }, function(response) {
             // failure
-            failure(response.data.error.message);
+            failure(response);
         });
 
     };

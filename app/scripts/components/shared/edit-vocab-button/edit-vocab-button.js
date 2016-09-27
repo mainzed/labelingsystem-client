@@ -30,6 +30,12 @@ angular.module('labelsApp')
             $scope.changedThesauri = false;
             $scope.newDescription = $scope.vocabulary.description;
 
+            // get all vocabs to be able to select them
+            console.log("load vocabs");
+            $scope.vocabularies = VocabService.query(function() {
+                $(".nano").nanoScroller();
+            });
+
             $scope.vocabulary.getThesauri(function(thesauri) {
                 $scope.thesauri = thesauri;
 
