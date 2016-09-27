@@ -17,7 +17,7 @@
 
         ctrl.openUserDialog = function() {
             ngDialog.open({
-                template: 'scripts/components/vocabs/edit-user-button/dialog.html',
+                template: 'scripts/components/shared/footer/edit-user-button/dialog.html',
                 className: 'bigdialog',
                 showClose: false,
                 closeByDocument: false,

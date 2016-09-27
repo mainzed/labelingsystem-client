@@ -65,7 +65,7 @@ angular.module('labelsApp')
             // updates automatically
             if ($scope.changedThesauri) {
                 $scope.vocabulary.setThesauri($scope.thesauri, function() {
-                    console.log("successfully updated thesauri");
+                    //
                 });
             }
 
@@ -73,7 +73,7 @@ angular.module('labelsApp')
             $scope.vocabulary.setDescription(newDescription);
 
             $scope.vocabulary.save(function() {
-                console.log("update successfull");
+                //
             }, function error(res) {
                 console.log(res);
             });

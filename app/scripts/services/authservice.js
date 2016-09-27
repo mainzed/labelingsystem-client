@@ -120,4 +120,17 @@ angular.module('labelsApp')
         return user;
     };
 
+    /**
+     * @param {Object} user
+     *  */
+    this.updateUser = function(user) {
+        $http.put(ConfigService.host + "/agents/" + user.id, user).then(function(res) {
+            if (res.data.id === user.id && res.status === 201) {
+                user = user.data;
+            }
+        }, function error(res) {
+            console.log(res);
+        });
+    };
+
 });

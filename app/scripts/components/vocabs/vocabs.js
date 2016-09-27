@@ -13,17 +13,6 @@
     templateUrl: "scripts/components/vocabs/vocabs.html",
     controller: function ($scope, $q, $location, $rootScope, $http, ngDialog, AuthService, VocabService) {
 
-        /**
-         * Logout current user and redirect to login page if successfull.
-         */
-        $scope.onLogoutClick = function() {
-            AuthService.logout().then(function () {
-                $location.path('/admin/login');
-            }, function() {
-                console.log("logout failed!!");
-            });
-        };
-
         $scope.createVocab = function(vocab) {
             var jsonObj = {
                 item: vocab,
