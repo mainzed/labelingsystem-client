@@ -7,7 +7,7 @@
  * # conceptBox
  */
 angular.module('labelsApp')
-  .directive('lsLabelBox', function ($location, $timeout, ngDialog, LabelService, HelperService, $routeParams, AuthService, ConfigService) {
+  .directive('lsLabelBox', function ($rootScope, $location, $timeout, ngDialog, LabelService, HelperService, $routeParams, AuthService, ConfigService) {
     return {
         templateUrl: "scripts/components/concept-detail/label-box/label-box.html",
         restrict: 'E',
@@ -20,7 +20,7 @@ angular.module('labelsApp')
             // get concept data from ID
             LabelService.get({id: scope.data}, function(concept) {
                 scope.concept = concept;
-                $(".nano").nanoScroller();
+                //$(".nano").nanoScroller();
             }, function(err) {
                 console.log(err);
             });
@@ -58,13 +58,22 @@ angular.module('labelsApp')
                 //     scope.broaderConcepts = scope.broaderConcepts.concat(broaderResources);
                 // });
 
-                ngDialog.open({
+                var conceptDialog = ngDialog.open({
                     template: "scripts/components/concept-detail/label-box/dialog.html",
                     className: 'bigdialog',
                     showClose: false,
                     closeByDocument: false,
                     disableAnimation: true,
                     scope: scope
+                });
+
+                // add listener to init nanoScroller once the dialog is loaded
+                $rootScope.$on('ngDialog.opened', function (e, $dialog) {
+                    if (conceptDialog.id === $dialog.attr('id')) {  // is the resource dialog
+                        $timeout(function() {
+                            $(".nano").nanoScroller();
+                        }, 0);
+                    }
                 });
             };
 

@@ -7,7 +7,7 @@
 * # resourceBox
 */
 angular.module('labelsApp')
-.directive('lsResourceBox', function ($location, $timeout, $window, ngDialog, LabelService, HelperService, $routeParams, AuthService, ResourcesService) {
+.directive('lsResourceBox', function ($location, $rootScope, $timeout, $window, ngDialog, LabelService, HelperService, $routeParams, AuthService, ResourcesService) {
   return {
         templateUrl: "scripts/components/concept-detail/resource-box/resource-box.html",
         restrict: 'E',
@@ -26,7 +26,6 @@ angular.module('labelsApp')
             // get resource data from uri
             ResourcesService.get(scope.data.uri, function(resource) {
                 scope.resource = resource;
-                $(".nano").nanoScroller();
             });
 
             // determine relation icon
@@ -42,13 +41,22 @@ angular.module('labelsApp')
              * Opens a dialog with detailed information.
              */
             scope.openDialog = function() {
-                ngDialog.open({
+                var resourceDialog = ngDialog.open({
                     template: "scripts/components/concept-detail/resource-box/dialog.html",
                     className: 'bigdialog',
                     showClose: false,
                     closeByDocument: false,
                     disableAnimation: true,
                     scope: scope
+                });
+
+                // add listener to init nanoScroller once the dialog is loaded
+                $rootScope.$on('ngDialog.opened', function (e, $dialog) {
+                    if (resourceDialog.id === $dialog.attr('id')) {  // is the resource dialog
+                        $timeout(function() {
+                            $(".nano").nanoScroller();
+                        }, 0);
+                    }
                 });
             };
 
@@ -138,14 +146,13 @@ angular.module('labelsApp')
                 $window.open(scope.resource.uri, "_blank");
             };
 
+
             // scope.$watchCollection("resource", function() {
             //     // refresh nanoscroller
             //     console.log("resource refresh");
             //     $timeout(function() {
             //         $(".nano").nanoScroller();
             //     }, 5);
-            //
-            //
             // });
             //
             // scope.$watchCollection("data", function() {

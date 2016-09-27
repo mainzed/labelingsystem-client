@@ -14,7 +14,7 @@ angular.module('labelsApp')
         shortcut: "@"  // "thesauri"
     },
     template: '<span class="{{$ctrl.icon}} icon" ng-click="$ctrl.openDialog()"></span>',
-    controller: function ($scope, $location, $document, $anchorScroll, $timeout, ngDialog, VocabService, ConfigService) {
+    controller: function ($scope, $rootScope, $location, $document, $anchorScroll, $timeout, ngDialog, VocabService, ConfigService) {
 
         var ctrl = this;
 
@@ -39,6 +39,13 @@ angular.module('labelsApp')
                     closeByDocument: false,
                     disableAnimation: true,
                     scope: $scope
+                });
+
+                // add listener to init nanoScroller once the dialog is loaded
+                $rootScope.$on('ngDialog.opened', function (e, $dialog) {
+                    if ($scope.dialog.id === $dialog.attr('id')) {  // is the resource dialog
+                        $(".nano").nanoScroller();
+                    }
                 });
             });
 
