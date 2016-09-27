@@ -79,16 +79,5 @@ angular.module('labelsApp')
             });
         };
 
-        // hotkey: press "esc" to cancel
-        $document.keydown(function(e) {
-            if (e.keyCode === 27) {  // esc
-                if ($scope.dialog) {
-                    $scope.dialog.close();
-                }
-            }
-        });
-
-        // TODO: hotkey: press "enter" to apply
-
     }
 });

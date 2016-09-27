@@ -12,7 +12,7 @@
     },
     templateUrl: "scripts/components/login/login.html",
 
-    controller: function ($scope, $location, $document, AuthService) {
+    controller: function ($scope, $rootScope, $location, $document, AuthService) {
         //skip login if authenticated
         if (AuthService.isLoggedIn()) {
             $location.path("admin/vocabularies");
@@ -29,7 +29,6 @@
                 $scope.error = true;
                 $scope.errorMessage = "some error message";  // res.userMessage
                 $scope.disabled = false;
-                console.log($scope.disabled);
                 $scope.username = "";
                 $scope.password = "";
             });
@@ -37,12 +36,13 @@
 
         // hotkeys
         $document.keydown(function(e) {
-            if (e.keyCode === 13) {  // enter
+            if ($location.path() === "/admin/login" && e.keyCode === 13) {  // enter
                 if ($scope.username && $scope.password) {
                     $scope.onLoginClick();
                 }
             }
         });
+
 
     }
 });

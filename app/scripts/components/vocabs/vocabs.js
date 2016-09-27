@@ -29,5 +29,7 @@
             $scope.vocabularies = VocabService.query({ creator: AuthService.getUser().id });
             //console.log("user ready!");
         });
+
+        //$(".nano").nanoScroller();
     }
 });

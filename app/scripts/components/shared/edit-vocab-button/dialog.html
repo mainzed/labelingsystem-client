@@ -92,5 +92,5 @@
   <button id="someButton" type="button" class="apply" ng-click="$ctrl.update(newTitle, newDescription); closeThisDialog()" ng-class="{'inactive': newTitle === vocabulary.title && newDescription === vocabulary.description && !changedThesauri}">Apply</button>
 
   <!-- cancel -->
-  <button type="button" class="cancel" ng-click="closeThisDialog()">Cancel</button>
+  <button type="button" class="cancel" ng-click="closeThisDialog()" ng-keypress="$ctrl.onCancelKeyDown($event)">Cancel</button>
 </div>

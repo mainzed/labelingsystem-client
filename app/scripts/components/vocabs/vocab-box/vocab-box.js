@@ -24,5 +24,7 @@ angular.module('labelsApp')
         this.onClick = function(id) {
             $location.path('/admin/vocabularies/' + id + '/concepts');
         };
+
+        $(".nano").nanoScroller();
     }
 });
