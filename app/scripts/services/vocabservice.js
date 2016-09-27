@@ -23,7 +23,7 @@ angular.module('labelsApp')
     // this.description is optional
 
     Vocab.prototype.getLang = function() {
-        return this.description.lang || this.title.lang;
+        return this.title.lang;
     };
 
     Vocab.prototype.setTitle = function(value) {
@@ -110,12 +110,9 @@ angular.module('labelsApp')
     Vocab.prototype.save = function(successCallback, errorCallback) {
         var me = this;
 
-        // remove thesauri (TODO: florian ignore this property)
-        //delete me.thesauri;
-
         var jsonObj = {
             item: me,
-            user: "demo"
+            user: AuthService.getUser().id
         };
 
         $http.put(ConfigService.host + '/vocabs/' + me.id, jsonObj).then(function success(res) {
@@ -123,7 +120,6 @@ angular.module('labelsApp')
         }, function error(res) {
             errorCallback(res);
         });
-
     };
 
 
