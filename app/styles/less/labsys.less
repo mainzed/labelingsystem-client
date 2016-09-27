@@ -88,7 +88,7 @@ textarea:focus {	outline: none; }
 #header h1 {		margin-top: 45px; float: left; font-weight: bold;
 					@media screen and (max-width: 1600px) { margin-top: 53px;} }
 .nano {				 	}
-.noresult {			width: calc(100% - @marginoutboxsmall - @marginoutside); height: 100%; font-size: @headlines; font-style: italic; color: @workareas; font-weight: 300;
+.noresult {			width: calc(100% - @marginoutboxsmall - @marginoutside); height: calc( 100% - 100px); font-size: @headlines; font-style: italic; color: @workareas; font-weight: 300;
 					text-align: center; position: absolute; margin-left: @marginoutboxsmall; background: @text; padding-top: 100px; }
 .cancel {			position: absolute; bottom: @marginoutside; left: @marginoutside; cursor: pointer; }
 .apply {			position: absolute; bottom: @marginoutside; right: @marginoutside; cursor: pointer; }
@@ -162,7 +162,7 @@ textarea:focus {	outline: none; }
 #header.box {		cursor: auto; }
 .small 	{			margin-bottom: @marginbottombox; margin-left: @marginoutboxsmall; position: relative; min-height: @boxheight; }
 .bigbox {			width: calc(100% - @marginoutside - @marginoutboxsmall); margin-bottom: @marginbottombox; margin-left: @marginoutboxsmall; position: relative;	}
-.smallheight {		height: 37px; }
+.smallheight {		height: 38px; }
 .smallheight .showadditionalcontent {
 					margin-top: -1px;}
 .smallheight .micropreview { 
@@ -226,7 +226,7 @@ textarea:focus {	outline: none; }
 .note {				float: left; margin-top: @margininboxsmall;		}
 .bigbox .thumbnail {
 					position: static; float: left; margin-left: @margininboxsmall;
-					margin-top: 8px; bottom: auto; left: auto; top: auto; width: auto;  }
+					margin-top: 9px; bottom: auto; left: auto; top: auto; width: auto;  }
 .bigbox .icon-more {float: right;  margin-right: @margininboxsmall; margin-top: 9px; }
 .bigbox:hover .icon-edit {
 					display: block; }
@@ -348,7 +348,7 @@ textarea:focus {	outline: none; }
 .dialogbox input {	width: calc(100% - 2 * @marginoutside); margin-left: @marginoutside; 
 					padding: @margininboxsmall; background: white; color: black; border: 0; height: 35px; }
 .dialogbox select { width: calc(100% - 2 * @marginoutside); margin-left: @marginoutside; background: @middle;
-					padding: calc( @margininboxsmall / 2); border: 1px solid @workareas; color: white; }
+					padding: calc( @margininboxsmall / 2); border: 1px solid @workareas; color: white; height: 35px; }
 .label .dialogbox input {
 					 color: black; }
 .text textarea {	background: white;  }					
