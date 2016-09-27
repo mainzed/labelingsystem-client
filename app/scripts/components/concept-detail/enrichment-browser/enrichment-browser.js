@@ -12,7 +12,6 @@ angular.module('labelsApp')
 
             // wait until resolved
             scope.label.$promise.then(function() {
-
                 // get siblings
                 LabelService.query({'vocab': $routeParams.vID}, function(concepts) {
                     scope.siblings = _.filter(concepts, function(o) {
@@ -66,7 +65,7 @@ angular.module('labelsApp')
             };
 
             scope.orderByLabel = function(concept) {
-                return concept.getLabel().value;
+                return concept.getLabel();
             };
 
             // press "enter" to start search

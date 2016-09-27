@@ -17,7 +17,6 @@ angular.module('labelsApp')
             parentConcept: "="  // needed to push updates on relation changes (maybe not)
         },
         link: function postLink(scope, element) {
-
             // get concept data from ID
             LabelService.get({id: scope.data}, function(concept) {
                 scope.concept = concept;

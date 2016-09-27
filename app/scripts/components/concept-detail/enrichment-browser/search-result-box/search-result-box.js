@@ -19,23 +19,11 @@ angular.module('labelsApp')
 
             // workaround for global scope
             scope.data = scope.box;
-            //console.log(scope.data.type);
-            // TODO: check if same vocab! with isolated scope
-            // scope.isSameVocab = function() {
-            //     return scope.data.id;
-            // };
-            //
-            // if (scope.isSameVocab()) {
-            //     scope.data.type = "label";
-            // }
 
             // determine type class
-            if (scope.data.type !== "ls") {
-                scope.typeClass = scope.data.type;
-            } else if (scope.data.scheme === scope.vocabulary.title.value) {  // same vocab
+            scope.typeClass = scope.data.type;
+            if (scope.data.scheme === scope.vocabulary.title) {  // same vocab
                 scope.typeClass = "label";
-            } else {
-                scope.typeClass = "ls";
             }
 
             // get additional data for ls results to show minipreview

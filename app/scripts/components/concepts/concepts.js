@@ -53,7 +53,7 @@
                 "vocabID": $scope.vocabulary.id,
                 "prefLabels": [{
                     "isThumbnail": true,
-                    "lang": $scope.vocabulary.title.lang,
+                    "lang": $scope.vocabulary.language,
                     "value": term
                 }]
             };
@@ -61,7 +61,7 @@
             if (description) {
                 newLabel.scopeNote = {
                     value: description,
-                    lang: $scope.vocabulary.title.lang,
+                    lang: $scope.vocabulary.language,
                 };
             }
 
