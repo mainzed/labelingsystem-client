@@ -17,8 +17,8 @@
 		<div class="line-dialog line"></div>
 
 		<div class="dialogbox dialog-full">
-			<h4>description</h4>
-			<input type="text" placeholder="description" ng-model="newVocab.description">
+      <h4>description</h4>
+      <textarea rows="8" cols="40"placeholder="description" ng-model="newVocab.description" ng-keypress="onDescriptionKeyPress($event)"></textarea>
 		</div>
 
 		<div class="line-dialog line"></div>

@@ -16,6 +16,7 @@
 
         $scope.languages = ConfigService.languages;
 
+        $scope.maxLength = ConfigService.vocabDescriptionLength;
         this.openDialog = function() {
 
             $scope.newVocab = {
@@ -33,6 +34,16 @@
                 disableAnimation: true,
                 scope: $scope
             });
+        };
+
+        $scope.onDescriptionKeyPress = function(e) {
+            //console.log();
+            if ($scope.newVocab.description.length > ConfigService.vocabDescriptionLength) {
+                // prevent new characters from being added
+                e.preventDefault();
+                // shorten description back to allowed length
+                $scope.newVocab.description = $scope.newVocab.description.substring(0, ConfigService.vocabDescriptionLength + 1);
+            }
         };
     }
 });
