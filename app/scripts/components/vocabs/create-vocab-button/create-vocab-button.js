@@ -19,8 +19,9 @@
         this.openDialog = function() {
 
             $scope.newVocab = {
-                title: {},
-                description: {},
+                title: "",
+                description: "",
+                language: "",
                 releaseType: "draft"
             };
 

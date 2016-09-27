@@ -1,7 +1,7 @@
 <div class="dialogwrapper label">
 
   <div class="dialogheader">
-    <h3 ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: true}" ng-bind="prefLabel.value"></h3>
+    <h3 ng-bind="label.getLabel()"></h3>
     <p class="typeinformation"> metadata/settings</p>
     <div class="line-bottom line"></div>
   </div>
@@ -11,6 +11,9 @@
   <div class="nano">
   <div class="nano-content">
 
+    <div class="dialogbox dialog-full">
+      <input type="text" placeholder="label" ng-model="newLabel">
+    </div>
 
     <div class="dialogbox dialog-full">
       <h4>Meta data</h4>
@@ -52,5 +55,5 @@
 
 
   <div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-  <div class="apply" ng-click="onThumbnailPrefLabelEdit(label); closeThisDialog()">Apply</div>
+  <div class="apply" ng-click="$ctrl.onApply(newLabel); closeThisDialog()" ng-class="{'inactive': newLabel === label.getLabel()}">Apply</div>
 </div>

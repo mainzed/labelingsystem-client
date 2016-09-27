@@ -21,6 +21,7 @@ angular.module('labelsApp')
          */
         this.openDialog = function() {
             $scope.label = ctrl.data;
+            $scope.newLabel = $scope.label.getLabel();
             ngDialog.open({
                 template: 'scripts/components/shared/edit-label-button/dialog.html',
                 className: 'bigdialog',
@@ -47,6 +48,15 @@ angular.module('labelsApp')
             LabelService.remove({id: concept.id}, function() {
                 $location.path("/admin/vocabularies/" + $routeParams.vID + "/concepts");
             }, function(res) {
+                console.log(res);
+            });
+        };
+
+        this.onApply = function(value) {
+            $scope.label.setLabel(value);
+            $scope.label.save(function() {
+                //console.log("success");
+            }, function error(res) {
                 console.log(res);
             });
         };

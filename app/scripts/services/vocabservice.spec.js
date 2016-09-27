@@ -21,8 +21,9 @@ describe('Service: VocabService', function () {
         beforeEach(inject(function($httpBackend) {
             $httpBackend.when('GET', 'http://143.93.114.135/api/v1/vocabs/some-vocab-id').respond(200, JSON.stringify({
                 id: 'some-vocab-id',
-                title: { value: "vocab title", lang: "en" },
-                description: { value: "vocab description", lang: "en"}
+                title: "vocab title",
+                description: "vocab description",
+                language: "en"
             }));
 
             vocab = VocabService.get({id: "some-vocab-id"});
@@ -31,22 +32,6 @@ describe('Service: VocabService', function () {
 
         it("should return mock vocab object", function() {
             expect(vocab.id).toBe("some-vocab-id");
-        });
-
-        it("getLang() should return language", function() {
-            expect(vocab.getLang()).toBe("en");
-        });
-
-        it("setTitle() should update title", function() {
-            vocab.setTitle("new vocab title");
-            expect(vocab.title.value).toBe("new vocab title");
-            expect(vocab.title.lang).toBe("en");
-        });
-
-        it("setDescription() should create or update description", function() {
-            vocab.setDescription("new vocab description");
-            expect(vocab.description.value).toBe("new vocab description");
-            expect(vocab.title.lang).toBe("en");
         });
 
         it("setThesauri() should replace thesauri");

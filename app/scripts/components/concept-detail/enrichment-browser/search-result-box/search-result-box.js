@@ -19,7 +19,7 @@ angular.module('labelsApp')
 
             // workaround for global scope
             scope.data = scope.box;
-
+            //console.log(scope.data.type);
             // TODO: check if same vocab! with isolated scope
             // scope.isSameVocab = function() {
             //     return scope.data.id;
@@ -28,6 +28,30 @@ angular.module('labelsApp')
             // if (scope.isSameVocab()) {
             //     scope.data.type = "label";
             // }
+
+            // determine type class
+            if (scope.data.type !== "ls") {
+                scope.typeClass = scope.data.type;
+            } else if (scope.data.scheme === scope.vocabulary.title.value) {  // same vocab
+                scope.typeClass = "label";
+            } else {
+                scope.typeClass = "ls";
+            }
+
+            // get additional data for ls results to show minipreview
+            if (scope.data.type === "ls") {
+
+                // set color for same vocab
+                if (scope.isSameVocab) {
+                    scope.data.type = "label";
+                }
+
+                var conceptID = scope.data.uri.split("/").pop();
+                LabelService.get({id: conceptID}, function(concept) {
+                    scope.concept = concept;
+                });
+
+            }
 
             /**
              * Opens a type-specific dialog that shows the connection (relation)

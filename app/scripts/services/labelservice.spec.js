@@ -54,6 +54,11 @@ describe('Service: LabelService', function () {
             expect(label).toBe("english label");
         });
 
+        it("setLabel() should update thumbnail prefLabel", function() {
+            concept.setLabel("new label");
+            expect(concept.getLabel()).toBe("new label");
+        });
+
         it("getTranslations() should return all prefLabel, but thumbnail prefLabel", function() {
             var translations = concept.getTranslations();
             expect(translations.length).toBe(2);

@@ -7,25 +7,25 @@
 	<div class="dialogscroll">
 	<div class="nano">
 	<div class="nano-content">
-		
+
 		<div class="dialogbox dialog-full">
 			<h4>name</h4>
-			<input type="text" placeholder="title" ng-model="newVocab.title.value">
+			<input type="text" placeholder="title" ng-model="newVocab.title">
 		</div>
 
 
 		<div class="line-dialog line"></div>
-		
+
 		<div class="dialogbox dialog-full">
 			<h4>description</h4>
-			<input type="text" placeholder="description" ng-model="newVocab.description.value">
+			<input type="text" placeholder="description" ng-model="newVocab.description">
 		</div>
 
 		<div class="line-dialog line"></div>
-		
+
 		<div class="dialogbox dialog-full">
 			<h4>Language</h4>
-			<select ng-model="newVocab.title.lang">
+			<select ng-model="newVocab.language">
 			   <option ng-repeat="language in languages | orderBy: 'name'" value="{{language.value}}" ng-bind="language.name"></option>
 			</select>
 		</div>
@@ -37,5 +37,5 @@
 
 
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="$ctrl.onConfirm({$newVocab: newVocab}); closeThisDialog()" ng-disabled="!term" ng-class="{'inactive': !newVocab.title.value || !newVocab.title.lang}">Apply</div>
+	<div class="apply" ng-click="$ctrl.onConfirm({$newVocab: newVocab}); closeThisDialog()" ng-disabled="!term" ng-class="{'inactive': !newVocab.title || !newVocab.description || !newVocab.language}">Apply</div>
 </div>

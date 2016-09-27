@@ -4,7 +4,7 @@
   </div>
 
   <div id="selectedbox">
-  	<div class="box bigbox {{ data.type }} high" ng-click="onBoxClick()">
+  	<div class="box bigbox {{ typeClass }} high" ng-click="onBoxClick()">
   	  <span class="thumbnail">{{ data.label }}</span>
   	  <span class="type" ng-bind-html="icon" title="{{ tooltip }}"></span>
   	</div>
@@ -13,7 +13,7 @@
   <div id="enrichbuttons">
 
     <!-- resource columns -->
-    <div ng-show="data.type !== 'label'">
+    <div ng-show="typeClass !== 'label'">
       <div class="col five leftout">
     		<button class="enrichbutton-ow" type="button" name="button" ng-click="addResource(data, 'broadMatch'); closeThisDialog()">
     			<span class="buttontext-ow">broad Match</span>
@@ -54,7 +54,7 @@
     </div>
 
     <!-- label columns -->
-    <div ng-show="data.type === 'label'">
+    <div ng-show="typeClass === 'label'">
       <div class="col three leftout">
     		<button class="enrichbutton-ow" type="button" name="button" ng-click="addResource(data, 'broader'); closeThisDialog()">
     			<span class="buttontext-ow">broader</span>

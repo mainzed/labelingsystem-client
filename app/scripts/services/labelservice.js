@@ -35,6 +35,17 @@ angular.module('labelsApp')
         }
     };
 
+    Concept.prototype.setLabel = function(value) {
+        var label = _.find(this.prefLabels, {isThumbnail: true});
+
+        // remove old label
+        _.remove(this.prefLabels, {isThumbnail: true});
+
+        // add new label
+        label.value = value;
+        this.prefLabels.push(label);
+    };
+
     /**
      * returns the concept's prefLabels that are not the thumbnail prefLabel.
      * @returns {Object[]} Array of prefLabel Objects

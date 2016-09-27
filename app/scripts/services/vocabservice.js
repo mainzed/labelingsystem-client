@@ -19,26 +19,6 @@ angular.module('labelsApp')
         'remove': { method: 'DELETE', params: { user: "demo", type: "delete" }}
     });
 
-    // needs this.title to construct
-    // this.description is optional
-
-    Vocab.prototype.getLang = function() {
-        return this.title.lang;
-    };
-
-    Vocab.prototype.setTitle = function(value) {
-        this.title.value = value;
-        this.title.lang = this.getLang();
-    };
-
-    Vocab.prototype.setDescription = function(value) {
-        if (!this.description) {
-            this.description = {};
-        }
-        this.description.value = value;
-        this.description.lang = this.getLang();
-    };
-
     Vocab.prototype.getUrl = function() {
         return ConfigService.host + "/vocabs/" + this.id;
     };
@@ -60,6 +40,7 @@ angular.module('labelsApp')
 
                 // preselect all vocab thesauri
                 angular.forEach(vocabThesauri, function(thesaurus) {
+                    //console.log(thesaurus.name);
 
                     //console.log(thesaurus.name);
                     var checkedThesaurus = _.find(thesauri, { 'name': thesaurus.name });
@@ -107,12 +88,7 @@ angular.module('labelsApp')
     Vocab.prototype.save = function(successCallback, errorCallback) {
         var me = this;
 
-        var jsonObj = {
-            item: me,
-            user: AuthService.getUser().id
-        };
-
-        $http.put(ConfigService.host + '/vocabs/' + me.id, jsonObj).then(function success(res) {
+        $http.put(ConfigService.host + '/vocabs/' + me.id, me).then(function success(res) {
             successCallback(res);
         }, function error(res) {
             errorCallback(res);
