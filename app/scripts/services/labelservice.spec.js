@@ -151,6 +151,13 @@ describe('Service: LabelService', function () {
             expect(concept.exactMatch[0].uri).toBe("some-concept-uri");
         });
 
+        it("addChild() should add wayback link", function() {
+            concept.addChild({ uri: "some-wayback-link", type: "wayback" }, "seeAlso");
+            expect(concept.seeAlso.length).toBe(1);
+            expect(concept.seeAlso[0].type).toBe("wayback");
+            expect(concept.seeAlso[0].uri).toBe("some-wayback-link");
+        });
+
         it("getScore() should return the quality score number", function() {
             expect(concept.getScore()).toBe(9);
 

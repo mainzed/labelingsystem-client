@@ -54,15 +54,19 @@
             $scope.label.setDescription(value);
             $scope.label.save(function() {
                 // success
-            }, function() {
+            }, function(res) {
                 // error
+                console.log(res);
             });
         };
 
         $scope.addLink = function(uri) {
-            console.log("add link: " + uri);
-            $scope.label.addChild(uri, "seeAlso");
-            //$scope.label.update();
+            $scope.label.addChild({ uri: uri}, "seeAlso");
+            $scope.label.save(function() {
+                // success
+            }, function error(res) {
+                console.log(res);
+            });
         };
 
         $scope.showEnrichmentBrowser = function() {

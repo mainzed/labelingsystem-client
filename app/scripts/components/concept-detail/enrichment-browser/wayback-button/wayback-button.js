@@ -14,13 +14,15 @@
     templateUrl: "scripts/components/concept-detail/enrichment-browser/wayback-button/wayback-button.html",
 
     // The controller that handles our component logic
-    controller: function ($scope, ngDialog, WaybackService) {
+    controller: function ($scope, $document, ngDialog, WaybackService) {
         var ctrl = this;
 
-        $scope.url = "";
-
         ctrl.openDialog = function() {
-            ngDialog.open({
+            ctrl.url = "";
+            ctrl.validUri = "";
+            ctrl.processing = false;
+
+            ctrl.dialog = ngDialog.open({
                 template: 'scripts/components/concept-detail/enrichment-browser/wayback-button/dialog.html',
                 className: 'bigdialog',
                 showClose: false,
@@ -31,14 +33,31 @@
         };
 
         ctrl.verifyLink = function(url) {
-            //console.log("verify");
+            ctrl.processing = true;
             WaybackService.get(url, function(uri) {
-                //console.log("success");
-                $scope.url = uri;
-                ctrl.isValid = true;
+                ctrl.validUri = uri;
+                $scope.validUri = uri;
             }, function(err) {
+                ctrl.processing = false;
                 console.log(err);
             });
         };
+
+        // "enter" to verify
+        $document.keydown(function(e) {
+            if (ctrl.url.length > 0 && !ctrl.processing && e.keyCode === 13) {  // enter to verify
+                ctrl.verifyLink(ctrl.url);
+            }
+        });
+
+        // "enter" to apply
+        // $document.keydown(function(e) {
+        //
+        //     if (ctrl.validUri.length > 0 && e.keyCode === 13) {  // enter to apply
+        //         ctrl.onConfirm({$uri: ctrl.validUri});
+        //         ngDialog.closeAll();
+        //     }
+        //
+        // });
     }
 });
