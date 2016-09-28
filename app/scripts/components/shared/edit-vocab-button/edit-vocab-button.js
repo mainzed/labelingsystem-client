@@ -30,8 +30,13 @@ angular.module('labelsApp')
             $scope.changedThesauri = false;
             $scope.newDescription = $scope.vocabulary.description;
 
+            // get number of draft concepts to be published
+            $scope.vocabulary.getDraftConcepts().then(function(concepts) {
+                $scope.draftConcepts = concepts;
+            });
+
             // get all vocabs to be able to select them
-            console.log("load vocabs");
+
             $scope.vocabularies = VocabService.query(function() {
                 $(".nano").nanoScroller();
             });
@@ -65,6 +70,10 @@ angular.module('labelsApp')
             $scope.changedThesauri = true;
         };
 
+        $scope.onVocabCheck = function() {
+            console.log("clicky!");
+        };
+
         $scope.deleteVocab = function(id) {
             VocabService.remove({id: id}, function() {
                 $location.path("/admin/vocabularies/");
@@ -83,8 +92,8 @@ angular.module('labelsApp')
                 });
             }
 
-            $scope.vocabulary.setTitle(newTitle);
-            $scope.vocabulary.setDescription(newDescription);
+            $scope.vocabulary.title = newTitle;
+            $scope.vocabulary.description = newDescription;
 
             $scope.vocabulary.save(function() {
                 //

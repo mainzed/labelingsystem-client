@@ -13,7 +13,14 @@ angular.module('labelsApp')
         restrict: 'E',
         scope: {
             ngModel: '=',  // two-way binding
-            onCheck: '&'  // references parent-scope function
+            onCheck: '&',  // references parent-scope function
+            type: "@"  // optional: radio
+        },
+        link: function postLink(scope) {
+            if (scope.type === "radio") {
+                //
+            }
+
         }
     };
 });

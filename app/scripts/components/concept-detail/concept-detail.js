@@ -12,12 +12,12 @@
     },
     templateUrl: "scripts/components/concept-detail/concept-detail.html",
 
-    controller: function ($scope, $routeParams, $timeout, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ResourcesService, TooltipService, SearchService, UserSettingsService, LanguageService, ThesauriService, WaybackService, ConfigService) {
+    controller: function ($scope, $routeParams, $timeout, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ResourcesService, TooltipService, SearchService, UserSettingsService) {
 
         // init nanoscroller here to prevent default scrollbar while loading boxes
         $(".nano").nanoScroller();
 
-        $scope.user = AuthService.getUser();
+        //$scope.user = AuthService.getUser();
 
         $scope.tooltips = TooltipService;
 

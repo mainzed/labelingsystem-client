@@ -45,23 +45,18 @@ angular.module('labelsApp')
              */
             scope.onDeleteClick = function() {
                 // get current concept
+
                 LabelService.get({id: $routeParams.lID}, function(concept) {
 
                     _.remove(concept.seeAlso, { "uri": scope.data.uri });
 
-                    // send updated label to server
-                    var jsonObject = {
-                        item: concept,
-                        user: AuthService.getUser().name
-                    };
+                    concept.save(function() {
+                        element.remove(); // delete element from DOM
 
-                    LabelService.update({id: $routeParams.lID}, jsonObject, function() {
-                        // delete element from DOM
-                        element.remove();
-
-                    }, function(err) {
-                        console.log(err);
+                    }, function error(res){
+                        console.log(res);
                     });
+
                 });
             };
 

@@ -10,7 +10,7 @@
 angular.module('labelsApp')
   .factory('LabelService', function ($resource, $http, AuthService, ConfigService, ResourcesService) {
 
-    var Concept = $resource(ConfigService.host + '/labels/:id', null, {
+    var Concept = $resource(ConfigService.host + '/labels/:id', { draft: true}, {
         'update': {
             method: 'PUT'
         },

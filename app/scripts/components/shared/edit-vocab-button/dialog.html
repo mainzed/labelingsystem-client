@@ -47,9 +47,9 @@
         <div class="dialogbox dialog-full">
         <h4>Actions</h4>
           <!-- delete draft vocab (not allowed to delete public vocab) -->
-          <ls-confirm-button on-confirm="deleteVocab(vocabulary.id); closeThisDialog()" ng-show="vocabulary.releaseType === 'draft'" text="Delete Vocabulary"></ls-confirm-button>
+          <ls-confirm-button on-confirm="deleteVocab(vocabulary.id); closeThisDialog()" text="Delete Vocabulary" inactive="{{vocabulary.releaseType === 'public'}}"></ls-confirm-button>
 
-          <ls-confirm-button ng-show="vocabulary.releaseType === 'draft'" on-confirm="publishVocab(vocabulary)" ng-show="vocabulary.releaseType === 'draft'" text="Publish" confirm-text="Publish all draft concepts" icon="icon-more"></ls-confirm-button>
+          <ls-confirm-button on-confirm="publishVocab(vocabulary)" text="{{'Publish draft concepts (' + draftConcepts.length + ')'}}" confirm-text="Publish all draft concepts" icon="icon-more"></ls-confirm-button>
         </div>
 
 
@@ -79,7 +79,7 @@
           <h4>Reference vocabulary</h4>
           <!-- <div ng-bind="enrichmentVocabID"></div> -->
           <div class="thesaurus" ng-repeat="vocab in vocabularies | orderBy: 'title'">
-            <ls-radiobox ng-model="thesaurus.checked" on-check="onCheck()"></ls-radiobox>
+            <ls-radio-button on-check="onVocabCheck()"></ls-radio-button>
             <h5 ng-bind="vocab.title"></h5>
             <!-- <p ng-bind="vocab.description"></p> -->
           </div>

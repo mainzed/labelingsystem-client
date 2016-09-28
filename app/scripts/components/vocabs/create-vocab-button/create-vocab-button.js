@@ -12,7 +12,7 @@
         onConfirm: "&"
     },
     template: '<span type="button" class="plusposition" ng-click="$ctrl.openDialog()">+</span>',
-    controller: function ($scope, ngDialog, ConfigService, LanguageService) {
+    controller: function ($scope, ngDialog, ConfigService, LanguageService, AuthService) {
 
         $scope.languages = LanguageService.query().then(function(languages) {
             $scope.languages = languages;
@@ -24,10 +24,10 @@
         this.openDialog = function() {
 
             $scope.newVocab = {
+                creator: AuthService.getUser().id,
                 title: "",
                 description: "",
-                language: "",
-                releaseType: "draft"
+                language: ""
             };
 
             ngDialog.open({

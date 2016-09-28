@@ -45,6 +45,7 @@
     <div class="dialogbox dialog-full">
       <h4>Functions</h4>
       <ls-confirm-button on-confirm="deleteConcept(label); closeThisDialog()"></ls-confirm-button>
+      <ls-confirm-button on-confirm="$ctrl.publish(label); closeThisDialog()" text="Publish Concept" inactive="{{label.releaseType === 'public'}}"></ls-confirm-button>
     </div>
 
 

@@ -8,7 +8,7 @@
  * Service in the labelsApp.
  */
 angular.module('labelsApp')
-  .factory('VocabService', function ($resource, $http, AuthService, ConfigService, ThesauriService) {
+  .factory('VocabService', function ($resource, $q, $http, AuthService, ConfigService, ThesauriService) {
 
     // the data model lives on the server!
     var Vocab = $resource(ConfigService.host + '/vocabs/:id', null, {
@@ -83,6 +83,20 @@ angular.module('labelsApp')
         }, function error(res) {
             errorCallback(res);
         });
+    };
+
+    Vocab.prototype.getDraftConcepts = function() {
+        var me = this;
+
+        var deferred = $q.defer();
+
+        $http.get(ConfigService.host + '/labels?draft=true&vocab=' + me.id).then(function(res) {
+            deferred.resolve(_.filter(res.data, { releaseType: "draft"}));
+        }, function error(res) {
+            deferred.reject(res);
+        });
+
+        return deferred.promise;
     };
 
     Vocab.prototype.save = function(successCallback, errorCallback) {

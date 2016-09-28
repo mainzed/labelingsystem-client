@@ -9,7 +9,7 @@
   <!-- text -->
   <span ng-class="{'micro': 'microcol', 'mini': 'minicol'}[size]">
     <span ng-repeat="prefLabel in label.prefLabels | filter: {isThumbnail: false}" class="text" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[size]"></span>
-    <span ng-show="label.scopeNote" class="text" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[size]"></span>
+    <span ng-show="label.description" class="text" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[size]"></span>
   </span>
 
   <!-- relations -->

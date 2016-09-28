@@ -27,6 +27,7 @@ describe('Service: VocabService', function () {
             }));
 
             vocab = VocabService.get({id: "some-vocab-id"});
+
             $httpBackend.flush();
         }));
 

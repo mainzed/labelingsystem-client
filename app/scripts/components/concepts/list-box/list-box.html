@@ -1,14 +1,14 @@
 <div class="bigboxwrapper">
 
-  <div class="box bigbox label listbox" ng-click="onClick(concept.id)">
+  <div class="box bigbox label listbox {{ concept.releaseType }}" ng-click="onClick(concept.id)">
 
     <span class="thumbnail">
 
       <button class="showadditionalcontent" ng-click="toggleExtension(concept.id); $event.stopPropagation()">
-        <span class="showmore" ng-show="!showMore && (concept.scopeNote || hasBroader(concept) || hasNarrower(concept))">+</span>
+        <span class="showmore" ng-show="!showMore && (concept.description || hasBroader(concept) || hasNarrower(concept))">+</span>
         <span class="showmore" ng-show="showMore">-</span>
       </button>
-      {{ concept.getLabel() }}
+      {{ concept.thumbnail }}
     </span>
 
     <ls-edit-label-button data="concept" ng-click="$event.stopPropagation()"></ls-edit-label-button>
@@ -17,24 +17,24 @@
   </div>
 
   <!-- extension that open on button click -->
-  <div ng-if="showMore" class="box boxextension bigbox label high" ng-click="onClick(concept.id)">
+  <div ng-if="showMore" class="box boxextension bigbox label high {{ concept.releaseType }}" ng-click="onClick(concept.id)">
     <span class="line-ext"></span>
     <span class="note-ext">
 
-    <span class="italic smalltype" ng-show="concept.scopeNote">Description</span><br>
-      {{ concept.scopeNote.value }}
+    <span class="italic smalltype" ng-show="concept.description">Description</span><br>
+      {{ concept.description }}
     </span>
 
     <span class="note-ext small"><span class="italic smalltype" ng-show="broaderConcepts.length > 0">broader</span><br>
 
       <ul class="hierarchie">
-        <li ng-repeat="broaderConcept in broaderConcepts">{{ broaderConcept.getLabel() }}</li>
+        <li ng-repeat="broaderConcept in broaderConcepts">{{ broaderConcept.thumbnail }}</li>
       </ul>
     </span>
 
     <span class="note-ext small"><span class="italic smalltype" ng-show="narrowerConcepts.length > 0">narrower</span><br>
       <ul class="hierarchie">
-        <li ng-repeat="narrowerConcept in narrowerConcepts">{{ narrowerConcept.getLabel() }}</li>
+        <li ng-repeat="narrowerConcept in narrowerConcepts">{{ narrowerConcept.thumbnail }}</li>
       </ul>
     </span>
 

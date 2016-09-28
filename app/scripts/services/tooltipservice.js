@@ -33,7 +33,7 @@ angular.module('labelsApp')
     };
 
     this.comments = {
-        scopeNote: "Describe current label with a few, clear words.",
+        description: "Describe current label with a few, clear words.",
         exactMatch: "skos:exactMatch is used to link two concepts, indicating a high degree of confidence that the concepts can be used interchangeably across a wide range of information retrieval applications.",
         relatedMatch: "skos:relatedMatch is used to state an associative mapping link between two conceptual resources in different concept schemes.",
         closeMatch: "skos:closeMatch is used to link two concepts that are sufficiently similar that they can be used interchangeably in some information retrieval applications.",

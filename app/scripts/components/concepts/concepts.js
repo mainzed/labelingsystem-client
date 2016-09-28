@@ -48,10 +48,11 @@
          */
         $scope.createConcept = function(newConcept) {
 
+            newConcept.creator = AuthService.getUser().id;
             newConcept.vocabID = $scope.vocabulary.id;
             newConcept.language = $scope.vocabulary.language;
 
-            LabelService.save({item: newConcept, user: AuthService.getUser().id}, function(concept) {
+            LabelService.save(newConcept, function(concept) {
                 if (concept.id) {
                     $location.path("/admin/vocabularies/" + $routeParams.vID + "/concepts/" + concept.id);
                 }

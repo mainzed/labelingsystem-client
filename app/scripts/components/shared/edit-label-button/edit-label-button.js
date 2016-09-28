@@ -13,7 +13,7 @@ angular.module('labelsApp')
         data: "=",
     },
     template: '<span class="icon-more icon" ng-click="$ctrl.openDialog()"></span>',
-    controller: function ($scope, $location, $routeParams, ngDialog, ConfigService, LabelService) {
+    controller: function ($scope, $location, $routeParams, ngDialog, ConfigService, LabelService, VocabService) {
         var ctrl = this;
 
         /**
@@ -29,6 +29,23 @@ angular.module('labelsApp')
                 closeByDocument: false,
                 disableAnimation: true,
                 scope: $scope
+            });
+        };
+
+        this.publish = function(concept) {
+            concept.releaseType = "public";
+            concept.save(function() {
+                // set vocab to public if it isn't already
+                VocabService.get({id: $routeParams.vID}, function(vocab) {
+                    vocab.releaseType = "public";
+                    vocab.save(function() {
+                        //
+                    }, function error(res) {
+                        console.log(res);
+                    });
+                });
+            }, function error(res) {
+                console.log(res);
             });
         };
 

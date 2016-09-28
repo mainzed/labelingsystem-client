@@ -1,5 +1,5 @@
 
-<div class="box bigbox label high smallheight" ng-click="openDialog()">
+<div class="box bigbox label high smallheight {{ data.releaseType }}" ng-click="openDialog()">
   <span class="thumbnail">
     <button class="showadditionalcontent" ng-click="showMore = !showMore; $event.stopPropagation()">
       <span ng-show="!showMore">+</span>
@@ -15,13 +15,13 @@
 </div>
 
 <!-- show details -->
-<div ng-if="showMore" class="box boxextension bigbox label high" ng-click="openDialog()" ng-init="getInfo()">
+<div ng-if="showMore" class="box boxextension bigbox label high {{ data.releaseType }}" ng-click="openDialog()" ng-init="getInfo()">
 
   <span class="line-ext"></span>
 
   <span class="note-ext">
-    <span class="italic" ng-show="data.scopeNote">Description</span><br>
-    {{ data.scopeNote.value }}
+    <span class="italic" ng-show="data.description">Description</span><br>
+    {{ data.description }}
   </span>
 
   <!-- broader -->
