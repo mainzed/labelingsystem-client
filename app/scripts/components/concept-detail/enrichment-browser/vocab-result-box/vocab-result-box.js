@@ -15,7 +15,7 @@ angular.module('labelsApp')
             data: "=",
             onConfirm: "&"
         },
-        link: function postLink(scope, LabelService) {
+        link: function postLink(scope) {
 
             // scope.getConceptLabel = function(id) {
             //     return new Promise(function(resolve, reject) {

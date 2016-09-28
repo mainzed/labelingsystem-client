@@ -16,22 +16,13 @@ angular.module('labelsApp')
             text: "@",  // optional delete text
             confirmText: "@",  // optional text on confirm
             icon: "@",  // optional icon class
-            inactive: "@"   // if true gets disabled
+            inactive: "<"   // if true gets disabled
         },
         link: function postLink(scope) {
             scope.showConfirm = false;
             scope.text = scope.text || "Delete";
             scope.confirmText = scope.confirmText || "Confirm";
             scope.icon = scope.icon || "icon-trash";
-
-            if (scope.inactive === "true") {
-                //scope.inactive = true;
-                scope.inactiveClass = "inactive";
-            } else {
-                //scope.inactive = false;
-                scope.inactiveClass = "";
-            }
-
         }
     };
   });

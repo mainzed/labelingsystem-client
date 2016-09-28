@@ -48,6 +48,15 @@ angular.module('labelsApp')
                         checkedThesaurus.checked = true;
                     }
                 });
+
+                // find all unchecked and give them checked: false to sort them later
+                thesauri = _.filter(thesauri, function(o) {
+                    if (!o.checked) {
+                        o.checked = false;
+                    }
+                    return o;
+                });
+
                 successCallback(thesauri);
             });
         });
@@ -85,10 +94,21 @@ angular.module('labelsApp')
         });
     };
 
-    Vocab.prototype.getDraftConcepts = function() {
-        var me = this;
-
+    Vocab.prototype.setEnrichmentVocab = function(id) {
         var deferred = $q.defer();
+        var me = this;
+        $http.put(ConfigService.host + '/retcat/vocabulary/' + me.id + '/list', {id: id}).then(function() {
+            deferred.resolve();  // return vocab ID
+        }, function error(res) {
+            deferred.reject(res);
+        });
+
+        return deferred.promise;
+    };
+
+    Vocab.prototype.getDraftConcepts = function() {
+        var deferred = $q.defer();
+        var me = this;
 
         $http.get(ConfigService.host + '/labels?draft=true&vocab=' + me.id).then(function(res) {
             deferred.resolve(_.filter(res.data, { releaseType: "draft"}));

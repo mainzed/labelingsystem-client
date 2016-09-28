@@ -12,7 +12,7 @@
   <div class="nano-content">
 
     <div class="dialogbox dialog-full">
-      <input type="text" placeholder="label" ng-model="newLabel">
+      <input type="text" placeholder="label" ng-model="newLabel" ng-class="{'inactive': label.releaseType === 'public'}">
     </div>
 
     <div class="dialogbox dialog-full">
@@ -44,8 +44,13 @@
     <div class="line-dialog line"></div>
     <div class="dialogbox dialog-full">
       <h4>Functions</h4>
-      <ls-confirm-button on-confirm="deleteConcept(label); closeThisDialog()"></ls-confirm-button>
-      <ls-confirm-button on-confirm="$ctrl.publish(label); closeThisDialog()" text="Publish Concept" inactive="{{label.releaseType === 'public'}}"></ls-confirm-button>
+      <ls-confirm-button on-confirm="deleteConcept(label); closeThisDialog()" inactive="label.releaseType === 'public'"></ls-confirm-button>
+
+      <!-- show publish -->
+      <ls-confirm-button on-confirm="$ctrl.publish(label)" text="Publish Concept" inactive="label.releaseType === 'public'" ng-show="label.releaseType === 'draft'"></ls-confirm-button>
+
+      <!-- show when already published -->
+      <ls-confirm-button text="Published" inactive="true" ng-show="label.releaseType === 'public'"></ls-confirm-button>
     </div>
 
 

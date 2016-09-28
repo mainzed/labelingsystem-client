@@ -1,5 +1,5 @@
 <!-- delete button -->
-<div class="deletebutton pointer" ng-click="showConfirm = true" ng-show="!showConfirm" ng-class="inactiveClass">
+<div class="deletebutton pointer" ng-click="showConfirm = true" ng-show="!showConfirm" ng-class="{'inactive': inactive}">
   <span class="buttontext" ng-bind="text"></span>
   <span class="{{ icon }} icon"></span>
 </div>

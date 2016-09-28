@@ -11,7 +11,7 @@
 
         <div class="dialogbox dialog-full">
           <h4>Rename</h4>
-          <input type="text" ng-model="newTitle" ng-init="newTitle = vocabulary.title">
+          <input type="text" ng-model="newTitle" ng-init="newTitle = vocabulary.title" ng-disabled="vocabulary.releaseType === 'public'" ng-class="{'inactive': vocabulary.releaseType === 'public'}">
         </div>
 
          <div>
@@ -21,7 +21,7 @@
         <div class="line-dialog line"></div>
         <div class="dialogbox dialog-full">
           <h4>description</h4>
-          <textarea rows="8" cols="40" ng-model="newDescription" ng-paste="onDescriptionKeyPress($event, newDescription)" ng-keypress="onDescriptionKeyPress($event, newDescription)"></textarea>
+          <textarea rows="8" cols="40" ng-model="newDescription" ng-paste="onDescriptionKeyPress($event, newDescription)" ng-keypress="onDescriptionKeyPress($event, newDescription)" ng-class="{'inactive': vocabulary.releaseType === 'public'}"></textarea>
 
         </div>
 
@@ -47,9 +47,9 @@
         <div class="dialogbox dialog-full">
         <h4>Actions</h4>
           <!-- delete draft vocab (not allowed to delete public vocab) -->
-          <ls-confirm-button on-confirm="deleteVocab(vocabulary.id); closeThisDialog()" text="Delete Vocabulary" inactive="{{vocabulary.releaseType === 'public'}}"></ls-confirm-button>
+          <ls-confirm-button on-confirm="deleteVocab(vocabulary.id); closeThisDialog()" text="Delete Vocabulary" inactive="vocabulary.releaseType === 'public'"></ls-confirm-button>
 
-          <ls-confirm-button on-confirm="publishVocab(vocabulary)" text="{{'Publish draft concepts (' + draftConcepts.length + ')'}}" confirm-text="Publish all draft concepts" icon="icon-more"></ls-confirm-button>
+          <ls-confirm-button on-confirm="publishVocab(vocabulary)" text="{{'Publish concepts (' + draftConcepts.length + ')'}}" confirm-text="Publish all concepts" icon="icon-more" inactive="draftConcepts.length < 1"></ls-confirm-button>
         </div>
 
 
@@ -65,7 +65,7 @@
         <div class="line-dialog line"></div>
         <div class="dialogbox dialog-full">
           <h4 id="thesauri">Reference thesauri</h4>
-          <div class="thesaurus" ng-repeat="thesaurus in thesauri" ng-class="{'checked': thesaurus.checked}">
+          <div class="thesaurus" ng-repeat="thesaurus in thesauri | orderBy: ['-checked', 'name'] " ng-class="{'checked': thesaurus.checked}">
 
             <checkbox ng-model="thesaurus.checked" on-check="onCheck()"></checkbox>
 
@@ -78,9 +78,10 @@
         <div class="dialogbox dialog-full">
           <h4>Reference vocabulary</h4>
           <!-- <div ng-bind="enrichmentVocabID"></div> -->
-          <div class="thesaurus" ng-repeat="vocab in vocabularies | orderBy: 'title'">
-            <ls-radio-button on-check="onVocabCheck()"></ls-radio-button>
+          <div class="thesaurus" ng-repeat="vocab in vocabularies | orderBy: 'title'" ng-class="{'checked': vocab.id === checkedVocab}">
+            <ls-radiobox checked="vocab.id === checkedVocab" on-check="onVocabCheck(vocab.id)"></ls-radiobox>
             <h5 ng-bind="vocab.title"></h5>
+
             <!-- <p ng-bind="vocab.description"></p> -->
           </div>
 
@@ -96,7 +97,7 @@
   <!-- apply -->
   <!-- updateVocabThesauri() -->
   <!-- onApplyChangesClick(vocabulary, newValue, newDescription); -->
-  <button id="someButton" type="button" class="apply" ng-click="$ctrl.update(newTitle, newDescription); closeThisDialog()" ng-class="{'inactive': newTitle === vocabulary.title && newDescription === vocabulary.description && !changedThesauri}">Apply</button>
+  <button id="someButton" type="button" class="apply" ng-click="$ctrl.update(newTitle, newDescription); closeThisDialog()" ng-class="{'inactive': newTitle === vocabulary.title && newDescription === vocabulary.description && !changedThesauri && !vocabChecked}">Apply</button>
 
   <!-- cancel -->
   <button type="button" class="cancel" ng-click="closeThisDialog()" ng-keypress="$ctrl.onCancelKeyDown($event)">Cancel</button>

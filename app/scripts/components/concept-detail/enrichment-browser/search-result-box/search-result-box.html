@@ -5,13 +5,12 @@
       <span ng-show="!showMore">+</span>
       <span ng-show="showMore">-</span>
     </button>
-    {{ data.label || data.getLabel() }}
+    {{ data.label || data.thumbnail }}
   </span>
 
-  <!-- TODO: micro-preview if label in same vocab -->
-  <!-- <span ng-show="data.type === 'label'" class="type">(same vocab)</span> -->
   <span class="type" ng-show="typeClass !== 'label'">({{ data.type + " - " + data.scheme }})</span>
-  <mini-preview ng-show="data.type === 'label'" label="concept" size="micro"></mini-preview>
+  <mini-preview ng-show="typeClass === 'label'" label="data" size="micro"></mini-preview>
+
 </div>
 
 <!-- show details -->

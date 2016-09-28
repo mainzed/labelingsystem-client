@@ -23,7 +23,6 @@
 
         $scope.showEnrichments = UserSettingsService.showEnrichments;
 
-
         VocabService.get({id: $routeParams.vID}, function(vocabulary) {
             $scope.vocabulary = vocabulary;
         });

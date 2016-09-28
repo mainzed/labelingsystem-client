@@ -1,19 +1,16 @@
 # Introduction
-The Labeling System (LS) is a web-application that allows registered users to create controlled vocabularies. Vocabularies contain concepts that can be described by a label and translations. Since a concept is better described by links into the Linked Open Data cloud than by plain string, the LS allows users to link to other concepts (in the LOD cloud) (hierarchical, associative and mapping). It is possible to build in-vocab skos hierarchies. Once a concept is published, it can be publicly accessed via a Uniform Resource Identifier (URI).
-
-The app provides an easy and convenient search functions to search for concepts in lod cloud. To enrich concepts . Full text search.
+The Labeling System (LS) is a web-application that allows registered users to create controlled vocabularies. Vocabularies contain concepts that can be described by a label and translations. Since a concept is better described by links into the Linked Open Data cloud than by plain string, the LS allows users to link to other concepts (in the LOD cloud) (hierarchical, associative and mapping). It is possible to build in-vocab skos hierarchies. The app provides an easy and convenient search functions to search for concepts in lod cloud. To enrich concepts . Full text search. Once a concept is published, it can be publicly accessed via a Uniform Resource Identifier (URI).
 
 # Getting Started
 
-
 ## Install
 ### LS Backend (TripleStore, SQLite, Item, API)
-See https://github.com/labelingsystem/server for instructions on how to setup a the backend.
+This web app uses the API provided by the Labeling System Server. See https://github.com/labelingsystem/server for instructions on how to set it up.
 
 ### LS Frontend (Editor and Viewer)
-Git clone this
+Run `git clone https://github.com/i3mainz/labels.git` to create a local copy of this repository.
 
-npm install
+Run `npm install` to install all node and bower modules.
 
 Run `grunt build` for building and `grunt serve` to start development server.
 

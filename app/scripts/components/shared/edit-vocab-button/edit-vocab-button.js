@@ -30,6 +30,12 @@ angular.module('labelsApp')
             $scope.changedThesauri = false;
             $scope.newDescription = $scope.vocabulary.description;
 
+
+            $scope.vocabulary.getEnrichmentVocab(function(vocabID) {
+                $scope.checkedVocab = vocabID;
+            });
+
+
             // get number of draft concepts to be published
             $scope.vocabulary.getDraftConcepts().then(function(concepts) {
                 $scope.draftConcepts = concepts;
@@ -70,8 +76,11 @@ angular.module('labelsApp')
             $scope.changedThesauri = true;
         };
 
-        $scope.onVocabCheck = function() {
-            console.log("clicky!");
+        //console.log($scope.vocabulary.getEnrichmentVocab());
+
+        $scope.onVocabCheck = function(id) {
+            $scope.checkedVocab = id;
+            $scope.vocabChecked = true;
         };
 
         $scope.deleteVocab = function(id) {
@@ -89,6 +98,17 @@ angular.module('labelsApp')
             if ($scope.changedThesauri) {
                 $scope.vocabulary.setThesauri($scope.thesauri, function() {
                     //
+                });
+            }
+
+            // update vocab list
+            if ($scope.vocabChecked) {
+                $scope.vocabulary.setEnrichmentVocab($scope.checkedVocab).then(function() {
+                    //
+                    $rootScope.$broadcast("changedEnrichmentVocab", $scope.checkedVocab.id);
+
+                }, function error(res) {
+                    console.log(res);
                 });
             }
 

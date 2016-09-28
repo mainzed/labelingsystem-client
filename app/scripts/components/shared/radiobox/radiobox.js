@@ -12,8 +12,8 @@ angular.module('labelsApp')
         templateUrl: 'scripts/components/shared/radiobox/radiobox.html',
         restrict: 'E',
         scope: {
-            ngModel: '=',  // two-way binding
-            onCheck: '&'  // references parent-scope function
+            checked: "<",
+            onCheck: '&'
         }
     };
 });

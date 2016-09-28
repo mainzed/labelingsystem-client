@@ -5,7 +5,7 @@
 
   <div id="selectedbox">
   	<div class="box bigbox {{ typeClass }} high" ng-click="onBoxClick()">
-  	  <span class="thumbnail">{{ data.label }}</span>
+  	  <span class="thumbnail">{{ data.label || data.thumbnail }}</span>
   	  <span class="type" ng-bind-html="icon" title="{{ tooltip }}"></span>
   	</div>
   </div>

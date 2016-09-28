@@ -22,14 +22,8 @@ angular.module('labelsApp')
 
             // determine type class
             scope.typeClass = scope.data.type;
-            if (scope.data.scheme === scope.vocabulary.title) {  // same vocab
+            if (scope.data.id && scope.data.thumbnail) {  // separately loaded sibling
                 scope.typeClass = "label";
-
-                var conceptID = scope.data.uri.split("/").pop();
-                LabelService.get({id: conceptID}, function(concept) {
-                    scope.concept = concept;
-                });
-
             }
 
             /**

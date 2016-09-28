@@ -4,8 +4,8 @@
   </div>
 
   <div id="selectedbox">
-  	<div class="box bigbox label high" ng-click="onBoxClick()">
-  	  <span class="thumbnail" ng-repeat="prefLabel in data.prefLabels | filter: {isThumbnail: true}" ng-bind="prefLabel.value"></span>
+  	<div class="box bigbox label high {{ data.releaseType }}" ng-click="onBoxClick()">
+  	  <span class="thumbnail" ng-bind="data.thumbnail"></span>
   	  <span class="type" ng-bind-html="icon" title="{{ tooltip }}"></span>
   	</div>
   </div>
