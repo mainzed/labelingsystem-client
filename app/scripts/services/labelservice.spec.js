@@ -60,29 +60,6 @@ describe('Service: LabelService', function () {
             expect(concept.getLabel()).toBe("new label");
         });
 
-        it("getTranslations() should return all prefLabel, but thumbnail prefLabel", function() {
-            var translations = concept.getTranslations();
-            expect(translations.length).toBe(2);
-            expect(translations[0].value).toBe("german translation");
-            expect(translations[0].lang).toBe("de");
-        });
-
-        it("addTranslation() should add translation", function() {
-            var translations = concept.getTranslations();
-            expect(translations.length).toBe(2);
-
-            concept.addTranslation({ value: "spanish translation", lang: "es"});
-            translations = concept.getTranslations();
-            expect(translations.length).toBe(3);
-            expect(translations[2].value).toBe("spanish translation");
-            expect(translations[2].lang).toBe("es");
-        });
-
-        it("updateTranslation() should update an existing translation", function() {
-            //var translations = concept.getTranslations();
-            //expect(translations.length).toBe(2);
-        });
-
         it("getUrl() should return url", function() {
             //var url = concept.getDownloadUrl();
             //expect(url.split("/")).toBe("123");

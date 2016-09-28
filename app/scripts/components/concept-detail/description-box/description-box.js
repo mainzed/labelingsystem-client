@@ -56,26 +56,14 @@ angular.module('labelsApp')
                 LabelService.get({id: $routeParams.lID}, function(concept) {
 
                     // replace old scopeNote
-                    concept.scopeNote.value = newValue;
+                    concept.description = newValue;
 
-                    // send updated label to server
-                    var jsonObject = {
-                        item: concept,
-                        user: AuthService.getUser().name
-                    };
-
-                    LabelService.update({id: $routeParams.lID}, jsonObject, function() {
-                        // temporarily update element from DOM
-                        scope.data.value = newValue;
-
-                    }, function(err) {
-                        console.log(err);
+                    concept.save(function() {
+                        scope.data.description = newValue;
+                    }, function error(res) {
+                        console.log(res);
                     });
-
-
                 });
-
-
 
             };
         }

@@ -37,10 +37,7 @@ angular.module('labelsApp')
                 // get current concept
                 LabelService.get({id: $routeParams.lID}, function(concept) {
 
-                    // remove current prefLabel
-                    concept.prefLabels = _.filter(concept.prefLabels, function(o) {
-                        return o.value !== scope.data.value && o.lang !== scope.data.value;
-                    });
+                    _.remove(concept.translations, { value: scope.data.value, lang: scope.data.lang });
 
                     // save to server
                     concept.save(function() {
@@ -62,20 +59,9 @@ angular.module('labelsApp')
                 // get current concept
                 LabelService.get({id: $routeParams.lID}, function(concept) {
 
-                    // get old prefLabel and remove it from concept
-                    var oldPrefLabel = _.find(concept.prefLabels, {
-                        "value": scope.data.value,
-                        "lang": scope.data.lang,
-                        "isThumbnail": scope.data.isThumbnail
-                    });
-                    concept.prefLabels = _.filter(concept.prefLabels, function(o) {
-                        return o.value !== scope.data.value && o.lang !== scope.data.lang;
-                    });
-
-                    // insert updated prefLabel
-                    var updatedPrefLabel = oldPrefLabel;
-                    updatedPrefLabel.value = newValue;
-                    concept.prefLabels.push(updatedPrefLabel);
+                    // find and replace
+                    var index = _.indexOf(concept.translations, _.find(concept.translations, { value: scope.data.value, lang: scope.data.lang}));
+                    concept.translations.splice(index, 1, {value: newValue, lang: scope.data.lang});
 
                     concept.save(function() {
                         // temporarily update current element

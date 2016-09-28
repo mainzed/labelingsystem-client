@@ -43,35 +43,20 @@
 
 
         /**
-         * Creates a new label by sending a new label object to the api.
-         * @param {string} term - The new label's thumbnail prefLabel
-         * @param {string} description - The new label's scopeNote of the new label
+         * Creates a new concept by sending a new object to the api.
+         * @param {Object} newConcept
          */
-        $scope.createLabel = function(term, description) {
+        $scope.createConcept = function(newConcept) {
 
-            var newLabel = {
-                "vocabID": $scope.vocabulary.id,
-                "prefLabels": [{
-                    "isThumbnail": true,
-                    "lang": $scope.vocabulary.language,
-                    "value": term
-                }]
-            };
+            newConcept.vocabID = $scope.vocabulary.id;
+            newConcept.language = $scope.vocabulary.language;
 
-            if (description) {
-                newLabel.scopeNote = {
-                    value: description,
-                    lang: $scope.vocabulary.language,
-                };
-            }
-
-            LabelService.save({
-                item: newLabel,
-                user: AuthService.getUser().id
-            }, function(label) {
-                if (label.id) {
-                    $location.path("/admin/vocabularies/" + $routeParams.vID + "/concepts/" + label.id);
+            LabelService.save({item: newConcept, user: AuthService.getUser().id}, function(concept) {
+                if (concept.id) {
+                    $location.path("/admin/vocabularies/" + $routeParams.vID + "/concepts/" + concept.id);
                 }
+            }, function error(res) {
+                console.log(res);
             });
         };
 

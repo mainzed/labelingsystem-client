@@ -15,11 +15,7 @@ angular.module('labelsApp')
             method: 'PUT'
         },
         'remove': {
-            method: 'DELETE',
-            params: {
-                user: "demo",
-                type: "delete"
-            }
+            method: 'DELETE'
         }
     });
 
@@ -32,21 +28,6 @@ angular.module('labelsApp')
 
     Concept.prototype.setLabel = function(value) {
         this.thumbnail = value;
-    };
-
-    /**
-     * returns the concept's prefLabels that are not the thumbnail prefLabel.
-     * @returns {Object[]} Array of prefLabel Objects
-     */
-    Concept.prototype.getTranslations = function() {
-        return this.translations;
-    };
-
-    /**
-     * Appends the new translation to the concept and calls the update function.
-     */
-    Concept.prototype.addTranslation = function(translation) {
-        this.translations.push(translation);
     };
 
     Concept.prototype.getUrl = function() {

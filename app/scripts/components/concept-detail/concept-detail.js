@@ -33,11 +33,15 @@
 
 
         $scope.addTranslation = function(term, lang) {
-            var newTranslation = {
+
+            if (!$scope.label.translations) {
+                $scope.label.translations = [];
+            }
+            $scope.label.translations.push({
                 value: term,
                 lang: lang
-            };
-            $scope.label.addTranslation(newTranslation);
+            });
+
             $scope.label.save(function() {
                 // success
             }, function() {

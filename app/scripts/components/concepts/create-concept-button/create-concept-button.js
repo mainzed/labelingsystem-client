@@ -7,7 +7,7 @@
  * # smallBox
  */
  angular.module('labelsApp')
-  .component('lsCreateLabelButton', {
+  .component('lsCreateConceptButton', {
     bindings: {
         onConfirm: "&"
     },
@@ -15,8 +15,14 @@
     controller: function ($scope, ngDialog) {
 
         this.openDialog = function() {
+
+            $scope.newConcept = {
+                thumbnail: "",
+                description: ""
+            };
+
             ngDialog.open({
-                template: 'scripts/components/concepts/create-label-button/dialog.html',
+                template: 'scripts/components/concepts/create-concept-button/dialog.html',
                 className: 'bigdialog',
                 showClose: false,
                 closeByDocument: false,
