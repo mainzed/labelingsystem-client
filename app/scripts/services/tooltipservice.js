@@ -20,16 +20,20 @@ angular.module('labelsApp')
 
     this.icons = {
         types: {
-            concept: "this is a concept!",
-            description: "This is a description!",
-            prefLabel: "this is a preferred label!",
-            altLabel: "this is an alternative label!"
+            concept: "this is a concept!"
         },
         relations: {
             closeMatch: "closeMatch!",
             exactMatch: "exactMatch!",
             relatedMatch: "relatedMatch!"
-        }
+        },
+        translation: "this is a translation",
+        description: "This is a description!",
+        internalLink: "internal links",
+        externalLink: "external links",
+        thesauriSettings: "change thesauri settings",
+        vocabSettings: "change vocab",
+        minipreview: "this is the minipreview"
     };
 
     this.comments = {

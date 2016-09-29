@@ -18,19 +18,19 @@
     <span class="listcontent" ng-bind="$ctrl.data.created | date: 'dd.MM.yyyy'"></span>
     -->
 
-    <span class="icon-folder icon"></span>
+    <!-- <span class="icon-folder icon"></span> -->
 
     <ls-edit-vocab-button data="$ctrl.data" ng-click="$event.stopPropagation()"></ls-edit-vocab-button>
 
     <span class="linksize">
 
-        <span ng-show="$ctrl.data.statistics.links.external > 0">
+        <span ng-show="$ctrl.data.statistics.links.external > 0" title="{{tooltips.icons.externalLink}}">
           <span class="minibox ls"></span>
           <span class="minibox getty"></span>
           <span class="listcontent">{{ $ctrl.data.statistics.links.external }}</span>
         </span>
 
-        <span ng-show="$ctrl.data.statistics.links.external > 0">
+        <span ng-show="$ctrl.data.statistics.links.internal > 0" title="{{tooltips.icons.internalLink}}">
           <span class="minibox concept"></span>
           <span class="listcontent">{{ $ctrl.data.statistics.links.internal }}</span>
         </span>

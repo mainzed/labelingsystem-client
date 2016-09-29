@@ -10,7 +10,7 @@
 
   <!-- icon -->
   <span class='type icon-label'></span>
-  <mini-preview label="data" size="micro"></mini-preview>
+  <mini-preview label="data" size="micro" title="{{tooltips.icons.minipreview}}"></mini-preview>
 
 </div>
 
@@ -28,7 +28,7 @@
   <span class="note-ext">
     <span class="italic smalltype" ng-show="data.broader">broader</span><br>
     <ul class="hierarchie">
-      <li ng-repeat="concept in broaderConcepts" ng-bind="concept.getLabel()"></li>
+      <li ng-repeat="concept in broaderConcepts" ng-bind="concept.thumbnail"></li>
     </ul>
   </span>
 
@@ -36,7 +36,7 @@
   <span class="note-ext">
     <span class="italic smalltype" ng-show="data.narrower">narrower</span><br>
     <ul class="hierarchie">
-      <li ng-repeat="concept in narrowerConcepts" ng-bind="concept.getLabel()"></li>
+      <li ng-repeat="concept in narrowerConcepts" ng-bind="concept.thumbnail"></li>
     </ul>
   </span>
 

@@ -7,7 +7,7 @@
  * # smallBox
  */
 angular.module('labelsApp')
-  .directive('lsTranslationBox', function ($routeParams, $document, ngDialog, VocabService, LabelService, AuthService, ConfigService) {
+  .directive('lsTranslationBox', function ($routeParams, $document, ngDialog, VocabService, TooltipService, LabelService, AuthService, ConfigService) {
     return {
         templateUrl: "scripts/components/concept-detail/translation-box/translation-box.html",
         restrict: 'E',
@@ -16,6 +16,8 @@ angular.module('labelsApp')
         },
         link: function postLink(scope, element) {
 
+            scope.tooltips = TooltipService;
+            
             /**
              * Opens a dialog with detailed information.
              */

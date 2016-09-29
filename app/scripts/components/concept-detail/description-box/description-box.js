@@ -7,7 +7,7 @@
  * # descriptionBox
  */
 angular.module('labelsApp')
-  .directive('lsDescriptionBox', function ($routeParams, $rootScope, ngDialog, LabelService, AuthService) {
+  .directive('lsDescriptionBox', function ($routeParams, $rootScope, ngDialog, LabelService, AuthService, TooltipService, ConfigService) {
     return {
         templateUrl: 'scripts/components/concept-detail/description-box/description-box.html',
         restrict: 'E',
@@ -16,10 +16,13 @@ angular.module('labelsApp')
         },
         link: function postLink(scope, element) {
 
+            scope.tooltips = TooltipService;
+
             /**
              * Opens a dialog with detailed information.
              */
             scope.openDialog = function() {
+                scope.newValue = scope.data.description;
                 ngDialog.open({
                     template: "scripts/components/concept-detail/description-box/dialog.html",
                     className: 'bigdialog',
@@ -64,7 +67,16 @@ angular.module('labelsApp')
                         console.log(res);
                     });
                 });
+            };
 
+            scope.onKeyPress = function(e, newValue) {
+                //console.log(newValue.length);
+                if (newValue.length > ConfigService.conceptDescriptionLength - 1) {
+                    // prevent new characters from being added
+                    e.preventDefault();
+                    // shorten description back to allowed length
+                    scope.newValue = newValue.substring(0, ConfigService.conceptDescriptionLength);
+                }
             };
         }
     };

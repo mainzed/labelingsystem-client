@@ -13,7 +13,7 @@ angular.module('labelsApp')
         data: "=",
     },
     templateUrl: "scripts/components/vocabs/vocab-box/vocab-box.html",
-    controller: function ($location) {
+    controller: function ($scope, $location, TooltipService) {
         var ctrl = this;
 
         //console.log(ctrl.data.getSomething());
@@ -24,6 +24,8 @@ angular.module('labelsApp')
         this.onClick = function(id) {
             $location.path('/admin/vocabularies/' + id + '/concepts');
         };
+
+        $scope.tooltips = TooltipService;
 
         $(".nano").nanoScroller();
     }

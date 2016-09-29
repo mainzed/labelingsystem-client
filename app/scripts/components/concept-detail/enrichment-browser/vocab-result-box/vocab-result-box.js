@@ -7,7 +7,7 @@
  * # searchResultBox
  */
 angular.module('labelsApp')
-  .directive('lsVocabResultBox', function (ngDialog) {
+  .directive('lsVocabResultBox', function (ngDialog, TooltipService) {
     return {
         templateUrl: "scripts/components/concept-detail/enrichment-browser/vocab-result-box/vocab-result-box.html",
         restrict: 'E',
@@ -16,6 +16,8 @@ angular.module('labelsApp')
             onConfirm: "&"
         },
         link: function postLink(scope) {
+
+            scope.tooltips = TooltipService;
 
             // scope.getConceptLabel = function(id) {
             //     return new Promise(function(resolve, reject) {
@@ -57,7 +59,6 @@ angular.module('labelsApp')
             };
 
             scope.getRelatedConcepts = function() {
-
             };
 
             /**

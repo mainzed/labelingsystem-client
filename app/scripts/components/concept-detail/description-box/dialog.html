@@ -10,7 +10,7 @@
 	<div class="nano-content">
 		<div class="dialogbox dialog-full">
 			<h4>Edit</h4>
-			<textarea ng-model="newValue" ng-init="newValue = data.description"></textarea>
+			<textarea ng-model="newValue" ng-paste="onKeyPress($event, newValue)" ng-keypress="onKeyPress($event, newValue)"></textarea>
 		</div>
 
 

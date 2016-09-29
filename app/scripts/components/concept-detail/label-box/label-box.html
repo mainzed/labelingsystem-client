@@ -1,4 +1,4 @@
-<div class="box small label high" ng-click="openDialog()">
+<div class="box small label high {{ concept.releaseType }}" ng-click="openDialog()">
 
   <!-- relation icon -->
   <span class="relation"><span ng-class="{'icon-arrow': relation === 'related'}"></span></span>
@@ -6,9 +6,9 @@
   <span class="thumbnail" ng-bind="concept.thumbnail"></span>
 
   <!-- type icon -->
-  <span class="type" title="{{ tooltip }}"></span>
+  <!-- <span class="type" title="{{ tooltip }}"></span> -->
 
-  <mini-preview label="concept" size="micro"></mini-preview>
+  <mini-preview label="concept" size="micro" title="{{ tooltips.icons.minipreview }}"></mini-preview>
 
   <!-- <span class="language" ng-bind="concept.language"></span> -->
 

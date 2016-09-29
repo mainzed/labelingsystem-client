@@ -15,7 +15,7 @@
 <div id="listwrapper">
 	<div class="nano">
     <div id="boxcontainer" class="nano-content voc-box">
-		  <ls-vocab-box ng-repeat="vocab in vocabularies | filter: {'creator': user.name} | filter: vocabFilter" data="vocab"></ls-vocab-box>
+		  <ls-vocab-box ng-repeat="vocab in vocabularies | filter: {'creator': user.name} | filter: vocabFilter | orderBy: 'title'" data="vocab"></ls-vocab-box>
 	  </div>
 	</div>
 </div>

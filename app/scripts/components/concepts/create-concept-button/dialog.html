@@ -9,7 +9,7 @@
 	<div class="nano-content">
 		<div class="dialogbox dialog-full">
 			<h4>name</h4>
-			<input type="text" placeholder="label" ng-model="newConcept.thumbnail">
+			<input type="text" placeholder="label" ng-model="$ctrl.newConcept.thumbnail">
 		</div>
 
 
@@ -17,7 +17,7 @@
 
 		<div class="dialogbox dialog-full">
 			<h4>description</h4>
-			<textarea placeholder="insert description" ng-model="newConcept.description"></textarea>
+			<textarea placeholder="insert description" ng-model="$ctrl.newConcept.description" ng-paste="onKeyPress($event)" ng-keypress="onKeyPress($event)"></textarea>
 		</div>
 
 
@@ -25,7 +25,6 @@
 	</div>
 	</div>
 
-
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="$ctrl.onConfirm({$newConcept: newConcept}); closeThisDialog()" ng-disabled="!newConcept.thumbnail" >Apply</div>
+	<div class="apply" ng-click="$ctrl.onConfirm({$newConcept: $ctrl.newConcept}); closeThisDialog()" ng-disabled="!$ctrl.newConcept.thumbnail">Apply</div>
 </div>
