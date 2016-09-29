@@ -78,7 +78,7 @@
         <div class="dialogbox dialog-full">
           <h4>Reference vocabulary</h4>
           <!-- <div ng-bind="enrichmentVocabID"></div> -->
-          <div class="thesaurus" ng-repeat="vocab in vocabularies | orderBy: 'title'" ng-class="{'checked': vocab.id === checkedVocab}">
+          <div class="thesaurus thesaurussmall" ng-repeat="vocab in vocabularies | orderBy: 'title'" ng-class="{'checked': vocab.id === checkedVocab}">
             <ls-radiobox checked="vocab.id === checkedVocab" on-check="onVocabCheck(vocab.id)"></ls-radiobox>
             <h5 ng-bind="vocab.title"></h5>
 

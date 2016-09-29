@@ -170,13 +170,14 @@ textarea:focus {	outline: none; }
 .bigboxwrapper:hover div {		
 					background: white; }
 .bigboxwrapper {}
-.vocabulary {		width: calc((100% - @marginoutside * 2 - @marginoutboxsmall * 3) / 5); margin-left: @marginoutboxsmall; height: 300px; 
+.vocabulary {		width: calc((100% - @marginoutside * 2 - @marginoutboxsmall * 3) / 5); margin-left: @marginoutboxsmall; height: 260px; 
 					margin-bottom: @marginoutboxsmall; position: relative;  
 					@media screen and (max-width: 1600px) {width: calc((100% - @marginoutside * 2 - @marginoutboxsmall) / 3); }}
 .vocabulary.draft {	background: @draft; }
 .voc-box {			padding-left: calc(@marginoutside - @marginoutboxsmall); }
-.vocabulary .note {	clear: both; margin-left: @marginoutboxsmall; border-top: 1px solid #c5c5c5; 
-					width: calc(100% - @marginoutboxsmall * 2); padding-top: 5px;  }
+.vocabulary .note {	border-top: 1px solid #c5c5c5; 
+					width: calc(100% - @marginoutboxsmall * 2); padding-top: 5px;
+					position: absolute; top: 50%; left: @marginoutboxsmall;   }
 .linksize {			position: absolute; bottom: @marginoutboxsmall; left: @marginoutboxsmall; }
 .linksize .minibox {width: 12px; float: left; margin-top: 5px;}
 .linksize .listcontent {
@@ -358,6 +359,7 @@ textarea:focus {	outline: none; }
 .listcontent {		float: left; width: calc(100% - 150px - @marginoutside); }
 .thesaurus {		width: calc(100% - @marginoutside * 2); margin-left: @marginoutside; display: block; float: left; margin-bottom: 30px;
 					border-top: 1px solid #c5c5c5; padding-top: 4px; position: relative; }
+.thesaurussmall {	margin-bottom: 6px; }
 .dialogbox input.checkbox {			
 					float: left; margin-left: 0; width: 20px; }
 .thesaurus p {		float: left; clear: left; }
@@ -369,9 +371,9 @@ textarea:focus {	outline: none; }
 .downloadlist a {	float: left; margin-right: @marginoutboxsmall; }
 
 /* Vocabulary */
-.vocabname {		margin: @margininboxsmall 0 0 @margininboxsmall; font-weight: bold; font-size: @emphasize; float: left; display: block;  }
+.vocabname {		margin: @margininboxsmall 0 0 @margininboxsmall; font-weight: bold; font-size: @emphasize; float: left; width: 80%; display: block;  }
 .vocabrelease {		float: left; clear: left; margin-left: @margininboxsmall; font-style: italic; font-size: @small; }
-.vocabsize {		float: left; clear: left; margin-bottom: 20px;  margin-left: @margininboxsmall; font-style: italic; font-size: @small; }
+.vocabsize {		position: absolute; top: calc(50% - 20px); left: @margininboxsmall; font-style: italic; font-size: @small; }
 
 
 .vocabulary .listtype {

@@ -26,6 +26,21 @@
 }
 
 
+.icon-search:before {
+  content: "\e916";
+}
+.icon-checked:before {
+  content: "\e917";
+}
+.icon-unchecked:before {
+  content: "\e918";
+}
+.icon-uncheckedradio:before {
+  content: "\e919";
+}
+.icon-checkedradio:before {
+  content: "\e91a";
+}
 .icon-user:before {
   content: "\e912";
 }
@@ -59,12 +74,6 @@
 .icon-breadcrumb:before {
   content: "\e910";
 }
-.icon-checked:before {
-  content: "\e903";
-}
-.icon-unchecked:before {
-  content: "\e904";
-}
 .icon-altlabel:before {
   content: "\e90e";
 }
@@ -80,9 +89,6 @@
 .icon-trash:before {
   content: "\e90c";
 }
-.icon-search:before {
-  content: "\e901";
-}
 .icon-arrow:before {
   content: "\e90a";
 }
@@ -92,5 +98,4 @@
 .icon-close:before {
   content: "\e909";
 }
-
 

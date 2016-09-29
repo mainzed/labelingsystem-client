@@ -12,20 +12,22 @@
   <div class="nano-content">
 
     <div class="dialogbox dialog-full">
+      <h4>Rename</h4>
       <input type="text" placeholder="label" ng-model="newLabel" ng-class="{'inactive': label.releaseType === 'public'}">
     </div>
 
+    <div class="line-dialog line"></div>
     <div class="dialogbox dialog-full">
       <h4>Meta data</h4>
 
-        <span class="listtype">License</span>
-        <span class="listcontent"><a ng-href="{{label.license}}" target="_blank">CC BY</a></span>
+      <span class="listtype">License</span>
+      <span class="listcontent"><a ng-href="{{label.license}}" target="_blank">CC BY</a></span>
 
-        <span class="listtype">Creator</span>
-        <span class="listcontent" ng-bind="label.creator"></span>
+      <span class="listtype">Creator</span>
+      <span class="listcontent" ng-bind="label.creator"></span>
 
-        <span class="listtype">Date of creation</span>
-        <span class="listcontent" ng-bind-template="{{ label.created | date: 'dd.MM.yyyy' }}"></span>
+      <span class="listtype">Date of creation</span>
+      <span class="listcontent" ng-bind-template="{{ label.created | date: 'dd.MM.yyyy' }}"></span>
 
 
     </div>
