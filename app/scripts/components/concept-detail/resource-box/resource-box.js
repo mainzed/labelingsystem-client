@@ -26,6 +26,7 @@ angular.module('labelsApp')
             // get resource data from uri
             ResourcesService.get(scope.data.uri, function(resource) {
                 scope.resource = resource;
+                //console.log(resource);
             });
 
             // determine relation icon
@@ -66,15 +67,10 @@ angular.module('labelsApp')
             scope.onDeleteClick = function() {
 
                 // get current parent concept
-                LabelService.get({id: $routeParams.lID}, function(parentConcept) {
-                    _.remove(parentConcept[scope.relation], { "uri": scope.resource.uri });
+                LabelService.get({id: $routeParams.lID}, function(concept) {
+                    _.remove(concept[scope.relation], { "uri": scope.resource.uri });
 
-                    var jsonObject = {
-                        item: parentConcept,
-                        user: AuthService.getUser().name
-                    };
-
-                    LabelService.update({id: $routeParams.lID}, jsonObject, function() {
+                    LabelService.update({id: $routeParams.lID}, concept, function() {
                         // delete element from DOM
                         element.remove();
 

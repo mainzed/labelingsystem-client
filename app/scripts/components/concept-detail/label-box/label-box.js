@@ -7,7 +7,7 @@
  * # conceptBox
  */
 angular.module('labelsApp')
-  .directive('lsLabelBox', function ($rootScope, $location, $timeout, ngDialog, LabelService, HelperService, $routeParams, AuthService, ConfigService) {
+  .directive('lsLabelBox', function ($rootScope, $location, $timeout, ngDialog, LabelService, HelperService, $routeParams, AuthService, ConfigService, TooltipService) {
     return {
         templateUrl: "scripts/components/concept-detail/label-box/label-box.html",
         restrict: 'E',
@@ -17,6 +17,8 @@ angular.module('labelsApp')
             parentConcept: "="  // needed to push updates on relation changes (maybe not)
         },
         link: function postLink(scope, element) {
+            scope.tooltips = TooltipService;
+
             // get concept data from ID
             LabelService.get({id: scope.data}, function(concept) {
                 scope.concept = concept;

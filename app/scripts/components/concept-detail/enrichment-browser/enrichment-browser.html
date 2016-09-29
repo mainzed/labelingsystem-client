@@ -15,14 +15,14 @@
         -->
         <!-- <span class="icon-config icon"></span> -->
 
-        <ls-edit-vocab-button data="vocab" shortcut="thesauri"></ls-edit-vocab-button>
+        <ls-edit-vocab-button data="vocab" shortcut="thesauri" title="{{tooltips.icons.thesauriSettings}}"></ls-edit-vocab-button>
 
       </div>
 
       <!-- labels tab -->
       <div class="tab" ng-click="showSearch = false" ng-class="{'active': !showSearch}">
         <span class="tablabel">Concepts of {{ enrichmentVocab.title }}</span>
-        <ls-edit-vocab-button data="vocab" shortcut="selectVocab"></ls-edit-vocab-button>
+        <ls-edit-vocab-button data="vocab" shortcut="selectVocab" title="{{tooltips.icons.vocabSettings}}"></ls-edit-vocab-button>
 
       </div>
 

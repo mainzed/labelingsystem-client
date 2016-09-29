@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('labelsApp')
-  .directive('lsEnrichmentBrowser', function ($http, $document, $rootScope, $routeParams, LabelService, VocabService, ConfigService, SearchService) {
+  .directive('lsEnrichmentBrowser', function ($http, $document, $rootScope, $routeParams, LabelService, VocabService, ConfigService, SearchService, TooltipService) {
     return {
         templateUrl: "scripts/components/concept-detail/enrichment-browser/enrichment-browser.html",
         restrict: 'E',
@@ -100,6 +100,8 @@ angular.module('labelsApp')
                     scope.onSearchClick();
                 }
             };
+
+            scope.tooltips = TooltipService;
         }
     };
   });
