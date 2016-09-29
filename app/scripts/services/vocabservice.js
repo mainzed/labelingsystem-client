@@ -12,11 +12,14 @@ angular.module('labelsApp')
 
     // the data model lives on the server!
     var Vocab = $resource(ConfigService.host + '/vocabs/:id', null, {
-        'query': { method: 'GET', params: { draft: true }, isArray: true },
-        'getPublicOnly': { method: 'GET', isArray: true },
+        'query': {
+            method: 'GET',
+            params: { draft: true, statistics: true },
+            isArray: true
+        },
         //'update': { method:'PUT' },
-        'download' : { method: 'GET', url: ConfigService.host + '/vocabs/:id' + ".skos", isArray: false },
-        'remove': { method: 'DELETE', params: { user: "demo", type: "delete" }}
+        //'download' : { method: 'GET', url: ConfigService.host + '/vocabs/:id' + ".skos", isArray: false },
+        'remove': { method: 'DELETE' }
     });
 
     Vocab.prototype.getUrl = function() {

@@ -8,7 +8,14 @@
  * Service in the labelsApp.
  */
 angular.module('labelsApp')
-  .service('AuthService', function ($location, $q, $cookies, $http, $httpParamSerializerJQLike, ConfigService) {
+  .service('AuthService', function ($rootScope, $interval, $location, $q, $cookies, $http, $httpParamSerializerJQLike, ConfigService) {
+
+    // $interval(
+    //     function handleInterval() {
+    //         $rootScope.$broadcast( "ping");
+    //     },
+    //     1000
+    // );
 
     var user = null;
 
@@ -42,6 +49,9 @@ angular.module('labelsApp')
                     user = false;
                     $cookies.remove("lsCookie");
                 }
+                $rootScope.$broadcast('userReady');
+                $rootScope.$emit('notifying-service-event');
+                console.log("broadcast userReady");
                 deferred.resolve();
             })
             .error(function () {

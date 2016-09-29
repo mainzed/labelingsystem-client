@@ -14,7 +14,7 @@ angular.module('labelsApp')
         shortcut: "@"  // "thesauri"
     },
     template: '<span class="{{$ctrl.icon}} icon" ng-click="$ctrl.openDialog()"></span>',
-    controller: function ($scope, $rootScope, $location, $document, $anchorScroll, $timeout, ngDialog, VocabService, ConfigService) {
+    controller: function ($scope, $rootScope, $location, $document, $anchorScroll, $timeout, ngDialog, VocabService, ConfigService, LabelService) {
 
         var ctrl = this;
 
@@ -88,6 +88,29 @@ angular.module('labelsApp')
                 $location.path("/admin/vocabularies/");
             }, function error(res) {
                 console.log(res);
+            });
+        };
+
+        $scope.publishConcepts = function() {
+            $scope.processing = true;
+            $scope.draftConcepts.forEach(function(concept, index) {
+                //console.log(concept.releaseType);
+                concept.releaseType = "public";
+                LabelService.update({id: concept.id}, concept, function() {
+                    if ($scope.vocabulary.releaseType === "draft") {
+                        $scope.vocabulary.releaseType = "public";
+                        $scope.vocabulary.save(function() {
+                            //
+                        }, function error(res) {
+                            console.log(res);
+                        });
+                    }
+
+                    console.log(index);
+                    console.log($scope.draftConcepts.length);
+                }, function error(res) {
+                    console.log(res);
+                });
             });
         };
 
