@@ -26,5 +26,5 @@
 	</div>
 
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="$ctrl.onConfirm({$newConcept: $ctrl.newConcept}); closeThisDialog()" ng-disabled="!$ctrl.newConcept.thumbnail">Apply</div>
+	<div class="apply" ng-click="$ctrl.onConfirm({$newConcept: $ctrl.newConcept}); closeThisDialog()" ng-class="{'inactive': !$ctrl.newConcept.thumbnail}">Apply</div>
 </div>

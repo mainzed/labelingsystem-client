@@ -65,7 +65,7 @@
         <div class="line-dialog line"></div>
         <div class="dialogbox dialog-full">
           <h4 id="thesauri">Reference thesauri</h4>
-          <div class="thesaurus" ng-repeat="thesaurus in thesauri | orderBy: ['-checked', 'name'] " ng-class="{'checked': thesaurus.checked}">
+          <div class="thesaurus" ng-repeat="thesaurus in thesauri | orderBy: ['-checked', 'name'] " ng-class="{'checked': thesaurus.checked}" ng-show="thesaurus.name.indexOf('this.') === -1">
 
             <checkbox ng-model="thesaurus.checked" on-check="onCheck()"></checkbox>
 
@@ -97,7 +97,7 @@
   <!-- apply -->
   <!-- updateVocabThesauri() -->
   <!-- onApplyChangesClick(vocabulary, newValue, newDescription); -->
-  <button id="someButton" type="button" class="apply" ng-click="$ctrl.update(newTitle, newDescription); closeThisDialog()" ng-class="{'inactive': newTitle === vocabulary.title && newDescription === vocabulary.description && !changedThesauri && !vocabChecked}">Apply</button>
+  <button id="someButton" type="button" class="apply" ng-click="$ctrl.update(newTitle, newDescription); closeThisDialog()" ng-class="{'inactive': newTitle === vocabulary.title && newDescription === vocabulary.description && !changedThesauri && !vocabChecked }">Apply</button>
 
   <!-- cancel -->
   <button type="button" class="cancel" ng-click="closeThisDialog()" ng-keypress="$ctrl.onCancelKeyDown($event)">Cancel</button>

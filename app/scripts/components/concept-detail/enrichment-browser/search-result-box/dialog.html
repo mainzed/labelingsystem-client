@@ -1,12 +1,18 @@
 <div class="dialogwrapper text">
   <div class="dialogheader">
-    <h3>Enrich current label</h3>
+    <h3>Enrich current concept</h3>
   </div>
 
   <div id="selectedbox">
-  	<div class="box bigbox {{ typeClass }} high" ng-click="onBoxClick()">
-  	  <span class="thumbnail">{{ data.label || data.thumbnail }}</span>
-  	  <span class="type" ng-bind-html="icon" title="{{ tooltip }}"></span>
+  	<div class="box bigbox {{ typeClass }} high {{ concept.releaseType }}" ng-click="onBoxClick()">
+  	  <span class="thumbnail">{{ data.label }}</span>
+
+  	  <!-- <span class="type" ng-bind-html="icon" title="{{ tooltip }}"></span> -->
+
+      <span class="type" ng-show="typeClass !== 'label'">({{ data.type + " - " + data.scheme }})</span>
+      <mini-preview ng-show="typeClass === 'label'" label="concept" size="micro"></mini-preview>
+
+
   	</div>
   </div>
 

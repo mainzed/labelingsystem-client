@@ -52,6 +52,10 @@
             newConcept.vocabID = $scope.vocabulary.id;
             newConcept.language = $scope.vocabulary.language;
 
+            if (newConcept.description.length < 1) {
+                delete newConcept.description;
+            }
+
             LabelService.save(newConcept, function(concept) {
                 if (concept.id) {
                     $location.path("/admin/vocabularies/" + $routeParams.vID + "/concepts/" + concept.id);

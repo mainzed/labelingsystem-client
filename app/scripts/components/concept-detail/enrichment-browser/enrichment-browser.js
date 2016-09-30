@@ -59,29 +59,18 @@ angular.module('labelsApp')
             scope.onSearchClick = function() {
                 scope.resultBoxes = [];
 
-                // load siblings and search them separately
-                LabelService.query({'vocab': $routeParams.vID}, function(siblings) {
-                    siblings = _.filter(siblings, function(o) {
-                        // skip current concept
-                        // search in thumbnails
-                        // TODO: also search description, translations etc
-                        return o.id !== $routeParams.lID && o.thumbnail.indexOf(scope.searchValue) > -1;  // skip current concept and search
-                    });
-                    scope.resultBoxes = $.merge(scope.resultBoxes, siblings);
-                });
-
                 // search in all thesauri and append as soon as they're found!
                 scope.thesauri.forEach(function(thesaurus) {
                     if (thesaurus.checked) {  // skip local labeling system and get them via LabelService
-                        SearchService.search(thesaurus.name, scope.searchValue, function(results) {
-                            console.log(thesaurus.name);
-                            // omit all concepts of current vocab - loaded separately
+                        SearchService.query({retcat: thesaurus.name, query: scope.searchValue}, function(results) {
+                            //console.log(results.length);
+
                             if (thesaurus.name === "Local Labeling System") {
                                 results = _.filter(results, function(o) {
                                     return o.scheme !== scope.vocab;  // skip same vocab concepts
                                 });
                             }
-
+                            //
                             scope.resultBoxes = $.merge(scope.resultBoxes, results);
                         }, function error(res) {
                             console.log(res);

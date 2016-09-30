@@ -50,6 +50,12 @@ angular.module('labelsApp')
                     if (checkedThesaurus) {  // skips local vocab
                         checkedThesaurus.checked = true;
                     }
+
+                    if (thesaurus.name.indexOf("this." + me.id) > -1) {
+                        //console.log("foudn same vocab!");
+                        thesaurus.checked = true;
+                        thesauri.push(thesaurus);
+                    }
                 });
 
                 // find all unchecked and give them checked: false to sort them later

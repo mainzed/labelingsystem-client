@@ -20,10 +20,19 @@ angular.module('labelsApp')
             // workaround for global scope
             scope.data = scope.box;
 
+
             // determine type class
             scope.typeClass = scope.data.type;
-            if (scope.data.id && scope.data.thumbnail) {  // separately loaded sibling
+
+            if (scope.data.type === "ls" && scope.data.scheme === scope.vocabulary.title) {
                 scope.typeClass = "label";
+
+                // get additional information to fill preview and show draft class
+                LabelService.get({ id: scope.data.uri.split("/").pop() }, function(concept) {
+                    console.log(concept.releaseType);
+                    scope.concept = concept;
+                });
+                //console.log(scope.data);
             }
 
             /**
