@@ -25,6 +25,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-time:before {
+  content: "\e903";
+}
+.icon-expand:before {
+  content: "\e904";
+}
 .icon-public:before {
   content: "\e901";
 }
@@ -100,4 +106,3 @@
 .icon-close:before {
   content: "\e909";
 }
-
