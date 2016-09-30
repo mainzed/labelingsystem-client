@@ -21,7 +21,13 @@ angular.module('labelsApp')
          */
         this.openDialog = function() {
             $scope.label = ctrl.data;
-            $scope.newLabel = $scope.label.getLabel();
+
+            // get vocab to check if public and determine if this concept can be deleted
+            VocabService.get({id: $routeParams.vID}, function(vocab) {
+                $scope.vocab = vocab;
+            });
+
+            $scope.newLabel = $scope.label.thumbnail;
             ngDialog.open({
                 template: 'scripts/components/shared/edit-label-button/dialog.html',
                 className: 'bigdialog',
@@ -32,22 +38,22 @@ angular.module('labelsApp')
             });
         };
 
-        this.publish = function(concept) {
-            concept.releaseType = "public";
-            concept.save(function() {
-                // set vocab to public if it isn't already
-                VocabService.get({id: $routeParams.vID}, function(vocab) {
-                    vocab.releaseType = "public";
-                    vocab.save(function() {
-                        //
-                    }, function error(res) {
-                        console.log(res);
-                    });
-                });
-            }, function error(res) {
-                console.log(res);
-            });
-        };
+        // this.publish = function(concept) {
+        //     concept.releaseType = "public";
+        //     concept.save(function() {
+        //         // set vocab to public if it isn't already
+        //         VocabService.get({id: $routeParams.vID}, function(vocab) {
+        //             vocab.releaseType = "public";
+        //             vocab.save(function() {
+        //                 //
+        //             }, function error(res) {
+        //                 console.log(res);
+        //             });
+        //         });
+        //     }, function error(res) {
+        //         console.log(res);
+        //     });
+        // };
 
         /**
          * Get skos of label url

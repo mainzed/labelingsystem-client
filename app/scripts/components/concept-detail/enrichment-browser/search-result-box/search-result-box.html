@@ -1,5 +1,5 @@
 
-<div class="box bigbox {{ typeClass }} high smallheight {{ concept.releaseType }}" ng-click="onClick()">
+<div class="box bigbox {{ typeClass }} high smallheight" ng-click="onClick()">
   <span class="thumbnail">
     <button class="showadditionalcontent" ng-click="showMore = !showMore; $event.stopPropagation()">
       <span ng-show="!showMore">+</span>
@@ -14,7 +14,7 @@
 </div>
 
 <!-- show details -->
-<div ng-if="showMore" class="box boxextension bigbox {{ typeClass }} high {{ concept.releaseType }}" ng-click="onClick()">
+<div ng-if="showMore" class="box boxextension bigbox {{ typeClass }} high" ng-click="onClick()">
 
   <span class="line-ext"></span>
 

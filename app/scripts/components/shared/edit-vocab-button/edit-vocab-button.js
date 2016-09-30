@@ -37,9 +37,9 @@ angular.module('labelsApp')
 
 
             // get number of draft concepts to be published
-            $scope.vocabulary.getDraftConcepts().then(function(concepts) {
-                $scope.draftConcepts = concepts;
-            });
+            // $scope.vocabulary.getDraftConcepts().then(function(concepts) {
+            //     $scope.draftConcepts = concepts;
+            // });
 
             // get all vocabs to be able to select them
 
@@ -91,33 +91,20 @@ angular.module('labelsApp')
             });
         };
 
-        $scope.publishConcepts = function() {
+        $scope.publish = function() {
+
             $scope.processing = true;
             console.log("publishing concepts");
 
-            $scope.draftConcepts.forEach(function(concept, index) {
-                //console.log(concept.releaseType);
-                concept.releaseType = "public";
-                LabelService.update({id: concept.id}, concept, function() {
-                    if ($scope.vocabulary.releaseType === "draft") {
-                        $scope.vocabulary.releaseType = "public";
-                        $scope.vocabulary.save(function() {
-                            //
-                        }, function error(res) {
-                            console.log(res);
-                        });
-                    }
-                    console.log(index + 1);
+            if ($scope.vocabulary.releaseType === "draft") {
+                $scope.vocabulary.releaseType = "public";
 
-                    if (index + 1 === $scope.draftConcepts.length) {
-                        $scope.processing = false;
-                        $scope.draftConcepts = [];
-                    }
-
+                $scope.vocabulary.save(function() {
+                    console.log("success");
                 }, function error(res) {
                     console.log(res);
                 });
-            });
+            }
         };
 
         this.update = function(newTitle, newDescription) {
