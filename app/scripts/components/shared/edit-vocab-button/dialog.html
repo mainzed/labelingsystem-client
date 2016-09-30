@@ -50,10 +50,10 @@
           <ls-confirm-button on-confirm="deleteVocab(vocabulary.id); closeThisDialog()" text="Delete Vocabulary" inactive="vocabulary.releaseType === 'public'"></ls-confirm-button>
 
           <!-- show publish -->
-          <ls-confirm-button on-confirm="publish()" text="Publish Vocabulary" confirm-text="Publish Vocabulary" icon="icon-more" ng-show="vocabulary.releaseType === 'draft'"></ls-confirm-button>
+          <ls-confirm-button on-confirm="publish()" text="Publish Vocabulary" confirm-text="Publish Vocabulary" icon="icon-public" ng-show="vocabulary.releaseType === 'draft'"></ls-confirm-button>
 
           <!-- show when already published -->
-          <ls-confirm-button text="Published" icon="icon-more" inactive="true" ng-show="vocabulary.releaseType === 'public'"></ls-confirm-button>
+          <ls-confirm-button text="Published" icon="icon-public" inactive="true" ng-show="vocabulary.releaseType === 'public'"></ls-confirm-button>
 
         </div>
 
