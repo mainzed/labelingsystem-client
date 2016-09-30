@@ -8,7 +8,7 @@
     {{ data.label }}
   </span>
 
-  <span class="type" ng-show="typeClass !== 'label'">({{ data.type + " - " + data.scheme }})</span>
+  <span class="type" ng-show="typeClass !== 'label'" title="{{ data.type + ' - ' + data.scheme }}">({{ data.type }})</span>
   <mini-preview ng-show="typeClass === 'label'" label="concept" size="micro"></mini-preview>
 
 </div>

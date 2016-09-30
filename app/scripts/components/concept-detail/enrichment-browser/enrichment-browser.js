@@ -61,14 +61,22 @@ angular.module('labelsApp')
 
                 // search in all thesauri and append as soon as they're found!
                 scope.thesauri.forEach(function(thesaurus) {
-                    if (thesaurus.checked) {  // skip local labeling system and get them via LabelService
+                    if (thesaurus.checked) {
+
                         SearchService.query({retcat: thesaurus.name, query: scope.searchValue}, function(results) {
+                            //console.log(results);
                             //console.log(results.length);
 
                             if (thesaurus.name === "Local Labeling System") {
                                 results = _.filter(results, function(o) {
                                     return o.scheme !== scope.vocab;  // skip same vocab concepts
                                 });
+
+                            } else if (thesaurus.name === "this." + scope.vocab.id) {
+                                //console.log(results);
+                                // results = _.filter(results, function(o) {
+                                //     return o.scheme !== scope.vocab;  // skips same concept
+                                // });
                             }
                             //
                             scope.resultBoxes = $.merge(scope.resultBoxes, results);
@@ -78,6 +86,12 @@ angular.module('labelsApp')
                     }
                 });
             };
+
+            scope.$on("changedThesauri", function() {
+                if (scope.searchValue) {
+                    scope.onSearchClick();
+                }
+            });
 
             // scope.orderByLabel = function(concept) {
             //     return concept.thumbnail;

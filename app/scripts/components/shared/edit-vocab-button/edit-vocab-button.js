@@ -93,6 +93,8 @@ angular.module('labelsApp')
 
         $scope.publishConcepts = function() {
             $scope.processing = true;
+            console.log("publishing concepts");
+
             $scope.draftConcepts.forEach(function(concept, index) {
                 //console.log(concept.releaseType);
                 concept.releaseType = "public";
@@ -105,9 +107,13 @@ angular.module('labelsApp')
                             console.log(res);
                         });
                     }
+                    console.log(index + 1);
 
-                    console.log(index);
-                    console.log($scope.draftConcepts.length);
+                    if (index + 1 === $scope.draftConcepts.length) {
+                        $scope.processing = false;
+                        $scope.draftConcepts = [];
+                    }
+
                 }, function error(res) {
                     console.log(res);
                 });
@@ -121,6 +127,7 @@ angular.module('labelsApp')
             if ($scope.changedThesauri) {
                 $scope.vocabulary.setThesauri($scope.thesauri, function() {
                     //
+                    $rootScope.$broadcast("changedThesauri");
                 });
             }
 
