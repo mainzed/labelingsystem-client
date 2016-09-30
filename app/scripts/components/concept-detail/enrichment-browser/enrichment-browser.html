@@ -20,7 +20,7 @@
       </div>
 
       <!-- labels tab -->
-      <div class="tab" ng-click="showSearch = false" ng-class="{'active': !showSearch}">
+      <div class="tab" ng-click="showSearch = false" ng-class="{'active': !showSearch, 'draft': enrichmentVocab.releaseType === 'draft' && !showSearch}">
         <span class="tablabel">Concepts of {{ enrichmentVocab.title }}</span>
         <ls-edit-vocab-button data="vocab" shortcut="selectVocab" title="{{tooltips.icons.vocabSettings}}"></ls-edit-vocab-button>
 
