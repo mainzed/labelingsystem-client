@@ -10,6 +10,9 @@
 @hovergray: 		#d5d5d5;
 @linegray:			#c5c5c5;
 
+/* hover colors */
+@drafthover: 		#FFFEDE;
+
 /* high quality */
 @high: 				#31CAFF;
 @ls:				#FF80B3;
@@ -169,6 +172,8 @@ textarea:focus {	outline: none; }
 					margin-top: 10px; }
 .bigboxwrapper:hover div {		
 					background: white; }
+.bigboxwrapper.draft:hover div {
+					background: @drafthover; }
 .bigboxwrapper {}
 .vocabulary {		width: calc((100% - @marginoutside * 2 - @marginoutboxsmall * 3) / 5); margin-left: @marginoutboxsmall; height: 260px; 
 					margin-bottom: @marginoutboxsmall; position: relative;  
@@ -458,7 +463,7 @@ textarea:focus {	outline: none; }
 
 /* hover states */
 .vocabulary.draft:hover {		
-					background: #FFFEDE; }	
+					background: @drafthover; }	
 .vocabulary:hover { background: white; }
 
 /* line colors */
