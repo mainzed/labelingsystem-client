@@ -7,7 +7,7 @@
  * # searchResultBox
  */
 angular.module('labelsApp')
-  .directive('lsVocabResultBox', function (ngDialog, TooltipService) {
+  .directive('lsVocabResultBox', function ($routeParams, ngDialog, TooltipService) {
     return {
         templateUrl: "scripts/components/concept-detail/enrichment-browser/vocab-result-box/vocab-result-box.html",
         restrict: 'E',
@@ -19,20 +19,6 @@ angular.module('labelsApp')
 
             scope.tooltips = TooltipService;
 
-            // scope.getConceptLabel = function(id) {
-            //     return new Promise(function(resolve, reject) {
-            //         LabelService.get({id: id}, function(concept) {
-            //             console.log("inside");
-            //             console.log(concept.getLabel());
-            //             var label = concept.getLabel();
-            //             resolve(label);
-            //             //
-            //         }, function error(res) {
-            //             reject(res);
-            //         });
-            //     });
-            //     //scope.broaderConcepts = scope.data.getRelatedConcepts("broader");
-            // };
             scope.getInfo = function() {
                 console.log("get info!");
                 scope.data.getRelatedConcepts("broader").then(function(concepts) {
@@ -42,12 +28,19 @@ angular.module('labelsApp')
 
             };
 
+            if (scope.data.vocabID === $routeParams.vID) {
+                scope.cssType = "label";
+            } else {
+                scope.cssType = "ls";
+            }
 
             /**
              * Opens a type-specific dialog that shows the connection (relation)
              * options for each type to link to the label.
              */
             scope.openDialog = function() {
+                console.log(scope.data);
+                console.log(scope.cssType);
                 ngDialog.open({
                     template: 'scripts/components/concept-detail/enrichment-browser/vocab-result-box/dialog.html',
                     className: 'bigdialog',

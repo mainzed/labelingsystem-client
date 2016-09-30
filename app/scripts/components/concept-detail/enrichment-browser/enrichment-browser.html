@@ -20,10 +20,9 @@
       </div>
 
       <!-- labels tab -->
-      <div class="tab" ng-click="showSearch = false" ng-class="{'active': !showSearch, 'draft': enrichmentVocab.releaseType === 'draft' && !showSearch}">
+      <div class="tab" ng-click="showSearch = false" ng-class="{'active': !showSearch}">
         <span class="tablabel">Concepts of {{ enrichmentVocab.title }}</span>
         <ls-edit-vocab-button data="vocab" shortcut="selectVocab" title="{{tooltips.icons.vocabSettings}}"></ls-edit-vocab-button>
-
       </div>
 
 
@@ -71,6 +70,7 @@
 
       <!-- own vocabs -->
       <div ng-show="!showSearch">
+        
         <ls-vocab-result-box ng-repeat="sibling in siblings | limitTo: conceptsLimit | orderBy: 'thumbnail'" data="sibling" on-confirm="addResource($concept, $relation)"></ls-vocab-result-box>
 
         <!-- TODO: make component -->

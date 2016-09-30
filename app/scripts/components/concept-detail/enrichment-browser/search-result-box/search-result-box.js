@@ -19,7 +19,7 @@ angular.module('labelsApp')
 
             // workaround for global scope
             scope.data = scope.box;
-
+            //console.log(scope.data);
 
             // determine type class
             scope.typeClass = scope.data.type;
