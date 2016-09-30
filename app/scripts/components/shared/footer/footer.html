@@ -1,5 +1,7 @@
-<p id="footer">
-  labeling system / {{ $ctrl.version }} /
-  <span ng-click="$ctrl.onLogoutClick()">logout</span>
+<div id="footer">
+  <span>Labeling System  {{ $ctrl.version }} </span>
+
+  <span class="icon-user"></span>
   <span ng-click="$ctrl.onUserClick()">{{ $ctrl.user.id }}</span>
-</p>
+  <span class="logout" ng-click="$ctrl.onLogoutClick()">Logout</span>
+</div>

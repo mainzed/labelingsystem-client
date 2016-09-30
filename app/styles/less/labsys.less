@@ -24,7 +24,7 @@
 
 /* font-sizes */
 @headlines: 		30px;
-@emphasize:			21px;
+@emphasize:			19px;
 @regular: 			16px;
 @small: 			14px;
 
@@ -60,8 +60,8 @@
 a {					color: inherit; text-decoration: underline; }
 html {				height: 100%;	}
 body {				height: 100%;	}
-textarea {			margin-left: @marginoutside; width: calc(100% - 2 * @marginoutside); display: block; resize: vertical;
-					height: 150px; background: white; padding: @margininboxsmall; border: 0; }
+textarea {			margin-left: @marginoutside; width: calc(100% - 2 * @marginoutside); display: block; resize: none;
+					height: 120px; background: white; padding: @margininboxsmall; border: 0; }
 h1 {				font-size: @headlines; font-weight: normal;
 					@media screen and (max-width: 1600px) {font-size: @headlines-small; } }
 h2 {				font-size: @headlines; font-weight: normal; margin-bottom: 50px; margin-top: @marginoutside; margin-left: @marginoutside; display: block;
@@ -78,8 +78,9 @@ button:focus {		outline: none; }
 textarea:focus {	outline: none; }
 
 #header {			color: white; height: 90px; position: relative; background: @background;	}
-#footer {			position: fixed; bottom: @margininboxsmall; left: @marginoutside; color: @label; font-size: @small; 
-					 }
+#footer {			position: fixed; bottom: @margininboxsmall; left: calc( @marginoutside + @marginoutboxsmall ); color: @label; height: 30px;  }
+#footer span {		float: left; margin-top: 8px; }
+.logout {			margin-left: 10px; text-decoration: underline; }
 #viewport {			height: 100%; background: @background;}
 #separator {		color: white; height: 75px; }
 .separatorsmall {	height: 50px; float: left; width: 100%; background: @workareas; clear: left;}
@@ -126,11 +127,12 @@ textarea:focus {	outline: none; }
 					margin-top: 36px; height: 36px; color: gray;  }
 .lefttab {			margin-left: @marginoutboxsmall; border-radius: 3px 0 0 0px; }
 .tab.active {		color: black;  font-weight: normal; background: @label;  }
+.tab.active.draft {	background: @draft; }
 .tab button {		margin-right: @margininboxsmall; float: right; color: white }
 
 
 .hideenrichment {	position: absolute; right: 10px; padding-top: 10px; padding-bottom: 15px; }
-#filtersearch {		margin-left: calc(@marginoutside + @marginoutboxsmall); margin-top: 10px; color: white; width: 200px; float: left; }
+#filtersearch {		margin-left: calc(@marginoutside + @marginoutboxsmall); margin-top: 10px; color: white; width: 60%; float: left; }
 #filtersearch .icon-search {
 					float: left;
 }
@@ -190,7 +192,8 @@ textarea:focus {	outline: none; }
 .linksize .concept {box-shadow: 1px 1px 1px black; margin-left: @marginoutboxsmall; background: white; }					
 
 #boxcontainer .bigbox {
-					margin-left: @marginoutside; width: calc(100% - @marginoutside * 2); }
+					margin-left: @marginoutside; width: calc(100% - @marginoutside * 2); height: 50px; }
+.bigboxdate {		margin-top: 15px; float: left; }
 .plusposition 	{	position: fixed; left: 50%; bottom: 10%; width: 50px; margin-left: -20px; cursor: pointer;
 					display: block; height: 25px; width: 25px; padding: 6px 6px; font-size: 30px; line-height: 23px;
     				text-align: center; background-color: gray; background-image: none; 
@@ -200,7 +203,7 @@ textarea:focus {	outline: none; }
 #selectedbox .bigbox {
 					margin-left: @marginoutside; width: calc(100% - @marginoutside * 2); }
 .listbox .thumbnail {
-					font-size: @emphasize; }
+					font-size: @emphasize;   }
 /* box color types */
 .getty	{			background: @high;	}
 .heritagedata	{	background: @high;	}
@@ -225,7 +228,7 @@ textarea:focus {	outline: none; }
 
 /* box elements */
 .thumbnail {		margin-bottom: @margininboxsmall; margin-left: @margininboxsmall; float: left; width: 80%; 
-					display: block; margin-top: 33px; overflow: hidden; text-overflow: ellipsis; }
+					display: block; margin-top: 33px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 .language {			bottom: @margininboxsmall; right: @margininboxsmall; font-size: @small; letter-spacing: 0.08em; position: absolute; text-transform: uppercase; font-style: italic;}
 .type {				top: @margininboxsmall; right: @margininboxsmall; font-size: @small; position: absolute;}
 .relation {			top: @margininboxsmall; left: @margininboxsmall; position: absolute;}
@@ -237,7 +240,7 @@ textarea:focus {	outline: none; }
 .bigbox:hover .icon-edit {
 					display: block; }
 #listwrapper .bigbox .thumbnail {
-					margin-top: 12px; }
+					margin-top: 12px; width: 30%; }
 
 
 /* grid */
@@ -299,16 +302,22 @@ textarea:focus {	outline: none; }
 #header .language {	font-size: @small; float: left; position: relative; margin-left: 15px; margin-top: 68px; }
 #header .icon-more {position: absolute; right: 22px; top: 45px; font-size: 38px; cursor: pointer; }
 .boxextension {		margin-top: -3px; padding-bottom: @margininboxsmall;  }
+#boxcontainer .bigbox.boxextension {
+					height: auto; }
 
 
 /* mini preview */
-.minipreview {		height: calc(@boxheight - @margininboxsmall * 2 - 10px); margin: 4px 40% 4px 0; background: black;
-					width: 100px; float: right; padding: 4px 2px 6px 2px; overflow: hidden;	}
+.minipreview {		height: 26px; margin: 7px 40% 4px 0; background: black;
+					width: 65px; float: right; padding: 4px 2px 6px 2px; overflow: hidden;	}
 .minicol	 {		width: calc(25% - 4px); padding: 0 2px; float: left; height: 100%;	}
-.minibox 	{		width: 100%; height: 6px; margin-bottom: 4px; display: block;}
+.minibox 	{		width: 100%; height: 4px; margin-bottom: 4px; display: block;}
 
 .dialogheader .minipreview {
-					position: absolute; right: @marginoutside; top: @marginoutside; height: 74px; margin-top: 0; margin-right: 0;
+					position: absolute; right: @marginoutside; width: 100px; top: @marginoutside; height: 74px; margin-top: 0; margin-right: 0;
+}
+
+.dialogheader .minibox {
+					height: 6px;
 }
 .dialogheader .minicol {
 					width: 25%;
@@ -332,6 +341,8 @@ textarea:focus {	outline: none; }
 .deletebutton .icon {position: absolute;  line-height: 25px; right: @marginoutboxsmall; top: @margininboxsmall; }
 .label .deletebutton {
 					color: black; background: #d6d6d6; }
+.label .deletebutton.inactive {
+					color: gray; }
 .deletebutton .buttontext {
 					margin: @margininboxsmall; }
 .deletebutton.confirm {		
@@ -419,6 +430,7 @@ textarea:focus {	outline: none; }
 #header .icon-concept {
 					position: absolute; right: 50px; font-size: 100px; top: 8px; }
 .icon-folder {		margin-top: -3px; margin-right: -3px; }
+#footer span.icon-user  {		margin: 3px 0 0 50px; display: block; float: left;}
 #filtersearch .icon-search	{
 					margin-left: 3px; margin-right: 2px; color: gray; }
 .ngdialog-overlay { background: rgba(0, 0, 0, 0.8); }

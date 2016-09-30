@@ -49,7 +49,7 @@
           <!-- delete draft vocab (not allowed to delete public vocab) -->
           <ls-confirm-button on-confirm="deleteVocab(vocabulary.id); closeThisDialog()" text="Delete Vocabulary" inactive="vocabulary.releaseType === 'public'"></ls-confirm-button>
 
-          <ls-confirm-button on-confirm="publishConcepts()" text="{{'Publish concepts (' + draftConcepts.length + ')'}}" confirm-text="Publish all concepts" icon="icon-more" inactive="draftConcepts.length < 1 || processing"></ls-confirm-button>
+          <ls-confirm-button on-confirm="publishConcepts()" text="{{'Publish concepts (' + draftConcepts.length + ')'}}" confirm-text="Publish all concepts" icon="icon-public" inactive="draftConcepts.length < 1 || processing"></ls-confirm-button>
         </div>
 
 
