@@ -1,36 +1,83 @@
 <div class="dialogwrapper text">
   <div class="dialogheader">
-    <h3>Enrich current label</h3>
+    <h3>Enrich current concept</h3>
   </div>
 
   <div id="selectedbox">
-  	<div class="box bigbox label high" ng-click="onBoxClick()">
+  	<div class="box bigbox {{ cssType }} high" ng-click="onBoxClick()">
   	  <span class="thumbnail" ng-bind="data.thumbnail"></span>
-  	  <span class="type" ng-bind-html="icon" title="{{ tooltip }}"></span>
+
+
+
+        <span class="type" ng-show="cssType !== 'label'" title="ls">(ls)</span>
+
+      <mini-preview ng-show="cssType ==='label'"label="data" size="micro" title="{{tooltips.icons.minipreview}}"></mini-preview>
+
   	</div>
   </div>
 
   <div id="enrichbuttons">
 
-    <!-- broader -->
-    <div>
+    <!-- resource columns -->
+    <div ng-show="cssType !== 'label'">
+      <div class="col five leftout">
+    		<button class="enrichbutton-ow" type="button" name="button" ng-click="onConfirm({ $concept: data, $relation: 'broadMatch' }); closeThisDialog()" disabled>
+    			<span class="buttontext-ow">broad Match</span>
+    		</button>
+    		<p class="enrichinfo">skos:broadMatch is used to state a hierarchical mapping link between two conceptual resources in different concept schemes.</p>
+    	</div>
+
+      <div class="col five">
+    		<button class="enrichbutton-ow" type="button" name="button" ng-click="onConfirm({ $concept: data, $relation: 'exactMatch' }); closeThisDialog()" disabled>
+    			<span class="buttontext-ow">exact Match</span>
+    			<span class="icon-exact icon"></span>
+    		</button>
+    		<p class="enrichinfo">skos:exactMatch is used to link two concepts, indicating a high degree of confidence that the concepts can be used interchangeably across a wide range of information retrieval applications.</p>
+    	</div>
+
+      <div class="col five">
+    		<button class="enrichbutton-ow" type="button" name="button" ng-click="onConfirm({ $concept: data, $relation: 'relatedMatch' }); closeThisDialog()" disabled>
+    			<span class="buttontext-ow">related Match</span>
+    			<span class="icon-arrow icon"></span>
+    		</button>
+    		<p class="enrichinfo">skos:relatedMatch is used to state an associative mapping link between two conceptual resources in different concept schemes.</p>
+    	</div>
+
+      <div class="col five">
+    		<button class="enrichbutton-ow" type="button" name="button" ng-click="onConfirm({ $concept: data, $relation: 'closeMatch' }); closeThisDialog()" disabled>
+    			<span class="buttontext-ow">close Match</span>
+    			<span class="icon-close icon"></span>
+    		</button>
+    		<p class="enrichinfo">skos:closeMatch is used to link two concepts that are sufficiently similar that they can be used interchangeably in some information retrieval applications.</p>
+    	</div>
+
+      <div class="col five rightout">
+    		<button class="enrichbutton-ow" type="button" name="button" ng-click="onConfirm({ $concept: data, $relation: 'narrowMatch' }); closeThisDialog()" disabled>
+    			<span class="buttontext-ow">narrow Match</span>
+    		</button>
+    		<p class="enrichinfo">skos:narrowMatch is used to state a hierarchical mapping link between two conceptual resources in different concept schemes.</p>
+    	</div>
+    </div>
+
+    <!-- label columns -->
+    <div ng-show="cssType === 'label'">
       <div class="col three leftout">
-    		<button class="enrichbutton-ow" type="button" name="button" ng-click="onConfirm({$concept: data, $relation: 'broader'}); closeThisDialog()">
+    		<button class="enrichbutton-ow" type="button" name="button" ng-click="onConfirm({ $concept: data, $relation: 'broader' }); closeThisDialog()">
     			<span class="buttontext-ow">broader</span>
     		</button>
     		<p class="enrichinfo">skos:broader relates a concept to a concept that is more general in meaning.</p>
     	</div>
 
       <div class="col three">
-    		<button class="enrichbutton-ow" type="button"ng-click="onConfirm({$concept: data, $relation: 'related'}); closeThisDialog()">
+    		<button class="enrichbutton-ow" type="button"ng-click="onConfirm({ $concept: data, $relation: 'related' }); closeThisDialog()">
     			<span class="buttontext-ow">related</span>
-    			<span class="icon-arrow icon"></span>
+    			<span class="icon-close icon"></span>
     		</button>
     		<p class="enrichinfo">skos:related relates a concept to a concept with which there is an associative semantic relationship.</p>
     	</div>
 
       <div class="col three rightout">
-    		<button class="enrichbutton-ow" type="button" name="button" ng-click="onConfirm({$concept: data, $relation: 'narrower'}); closeThisDialog()">
+    		<button class="enrichbutton-ow" type="button" name="button" ng-click="onConfirm({ $concept: data, $relation: 'narrower' }); closeThisDialog()">
     			<span class="buttontext-ow">narrower</span>
     		</button>
     		<p class="enrichinfo">skos:narrower relates a concept to a concept that is more specific in meaning.</p>

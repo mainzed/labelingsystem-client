@@ -1,5 +1,5 @@
 
-<div class="box bigbox label high smallheight" ng-click="openDialog()">
+<div class="box bigbox {{ cssType }} high smallheight" ng-click="openDialog()">
   <span class="thumbnail">
     <button class="showadditionalcontent" ng-click="showMore = !showMore; $event.stopPropagation()">
       <span ng-show="!showMore">+</span>
@@ -9,13 +9,15 @@
   </span>
 
   <!-- icon -->
-  <span class='type icon-label'></span>
-  <mini-preview label="data" size="micro" title="{{tooltips.icons.minipreview}}"></mini-preview>
+
+  <span class="type" ng-show="cssType !== 'label'" title="ls">(ls)</span>
+
+  <mini-preview ng-show="cssType === 'label'" label="data" size="micro" title="{{tooltips.icons.minipreview}}"></mini-preview>
 
 </div>
 
 <!-- show details -->
-<div ng-if="showMore" class="box boxextension bigbox label high" ng-click="openDialog()" ng-init="getInfo()">
+<div ng-if="showMore" class="box boxextension bigbox {{ cssType }} high" ng-click="openDialog()" ng-init="getInfo()">
 
   <span class="line-ext"></span>
 
