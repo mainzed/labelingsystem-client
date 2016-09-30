@@ -85,7 +85,10 @@
           <!-- <div ng-bind="enrichmentVocabID"></div> -->
           <div class="thesaurus thesaurussmall" ng-repeat="vocab in vocabularies | orderBy: 'title'" ng-class="{'checked': vocab.id === checkedVocab}">
             <ls-radiobox checked="vocab.id === checkedVocab" on-check="onVocabCheck(vocab.id)"></ls-radiobox>
-            <h5 ng-bind="vocab.title"></h5>
+
+            <h5 ng-show="vocab.title !== vocabulary.title" ng-bind="vocab.title"></h5>
+
+            <h5 ng-show="vocab.title === vocabulary.title" ng-bind-template="{{ vocab.title + ' -> This vocabulary' }}"></h5>
 
             <!-- <p ng-bind="vocab.description"></p> -->
           </div>
