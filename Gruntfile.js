@@ -62,10 +62,10 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/styles/less/*.less'],
         tasks: ['less']
       },
-    //   protractor: {
-    //     files: ['app/**/*.js', 'test/e2e/**/*.js'],
-    //     tasks: ['protractor:continuous']
-    //   },
+      protractor: {
+        files: ['app/**/*.js', 'e2e-tests/specs/*.js'],
+        tasks: ['protractor']
+      },
       livereload: {
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -107,26 +107,15 @@ module.exports = function (grunt) {
       },
       test: {
         options: {
-            //base: ['app'],  // not sure if this works
-          port: 9001,
-          middleware: function (connect) {
-            return [
-              connect.static('.tmp'),
-              connect.static('test'),
-              connect().use(
-                '/bower_components',
-                connect.static('./bower_components')
-              ),
-              connect.static(appConfig.app)
-            ];
-          }
+            base: ['app'],  // not sure if this works
+            port: 9001
         }
       },
       e2e: {
         options: {
             //base: ['app'],  // not sure if this works
           port: 9001,
-          //base: ['app']
+          base: ['app'],
           middleware: function (connect) {
             return [
               connect.static('.tmp'),
@@ -469,9 +458,12 @@ module.exports = function (grunt) {
 
     // e2e test settings
     protractor: {
+
         options: {
             // Location of your protractor config file
-            configFile: "test/protractor-conf.js",
+            configFile: "e2e-tests/protractor-conf.js",
+
+            keepAlive: true, // If false, the grunt process stops when the test fails.
 
             // Do you want the output to use fun colors?
             noColor: false,
@@ -482,19 +474,34 @@ module.exports = function (grunt) {
             // Additional arguments that are passed to the webdriver command
             args: { }
         },
-        // single run mode
-        e2e: {
+        chrome: {
             options: {
-                // Stops Grunt process if a test fails
-                keepAlive: false
-            }
+                  args: {
+                      browser: "chrome"
+                  }
+              }
         },
-        // continuous mode
-        continuous: {
-            options: {
-                keepAlive: true
-            }
-        }
+        // safari: {
+        //     options: {
+        //         args: {
+        //             browser: "safari"
+        //         }
+        //     }
+        // },
+        // firefox: {
+        //     options: {
+        //         args: {
+        //             browser: "firefox"
+        //         }
+        //     }
+        // },
+        // phantomjs: {
+        //     options: {
+        //         args: {
+        //             browser: "phantomjs"
+        //         }
+        //     }
+        // },
     }
   });
 
@@ -530,13 +537,6 @@ module.exports = function (grunt) {
     'karma:unit'
   ]);
 
-  grunt.registerTask('e2e-test', [
-    'connect:e2e',
-    'protractor:continuous',
-    'watch:protractor'
-  ]);
-
-
   grunt.registerTask('build', [
     'clean:dist',
     'wiredep',
@@ -554,6 +554,12 @@ module.exports = function (grunt) {
     'filerev',
     'usemin',
     'htmlmin'
+  ]);
+
+  grunt.registerTask('e2e', [
+      'connect:test',
+      'protractor',
+      'watch:protractor'
   ]);
 
   grunt.registerTask('default', [
