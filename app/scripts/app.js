@@ -64,6 +64,10 @@ angular.module('labelsApp').run(function ($rootScope, $location, $route, AuthSer
             if (next.access.restricted && !AuthService.isLoggedIn()) {
                 $location.path('/admin/login');
                 $route.reload();
+
+            } else if ($location.path() === "/admin/login" && AuthService.isLoggedIn()) {
+                // skip login page if already logged in
+                $location.path('/admin/vocabularies');
             }
         });
         //}

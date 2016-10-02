@@ -1,3 +1,4 @@
+"use strict";
 exports.config = {
     // location of the Selenium JAR file and chromedriver, use these if you installed protractor locally
     //seleniumServerJar: '../node_modules/protractor/selenium/selenium-server-standalone-2.40.0.jar',
@@ -18,6 +19,14 @@ exports.config = {
         //'browserName': 'phantomjs'
     },
 
+    // multiCapabilities: [
+    //     {
+    //         'browserName': 'firefox'
+    //     },{
+    //         'browserName': 'chrome'
+    //     }
+    // ],
+
     // The address of a running selenium server. (if started manually)
     // use: ./node_modules/grunt-protractor-runner/node_modules/protractor/bin/webdriver-manager start
     seleniumAddress: 'http://127.0.0.1:4444/wd/hub',
@@ -29,9 +38,27 @@ exports.config = {
 
     jasmineNodeOpts: {
         isVerbose: false,
-        showColors: true,
+        showColors: true
         //includeStackTrace: true,
         //defaultTimeoutInterval: 10000000000
-    }
+    },
+
+    // login before tests
+  //   onPrepare: function() {
+  //       browser.driver.get(env.baseUrl + '#/admin/login');
+  //
+  //   browser.driver.findElement(by.model('username')).sendKeys('demo');
+  //   browser.driver.findElement(by.model('password')).sendKeys('demo');
+  //   browser.driver.findElement(by.css('button.deletebutton')).click();
+  //
+  //   // Login takes some time, so wait until it's done.
+  //   // For the test app's login, we know it's done when it redirects to
+  //   // index.html.
+  //   return browser.driver.wait(function() {
+  //     return browser.driver.getCurrentUrl().then(function(url) {
+  //       return /index/.test(url);
+  //     });
+  //   }, 10000);
+  // }
 
 };
