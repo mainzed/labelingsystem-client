@@ -49,9 +49,9 @@ angular.module('labelsApp')
                     user = false;
                     $cookies.remove("lsCookie");
                 }
-                $rootScope.$broadcast('userReady');
-                $rootScope.$emit('notifying-service-event');
-                console.log("broadcast userReady");
+                // broadcast userReady
+                $rootScope.isAuthenticated = true;
+
                 deferred.resolve();
             })
             .error(function () {

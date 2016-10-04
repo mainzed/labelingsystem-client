@@ -13,10 +13,6 @@
     templateUrl: "scripts/components/login/login.html",
 
     controller: function ($scope, $rootScope, $location, $document, AuthService) {
-        //skip login if authenticated
-        if (AuthService.isLoggedIn()) {
-            $location.path("admin/vocabularies");
-        }
 
         $scope.onLoginClick = function() {
             $scope.error = false;

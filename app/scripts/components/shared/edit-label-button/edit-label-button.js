@@ -16,6 +16,8 @@ angular.module('labelsApp')
     controller: function ($scope, $location, $routeParams, ngDialog, ConfigService, LabelService, VocabService) {
         var ctrl = this;
 
+        $scope.publicLabelEdit = ConfigService.publicLabelEdit;
+        
         /**
          * Opens the metadata/settings dialog of a vocabulary.
          */
@@ -37,23 +39,6 @@ angular.module('labelsApp')
                 scope: $scope
             });
         };
-
-        // this.publish = function(concept) {
-        //     concept.releaseType = "public";
-        //     concept.save(function() {
-        //         // set vocab to public if it isn't already
-        //         VocabService.get({id: $routeParams.vID}, function(vocab) {
-        //             vocab.releaseType = "public";
-        //             vocab.save(function() {
-        //                 //
-        //             }, function error(res) {
-        //                 console.log(res);
-        //             });
-        //         });
-        //     }, function error(res) {
-        //         console.log(res);
-        //     });
-        // };
 
         /**
          * Get skos of label url
