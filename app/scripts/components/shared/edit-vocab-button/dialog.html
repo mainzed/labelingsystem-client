@@ -10,7 +10,7 @@
       <div class="nano-content">
 
         <div class="dialogbox dialog-full">
-          <h4>Rename</h4>
+          <h4 ng-class="{'inactive': vocabulary.releaseType === 'public'}">Rename</h4>
           <input type="text" ng-model="newTitle" ng-init="newTitle = vocabulary.title" ng-disabled="vocabulary.releaseType === 'public'" ng-class="{'inactive': vocabulary.releaseType === 'public'}">
         </div>
 
@@ -20,14 +20,14 @@
 
         <div class="line-dialog line"></div>
         <div class="dialogbox dialog-full">
-          <h4>description</h4>
+          <h4 ng-class="{'inactive': vocabulary.releaseType === 'public'}">description</h4>
           <textarea rows="8" cols="40" ng-model="newDescription" ng-paste="onDescriptionKeyPress($event, newDescription)" ng-keypress="onDescriptionKeyPress($event, newDescription)" ng-class="{'inactive': vocabulary.releaseType === 'public'}"></textarea>
 
         </div>
 
         <div class="line-dialog line"></div>
         <div class="dialogbox dialog-full">
-          <h4 >meta data</h4>
+          <h4>meta data</h4>
           <span class="listtype">language</span>
           <span class="listcontent" ng-bind="vocabulary.language"></span>
 
@@ -45,12 +45,12 @@
 
         <div class="line-dialog line"></div>
         <div class="dialogbox dialog-full">
-        <h4>Actions</h4>
+        <h4 ng-class="{'inactive': vocabulary.releaseType === 'public'}">Actions</h4>
           <!-- delete draft vocab (not allowed to delete public vocab) -->
           <ls-confirm-button on-confirm="deleteVocab(vocabulary.id); closeThisDialog()" text="Delete Vocabulary" inactive="vocabulary.releaseType === 'public'"></ls-confirm-button>
 
           <!-- show publish -->
-          <ls-confirm-button on-confirm="publish()" text="Publish Vocabulary" confirm-text="Publish Vocabulary" icon="icon-public" ng-show="vocabulary.releaseType === 'draft'"></ls-confirm-button>
+          <ls-confirm-button on-confirm="publish()" text="Publish Vocab" confirm-text="{{tooltips.explaination.wayback}}" icon="icon-public" ng-show="vocabulary.releaseType === 'draft'" size="large"></ls-confirm-button>
 
           <!-- show when already published -->
           <ls-confirm-button text="Published" icon="icon-public" inactive="true" ng-show="vocabulary.releaseType === 'public'"></ls-confirm-button>
