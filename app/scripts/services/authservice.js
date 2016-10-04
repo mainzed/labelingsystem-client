@@ -45,21 +45,26 @@ angular.module('labelsApp')
                 if (data.status.verified) {
                     user = data.user;  // update user object with response user object
                     //console.log(user);
+                    // broadcast userReady
+                    console.log("user ready");
+                    $rootScope.isAuthenticated = true;
+
                 } else {
                     user = false;
                     $cookies.remove("lsCookie");
+                    $rootScope.isAuthenticated = false;
                 }
-                // broadcast userReady
-                $rootScope.isAuthenticated = true;
 
                 deferred.resolve();
             })
             .error(function () {
                 user = false;
                 $cookies.remove("lsCookie");
+                $rootScope.isAuthenticated = false;
                 deferred.resolve();
             });
         } else {
+            $rootScope.isAuthenticated = false;
             deferred.resolve();
         }
 
