@@ -21,8 +21,10 @@
             });
         };
 
-        $rootScope.$watch("authenticated", function() {  // set in AuthService when user ready
-            $scope.vocabularies = VocabService.query({ creator: AuthService.getUser().id });
+        $rootScope.$watch("isAuthenticated", function(isAuthenticated) {  // set in AuthService when user ready
+            if (isAuthenticated) {
+                $scope.vocabularies = VocabService.query({ creator: AuthService.getUser().id });
+            }
         });
 
     }
