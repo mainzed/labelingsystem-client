@@ -48,4 +48,8 @@ angular.module('labelsApp')
         broader: "skos:broader relates a concept to a concept that is more general in meaning."
     };
 
+    this.explaination = {
+        wayback: "Use Wayback links"
+    }
+
   });

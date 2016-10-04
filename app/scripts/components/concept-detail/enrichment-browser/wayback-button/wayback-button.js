@@ -14,8 +14,10 @@
     templateUrl: "scripts/components/concept-detail/enrichment-browser/wayback-button/wayback-button.html",
 
     // The controller that handles our component logic
-    controller: function ($scope, $document, ngDialog, WaybackService) {
+    controller: function ($scope, $document, ngDialog, WaybackService, TooltipService) {
         var ctrl = this;
+
+        $scope.tooltips = TooltipService;
 
         ctrl.openDialog = function() {
             ctrl.url = "";
