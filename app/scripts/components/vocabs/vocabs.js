@@ -20,23 +20,10 @@
                 console.log(res);
             });
         };
-        console.log("loading vocabs");
 
-
-        // $rootScope.$on("userReady", function() {
-        //     console.log("caught broadcast! in rootscope");
-        //     console.log(AuthService.getUser().id);
-        //     $scope.vocabularies = VocabService.query({ creator: AuthService.getUser().id });
-        //     //console.log("user ready!");
-        //
-        // });
-        $scope.vocabularies = VocabService.query({ creator: "demo" });
-
-        $rootScope.$on("userReady", function() {
-            console.log("caught broadcast in scope!");
+        $rootScope.$watch("authenticated", function() {  // set in AuthService when user ready
             $scope.vocabularies = VocabService.query({ creator: AuthService.getUser().id });
         });
 
-        //$(".nano").nanoScroller();
     }
 });

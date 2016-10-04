@@ -13,7 +13,7 @@
 
     <div class="dialogbox dialog-full">
       <h4>Rename</h4>
-      <input type="text" placeholder="label" ng-model="newLabel" ng-class="{'inactive': label.releaseType === 'public'}">
+      <input type="text" placeholder="label" ng-model="newLabel" ng-class="{'inactive': vocab.releaseType === 'public' && !publicLabelEdit}">
     </div>
 
     <div class="line-dialog line"></div>

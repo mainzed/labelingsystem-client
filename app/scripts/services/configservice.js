@@ -18,10 +18,10 @@ angular.module('labelsApp')
 
     /**
      * If true, prevents users from editing the thumbnail prefLabel of a concept
-     * if it's vocabulary has the releaseType "public". If false, allows editing
+     * if it's vocabulary has the releaseType "public". If true, allows editing
      * even if a vocabulary is public.
      */
-    this.preventThumbnailEdit = true;
+    this.publicLabelEdit = false;
 
     /**
      * If true, shows broadMatches and narrowMatches in broader/narrower columns
