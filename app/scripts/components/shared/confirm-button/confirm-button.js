@@ -16,7 +16,8 @@ angular.module('labelsApp')
             text: "@",  // optional delete text
             confirmText: "@",  // optional text on confirm
             icon: "@",  // optional icon class
-            inactive: "="   // if true gets disabled
+            inactive: "=",   // if true gets disabled
+            size: "@"
         },
         link: function postLink(scope) {
             scope.showConfirm = false;

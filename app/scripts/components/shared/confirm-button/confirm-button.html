@@ -5,6 +5,6 @@
 </div>
 
 <!-- confirm button -->
-<div class="deletebutton confirm" ng-click="onConfirm()" ng-show="showConfirm" ng-class="{'inactive': inactive}">
+<div class="deletebutton confirm" ng-click="onConfirm()" ng-show="showConfirm" ng-class="{'inactive': inactive, 'bigconfirm': size === 'large'}">
 	<span class="buttontext confirmtext" ng-bind="confirmText"></span>
 </div>
