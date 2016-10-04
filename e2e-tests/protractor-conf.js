@@ -12,7 +12,11 @@ exports.config = {
         'specs/**/*.spec.js'
     ],
 
-    // or configure a single browser
+    suites: {
+        login: 'specs/login.spec.js',
+        vocabs: 'specs/vocabs.spec.js',
+        concepts: 'specs/concepts.spec.js'
+    },
 
     capabilities: {
         'browserName': 'chrome'
