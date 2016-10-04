@@ -83,20 +83,19 @@
         <div class="dialogbox dialog-full">
           <h4>Reference vocabulary (mine)</h4>
           <!-- <div ng-bind="enrichmentVocabID"></div> -->
-          <div class="thesaurus thesaurussmall" ng-repeat="vocab in vocabularies | filter: {creator: 'demo'} | orderBy: 'title'" ng-class="{'checked': vocab.id === checkedVocab}">
+          <div class="thesaurus thesaurussmall" ng-repeat="vocab in vocabularies | filter: {creator: user.id} | orderBy: 'title'" ng-class="{'checked': vocab.id === checkedVocab}">
             <ls-radiobox checked="vocab.id === checkedVocab" on-check="onVocabCheck(vocab.id)"></ls-radiobox>
-            <h5 ng-show="vocab.title !== vocabulary.title" ng-bind="vocab.title"></h5>
+            <h5 ng-bind="vocab.title"></h5>
           </div>
 
           <h4>Reference vocabulary (other users)</h4>
           <!-- <div ng-bind="enrichmentVocabID"></div> -->
-          <div class="thesaurus thesaurussmall" ng-repeat="vocab in vocabularies | filter: !{creator: 'demo'} | orderBy: 'title'" ng-class="{'checked': vocab.id === checkedVocab}">
+          <div class="thesaurus thesaurussmall" ng-repeat="vocab in vocabularies | filter: {creator: '!' + user.id} | orderBy: 'title'" ng-class="{'checked': vocab.id === checkedVocab}">
             <ls-radiobox checked="vocab.id === checkedVocab" on-check="onVocabCheck(vocab.id)"></ls-radiobox>
 
-            <h5 ng-show="vocab.title !== vocabulary.title">
+            <h5>
               <span>{{ vocab.title + " - " + vocab.creator}}</span>
-              <a ng-href="#">more info</a>
-              <span></span>
+              <a ng-show="vocab.creatorInfo.orcid" ng-href="{{ vocab.creatorInfo.orcid }}" target="_blank">more info</a>
             </h5>
           </div>
 

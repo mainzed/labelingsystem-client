@@ -7,7 +7,7 @@
  * # searchResultBox
  */
 angular.module('labelsApp')
-  .directive('lsSearchResultBox', function (ngDialog, LabelService, ResourcesService) {
+  .directive('lsSearchResultBox', function (ngDialog, LabelService, TooltipService, ResourcesService) {
     return {
         templateUrl: "scripts/components/concept-detail/enrichment-browser/search-result-box/search-result-box.html",
         restrict: 'E',
@@ -20,7 +20,8 @@ angular.module('labelsApp')
             // workaround for global scope
             scope.data = scope.box;
             //console.log(scope.data);
-
+            scope.tooltips = TooltipService;
+            
             // determine type class
             scope.typeClass = scope.data.type;
 

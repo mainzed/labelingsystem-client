@@ -34,7 +34,7 @@ angular.module('labelsApp')
         thesauriSettings: "change thesauri settings",
         vocabSettings: "change vocab",
         minipreview: "this is the minipreview"
-    };
+    };//
 
     this.comments = {
         description: "Describe current label with a few, clear words.",

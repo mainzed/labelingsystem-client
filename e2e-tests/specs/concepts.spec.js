@@ -78,7 +78,12 @@ describe("Component: concepts", function() {
         expect(date.getText()).toEqual("04.10.2016");
     });
 
-    it("should show mini preview with content");
+    it("should show mini preview with content", function() {
+        var miniPreview = concepts.first().element(by.css("mini-preview"));
+        expect(miniPreview.isDisplayed()).toBeTruthy();
+
+        // TODO: should have miniboxes
+    });
 
     it("should open dialog on create", function() {
         // dialog not visible
@@ -93,6 +98,15 @@ describe("Component: concepts", function() {
         // apply button should be disabled
         expect(applyButton.isDisplayed() && applyButton.isEnabled()).toBeTruthy();
         //console.log(applyButton.isEnabled());
+    });
+
+    it("should filter concepts", function() {
+        // vocabs before filter input
+        expect(concepts.count()).toEqual(3);
+
+        var filter = element(by.model("labelFilter"));
+        filter.sendKeys("bv1");
+        expect(concepts.count()).toBeLessThan(3);
     });
 
 

@@ -28,6 +28,10 @@ angular.module('labelsApp')
 
                 scope.vocab.getThesauri(function(thesauri) {
                     scope.thesauri = thesauri;
+
+                    // auto init
+                    scope.searchValue = scope.label.thumbnail;
+                    scope.onSearchClick();
                 });
             });
 
@@ -64,19 +68,18 @@ angular.module('labelsApp')
                     if (thesaurus.checked) {
 
                         SearchService.query({retcat: thesaurus.name, query: scope.searchValue}, function(results) {
-                            //console.log(results);
-                            //console.log(results.length);
 
                             if (thesaurus.name === "Local Labeling System") {
                                 results = _.filter(results, function(o) {
-                                    return o.scheme !== scope.vocab;  // skip same vocab concepts
+                                    //console.log(o.scheme);
+                                    //console.log(scope.vocab.title);
+                                    return o.scheme !== scope.vocab.title;  // skip same vocab concepts
                                 });
 
                             } else if (thesaurus.name === "this." + scope.vocab.id) {
-                                //console.log(results);
-                                // results = _.filter(results, function(o) {
-                                //     return o.scheme !== scope.vocab;  // skips same concept
-                                // });
+                                results = _.filter(results, function(o) {
+                                    return o.uri.split("/").pop() !== scope.label.id;  // skip current concept
+                                });
                             }
                             //
                             scope.resultBoxes = $.merge(scope.resultBoxes, results);
@@ -105,6 +108,7 @@ angular.module('labelsApp')
             };
 
             scope.tooltips = TooltipService;
+
         }
     };
   });

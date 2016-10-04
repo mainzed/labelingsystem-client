@@ -20,7 +20,7 @@
       </div>
 
       <!-- labels tab -->
-      <div class="tab" ng-click="showSearch = false" ng-class="{'active': !showSearch}">
+      <div class="tab" ng-click="showSearch = false" ng-class="{'active': !showSearch, 'ls': enrichmentVocab.title !== vocab.title}">
         <span class="tablabel">Concepts of {{ enrichmentVocab.title }}</span>
         <ls-edit-vocab-button data="vocab" shortcut="selectVocab" title="{{tooltips.icons.vocabSettings}}"></ls-edit-vocab-button>
       </div>
@@ -66,12 +66,20 @@
 
         <ls-search-result-box ng-repeat="box in resultBoxes | orderBy: ['quality', 'type']" data="box"></ls-search-result-box>
 
+        <div class="preloader">
+          <img src="images/spin.gif" alt="" ng-show="!resultBoxes.length"/>
+        </div>
+
       </div>
 
       <!-- own vocabs -->
       <div ng-show="!showSearch">
-        
+
         <ls-vocab-result-box ng-repeat="sibling in siblings | limitTo: conceptsLimit | orderBy: 'thumbnail'" data="sibling" on-confirm="addResource($concept, $relation)"></ls-vocab-result-box>
+
+        <div class="preloader">
+          <img src="images/spin.gif" alt="" ng-show="!siblings.length"/>
+        </div>
 
         <!-- TODO: make component -->
         <span class="box bigbox label listbox" ng-show="labels.length > conceptsLimit" ng-click="conceptsLimit = conceptsLimit * 2">

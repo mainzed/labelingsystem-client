@@ -38,6 +38,10 @@
 
       <ls-list-box ng-repeat="label in filteredLabels = (labels | filter: labelFilter | orderBy: labelOrder | limitTo: conceptsLimit)" concept="label"></ls-list-box>
 
+      <div class="preloader">
+        <img src="images/spin.gif" alt="" ng-show="!filteredLabels.length"/>
+      </div>
+
       <!-- message when no labels found -->
       <!-- <span class="box bigbox label listbox" ng-show="filteredLabels.length > 30">
        No labels found, <a href="#/vocabularies">browse vocabularies!</a>

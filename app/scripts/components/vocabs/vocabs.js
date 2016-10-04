@@ -23,7 +23,7 @@
 
         $rootScope.$watch("isAuthenticated", function(isAuthenticated) {  // set in AuthService when user ready
             if (isAuthenticated) {
-                $scope.vocabularies = VocabService.query({ creator: AuthService.getUser().id });
+                $scope.vocabularies = VocabService.queryWithStats({ creator: AuthService.getUser().id });
             }
         });
 

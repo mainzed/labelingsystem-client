@@ -7,24 +7,26 @@
 	<div class="dialogscroll">
 	<div class="nano">
 	<div class="nano-content">
-		<div class="dialogbox dialog-full">
-			<h4>name</h4>
-			<input type="text" placeholder="label" ng-model="$ctrl.newConcept.thumbnail">
-		</div>
+
+    <form name="conceptForm" novalidate>
+      <div class="dialogbox dialog-full">
+  			<h4>name</h4>
+  			<input type="text" maxlength="{{titleLength}}" placeholder="label" ng-model="$ctrl.newConcept.thumbnail" required>
+  		</div>
 
 
-		<div class="line-dialog line"></div>
+  		<div class="line-dialog line"></div>
 
-		<div class="dialogbox dialog-full">
-			<h4>description</h4>
-			<textarea placeholder="insert description" ng-model="$ctrl.newConcept.description" ng-paste="onKeyPress($event)" ng-keypress="onKeyPress($event)"></textarea>
-		</div>
-
+  		<div class="dialogbox dialog-full">
+  			<h4>description</h4>
+  			<textarea maxlength="{{descriptionLength}}" placeholder="insert description" ng-model="$ctrl.newConcept.description"></textarea>
+  		</div>
+    </form>
 
 	</div>
 	</div>
 	</div>
 
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="$ctrl.onConfirm({$newConcept: $ctrl.newConcept}); closeThisDialog()" ng-class="{'inactive': !$ctrl.newConcept.thumbnail}">Apply</div>
+	<div class="apply" ng-click="$ctrl.onConfirm({$newConcept: $ctrl.newConcept}); closeThisDialog()" ng-class="{'inactive': conceptForm.$invalid}">Apply</div>
 </div>

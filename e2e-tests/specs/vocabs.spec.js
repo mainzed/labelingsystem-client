@@ -2,26 +2,27 @@
 
 describe("Component: vocabs", function() {
 
+    // elements
+    var vocabs = element.all(by.css("ls-vocab-box"));
+
     beforeAll(function() {
         browser.get(browser.baseUrl + "#/admin/login");
-        element(by.model("username")).sendKeys("demo");
-        element(by.model("password")).sendKeys("demo");
+        element(by.model("username")).sendKeys("test");
+        element(by.model("password")).sendKeys("test");
         element(by.css('button.deletebutton')).click();
 
-        // TODO: create new user "test" and create the tested vocab!
+        // wait until login redirect complete
+        browser.wait(function() {
+            return browser.getCurrentUrl().then(function(url) {
+                return url === browser.baseUrl + "#/admin/vocabularies"; // wait until true
+            });
+        });
     });
 
     afterEach(function() {
         // go back in case of redirect
         browser.get(browser.baseUrl + "#/admin/vocabularies");
     });
-    // beforeEach(function() {
-    //     browser.get(browser.baseUrl + "#/admin/vocabularies");
-    // });
-    //
-    // afterAll(function() {
-    //     browser.manage().deleteAllCookies();
-    // });
 
     it("should be on correct url path", function() {
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/admin/vocabularies');
@@ -36,30 +37,23 @@ describe("Component: vocabs", function() {
     });
 
     it("should show vocabularies", function() {
-        element.all(by.repeater('vocab in vocabularies')).then(function(vocabs) {
-            expect(vocabs.length).toEqual(23);
-        });
+        expect(vocabs.count()).toBe(3);
     });
 
     describe("Vocabulary boxes", function() {
-        var vocabs;
-        beforeEach(function() {
-            vocabs = element.all(by.repeater('vocab in vocabularies'));
-            //var elements = element.all(by.repeater('term in facets.target'));
-        });
 
         it("should show vocab properties", function() {
             var boxTitle = vocabs.first().element(by.css("span.vocabname"));
-            expect(boxTitle.getText()).toEqual("123456!");
+            expect(boxTitle.getText()).toEqual("Beispiel Vokabular 1");
 
             var conceptNumber = vocabs.first().element(by.css("span.vocabsize"));
             expect(conceptNumber.getText()).toEqual("3 concepts");
 
             var language = vocabs.first().element(by.css("span.language"));
-            expect(language.getText()).toEqual("ES");
+            expect(language.getText()).toEqual("DE");
 
             var description = vocabs.first().element(by.css("span.note"));
-            expect(description.getText()).toEqual("123456");
+            expect(description.getText()).toEqual("Beispiel Vokabular Eins");
 
         });
 
@@ -78,7 +72,7 @@ describe("Component: vocabs", function() {
 
         it("should open the concepts view when clicked", function() {
             vocabs.first().element(by.css("div.box.vocabulary")).click();
-            expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/admin/vocabularies/8d400769-fbd6-464c-8dc6-860709419801/concepts');
+            expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/admin/vocabularies/2420a664-7b1c-4da6-aba3-d0694221ee8a/concepts');
         });
 
 
@@ -86,15 +80,11 @@ describe("Component: vocabs", function() {
 
     it("should filter vocab boxes", function() {
         // vocabs before filter input
-        element.all(by.repeater('vocab in vocabularies')).then(function(vocabs) {
-            expect(vocabs.length).toEqual(23);
-        });
+        expect(vocabs.count()).toEqual(3);
 
         var filter = element(by.model("vocabFilter"));
-        filter.sendKeys("123");
-        element.all(by.repeater('vocab in vocabularies')).then(function(vocabs) {
-            expect(vocabs.length).toBeLessThan(23);
-        });
+        filter.sendKeys("Vokabular 1");
+        expect(vocabs.count()).toEqual(1);
     });
 
     it("should have working 'create vocab' button", function() {

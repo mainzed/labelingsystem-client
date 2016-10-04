@@ -14,7 +14,7 @@ angular.module('labelsApp')
         shortcut: "@"  // "thesauri"
     },
     template: '<span class="{{$ctrl.icon}} icon" ng-click="$ctrl.openDialog()"></span>',
-    controller: function ($scope, $rootScope, $location, $document, $anchorScroll, $timeout, ngDialog, VocabService, ConfigService, LabelService) {
+    controller: function ($scope, $rootScope, $location, $document, $anchorScroll, $timeout, ngDialog, VocabService, ConfigService, LabelService, AuthService) {
 
         var ctrl = this;
 
@@ -30,10 +30,11 @@ angular.module('labelsApp')
             $scope.changedThesauri = false;
             $scope.newDescription = $scope.vocabulary.description;
 
-
             $scope.vocabulary.getEnrichmentVocab(function(vocabID) {
                 $scope.checkedVocab = vocabID;
             });
+
+            $scope.user = AuthService.getUser();
 
 
             // get number of draft concepts to be published
@@ -43,8 +44,10 @@ angular.module('labelsApp')
 
             // get all vocabs to be able to select them
 
-            $scope.vocabularies = VocabService.query(function() {
+            $scope.vocabularies = VocabService.queryWithCreator(function() {
                 $(".nano").nanoScroller();
+                //console.log(vocabs);
+                //console.log(vocabs[0]);
             });
 
             $scope.vocabulary.getThesauri(function(thesauri) {

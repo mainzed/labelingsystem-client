@@ -146,10 +146,12 @@ angular.module('labelsApp')
             this[relation].push(concept.id);
 
         } else if (isExternalConcept()) {
+
             // is external concept
             this[relation].push({
-                type: concept.type,
-                uri: concept.uri
+                type: concept.type || "ls",
+                uri: concept.uri || "http://143.93.114.135/item/label/" + concept.id
+
             });
         } else {
             console.log("failed to add child because of unknown relation: " + relation);

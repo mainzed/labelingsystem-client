@@ -28,8 +28,8 @@ describe("Component: login", function() {
         expect(button.getAttribute("class")).toContain("inactive");
 
         // providing username and password should remove class 'inactive'
-        element(by.model("username")).sendKeys("John Doe");
-        element(by.model("password")).sendKeys("some password");
+        element(by.model("username")).sendKeys("test");
+        element(by.model("password")).sendKeys("test");
 
         expect(button.getAttribute('class')).not.toContain("inactive");
     });

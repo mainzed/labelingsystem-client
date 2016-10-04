@@ -56,6 +56,8 @@ angular.module('labelsApp')
 
     // maximum numbe rof chars allowed for descriptions
     this.vocabDescriptionLength = 160;
+
+    this.conceptLabelLength = 20;
     this.conceptDescriptionLength = 300;
 
 });

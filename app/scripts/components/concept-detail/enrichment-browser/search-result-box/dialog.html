@@ -5,13 +5,10 @@
 
   <div id="selectedbox">
   	<div class="box bigbox {{ typeClass }} high" ng-click="onBoxClick()">
-  	  <span class="thumbnail">{{ data.label }}</span>
-
-  	  <!-- <span class="type" ng-bind-html="icon" title="{{ tooltip }}"></span> -->
+  	  <span class="thumbnail" ng-bind="data.label"></span>
 
       <span class="type" ng-show="typeClass !== 'label'" title="{{ data.type + ' - ' + data.scheme }}">({{ data.type }})</span>
       <mini-preview ng-show="typeClass === 'label'" label="concept" size="micro"></mini-preview>
-
 
   	</div>
   </div>
@@ -24,7 +21,7 @@
     		<button class="enrichbutton-ow" type="button" name="button" ng-click="addResource(data, 'broadMatch'); closeThisDialog()">
     			<span class="buttontext-ow">broad Match</span>
     		</button>
-    		<p class="enrichinfo">skos:broadMatch is used to state a hierarchical mapping link between two conceptual resources in different concept schemes.</p>
+    		<p class="enrichinfo" ng-bind="tooltips.comments.broadMatch"></p>
     	</div>
 
       <div class="col five">
@@ -32,7 +29,7 @@
     			<span class="buttontext-ow">exact Match</span>
     			<span class="icon-exact icon"></span>
     		</button>
-    		<p class="enrichinfo">skos:exactMatch is used to link two concepts, indicating a high degree of confidence that the concepts can be used interchangeably across a wide range of information retrieval applications.</p>
+        <p class="enrichinfo" ng-bind="tooltips.comments.exactMatch"></p>
     	</div>
 
       <div class="col five">
@@ -40,7 +37,7 @@
     			<span class="buttontext-ow">related Match</span>
     			<span class="icon-arrow icon"></span>
     		</button>
-    		<p class="enrichinfo">skos:relatedMatch is used to state an associative mapping link between two conceptual resources in different concept schemes.</p>
+        <p class="enrichinfo" ng-bind="tooltips.comments.relatedMatch"></p>
     	</div>
 
       <div class="col five">
@@ -48,14 +45,14 @@
     			<span class="buttontext-ow">close Match</span>
     			<span class="icon-close icon"></span>
     		</button>
-    		<p class="enrichinfo">skos:closeMatch is used to link two concepts that are sufficiently similar that they can be used interchangeably in some information retrieval applications.</p>
+        <p class="enrichinfo" ng-bind="tooltips.comments.closeMatch"></p>
     	</div>
 
       <div class="col five rightout">
     		<button class="enrichbutton-ow" type="button" name="button" ng-click="addResource(data, 'narrowMatch'); closeThisDialog()">
     			<span class="buttontext-ow">narrow Match</span>
     		</button>
-    		<p class="enrichinfo">skos:narrowMatch is used to state a hierarchical mapping link between two conceptual resources in different concept schemes.</p>
+        <p class="enrichinfo" ng-bind="tooltips.comments.narrowMatch"></p>
     	</div>
     </div>
 
@@ -65,7 +62,7 @@
     		<button class="enrichbutton-ow" type="button" name="button" ng-click="addResource(data, 'broader'); closeThisDialog()">
     			<span class="buttontext-ow">broader</span>
     		</button>
-    		<p class="enrichinfo">skos:broader relates a concept to a concept that is more general in meaning.</p>
+        <p class="enrichinfo" ng-bind="tooltips.comments.broader"></p>
     	</div>
 
       <div class="col three">
@@ -73,14 +70,14 @@
     			<span class="buttontext-ow">related</span>
     			<span class="icon-close icon"></span>
     		</button>
-    		<p class="enrichinfo">skos:related relates a concept to a concept with which there is an associative semantic relationship.</p>
+        <p class="enrichinfo" ng-bind="tooltips.comments.related"></p>
     	</div>
 
       <div class="col three rightout">
     		<button class="enrichbutton-ow" type="button" name="button" ng-click="addResource(data, 'narrower'); closeThisDialog()">
     			<span class="buttontext-ow">narrower</span>
     		</button>
-    		<p class="enrichinfo">skos:narrower relates a concept to a concept that is more specific in meaning.</p>
+        <p class="enrichinfo" ng-bind="tooltips.comments.narrower"></p>
     	</div>
     </div>
 
