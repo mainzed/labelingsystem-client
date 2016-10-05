@@ -1,4 +1,7 @@
 "use strict";
+
+var http = require('http');
+
 exports.config = {
     // location of the Selenium JAR file and chromedriver, use these if you installed protractor locally
     //seleniumServerJar: '../node_modules/protractor/selenium/selenium-server-standalone-2.40.0.jar',
@@ -15,7 +18,8 @@ exports.config = {
     suites: {
         login: 'specs/login.spec.js',
         vocabs: 'specs/vocabs.spec.js',
-        concepts: 'specs/concepts.spec.js'
+        concepts: 'specs/concepts.spec.js',
+        "concept-detail": 'specs/concept-detail.spec.js'
     },
 
     capabilities: {
@@ -48,21 +52,15 @@ exports.config = {
     },
 
     // login before tests
-  //   onPrepare: function() {
-  //       browser.driver.get(env.baseUrl + '#/admin/login');
-  //
-  //   browser.driver.findElement(by.model('username')).sendKeys('demo');
-  //   browser.driver.findElement(by.model('password')).sendKeys('demo');
-  //   browser.driver.findElement(by.css('button.deletebutton')).click();
-  //
-  //   // Login takes some time, so wait until it's done.
-  //   // For the test app's login, we know it's done when it redirects to
-  //   // index.html.
-  //   return browser.driver.wait(function() {
-  //     return browser.driver.getCurrentUrl().then(function(url) {
-  //       return /index/.test(url);
-  //     });
-  //   }, 10000);
-  // }
+    onPrepare: function() {
+
+        // var defer = protractor.promise.defer();
+        //
+        // http.request({host: 'http://143.93.114.135', path: '/api/v1/tests/init', method: 'POST'}, function(res) {
+        //     defer.fulfill(res);
+        // });
+        //
+        // return defer.promise;
+    }
 
 };

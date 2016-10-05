@@ -9,7 +9,7 @@
 	<div class="nano-content">
 
 		<div class="dialogbox dialog-full">
-			<h4>name</h4>
+			<h4>Title</h4>
 			<input type="text" placeholder="title" ng-model="newVocab.title">
 		</div>
 
@@ -17,7 +17,7 @@
 		<div class="line-dialog line"></div>
 
 		<div class="dialogbox dialog-full">
-      <h4>description</h4>
+      <h4>Description</h4>
       <textarea rows="8" cols="40" placeholder="description" ng-model="newVocab.description" ng-paste="onDescriptionKeyPress($event)" ng-keypress="onDescriptionKeyPress($event)"></textarea>
 		</div>
 
@@ -26,7 +26,8 @@
 		<div class="dialogbox dialog-full">
 			<h4>Language</h4>
 			<select ng-model="newVocab.language">
-			   <option ng-repeat="language in languages | orderBy: 'name'" value="{{language.value}}" ng-bind="language.name"></option>
+        <option value="" disabled selected>Select language</option>
+			  <option ng-repeat="language in languages | orderBy: 'name'" value="{{language.value}}" ng-bind="language.name"></option>
 			</select>
 		</div>
 

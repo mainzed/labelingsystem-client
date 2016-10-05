@@ -10,6 +10,7 @@ angular.module('labelsApp')
             // limit for concepts shown in concepts tab
             scope.conceptsLimit = ConfigService.conceptsLimit;
 
+            scope.showSearch = false;//ConfigService.showSearchOnStart;
             // wait until resolved
             // scope.label.$promise.then(function() {
             //     LabelService.query({'vocab': $routeParams.vID}, function(concepts) {
@@ -30,8 +31,8 @@ angular.module('labelsApp')
                     scope.thesauri = thesauri;
 
                     // auto init
-                    scope.searchValue = scope.label.thumbnail;
-                    scope.onSearchClick();
+                    //scope.searchValue = scope.label.thumbnail;
+                    //scope.onSearchClick();
                 });
             });
 

@@ -44,9 +44,7 @@ angular.module('labelsApp')
             .success(function (data) {
                 if (data.status.verified) {
                     user = data.user;  // update user object with response user object
-                    //console.log(user);
                     // broadcast userReady
-                    console.log("user ready");
                     $rootScope.isAuthenticated = true;
 
                 } else {

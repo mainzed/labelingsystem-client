@@ -17,6 +17,7 @@
         $(".nano").nanoScroller();
 
         // initial values
+        $scope.loading = true;
         $scope.tooltips = TooltipService;
         $scope.placeholder = "loading labels...";
         $scope.extendAll = UserSettingsService.extendAll;
@@ -30,6 +31,7 @@
         LabelService.query({'vocab': $routeParams.vID}, function(labels) {
             $scope.labels = labels;
             $scope.placeholder = "filter";
+            $scope.loading = false;
         });
 
         /**
@@ -38,7 +40,7 @@
          * @returns {String}
          */
         $scope.orderByLabel = function(concept) {
-            return concept.getLabel();
+            return concept.thumbnail;
         };
 
 
@@ -58,7 +60,7 @@
 
             LabelService.save(newConcept, function(concept) {
                 if (concept.id) {
-                    $location.path("/admin/vocabularies/" + $routeParams.vID + "/concepts/" + concept.id);
+                    $scope.labels.push(concept);
                 }
             }, function error(res) {
                 console.log(res);

@@ -35,23 +35,11 @@ describe("Component: login", function() {
     });
 
     it("should redirect to vocabs on successful login", function() {
-        element(by.model("username")).sendKeys("demo");
-        element(by.model("password")).sendKeys("demo");
+        element(by.model("username")).sendKeys("test");
+        element(by.model("password")).sendKeys("test");
         element(by.css('button.deletebutton')).click();
 
         expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + "#/admin/vocabularies");
     });
-
-    // it("should redirect to vocabs if already logged in", function() {
-    //     element(by.model("username")).sendKeys("demo");
-    //     element(by.model("password")).sendKeys("demo");
-    //     element(by.css('button.deletebutton')).click();
-    //
-    //     // access login page when already logged in
-    //     browser.get(browser.baseUrl + "#/admin/login");
-    //
-    //     expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + "#/admin/vocabularies");
-    //
-    // });
-
+    
 });

@@ -12,7 +12,7 @@
         onConfirm: "&"
     },
     template: '<span class="plusposition" ng-click="$ctrl.openDialog()">+</span>',
-    controller: function ($scope, ngDialog, ConfigService) {
+    controller: function ($scope, $document, ngDialog, ConfigService) {
         var ctrl = this;
         this.openDialog = function() {
 
@@ -21,7 +21,7 @@
                 description: ""
             };
 
-            ngDialog.open({
+            ctrl.dialog = ngDialog.open({
                 template: 'scripts/components/concepts/create-concept-button/dialog.html',
                 className: 'bigdialog',
                 showClose: false,
@@ -33,5 +33,13 @@
 
         $scope.titleLength = ConfigService.conceptLabelLength;
         $scope.descriptionLength = ConfigService.conceptDescriptionLength;
+
+        // hotkeys
+        $document.keydown(function(e) {
+            if (ctrl.dialog && e.keyCode === 13 && !ctrl.conceptForm.$invalid) {  // enter
+                ctrl.onConfirm({$newConcept: ctrl.newConcept});
+                ctrl.dialog.close();
+            }
+        });
     }
 });

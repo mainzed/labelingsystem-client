@@ -39,15 +39,11 @@ access concept via uuid
 
 ## FAQ
 ### What happens if a concept is published?
-- prior to publishing concepts can be modified
-- once published, cannot be modified and visible via uri in LS Viewer
+- the concept's label cannot be modified anymore
+- visible via uri in LS Viewer to external users
 
 ### How do I create a synonym of a concept within a vocabulary?
 Synonyms are not allowed in a controlled vocabulary. Workaround: it is possible to create a second vocabulary and link the concept as an exactMatch. However, exaactMatch is a unidirectional relation which means that the "synonym" in the second vocabulary does not know about the linked exactMatch concept.
 
 ### How can I map two concepts of different vocabularies?
 - only possible to link to public concepts
-
-### A new thesauri ha just been published. How can I link my published concepts to it?
-- not possible
-- workaround: create 'new edition' of vocabulary and link with exact match to old vocab and publish new one.

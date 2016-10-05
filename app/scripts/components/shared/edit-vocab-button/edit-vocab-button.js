@@ -78,6 +78,7 @@ angular.module('labelsApp')
         };
 
         $scope.onCheck = function() {
+            console.log("changed!!!");
             $scope.changedThesauri = true;
         };
 
