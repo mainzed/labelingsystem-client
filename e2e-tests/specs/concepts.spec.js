@@ -68,6 +68,15 @@ describe("Component: concepts", function() {
         expect(concepts.count()).toBe(3);
     });
 
+    it("should filter concepts", function() {
+        // vocabs before filter input
+        expect(concepts.count()).toEqual(3);
+
+        var filter = element(by.model("labelFilter"));
+        filter.sendKeys("bv1");
+        expect(concepts.count()).toBeLessThan(3);
+    });
+
     it("should show concept details", function() {
         // should have a label
         var thumbnail = concepts.first().element(by.css("span.thumbnail"));
@@ -93,20 +102,22 @@ describe("Component: concepts", function() {
         createButton.click();
         expect(createDialog.isDisplayed()).toBeTruthy();
 
-        //
-
-        // apply button should be disabled
-        expect(applyButton.isDisplayed() && applyButton.isEnabled()).toBeTruthy();
-        //console.log(applyButton.isEnabled());
+        // apply button should be disabled, but inactive
+        expect(applyButton.isDisplayed());
+        expect(applyButton.getAttribute("class")).toContain("inactive");
     });
 
-    it("should filter concepts", function() {
-        // vocabs before filter input
-        expect(concepts.count()).toEqual(3);
+    it("should create new concept", function() {
+        expect(concepts.count()).toBe(3);
+        // open dialog
+        createButton.click();
 
-        var filter = element(by.model("labelFilter"));
-        filter.sendKeys("bv1");
-        expect(concepts.count()).toBeLessThan(3);
+        // create concept
+        element(by.model("$ctrl.newConcept.thumbnail")).sendKeys("new concept");
+        applyButton.click();
+
+        // check if new concept was added
+        expect(concepts.count()).toBe(4);
     });
 
 

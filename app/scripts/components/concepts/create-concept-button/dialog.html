@@ -8,19 +8,20 @@
 	<div class="nano">
 	<div class="nano-content">
 
-    <form name="conceptForm" novalidate>
+    <form name="$ctrl.conceptForm" novalidate>
       <div class="dialogbox dialog-full">
-  			<h4>name</h4>
+  			<h4>Label</h4>
   			<input type="text" maxlength="{{titleLength}}" placeholder="label" ng-model="$ctrl.newConcept.thumbnail" required>
   		</div>
 
 
-  		<div class="line-dialog line"></div>
+  		<!-- <div class="line-dialog line"></div>
 
   		<div class="dialogbox dialog-full">
-  			<h4>description</h4>
+  			<h4>Description</h4>
   			<textarea maxlength="{{descriptionLength}}" placeholder="insert description" ng-model="$ctrl.newConcept.description"></textarea>
-  		</div>
+  		</div> -->
+
     </form>
 
 	</div>
@@ -28,5 +29,5 @@
 	</div>
 
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="$ctrl.onConfirm({$newConcept: $ctrl.newConcept}); closeThisDialog()" ng-class="{'inactive': conceptForm.$invalid}">Apply</div>
+	<div class="apply" ng-click="$ctrl.onConfirm({$newConcept: $ctrl.newConcept}); closeThisDialog()" ng-class="{'inactive': $ctrl.conceptForm.$invalid}">Apply</div>
 </div>

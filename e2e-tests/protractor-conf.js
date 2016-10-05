@@ -1,6 +1,6 @@
 "use strict";
 
-var request = require('request');
+var http = require('http');
 
 exports.config = {
     // location of the Selenium JAR file and chromedriver, use these if you installed protractor locally
@@ -54,16 +54,13 @@ exports.config = {
     // login before tests
     onPrepare: function() {
 
-        var defer = protractor.promise.defer();
-
-        request.post('http://143.93.114.135/api/v1/tests/init', function(err, res) {
-            //console.log(err);
-            //console.log(res.data);
-            defer.fulfill();
-            //defer.reject(resp);
-        });
-
-        return defer.promise;
+        // var defer = protractor.promise.defer();
+        //
+        // http.request({host: 'http://143.93.114.135', path: '/api/v1/tests/init', method: 'POST'}, function(res) {
+        //     defer.fulfill(res);
+        // });
+        //
+        // return defer.promise;
     }
 
 };

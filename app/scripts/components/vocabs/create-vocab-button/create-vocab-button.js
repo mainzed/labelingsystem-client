@@ -12,7 +12,7 @@
         onConfirm: "&"
     },
     template: '<span type="button" class="plusposition" ng-click="$ctrl.openDialog()">+</span>',
-    controller: function ($scope, ngDialog, ConfigService, LanguageService, AuthService) {
+    controller: function ($scope, ngDialog, ConfigService, LanguageService, AuthService, ThesauriService) {
 
         $scope.languages = LanguageService.query().then(function(languages) {
             $scope.languages = languages;

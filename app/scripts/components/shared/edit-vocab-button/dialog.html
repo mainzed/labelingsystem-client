@@ -10,7 +10,7 @@
       <div class="nano-content">
 
         <div class="dialogbox dialog-full">
-          <h4 ng-class="{'inactive': vocabulary.releaseType === 'public'}">Rename</h4>
+          <h4 ng-class="{'inactive': vocabulary.releaseType === 'public'}">Title</h4>
           <input type="text" ng-model="newTitle" ng-init="newTitle = vocabulary.title" ng-disabled="vocabulary.releaseType === 'public'" ng-class="{'inactive': vocabulary.releaseType === 'public'}">
         </div>
 
@@ -20,7 +20,7 @@
 
         <div class="line-dialog line"></div>
         <div class="dialogbox dialog-full">
-          <h4 ng-class="{'inactive': vocabulary.releaseType === 'public'}">description</h4>
+          <h4 ng-class="{'inactive': vocabulary.releaseType === 'public'}">Description</h4>
           <textarea rows="8" cols="40" ng-model="newDescription" ng-paste="onDescriptionKeyPress($event, newDescription)" ng-keypress="onDescriptionKeyPress($event, newDescription)" ng-class="{'inactive': vocabulary.releaseType === 'public'}"></textarea>
 
         </div>
@@ -69,14 +69,16 @@
 
         <div class="line-dialog line"></div>
         <div class="dialogbox dialog-full">
+          
           <h4 id="thesauri">Reference thesauri</h4>
-          <div class="thesaurus" ng-repeat="thesaurus in thesauri | orderBy: ['-checked', 'name'] " ng-class="{'checked': thesaurus.checked}" ng-show="thesaurus.name.indexOf('this.') === -1">
+            <div class="thesaurus" ng-repeat="thesaurus in thesauri | orderBy: ['-checked', 'name'] " ng-class="{'checked': thesaurus.checked}" ng-show="thesaurus.name.indexOf('this.') === -1">
 
-            <checkbox ng-model="thesaurus.checked" on-check="onCheck()"></checkbox>
+              <checkbox ng-model="thesaurus.checked" on-check="onCheck()"></checkbox>
 
-            <h5 ng-bind="thesaurus.name"></h5>
-            <p ng-bind="thesaurus.description"></p>
-          </div>
+              <h5 ng-bind="thesaurus.name"></h5>
+              <p ng-bind="thesaurus.description"></p>
+            </div>
+
         </div>
 
         <div class="line-dialog line"></div>
