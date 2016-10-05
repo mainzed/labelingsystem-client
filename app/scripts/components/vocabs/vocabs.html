@@ -18,8 +18,8 @@
 
       <ls-vocab-box ng-repeat="vocab in (filteredVocabularies = (vocabularies | filter: {'creator': user.name} | filter: vocabFilter | orderBy: 'title'))" data="vocab"></ls-vocab-box>
 
-      <div class="preloader">
-        <img src="images/spin.gif" alt="" ng-show="!filteredVocabularies.length"/>
+      <div class="loader" ng-show="!filteredVocabularies.length">
+       
       </div>
 
 	  </div>

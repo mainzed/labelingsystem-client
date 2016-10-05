@@ -66,8 +66,8 @@
 
         <ls-search-result-box ng-repeat="box in resultBoxes | orderBy: ['quality', 'type']" data="box"></ls-search-result-box>
 
-        <div class="preloader">
-          <img src="images/spin.gif" alt="" ng-show="!resultBoxes.length"/>
+        <div class="loader" ng-show="!resultBoxes.length">
+          
         </div>
 
       </div>
