@@ -49,7 +49,8 @@ angular.module('labelsApp')
     };
 
     this.explaination = {
-        wayback: "Use Wayback links"
+        wayback: "Use Wayback links",
+        publication: "By pressing this button you make this vocabulary public. The concepts of this vocabulary can no longer be edited. Furthermore, you may not delete concepts of this vocabulary."
     }
 
   });

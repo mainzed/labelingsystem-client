@@ -50,7 +50,7 @@
           <ls-confirm-button on-confirm="deleteVocab(vocabulary.id); closeThisDialog()" text="Delete Vocabulary" inactive="vocabulary.releaseType === 'public'"></ls-confirm-button>
 
           <!-- show publish -->
-          <ls-confirm-button on-confirm="publish()" text="Publish Vocab" confirm-text="{{tooltips.explaination.wayback}}" icon="icon-public" ng-show="vocabulary.releaseType === 'draft'" size="large"></ls-confirm-button>
+          <ls-confirm-button on-confirm="publish()" text="Publish Vocab" confirm-text="{{tooltips.explaination.publication}}" icon="icon-public" ng-show="vocabulary.releaseType === 'draft'" size="large"></ls-confirm-button>
 
           <!-- show when already published -->
           <ls-confirm-button text="Published" icon="icon-public" inactive="true" ng-show="vocabulary.releaseType === 'public'"></ls-confirm-button>
@@ -87,7 +87,10 @@
             <ls-radiobox checked="vocab.id === checkedVocab" on-check="onVocabCheck(vocab.id)"></ls-radiobox>
             <h5 ng-bind="vocab.title"></h5>
           </div>
+        </div>
 
+        <div class="line-dialog line"></div>
+        <div class="dialogbox dialog-full">
           <h4>Reference vocabulary (other users)</h4>
           <!-- <div ng-bind="enrichmentVocabID"></div> -->
           <div class="thesaurus thesaurussmall" ng-repeat="vocab in vocabularies | filter: {creator: '!' + user.id} | orderBy: 'title'" ng-class="{'checked': vocab.id === checkedVocab}">
