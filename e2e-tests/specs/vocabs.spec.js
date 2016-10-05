@@ -4,6 +4,8 @@ describe("Component: vocabs", function() {
 
     // elements
     var vocabs = element.all(by.css("ls-vocab-box"));
+    var metaDialog = element(by.css("div.ngdialog.bigdialog"));
+    var showMoreButton = vocabs.first().element(by.css("span.icon-more.icon"));
 
     beforeAll(function() {
         browser.get(browser.baseUrl + "#/admin/login");
@@ -58,23 +60,21 @@ describe("Component: vocabs", function() {
         });
 
         it("should have a working metadata button", function() {
-            var showMore = vocabs.first().element(by.css("span.icon-more.icon"));
-            expect(showMore.isDisplayed()).toBeTruthy();
+            expect(showMoreButton.isDisplayed()).toBeTruthy();
 
-            // TODO: test if dialog is visible
-            // dialog not visible
-            //var dialog = element(by.css("div.dialogwrapper"));
-            //expect(dialog.isDisplayed()).toBeFalsy();
+            // dialog should not exist prior to click
+            expect(metaDialog.isPresent()).toBeFalsy();
 
-            //showMore.click();
-            //expect(dialog.isDisplayed()).toBeTruthy();
+            // should show dialog after click
+            showMoreButton.click();
+            expect(metaDialog.isDisplayed()).toBeTruthy();
+            expect(metaDialog.element(by.css(".dialogheader h3")).getText()).toEqual("Beispiel Vokabular 1");
         });
 
         it("should open the concepts view when clicked", function() {
             vocabs.first().element(by.css("div.box.vocabulary")).click();
             expect(browser.getCurrentUrl()).toEqual(browser.baseUrl + '#/admin/vocabularies/2420a664-7b1c-4da6-aba3-d0694221ee8a/concepts');
         });
-
 
     });
 
@@ -96,7 +96,7 @@ describe("Component: vocabs", function() {
         //var dialog = element(by.css(".ngdialog.bigdialog"));
 
         // dialog not visible prior to click
-        //expect(dialog.isPresent()).toBeFalsy();
+        //expect(metaDialog.isPresent()).toBeFalsy();
 
         // click on button opens dialog
         //createButton.click();
