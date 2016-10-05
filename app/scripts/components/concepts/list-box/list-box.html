@@ -6,10 +6,10 @@
 
       <button class="showadditionalcontent" ng-click="toggleExtension(concept.id); $event.stopPropagation()">
         <span class="showmore" ng-show="!showMore && (concept.description || hasBroader(concept) || hasNarrower(concept))">
-          <span class="icon-dropdown"></span>
+          <span class="icon-breadcrumb"></span>
         </span>
         <span class="showmore" ng-show="showMore">
-          <span class="icon-breadcrumb"></span>
+          <span class="icon-dropdown"></span>
         </span>
       </button>
       {{ concept.thumbnail }}

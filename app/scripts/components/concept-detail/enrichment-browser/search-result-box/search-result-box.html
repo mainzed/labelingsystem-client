@@ -2,8 +2,8 @@
 <div class="box bigbox {{ typeClass }} high smallheight" ng-click="onClick()">
   <span class="thumbnail">
     <button class="showadditionalcontent" ng-click="showMore = !showMore; $event.stopPropagation()">
-      <span ng-show="!showMore"><span class="icon-dropdown"></span></span>
-      <span ng-show="showMore"><span class="icon-breadcrumb"></span></span>
+      <span ng-show="!showMore"><span class="icon-breadcrumb"></span></span>
+      <span ng-show="showMore"><span class="icon-dropdown"></span></span>
     </button>
     {{ data.label }}
   </span>

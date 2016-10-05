@@ -120,7 +120,10 @@ textarea:focus {	outline: none; }
 					overflow-x: hidden; float: left; height: 100%; background: @middle; }
 #enrichmentsearch {	float: left; margin-top: 0px; background: @middle; height: 100%; position: relative; }
 #enrichmentsearch input
-				 {	background: none; border: none; color: black; width: 200px; margin-top: 8px; margin-left: 3px; }
+				 {	background: none; border: none; width: 200px; margin-top: 8px; margin-left: 3px; color: gray; }
+#enrichmentsearch .active input {
+					color: black; 
+}
 .tablabel	{		margin-top: 8px; display: block; padding: 0 @margininboxsmall; float: left; width: 80%;
 					overflow: hidden; text-overflow: ellipsis; white-space: nowrap;  }				 
 
@@ -129,6 +132,8 @@ textarea:focus {	outline: none; }
 .icon-config {		float: right; margin-top: 4px; }
 .tab {				float: left; border-radius: 0 3px 0px 0; cursor: pointer; width: 310px; background: @text; 
 					margin-top: 36px; height: 36px; color: gray;  }
+.tab.ls {			background: @text; }
+.tab.ls.active {	background: @ls; }
 .lefttab {			margin-left: @marginoutboxsmall; border-radius: 3px 0 0 0px; }
 .tab.active {		color: black;  font-weight: normal; background: @label;  }
 .tab.active.draft {	background: @draft; }
@@ -143,14 +148,14 @@ textarea:focus {	outline: none; }
 #filtersearch input {
 					background: none; border: none; width: 200px; float: left; height: 30px; color: white; }
 
-.sortlist	{		display: block; float: left; position: relative; color: white; margin-top: 13px; border-left: 1px solid white;
+.sortlist	{		display: block; float: left; position: relative; color: white; margin-top: 13px; 
 					padding-left: @margininboxsmall; cursor: pointer;  }
 .sortlist li {		list-style: none; margin-left: 0; }
 .sortlist .icon {	line-height: 0px; margin-top: 10px; float: right; margin-left: -2px;}
 .sortoptions {		position: absolute; background: @workareas; width: 200px; padding: 10px; color: white; z-index: 9999999; margin-left: -10px; }
 .sortoptions li {	list-style: none; padding: 3px 0; }
 .extendbutton {		float: left; margin-left: 40px; color: white; border-bottom: 0; padding-left: @margininboxsmall; 
-					margin-top: 12px; border-left: 1px solid white; cursor: pointer; }
+					margin-top: 12px; cursor: pointer; }
 #enrichmentsearch .extendbutton {
 					position: absolute; right: @marginoutside; top: 40px; color: gray; margin-right: 0; }
 #breadcrumb {		float: left; display: block; height: 100px; }
@@ -343,7 +348,9 @@ textarea:focus {	outline: none; }
 .dialog-full	{	width: 100%;  }
 .deletebutton { 	width: calc(100% - @marginoutside * 2 ); border-radius: 3px; height: 38px; margin-left: @marginoutside; 
 					float: left; position: relative; background: #d6d6d6; color: black; margin-bottom: @marginbottombox; cursor: pointer;	}
-.bigconfirm {		height: 300px; }
+.bigconfirm {		height: 300px;  }
+.deletebutton.bigconfirm .confirmtext {	
+					font-size: @headlines; left: @margininboxsmall; width: calc(100% - @margininboxsmall * 2); text-align: left; margin-left: 0; }
 .deletebutton .icon {position: absolute;  line-height: 25px; right: @marginoutboxsmall; top: @margininboxsmall; }
 .label .deletebutton {
 					color: black; background: #d6d6d6; }
@@ -353,7 +360,8 @@ textarea:focus {	outline: none; }
 					margin: @margininboxsmall; }
 .deletebutton.confirm {		
 					background: tomato;}
-.confirmtext {		position: absolute; left: 50%; margin-left: -50px !important; text-align: center; width: 100px;}
+.deletebutton .confirmtext {		
+					position: absolute; left: 50%; margin-left: -50px; text-align: center; width: 100px;}
 .confirmed {		margin-left: calc(@marginoutside); width: calc(100% - @marginoutside * 2); background: green;
 					padding: @margininboxsmall; height: 38px; }
 .line-dialog {		height: 1px; width: calc(100% - @marginoutside * 2); margin-left: @marginoutside; float: left;
@@ -425,7 +433,7 @@ textarea.inactive{	color: #a3a3a3; }
 .center input {		width: calc(100% - @marginoutside * 2 - @margininboxsmall * 2); margin-left: @marginoutside; padding: @margininboxsmall; background: white; color: black; 
 					border: 0; height: 20px; margin-bottom: @marginbottombox; }
 .center button {	background: #c5c5c5; color: black; }
-.center h3		{	; padding: @margininboxsmall 0 50px 0; }
+.center h3		{	padding: @margininboxsmall 0 50px 0; }
 
 
 
@@ -442,7 +450,7 @@ textarea.inactive{	color: #a3a3a3; }
 #header .icon-concept {
 					position: absolute; right: 50px; font-size: 100px; top: 8px; }
 .icon-folder {		margin-top: -3px; margin-right: -3px; }
-span.icon-expand {	line-height: 5px; float: right; margin-top: 6px;}
+span.icon-expand {	line-height: 5px; float: right; margin-top: 9px;}
 span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-top: 7px;}
 
 .bigbox span.icon-dropdown, .bigbox span.icon-breadcrumb  {
@@ -453,7 +461,7 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
 					line-height: 21px; font-size: 35px; margin-left: -4px;
 }
 
-#footer span.icon-user  {		margin: 3px 0 0 50px; display: block; float: left;}
+#footer span.icon-user  {		margin: 5px 0 0 50px; display: block; float: left; font-size: 23px;}
 #filtersearch .icon-search	{
 					margin-left: 3px; margin-right: 2px; color: gray; }
 .ngdialog-overlay { background: rgba(0, 0, 0, 0.8); }
@@ -519,17 +527,13 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
 
 /* placeholder */
 ::-webkit-input-placeholder {
-    color:    gray;
-}
+    				color: gray; }
 :-moz-placeholder {
-    color:    gray;
-}
+    				color: gray; }
 ::-moz-placeholder {
-    color:    gray;
-}
+    				color: gray; }
 :-ms-input-placeholder {
-    color:    gray;
-}
+    				color: gray; }
 
 
 .loader {
