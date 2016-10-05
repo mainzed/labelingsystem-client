@@ -17,6 +17,7 @@
 			<h4>language</h4>
 			<select ng-model="selectedLang">
         	<!-- prevent adding of prefLabel in vocab language (has to exist anyway) -->
+        <option value="" disabled selected>Select language</option>
 	    	<option ng-repeat="language in languages | orderBy: 'name'" value="{{language.value}}" ng-bind="language.name" ng-disabled="language.used"></option>
 	  		</select>
 		</div>
