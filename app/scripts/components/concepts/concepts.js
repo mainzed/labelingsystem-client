@@ -97,6 +97,12 @@
             }
         });
 
+        // refresh boxes when csv upload complete
+        $scope.$on("csvUploadComplete", function() {
+            console.log("csv complete!!!");
+            $scope.labels = LabelService.query({'vocab': $routeParams.vID});
+        });
+
         // set inital labelOrder to a function, has to be defined before this line
         // TODO: sort button highlights dont work because of the returned functions
         $scope.labelOrder = UserSettingsService.labelOrder || $scope.orderByThumbnail;

@@ -38,10 +38,9 @@
 
       <!-- csv import -->
       <div class="nano-content" ng-show="$ctrl.showCSV">
-
-        <input type="file" name="fileName" data-file="$ctrl.filename" accept=".csv" />
+        
+        <input type="file" file-model="$ctrl.filename" accept=".csv" />
         <span ng-show="errors" ng-repeat="error in errors" ng-bind="error"></span>
-        <!-- <div>param.file: {{param.file}}</div> -->
 
     	</div>
 
@@ -57,7 +56,7 @@
   <!-- csv buttons -->
   <div ng-show="$ctrl.showCSV">
     <div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-  	<div class="apply" ng-click="$ctrl.import($ctrl.filename)" ng-class="{'inactive': !$ctrl.filename}">Import</div>
+  	<div class="apply" ng-click="$ctrl.import()" ng-class="{'inactive': !$ctrl.filename}">Import</div>
   </div>
 
 
