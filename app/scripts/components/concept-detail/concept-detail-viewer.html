@@ -4,12 +4,13 @@
 
   <h1 ng-bind="label.thumbnail"></h1>
 	<span class="language" ng-bind="label.language"></span>
+  <span class="icon-search"></span>
 
   <!-- <ls-edit-label-button data="label"></ls-edit-label-button> -->
 
 </div>
 
-<div id="enrichment-ov" ng-class="{ 'fullheight': true }">
+<div id="enrichment-ov" class="viewerheight">
 	<!-- fixed table header -->
 	<div class="tableheadwrapper">
 		<div class="tablehead left"><span>Broader</span></div>
@@ -21,7 +22,7 @@
 	</div>
 
 	<!-- table -->
-	<div class="nano enrichmentswrapper">
+	<div class="nano enrichmentswrapper enrichmentswrappermin">
 
     <div id="enrichments" class="nano-content">
 

@@ -1,50 +1,68 @@
-<h1>Labeling System Webapp</h1>
+<div id="header" class="box full" ng-class="vocabulary.releaseType">
+  <input type="text" name="search" value="" placeholder="{{placeholder}}" ng-model="labelFilter" ng-change="onSearchBoxChange()" ng-disabled="!labels" >
+  <div class="loader"></div>
 
-<!-- search box -->
-<input type="text" name="search" value="" placeholder="{{placeholder}}" ng-model="labelFilter" ng-change="onSearchBoxChange()" ng-disabled="!labels" >
+</div>
 
-<!-- search results -->
-<ul ng-show="labelFilter" style="color:white">
+<div id="listwrapper" class="listwrappermin">
 
-  <li ng-repeat="label in filteredLabels = (labels | filter: labelFilter | limitTo: 25)">
+  <h1 class="landingh1">labeling system</h1>
+
+  <!-- search box -->
 
 
-    <a href="#/vocabularies/{{ label.vocabID }}/concepts/{{ label.id }}">
+  <!-- search results -->
+  <ul ng-show="labelFilter" style="color:white">
 
-      <span ng-bind-html="highlightResult(label.thumbnail, labelFilter)"></span>
+    <li ng-repeat="label in filteredLabels = (labels | filter: labelFilter | limitTo: 25)">
 
-      <!-- <span ng-show="label.description.indexOf(labelFilter)">description:</span>
-      <span ng-show="label.description.indexOf(labelFilter)" ng-bind-html="highlightResult(label.description, labelFilter)"></span> -->
-      <!-- <span ng-repeat="prefLabel in label.prefLabels" ng-bind-html="highlightResult(prefLabel.value, labelFilter)" ng-show="prefLabel.isThumbnail"></span> -->
-    </a>
 
-    <!-- scopeNote -->
-    <!-- <ul>
-      <li ng-bind-html="highlightResult(label.scopeNote.value, labelFilter)" ng-show="label.scopeNote.value.indexOf(labelFilter) > -1"></li>
-    </ul> -->
+      <a href="#/vocabularies/{{ label.vocabID }}/concepts/{{ label.id }}">
 
-  </li>
+        <span ng-bind-html="highlightResult(label.thumbnail, labelFilter)"></span>
 
-  <!-- message when no labels found -->
-  <span ng-show="labelFilter && !filteredLabels.length">
-    No labels found, <a href="#/vocabularies">browse vocabularies!</a>
-  </span>
+        <!-- <span ng-show="label.description.indexOf(labelFilter)">description:</span>
+        <span ng-show="label.description.indexOf(labelFilter)" ng-bind-html="highlightResult(label.description, labelFilter)"></span> -->
+        <!-- <span ng-repeat="prefLabel in label.prefLabels" ng-bind-html="highlightResult(prefLabel.value, labelFilter)" ng-show="prefLabel.isThumbnail"></span> -->
+      </a>
 
-  <!-- show more -->
-  <!-- <span ng-show="labelFilter && filteredLabels.length >= 30">
-    Only showing first 30 results!
-  </span> -->
-</ul>
+      <!-- scopeNote -->
+      <!-- <ul>
+        <li ng-bind-html="highlightResult(label.scopeNote.value, labelFilter)" ng-show="label.scopeNote.value.indexOf(labelFilter) > -1"></li>
+      </ul> -->
 
-<!-- landing page text prior to search -->
-<div ng-show="!labelFilter" style="color:white">
-  Portland wolf meggings, slow-carb four loko squid helvetica. Viral authentic bicycle rights bespoke brooklyn forage, irony everyday carry quinoa. Umami wolf organic, hoodie ennui disrupt church-key kinfolk gastropub synth. Ramps fashion axe cliche, keffiyeh 3 wolf moon before they sold out kinfolk master cleanse pour-over listicle williamsburg four dollar toast ethical kitsch. Organic stumptown occupy, DIY meh man bun four dollar toast shoreditch craft beer mlkshk retro four loko. Vice letterpress plaid cray. Everyday carry try-hard readymade, deep v meh fixie bicycle rights keytar drinking vinegar godard hammock cold-pressed.<br><br>
+    </li>
 
-  Authentic craft beer synth portland kale chips bitters. Squid migas lo-fi, swag keytar helvetica YOLO williamsburg tousled twee polaroid. Knausgaard organic literally austin, typewriter farm-to-table artisan beard fap lomo four loko banjo. Green juice photo booth humblebrag cliche, butcher raw denim shabby chic whatever celiac affogato vinyl lumbersexual intelligentsia artisan banh mi. Hella shoreditch street art, kickstarter you probably haven't heard of them viral normcore ethical selvage twee kitsch hoodie typewriter. Artisan squid polaroid photo booth narwhal umami. Franzen venmo iPhone freegan, authentic letterpress poutine cray.<br><br>
+    <!-- message when no labels found -->
+    <span ng-show="labelFilter && !filteredLabels.length">
+      No labels found, <a href="#/vocabularies">browse vocabularies!</a>
+    </span>
 
-  <div>
-    <a href="#/admin/login">Admin page</a>
+    <!-- show more -->
+    <!-- <span ng-show="labelFilter && filteredLabels.length >= 30">
+      Only showing first 30 results!
+    </span> -->
+  </ul>
+
+  <!-- landing page text prior to search -->
+  <div ng-show="!labelFilter">
+    <div class="dialog-half whitetext emphasize float">
+        <h6>Viewer</h6>
+        <p>
+        Portland wolf meggings, slow-carb four loko squid helvetica. Viral authentic bicycle rights bespoke brooklyn forage, irony everyday carry quinoa. Umami wolf organic, hoodie ennui disrupt church-key kinfolk gastropub synth. Ramps fashion axe cliche, keffiyeh 3 wolf moon before they sold out kinfolk master cleanse pour-over listicle williamsburg four dollar toast ethical kitsch. Organic stumptown occupy, DIY meh man bun four dollar toast shoreditch craft beer mlkshk retro four loko. Vice letterpress plaid cray. Everyday carry try-hard readymade, deep v meh fixie bicycle rights keytar drinking vinegar godard hammock cold-pressed.
+        </p>
+    </div>
+    <div class="dialog-half whitetext emphasize float">
+        <h6>Editor</h6>
+        <p>  
+        Authentic craft beer synth portland kale chips bitters. Squid migas lo-fi, swag keytar helvetica YOLO williamsburg tousled twee polaroid. Knausgaard organic literally austin, typewriter farm-to-table artisan beard fap lomo four loko banjo. Green juice photo booth humblebrag cliche, butcher raw denim shabby chic whatever celiac affogato vinyl lumbersexual intelligentsia artisan banh mi. Hella shoreditch street art, kickstarter you probably haven't heard of them viral normcore ethical selvage twee kitsch hoodie typewriter. Artisan squid polaroid photo booth narwhal umami. Franzen venmo iPhone freegan, authentic letterpress poutine cray.<br><br>
+        </p>
+    </div>
+
+    <div class="whitetext">
+      <a href="#/admin/login">Admin page</a>
+    </div>
+
+
   </div>
-
-
 </div>
