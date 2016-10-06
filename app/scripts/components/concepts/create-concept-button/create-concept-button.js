@@ -12,8 +12,11 @@
         onConfirm: "&"
     },
     template: '<span class="plusposition" ng-click="$ctrl.openDialog()">+</span>',
-    controller: function ($scope, $document, ngDialog, ConfigService) {
+    controller: function ($scope, $http, $document, $routeParams, ngDialog, ConfigService) {
         var ctrl = this;
+
+        ctrl.showCSV = false;
+
         this.openDialog = function() {
 
             ctrl.newConcept = {
@@ -29,7 +32,32 @@
                 disableAnimation: true,
                 scope: $scope
             });
+
+            ctrl.import = function(filename) {
+                var url = ConfigService.host + "/importcsv/vocabulary/" + $routeParams.vID;
+
+                var fd = new FormData();
+
+                //fd.append('name', "fileName");
+                fd.append("file", filename);
+
+                $http.post(url, fd, {
+                    transformRequest: angular.identity,
+                    headers: {'Content-Type': undefined}
+                })
+                .success(function(res) {
+
+                    console.log(res);
+                    ctrl.dialog.close();
+                })
+                .error(function(res) {
+                    $scope.errors = res.messages;
+                });
+
+            };
         };
+
+
 
         $scope.titleLength = ConfigService.conceptLabelLength;
         $scope.descriptionLength = ConfigService.conceptDescriptionLength;
