@@ -34,24 +34,22 @@
             });
 
             ctrl.import = function(filename) {
-                var url = ConfigService.host + "/importcsv/vocabulary/" + $routeParams.vID;
+                //var url = ConfigService.host + "/importcsv/vocabulary/" + $routeParams.vID;
+
 
                 var fd = new FormData();
-
-                //fd.append('name', "fileName");
-                fd.append("file", filename);
-
-                $http.post(url, fd, {
-                    transformRequest: angular.identity,
-                    headers: {'Content-Type': undefined}
-                })
-                .success(function(res) {
-
-                    console.log(res);
-                    ctrl.dialog.close();
-                })
-                .error(function(res) {
-                    $scope.errors = res.messages;
+                fd.append('file', filename);
+                $.ajax({
+                    url: ConfigService.host + "/importcsv/vocabulary/" + $routeParams.vID,
+                    data: fd,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    type: 'POST',
+                    success: function(data) {
+                        console.log(data);
+                        //ctrl.dialog.close();
+                    }
                 });
 
             };
