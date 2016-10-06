@@ -52,7 +52,7 @@
                 })
                 .error(function(res) {
                     console.log(res);
-                    $scope.errors = res.errors;
+                    $scope.errors = res.messages;
                 });
 
             };
