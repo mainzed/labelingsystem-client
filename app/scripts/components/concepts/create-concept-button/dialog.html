@@ -1,6 +1,10 @@
 <div class="dialogwrapper label">
 	<div class="dialogheader">
 		<h3>Create new concept</h3>
+		<div id="tabcontainer">
+			<div class="tab lefttab active"><span class="tablabel">single concept</span></div>
+			<div class="tab righttab"><span class="tablabel">csv import</span></div>
+		</div>
 		<div class="line-bottom line"></div>
 	</div>
 
@@ -8,7 +12,9 @@
 	<div class="nano">
 	<div class="nano-content">
 
+
     <form name="$ctrl.conceptForm" novalidate>
+
       <div class="dialogbox dialog-full">
   			<h4>Label</h4>
   			<input type="text" maxlength="{{titleLength}}" placeholder="label" ng-model="$ctrl.newConcept.thumbnail" required>

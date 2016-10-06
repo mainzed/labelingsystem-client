@@ -130,12 +130,16 @@ textarea:focus {	outline: none; }
 #enrichmentsearch .icon-search {
 					margin-left: 4px; margin-top: 3px; float: left;  }
 .icon-config {		float: right; margin-top: 4px; }
+#tabcontainer {		position: absolute; bottom: 0; left: @marginoutside;}
+#tabcontainer .lefttab {
+					margin-left: 0; }
 .tab {				float: left; border-radius: 0 3px 0px 0; cursor: pointer; width: 310px; background: @text; 
 					margin-top: 36px; height: 36px; color: gray;  }
 .tab.ls {			background: @text; }
 .tab.ls.active {	background: @ls; }
 .lefttab {			margin-left: @marginoutboxsmall; border-radius: 3px 0 0 0px; }
 .tab.active {		color: black;  font-weight: normal; background: @label;  }
+.label .tab.active {background: #d6d6d6; }
 .tab.active.draft {	background: @draft; }
 .tab button {		margin-right: @margininboxsmall; float: right; color: white }
 
