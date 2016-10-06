@@ -43,8 +43,11 @@ angular.module('labelsApp')
              * Opens a dialog with detailed information.
              */
             scope.openDialog = function() {
-                console.log(scope.mode);
-                if (scope.mode !== "viewer") {
+                //console.log(scope.mode);
+                if (scope.mode === "viewer") {
+                    $window.open(scope.data.uri, "_blank");
+
+                } else {
                     var resourceDialog = ngDialog.open({
                         template: "scripts/components/concept-detail/resource-box/dialog.html",
                         className: 'bigdialog',

@@ -31,11 +31,11 @@ angular.module('labelsApp')
             }
         });
 
-        $scope.labelFilter = FilterService.getSearchFilter();
-
-        $scope.$watch('labelFilter', function(newValue) {
-            FilterService.setSearchFilter(newValue);
-        });
+        // $scope.labelFilter = FilterService.getSearchFilter();
+        //
+        // $scope.$watch('labelFilter', function(newValue) {
+        //     FilterService.setSearchFilter(newValue);
+        // });
 
         $scope.highlightResult = function(labelName, search) {
             if (labelName) {
