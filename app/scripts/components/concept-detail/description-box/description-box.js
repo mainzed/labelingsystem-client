@@ -12,7 +12,8 @@ angular.module('labelsApp')
         templateUrl: 'scripts/components/concept-detail/description-box/description-box.html',
         restrict: 'E',
         scope: {
-            data: "="
+            data: "=",
+            mode: "@"
         },
         link: function postLink(scope, element) {
 
@@ -22,15 +23,18 @@ angular.module('labelsApp')
              * Opens a dialog with detailed information.
              */
             scope.openDialog = function() {
-                scope.newValue = scope.data.description;
-                ngDialog.open({
-                    template: "scripts/components/concept-detail/description-box/dialog.html",
-                    className: 'bigdialog',
-                    showClose: false,
-                    closeByDocument: false,
-                    disableAnimation: true,
-                    scope: scope
-                });
+                console.log(scope.mode);
+                if (scope.mode !== "viewer") {
+                    scope.newValue = scope.data.description;
+                    ngDialog.open({
+                        template: "scripts/components/concept-detail/description-box/dialog.html",
+                        className: 'bigdialog',
+                        showClose: false,
+                        closeByDocument: false,
+                        disableAnimation: true,
+                        scope: scope
+                    });
+                }
             };
 
             /**

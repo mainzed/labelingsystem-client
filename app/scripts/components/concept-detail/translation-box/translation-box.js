@@ -12,24 +12,28 @@ angular.module('labelsApp')
         templateUrl: "scripts/components/concept-detail/translation-box/translation-box.html",
         restrict: 'E',
         scope: {
-            data: "="
+            data: "=",
+            mode: "@"
         },
         link: function postLink(scope, element) {
 
             scope.tooltips = TooltipService;
-            
+
             /**
              * Opens a dialog with detailed information.
              */
             scope.openDialog = function() {
-                ngDialog.open({
-                    template: "scripts/components/concept-detail/translation-box/dialog.html",
-                    className: 'bigdialog',
-                    showClose: false,
-                    closeByDocument: false,
-                    disableAnimation: true,
-                    scope: scope
-                });
+                console.log(scope.mode);
+                if (scope.mode !== "viewer") {
+                    ngDialog.open({
+                        template: "scripts/components/concept-detail/translation-box/dialog.html",
+                        className: 'bigdialog',
+                        showClose: false,
+                        closeByDocument: false,
+                        disableAnimation: true,
+                        scope: scope
+                    });
+                }
             };
 
             /**

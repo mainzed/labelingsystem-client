@@ -12,7 +12,7 @@
     },
     templateUrl: "scripts/components/concepts/concepts-viewer.html",
     controller: function ($scope, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService, ConfigService, UserSettingsService) {
-
+        var ctrl = this;
         // init nanoscroller here to prevent default scrollbar while loading boxes
         $(".nano").nanoScroller();
 
@@ -76,5 +76,9 @@
         // set inital labelOrder to a function, has to be defined before this line
         // TODO: sort button highlights dont work because of the returned functions
         $scope.labelOrder = UserSettingsService.labelOrder || $scope.orderByThumbnail;
+
+        $scope.onSearchClick = function() {
+            $location.path("/");
+        };
     }
 });

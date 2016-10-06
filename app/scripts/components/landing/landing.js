@@ -12,13 +12,23 @@ angular.module('labelsApp')
     },
     templateUrl: "scripts/components/landing/landing.html",
 
-    controller: function ($scope, $location, LabelService, FilterService) {
+    controller: function ($scope, $window, $timeout, $location, LabelService, FilterService) {
         $scope.placeholder = "loading labels ...";
+        $scope.loading = true;
 
         LabelService.query(function(labels) {
             $scope.labels = labels;
+            $scope.loading = false;
             $scope.placeholder = "search labels";
+        });
 
+        // focus when loading complete
+        $scope.$watch("loading", function(loading) {
+            if (!loading) {
+                $timeout(function() {
+                    $window.document.getElementById("labelSearch").focus();
+                }, 0);
+            }
         });
 
         $scope.labelFilter = FilterService.getSearchFilter();

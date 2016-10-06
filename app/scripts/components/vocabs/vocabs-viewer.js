@@ -11,7 +11,12 @@
     bindings: {
     },
     templateUrl: "scripts/components/vocabs/vocabs-viewer.html",
-    controller: function ($scope, VocabService) {
+    controller: function ($scope, $location, VocabService) {
         $scope.vocabularies = VocabService.queryPublic();
+
+        $scope.onSearchClick = function() {
+            console.log("clicky");
+            $location.path("/");
+        };
     }
 });

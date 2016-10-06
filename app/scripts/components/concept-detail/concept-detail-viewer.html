@@ -4,7 +4,8 @@
 
   <h1 ng-bind="label.thumbnail"></h1>
 	<span class="language" ng-bind="label.language"></span>
-  <span class="icon-search"></span>
+
+  <span class="icon-search" ng-click="onSearchClick()"></span>
 
   <!-- <ls-edit-label-button data="label"></ls-edit-label-button> -->
 
@@ -28,7 +29,7 @@
 
       <!-- broader column -->
   		<div class="col left">
-        <ls-label-box ng-repeat="broaderConcept in label.broader" data="broaderConcept" relation="broader" mode="{{'viewer'}}"></ls-label-box>
+        <ls-label-box ng-repeat="broaderConcept in label.broader" data="broaderConcept" relation="broader" mode="viewer"></ls-label-box>
 
         <ls-resource-box ng-repeat="broadMatch in label.broadMatch" data="broadMatch" relation="broadMatch" mode="viewer"></ls-resource-box>
 
@@ -39,8 +40,8 @@
 
         <!-- descriptive -->
   			<div class="col halfleft">
-          <ls-translation-box ng-repeat="translation in label.translations" data="translation"></ls-translation-box>
-          <ls-description-box ng-show="label.description" data="label"></ls-description-box>
+          <ls-translation-box ng-repeat="translation in label.translations" data="translation" mode="viewer"></ls-translation-box>
+          <ls-description-box ng-show="label.description" data="label" mode="viewer"></ls-description-box>
   			</div>
 
   			<!-- relations column -->
