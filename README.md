@@ -6,10 +6,10 @@ The Labeling System (LS) is a web-application that allows registered users to cr
 ## Getting Started
 
 ### Install
-#### LS Backend (TripleStore, SQLite, Item, API)
+#### Labeling System Backend (TripleStore, SQLite, Item, API)
 This web app uses the API provided by the Labeling System Server. See https://github.com/labelingsystem/server for instructions on how to set it up.
 
-#### LS Frontend (Editor and Viewer)
+#### Labeling System Frontend (Editor and Viewer)
 Run `git clone https://github.com/i3mainz/labels.git` to create a local copy of this repository.
 
 Run `npm install` to install all node and bower modules.

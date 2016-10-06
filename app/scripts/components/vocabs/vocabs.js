@@ -28,7 +28,11 @@
 
                     // update
                     ThesauriService.update({id: res.id}, vocabThesauri, function() {
-                        //
+                        // redirect when everything finished
+                        console.log(res.id);
+                        console.log($location.path());
+                        $location.path("#/admin/vocabularies/" + res.id + "/concepts");
+
                     }, function error(res) {
                         console.log(res);
                     });
