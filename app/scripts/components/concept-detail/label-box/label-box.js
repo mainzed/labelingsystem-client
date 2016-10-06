@@ -18,7 +18,7 @@ angular.module('labelsApp')
             mode: "@ "  // viewer
         },
         link: function postLink(scope, element) {
-            
+
             scope.tooltips = TooltipService;
 
             // get concept data from ID
@@ -33,8 +33,15 @@ angular.module('labelsApp')
              * Opens a dialog with detailed information.
              */
             scope.openDialog = function() {
-                console.log(scope.mode);
-                if (scope.mode !== "viewer") {
+                if (scope.mode === "viewer") {
+
+                    var currentPath = $location.path().split("/");
+                    currentPath.pop();
+                    currentPath.push(scope.concept.id);
+
+                    $location.path(currentPath.join("/"));
+
+                } else {
                     // get this concept's broader concepts
                     scope.broaderConcepts = [];
                     scope.narrowerConcepts = [];

@@ -7,12 +7,13 @@
  * # linkBox
  */
 angular.module('labelsApp')
-  .directive('linkBox', function (ngDialog, $routeParams, ResourcesService, LabelService, HelperService, AuthService) {
+  .directive('linkBox', function ($window, ngDialog, $routeParams, ResourcesService, LabelService, HelperService, AuthService) {
     return {
         templateUrl: 'scripts/components/concept-detail/wayback-box/wayback-box.html',
         restrict: 'E',
         scope: {
-            data: "="
+            data: "=",
+            mode: "@"
         },
         link: function postLink(scope, element) {
             // prefill data
@@ -30,14 +31,20 @@ angular.module('labelsApp')
              * Opens a dialog with detailed information.
              */
             scope.openDialog = function() {
-                ngDialog.open({
-                    template: "scripts/components/concept-detail/wayback-box/dialog.html",
-                    className: 'bigdialog smallheightdialog',
-                    showClose: false,
-                    closeByDocument: false,
-                    disableAnimation: true,
-                    scope: scope
-                });
+                if (scope.mode === "viewer") {
+                    $window.open(scope.data.uri, "_blank");
+
+                } else {
+                    ngDialog.open({
+                        template: "scripts/components/concept-detail/wayback-box/dialog.html",
+                        className: 'bigdialog smallheightdialog',
+                        showClose: false,
+                        closeByDocument: false,
+                        disableAnimation: true,
+                        scope: scope
+                    });
+                }
+
             };
 
             /**

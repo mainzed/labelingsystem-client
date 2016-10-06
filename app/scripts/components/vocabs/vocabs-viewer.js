@@ -15,7 +15,6 @@
         $scope.vocabularies = VocabService.queryPublic();
 
         $scope.onSearchClick = function() {
-            console.log("clicky");
             $location.path("/");
         };
     }
