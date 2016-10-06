@@ -48,6 +48,7 @@
 @marginoutside: 	20px;
 @marginbottombox: 	3px;
 @boxheight: 		60px;
+@headerheight: 		90px;
 
 
 /*------------------- grid --------------------- */
@@ -81,9 +82,10 @@ input:focus {		outline: none; }
 button:focus {		outline: none; }
 textarea:focus {	outline: none; }
 
-#header {			color: white; height: 90px; position: relative; background: @background;	}
+#header {			color: white; height: @headerheight; position: relative; background: @background;	}
 #footer {			position: fixed; bottom: @margininboxsmall; left: calc( @marginoutside + @marginoutboxsmall ); color: @label; height: 30px;  }
 #footer span {		float: left; margin-top: 8px; }
+.landingh1 {		color: white; font-weight: 300; font-size: 150px; margin-left: @marginoutside; margin-bottom: 50px; }
 .logout {			margin-left: 10px; text-decoration: underline; }
 #viewport {			height: 100%; background: @background;}
 #separator {		color: white; height: 75px; }
@@ -102,8 +104,11 @@ textarea:focus {	outline: none; }
 .apply {			position: absolute; bottom: @marginoutside; right: @marginoutside; cursor: pointer; }
 .enrichmentswrapper {
 					height: calc(100% - 50px); }
-#enrichment-ov {	width: 100%; float: left; background: @workareas; height: calc(50% - 90px);	}
-.fullheight		{	height: calc(100% - 90px - 40px) !important;}
+.enrichmentswrappermin {
+					height: calc(100% - 50px); }
+#enrichment-ov {	width: 100%; float: left; background: @workareas; height: calc(50% - @headerheight);	}
+.fullheight		{	height: calc(100% - @headerheight - 40px) !important; }
+.viewerheight {		height: calc(100% - 250px) !important; }
 #enrichment-src {	width: 100%; float: left; position: absolute; height: calc(50% - 40px); margin-top: 3px;
 					box-shadow: 2px -4px 13px black; top: 50%; background: @workareas; }
 #enrichment-src-min {
@@ -114,7 +119,9 @@ textarea:focus {	outline: none; }
 
 .tableheadwrapper {	width: 100%; float: left; }
 #enrichments {		overflow-y: scroll; overflow-x: hidden; float: left; background: @workareas;}
-#listwrapper {		height: calc(100% - 90px - 50px - 38px); float: left; clear: left; display: block; width: 100%;}
+#listwrapper {		height: calc(100% - @headerheight - 50px - 38px); float: left; clear: left; display: block; width: 100%;}
+#listwrapper.listwrappermin {	
+					height: calc(100% - 250px - 50px); }
 #boxcontainer {		overflow-y: scroll; overflow-x: hidden; float: left; background: @workareas; padding-bottom: @marginoutside; }
 #enrichmentbrowser {
 					overflow-x: hidden; float: left; height: 100%; background: @middle; }
@@ -214,6 +221,7 @@ textarea:focus {	outline: none; }
 					border-radius: 20px; box-shadow: 0 3px 15px black; color: white }
 
 #selectedbox 	{	display: block; margin-bottom: 30px; float: left; width: 100%;}
+#selectedbox .box {	cursor: auto; }
 #selectedbox .bigbox {
 					margin-left: @marginoutside; width: calc(100% - @marginoutside * 2); }
 .listbox .thumbnail {
@@ -243,6 +251,7 @@ textarea:focus {	outline: none; }
 /* box elements */
 .thumbnail {		margin-bottom: @margininboxsmall; margin-left: @margininboxsmall; float: left; width: 80%; 
 					display: block; margin-top: 33px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.text .thumbnail {	white-space: normal; text-overflow: inherit; }
 .language {			bottom: @margininboxsmall; right: @margininboxsmall; font-size: @small; letter-spacing: 0.08em; position: absolute; text-transform: uppercase; font-style: italic;}
 .type {				top: @margininboxsmall; right: @margininboxsmall; font-size: @small; position: absolute;}
 .relation {			top: @margininboxsmall; left: @margininboxsmall; position: absolute;}
@@ -440,6 +449,11 @@ textarea.inactive{	color: #a3a3a3; }
 .center h3		{	padding: @margininboxsmall 0 50px 0; }
 
 
+/* landing page */
+#header input {		background: transparent; border: none; color: white; font-size: @headlines; font-weight: bold; margin-left: @marginoutside;
+					margin-top: 45px; float: left;}
+
+
 
 
 
@@ -453,6 +467,9 @@ textarea.inactive{	color: #a3a3a3; }
 	{ 				margin-left: -5px; margin-top: -5px; display: block; }
 #header .icon-concept {
 					position: absolute; right: 50px; font-size: 100px; top: 8px; }
+
+#header .icon-search {
+					position: absolute; right: 20px; font-size: 50px; top: 40px; cursor: pointer; }
 .icon-folder {		margin-top: -3px; margin-right: -3px; }
 span.icon-expand {	line-height: 5px; float: right; margin-top: 9px;}
 span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-top: 7px;}
@@ -468,6 +485,10 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
 #footer span.icon-user  {		margin: 5px 0 0 50px; display: block; float: left; font-size: 23px;}
 #filtersearch .icon-search	{
 					margin-left: 3px; margin-right: 2px; color: gray; }
+
+
+
+
 .ngdialog-overlay { background: rgba(0, 0, 0, 0.8); }
 .selectedbutton {	background: @middle; color: white; }
 
@@ -478,6 +499,7 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
 .note-ext.small {	width: calc((100% / 8) - 80px); }
 .creator-ext {		float: left; margin-left: @margininboxsmall; margin-top: @margininboxsmall; }
 
+.float {			float: left; }
 .italic {			font-style: italic; line-height: 20px; }
 .italic .icon-note {line-height: 10px; line-height: 10px; margin-top: 2px; display: block; float: left;}
 .showadditionalcontent {
@@ -497,6 +519,9 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
                     -ms-hyphens: auto; -moz-hyphens: auto; hyphens: auto; }
 
 .active {			font-weight: bold; }
+.whitetext {		color: white; }
+.emphasize p, .emphasize h6
+			 {		font-size: @emphasize; }
 
 .inactive {			color: gray; pointer-events:none; }
 .paddingbottom {	padding-bottom: 10px;	}
