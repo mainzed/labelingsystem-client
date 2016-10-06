@@ -7,24 +7,22 @@
  * # breadcrumb
  */
 angular.module('labelsApp')
-  .directive('lsBreadcrumbs', function ($location, $routeParams) {
+  .directive('lsBreadcrumbs', function ($location, $routeParams, VocabService) {
     return {
-      templateUrl: "scripts/components/shared/breadcrumbs/breadcrumbs.html",
-      restrict: 'E',
-      link: function postLink(scope, element, attrs) {
+        templateUrl: "scripts/components/shared/breadcrumbs/breadcrumbs.html",
+        restrict: 'E',
+        scope: {
+            mode: "@"  // viewer
+        },
+        link: function postLink(scope) {
 
-        var path = $location.path();
+            scope.vocabID = $routeParams.vID;
+            scope.conceptID = $routeParams.lID;
 
-        // check view and decide what breadcrumbs to show
-        if (path.indexOf("/concepts/") > -1) {
-            scope.showLabelDetail = true;
-
-        } else if (path.indexOf("/vocabularies/") > -1) {
-            scope.showVocabulary = true;
-        } else {
-            scope.showVocabulary = false;
-        }
-
+            // get vocab title
+            if (scope.vocabID) {
+                scope.vocab = VocabService.get({ id: scope.vocabID });
+            }
       }
     };
   });

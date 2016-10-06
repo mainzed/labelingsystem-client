@@ -26,6 +26,18 @@ angular
         template: '<ls-landing></ls-landing>',
         access: {restricted: false}
       })
+      .when('/vocabularies', {
+        template: '<ls-vocabs-viewer></ls-vocabs-viewer>',
+        access: {restricted: false}
+      })
+      .when('/vocabularies/:vID/concepts', {
+        template: '<ls-concepts-viewer></ls-concepts-viewer>',
+        access: {restricted: false}
+      })
+      .when('/vocabularies/:vID/concepts/:lID', {
+        template: '<ls-concept-detail-viewer></ls-concept-detail-viewer>',
+        access: {restricted: false}
+      })
 
       // editor
       .when('/admin/login', {

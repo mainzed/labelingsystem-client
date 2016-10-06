@@ -13,7 +13,8 @@ angular.module('labelsApp')
         restrict: 'E',
         scope: {
             data: "=",  // concept ID
-            relation: "@"  // "related", "broader", "narrower"
+            relation: "@",  // "related", "broader", "narrower"
+            mode: "@"
         },
         link: function postLink(scope, element) {
 
@@ -42,23 +43,27 @@ angular.module('labelsApp')
              * Opens a dialog with detailed information.
              */
             scope.openDialog = function() {
-                var resourceDialog = ngDialog.open({
-                    template: "scripts/components/concept-detail/resource-box/dialog.html",
-                    className: 'bigdialog',
-                    showClose: false,
-                    closeByDocument: false,
-                    disableAnimation: true,
-                    scope: scope
-                });
+                console.log(scope.mode);
+                if (scope.mode !== "viewer") {
+                    var resourceDialog = ngDialog.open({
+                        template: "scripts/components/concept-detail/resource-box/dialog.html",
+                        className: 'bigdialog',
+                        showClose: false,
+                        closeByDocument: false,
+                        disableAnimation: true,
+                        scope: scope
+                    });
 
-                // add listener to init nanoScroller once the dialog is loaded
-                $rootScope.$on('ngDialog.opened', function (e, $dialog) {
-                    if (resourceDialog.id === $dialog.attr('id')) {  // is the resource dialog
-                        $timeout(function() {
-                            $(".nano").nanoScroller();
-                        }, 0);
-                    }
-                });
+                    // add listener to init nanoScroller once the dialog is loaded
+                    $rootScope.$on('ngDialog.opened', function (e, $dialog) {
+                        if (resourceDialog.id === $dialog.attr('id')) {  // is the resource dialog
+                            $timeout(function() {
+                                $(".nano").nanoScroller();
+                            }, 0);
+                        }
+                    });
+                }
+
             };
 
             /**

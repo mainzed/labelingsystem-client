@@ -39,8 +39,7 @@ angular.module('labelsApp')
              * options for each type to link to the label.
              */
             scope.openDialog = function() {
-                console.log(scope.data);
-                //console.log(scope.cssType);
+
                 ngDialog.open({
                     template: 'scripts/components/concept-detail/enrichment-browser/vocab-result-box/dialog.html',
                     className: 'bigdialog',

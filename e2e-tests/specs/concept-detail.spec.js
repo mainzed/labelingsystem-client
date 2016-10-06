@@ -95,22 +95,22 @@ describe("Component: concept-detail", function() {
 
         it("should show enrichment buttons");
 
-        it("should show prefilled search tab", function() {
-            expect(searchField.isDisplayed()).toBeTruthy();
-            expect(searchField.getAttribute("value")).toEqual("Concept BV1");
-        });
+        // it("should show prefilled search tab", function() {
+        //     expect(searchField.isDisplayed()).toBeTruthy();
+        //     expect(searchField.getAttribute("value")).toEqual("Concept BV1");
+        // });
 
-        it("should show search results", function() {
-            expect(searchResults.count()).toBeGreaterThan(0);
-            //expect(searchResults.first().element(by.css("div span.thumbnail")).getText()).toEqual("Regionalist (American Scene)");
-        });
+        // it("should show search results", function() {
+        //     expect(searchResults.count()).toBeGreaterThan(0);
+        //     //expect(searchResults.first().element(by.css("div span.thumbnail")).getText()).toEqual("Regionalist (American Scene)");
+        // });
 
-        it("should show siblings on click", function() {
+        it("should show siblings on open", function() {
             // should be inactive before click
-            expect(vocabTab.getAttribute("class")).not.toContain("active");
+            //expect(vocabTab.getAttribute("class")).not.toContain("active");
 
             // should be active when tab is clicked
-            vocabTab.click();
+            //vocabTab.click();
             expect(vocabTab.getAttribute("class")).toContain("active");
 
             // should show two siblings

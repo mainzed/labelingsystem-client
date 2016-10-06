@@ -14,8 +14,8 @@ angular.module('labelsApp')
 
     controller: function ($scope, $location, LabelService, FilterService) {
         $scope.placeholder = "loading labels ...";
+
         LabelService.query(function(labels) {
-            //console.log(labels);
             $scope.labels = labels;
             $scope.placeholder = "search labels";
 

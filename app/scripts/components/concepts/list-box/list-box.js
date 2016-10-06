@@ -12,7 +12,8 @@ angular.module('labelsApp')
         templateUrl: "scripts/components/concepts/list-box/list-box.html",
         restrict: 'E',
         scope: {
-            concept: "="
+            concept: "=",
+            mode: "@"
         },
         link: function postLink(scope) {
 
@@ -29,7 +30,12 @@ angular.module('labelsApp')
              * @param {string} id - Concept ID
              */
             scope.onClick = function(id) {
-                $location.path("admin/vocabularies/" + $routeParams.vID + "/concepts/" + id);
+                if (scope.mode === 'viewer') {
+                    $location.path("/vocabularies/" + $routeParams.vID + "/concepts/" + id);
+                } else {
+                    $location.path("admin/vocabularies/" + $routeParams.vID + "/concepts/" + id);
+                }
+
             };
 
             /**

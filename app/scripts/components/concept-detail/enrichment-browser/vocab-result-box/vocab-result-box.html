@@ -44,7 +44,7 @@
 
   <!-- link -->
   <span class="note-ext"><span class="italic smalltype">link</span><br>
-    <a ng-href="{{ data.uri }}" target="_blank">link</a>
+    <a ng-href="{{ data.uri }}" target="_blank" ng-click="$event.stopPropagation()">link</a>
   </span>
 
 

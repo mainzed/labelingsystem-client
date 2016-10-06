@@ -1,21 +1,19 @@
 <div id="breadcrumb">
 
-  <!-- vocabulary -->
-  <span ng-show="showVocabulary">
-    <a class="outside" ng-show="!showVocabularies" href="#/admin/vocabularies">My vocabularies</a>
-    <span class="icon-breadcrumb"></span>
-  </span>
+  <span>
+    <!-- vocabs link -->
+    <a ng-show="mode !== 'viewer'" class="outside" href="#/admin/vocabularies">My vocabularies</a>
+    <a ng-show="mode === 'viewer'" class="outside" href="#/vocabularies">All vocabularies</a>
 
-  <!-- label detail -->
-  <span ng-show="showLabelDetail">
-
-    <a class="outside" ng-show="!showVocabularies" href="#/admin/vocabularies">My vocabularies</a>
-
+    <!-- placeholder -->
     <span class="icon-breadcrumb"></span>
 
-    <a ng-href="#/admin/vocabularies/{{ vocabulary.id }}/concepts" ng-bind="vocabulary.title"></a>
+    <!-- concepts link (if in concepts-detail) -->
+    <a ng-show="conceptID && mode !== 'viewer'" ng-href="#/admin/vocabularies/{{ vocabID }}/concepts">{{ vocab.title }}</a>
+    <a ng-show="conceptID && mode === 'viewer'" ng-href="#/vocabularies/{{ vocabID }}/concepts">{{ vocab.title }}</a>
 
-    <span class="icon-breadcrumb"></span>
+    <!-- placeholder (if in concepts-detail) -->
+    <span ng-show="conceptID" class="icon-breadcrumb"></span>
 
   </span>
 

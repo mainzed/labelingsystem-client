@@ -27,6 +27,11 @@ angular.module('labelsApp')
             params: { creatorInfo: true },
             isArray: true
         },
+        'queryPublic': {
+            method: 'GET',
+            params: { statistics: true },
+            isArray: true
+        },
         //'update': { method:'PUT' },
         //'download' : { method: 'GET', url: ConfigService.host + '/vocabs/:id' + ".skos", isArray: false },
         'remove': { method: 'DELETE' }

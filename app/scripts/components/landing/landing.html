@@ -4,24 +4,24 @@
 <input type="text" name="search" value="" placeholder="{{placeholder}}" ng-model="labelFilter" ng-change="onSearchBoxChange()" ng-disabled="!labels" >
 
 <!-- search results -->
-<ul ng-show="labelFilter">
-  <!-- <li ng-repeat="label in labels | filter: labelFilter as filtered | limitTo: 50"> -->
-  <li ng-repeat="label in filteredLabels = (labels | filter: labelFilter | limitTo: 30)">
+<ul ng-show="labelFilter" style="color:white">
 
-    <a href="#/vocabularies/{{ label.vocabID }}/labels/{{ label.id }}">
-      <!-- {{ prefLabel.value }} -->
-      <span ng-repeat="prefLabel in label.prefLabels" ng-bind-html="highlightResult(prefLabel.value, labelFilter)" ng-show="prefLabel.isThumbnail"></span>
+  <li ng-repeat="label in filteredLabels = (labels | filter: labelFilter | limitTo: 25)">
+
+
+    <a href="#/vocabularies/{{ label.vocabID }}/concepts/{{ label.id }}">
+
+      <span ng-bind-html="highlightResult(label.thumbnail, labelFilter)"></span>
+
+      <!-- <span ng-show="label.description.indexOf(labelFilter)">description:</span>
+      <span ng-show="label.description.indexOf(labelFilter)" ng-bind-html="highlightResult(label.description, labelFilter)"></span> -->
+      <!-- <span ng-repeat="prefLabel in label.prefLabels" ng-bind-html="highlightResult(prefLabel.value, labelFilter)" ng-show="prefLabel.isThumbnail"></span> -->
     </a>
 
     <!-- scopeNote -->
-    <ul>
+    <!-- <ul>
       <li ng-bind-html="highlightResult(label.scopeNote.value, labelFilter)" ng-show="label.scopeNote.value.indexOf(labelFilter) > -1"></li>
-    </ul>
-
-    <!-- altlabels -->
-    <ul>
-      <li ng-repeat="altLabel in label.altLabels" ng-bind-html="highlightResult(altLabel.value, labelFilter)" ng-show="altLabel.value.indexOf(labelFilter) > -1"></li>
-    </ul>
+    </ul> -->
 
   </li>
 
@@ -30,14 +30,14 @@
     No labels found, <a href="#/vocabularies">browse vocabularies!</a>
   </span>
 
-  <!-- message when too many labels found -->
-  <span ng-show="labelFilter && filteredLabels.length >= 30">
+  <!-- show more -->
+  <!-- <span ng-show="labelFilter && filteredLabels.length >= 30">
     Only showing first 30 results!
-  </span>
+  </span> -->
 </ul>
 
 <!-- landing page text prior to search -->
-<div ng-show="!labelFilter">
+<div ng-show="!labelFilter" style="color:white">
   Portland wolf meggings, slow-carb four loko squid helvetica. Viral authentic bicycle rights bespoke brooklyn forage, irony everyday carry quinoa. Umami wolf organic, hoodie ennui disrupt church-key kinfolk gastropub synth. Ramps fashion axe cliche, keffiyeh 3 wolf moon before they sold out kinfolk master cleanse pour-over listicle williamsburg four dollar toast ethical kitsch. Organic stumptown occupy, DIY meh man bun four dollar toast shoreditch craft beer mlkshk retro four loko. Vice letterpress plaid cray. Everyday carry try-hard readymade, deep v meh fixie bicycle rights keytar drinking vinegar godard hammock cold-pressed.<br><br>
 
   Authentic craft beer synth portland kale chips bitters. Squid migas lo-fi, swag keytar helvetica YOLO williamsburg tousled twee polaroid. Knausgaard organic literally austin, typewriter farm-to-table artisan beard fap lomo four loko banjo. Green juice photo booth humblebrag cliche, butcher raw denim shabby chic whatever celiac affogato vinyl lumbersexual intelligentsia artisan banh mi. Hella shoreditch street art, kickstarter you probably haven't heard of them viral normcore ethical selvage twee kitsch hoodie typewriter. Artisan squid polaroid photo booth narwhal umami. Franzen venmo iPhone freegan, authentic letterpress poutine cray.<br><br>

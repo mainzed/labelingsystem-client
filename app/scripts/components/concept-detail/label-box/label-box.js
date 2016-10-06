@@ -14,9 +14,11 @@ angular.module('labelsApp')
         scope: {
             data: "=",  // concept ID
             relation: "@",  // "related", "broader", "narrower"
-            parentConcept: "="  // needed to push updates on relation changes (maybe not)
+            parentConcept: "=",  // needed to push updates on relation changes (maybe not)
+            mode: "@ "  // viewer
         },
         link: function postLink(scope, element) {
+            
             scope.tooltips = TooltipService;
 
             // get concept data from ID
@@ -31,52 +33,56 @@ angular.module('labelsApp')
              * Opens a dialog with detailed information.
              */
             scope.openDialog = function() {
-                // get this concept's broader concepts
-                scope.broaderConcepts = [];
-                scope.narrowerConcepts = [];
+                console.log(scope.mode);
+                if (scope.mode !== "viewer") {
+                    // get this concept's broader concepts
+                    scope.broaderConcepts = [];
+                    scope.narrowerConcepts = [];
 
-                HelperService.getRelatedConcepts(scope.concept, "broader", function(broaderConcepts) {
-                    scope.broaderConcepts = scope.broaderConcepts.concat(broaderConcepts);
-                });
-                HelperService.getRelatedConcepts(scope.concept, "narrower", function(narrowerConcepts) {
-                    scope.narrowerConcepts = scope.narrowerConcepts.concat(narrowerConcepts);
-                });
-
-                if (ConfigService.showMatches) {
-                    HelperService.getRelatedConcepts(scope.concept, "broadMatch", function(broaderConcepts) {
+                    HelperService.getRelatedConcepts(scope.concept, "broader", function(broaderConcepts) {
                         scope.broaderConcepts = scope.broaderConcepts.concat(broaderConcepts);
                     });
-                    HelperService.getRelatedConcepts(scope.concept, "narrowMatch", function(narrowMatch) {
-                        scope.narrowerConcepts = scope.narrowerConcepts.concat(narrowMatch);
+                    HelperService.getRelatedConcepts(scope.concept, "narrower", function(narrowerConcepts) {
+                        scope.narrowerConcepts = scope.narrowerConcepts.concat(narrowerConcepts);
+                    });
+
+                    if (ConfigService.showMatches) {
+                        HelperService.getRelatedConcepts(scope.concept, "broadMatch", function(broaderConcepts) {
+                            scope.broaderConcepts = scope.broaderConcepts.concat(broaderConcepts);
+                        });
+                        HelperService.getRelatedConcepts(scope.concept, "narrowMatch", function(narrowMatch) {
+                            scope.narrowerConcepts = scope.narrowerConcepts.concat(narrowMatch);
+                        });
+                    }
+
+
+                    // scope.broaderConcepts = [];
+                    // HelperService.getRelatedConcepts(scope.concept, "broader", function(broaderConcepts) {
+                    //     scope.broaderConcepts = scope.broaderConcepts.concat(broaderConcepts);
+                    // });
+                    // HelperService.getRelatedConcepts(scope.concept, "broadMatch", function(broaderResources) {
+                    //     scope.broaderConcepts = scope.broaderConcepts.concat(broaderResources);
+                    // });
+
+                    var conceptDialog = ngDialog.open({
+                        template: "scripts/components/concept-detail/label-box/dialog.html",
+                        className: 'bigdialog',
+                        showClose: false,
+                        closeByDocument: false,
+                        disableAnimation: true,
+                        scope: scope
+                    });
+
+                    // add listener to init nanoScroller once the dialog is loaded
+                    $rootScope.$on('ngDialog.opened', function (e, $dialog) {
+                        if (conceptDialog.id === $dialog.attr('id')) {  // is the resource dialog
+                            $timeout(function() {
+                                $(".nano").nanoScroller();
+                            }, 0);
+                        }
                     });
                 }
 
-
-                // scope.broaderConcepts = [];
-                // HelperService.getRelatedConcepts(scope.concept, "broader", function(broaderConcepts) {
-                //     scope.broaderConcepts = scope.broaderConcepts.concat(broaderConcepts);
-                // });
-                // HelperService.getRelatedConcepts(scope.concept, "broadMatch", function(broaderResources) {
-                //     scope.broaderConcepts = scope.broaderConcepts.concat(broaderResources);
-                // });
-
-                var conceptDialog = ngDialog.open({
-                    template: "scripts/components/concept-detail/label-box/dialog.html",
-                    className: 'bigdialog',
-                    showClose: false,
-                    closeByDocument: false,
-                    disableAnimation: true,
-                    scope: scope
-                });
-
-                // add listener to init nanoScroller once the dialog is loaded
-                $rootScope.$on('ngDialog.opened', function (e, $dialog) {
-                    if (conceptDialog.id === $dialog.attr('id')) {  // is the resource dialog
-                        $timeout(function() {
-                            $(".nano").nanoScroller();
-                        }, 0);
-                    }
-                });
             };
 
             /**

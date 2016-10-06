@@ -1,6 +1,6 @@
 "use strict";
 
-var http = require('http');
+var request = require('request');
 
 exports.config = {
     // location of the Selenium JAR file and chromedriver, use these if you installed protractor locally
@@ -51,16 +51,15 @@ exports.config = {
         //defaultTimeoutInterval: 10000000000
     },
 
-    // login before tests
+    // reset db before tests start
     onPrepare: function() {
+        var defer = protractor.promise.defer();
 
-        // var defer = protractor.promise.defer();
-        //
-        // http.request({host: 'http://143.93.114.135', path: '/api/v1/tests/init', method: 'POST'}, function(res) {
-        //     defer.fulfill(res);
-        // });
-        //
-        // return defer.promise;
+        request.post('http://143.93.114.135/api/v1/tests/init', {form: {key:'value'}}, function(err, res) {
+            defer.fulfill();
+        });
+
+        return defer.promise;
     }
 
 };

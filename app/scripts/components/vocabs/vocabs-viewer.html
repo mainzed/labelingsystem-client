@@ -1,0 +1,24 @@
+<div id="header" class="box full">
+	<h1 class="vocabheading">All vocabularies</h1>
+</div>
+
+<div class="separatorsmall">
+
+	<div id="filtersearch">
+    <input type="text" name="search" value="search" ng-model="vocabFilter" placeholder="filter">
+	</div>
+</div>
+
+<div id="listwrapper">
+	<div class="nano">
+    <div id="boxcontainer" class="nano-content voc-box">
+
+      <ls-vocab-box ng-repeat="vocab in (filteredVocabularies = (vocabularies | filter: {'creator': user.name} | filter: vocabFilter | orderBy: 'title'))" data="vocab" mode="viewer"></ls-vocab-box>
+
+      <div class="loader" ng-show="!filteredVocabularies.length"></div>
+
+	  </div>
+	</div>
+</div>
+
+<ls-footer mode="viewer"></ls-footer>

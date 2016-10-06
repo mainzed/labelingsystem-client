@@ -9,7 +9,9 @@
 angular.module('labelsApp')
 
 .component('lsFooter', {
-    bindings: {},
+    bindings: {
+        mode: "@"
+    },
     templateUrl: 'scripts/components/shared/footer/footer.html',
     controller: function ($scope, $rootScope, $location, ngDialog, AuthService, ConfigService) {
         var ctrl = this;
