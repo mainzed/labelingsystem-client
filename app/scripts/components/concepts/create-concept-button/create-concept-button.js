@@ -26,7 +26,7 @@
 
             ctrl.dialog = ngDialog.open({
                 template: 'scripts/components/concepts/create-concept-button/dialog.html',
-                className: 'bigdialog',
+                className: 'bigdialog smallheightdialog',
                 showClose: false,
                 closeByDocument: false,
                 disableAnimation: true,
