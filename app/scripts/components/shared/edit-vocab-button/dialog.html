@@ -45,7 +45,7 @@
 
         <div class="line-dialog line"></div>
         <div class="dialogbox dialog-full">
-        <h4 ng-class="{'inactive': vocabulary.releaseType === 'public'}">Actions</h4>
+          <h4 ng-class="{'inactive': vocabulary.releaseType === 'public'}">Actions</h4>
           <!-- delete draft vocab (not allowed to delete public vocab) -->
           <ls-confirm-button on-confirm="deleteVocab(vocabulary.id); closeThisDialog()" text="Delete Vocabulary" inactive="vocabulary.releaseType === 'public'"></ls-confirm-button>
 
@@ -73,7 +73,9 @@
           <h4 id="thesauri">Reference thesauri</h4>
             <div class="thesaurus" ng-repeat="thesaurus in thesauri | orderBy: ['-checked', 'name'] " ng-class="{'checked': thesaurus.checked}" ng-show="thesaurus.name.indexOf('this.') === -1">
 
-              <checkbox ng-model="thesaurus.checked" on-check="onCheck()"></checkbox>
+              <div class="checkboxwrapper">
+                <checkbox ng-model="thesaurus.checked" on-check="onCheck()"></checkbox>
+              </div>
 
               <h5 ng-bind="thesaurus.name"></h5>
               <p ng-bind="thesaurus.description"></p>
@@ -86,7 +88,9 @@
           <h4>Reference vocabulary (mine)</h4>
           <!-- <div ng-bind="enrichmentVocabID"></div> -->
           <div class="thesaurus thesaurussmall" ng-repeat="vocab in vocabularies | filter: {creator: user.id} | orderBy: 'title'" ng-class="{'checked': vocab.id === checkedVocab}">
+            
             <ls-radiobox checked="vocab.id === checkedVocab" on-check="onVocabCheck(vocab.id)"></ls-radiobox>
+           
             <h5 ng-bind="vocab.title"></h5>
           </div>
         </div>
@@ -99,9 +103,14 @@
             <ls-radiobox checked="vocab.id === checkedVocab" on-check="onVocabCheck(vocab.id)"></ls-radiobox>
 
             <h5>
-              <span>{{ vocab.title + " - " + vocab.creator}}</span>
-              <a ng-show="vocab.creatorInfo.orcid" ng-href="{{ vocab.creatorInfo.orcid }}" target="_blank">more info</a>
+              <span>{{ vocab.title }}</span>
             </h5>
+            
+            <span class="floatright">
+              <span>{{ vocab.creator }}</span>
+              <a ng-show="vocab.creatorInfo.orcid" ng-href="{{ vocab.creatorInfo.orcid }}" target="_blank">more info</a>
+            </span>
+            
           </div>
 
         </div>
