@@ -9,6 +9,29 @@
 
 </div>
 
+<div id="metafooter">
+   
+    <div class="dialog-half float">
+        <span class="listtype">uri</span>
+        <span class="listcontent smalltype">{{ uri }}</span>
+        <span class="listtype"></span>
+        <span class="listcontent"><button class="clipboardbutton" clipboard supported="supported" text="uri" on-copied="success()" on-error="fail(err)">Copy to clipboard</button></span>
+        
+        <span class="listtype">creator</span>
+        <span class="listcontent">{{ label.creator }}</span>
+        <span class="listtype">created:</span>
+        <span class="listcontent">{{ label.created | date: 'dd.MM.yyyy' }}</span>
+        <span class="listtype">last modified:</span>
+        <span class="listcontent">{{ label.lastModified | date: 'dd.MM.yyyy' }}</span>
+        <span class="listtype">license</span>
+        <span class="listcontent">{{ label.license }}</span>       
+    </div>
+
+     <div class="dialog-half float" id="ls-selfexplain">
+        Labeling System is a web based tool for creating controlled vocabularies using linked open data techniques.
+    </div>
+</div>
+
 <div id="enrichment-ov" class="viewerheight">
 	<!-- fixed table header -->
 	<div class="tableheadwrapper">
@@ -66,12 +89,6 @@
 	</div>
 </div>
 
-<div id="metafooter">
-    <span>uri: {{ uri }}</span>
-    <span>creator: {{ label.creator }}</span>
-    <span>created: {{ label.created | date: 'dd.MM.yyyy' }}</span>
-    <span>lastModified: {{ label.lastModified | date: 'dd.MM.yyyy' }}</span>
-    <span>license: {{ label.license }}</span>
-</div>
 
-<button clipboard supported="supported" text="uri" on-copied="success()" on-error="fail(err)">Copy</button>
+
+
