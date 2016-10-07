@@ -39,7 +39,7 @@ angular.module('labelsApp')
         var cookie = $cookies.getObject("lsCookie");
 
         if (cookie) {
-            $http.get(ConfigService.host + "/auth/status?user=" + cookie.userID + "&token=" + cookie.token)
+            $http.get(ConfigService.api + "/auth/status?user=" + cookie.userID + "&token=" + cookie.token)
             // handle success
             .success(function (data) {
                 if (data.status.verified) {
@@ -76,7 +76,7 @@ angular.module('labelsApp')
         var deferred = $q.defer();
 
         // send a post request to the server
-        $http.post(ConfigService.host + "/auth/login", $httpParamSerializerJQLike({ "user": username, "pwd": password }))
+        $http.post(ConfigService.api + "/auth/login", $httpParamSerializerJQLike({ "user": username, "pwd": password }))
         .success(function(data, status) {
             // TODO Florian: dont return expection when login failed, but meaningful error message
             if (status === 200 && data) {
@@ -110,7 +110,7 @@ angular.module('labelsApp')
 
         var deferred = $q.defer();
 
-        $http.post(ConfigService.host + "/auth/logout?user=" + user.id)
+        $http.post(ConfigService.api + "/auth/logout?user=" + user.id)
         .success(function () {
             user = false;  // remove user in any case
             $cookies.remove("lsCookie");
@@ -137,7 +137,7 @@ angular.module('labelsApp')
      * @param {Object} user
      *  */
     this.updateUser = function(user) {
-        $http.put(ConfigService.host + "/agents/" + user.id, user).then(function(res) {
+        $http.put(ConfigService.api + "/agents/" + user.id, user).then(function(res) {
             if (res.data.id === user.id && res.status === 201) {
                 user = user.data;
             }

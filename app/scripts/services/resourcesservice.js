@@ -12,7 +12,7 @@ angular.module('labelsApp')
     // AngularJS will instantiate a singleton by calling "new" on this function
     this.get = function(url, success, failure) {
 
-        $http.get(ConfigService.host + "/resourceinfo?uri=" + encodeURI(url)).then(function(response) {
+        $http.get(ConfigService.api + "/resourceinfo?uri=" + encodeURI(url)).then(function(response) {
             // success
             success(response.data);
         }, function(response) {

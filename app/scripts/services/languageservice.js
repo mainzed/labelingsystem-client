@@ -11,7 +11,7 @@ angular.module('labelsApp')
   .service('LanguageService', function ($http, $q, ConfigService) {
     this.query = function() {
         var deferred = $q.defer();
-        $http.get(ConfigService.host + '/languages').then(function(res) {
+        $http.get(ConfigService.api + '/languages').then(function(res) {
             deferred.resolve(res.data);
         }, function error(res) {
             deferred.reject(res);

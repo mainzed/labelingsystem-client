@@ -10,10 +10,10 @@
 angular.module('labelsApp')
   .factory('ThesauriService', function ($resource, ConfigService) {
 
-    return $resource(ConfigService.host + '/retcat/vocabulary/:id', null, {
+    return $resource(ConfigService.api + '/retcat/vocabulary/:id', null, {
         'query': {
             method: 'GET',
-            url: ConfigService.host + '/retcat',
+            url: ConfigService.api + '/retcat',
             isArray: true
         },
         'get': { isArray: true },

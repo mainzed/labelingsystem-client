@@ -11,7 +11,7 @@ angular.module('labelsApp')
   .factory('VocabService', function ($resource, $q, $http, AuthService, ConfigService, ThesauriService) {
 
     // the data model lives on the server!
-    var Vocab = $resource(ConfigService.host + '/vocabs/:id', null, {
+    var Vocab = $resource(ConfigService.api + '/vocabs/:id', null, {
         'query': {
             method: 'GET',
             params: { draft: true },
@@ -33,12 +33,12 @@ angular.module('labelsApp')
             isArray: true
         },
         //'update': { method:'PUT' },
-        //'download' : { method: 'GET', url: ConfigService.host + '/vocabs/:id' + ".skos", isArray: false },
+        //'download' : { method: 'GET', url: ConfigService.api + '/vocabs/:id' + ".skos", isArray: false },
         'remove': { method: 'DELETE' }
     });
 
     Vocab.prototype.getUrl = function() {
-        return ConfigService.host + "/vocabs/" + this.id;
+        return ConfigService.api + "/vocabs/" + this.id;
     };
 
     /**
@@ -111,7 +111,7 @@ angular.module('labelsApp')
      */
     Vocab.prototype.getEnrichmentVocab = function(successCallback, errorCallback) {
         var me = this;
-        $http.get(ConfigService.host + '/retcat/vocabulary/' + me.id + '/list').then(function(res) {
+        $http.get(ConfigService.api + '/retcat/vocabulary/' + me.id + '/list').then(function(res) {
             successCallback(res.data.id);  // return vocab ID
         }, function error(res) {
             errorCallback(res);
@@ -121,7 +121,7 @@ angular.module('labelsApp')
     Vocab.prototype.setEnrichmentVocab = function(id) {
         var deferred = $q.defer();
         var me = this;
-        $http.put(ConfigService.host + '/retcat/vocabulary/' + me.id + '/list', {id: id}).then(function() {
+        $http.put(ConfigService.api + '/retcat/vocabulary/' + me.id + '/list', {id: id}).then(function() {
             deferred.resolve();  // return vocab ID
         }, function error(res) {
             deferred.reject(res);
@@ -134,7 +134,7 @@ angular.module('labelsApp')
         var deferred = $q.defer();
         var me = this;
 
-        $http.get(ConfigService.host + '/labels?draft=true&vocab=' + me.id).then(function(res) {
+        $http.get(ConfigService.api + '/labels?draft=true&vocab=' + me.id).then(function(res) {
             deferred.resolve(_.filter(res.data, { releaseType: "draft"}));
         }, function error(res) {
             deferred.reject(res);
@@ -146,7 +146,7 @@ angular.module('labelsApp')
     Vocab.prototype.save = function(successCallback, errorCallback) {
         var me = this;
 
-        $http.put(ConfigService.host + '/vocabs/' + me.id, me).then(function success(res) {
+        $http.put(ConfigService.api + '/vocabs/' + me.id, me).then(function success(res) {
             successCallback(res);
         }, function error(res) {
             errorCallback(res);

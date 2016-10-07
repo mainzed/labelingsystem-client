@@ -14,7 +14,9 @@ angular.module('labelsApp')
     this.version = "v0.2";
 
     // host adress of the used labeling system api
-    this.host = "http://143.93.114.135/api/v1";
+    this.host = "http://143.93.114.135";
+
+    this.api = this.host + "/api/v1";
 
     /**
      * If true, prevents users from editing the thumbnail prefLabel of a concept

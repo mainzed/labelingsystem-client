@@ -80,5 +80,6 @@
         $scope.onSearchClick = function() {
             $location.path("/");
         };
+
     }
 });

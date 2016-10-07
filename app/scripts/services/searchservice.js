@@ -10,12 +10,12 @@
 angular.module('labelsApp')
   .factory('SearchService', function ($resource, ConfigService) {
 
-    var SearchResult = $resource(ConfigService.host + '/resourcequery');
+    var SearchResult = $resource(ConfigService.api + '/resourcequery');
 
 
 
     // this.search = function(thesaurus, text, success, failure) {
-    //     $http.get(ConfigService.host + '/resourcequery?retcat=' + thesaurus + '&query=' + text).then(function(res) {
+    //     $http.get(ConfigService.api + '/resourcequery?retcat=' + thesaurus + '&query=' + text).then(function(res) {
     //         success(res.data);
     //     }, function(res) {
     //         failure(res);

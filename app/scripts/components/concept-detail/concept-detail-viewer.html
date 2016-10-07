@@ -67,9 +67,11 @@
 </div>
 
 <div id="metafooter">
-    <span>id: {{ label.id }}</span>
+    <span>uri: {{ uri }}</span>
     <span>creator: {{ label.creator }}</span>
     <span>created: {{ label.created | date: 'dd.MM.yyyy' }}</span>
     <span>lastModified: {{ label.lastModified | date: 'dd.MM.yyyy' }}</span>
     <span>license: {{ label.license }}</span>
 </div>
+
+<button clipboard supported="supported" text="uri" on-copied="success()" on-error="fail(err)">Copy</button>

@@ -10,7 +10,7 @@
 angular.module('labelsApp')
   .factory('LabelService', function ($resource, $http, AuthService, ConfigService, ResourcesService) {
 
-    var Concept = $resource(ConfigService.host + '/labels/:id', { draft: true}, {
+    var Concept = $resource(ConfigService.api + '/labels/:id', { draft: true}, {
         'update': {
             method: 'PUT'
         },
@@ -31,7 +31,7 @@ angular.module('labelsApp')
     };
 
     Concept.prototype.getUrl = function() {
-        return ConfigService.host + "/labels/" + this.id;
+        return ConfigService.api + "/labels/" + this.id;
     };
 
     /**
@@ -43,7 +43,7 @@ angular.module('labelsApp')
 
     // Concept.prototype.delete = function(successCallback, errorCallback) {
     //     var me = this;
-    //     console.log(ConfigService.host + '/labels/' + me.id);
+    //     console.log(ConfigService.api + '/labels/' + me.id);
     //     console.log(AuthService.getUser().id);
     //
     //     LabelService.remove({id: })
@@ -77,7 +77,7 @@ angular.module('labelsApp')
                  concept[relation].forEach(function(resource, index, array) {
 
                      if (_.isString(resource)) {  // is internal concept ID
-                        $http.get(ConfigService.host + '/labels/' + resource).then(function(res) {
+                        $http.get(ConfigService.api + '/labels/' + resource).then(function(res) {
                              relatedConcepts.push(res.data);
                              //console.log(res.data);
                              // callback when all done
@@ -229,7 +229,7 @@ angular.module('labelsApp')
      */
     Concept.prototype.save = function(successCallback, errorCallback) {
         var me = this;
-        $http.put(ConfigService.host + '/labels/' + me.id, me).then(function() {
+        $http.put(ConfigService.api + '/labels/' + me.id, me).then(function() {
             successCallback();
         }, function() {
             errorCallback();

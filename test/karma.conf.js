@@ -33,7 +33,7 @@ module.exports = function(config) {
       'bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.js',
       'bower_components/lodash/lodash.js',
       'bower_components/leaflet/dist/leaflet-src.js',
-      'bower_components/ng-file-upload/ng-file-upload.js',
+      'bower_components/angular-clipboard/angular-clipboard.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

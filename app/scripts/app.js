@@ -17,7 +17,7 @@ angular
     'ngSanitize',
     'ngTouch',
     'ngDialog',
-    'ngFileUpload'
+    'angular-clipboard'
   ])
   .config(function ($routeProvider) {
     $routeProvider

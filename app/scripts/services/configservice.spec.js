@@ -17,7 +17,7 @@ describe('Service: ConfigService', function () {
 
     it("should provide host property", function() {
         expect(ConfigService.hasOwnProperty("host")).toBe(true);
-        expect(typeof(ConfigService.host)).toBe("string");
+        expect(typeof(ConfigService.api)).toBe("string");
     });
 
     it("should provide preventThumbnailEdit property", function() {

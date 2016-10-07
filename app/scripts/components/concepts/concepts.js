@@ -106,5 +106,6 @@
         // set inital labelOrder to a function, has to be defined before this line
         // TODO: sort button highlights dont work because of the returned functions
         $scope.labelOrder = UserSettingsService.labelOrder || $scope.orderByThumbnail;
+
     }
 });

@@ -34,7 +34,7 @@
             });
 
             ctrl.import = function() {
-                var url = ConfigService.host + "/importcsv/vocabulary/" + $routeParams.vID;
+                var url = ConfigService.api + "/importcsv/vocabulary/" + $routeParams.vID;
 
                 var fd = new FormData();
 

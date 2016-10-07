@@ -46,7 +46,7 @@ angular.module('labelsApp')
          * @return {string} url to download vocab in skos format
          */
         $scope.getDownloadUrl = function(id) {
-            return ConfigService.host + "/labels/" + id;
+            return ConfigService.api + "/labels/" + id;
         };
 
         /**
