@@ -87,7 +87,8 @@ h3 {				font-size: @emphasize; margin-bottom: 5px; margin-top: @marginoutside; m
 					display: block; float: left;
 					@media screen and (max-width: 1600px) {font-size: @emphasize-small; } }
 h4 {				font-size: @regular; margin-left: @marginoutside; display: block; margin-bottom: 14px;}
-h5 {				float: left; font-weight: normal; font-style: italic; }
+h5 {				float: left; font-weight: bold; font-style: italic; }
+h6 {				margin-bottom: 20px; }
 li {				margin-left: 14px; }
 button {			border: 0; background: transparent;}
 input:focus {		outline: none; }
@@ -426,14 +427,21 @@ textarea.inactive{	color: #a3a3a3; }
 .listtype {			float: left; width: 120px; margin-right: 20px; clear: left; margin-left: @marginoutside; font-style: italic; 
 					padding-top: 2px; font-size: @small;  }
 .listcontent {		float: left; width: calc(100% - 150px - @marginoutside); }
+
+/* thesaurus */
 .thesaurus {		width: calc(100% - @marginoutside * 2); margin-left: @marginoutside; display: block; float: left; margin-bottom: 30px;
 					border-top: 1px solid #c5c5c5; padding-top: 4px; position: relative; }
 .thesaurussmall {	margin-bottom: 6px; }
+.thesaurussmall h5 {font-weight: normal; }
 .dialogbox input.checkbox {			
 					float: left; margin-left: 0; width: 20px; }
-.thesaurus p {		float: left; clear: left; }
-.thesaurus .icon {	float: left; line-height: 18px; margin-left: -8px; width: 26px; cursor: pointer;}
+.thesaurus p {		float: left; clear: left; margin-left: 20px; }
+.thesaurus .icon {	position: absolute; line-height: 18px; margin-left: -8px; width: 26px; cursor: pointer;}
 .checked {			color: green;  }
+.checkboxwrapper {	float: left; width: 20px; height: 19px; display: block; position: relative;  }
+
+
+
 .hierarchie li { 	width: 100%; font-size: @small; letter-spacing: 0.03em;
 					list-style: none; margin-left: 0;  }
 .downloadlist {		margin-left: @marginoutside; float: left; display: block; }
@@ -520,6 +528,7 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
 .creator-ext {		float: left; margin-left: @margininboxsmall; margin-top: @margininboxsmall; }
 
 .float {			float: left; }
+.floatright {       float: right; }
 .italic {			font-style: italic; line-height: 20px; }
 .italic .icon-note {line-height: 10px; line-height: 10px; margin-top: 2px; display: block; float: left;}
 .showadditionalcontent {
@@ -586,23 +595,23 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
 
 
 .loader {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-  	margin-left: -2.5em;
-  	margin-top: -2.5em;
-  font-size: 5px;
+                	position: absolute;
+                	top: 50%;
+                	left: 50%;
+                  	margin-left: -2.5em;
+                  	margin-top: -2.5em;
+                    font-size: 5px;
   
-  text-indent: -9999em;
-  border-top: 1.7em solid rgba(255, 255, 255, 0.2);
-  border-right: 1.7em solid rgba(255, 255, 255, 0.2);
-  border-bottom: 1.7em solid rgba(255, 255, 255, 0.2);
-  border-left: 1.7em solid rgba(255, 255, 255, 0.3);
-  -webkit-transform: translateZ(0);
-  -ms-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-animation: load8 0.3s infinite linear;
-  animation: load8 0.3s infinite linear;
+                    text-indent: -9999em;
+                    border-top: 1.7em solid rgba(255, 255, 255, 0.2);
+                    border-right: 1.7em solid rgba(255, 255, 255, 0.2);
+                    border-bottom: 1.7em solid rgba(255, 255, 255, 0.2);
+                    border-left: 1.7em solid rgba(255, 255, 255, 0.3);
+                    -webkit-transform: translateZ(0);
+                    -ms-transform: translateZ(0);
+                    transform: translateZ(0);
+                    -webkit-animation: load8 0.3s infinite linear;
+                    animation: load8 0.3s infinite linear;
 }
 .loader,
 .loader:after {
@@ -611,6 +620,15 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
   height: 4em;
   z-index: 5;
 }
+
+.highlight {    
+                    animation: highlight 0.3s linear;
+                    -webkit-animation: highlight 0.3s linear;
+}
+
+
+/* keyframes */
+
 @-webkit-keyframes load8 {
   0% {
     -webkit-transform: rotate(0deg);
@@ -633,6 +651,8 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
     transform: rotate(360deg);
   }
 }
+
+
 @keyframes load8 {
   0% {
     -webkit-transform: rotate(0deg);
@@ -654,5 +674,23 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+
+@keyframes highlight {
+    0% {
+        background: white;
+    }
+    100% {
+        background: auto;
+    }
+}
+
+@-webkit-keyframes highlight {
+    0% {
+        background: white;
+    }
+    100% {
+        background: auto;
+    }
 }
 
