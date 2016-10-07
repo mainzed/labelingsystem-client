@@ -1,13 +1,11 @@
 <div id="header" class="box full" ng-class="vocabulary.releaseType">
+    <ls-breadcrumbs mode="viewer"></ls-breadcrumbs>
 
-  <ls-breadcrumbs mode="viewer"></ls-breadcrumbs>
+    <h1 ng-bind="label.thumbnail"></h1>
+    <span class="language" ng-bind="label.language"></span>
 
-  <h1 ng-bind="label.thumbnail"></h1>
-	<span class="language" ng-bind="label.language"></span>
-
-  <span class="icon-search" ng-click="onSearchClick()"></span>
-
-  <!-- <ls-edit-label-button data="label"></ls-edit-label-button> -->
+    <span class="icon-search" ng-click="onSearchClick()"></span>
+    <!-- <ls-edit-label-button data="label"></ls-edit-label-button> -->
 
 </div>
 
@@ -19,7 +17,9 @@
 			<div class="tablehead halfleft"><span>Descriptive</span></div>
 			<div class="tablehead halfright"><span>Similar</span></div>
 		</div>
-		<div class="tablehead right"><span>Narrower</span></div>
+	       <div class="tablehead right">
+            <span>Narrower</span>
+        </div>
 	</div>
 
 	<!-- table -->
@@ -67,5 +67,9 @@
 </div>
 
 <div id="metafooter">
-  labeling system is a web app, that provides simple functionality... etc.
+    <span>id: {{ label.id }}</span>
+    <span>creator: {{ label.creator }}</span>
+    <span>created: {{ label.created | date: 'dd.MM.yyyy' }}</span>
+    <span>lastModified: {{ label.lastModified | date: 'dd.MM.yyyy' }}</span>
+    <span>license: {{ label.license }}</span>
 </div>

@@ -60,4 +60,11 @@
 	</div>
 </div>
 
-<ls-footer mode="viewer"></ls-footer>
+<div id="metafooter">
+    <span>id: {{ vocabulary.id }}</span>
+    <span>creator: {{ vocabulary.creator }}</span>
+    <span>created: {{ vocabulary.created | date: 'dd.MM.yyyy' }}</span>
+    <span>lastModified: {{ vocabulary.lastModified | date: 'dd.MM.yyyy' }}</span>
+    <span>license: {{ vocabulary.license }}</span>
+
+</div>
