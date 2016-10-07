@@ -11,7 +11,8 @@
     bindings: {
     },
     templateUrl: "scripts/components/vocabs/vocabs.html",
-    controller: function ($scope, $q, $location, $rootScope, $http, ngDialog, AuthService, VocabService, ThesauriService) {
+    controller: function ($scope, $q, $location, $timeout, $rootScope, $http, ngDialog, AuthService, VocabService, ThesauriService) {
+        $scope.loading = true;
 
         $scope.createVocab = function(vocab) {
             VocabService.save(vocab, function(res) {
@@ -45,6 +46,15 @@
         $rootScope.$watch("isAuthenticated", function(isAuthenticated) {  // set in AuthService when user ready
             if (isAuthenticated) {
                 $scope.vocabularies = VocabService.queryWithStats({ creator: AuthService.getUser().id });
+                $scope.loading = false;
+            }
+        });
+
+        $scope.$watch("loading", function(loading) {
+            if (!loading) {
+                $timeout(function() {
+                    angular.element('#filtersearch input').focus();
+                }, 0);
             }
         });
 

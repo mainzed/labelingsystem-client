@@ -11,7 +11,7 @@
     bindings: {
     },
     templateUrl: "scripts/components/concepts/concepts.html",
-    controller: function ($scope, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService, ConfigService, UserSettingsService) {
+    controller: function ($scope, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService, ConfigService, UserSettingsService, $timeout) {
 
         // init nanoscroller here to prevent default scrollbar while loading boxes
         $(".nano").nanoScroller();
@@ -99,8 +99,15 @@
 
         // refresh boxes when csv upload complete
         $scope.$on("csvUploadComplete", function() {
-            console.log("csv complete!!!");
             $scope.labels = LabelService.query({'vocab': $routeParams.vID});
+        });
+
+        $scope.$watch("loading", function(loading) {
+            if (!loading) {
+                $timeout(function() {
+                    angular.element('#filtersearch input').focus();
+                }, 0);
+            }
         });
 
         // set inital labelOrder to a function, has to be defined before this line

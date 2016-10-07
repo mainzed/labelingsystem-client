@@ -12,7 +12,7 @@
     },
     templateUrl: "scripts/components/concept-detail/concept-detail-viewer.html",
 
-    controller: function ($scope, $location, $routeParams, LabelService, TooltipService, ConfigService) {
+    controller: function ($scope, $timeout, $location, $routeParams, LabelService, TooltipService, ConfigService) {
 
         // init nanoscroller here to prevent default scrollbar while loading boxes
         $(".nano").nanoScroller();

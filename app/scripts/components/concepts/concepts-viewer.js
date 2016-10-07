@@ -11,7 +11,7 @@
     bindings: {
     },
     templateUrl: "scripts/components/concepts/concepts-viewer.html",
-    controller: function ($scope, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService, ConfigService, UserSettingsService) {
+    controller: function ($scope, $timeout, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService, ConfigService, UserSettingsService) {
         var ctrl = this;
         // init nanoscroller here to prevent default scrollbar while loading boxes
         $(".nano").nanoScroller();
@@ -80,6 +80,14 @@
         $scope.onSearchClick = function() {
             $location.path("/");
         };
+
+        $scope.$watch("loading", function(loading) {
+            if (!loading) {
+                $timeout(function() {
+                    angular.element('#filtersearch input').focus();
+                }, 0);
+            }
+        });
 
     }
 });
