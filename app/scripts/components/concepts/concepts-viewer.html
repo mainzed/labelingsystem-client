@@ -12,6 +12,31 @@
 	<span class="language" ng-bind="vocabulary.language"></span>
 </div>
 
+<div id="metafooter">
+      <div class="dialog-half float">
+        <!--<span class="listtype">uri</span>
+        <span class="listcontent smalltype autowidth">{{ uri }}</span>-->
+        <span class="listtype">URI</span>
+        <span class="listcontent"><button class="clipboardbutton" clipboard supported="supported" text="vocabulary.uri" on-copied="success()" on-error="fail(err)">Copy URI to clipboard</button></span>
+        
+        <span class="listtype">creator</span>
+        <span class="listcontent">{{ vocabulary.creator }}</span>
+        <span class="listtype">created:</span>
+        <span class="listcontent">{{ vocabulary.created | date: 'dd.MM.yyyy' }}</span>
+        <span class="listtype">last modified:</span>
+        <span class="listcontent">{{ vocabulary.lastModified | date: 'dd.MM.yyyy' }}</span>
+        <span class="listtype">license</span>
+        <span class="listcontent">{{ vocabulary.license }}</span>   
+        <span class="listtype">Download</span>
+        <span class="listcontent">download files</span>     
+    </div>
+
+     <div class="dialog-half float" id="ls-selfexplain">
+        Labeling System is a web based tool for creating controlled vocabularies using linked open data techniques.
+    </div>
+
+</div>
+
 <div class="separatorsmall">
 
 	<div id="filtersearch">
@@ -60,11 +85,4 @@
 	</div>
 </div>
 
-<div id="metafooter">
-    <!-- <span>uri: {{ vocabulary.uri }}</span> -->
-    <span>creator: {{ vocabulary.creator }}</span>
-    <span>created: {{ vocabulary.created | date: 'dd.MM.yyyy' }}</span>
-    <span>lastModified: {{ vocabulary.lastModified | date: 'dd.MM.yyyy' }}</span>
-    <span>license: {{ vocabulary.license }}</span>
 
-</div>
