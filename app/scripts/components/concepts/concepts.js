@@ -11,7 +11,7 @@
     bindings: {
     },
     templateUrl: "scripts/components/concepts/concepts.html",
-    controller: function ($scope, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService, ConfigService, UserSettingsService, $timeout) {
+    controller: function ($scope, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService, ConfigService, UserSettingsService, $timeout, CachingService) {
 
         // init nanoscroller here to prevent default scrollbar while loading boxes
         $(".nano").nanoScroller();
@@ -23,26 +23,31 @@
         $scope.extendAll = UserSettingsService.extendAll;
         $scope.conceptsLimit = ConfigService.conceptsLimit;
 
+        // TODO: load currentVocab from cache
         VocabService.get({id: $routeParams.vID}, function(vocabulary) {
             $scope.vocabulary = vocabulary;
         });
 
-        // load all labels for the current vocabulary
-        LabelService.query({'vocab': $routeParams.vID}, function(labels) {
-            $scope.labels = labels;
-            $scope.placeholder = "filter";
+        // get from cache or server
+        if (CachingService.editor.concepts && CachingService.editor.concepts.vocabID === $routeParams.vID) {  // cached concepts are for the current vocab
+            $scope.labels = CachingService.editor.concepts.items;
             $scope.loading = false;
-        });
+            $scope.placeholder = "filter";
+        } else {
+            loadConcepts();
+        }
 
-        /**
-         * Order function for the use with the ng-repeat directive.
-         * @param {object} concept
-         * @returns {String}
-         */
-        $scope.orderByLabel = function(concept) {
-            return concept.thumbnail;
-        };
-
+        function loadConcepts() {
+            LabelService.query({'vocab': $routeParams.vID}, function(labels) {
+                $scope.labels = labels;
+                CachingService.editor.concepts = {
+                    vocabID: $routeParams.vID,
+                    items: labels
+                };
+                $scope.loading = false;
+                $scope.placeholder = "filter";
+            });
+        }
 
         /**
          * Creates a new concept by sending a new object to the api.
@@ -61,6 +66,7 @@
             LabelService.save(newConcept, function(concept) {
                 if (concept.id) {
                     $scope.labels.push(concept);
+                    CachingService.editor.concepts.push(concept);
                 }
             }, function error(res) {
                 console.log(res);
@@ -99,7 +105,8 @@
 
         // refresh boxes when csv upload complete
         $scope.$on("csvUploadComplete", function() {
-            $scope.labels = LabelService.query({'vocab': $routeParams.vID});
+            $scope.loading = true;
+            loadConcepts();
         });
 
         $scope.$watch("loading", function(loading) {
@@ -112,7 +119,7 @@
 
         // set inital labelOrder to a function, has to be defined before this line
         // TODO: sort button highlights dont work because of the returned functions
-        $scope.labelOrder = UserSettingsService.labelOrder || $scope.orderByThumbnail;
+        $scope.labelOrder = UserSettingsService.labelOrder;
 
     }
 });

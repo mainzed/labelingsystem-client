@@ -12,24 +12,38 @@ angular.module('labelsApp')
     },
     templateUrl: "scripts/components/landing/landing.html",
 
-    controller: function ($scope, $window, $timeout, $location, LabelService, FilterService) {
-        $scope.placeholder = "loading labels ...";
-        $scope.loading = true;
+    controller: function ($scope, $window, $filter, $timeout, $location, LabelService, FilterService, CachingService) {
 
-        LabelService.query(function(labels) {
-            $scope.labels = labels;
-            $scope.loading = false;
-            $scope.placeholder = "search labels";
-        });
+        $scope.resultsLimit = 25;
+
+        $scope.loading = false;
+        // get from cache or load new
+        if (CachingService.viewer.allConcepts) {  // already cached
+            $scope.labels = CachingService.viewer.allConcepts;
+        } else {
+            console.log("reloading");
+            $scope.loading = true;
+            LabelService.query(function(labels) {
+                $scope.labels = labels;
+                CachingService.viewer.allConcepts = labels;
+                $scope.loading = false;
+            });
+        }
 
         // focus when loading complete
         $scope.$watch("loading", function(loading) {
-            if (!loading) {
+            if (loading) {
+                $scope.placeholder = "loading labels ...";
+            } else {
                 $timeout(function() {
+                    $scope.placeholder = "search labels";
                     $window.document.getElementById("labelSearch").focus();
                 }, 0);
             }
         });
+
+        // filter in controller to improve speed
+
 
         // $scope.labelFilter = FilterService.getSearchFilter();
         //
@@ -46,5 +60,6 @@ angular.module('labelsApp')
                 return false;
             }
         };
+
     }
 });

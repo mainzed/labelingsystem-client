@@ -17,7 +17,7 @@ angular.module('labelsApp')
         var ctrl = this;
 
         ctrl.version = ConfigService.version;
-        ctrl.user = AuthService.getUser();
+        //ctrl.user = AuthService.getUser();
 
         /**
          * Logout current user and redirect to login page if successfull.
@@ -30,21 +30,7 @@ angular.module('labelsApp')
             });
         };
 
-        ctrl.onUserClick = function() {
-            $scope.user = ctrl.user;
-            ngDialog.open({
-                template: 'scripts/components/shared/footer/dialog.html',
-                className: 'bigdialog',
-                showClose: false,
-                closeByDocument: false,
-                disableAnimation: true,
-                scope: $scope
-            });
 
-            $scope.updateUser = function() {
-                AuthService.updateUser($scope.user);
-            };
-        };
 
 
 

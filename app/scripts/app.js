@@ -57,10 +57,8 @@ angular
         template: '<ls-concept-detail></ls-concept-detail>',
         access: {restricted: true}
       })
-
-      // redirects
       .when('/admin/vocabularies/:vID', {
-        redirectTo: '/admin/vocabularies/:vID/concepts',
+        redirectTo: '/admin/vocabularies/:vID/concepts'
       })
       .otherwise({
         redirectTo: '/'
@@ -74,7 +72,7 @@ angular.module('labelsApp').run(function ($rootScope, $location, $route, AuthSer
         //if (next.access) {  // allow unit tests
         // sets user object before everything else so that isLoggedIn is synchronous
         AuthService.getUserStatus().then(function() {
-            if (next.access.restricted && !AuthService.isLoggedIn()) {
+            if (next.access && next.access.restricted && !AuthService.isLoggedIn()) {
                 $location.path('/admin/login');
                 $route.reload();
 

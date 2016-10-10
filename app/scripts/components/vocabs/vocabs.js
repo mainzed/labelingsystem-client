@@ -11,7 +11,7 @@
     bindings: {
     },
     templateUrl: "scripts/components/vocabs/vocabs.html",
-    controller: function ($scope, $q, $location, $timeout, $rootScope, $http, ngDialog, AuthService, VocabService, ThesauriService) {
+    controller: function ($scope, $q, $location, $timeout, $rootScope, $http, ngDialog, AuthService, VocabService, ThesauriService, CachingService) {
         $scope.loading = true;
 
         $scope.createVocab = function(vocab) {
@@ -45,8 +45,18 @@
 
         $rootScope.$watch("isAuthenticated", function(isAuthenticated) {  // set in AuthService when user ready
             if (isAuthenticated) {
-                $scope.vocabularies = VocabService.queryWithStats({ creator: AuthService.getUser().id });
-                $scope.loading = false;
+
+                // get from cache or server
+                if (CachingService.editor.vocabs) {
+                    $scope.vocabularies = CachingService.editor.vocabs;
+                    $scope.loading = false;
+                } else {
+                    VocabService.queryWithStats({ creator: AuthService.getUser().id }, function(vocabs) {
+                        $scope.vocabularies = vocabs;
+                        CachingService.editor.vocabs = vocabs;
+                        $scope.loading = false;
+                    });
+                }
             }
         });
 

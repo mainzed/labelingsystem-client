@@ -21,7 +21,7 @@
       <li ng-click="showOptions=!showOptions" ng-init="sortName='sort by last modified'; labelOrder = '-lastModified'">{{sortName}}<span class="icon-dropdown icon"></span>
         <ul ng-show="showOptions" class="sortoptions">
           <li ng-click="labelOrder = '-lastModified'; sortName='sort by last modified'" ng-class="{'active': labelOrder === '-lastModified'}">by lastModified</li>
-          <li ng-click="labelOrder = orderByLabel; sortName='sort alphabetically'" ng-class="{'active': labelOrder === orderByLabel}">alphabetically</li>
+          <li ng-click="labelOrder = 'thumbnail'; sortName='sort alphabetically'" ng-class="{'active': labelOrder === 'thumbnail'}">alphabetically</li>
           <li ng-click="labelOrder = orderByQuality; sortName='sort by quality'" ng-class="{'active': labelOrder === orderByQuality}">by quality</li>
         </ul>
       </li>

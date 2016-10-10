@@ -11,7 +11,7 @@
     bindings: {
     },
     templateUrl: "scripts/components/concepts/concepts-viewer.html",
-    controller: function ($scope, $timeout, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService, ConfigService, UserSettingsService) {
+    controller: function ($scope, $timeout, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService, ConfigService, UserSettingsService, CachingService) {
         var ctrl = this;
         // init nanoscroller here to prevent default scrollbar while loading boxes
         $(".nano").nanoScroller();
@@ -19,7 +19,7 @@
         // initial values
         $scope.loading = true;
         $scope.tooltips = TooltipService;
-        $scope.placeholder = "loading labels...";
+
         $scope.extendAll = UserSettingsService.extendAll;
         $scope.conceptsLimit = ConfigService.conceptsLimit;
 
@@ -27,12 +27,28 @@
             $scope.vocabulary = vocabulary;
         });
 
-        // load all labels for the current vocabulary
-        LabelService.query({'vocab': $routeParams.vID}, function(labels) {
-            $scope.labels = labels;
-            $scope.placeholder = "filter";
+        // get from cache or server
+        if (CachingService.viewer.concepts && CachingService.viewer.concepts.vocabID === $routeParams.vID) {
+            $scope.labels = CachingService.viewer.concepts.items;
             $scope.loading = false;
-        });
+        } else {
+            LabelService.query({'vocab': $routeParams.vID}, function(labels) {
+                $scope.labels = labels;
+                CachingService.viewer.concepts = {
+                    vocabID: $routeParams.vID,
+                    items: labels
+                };
+
+                $scope.loading = false;
+            });
+        }
+
+        // cache all concepts for landing page (if user clicks on search icon)
+        if (!CachingService.viewer.allConcepts) {
+            LabelService.query(function(concepts) {
+                CachingService.viewer.allConcepts = concepts;
+            });
+        }
 
         /**
          * Order function for the use with the ng-repeat directive.
@@ -82,8 +98,12 @@
         };
 
         $scope.$watch("loading", function(loading) {
-            if (!loading) {
+            if (loading) {
+                $scope.placeholder = "loading labels...";
+
+            } else {
                 $timeout(function() {
+                    $scope.placeholder = "filter";
                     angular.element('#filtersearch input').focus();
                 }, 0);
             }

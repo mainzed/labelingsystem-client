@@ -12,7 +12,7 @@
     },
     templateUrl: "scripts/components/concept-detail/concept-detail-viewer.html",
 
-    controller: function ($scope, $timeout, $location, $routeParams, LabelService, TooltipService, ConfigService) {
+    controller: function ($scope, $timeout, $location, $routeParams, LabelService, TooltipService, ConfigService, CachingService) {
 
         // init nanoscroller here to prevent default scrollbar while loading boxes
         $(".nano").nanoScroller();
@@ -21,6 +21,13 @@
 
         // load current label
         $scope.label = LabelService.get({id: $routeParams.lID});
+
+        // cache all concepts for landing page (if user clicks on search icon)
+        if (!CachingService.viewer.allConcepts) {
+            LabelService.query(function(concepts) {
+                CachingService.viewer.allConcepts = concepts;
+            });
+        }
 
         $scope.onSearchClick = function() {
             $location.path("/");

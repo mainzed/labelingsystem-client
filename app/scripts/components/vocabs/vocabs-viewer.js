@@ -11,8 +11,29 @@
     bindings: {
     },
     templateUrl: "scripts/components/vocabs/vocabs-viewer.html",
-    controller: function ($scope, $timeout, $location, VocabService) {
-        $scope.vocabularies = VocabService.queryPublic();
+    controller: function ($scope, $timeout, $location, VocabService, LabelService, CachingService) {
+        $scope.loading = true;
+
+        // get from cache or server
+        if (CachingService.viewer.vocabs) {  // already cached
+            $scope.vocabularies = CachingService.viewer.vocabs;
+            $scope.loading = false;
+        } else {
+            VocabService.queryPublic(function(vocabs) {
+                $scope.vocabularies = vocabs;
+                CachingService.viewer.vocabs = vocabs;
+                $scope.loading = false;
+            }, function error(res) {
+                console.log(res);
+            });
+        }
+
+        // cache all concepts for landing page (if user clicks on search icon)
+        if (!CachingService.viewer.allConcepts) {
+            LabelService.query(function(concepts) {
+                CachingService.viewer.allConcepts = concepts;
+            });
+        }
 
         $scope.onSearchClick = function() {
             $location.path("/");

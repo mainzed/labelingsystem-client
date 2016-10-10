@@ -31,6 +31,12 @@ describe('Service: VocabService', function () {
             $httpBackend.flush();
         }));
 
+        afterEach(inject(function($httpBackend) {
+            $httpBackend.verifyNoOutstandingExpectation();
+            $httpBackend.verifyNoOutstandingRequest();
+        }));
+
+
         it("should return mock vocab object", function() {
             expect(vocab.id).toBe("some-vocab-id");
         });

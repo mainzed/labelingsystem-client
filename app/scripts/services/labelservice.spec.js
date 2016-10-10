@@ -46,6 +46,11 @@ describe('Service: LabelService', function () {
             $httpBackend.flush();
         }));
 
+        afterEach(inject(function($httpBackend) {
+            $httpBackend.verifyNoOutstandingExpectation();
+            $httpBackend.verifyNoOutstandingRequest();
+        }));
+
         it("should return mock concept object", function() {
             expect(concept.id).toBe("36799281-7c6c-4251-a0c1-ef20ce07a8b9");
         });

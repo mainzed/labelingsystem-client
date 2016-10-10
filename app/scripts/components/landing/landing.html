@@ -1,5 +1,5 @@
-<div id="header" class="box full" ng-class="vocabulary.releaseType">
-	<input id="labelSearch" type="text" placeholder="{{placeholder}}" ng-model="labelFilter" ng-change="onSearchBoxChange()" ng-disabled="!labels">
+esc<div id="header" class="box full" ng-class="vocabulary.releaseType">
+	<input id="labelSearch" type="text" placeholder="{{placeholder}}" ng-model="filterValue" ng-change="onSearchBoxChange()" ng-disabled="!labels">
 
 	<div class="loader" ng-show="placeholder === 'loading labels ...'"></div>
 
@@ -7,46 +7,48 @@
 
 <div id="listwrapper" class="listwrappermin">
 
-	<h1 class="landingh1" ng-show="!labelFilter">labeling system</h1>
+	<h1 class="landingh1" ng-show="!filterValue">labeling system</h1>
 
 	<!-- search box -->
 
 
 	<!-- search results -->
-	<ul ng-show="labelFilter" style="color:white">
+	<ul ng-show="filterValue" style="color:white">
 
-		<li ng-repeat="label in filteredLabels = (labels | filter: labelFilter | limitTo: 25)">
-
-
+		<li ng-repeat="label in filteredLabels = (labels | filter: {thumbnail: filterValue}) | limitTo: resultsLimit as limitedLabels">
+            <!-- <span>{{ filteredLabels.length }}</span>
+            <span>{{ limitedLabels.length }}</span> -->
 			<a href="#/vocabularies/{{ label.vocabID }}/concepts/{{ label.id }}">
 
-				<span ng-bind-html="highlightResult(label.thumbnail, labelFilter)"></span>
-
-				<!-- <span ng-show="label.description.indexOf(labelFilter)">description:</span>
-				<span ng-show="label.description.indexOf(labelFilter)" ng-bind-html="highlightResult(label.description, labelFilter)"></span> -->
-				<!-- <span ng-repeat="prefLabel in label.prefLabels" ng-bind-html="highlightResult(prefLabel.value, labelFilter)" ng-show="prefLabel.isThumbnail"></span> -->
+				<!-- <span ng-bind-html="highlightResult(label.thumbnail, filterValue)"></span> -->
+                <span ng-bind="label.thumbnail"></span>
+				<!-- <span ng-show="label.description.indexOf(filterValue)">description:</span>
+				<span ng-show="label.description.indexOf(filterValue)" ng-bind-html="highlightResult(label.description, filterValue)"></span> -->
+				<!-- <span ng-repeat="prefLabel in label.prefLabels" ng-bind-html="highlightResult(prefLabel.value, filterValue)" ng-show="prefLabel.isThumbnail"></span> -->
 			</a>
 
 			<!-- scopeNote -->
 			<!-- <ul>
-				<li ng-bind-html="highlightResult(label.scopeNote.value, labelFilter)" ng-show="label.scopeNote.value.indexOf(labelFilter) > -1"></li>
+				<li ng-bind-html="highlightResult(label.scopeNote.value, filterValue)" ng-show="label.scopeNote.value.indexOf(filterValue) > -1"></li>
 			</ul> -->
 
 		</li>
 
+        <span ng-show="filterValue && filteredLabels.length > limitedLabels.length" ng-click="resultsLimit = resultsLimit * 2">show more</span>
+
 		<!-- message when no labels found -->
-		<span ng-show="labelFilter && !filteredLabels.length">
+		<span ng-show="filterValue && !filteredLabels.length">
 			No labels found, <a href="#/vocabularies">browse vocabularies!</a>
 		</span>
 
 		<!-- show more -->
-		<!-- <span ng-show="labelFilter && filteredLabels.length >= 30">
+		<!-- <span ng-show="filterValue && filteredLabels.length >= 30">
 			Only showing first 30 results!
 		</span> -->
 	</ul>
 
 	<!-- landing page text prior to search -->
-	<div ng-show="!labelFilter">
+	<div ng-show="!filterValue">
 		<div class="dialog-half whitetext emphasize float">
 			<h6>Viewer</h6>
 			<p>

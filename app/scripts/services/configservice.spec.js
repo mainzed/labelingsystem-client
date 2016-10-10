@@ -15,19 +15,12 @@ describe('Service: ConfigService', function () {
         expect(!!ConfigService).toBe(true);
     });
 
-    it("should provide host property", function() {
+    it("should provide config properties", function() {
+        expect(ConfigService.hasOwnProperty("version")).toBe(true);
         expect(ConfigService.hasOwnProperty("host")).toBe(true);
-        expect(typeof(ConfigService.api)).toBe("string");
-    });
-
-    it("should provide preventThumbnailEdit property", function() {
-        expect(ConfigService.hasOwnProperty("preventThumbnailEdit")).toBe(true);
-        expect(typeof(ConfigService.preventThumbnailEdit)).toBe("boolean");
-    });
-
-    it("should provide showMatches property", function() {
+        expect(ConfigService.hasOwnProperty("api")).toBe(true);
+        expect(ConfigService.hasOwnProperty("publicLabelEdit")).toBe(true);
         expect(ConfigService.hasOwnProperty("showMatches")).toBe(true);
-        expect(typeof(ConfigService.showMatches)).toBe("boolean");
     });
 
     it("should provide scores property", function() {
