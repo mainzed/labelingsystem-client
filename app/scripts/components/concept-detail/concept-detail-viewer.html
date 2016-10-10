@@ -12,10 +12,10 @@
 <div id="metafooter">
    
     <div class="dialog-half float">
-        <span class="listtype">uri</span>
-        <span class="listcontent smalltype">{{ uri }}</span>
-        <span class="listtype"></span>
-        <span class="listcontent"><button class="clipboardbutton" clipboard supported="supported" text="uri" on-copied="success()" on-error="fail(err)">Copy to clipboard</button></span>
+        <!--<span class="listtype">uri</span>
+        <span class="listcontent smalltype autowidth">{{ uri }}</span>-->
+        <span class="listtype">URI</span>
+        <span class="listcontent"><button class="clipboardbutton" clipboard supported="supported" text="uri" on-copied="success()" on-error="fail(err)">Copy URI to clipboard</button></span>
         
         <span class="listtype">creator</span>
         <span class="listcontent">{{ label.creator }}</span>
@@ -24,7 +24,9 @@
         <span class="listtype">last modified:</span>
         <span class="listcontent">{{ label.lastModified | date: 'dd.MM.yyyy' }}</span>
         <span class="listtype">license</span>
-        <span class="listcontent">{{ label.license }}</span>       
+        <span class="listcontent">{{ label.license }}</span>   
+        <span class="listtype">Download</span>
+        <span class="listcontent">download files</span>     
     </div>
 
      <div class="dialog-half float" id="ls-selfexplain">
