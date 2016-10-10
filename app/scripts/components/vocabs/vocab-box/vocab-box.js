@@ -14,7 +14,7 @@ angular.module('labelsApp')
         mode: "@"
     },
     templateUrl: "scripts/components/vocabs/vocab-box/vocab-box.html",
-    controller: function ($scope, $location, TooltipService) {
+    controller: function ($rootScope, $scope, $location, TooltipService) {
         var ctrl = this;
 
         //console.log(ctrl.data.getSomething());
@@ -23,9 +23,10 @@ angular.module('labelsApp')
          * @param {string} id - Vocabulary ID
          */
         this.onClick = function(id) {
+            // broadcast vocabs leave event so vocabs component saves current filter
+            $rootScope.$broadcast("leaveVocabs");
+
             if (ctrl.mode === "viewer") {
-                console.log("open viewer");
-                console.log(id);
                 $location.path('/vocabularies/' + id + '/concepts');
             } else {
                 $location.path('/admin/vocabularies/' + id + '/concepts');

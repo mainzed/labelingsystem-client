@@ -34,6 +34,9 @@ module.exports = function(config) {
       'bower_components/lodash/lodash.js',
       'bower_components/leaflet/dist/leaflet-src.js',
       'bower_components/angular-clipboard/angular-clipboard.js',
+      'bower_components/angular-aria/angular-aria.js',
+      'bower_components/angular-messages/angular-messages.js',
+      'bower_components/angular-material/angular-material.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js'
@@ -65,7 +68,8 @@ module.exports = function(config) {
       'karma-phantomjs-launcher',
       'karma-chrome-launcher',
       'karma-jasmine',
-      'karma-mocha-reporter'
+      'karma-mocha-reporter',
+      'karma-ng-html2js-preprocessor'
     ],
 
     // Continuous Integration mode
@@ -79,7 +83,7 @@ module.exports = function(config) {
     logLevel: config.LOG_INFO,
 
     preprocessors: {
-      '/app/scripts/**/*.html': ['ng-html2js']  // to catch the filename as specified in templateUrl
+      '/scripts/**/*.html': ['ng-html2js']  // to catch the filename as specified in templateUrl
     },
 
     ngHtml2JsPreprocessor: {

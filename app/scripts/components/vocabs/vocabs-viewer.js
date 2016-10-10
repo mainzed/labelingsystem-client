@@ -14,6 +14,10 @@
     controller: function ($scope, $timeout, $location, VocabService, LabelService, CachingService) {
         $scope.loading = true;
 
+        if (CachingService.filters.vocabs) {
+            $scope.vocabFilter = CachingService.filters.vocabs;
+        }
+
         // get from cache or server
         if (CachingService.viewer.vocabs) {  // already cached
             $scope.vocabularies = CachingService.viewer.vocabs;
@@ -45,6 +49,13 @@
                     angular.element('#filtersearch input').focus();
                 }, 0);
             }
+        });
+
+        /**
+         * Save searchvalue in cache.
+         */
+        $scope.$on("leaveVocabs", function() {
+            CachingService.filters.vocabs = $scope.vocabFilter;
         });
     }
 });

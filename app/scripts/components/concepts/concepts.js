@@ -28,6 +28,9 @@
             $scope.vocabulary = vocabulary;
         });
 
+        if (CachingService.filters.concepts && CachingService.filters.concepts.vocabID === $routeParams.vID) {
+            $scope.labelFilter = CachingService.filters.concepts.value;
+        }
         // get from cache or server
         if (CachingService.editor.concepts && CachingService.editor.concepts.vocabID === $routeParams.vID) {  // cached concepts are for the current vocab
             $scope.labels = CachingService.editor.concepts.items;
@@ -115,6 +118,11 @@
                     angular.element('#filtersearch input').focus();
                 }, 0);
             }
+        });
+
+        $scope.$on("leaveConcepts", function() {
+            CachingService.filters.concepts.vocabID = $routeParams.vID;
+            CachingService.filters.concepts.value = $scope.labelFilter;
         });
 
         // set inital labelOrder to a function, has to be defined before this line

@@ -27,6 +27,10 @@
             $scope.vocabulary = vocabulary;
         });
 
+        if (CachingService.filters.concepts && CachingService.filters.concepts.vocabID === $routeParams.vID) {
+            $scope.labelFilter = CachingService.filters.concepts.value;
+        }
+
         // get from cache or server
         if (CachingService.viewer.concepts && CachingService.viewer.concepts.vocabID === $routeParams.vID) {
             $scope.labels = CachingService.viewer.concepts.items;
@@ -107,6 +111,11 @@
                     angular.element('#filtersearch input').focus();
                 }, 0);
             }
+        });
+
+        $scope.$on("leaveConcepts", function() {
+            CachingService.filters.concepts.vocabID = $routeParams.vID;
+            CachingService.filters.concepts.value = $scope.labelFilter;
         });
 
     }

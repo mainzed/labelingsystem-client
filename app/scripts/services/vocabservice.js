@@ -24,7 +24,7 @@ angular.module('labelsApp')
         },
         'queryWithCreator': {
             method: 'GET',
-            params: { creatorInfo: true },
+            params: { draft: true, creatorInfo: true },  // filter later
             isArray: true
         },
         'queryPublic': {

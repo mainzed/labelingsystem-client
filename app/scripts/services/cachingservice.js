@@ -25,7 +25,15 @@ angular.module('labelsApp')
 
         this.editor = {
             vocabs: null,
+            vocabsWithCreator: null,
             concepts: null
         };
 
+        this.filters = {
+            vocabs: null,
+            concepts: {
+                vocabID: null,
+                value: null
+            }  // concepts.vocabID, concepts.value
+        };
     });

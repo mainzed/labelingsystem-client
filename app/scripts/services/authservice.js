@@ -8,7 +8,7 @@
  * Service in the labelsApp.
  */
 angular.module('labelsApp')
-  .service('AuthService', function ($rootScope, $interval, $location, $q, $cookies, $http, $httpParamSerializerJQLike, ConfigService) {
+  .service('AuthService', function ($rootScope, $interval, $location, $q, $cookies, $http, $httpParamSerializerJQLike, ConfigService, CachingService) {
 
     // $interval(
     //     function handleInterval() {
@@ -113,6 +113,13 @@ angular.module('labelsApp')
         $http.post(ConfigService.api + "/auth/logout?user=" + user.id)
         .success(function () {
             user = false;  // remove user in any case
+
+            CachingService.editor = {
+                vocabs: null,
+                vocabsWithCreator: null,
+                concepts: null
+            };
+
             $cookies.remove("lsCookie");
             deferred.resolve();
         })

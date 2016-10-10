@@ -14,6 +14,10 @@
     controller: function ($scope, $q, $location, $timeout, $rootScope, $http, ngDialog, AuthService, VocabService, ThesauriService, CachingService) {
         $scope.loading = true;
 
+        if (CachingService.filters.vocabs) {
+            $scope.vocabFilter = CachingService.filters.vocabs;
+        }
+
         $scope.createVocab = function(vocab) {
             VocabService.save(vocab, function(res) {
                 $scope.vocabularies.push(res);
@@ -58,6 +62,13 @@
                     });
                 }
             }
+        });
+
+        /**
+         * Save searchvalue in cache.
+         */
+        $scope.$on("leaveVocabs", function() {
+            CachingService.filters.vocabs = $scope.vocabFilter;
         });
 
         $scope.$watch("loading", function(loading) {

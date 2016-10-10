@@ -17,7 +17,6 @@ angular.module('labelsApp')
         var ctrl = this;
 
         ctrl.version = ConfigService.version;
-        //ctrl.user = AuthService.getUser();
 
         /**
          * Logout current user and redirect to login page if successfull.

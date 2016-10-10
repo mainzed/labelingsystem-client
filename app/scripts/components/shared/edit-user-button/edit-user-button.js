@@ -15,7 +15,7 @@
         controller: function ($scope, ngDialog, AuthService) {
             var ctrl = this;
 
-            AuthService.getUser();
+            ctrl.user = AuthService.getUser();
 
             ctrl.openDialog = function() {
 

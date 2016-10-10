@@ -14,11 +14,17 @@ angular.module('labelsApp')
         shortcut: "@"  // "thesauri"
     },
     template: '<span class="{{$ctrl.icon}} icon" ng-click="$ctrl.openDialog()"></span>',
-    controller: function ($scope, $rootScope, $location, $document, $anchorScroll, $timeout, ngDialog, VocabService, ConfigService, LabelService, TooltipService, AuthService) {
+    controller: function ($scope, $rootScope, $location, $document, $anchorScroll, $timeout, ngDialog, VocabService, ConfigService, LabelService, TooltipService, AuthService, CachingService) {
 
         var ctrl = this;
 
         $scope.tooltips = TooltipService;
+
+        $scope.user = AuthService.getUser();
+
+        $scope.vocabDescriptionLength = ConfigService.vocabDescriptionLength;
+
+        //$scope.orderBy = "";  // set to '-checked' on start of dialog
 
         // determine icon
         this.icon = "icon-more";
@@ -26,30 +32,27 @@ angular.module('labelsApp')
             this.icon = "icon-config";
         }
 
+        // get all vocabularies with creator info to make them selectable
+        if (CachingService.editor.vocabsWithCreator) {
+            $scope.vocabularies = CachingService.editor.vocabsWithCreator;
+        } else {
+            VocabService.query({creatorInfo: true}, function(vocabs) {
+                $scope.vocabularies = vocabs;
+                CachingService.editor.vocabsWithCreator = vocabs;
+                $(".nano").nanoScroller();
+            });
+        }
+
         this.openDialog = function() {
             // save original vocab object in case the dialog gets cancelled
             $scope.vocabulary = ctrl.data;
+
+
             $scope.changedThesauri = false;
             $scope.newDescription = $scope.vocabulary.description;
 
             $scope.vocabulary.getEnrichmentVocab(function(vocabID) {
                 $scope.checkedVocab = vocabID;
-            });
-
-            $scope.user = AuthService.getUser();
-
-
-            // get number of draft concepts to be published
-            // $scope.vocabulary.getDraftConcepts().then(function(concepts) {
-            //     $scope.draftConcepts = concepts;
-            // });
-
-            // get all vocabs to be able to select them
-
-            $scope.vocabularies = VocabService.queryWithCreator(function() {
-                $(".nano").nanoScroller();
-                //console.log(vocabs);
-                //console.log(vocabs[0]);
             });
 
             $scope.vocabulary.getThesauri(function(thesauri) {
@@ -70,10 +73,6 @@ angular.module('labelsApp')
                         $(".nano").nanoScroller();
                     }
                 });
-            });
-
-            $scope.vocabulary.getEnrichmentVocab(function(vocabID) {
-                $scope.enrichmentVocabID = vocabID;
             });
         };
 
@@ -110,6 +109,17 @@ angular.module('labelsApp')
                 }, function error(res) {
                     console.log(res);
                 });
+            }
+        };
+
+        /**
+         * Returns same vocab (draft or public) and all other public vocbs
+         */
+        $scope.vocabFilter = function(vocab) {
+            if (vocab.creator === $scope.user.id && vocab.id === $scope.vocabulary.id) {
+                return true;
+            } else {
+                return false;
             }
         };
 

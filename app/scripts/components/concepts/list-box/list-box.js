@@ -7,7 +7,7 @@
  * # listBox
  */
 angular.module('labelsApp')
-  .directive('lsListBox', function ($location, $routeParams, LabelService, ResourcesService, ConfigService, HelperService) {
+  .directive('lsListBox', function ($rootScope, $location, $routeParams, LabelService, ResourcesService, ConfigService, HelperService) {
     return {
         templateUrl: "scripts/components/concepts/list-box/list-box.html",
         restrict: 'E',
@@ -30,6 +30,7 @@ angular.module('labelsApp')
              * @param {string} id - Concept ID
              */
             scope.onClick = function(id) {
+                $rootScope.$broadcast("leaveConcepts");
                 if (scope.mode === 'viewer') {
                     $location.path("/vocabularies/" + $routeParams.vID + "/concepts/" + id);
                 } else {
