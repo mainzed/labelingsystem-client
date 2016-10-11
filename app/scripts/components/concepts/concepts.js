@@ -74,7 +74,7 @@
          * @param {Object} newConcept
          */
         $scope.createConcept = function(newConcept) {
-
+            delete newConcept.thumbnailConfirm;
             newConcept.creator = AuthService.getUser().id;
             newConcept.vocabID = $scope.vocabulary.id;
             newConcept.language = $scope.vocabulary.language;

@@ -12,11 +12,23 @@
         onConfirm: "&"
     },
     template: '<span class="plusposition" ng-click="$ctrl.openDialog()">+</span>',
-    controller: function ($scope, $http, $rootScope, $document, $location, $routeParams, ngDialog, ConfigService) {
+    controller: function ($scope, $http, $rootScope, $document, $location, $routeParams, ngDialog, ConfigService, VocabService) {
         var ctrl = this;
 
-        ctrl.showCSV = false;
+        ctrl.$onInit = function() {
+            ctrl.showCSV = false;
+            ctrl.titleLength = ConfigService.conceptLabelLength;
+            ctrl.descriptionLength = ConfigService.conceptDescriptionLength;
 
+            // get vocab to check if it is public
+            // TODO: get currentVocab from cache
+            VocabService.get({id: $routeParams.vID}, function(vocab) {
+                ctrl.vocab = vocab;
+            });
+        };
+
+        //
+        // ctrl.vocabulary
         this.openDialog = function() {
 
             ctrl.newConcept = {
@@ -57,11 +69,6 @@
 
             };
         };
-
-
-
-        $scope.titleLength = ConfigService.conceptLabelLength;
-        $scope.descriptionLength = ConfigService.conceptDescriptionLength;
 
         // hotkeys
         $document.keydown(function(e) {

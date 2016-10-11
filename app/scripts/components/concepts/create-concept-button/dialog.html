@@ -1,63 +1,58 @@
 <div class="dialogwrapper label">
-	<div class="dialogheader">
-		<h3>Create new concept</h3>
+    <div class="dialogheader">
+        <h3>Create new concept</h3>
 
-    <div id="tabcontainer">
-			<div class="tab lefttab" ng-click="$ctrl.showCSV = false" ng-class="{'active': !$ctrl.showCSV}"><span class="tablabel">single concept</span></div>
+        <div id="tabcontainer">
+            <div class="tab lefttab" ng-click="$ctrl.showCSV = false" ng-class="{'active': !$ctrl.showCSV}"><span class="tablabel">single concept</span></div>
 
-    	<div class="tab righttab" ng-click="$ctrl.showCSV = true" ng-class="{'active': $ctrl.showCSV}"><span class="tablabel">csv import</span></div>
+            <div class="tab righttab" ng-click="$ctrl.showCSV = true" ng-class="{'active': $ctrl.showCSV}"><span class="tablabel">csv import</span></div>
 
+        </div>
+        <div class="line-bottom line"></div>
     </div>
-		<div class="line-bottom line"></div>
-	</div>
 
-	<div class="dialogscroll">
-  	<div class="nano">
+    <div class="dialogscroll">
+        <div class="nano">
 
-      <!-- single concept -->
-      <div class="nano-content" ng-show="!$ctrl.showCSV">
+            <!-- single concept -->
+            <div class="nano-content" ng-show="!$ctrl.showCSV">
 
-        <form name="$ctrl.conceptForm" novalidate>
+                <form name="$ctrl.conceptForm" novalidate>
 
-          <div class="dialogbox dialog-full">
-      			<h4>Label</h4>
-      			<input type="text" maxlength="{{titleLength}}" placeholder="label" ng-model="$ctrl.newConcept.thumbnail" required>
-      		</div>
+                    <div class="dialogbox dialog-full">
+                        <h4>Label</h4>
+                        <input type="text" maxlength="{{ $ctrl.titleLength }}" placeholder="label" ng-model="$ctrl.newConcept.thumbnail" required>
 
+                        <!-- confirm label -->
+                        <input ng-show="$ctrl.vocab.releaseType === 'public'" type="text" maxlength="{{ $ctrl.titleLength }}" placeholder="confirm label" ng-model="$ctrl.newConcept.thumbnailConfirm">
+                    </div>
 
-      		<!-- <div class="line-dialog line"></div>
+                </form>
 
-      		<div class="dialogbox dialog-full">
-      			<h4>Description</h4>
-      			<textarea maxlength="{{descriptionLength}}" placeholder="insert description" ng-model="$ctrl.newConcept.description"></textarea>
-      		</div> -->
+            </div>
 
-        </form>
+            <!-- csv import -->
+            <div class="nano-content" ng-show="$ctrl.showCSV">
 
-    	</div>
+                <input type="file" file-model="$ctrl.filename" accept=".csv" />
+                <span ng-show="errors" ng-repeat="error in errors track by $index" ng-bind="error"></span>
 
-      <!-- csv import -->
-      <div class="nano-content" ng-show="$ctrl.showCSV">
+            </div>
 
-        <input type="file" file-model="$ctrl.filename" accept=".csv" />
-        <span ng-show="errors" ng-repeat="error in errors track by $index" ng-bind="error"></span>
+        </div>
+    </div>
 
-    	</div>
+    <!-- single concept buttons -->
+    <div ng-show="!$ctrl.showCSV">
+        <div class="cancel" ng-click="closeThisDialog()">Cancel</div>
+        <div class="apply" ng-click="$ctrl.onConfirm({$newConcept: $ctrl.newConcept}); closeThisDialog()" ng-class="{'inactive': $ctrl.conceptForm.$invalid || ($ctrl.vocab.releaseType === 'public' && $ctrl.newConcept.thumbnail !== $ctrl.newConcept.thumbnailConfirm) }">Apply</div>
+    </div>
 
-  	</div>
-  </div>
-
-  <!-- single concept buttons -->
-  <div ng-show="!$ctrl.showCSV">
-    <div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-  	<div class="apply" ng-click="$ctrl.onConfirm({$newConcept: $ctrl.newConcept}); closeThisDialog()" ng-class="{'inactive': $ctrl.conceptForm.$invalid}">Apply</div>
-  </div>
-
-  <!-- csv buttons -->
-  <div ng-show="$ctrl.showCSV">
-    <div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-  	<div class="apply" ng-click="$ctrl.import()" ng-class="{'inactive': !$ctrl.filename}">Import</div>
-  </div>
+    <!-- csv buttons -->
+    <div ng-show="$ctrl.showCSV">
+        <div class="cancel" ng-click="closeThisDialog()">Cancel</div>
+        <div class="apply" ng-click="$ctrl.import()" ng-class="{'inactive': !$ctrl.filename}">Import</div>
+    </div>
 
 
 
