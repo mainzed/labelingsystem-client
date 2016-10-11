@@ -1,132 +1,133 @@
 <div class="dialogwrapper" ng-class="{ 'label': vocabulary.releaseType === 'public', 'draft': vocabulary.releaseType === 'draft' }">
-  <div class="dialogheader">
-    <h3 ng-bind="vocabulary.title"></h3>
-    <p class="typeinformation"> metadata/settings<br>{{ vocabulary.releaseType }}</p>
-    <div class="line-bottom line"></div>
-  </div>
+    <div class="dialogheader">
+        <h3 ng-bind="vocabulary.title"></h3>
+        <p class="typeinformation"> metadata/settings<br>{{ vocabulary.releaseType }}</p>
+        <div class="line-bottom line"></div>
+    </div>
 
-  <div class="dialogscroll">
-    <div class="nano">
-      <div class="nano-content">
+    <div class="dialogscroll">
+        <div class="nano">
+            <div class="nano-content">
 
-        <div class="dialogbox dialog-full">
-          <h4 ng-class="{'inactive': vocabulary.releaseType === 'public'}">Title</h4>
-          <input type="text" ng-model="newTitle" ng-init="newTitle = vocabulary.title" ng-disabled="vocabulary.releaseType === 'public'" ng-class="{'inactive': vocabulary.releaseType === 'public'}">
-        </div>
-
-         <div>
-        </div>
+                <div class="dialogbox dialog-full">
+                    <h4 ng-class="{'inactive': vocabulary.releaseType === 'public'}">Title</h4>
+                    <input type="text" ng-model="newTitle" ng-init="newTitle = vocabulary.title" ng-disabled="vocabulary.releaseType === 'public'" ng-class="{'inactive': vocabulary.releaseType === 'public'}">
+                </div>
 
 
-        <div class="line-dialog line"></div>
-        <div class="dialogbox dialog-full">
-          <h4 ng-class="{'inactive': vocabulary.releaseType === 'public'}">Description</h4>
-          <textarea rows="8" cols="40" ng-model="newDescription" ng-paste="onDescriptionKeyPress($event, newDescription)" ng-keypress="onDescriptionKeyPress($event, newDescription)" ng-class="{'inactive': vocabulary.releaseType === 'public'}"></textarea>
+                <div class="line-dialog line"></div>
+                <div class="dialogbox dialog-full">
+                    <h4 ng-class="{'inactive': vocabulary.releaseType === 'public'}">Description</h4>
+                    <textarea rows="8" cols="40" ng-model="newDescription" ng-paste="onDescriptionKeyPress($event, newDescription)" ng-keypress="onDescriptionKeyPress($event, newDescription)" ng-class="{'inactive': vocabulary.releaseType === 'public'}"></textarea>
 
-        </div>
+                </div>
 
-        <div class="line-dialog line"></div>
-        <div class="dialogbox dialog-full">
-          <h4>meta data</h4>
-          <span class="listtype">language</span>
-          <span class="listcontent" ng-bind="vocabulary.language"></span>
+                <div class="line-dialog line"></div>
+                <div class="dialogbox dialog-full">
+                    <h4>meta data</h4>
+                    <span class="listtype">language</span>
+                    <span class="listcontent" ng-bind="vocabulary.language"></span>
 
-          <span class="listtype">license</span>
-          <span class="listcontent"><a ng-href="{{vocabulary.license}}" target="_blank">CC BY</a></span>
+                    <span class="listtype">license</span>
+                    <span class="listcontent"><a ng-href="{{vocabulary.license}}" target="_blank">CC BY</a></span>
 
-          <span class="listtype">creator</span>
-          <span class="listcontent" ng-bind="vocabulary.creator"></span>
+                    <span class="listtype">creator</span>
+                    <span class="listcontent" ng-bind="vocabulary.creator"></span>
 
-          <span class="listtype">creation date</span>
-          <span class="listcontent" ng-bind="vocabulary.created"></span>
+                    <span class="listtype">creation date</span>
+                    <span class="listcontent" ng-bind="vocabulary.created"></span>
 
-        </div>
-
-
-        <div class="line-dialog line"></div>
-        <div class="dialogbox dialog-full">
-          <h4 ng-class="{'inactive': vocabulary.releaseType === 'public'}">Actions</h4>
-          <!-- delete draft vocab (not allowed to delete public vocab) -->
-          <ls-confirm-button on-confirm="deleteVocab(vocabulary.id); closeThisDialog()" text="Delete Vocabulary" inactive="vocabulary.releaseType === 'public'"></ls-confirm-button>
-
-          <!-- show publish -->
-          <ls-confirm-button on-confirm="publish()" text="Publish Vocab" confirm-text="{{tooltips.explaination.publication}}" icon="icon-public" ng-show="vocabulary.releaseType === 'draft'" size="large"></ls-confirm-button>
-
-          <!-- show when already published -->
-          <ls-confirm-button text="Published" icon="icon-public" inactive="true" ng-show="vocabulary.releaseType === 'public'"></ls-confirm-button>
-
-        </div>
+                </div>
 
 
-        <div class="line-dialog line"></div>
-        <div class="dialogbox dialog-full">
-          <h4>Downloads</h4>
-          <span class="downloadlist">
+                <div class="line-dialog line"></div>
+                <div class="dialogbox dialog-full">
+                    <h4 ng-class="{'inactive': vocabulary.releaseType === 'public'}">Actions</h4>
+                    <!-- delete draft vocab (not allowed to delete public vocab) -->
+                    <ls-confirm-button on-confirm="deleteVocab(vocabulary.id); closeThisDialog()" text="Delete Vocabulary" inactive="vocabulary.releaseType === 'public'"></ls-confirm-button>
+
+                    <!-- show publish -->
+                    <ls-confirm-button on-confirm="publish()" text="Publish Vocab" confirm-text="{{tooltips.explaination.publication}}" icon="icon-public" ng-show="vocabulary.releaseType === 'draft'" size="large"></ls-confirm-button>
+
+                    <!-- show when already published -->
+                    <ls-confirm-button text="Published" icon="icon-public" inactive="true" ng-show="vocabulary.releaseType === 'public'"></ls-confirm-button>
+
+                </div>
+
+
+                <div class="line-dialog line"></div>
+                <div class="dialogbox dialog-full">
+                    <h4>Downloads</h4>
+                    <span class="downloadlist">
             <a ng-href="{{ vocabulary.getUrl() + '.skos' }}" target="_blank" ng-click="$event.stopPropagation()">SKOS</a>
 
           </span>
-        </div>
+                </div>
 
-        <div class="line-dialog line"></div>
-        <div class="dialogbox dialog-full">
+                <div class="line-dialog line"></div>
+                <div class="dialogbox dialog-full">
 
-          <h4 id="thesauri">Reference thesauri</h4>
-            <div class="thesaurus" ng-repeat="thesaurus in thesauri | orderBy: ['name']" ng-class="{'checked': thesaurus.checked}" ng-show="thesaurus.name.indexOf('this.') === -1">
+                    <h4 id="thesauri">Reference thesauri</h4>
+                    <div class="thesaurus" ng-repeat="thesaurus in thesauri | orderBy: ['name']" ng-class="{'checked': thesaurus.checked}" ng-show="thesaurus.name.indexOf('this.') === -1">
 
-              <div class="checkboxwrapper">
-                <checkbox ng-model="thesaurus.checked" on-check="onCheck()"></checkbox>
-              </div>
+                        <div class="checkboxwrapper">
+                            <checkbox ng-model="thesaurus.checked" on-check="onCheck()"></checkbox>
+                        </div>
 
-              <h5 ng-bind="thesaurus.name"></h5>
-              <p ng-show="thesaurus.checked" ng-bind="thesaurus.description"></p>
+                        <h5 ng-bind="thesaurus.name"></h5>
+                        <p ng-show="thesaurus.checked" ng-bind="thesaurus.description"></p>
+                    </div>
+
+                </div>
+
+                <div class="line-dialog line"></div>
+                <div class="dialogbox dialog-full">
+                    <h4>Reference vocabulary (mine)</h4>
+                    <!-- <div ng-bind="enrichmentVocabID"></div> -->
+                    <div class="thesaurus thesaurussmall" ng-repeat="vocab in vocabularies | filter: vocabFilter | orderBy: 'title'" ng-class="{'checked': vocab.id === checkedVocab}">
+
+                        <ls-radiobox checked="vocab.id === checkedVocab" on-check="onVocabCheck(vocab.id)"></ls-radiobox>
+
+                        <h5 ng-bind="vocab.title"></h5>
+                        <p ng-show="vocab.id === checkedVocab" ng-bind="vocab.description"></p>
+                    </div>
+                </div>
+
+                <div class="line-dialog line"></div>
+                <div class="dialogbox dialog-full">
+                    <h4>Reference vocabulary (other users)</h4>
+                    <!-- <div ng-bind="enrichmentVocabID"></div> -->
+                    <div class="thesaurus thesaurussmall" ng-repeat="vocab in vocabularies | filter: {creator: '!' + user.id, releaseType: 'public'} | orderBy: 'title'" ng-class="{'checked': vocab.id === checkedVocab}">
+                        <ls-radiobox checked="vocab.id === checkedVocab" on-check="onVocabCheck(vocab.id)"></ls-radiobox>
+
+                        <h5>
+                          <span>{{ vocab.title }}</span>
+                        </h5>
+
+                        <span class="floatright">
+                          <span>{{ vocab.creator }}</span>
+                          <a ng-show="vocab.creatorInfo.orcid" ng-href="{{ vocab.creatorInfo.orcid }}" target="_blank">more info</a>
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
             </div>
-
+            <!-- end nano-content -->
         </div>
-
-        <div class="line-dialog line"></div>
-        <div class="dialogbox dialog-full">
-          <h4>Reference vocabulary (mine)</h4>
-          <!-- <div ng-bind="enrichmentVocabID"></div> -->
-          <div class="thesaurus thesaurussmall" ng-repeat="vocab in vocabularies | filter: vocabFilter | orderBy: 'title'" ng-class="{'checked': vocab.id === checkedVocab}">
-
-            <ls-radiobox checked="vocab.id === checkedVocab" on-check="onVocabCheck(vocab.id)"></ls-radiobox>
-
-            <h5 ng-bind="vocab.title"></h5>
-          </div>
-        </div>
-
-        <div class="line-dialog line"></div>
-        <div class="dialogbox dialog-full">
-          <h4>Reference vocabulary (other users)</h4>
-          <!-- <div ng-bind="enrichmentVocabID"></div> -->
-          <div class="thesaurus thesaurussmall" ng-repeat="vocab in vocabularies | filter: {creator: '!' + user.id, releaseType: 'public'} | orderBy: 'title'" ng-class="{'checked': vocab.id === checkedVocab}">
-            <ls-radiobox checked="vocab.id === checkedVocab" on-check="onVocabCheck(vocab.id)"></ls-radiobox>
-
-            <h5>
-              <span>{{ vocab.title }}</span>
-            </h5>
-
-            <span class="floatright">
-              <span>{{ vocab.creator }}</span>
-              <a ng-show="vocab.creatorInfo.orcid" ng-href="{{ vocab.creatorInfo.orcid }}" target="_blank">more info</a>
-            </span>
-
-          </div>
-
-        </div>
+        <!-- end nano -->
+    </div>
+    <!-- end dialog scroll -->
 
 
+    <!-- apply -->
+    <!-- updateVocabThesauri() -->
+    <!-- onApplyChangesClick(vocabulary, newValue, newDescription); -->
+    <button id="someButton" type="button" class="apply" ng-click="$ctrl.update(newTitle, newDescription); closeThisDialog()" ng-class="{'inactive': newTitle === vocabulary.title && newDescription === vocabulary.description && !changedThesauri && !vocabChecked }">Apply</button>
 
-      </div><!-- end nano-content -->
-    </div><!-- end nano -->
-  </div><!-- end dialog scroll -->
-
-
-  <!-- apply -->
-  <!-- updateVocabThesauri() -->
-  <!-- onApplyChangesClick(vocabulary, newValue, newDescription); -->
-  <button id="someButton" type="button" class="apply" ng-click="$ctrl.update(newTitle, newDescription); closeThisDialog()" ng-class="{'inactive': newTitle === vocabulary.title && newDescription === vocabulary.description && !changedThesauri && !vocabChecked }">Apply</button>
-
-  <!-- cancel -->
-  <button type="button" class="cancel" ng-click="closeThisDialog()" ng-keypress="$ctrl.onCancelKeyDown($event)">Cancel</button>
+    <!-- cancel -->
+    <button type="button" class="cancel" ng-click="closeThisDialog()" ng-keypress="$ctrl.onCancelKeyDown($event)">Cancel</button>
 </div>

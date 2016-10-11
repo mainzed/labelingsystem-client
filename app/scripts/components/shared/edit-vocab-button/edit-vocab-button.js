@@ -116,7 +116,7 @@ angular.module('labelsApp')
          * Returns same vocab (draft or public) and all other public vocbs
          */
         $scope.vocabFilter = function(vocab) {
-            if (vocab.creator === $scope.user.id && vocab.id === $scope.vocabulary.id) {
+            if (vocab.creator === $scope.user.id || vocab.id === $scope.vocabulary.id) {
                 return true;
             } else {
                 return false;
