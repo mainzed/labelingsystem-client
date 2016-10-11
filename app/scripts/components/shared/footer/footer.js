@@ -23,7 +23,7 @@ angular.module('labelsApp')
          */
         ctrl.onLogoutClick = function() {
             AuthService.logout().then(function () {
-                $location.path('/admin/login');
+                $location.path('/editor/login');
             }, function() {
                 console.log("logout failed!!");
             });

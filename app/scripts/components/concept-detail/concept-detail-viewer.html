@@ -10,23 +10,29 @@
 </div>
 
 <div id="metafooter">
-   
+
     <div class="dialog-half float">
         <!--<span class="listtype">uri</span>
         <span class="listcontent smalltype autowidth">{{ uri }}</span>-->
         <span class="listtype">URI</span>
         <span class="listcontent"><button class="clipboardbutton" clipboard supported="supported" text="uri" on-copied="success()" on-error="fail(err)">Copy URI to clipboard</button></span>
-        
+
         <span class="listtype">creator</span>
-        <span class="listcontent">{{ label.creator }}</span>
-        <span class="listtype">created:</span>
-        <span class="listcontent">{{ label.created | date: 'dd.MM.yyyy' }}</span>
+        <span class="listcontent" ng-bind-html="agent.getNameAsLink()"></span>
+
         <span class="listtype">last modified:</span>
         <span class="listcontent">{{ label.lastModified | date: 'dd.MM.yyyy' }}</span>
+
         <span class="listtype">license</span>
-        <span class="listcontent">{{ label.license }}</span>   
+        <span class="listcontent"><a ng-href="{{label.license}}" target="_blank">CC BY</a></span>
+
         <span class="listtype">Download</span>
-        <span class="listcontent">download files</span>     
+        <span class="listcontent">
+           <a ng-href="{{ label.getUrl() + '.jsonld' }}" target="_blank" ng-click="$event.stopPropagation()">JSONLD</a>
+           <a ng-href="{{ label.getUrl() + '.ttl' }}" target="_blank" ng-click="$event.stopPropagation()">Turtle</a>
+           <a ng-href="{{ label.getUrl() + '.rdf' }}" target="_blank" ng-click="$event.stopPropagation()">RDF/XML</a>
+           <a ng-href="{{ label.getUrl() + '.n3'}}" target="_blank" ng-click="$event.stopPropagation()">N-Triples</a>
+        </span>
     </div>
 
      <div class="dialog-half float" id="ls-selfexplain">
@@ -90,7 +96,3 @@
   	</div>
 	</div>
 </div>
-
-
-
-

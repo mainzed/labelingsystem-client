@@ -41,24 +41,24 @@ angular
       })
 
       // editor
-      .when('/admin/login', {
+      .when('/editor/login', {
         template: '<ls-login></ls-login>',
         access: {restricted: false}
       })
-      .when('/admin/vocabularies', {
+      .when('/editor/vocabularies', {
         template: '<ls-vocabs></ls-vocabs>',
         access: {restricted: true}
       })
-      .when('/admin/vocabularies/:vID/concepts', {
+      .when('/editor/vocabularies/:vID/concepts', {
         template: '<ls-concepts></ls-concepts>',
         access: {restricted: true}
       })
-      .when('/admin/vocabularies/:vID/concepts/:lID', {
+      .when('/editor/vocabularies/:vID/concepts/:lID', {
         template: '<ls-concept-detail></ls-concept-detail>',
         access: {restricted: true}
       })
-      .when('/admin/vocabularies/:vID', {
-        redirectTo: '/admin/vocabularies/:vID/concepts'
+      .when('/editor/vocabularies/:vID', {
+        redirectTo: '/editor/vocabularies/:vID/concepts'
       })
       .otherwise({
         redirectTo: '/'
@@ -73,12 +73,12 @@ angular.module('labelsApp').run(function ($rootScope, $location, $route, AuthSer
         // sets user object before everything else so that isLoggedIn is synchronous
         AuthService.getUserStatus().then(function() {
             if (next.access && next.access.restricted && !AuthService.isLoggedIn()) {
-                $location.path('/admin/login');
+                $location.path('/editor/login');
                 $route.reload();
 
-            } else if ($location.path() === "/admin/login" && AuthService.isLoggedIn()) {
+            } else if ($location.path() === "/editor/login" && AuthService.isLoggedIn()) {
                 // skip login page if already logged in
-                $location.path('/admin/vocabularies');
+                $location.path('/editor/vocabularies');
             }
         });
         //}

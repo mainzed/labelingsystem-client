@@ -29,11 +29,24 @@ angular.module('labelsApp')
             concepts: null
         };
 
+        // same for editor and viewer
         this.filters = {
             vocabs: null,
             concepts: {
                 vocabID: null,
                 value: null
-            }  // concepts.vocabID, concepts.value
+            }
+        };
+
+        /**
+         * Returns the filter if the the vocab id matches.
+         * @param {string} id - Vocabulary ID
+         */
+        this.getFilterByVocab = function(id) {
+            if (this.filters.concepts && this.filters.concepts.vocabID === id) {
+                return this.filters.concepts.value;
+            } else {
+                return;
+            }
         };
     });

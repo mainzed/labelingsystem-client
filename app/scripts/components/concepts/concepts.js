@@ -12,45 +12,62 @@
     },
     templateUrl: "scripts/components/concepts/concepts.html",
     controller: function ($scope, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService, ConfigService, UserSettingsService, $timeout, CachingService) {
+        var ctrl = this;
 
-        // init nanoscroller here to prevent default scrollbar while loading boxes
-        $(".nano").nanoScroller();
+        ctrl.$onInit = function () {
+            $scope.loading = true;
+            $scope.tooltips = TooltipService;
+            $scope.placeholder = "loading labels...";
+            $scope.extendAll = UserSettingsService.extendAll;
+            $scope.conceptsLimit = ConfigService.conceptsLimit;
+            ctrl.vocabID = $routeParams.vID;
 
-        // initial values
-        $scope.loading = true;
-        $scope.tooltips = TooltipService;
-        $scope.placeholder = "loading labels...";
-        $scope.extendAll = UserSettingsService.extendAll;
-        $scope.conceptsLimit = ConfigService.conceptsLimit;
+            // init nanoscroller here to prevent default scrollbar while loading boxes
+            $(".nano").nanoScroller();
 
-        // TODO: load currentVocab from cache
-        VocabService.get({id: $routeParams.vID}, function(vocabulary) {
-            $scope.vocabulary = vocabulary;
-        });
+            // TODO: load currentVocab from cache
+            VocabService.get({id: $routeParams.vID}, function(vocabulary) {
+                $scope.vocabulary = vocabulary;
+            });
 
-        if (CachingService.filters.concepts && CachingService.filters.concepts.vocabID === $routeParams.vID) {
-            $scope.labelFilter = CachingService.filters.concepts.value;
-        }
-        // get from cache or server
-        if (CachingService.editor.concepts && CachingService.editor.concepts.vocabID === $routeParams.vID) {  // cached concepts are for the current vocab
-            $scope.labels = CachingService.editor.concepts.items;
-            $scope.loading = false;
-            $scope.placeholder = "filter";
-        } else {
-            loadConcepts();
-        }
+            // load filter from cache of possible
+            $scope.labelFilter = CachingService.getFilterByVocab(ctrl.vocabID);
 
-        function loadConcepts() {
+            // get from cache or server
+            if (CachingService.editor.concepts && CachingService.editor.concepts.vocabID === $routeParams.vID) {
+                // cached concepts are for the current vocab
+                $scope.labels = CachingService.editor.concepts.items;
+                $scope.loading = false;
+                $scope.placeholder = "filter";
+            } else {
+                ctrl.loadConcepts();
+            }
+        };
+
+        ctrl.$onDestroy = function () {
+            // cache filter value
+            if ($scope.labelFilter) {
+                CachingService.filters.concepts = {
+                    vocabID: ctrl.vocabID,
+                    value: $scope.labelFilter
+                };
+            }
+
+            // cache concepts. doing this on destroy saves us from having to
+            // update the cache when adding or removing concepts
+            CachingService.editor.concepts = {
+                vocabID: ctrl.vocabID,
+                items: $scope.labels
+            };
+        };
+
+        ctrl.loadConcepts = function() {
             LabelService.query({'vocab': $routeParams.vID}, function(labels) {
                 $scope.labels = labels;
-                CachingService.editor.concepts = {
-                    vocabID: $routeParams.vID,
-                    items: labels
-                };
                 $scope.loading = false;
                 $scope.placeholder = "filter";
             });
-        }
+        };
 
         /**
          * Creates a new concept by sending a new object to the api.
@@ -69,7 +86,6 @@
             LabelService.save(newConcept, function(concept) {
                 if (concept.id) {
                     $scope.labels.push(concept);
-                    CachingService.editor.concepts.push(concept);
                 }
             }, function error(res) {
                 console.log(res);
@@ -109,7 +125,7 @@
         // refresh boxes when csv upload complete
         $scope.$on("csvUploadComplete", function() {
             $scope.loading = true;
-            loadConcepts();
+            ctrl.loadConcepts();
         });
 
         $scope.$watch("loading", function(loading) {
@@ -118,11 +134,6 @@
                     angular.element('#filtersearch input').focus();
                 }, 0);
             }
-        });
-
-        $scope.$on("leaveConcepts", function() {
-            CachingService.filters.concepts.vocabID = $routeParams.vID;
-            CachingService.filters.concepts.value = $scope.labelFilter;
         });
 
         // set inital labelOrder to a function, has to be defined before this line

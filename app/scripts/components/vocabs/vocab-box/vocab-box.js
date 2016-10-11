@@ -23,13 +23,10 @@ angular.module('labelsApp')
          * @param {string} id - Vocabulary ID
          */
         this.onClick = function(id) {
-            // broadcast vocabs leave event so vocabs component saves current filter
-            $rootScope.$broadcast("leaveVocabs");
-
             if (ctrl.mode === "viewer") {
                 $location.path('/vocabularies/' + id + '/concepts');
             } else {
-                $location.path('/admin/vocabularies/' + id + '/concepts');
+                $location.path('/editor/vocabularies/' + id + '/concepts');
             }
         };
 

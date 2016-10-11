@@ -19,7 +19,7 @@
             $scope.disabled = true;  // block another click
 
             AuthService.login($scope.username, $scope.password).then(function() {
-                $location.path('/admin/vocabularies');
+                $location.path('/editor/vocabularies');
             })
             .catch(function() {
                 $scope.error = true;
@@ -32,7 +32,7 @@
 
         // hotkeys
         $document.keydown(function(e) {
-            if ($location.path() === "/admin/login" && e.keyCode === 13) {  // enter
+            if ($location.path() === "/editor/login" && e.keyCode === 13) {  // enter
                 if ($scope.username && $scope.password) {
                     $scope.onLoginClick();
                 }

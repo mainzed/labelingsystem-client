@@ -56,10 +56,10 @@ describe('Component: lsEditVocabButton', function () {
         $httpBackend.flush();
     }));
 
-    it("should render button", function() {
-        var icon = element.find("span.icon-more");
-        expect(icon.length).toBeTruthy();
-    });
+    // it("should render button", function() {
+    //     var icon = element.find("span.icon-more");
+    //     expect(icon.length).toBeTruthy();
+    // });
 
     // it("should call openDialog() on click", function() {
     //     element.find("span.icon-more").click();

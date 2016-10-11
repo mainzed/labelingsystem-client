@@ -96,7 +96,7 @@ angular.module('labelsApp')
              * redirect to new concept path
              */
             scope.openConcept = function() {
-                $location.path('/admin/vocabularies/' + scope.concept.vocabID + '/concepts/' + scope.concept.id);
+                $location.path('/editor/vocabularies/' + scope.concept.vocabID + '/concepts/' + scope.concept.id);
             };
 
             /**

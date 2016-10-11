@@ -18,17 +18,18 @@
         <span class="listcontent smalltype autowidth">{{ uri }}</span>-->
         <span class="listtype">URI</span>
         <span class="listcontent"><button class="clipboardbutton" clipboard supported="supported" text="vocabulary.uri" on-copied="success()" on-error="fail(err)">Copy URI to clipboard</button></span>
-        
+
         <span class="listtype">creator</span>
-        <span class="listcontent">{{ vocabulary.creator }}</span>
-        <span class="listtype">created:</span>
-        <span class="listcontent">{{ vocabulary.created | date: 'dd.MM.yyyy' }}</span>
+        <span class="listcontent" ng-bind-html="agent.getNameAsLink()"></span>
         <span class="listtype">last modified:</span>
         <span class="listcontent">{{ vocabulary.lastModified | date: 'dd.MM.yyyy' }}</span>
         <span class="listtype">license</span>
-        <span class="listcontent">{{ vocabulary.license }}</span>   
+        <span class="listcontent"><a ng-href="{{vocabulary.license}}" target="_blank">CC BY</a></span>
         <span class="listtype">Download</span>
-        <span class="listcontent">download files</span>     
+        <span class="listcontent">
+            <a ng-href="{{ vocabulary.getUrl() + '.skos' }}" target="_blank" ng-click="$event.stopPropagation()">SKOS</a>
+        </span>
+
     </div>
 
      <div class="dialog-half float" id="ls-selfexplain">
@@ -84,5 +85,3 @@
 	</div>
 	</div>
 </div>
-
-

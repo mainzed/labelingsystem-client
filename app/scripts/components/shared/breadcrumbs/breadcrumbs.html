@@ -2,14 +2,14 @@
 
   <span>
     <!-- vocabs link -->
-    <a ng-show="mode !== 'viewer'" class="outside" href="#/admin/vocabularies">My vocabularies</a>
+    <a ng-show="mode !== 'viewer'" class="outside" href="#/editor/vocabularies">My vocabularies</a>
     <a ng-show="mode === 'viewer'" class="outside" href="#/vocabularies">All vocabularies</a>
 
     <!-- placeholder -->
     <span class="icon-breadcrumb"></span>
 
     <!-- concepts link (if in concepts-detail) -->
-    <a ng-show="conceptID && mode !== 'viewer'" ng-href="#/admin/vocabularies/{{ vocabID }}/concepts">{{ vocab.title }}</a>
+    <a ng-show="conceptID && mode !== 'viewer'" ng-href="#/editor/vocabularies/{{ vocabID }}/concepts">{{ vocab.title }}</a>
     <a ng-show="conceptID && mode === 'viewer'" ng-href="#/vocabularies/{{ vocabID }}/concepts">{{ vocab.title }}</a>
 
     <!-- placeholder (if in concepts-detail) -->

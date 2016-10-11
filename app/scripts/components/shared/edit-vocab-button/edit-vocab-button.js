@@ -90,7 +90,7 @@ angular.module('labelsApp')
 
         $scope.deleteVocab = function(id) {
             VocabService.remove({id: id}, function() {
-                $location.path("/admin/vocabularies/");
+                $location.path("/editor/vocabularies/");
             }, function error(res) {
                 console.log(res);
             });

@@ -11,48 +11,78 @@
     bindings: {
     },
     templateUrl: "scripts/components/concepts/concepts-viewer.html",
-    controller: function ($scope, $timeout, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService, ConfigService, UserSettingsService, CachingService) {
+    controller: function ($scope, $timeout, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService, ConfigService, UserSettingsService, CachingService, AgentService) {
         var ctrl = this;
-        // init nanoscroller here to prevent default scrollbar while loading boxes
-        $(".nano").nanoScroller();
 
-        // initial values
-        $scope.loading = true;
-        $scope.tooltips = TooltipService;
+        var ctrl = this;
 
-        $scope.extendAll = UserSettingsService.extendAll;
-        $scope.conceptsLimit = ConfigService.conceptsLimit;
+        ctrl.$onInit = function () {
+            $scope.loading = true;
+            $scope.tooltips = TooltipService;
+            $scope.placeholder = "loading labels...";
+            $scope.extendAll = UserSettingsService.extendAll;
+            $scope.conceptsLimit = ConfigService.conceptsLimit;
+            ctrl.vocabID = $routeParams.vID;
 
-        VocabService.get({id: $routeParams.vID}, function(vocabulary) {
-            $scope.vocabulary = vocabulary;
-        });
+            // init nanoscroller here to prevent default scrollbar while loading boxes
+            $(".nano").nanoScroller();
 
-        if (CachingService.filters.concepts && CachingService.filters.concepts.vocabID === $routeParams.vID) {
-            $scope.labelFilter = CachingService.filters.concepts.value;
-        }
+            // TODO: load currentVocab from cache
+            VocabService.get({id: $routeParams.vID}, function(vocabulary) {
+                $scope.vocabulary = vocabulary;
+                //console.log($scope.vocabulary);
 
-        // get from cache or server
-        if (CachingService.viewer.concepts && CachingService.viewer.concepts.vocabID === $routeParams.vID) {
-            $scope.labels = CachingService.viewer.concepts.items;
-            $scope.loading = false;
-        } else {
+                // creator info
+                AgentService.get({id: $scope.vocabulary.creator}, function(agent) {
+                    $scope.agent = agent;
+                });
+            });
+
+            // load filter from cache of possible
+            $scope.labelFilter = CachingService.getFilterByVocab(ctrl.vocabID);
+
+            // get from cache or server
+            if (CachingService.editor.concepts && CachingService.editor.concepts.vocabID === $routeParams.vID) {
+                // cached concepts are for the current vocab
+                $scope.labels = CachingService.editor.concepts.items;
+                $scope.loading = false;
+                $scope.placeholder = "filter";
+            } else {
+                ctrl.loadConcepts();
+            }
+
+            // cache all concepts for landing page (if user clicks on search icon)
+            if (!CachingService.viewer.allConcepts) {
+                LabelService.query(function(concepts) {
+                    CachingService.viewer.allConcepts = concepts;
+                });
+            }
+        };
+
+        ctrl.$onDestroy = function () {
+            // cache filter value
+            if ($scope.labelFilter) {
+                CachingService.filters.concepts = {
+                    vocabID: ctrl.vocabID,
+                    value: $scope.labelFilter
+                };
+            }
+
+            // cache concepts. doing this on destroy saves us from having to
+            // update the cache when adding or removing concepts
+            CachingService.editor.concepts = {
+                vocabID: ctrl.vocabID,
+                items: $scope.labels
+            };
+        };
+
+        ctrl.loadConcepts = function() {
             LabelService.query({'vocab': $routeParams.vID}, function(labels) {
                 $scope.labels = labels;
-                CachingService.viewer.concepts = {
-                    vocabID: $routeParams.vID,
-                    items: labels
-                };
-
                 $scope.loading = false;
+                $scope.placeholder = "filter";
             });
-        }
-
-        // cache all concepts for landing page (if user clicks on search icon)
-        if (!CachingService.viewer.allConcepts) {
-            LabelService.query(function(concepts) {
-                CachingService.viewer.allConcepts = concepts;
-            });
-        }
+        };
 
         /**
          * Order function for the use with the ng-repeat directive.
@@ -112,11 +142,5 @@
                 }, 0);
             }
         });
-
-        $scope.$on("leaveConcepts", function() {
-            CachingService.filters.concepts.vocabID = $routeParams.vID;
-            CachingService.filters.concepts.value = $scope.labelFilter;
-        });
-
     }
 });

@@ -30,11 +30,10 @@ angular.module('labelsApp')
              * @param {string} id - Concept ID
              */
             scope.onClick = function(id) {
-                $rootScope.$broadcast("leaveConcepts");
                 if (scope.mode === 'viewer') {
                     $location.path("/vocabularies/" + $routeParams.vID + "/concepts/" + id);
                 } else {
-                    $location.path("admin/vocabularies/" + $routeParams.vID + "/concepts/" + id);
+                    $location.path("editor/vocabularies/" + $routeParams.vID + "/concepts/" + id);
                 }
 
             };

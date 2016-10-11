@@ -17,7 +17,7 @@ angular.module('labelsApp')
         var ctrl = this;
 
         $scope.publicLabelEdit = ConfigService.publicLabelEdit;
-        
+
         /**
          * Opens the metadata/settings dialog of a vocabulary.
          */
@@ -54,7 +54,7 @@ angular.module('labelsApp')
          */
         $scope.deleteConcept = function(concept) {
             LabelService.remove({id: concept.id}, function() {
-                $location.path("/admin/vocabularies/" + $routeParams.vID + "/concepts");
+                $location.path("/editor/vocabularies/" + $routeParams.vID + "/concepts");
             }, function(res) {
                 console.log(res);
             });
