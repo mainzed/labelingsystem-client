@@ -88,11 +88,6 @@
          * @param {string} relation - Concept-to-Concept relation  (e.g. "broader" or "exactMatch")
          */
         $scope.addResource = function(concept, relation) {
-            // console.log("add recource");
-            // console.log(concept);
-            // console.log(relation);
-            //console.log($scope.label);
-
             $scope.label.addChild(concept, relation);
 
             //console.log($scope.label);
