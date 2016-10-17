@@ -24,7 +24,7 @@
                         <input type="text" maxlength="{{ $ctrl.titleLength }}" placeholder="label" ng-model="$ctrl.newConcept.thumbnail" required>
 
                         <!-- confirm label -->
-                        <input ng-show="$ctrl.vocab.releaseType === 'public'" type="text" maxlength="{{ $ctrl.titleLength }}" placeholder="confirm label" ng-model="$ctrl.newConcept.thumbnailConfirm">
+                        <input ng-show="$ctrl.vocab.releaseType === 'public'" type="text" maxlength="{{ $ctrl.titleLength }}" placeholder="rewrite to prevent wrong spelling" ng-model="$ctrl.newConcept.thumbnailConfirm">
                     </div>
 
                 </form>
