@@ -1,6 +1,6 @@
 <div class="bigboxwrapper {{ concept.releaseType }}">
 
-  <div class="box bigbox label listbox" ng-click="onClick(concept.id)">
+  <div class="box bigbox label listbox smallheight" ng-click="onClick(concept.id)">
 
     <span class="thumbnail">
 
@@ -19,9 +19,9 @@
 
     <ls-edit-label-button ng-hide="mode ==='viewer'" data="concept" ng-click="$event.stopPropagation()"></ls-edit-label-button>
     
-    <mini-preview label="concept"></mini-preview>
+    <mini-preview label="concept" size="micro"></mini-preview>
 
-     <span class="bigboxdate"><span class="icon-time"></span>{{ concept.lastModified | date:"dd.MM.yyyy"}}</span>
+     <!--<span class="bigboxdate"><span class="icon-time"></span>{{ concept.lastModified | date:"dd.MM.yyyy"}}</span>-->
 
   </div>
 

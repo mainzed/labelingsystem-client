@@ -25,6 +25,16 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
+.icon-time:before {
+  content: "\e903";
+}
+.icon-expand:before {
+  content: "\e91e";
+}
+.icon-sort:before {
+  content: "\e923";
+}
 .icon-public:before {
   content: "\e91b";
 }
@@ -33,12 +43,6 @@
 }
 .icon-dropdown:before {
   content: "\e91d";
-}
-.icon-expand:before {
-  content: "\e91e";
-}
-.icon-time:before {
-  content: "\e903";
 }
 .icon-search:before {
   content: "\e916";
@@ -106,4 +110,5 @@
 .icon-close:before {
   content: "\e909";
 }
+
 
