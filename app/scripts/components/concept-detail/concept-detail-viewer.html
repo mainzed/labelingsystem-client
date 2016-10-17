@@ -15,7 +15,7 @@
         <!--<span class="listtype">uri</span>
         <span class="listcontent smalltype autowidth">{{ uri }}</span>-->
         <span class="listtype">URI</span>
-        <span class="listcontent"><button class="clipboardbutton" clipboard supported="supported" text="uri" on-copied="success()" on-error="fail(err)">Copy URI to clipboard</button></span>
+        <span class="listcontent"><span class="loudlink" clipboard supported="supported" text="uri" on-copied="success()" on-error="fail(err)">Copy URI to clipboard</span></span>
 
         <span class="listtype">creator</span>
         <span class="listcontent" ng-bind-html="agent.getNameAsLink()"></span>

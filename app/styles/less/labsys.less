@@ -97,7 +97,7 @@ textarea:focus {	outline: none; }
 
 #header {			color: white; height: @headerheight; position: relative; background: @background;	}
 #footer {			position: fixed; bottom: @margininboxsmall; left: calc( @marginoutside + @marginoutboxsmall ); color: @label; height: 30px;  }
-#metafooter {		color: white; height: 150px; width: 100%; float: left; margin-top: 10px; }
+#metafooter {		color: white; height: 130px; width: 100%; float: left; margin-top: 10px; }
 #metafooter .listtype {
                     margin-left: @marginoutboxsmall;}
 .clipboardbutton {  float: left; background: white; font-size: @small; margin: 0 auto; padding: 2px; border-radius: 3px; cursor: pointer;}
@@ -127,7 +127,7 @@ textarea:focus {	outline: none; }
 					height: calc(100% - 50px); }
 #enrichment-ov {	width: 100%; float: left; background: @workareas; height: calc(50% - @headerheight);	}
 .fullheight		{	height: calc(100% - @headerheight - 40px) !important; }
-.viewerheight {		height: calc(100% - 250px) !important; }
+.viewerheight {		height: calc(100% - 230px) !important; }
 #enrichment-src {	width: 100%; float: left; position: absolute; height: calc(50% - 40px); margin-top: 3px;
 					box-shadow: 2px -4px 13px black; top: 50%; background: @workareas; }
 #enrichment-src-min {
@@ -141,6 +141,8 @@ textarea:focus {	outline: none; }
 #listwrapper {		height: calc(100% - @headerheight - 50px - 38px); float: left; clear: left; display: block; width: 100%;}
 #listwrapper.listwrappermin {	
 					height: calc(100% - 250px - 50px); }
+#listwrapper.startwrapper {     
+                    background: @workareas; height: calc(100% - @headerheight); }
 #boxcontainer {		overflow-y: scroll; overflow-x: hidden; float: left; background: @workareas; padding-bottom: @marginoutside; }
 #enrichmentbrowser {
 					overflow-x: hidden; float: left; height: 100%; background: @middle; }
@@ -395,6 +397,9 @@ textarea:focus {	outline: none; }
 					margin: @margininboxsmall; }
 .deletebutton.confirm {		
 					background: tomato;}
+
+.csverrors {        float: left; clear: left; margin-top: 50px; margin-left: @marginoutside; }
+.error {            float: left; clear: left; color: tomato; }
 .deletebutton .confirmtext {		
 					position: absolute; left: 50%; margin-left: -50px; text-align: center; width: 100px;}
 .confirmed {		margin-left: calc(@marginoutside); width: calc(100% - @marginoutside * 2); background: green;

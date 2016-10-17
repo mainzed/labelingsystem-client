@@ -35,7 +35,9 @@
             <div class="nano-content" ng-show="$ctrl.showCSV">
 
                 <input type="file" file-model="$ctrl.filename" accept=".csv" />
-                <span ng-show="errors" ng-repeat="error in errors track by $index" ng-bind="error"></span>
+                <div ng-show="errors" class="csverrors">
+                <span ng-repeat="error in errors track by $index" ng-bind="error" class="error"></span>
+                </div>
 
             </div>
 
