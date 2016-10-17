@@ -64,7 +64,7 @@
 	<div class="nano">
     <div id="boxcontainer" class="nano-content">
 
-      <ls-list-box ng-repeat="label in filteredLabels = (labels | filter: labelFilter | orderBy: labelOrder | limitTo: conceptsLimit)" concept="label" mode="viewer"></ls-list-box>
+      <ls-list-box ng-repeat="label in filteredLabels = (labels | filter: {thumbnail: labelFilter} | orderBy: labelOrder | limitTo: conceptsLimit)" concept="label" mode="viewer"></ls-list-box>
 
       <div class="loader" ng-show="!filteredLabels.length && loading">
 
