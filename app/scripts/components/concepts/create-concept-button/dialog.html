@@ -38,7 +38,9 @@
                 <input type="file" class="filestyle" data-buttonText="Find file"> -->
 
                 <input type="file" file-model="$ctrl.filename" accept=".csv" />
-                <span ng-show="errors" ng-repeat="error in errors track by $index" ng-bind="error"></span>
+                <div ng-show="errors" class="csverrors">
+                <span ng-repeat="error in errors track by $index" ng-bind="error" class="error"></span>
+                </div>
 
             </div>
 
