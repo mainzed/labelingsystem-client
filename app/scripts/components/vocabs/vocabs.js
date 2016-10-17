@@ -24,6 +24,7 @@
         };
 
         ctrl.$onDestroy = function () {
+            //console.log("destroy ")
             // cache filter value
             CachingService.filters.vocabs = $scope.vocabFilter;
 

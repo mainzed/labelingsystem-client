@@ -25,6 +25,8 @@
             VocabService.get({id: $routeParams.vID}, function(vocab) {
                 ctrl.vocab = vocab;
             });
+
+            //$(":file").filestyle({buttonText: "Find file"});
         };
 
         //

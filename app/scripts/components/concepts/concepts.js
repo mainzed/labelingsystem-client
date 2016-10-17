@@ -52,7 +52,7 @@
                     value: $scope.labelFilter
                 };
             }
-
+            
             // cache concepts. doing this on destroy saves us from having to
             // update the cache when adding or removing concepts
             CachingService.editor.concepts = {

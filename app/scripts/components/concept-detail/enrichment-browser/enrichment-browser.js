@@ -20,6 +20,16 @@ angular.module('labelsApp')
             //     });
             // });
 
+            function updateSearchThesauri() {
+                scope.vocab.getThesauri(function(thesauri) {
+                    scope.thesauri = thesauri;
+                    // reset search results
+                    if (scope.searchValue) {
+                        scope.onSearchClick();
+                    }
+                });
+            }
+
 
             // get thesauri when label is available
             VocabService.get({id: $routeParams.vID}, function(vocab) {
@@ -27,13 +37,7 @@ angular.module('labelsApp')
 
                 scope.getEnrichmentVocab();
 
-                scope.vocab.getThesauri(function(thesauri) {
-                    scope.thesauri = thesauri;
-
-                    // auto init
-                    //scope.searchValue = scope.label.thumbnail;
-                    //scope.onSearchClick();
-                });
+                updateSearchThesauri();
             });
 
             $rootScope.$on("changedEnrichmentVocab", function(vocabID) {
@@ -92,9 +96,8 @@ angular.module('labelsApp')
             };
 
             scope.$on("changedThesauri", function() {
-                if (scope.searchValue) {
-                    scope.onSearchClick();
-                }
+                // apply changed thesauri
+                updateSearchThesauri();
             });
 
             // scope.orderByLabel = function(concept) {
@@ -109,7 +112,6 @@ angular.module('labelsApp')
             };
 
             scope.tooltips = TooltipService;
-
         }
     };
   });

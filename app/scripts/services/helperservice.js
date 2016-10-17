@@ -16,6 +16,21 @@ angular.module('labelsApp')
     // };
 
     /**
+     * Find and replace using lodash functions.
+     * @param query
+     */
+    this.findAndReplace = function(array, query, newval) {
+        var match = _.find(array, query);
+        if (match) {
+            var index = _.indexOf(array, _.find(array, query));
+            array.splice(index, 1, newval);
+        } else {
+            array.push(newval);
+        }
+
+    };
+
+    /**
      * Determines the term of a concept or match and returns it.
      * @param {Object} obj - concept or match
      * @returns {String} - concept thumbnail-prefLabel or match term

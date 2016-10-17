@@ -14,7 +14,7 @@ angular.module('labelsApp')
         shortcut: "@"  // "thesauri"
     },
     template: '<span class="{{$ctrl.icon}} icon" ng-click="$ctrl.openDialog()"></span>',
-    controller: function ($scope, $rootScope, $location, $document, $anchorScroll, $timeout, ngDialog, VocabService, ConfigService, LabelService, TooltipService, AuthService, CachingService) {
+    controller: function ($scope, $rootScope, $location, $document, $anchorScroll, $timeout, ngDialog, VocabService, ConfigService, LabelService, TooltipService, AuthService, HelperService, CachingService) {
 
         var ctrl = this;
 
@@ -123,7 +123,15 @@ angular.module('labelsApp')
             }
         };
 
+        // update cache when exists
+        function updateVocabCache() {
+            if (CachingService.viewer.vocabs) {
+                HelperService.findAndReplace(CachingService.viewer.vocabs, {id: $scope.vocabulary.id}, $scope.vocabulary);
+            }
+        }
+
         this.update = function(newTitle, newDescription) {
+
 
             // check if thesauri have been (de)selected
             // updates automatically
@@ -149,7 +157,9 @@ angular.module('labelsApp')
             $scope.vocabulary.description = newDescription;
 
             $scope.vocabulary.save(function() {
-                //
+                updateVocabCache();
+                // update thesauri
+
             }, function error(res) {
                 console.log(res);
             });

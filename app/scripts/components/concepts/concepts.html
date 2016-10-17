@@ -19,11 +19,13 @@
   <span>
     <ul class="sortlist">
       <li ng-click="showOptions=!showOptions" ng-init="sortName='sort by last modified'; labelOrder = '-lastModified'">{{sortName}}<span class="icon-dropdown icon"></span>
-        <ul ng-show="showOptions" class="sortoptions">
+
+        <ul ng-show="showOptions" class="sortoptions" ng-blur="showOptions = false">
           <li ng-click="labelOrder = '-lastModified'; sortName='sort by last modified'" ng-class="{'active': labelOrder === '-lastModified'}">by lastModified</li>
           <li ng-click="labelOrder = 'thumbnail'; sortName='sort alphabetically'" ng-class="{'active': labelOrder === 'thumbnail'}">alphabetically</li>
           <li ng-click="labelOrder = orderByQuality; sortName='sort by quality'" ng-class="{'active': labelOrder === orderByQuality}">by quality</li>
         </ul>
+
       </li>
     </ul>
     <span class="extendbutton" ng-click="extendAll = !extendAll">extend boxes<span class="icon-expand"></span></span>
