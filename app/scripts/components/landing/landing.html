@@ -16,24 +16,7 @@ esc<div id="header" class="box full" ng-class="vocabulary.releaseType">
 	<!-- search results -->
 	<ul ng-show="filterValue" style="color:white">
 
-		<li ng-repeat="label in filteredLabels = (labels | filter: {thumbnail: filterValue}) | limitTo: resultsLimit as limitedLabels">
-            <!-- <span>{{ filteredLabels.length }}</span>
-            <span>{{ limitedLabels.length }}</span> -->
-			<a href="#/vocabularies/{{ label.vocabID }}/concepts/{{ label.id }}">
-
-				<!-- <span ng-bind-html="highlightResult(label.thumbnail, filterValue)"></span> -->
-                <span ng-bind="label.thumbnail"></span>
-				<!-- <span ng-show="label.description.indexOf(filterValue)">description:</span>
-				<span ng-show="label.description.indexOf(filterValue)" ng-bind-html="highlightResult(label.description, filterValue)"></span> -->
-				<!-- <span ng-repeat="prefLabel in label.prefLabels" ng-bind-html="highlightResult(prefLabel.value, filterValue)" ng-show="prefLabel.isThumbnail"></span> -->
-			</a>
-
-			<!-- scopeNote -->
-			<!-- <ul>
-				<li ng-bind-html="highlightResult(label.scopeNote.value, filterValue)" ng-show="label.scopeNote.value.indexOf(filterValue) > -1"></li>
-			</ul> -->
-
-		</li>
+		<ls-result-box ng-repeat="label in filteredLabels = (labels | filter: {thumbnail: filterValue}) | limitTo: resultsLimit as limitedLabels" data="label"></ls-result-box>
 
         <span ng-show="filterValue && filteredLabels.length > limitedLabels.length" ng-click="resultsLimit = resultsLimit * 2">show more</span>
 

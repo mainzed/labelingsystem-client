@@ -14,12 +14,10 @@
 	<div class="nano">
     <div id="boxcontainer" class="nano-content voc-box">
 
-      <ls-vocab-box ng-repeat="vocab in (filteredVocabularies = (vocabularies | filter: {'creator': user.name} | filter: vocabFilter | orderBy: 'title'))" data="vocab" mode="viewer"></ls-vocab-box>
+      <ls-vocab-box ng-repeat="vocab in (filteredVocabularies = (vocabularies | filter: {'creator': user.name} | filter: {title: vocabFilter} | orderBy: 'title'))" data="vocab" mode="viewer"></ls-vocab-box>
 
       <div class="loader" ng-show="!filteredVocabularies.length"></div>
 
 	  </div>
 	</div>
 </div>
-
-

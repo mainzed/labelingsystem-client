@@ -125,8 +125,8 @@ angular.module('labelsApp')
 
         // update cache when exists
         function updateVocabCache() {
-            if (CachingService.viewer.vocabs) {
-                HelperService.findAndReplace(CachingService.viewer.vocabs, {id: $scope.vocabulary.id}, $scope.vocabulary);
+            if (CachingService.editor.vocabs) {
+                HelperService.findAndReplace(CachingService.editor.vocabs, {id: $scope.vocabulary.id}, $scope.vocabulary);
             }
         }
 
