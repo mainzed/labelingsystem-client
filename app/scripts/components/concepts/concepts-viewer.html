@@ -17,7 +17,7 @@
         <!--<span class="listtype">uri</span>
         <span class="listcontent smalltype autowidth">{{ uri }}</span>-->
         <span class="listtype">URI</span>
-        <span class="listcontent"><button class="clipboardbutton" clipboard supported="supported" text="vocabulary.uri" on-copied="success()" on-error="fail(err)">Copy URI to clipboard</button></span>
+        <span class="listcontent"><span class="loudlink" clipboard supported="supported" text="vocabulary.uri" on-copied="success()" on-error="fail(err)">Copy URI to clipboard</span></span>
 
         <span class="listtype">creator</span>
         <span class="listcontent" ng-bind-html="agent.getNameAsLink()"></span>
@@ -46,7 +46,7 @@
 
   <span>
     <ul class="sortlist">
-      <li ng-click="showOptions=!showOptions" ng-init="sortName='sort by last modified'; labelOrder = '-lastModified'">{{sortName}}<span class="icon-dropdown icon"></span>
+      <li ng-click="showOptions=!showOptions" ng-init="sortName='sort by last modified'; labelOrder = '-lastModified'">{{sortName}}<span class="icon-sort icon"></span>
         <ul ng-show="showOptions" class="sortoptions">
           <li ng-click="labelOrder = '-lastModified'; sortName='sort by last modified'" ng-class="{'active': labelOrder === '-lastModified'}">by lastModified</li>
           <li ng-click="labelOrder = orderByLabel; sortName='sort alphabetically'" ng-class="{'active': labelOrder === orderByLabel}">alphabetically</li>

@@ -25,18 +25,23 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-
+.icon-public:before {
+  content: "\e901";
+}
+.icon-unchecked:before {
+  content: "\e902";
+}
+.icon-uncheckedradio:before {
+  content: "\e904";
+}
+.icon-sort:before {
+  content: "\e910";
+}
 .icon-time:before {
   content: "\e903";
 }
 .icon-expand:before {
   content: "\e91e";
-}
-.icon-sort:before {
-  content: "\e923";
-}
-.icon-public:before {
-  content: "\e91b";
 }
 .icon-breadcrumb:before {
   content: "\e91c";
@@ -49,12 +54,6 @@
 }
 .icon-checked:before {
   content: "\e917";
-}
-.icon-unchecked:before {
-  content: "\e918";
-}
-.icon-uncheckedradio:before {
-  content: "\e919";
 }
 .icon-checkedradio:before {
   content: "\e91a";
@@ -110,5 +109,3 @@
 .icon-close:before {
   content: "\e909";
 }
-
-

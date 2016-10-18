@@ -27,7 +27,7 @@
         <span class="listcontent"><a ng-href="{{label.license}}" target="_blank">CC BY</a></span>
 
         <span class="listtype">Download</span>
-        <span class="listcontent">
+        <span class="listcontent downloadlist downloadlistindent">
            <a ng-href="{{ label.getUrl() + '.jsonld' }}" target="_blank" ng-click="$event.stopPropagation()">JSONLD</a>
            <a ng-href="{{ label.getUrl() + '.ttl' }}" target="_blank" ng-click="$event.stopPropagation()">Turtle</a>
            <a ng-href="{{ label.getUrl() + '.rdf' }}" target="_blank" ng-click="$event.stopPropagation()">RDF/XML</a>
