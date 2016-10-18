@@ -75,7 +75,7 @@
                         </div>
 
                         <h5 ng-bind="thesaurus.name"></h5>
-                        <p ng-show="thesaurus.checked" ng-bind="thesaurus.description"></p>
+                        <p ng-bind="thesaurus.description"></p>
                     </div>
 
                 </div>
@@ -89,7 +89,7 @@
                         <ls-radiobox checked="vocab.id === checkedVocab" on-check="onVocabCheck(vocab.id)"></ls-radiobox>
 
                         <h5 ng-bind="vocab.title"></h5>
-                        <p ng-show="vocab.id === checkedVocab" ng-bind="vocab.description"></p>
+                        <p ng-bind="vocab.description"></p>
                     </div>
                 </div>
 

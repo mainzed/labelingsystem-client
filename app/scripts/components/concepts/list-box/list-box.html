@@ -12,14 +12,15 @@
           <span class="icon-dropdown"></span>
         </span>
       </button>
-      {{ concept.thumbnail }}
+       <mini-preview label="concept" size="micro"></mini-preview>
+       {{ concept.thumbnail }}
     </span>
 
 
 
     <ls-edit-label-button ng-hide="mode ==='viewer'" data="concept" ng-click="$event.stopPropagation()"></ls-edit-label-button>
     
-    <mini-preview label="concept" size="micro"></mini-preview>
+   
 
      <!--<span class="bigboxdate"><span class="icon-time"></span>{{ concept.lastModified | date:"dd.MM.yyyy"}}</span>-->
 

@@ -375,7 +375,7 @@ textarea:focus {	outline: none; }
 .micropreview {		height: 10px; margin: @margininboxsmall; background: black;
 					width: 32px; position: absolute; top: 0; right: 0; padding: 3px 1px 4px 1px; overflow: hidden;	}
 .bigboxwrapper .micropreview {  
-                    right: 50px; }
+                    position: relative; float: left; margin-top: 1px; margin-left: 3px; margin-right: 15px; }
 .microcol	 {		width: 4px; padding: 0 2px; float: left; height: 100%;	}
 .microbox 	{		width: 100%; height: 4px; margin-bottom: 3px; display: block;}
 
@@ -442,8 +442,10 @@ textarea.inactive{	color: #a3a3a3; }
 /* thesaurus */
 .thesaurus {		width: calc(100% - @marginoutside * 2); margin-left: @marginoutside; display: block; float: left; margin-bottom: 30px;
 					border-top: 1px solid #c5c5c5; padding-top: 4px; position: relative; }
-.thesaurussmall {	margin-bottom: 6px; }
-.thesaurussmall h5 {font-weight: normal; }
+.draft .thesaurus {
+                    border-top: 1px solid @draftlinecolor; }
+
+
 .dialogbox input.checkbox {			
 					float: left; margin-left: 0; width: 20px; }
 .thesaurus p {		float: left; clear: left; margin-left: 20px; }
@@ -504,6 +506,9 @@ textarea.inactive{	color: #a3a3a3; }
 	{ 				margin-right: -6px; margin-top: -5px; display: block; }
 .small .icon-exact, .small .icon-close, .small .icon-related
 	{ 				margin-left: -5px; margin-top: -5px; display: block; }
+.icon-checkedradio {margin-top: 1px;}
+.icon-uncheckedradio {
+                    margin-top: 1px; }
 #header .icon-concept {
 					position: absolute; right: 50px; font-size: 100px; top: 8px; }
 
