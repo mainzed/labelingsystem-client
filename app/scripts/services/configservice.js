@@ -54,6 +54,7 @@ angular.module('labelsApp')
     };
 
     // limit of concepts shown in concepts overview and enrichment-browser 'concepts'-tab
+    // and on landing page
     this.conceptsLimit = 25;
 
     // maximum numbe rof chars allowed for descriptions

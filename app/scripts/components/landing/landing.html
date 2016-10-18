@@ -1,4 +1,4 @@
-esc<div id="header" class="box full" ng-class="vocabulary.releaseType">
+<div id="header" class="box full" ng-class="vocabulary.releaseType">
 
     <input id="labelSearch" type="text" placeholder="{{placeholder}}" ng-model="filterValue" ng-change="onSearchBoxChange()" ng-disabled="!labels">
 
@@ -6,54 +6,57 @@ esc<div id="header" class="box full" ng-class="vocabulary.releaseType">
 
 </div>
 
-<div id="listwrapper" class="listwrapper startwrapper">
+<div id="listwrapper" class="listwrapper startwrapper nano">
 
-	<h1 class="landingh1" ng-show="!filterValue">labeling system</h1>
+    <div class="nano-content">
 
-	<!-- search box -->
+        <h1 class="landingh1" ng-show="!filterValue">labeling system</h1>
+
+    	<!-- search box -->
+
+    	<!-- search results -->
+    	<ul ng-show="filterValue" style="color:white">
+
+    		<ls-result-box ng-repeat="label in filteredLabels = (labels | filter: {thumbnail: filterValue}) | limitTo: $ctrl.resultsLimit as limitedLabels" data="label"></ls-result-box>
+
+            <span ng-show="filterValue && filteredLabels.length > limitedLabels.length" ng-click="$ctrl.resultsLimit = $ctrl.resultsLimit * 2">show more</span>
+
+    		<!-- message when no labels found -->
+    		<span ng-show="filterValue && !filteredLabels.length">
+    			No labels found, <a href="#/vocabularies">browse vocabularies!</a>
+    		</span>
+
+    		<!-- show more -->
+    		<span ng-show="filterValue && filteredLabels.length > $ctrl.resultsLimit">
+    			show more
+    		</span>
+    	</ul>
+
+    	<!-- landing page text prior to search -->
+    	<div ng-show="!filterValue">
+
+    		<div class="dialog-half whitetext emphasize float">
+    			<h6></h6>
+    			<p>
+    			The Labeling System (LS) is a web-application that allows registered users to create controlled vocabularies. Vocabularies contain concepts that can be described by a label and translations. Since a concept is better described by links into the Linked Open Data cloud than by plain string, the Labeling System allows users to link to other concepts in the Linked Open Data. These links can be hierarchical, associative or mapping. It is possible to build in-vocab skos hierarchies. The app provides a convenient way to search for Linked Open Data within controlled vocabularies. Once a concept is published, it can be publicly accessed via a Uniform Resource Identifier (URI).
+    			<br><br>
+    			</p>
+    		</div>
+
+    		<div class="dialog-full whitetext emphasize float">
+    			<h6></h6>
+    			<p>Request Account</p>
+
+    			<h6>Partner</h6>
+    			<h6>Credits</h6>
+    		</div>
+
+    		<div class="whitetext">
+    			<a href="#/editor/login">Editor Login</a>
+    		</div>
 
 
-	<!-- search results -->
-	<ul ng-show="filterValue" style="color:white">
+    	</div>
+    </div>
 
-		<ls-result-box ng-repeat="label in filteredLabels = (labels | filter: {thumbnail: filterValue}) | limitTo: resultsLimit as limitedLabels" data="label"></ls-result-box>
-
-        <span ng-show="filterValue && filteredLabels.length > limitedLabels.length" ng-click="resultsLimit = resultsLimit * 2">show more</span>
-
-		<!-- message when no labels found -->
-		<span ng-show="filterValue && !filteredLabels.length">
-			No labels found, <a href="#/vocabularies">browse vocabularies!</a>
-		</span>
-
-		<!-- show more -->
-		<!-- <span ng-show="filterValue && filteredLabels.length >= 30">
-			Only showing first 30 results!
-		</span> -->
-	</ul>
-
-	<!-- landing page text prior to search -->
-	<div ng-show="!filterValue">
-
-		<div class="dialog-half whitetext emphasize float">
-			<h6></h6>
-			<p>
-			The Labeling System (LS) is a web-application that allows registered users to create controlled vocabularies. Vocabularies contain concepts that can be described by a label and translations. Since a concept is better described by links into the Linked Open Data cloud than by plain string, the Labeling System allows users to link to other concepts in the Linked Open Data. These links can be hierarchical, associative or mapping. It is possible to build in-vocab skos hierarchies. The app provides a convenient way to search for Linked Open Data within controlled vocabularies. Once a concept is published, it can be publicly accessed via a Uniform Resource Identifier (URI).
-			<br><br>
-			</p>
-		</div>
-
-		<div class="dialog-full whitetext emphasize float">
-			<h6></h6>
-			<p>Request Account</p>
-
-			<h6>Partner</h6>
-			<h6>Credits</h6>
-		</div>
-
-		<div class="whitetext">
-			<a href="#/editor/login">Editor Login</a>
-		</div>
-
-
-	</div>
 </div>
