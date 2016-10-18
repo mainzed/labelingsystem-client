@@ -12,9 +12,18 @@ angular.module('labelsApp')
     },
     templateUrl: "scripts/components/landing/landing.html",
 
-    controller: function ($scope, $window, $filter, $timeout, $location, LabelService, FilterService, CachingService) {
+    controller: function ($scope, $window, $filter, $timeout, $location, LabelService, FilterService, CachingService, ConfigService) {
 
-        $scope.resultsLimit = 25;
+        var ctrl = this;
+
+        ctrl.resultsLimit = 0;
+
+        ctrl.$onInit = function() {
+            ctrl.resultsLimit = ConfigService.conceptsLimit;
+            $(".nano").nanoScroller();
+        };
+
+
 
         $scope.loading = false;
         // get from cache or load new

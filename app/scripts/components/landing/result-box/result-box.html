@@ -1,5 +1,5 @@
 
-<div class="box bigbox label high smallheight" ng-click="onClick()">
+<div class="box bigbox label high smallheight" ng-click="$ctrl.redirectToConcept()">
   <span class="thumbnail">
     <button class="showadditionalcontent" ng-click="showMore = !showMore; $event.stopPropagation()">
       <span ng-show="!showMore"><span class="icon-breadcrumb"></span></span>
@@ -13,7 +13,7 @@
 </div>
 
 <!-- show details -->
-<div ng-if="showMore" class="box boxextension bigbox label high" ng-click="onClick()">
+<div ng-if="showMore" class="box boxextension bigbox label high" ng-click="$ctrl.redirectToConcept()">
 
   <span class="line-ext"></span>
 
