@@ -105,7 +105,7 @@ textarea:focus {	outline: none; }
 #footer span {		float: left; margin-top: 8px; }
 .landingh1 {		color: white; font-weight: 300; font-size: 150px; margin-left: @marginoutside; margin-bottom: 50px;
 					font-family: "mainzeddisplay"; }
-.logout {			margin-left: 10px; text-decoration: underline; }
+.logout {			margin-left: 10px;  }
 #viewport {			height: 100%; background: @background;}
 #separator {		color: white; height: 75px; }
 .separatorsmall {	height: 50px; float: left; width: 100%; background: @workareas; clear: left;}
@@ -173,12 +173,13 @@ textarea:focus {	outline: none; }
 
 
 .hideenrichment {	position: absolute; right: 10px; padding-top: 10px; padding-bottom: 15px; }
-#filtersearch {		margin-left: calc(@marginoutside + @marginoutboxsmall); margin-top: 10px; color: white; width: 60%; float: left; }
+#filtersearch {		margin-left: calc(@marginoutside + @marginoutboxsmall); margin-top: 10px; color: white; width: 40%; float: left; }
 #filtersearch .icon-search {
 					float: left;
 }
 #filtersearch input {
 					background: none; border: none; width: 200px; float: left; height: 30px; color: white; }
+.listoptions {		width: 50%; display: block; float: right;}
 
 .sortlist	{		display: block; float: left; position: relative; color: white; margin-top: 13px; 
 					padding-left: @margininboxsmall; cursor: pointer; width: 200px;  }
@@ -565,6 +566,7 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
                     -ms-hyphens: auto; -moz-hyphens: auto; hyphens: auto; }
 
 .active {			font-weight: bold; }
+.underlined {		border-bottom: 1px solid white; padding-bottom: 2px; cursor: pointer;}
 .whitetext {		color: white; }
 .emphasize p, .emphasize h6
 			 {		font-size: @emphasize; }

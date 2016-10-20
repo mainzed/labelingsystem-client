@@ -44,7 +44,7 @@
         <input type="text" ng-model="labelFilter" placeholder="filter" autofocus>
 	</div>
 
-  <span>
+  <div class="listoptions">
     <ul class="sortlist">
       <li ng-click="showOptions=!showOptions" ng-init="sortName='sort by last modified'; labelOrder = '-lastModified'">{{sortName}}<span class="icon-sort icon"></span>
         <ul ng-show="showOptions" class="sortoptions">
@@ -57,7 +57,7 @@
     <span class="extendbutton" ng-click="extendAll = !extendAll">extend boxes<span class="icon-expand"></span></span>
     <!--<button class="extendbutton" type="button" ng-click="extendAll = !extendAll" ng-bind="extendButtonText"></button>-->
 
-  </span>
+  </div>
 </div>
 
 <div id="listwrapper" class="listwrappermin">

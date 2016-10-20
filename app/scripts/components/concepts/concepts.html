@@ -16,7 +16,8 @@
         <input type="text" ng-model="labelFilter" placeholder="filter" autofocus>
 	</div>
 
-  <span>
+ 
+  <div class="listoptions">
     <ul class="sortlist">
       <span class="icon-sort icon"></span>
       <li ng-click="showOptions=!showOptions" ng-init="sortName='sort by last modified'; labelOrder = '-lastModified'">{{sortName}}
@@ -27,13 +28,13 @@
           <li ng-click="labelOrder = 'thumbnail'; sortName='sort alphabetically'" ng-class="{'active': labelOrder === 'thumbnail'}">alphabetically</li>
           <li ng-click="labelOrder = orderByQuality; sortName='sort by quality'" ng-class="{'active': labelOrder === orderByQuality}">by quality</li>
         </ul>
-
       </li>
     </ul>
-    <span class="extendbutton" ng-click="extendAll = !extendAll"><span class="icon-expand"></span>extend boxes</span>
-    <!--<button class="extendbutton" type="button" ng-click="extendAll = !extendAll" ng-bind="extendButtonText"></button>-->
+  <span class="extendbutton" ng-click="extendAll = !extendAll"><span class="icon-expand"></span>extend boxes</span>
+  <!--<button class="extendbutton" type="button" ng-click="extendAll = !extendAll" ng-bind="extendButtonText"></button>-->
+  </div>
 
-  </span>
+
 </div>
 
 <div id="listwrapper">

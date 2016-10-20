@@ -10,7 +10,7 @@
      .component('lsEditUserButton', {
         bindings: {
         },
-        template: "<span class='icon-user'></span><span ng-click='$ctrl.openDialog()'>{{ $ctrl.user.id }}</span>",
+        template: "<span class='icon-user'></span><span class='underlined' ng-click='$ctrl.openDialog()'>{{ $ctrl.user.id }}</span>",
 
         controller: function ($scope, ngDialog, AuthService) {
             var ctrl = this;
