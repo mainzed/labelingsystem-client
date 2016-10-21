@@ -127,8 +127,7 @@ textarea:focus {	outline: none; }
 .enrichmentswrappermin {
 					height: calc(100% - 50px); }
 #enrichment-ov {	width: 100%; float: left; background: @workareas; height: calc(50% - @headerheight);	}
-.fullheight		{	height: calc(100% - @headerheight - 40px) !important; }
-.viewerheight {		height: calc(100% - 230px) !important; }
+
 #enrichment-src {	width: 100%; float: left; position: absolute; height: calc(50% - 40px); margin-top: 3px;
 					box-shadow: 2px -4px 13px black; top: 50%; background: @workareas; }
 #enrichment-src-min {
@@ -501,6 +500,11 @@ textarea.inactive{	color: #a3a3a3; }
 
 
 
+/* height corrections */
+.fullheight		{	height: calc(100% - @headerheight - 40px) !important; }
+.viewerheight {		height: calc(100% - 230px) !important; }
+.viewersearch {		height: calc(100% - @headerheight) !important;}
+
 
 
 /* icon corrections */
@@ -530,7 +534,8 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
 					line-height: 21px; font-size: 30px; margin-left: -4px;
 }
 
-#footer span.icon-user  {		margin: 5px 0 0 50px; display: block; float: left; font-size: 23px;}
+#footer span.icon-user  {		
+					margin: 5px 0 0 50px; display: block; float: left; font-size: 23px;}
 #filtersearch .icon-search	{
 					margin-left: 3px; margin-right: 2px; color: gray; }
 
@@ -641,11 +646,10 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
 }
 .loader,
 .loader:after {
-  border-radius: 50%;
-  width: 4em;
-  height: 4em;
-  z-index: 5;
-}
+					border-radius: 50%;
+					width: 4em;
+					height: 4em;
+					z-index: 5; }
 
 .highlight {    
                     animation: highlight 0.3s linear;
