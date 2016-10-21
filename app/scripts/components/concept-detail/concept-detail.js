@@ -12,92 +12,39 @@
     },
     templateUrl: "scripts/components/concept-detail/concept-detail.html",
 
-    controller: function ($scope, $routeParams, $timeout, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ResourcesService, TooltipService, SearchService) {
+    controller: function ($scope, $routeParams, VocabService, LabelService, TooltipService) {
 
-        // init nanoscroller here to prevent default scrollbar while loading boxes
-        $(".nano").nanoScroller();
+        var ctrl = this;
 
-        //$scope.user = AuthService.getUser();
+        ctrl.$onInit = function() {
+            $scope.tooltips = TooltipService;
+            $scope.vocabulary = VocabService.get({id: $routeParams.vID});
+            $scope.label = LabelService.get({id: $routeParams.lID});
 
-        $scope.tooltips = TooltipService;
+            $(".nano").nanoScroller();
+        }
 
-        VocabService.get({id: $routeParams.vID}, function(vocabulary) {
-            $scope.vocabulary = vocabulary;
+        // temporarily add box when new resource was addedd
+        $scope.$on("addedResource", function(event, data) {
+            if (!$scope.label[data.relation]) {
+                $scope.label[data.relation] = [];
+            }
+            $scope.label[data.relation].push(data.resource);
         });
 
-        // load current label
-        $scope.label = LabelService.get({id: $routeParams.lID});
-
-
-        $scope.addTranslation = function(term, lang) {
-
+        $scope.$on("addedTranslation", function(event, data) {
             if (!$scope.label.translations) {
                 $scope.label.translations = [];
             }
-            $scope.label.translations.push({
-                value: term,
-                lang: lang
-            });
+            $scope.label.translations.push(data.translation);
+        });
 
-            $scope.label.save(function() {
-                // success
-            }, function() {
-                // error
-            });
-        };
+        $scope.$on("addedDescription", function(event, data) {
+            console.log("added description!");
+        });
 
-        /**
-         * Adds a description to the current concept.
-         */
-        $scope.addDescription = function(value) {
-            $scope.label.description = value;
-            $scope.label.save(function() {
-                // success
-            }, function(res) {
-                // error
-                console.log(res);
-            });
-        };
-
-        $scope.addLink = function(uri) {
-            $scope.label.addChild({ uri: uri}, "seeAlso");
-            $scope.label.save(function() {
-                // success
-            }, function error(res) {
-                console.log(res);
-            });
-        };
-
-        /**
-         * Link a search result as a child concept to the current concept.
-         * @param {Object} concept - internal or external concept object
-         * @param {string} relation - Concept-to-Concept relation  (e.g. "broader" or "exactMatch")
-         */
-        $scope.addResource = function(concept, relation) {
-            $scope.label.addChild(concept, relation);
-
-            //console.log($scope.label);
-
-            $scope.label.save(function() {
-                console.log("success");
-                // success
-            }, function error(res) {
-                console.log(res);
-            });
-        };
-
-        // listener to reload nanoscroller when menu is hidden or shown
-        // $scope.$watch("showEnrichments", function() {
-        //     $timeout(function() {
-        //         $(".nano").nanoScroller();
-        //     }, 0);
-        // });
-
-        // $scope.$on('removed-description', function() {
-        //     delete $scope.label.description;
-        // });
-
-        // init nano-scroller (gets refreshed in directives after render)
-        $(".nano").nanoScroller();
+        $scope.$on("addedLink", function(event, data) {
+            console.log("added link!");
+        });
     }
 });

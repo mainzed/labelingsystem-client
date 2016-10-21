@@ -9,9 +9,10 @@ angular.module("labelsApp")
         "enrichment-browser.html",
 
     // The controller that handles our component logic
-    controller: function($scope, $routeParams, ConfigService, SearchService,
-        VocabService, TooltipService, UserSettingsService) {
+    controller: function($scope, $routeParams, $rootScope, ConfigService, SearchService,
+        VocabService, TooltipService, UserSettingsService, LabelService) {
         var ctrl = this;
+        ctrl.concept;
 
         ctrl.$onInit = function() {
             $scope.searching = false;
@@ -21,12 +22,14 @@ angular.module("labelsApp")
             $scope.tooltips = TooltipService;
             ctrl.showEnrichments = UserSettingsService.showEnrichments;
 
+            LabelService.get({id: $routeParams.lID}, function(concept) {
+                ctrl.concept = concept;
+            });
+
             // get thesauri when label is available
             VocabService.get({id: $routeParams.vID}, function(vocab) {
                 $scope.vocab = vocab;
-
                 ctrl.getEnrichmentVocab(vocab);
-
                 updateSearchThesauri();
             });
         };
@@ -43,11 +46,11 @@ angular.module("labelsApp")
                 });
 
                 // get concepts of vocab to be shown
-                // LabelService.query({'vocab': vocab.id}, function(concepts) {
-                //     scope.siblings = _.filter(concepts, function(o) {
-                //         return o.id !== $routeParams.lID;  // skip current concept
-                //     });
-                // });
+                LabelService.query({'vocab': vocab.id}, function(concepts) {
+                    $scope.siblings = _.filter(concepts, function(o) {
+                        return o.id !== $routeParams.lID;  // skip current concept
+                    });
+                });
             });
         };
 
@@ -84,7 +87,7 @@ angular.module("labelsApp")
                         }
                         //
                         $scope.searching = false;
-                        $scope.resultBoxes = $.merge(scope.resultBoxes, results);
+                        $scope.resultBoxes = $.merge($scope.resultBoxes, results);
                     }, function error(res) {
                         console.log(res);
                     });
@@ -102,7 +105,43 @@ angular.module("labelsApp")
             });
         }
 
+        $scope.addTranslation = function(term, lang) {
+            var newTranslation = {
+                value: term,
+                lang: lang
+            };
 
+            if (!ctrl.concept.translations) {
+                ctrl.concept.translations = [];
+            }
+
+            ctrl.concept.translations.push(newTranslation);
+            ctrl.concept.save(function success() {
+                $rootScope.$broadcast("addedTranslation", { translation: newTranslation });
+            });
+        };
+
+        /**
+         * Adds a description to the current concept.
+         */
+        $scope.addDescription = function(value) {
+            $scope.label.description = value;
+            $scope.label.save(function() {
+                // success
+            }, function(res) {
+                // error
+                console.log(res);
+            });
+        };
+
+        $scope.addLink = function(uri) {
+            $scope.label.addChild({ uri: uri}, "seeAlso");
+            $scope.label.save(function() {
+                // success
+            }, function error(res) {
+                console.log(res);
+            });
+        };
 
 
 
@@ -114,7 +153,7 @@ angular.module("labelsApp")
         // press "enter" to start search
         $scope.onSearchKeyPress = function(e) {
             if (e.keyCode === 13) {
-                scope.onSearchClick();
+                $scope.onSearchClick();
             }
         };
 

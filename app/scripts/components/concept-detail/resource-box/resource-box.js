@@ -113,12 +113,7 @@ angular.module('labelsApp')
                         uri: resource.uri
                     });
 
-                    var jsonObject = {
-                        item: parentConcept,
-                        user: AuthService.getUser().name
-                    };
-
-                    LabelService.update({ id: $routeParams.lID }, jsonObject, function() {
+                    parentConcept.save(function() {
                         // temporarily push changes to parentConcept without refreshing everything
                         // TODO: find cleaner solution
                         _.remove(scope.$parent.label[oldRelation], query);
@@ -132,10 +127,6 @@ angular.module('labelsApp')
 
                         // remove from current relation, gets created automatically in new column
                         element.remove();
-
-
-                    }, function(res) {
-                        console.log(res);
                     });
 
                 }, function(err) {
