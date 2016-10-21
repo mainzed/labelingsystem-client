@@ -30,13 +30,17 @@
   <div ng-if="showMore" class="box boxextension bigbox label high" ng-click="onClick(concept.id)">
     <span class="line-ext"></span>
     <span class="note-ext">
-
-    <span class="italic smalltype" ng-show="concept.description">Description</span><br>
+      <span class="italic smalltype" ng-show="concept.description">Description</span><br>
       {{ concept.description }}
     </span>
 
     <span class="note-ext small"><span class="italic smalltype" ng-show="broaderConcepts.length > 0">broader</span><br>
+      <ul class="hierarchie">
+        <li ng-repeat="broaderConcept in broaderConcepts">{{ broaderConcept.thumbnail }}</li>
+      </ul>
+    </span>
 
+    <span class="note-ext small"><span class="italic smalltype" ng-show="broaderConcepts.length > 0">broader</span><br>
       <ul class="hierarchie">
         <li ng-repeat="broaderConcept in broaderConcepts">{{ broaderConcept.thumbnail }}</li>
       </ul>
