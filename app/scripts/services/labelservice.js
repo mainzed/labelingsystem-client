@@ -10,7 +10,17 @@
 angular.module('labelsApp')
   .factory('LabelService', function ($resource, $http, AuthService, ConfigService, ResourcesService) {
 
-    var Concept = $resource(ConfigService.api + '/labels/:id', { draft: true}, {
+    var Concept = $resource(ConfigService.api + '/labels/:id', null, {
+        'query': {
+            method: 'GET',
+            params: { draft: true },
+            isArray: true
+        },
+        'queryPublic': {
+            method: 'GET',
+            params: { draft: false },
+            isArray: true
+        },
         'update': {
             method: 'PUT'
         },
@@ -49,63 +59,97 @@ angular.module('labelsApp')
     //     LabelService.remove({id: })
     // };
 
+    Concept.prototype.getDetails = function() {
+        var me = this;
+
+        return new Promise(function(resolve, reject) {
+
+            Promise.all([
+                me.getRelatedConcepts("broader"),
+                me.getRelatedMatches("broadMatch"),
+                me.getRelatedConcepts("narrower"),
+                me.getRelatedMatches("narrowMatch"),
+                me.getRelatedConcepts("related"),
+                me.getRelatedMatches("relatedMatch"),
+                me.getRelatedMatches("closeMatch"),
+                me.getRelatedMatches("exactMatch")
+            ]).then(function(values) {
+                resolve({
+                    broader: values[0],
+                    broadMatches: values[1],
+                    narrower: values[2],
+                    narrowMatches: values[3],
+                    related: values[4],
+                    relatedMatches: values[5],
+                    closeMatches: values[6],
+                    exactMatches: values[7]
+                });
+            });
+        });
+    }
+
     /**
-     * Sets the description and adds language automatically.
+     * Gets all of a concept's broader, narrower and related concepts and
+     * returns a list of objects.
+     * @param {String} relation - Relation to get concepts for
      */
-    Concept.prototype.setDescription = function(value) {
-        this.description = value;
+     Concept.prototype.getRelatedConcepts = function(relation) {
+        //console.log(Concept);
+        var concept = this;
+
+        // TODO: the concepts return dont have all the prototype functions
+        // because LabelService is not used!!!
+        // maybe its better to leave this as helperfunction for now
+
+        return new Promise(function(resolve, reject) {
+            var relatedConcepts = [];
+            if (concept[relation]) {
+                 concept[relation].forEach(function(resource, index, array) {
+
+                    $http.get(ConfigService.api + '/labels/' + resource).then(function(res) {
+                        relatedConcepts.push(res.data);
+                        // callback when all done
+                        if (index === array.length - 1) {
+                            resolve(relatedConcepts);
+                        }
+                    });
+                });
+            } else {
+                resolve(relatedConcepts);
+            }
+        });
     };
 
     /**
      * Gets all of a concept's broader, narrower and related concepts and
      * returns a list of objects.
-     * @param {Object} concept - A Labeling System concept (formerly 'label')
      * @param {String} relation - Relation to get concepts for
-     * @param {function} callback - Callback that returns the related concepts
      */
-     Concept.prototype.getRelatedConcepts = function(relation) {
-         //console.log(Concept);
-         var concept = this;
+    Concept.prototype.getRelatedMatches = function(relation) {
+        var concept = this;
 
-         // TODO: the concepts return dont have all the prototype functions
-         // because LabelService is not used!!!
-         // maybe its better to leave this as helperfunction for now
+        return new Promise(function(resolve, reject) {
+           var relatedConcepts = [];
+           if (concept[relation]) {
+                concept[relation].forEach(function(resource, index, array) {
 
-         return new Promise(function(resolve, reject) {
-             var relatedConcepts = [];
-             if (concept[relation]) {
-                 concept[relation].forEach(function(resource, index, array) {
+                    if (resource.uri) {  // is external resource
+                        ResourcesService.get(resource.uri, function(relatedConcept) {
+                            relatedConcepts.push(relatedConcept);
 
-                     if (_.isString(resource)) {  // is internal concept ID
-                        $http.get(ConfigService.api + '/labels/' + resource).then(function(res) {
-                             relatedConcepts.push(res.data);
-                             //console.log(res.data);
-                             // callback when all done
-                             if (index === array.length - 1) {
-                                 resolve(relatedConcepts);
-                             }
-                         });
+                            // callback when all done
+                            if (index === array.length - 1) {
+                                resolve(relatedConcepts);
+                            }
+                        });
+                    }
+                });
+            } else {
+                resolve(relatedConcepts);
+            }
+        });
 
-                     } else if (resource.uri) {  // is external resource
-                         ResourcesService.get(resource.uri, function(relatedConcept) {
-                             relatedConcepts.push(relatedConcept);
-
-                             // callback when all done
-                             if (index === array.length - 1) {
-                                 resolve(relatedConcepts);
-                             }
-                         });
-                     } else {
-                         console.log("unknown resource:");
-                         console.log(resource);
-                     }
-                 });
-             } else {
-                 resolve(relatedConcepts);
-             }
-         });
-
-     };
+    };
 
     /**
      * Adds another concept, resource or wayback link to this concept.

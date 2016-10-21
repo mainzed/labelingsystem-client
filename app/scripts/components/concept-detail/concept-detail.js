@@ -12,7 +12,7 @@
     },
     templateUrl: "scripts/components/concept-detail/concept-detail.html",
 
-    controller: function ($scope, $routeParams, $timeout, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ResourcesService, TooltipService, SearchService, UserSettingsService) {
+    controller: function ($scope, $routeParams, $timeout, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ResourcesService, TooltipService, SearchService) {
 
         // init nanoscroller here to prevent default scrollbar while loading boxes
         $(".nano").nanoScroller();
@@ -20,8 +20,6 @@
         //$scope.user = AuthService.getUser();
 
         $scope.tooltips = TooltipService;
-
-        $scope.showEnrichments = UserSettingsService.showEnrichments;
 
         VocabService.get({id: $routeParams.vID}, function(vocabulary) {
             $scope.vocabulary = vocabulary;
@@ -70,18 +68,6 @@
             });
         };
 
-        $scope.showEnrichmentBrowser = function() {
-            $scope.showEnrichments = true;
-            UserSettingsService.showEnrichments = $scope.showEnrichments;
-            //$(".nano").nanoScroller();
-        };
-
-        $scope.hideEnrichmentBrowser = function() {
-            $scope.showEnrichments = false;
-            UserSettingsService.showEnrichments = $scope.showEnrichments;
-            //$(".nano").nanoScroller();
-        };
-
         /**
          * Link a search result as a child concept to the current concept.
          * @param {Object} concept - internal or external concept object
@@ -101,11 +87,11 @@
         };
 
         // listener to reload nanoscroller when menu is hidden or shown
-        $scope.$watch("showEnrichments", function() {
-            $timeout(function() {
-                $(".nano").nanoScroller();
-            }, 0);
-        });
+        // $scope.$watch("showEnrichments", function() {
+        //     $timeout(function() {
+        //         $(".nano").nanoScroller();
+        //     }, 0);
+        // });
 
         // $scope.$on('removed-description', function() {
         //     delete $scope.label.description;

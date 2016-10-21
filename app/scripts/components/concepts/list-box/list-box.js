@@ -17,6 +17,8 @@ angular.module('labelsApp')
         },
         link: function postLink(scope) {
 
+            scope.conceptDetails = {};
+
             /**
              * Shows the box's extension with additional information about the
              * specified concept.
@@ -69,37 +71,26 @@ angular.module('labelsApp')
                 }
             };
 
+            scope.hasRelated = function(concept) {
+                if (ConfigService.showMatches) {
+                    return concept.related || concept.relatedMatch || concept.closeMatch || concept.exactMatch;
+                } else {
+                    return concept.related;
+                }
+            };
+
 
             /**
              * Watcher that resets nanoscroll each time a concept is extended
              * to show additional details.
              */
-            scope.$watch("showMore", function(newValue) {
-                //console.log("showMore");
-                // get additional infos if showMore is true
-                if (newValue && !scope.broaderTerms && !scope.narrowerConcepts) {
-
-                    scope.broaderConcepts = [];
-                    scope.narrowerConcepts = [];
-
-                    // internal
-                    HelperService.getRelatedConcepts(scope.concept, "broader", function(relatedConcepts) {
-                        scope.broaderConcepts = scope.broaderConcepts.concat(relatedConcepts);
+            scope.$watch("showMore", function(showMore) {
+                if (showMore) {
+                    scope.concept.getDetails().then(function(conceptDetails) {
+                        scope.conceptDetails = conceptDetails;
+                        console.log(conceptDetails);
+                        scope.$apply();
                     });
-                    HelperService.getRelatedConcepts(scope.concept, "narrower", function(relatedConcepts) {
-                        scope.narrowerConcepts = scope.narrowerConcepts.concat(relatedConcepts);
-                        //console.log("add narrower to: " + scope.concept.prefLabels[0].value);
-                    });
-
-                    // external
-                    if (ConfigService.showMatches) {
-                        HelperService.getRelatedConcepts(scope.concept, "broadMatch", function(relatedConcepts) {
-                            scope.broaderConcepts = scope.broaderConcepts.concat(relatedConcepts);
-                        });
-                        HelperService.getRelatedConcepts(scope.concept, "narrowMatch", function(relatedConcepts) {
-                            scope.narrowerConcepts = scope.narrowerConcepts.concat(relatedConcepts);
-                        });
-                    }
                 }
 
                 // reset nanoscroll
