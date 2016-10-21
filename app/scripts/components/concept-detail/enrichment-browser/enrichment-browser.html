@@ -1,4 +1,4 @@
-<div id="enrichment-src" ng-show="showEnrichments">
+<div id="enrichment-src" ng-show="$ctrl.showEnrichments">
 	<div id="separator">
 		<h1><!--Enrich--></h1>
 
@@ -30,15 +30,10 @@
 
 
       <!-- hide icon -->
-      <button class="hideenrichment pointer" type="button" name="button" ng-click="hideEnrichmentBrowser()">
+      <button class="hideenrichment pointer" type="button" name="button" ng-click="$ctrl.showEnrichments = false">
   			<span class="icon-hide"></span>
   		</button>
-
-
 		</div>
-
-
-
 	</div>
 
   <div class="col left">
@@ -61,14 +56,10 @@
         <!-- placeholder when not searching -->
         <span class="noresult" ng-show="!searching && !resultBoxes">Add enrichment sources by searching</span>
 
-        <!-- placeholder when searching -->
-        <span class="noresult" ng-show="searching && !resultBoxes">Searching ...</span>
-
         <ls-search-result-box ng-repeat="box in resultBoxes | orderBy: ['quality', 'type']" data="box"></ls-search-result-box>
 
-        <div class="loader" ng-show="!resultBoxes.length">
-
-        </div>
+        <!-- spinning icon -->
+        <div class="loader" ng-show="searching && !resultBoxes.length"></div>
 
       </div>
 
@@ -92,6 +83,6 @@
 </div>
 
 <!-- minified enrichment bar -->
-<div id="enrichment-src-min" ng-show="!showEnrichments" ng-click="showEnrichmentBrowser()">
+<div id="enrichment-src-min" ng-show="!$ctrl.showEnrichments" ng-click="$ctrl.showEnrichments = true">
   <span class="mintext">Show Enrichment Sources</span>
 </div>

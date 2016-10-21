@@ -23,8 +23,6 @@ angular.module('labelsApp')
             $(".nano").nanoScroller();
         };
 
-
-
         $scope.loading = false;
         // get from cache or load new
         if (CachingService.viewer.allConcepts) {  // already cached
@@ -32,7 +30,7 @@ angular.module('labelsApp')
         } else {
             console.log("reloading");
             $scope.loading = true;
-            LabelService.query(function(labels) {
+            LabelService.queryPublic(function(labels) {
                 $scope.labels = labels;
                 CachingService.viewer.allConcepts = labels;
                 $scope.loading = false;

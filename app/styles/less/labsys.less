@@ -89,6 +89,7 @@ h3 {				font-size: @emphasize; margin-bottom: 5px; margin-top: @marginoutside; m
 h4 {				font-size: @regular; margin-left: @marginoutside; display: block; margin-bottom: 14px;}
 h5 {				float: left; font-weight: bold; font-style: italic; }
 h6 {				margin-bottom: 20px; }
+
 li {				margin-left: 14px; }
 button {			border: 0; background: transparent;}
 input:focus {		outline: none; }
@@ -390,6 +391,7 @@ textarea:focus {	outline: none; }
 .deletebutton { 	width: calc(100% - @marginoutside * 2 ); border-radius: 3px; height: 38px; margin-left: @marginoutside; 
 					float: left; position: relative; background: #d6d6d6; color: black; margin-bottom: @marginbottombox; cursor: pointer;	}
 .bigconfirm {		height: 340px;  }
+.hierarchie .icon {	font-size: 22px; float: left; clear: left; line-height: 14px; width: 25px; margin-left: -2px; }
 .deletebutton.bigconfirm .confirmtext {	
 					font-size: @headlines; left: @margininboxsmall; width: calc(100% - @margininboxsmall * 2); text-align: left; margin-left: 0; }
 .deletebutton .icon {position: absolute;  line-height: 25px; right: @marginoutboxsmall; top: @margininboxsmall; }
@@ -542,12 +544,15 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
 .line-ext {			height: 1px; width: calc(100% - @margininboxsmall * 2); margin-left: @margininboxsmall; display: block; background: black; }
 .label .line-ext {	background: @linegray; }
 .note-ext {			float: left; margin: 14px; margin-left: 34px; width: calc((100% / 4) - 80px);    }
-.note-ext.small {	width: calc((100% / 8) - 80px); }
+.note-ext.smallsection {	
+					width: calc((100% / 8) - 80px); }
 .creator-ext {		float: left; margin-left: @margininboxsmall; margin-top: @margininboxsmall; }
 
 .float {			float: left; }
 .floatright {       float: right; }
 .italic {			font-style: italic; line-height: 20px; }
+.bold {				font-weight: bold; }
+.block {			display: block; margin-top: 5px; margin-bottom: 10px; }
 .italic .icon-note {line-height: 10px; line-height: 10px; margin-top: 2px; display: block; float: left;}
 .showadditionalcontent {
 					width: 26px; height: 20px; display: block; float: left; margin-top: 2px; color: white; }
@@ -562,6 +567,7 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
 
 .pointer		{	cursor: pointer; }
 .smalltype {		font-size: @small;}
+.description {		display: block; line-height: 17px; }
 .wordbreak {		overflow-wrap: break-word; word-wrap: break-word; -webkit-hyphens: auto;
                     -ms-hyphens: auto; -moz-hyphens: auto; hyphens: auto; }
 
