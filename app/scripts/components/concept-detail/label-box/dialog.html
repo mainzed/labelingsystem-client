@@ -9,23 +9,35 @@
 	<div class="nano">
 	<div class="nano-content">
 		<div class="dialogbox dialog-full">
-			<div class="dialog-half col">
+
+      <div class="dialog-half col">
 				<span class="italic" ng-show="concept.description">Description</span><br>
-        		{{ concept.description }}
+        	{{ concept.description }}
 			</div>
+
 			<div class="dialog-quarter col">
-				<span class="italic smalltype" ng-show="broaderConcepts.length > 0">Broader</span><br>
-
+				<span class="italic smalltype" ng-show="concept.hasBroader()">Broader</span><br>
 				<ul class="hierarchie">
-					<li ng-repeat="broaderConcept in broaderConcepts">{{ getLabel(broaderConcept) }}</li>
-
+					<li ng-repeat="broaderConcept in conceptDetails.broader | orderBy: 'thumbnail'">{{ broaderConcept.thumbnail }}</li>
+          <li ng-repeat="broadMatch in conceptDetails.broadMatches | orderBy: 'label'">{{ broadMatch.label }}</li>
 				</ul>
 			</div>
-			<div class="dialog-quarter col">
-				<span class="italic smalltype" ng-show="narrowerConcepts.length > 0">Narrower</span><br>
 
+      <div class="dialog-quarter col">
+				<span class="italic smalltype" ng-show="concept.hasRelated()">Related</span><br>
 				<ul class="hierarchie">
-          			<li ng-repeat="narrowerConcept in narrowerConcepts">{{  getLabel(narrowerConcept) }}</li>
+          <li ng-repeat="relatedConcept in conceptDetails.related | orderBy: 'thumbnail'">{{ relatedConcept.thumbnail }}</li>
+          <li ng-repeat="relatedMatch in conceptDetails.relatedMatches | orderBy: 'label'">{{ relatedMatch.label }}</li>
+          <li ng-repeat="closeMatch in conceptDetails.closeMatches | orderBy: 'label'">{{ closeMatch.label }}</li>
+          <li ng-repeat="exactMatch in conceptDetails.exactMatches | orderBy: 'label'">{{ exactMatch.label }}</li>
+				</ul>
+			</div>
+
+			<div class="dialog-quarter col">
+				<span class="italic smalltype" ng-show="concept.hasNarrower()">Narrower</span><br>
+				<ul class="hierarchie">
+          <li ng-repeat="narrowerConcept in conceptDetails.narrower| orderBy: 'thumbnail'">{{ narrowerConcept.thumbnail }}</li>
+          <li ng-repeat="narrowMatch in conceptDetails.narrowMatches| orderBy: 'label'">{{ narrowMatch.label }}</li>
 				</ul>
 			</div>
 		</div>

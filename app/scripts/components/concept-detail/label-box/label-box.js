@@ -42,34 +42,10 @@ angular.module('labelsApp')
                     $location.path(currentPath.join("/"));
 
                 } else {
-                    // get this concept's broader concepts
-                    scope.broaderConcepts = [];
-                    scope.narrowerConcepts = [];
-
-                    HelperService.getRelatedConcepts(scope.concept, "broader", function(broaderConcepts) {
-                        scope.broaderConcepts = scope.broaderConcepts.concat(broaderConcepts);
+                    scope.concept.getDetails().then(function(conceptDetails) {
+                        scope.conceptDetails = conceptDetails;
+                        scope.$apply();
                     });
-                    HelperService.getRelatedConcepts(scope.concept, "narrower", function(narrowerConcepts) {
-                        scope.narrowerConcepts = scope.narrowerConcepts.concat(narrowerConcepts);
-                    });
-
-                    if (ConfigService.showMatches) {
-                        HelperService.getRelatedConcepts(scope.concept, "broadMatch", function(broaderConcepts) {
-                            scope.broaderConcepts = scope.broaderConcepts.concat(broaderConcepts);
-                        });
-                        HelperService.getRelatedConcepts(scope.concept, "narrowMatch", function(narrowMatch) {
-                            scope.narrowerConcepts = scope.narrowerConcepts.concat(narrowMatch);
-                        });
-                    }
-
-
-                    // scope.broaderConcepts = [];
-                    // HelperService.getRelatedConcepts(scope.concept, "broader", function(broaderConcepts) {
-                    //     scope.broaderConcepts = scope.broaderConcepts.concat(broaderConcepts);
-                    // });
-                    // HelperService.getRelatedConcepts(scope.concept, "broadMatch", function(broaderResources) {
-                    //     scope.broaderConcepts = scope.broaderConcepts.concat(broaderResources);
-                    // });
 
                     var conceptDialog = ngDialog.open({
                         template: "scripts/components/concept-detail/label-box/dialog.html",

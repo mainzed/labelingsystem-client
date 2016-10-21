@@ -51,13 +51,20 @@ angular.module('labelsApp')
         return this.language;
     };
 
-    // Concept.prototype.delete = function(successCallback, errorCallback) {
-    //     var me = this;
-    //     console.log(ConfigService.api + '/labels/' + me.id);
-    //     console.log(AuthService.getUser().id);
-    //
-    //     LabelService.remove({id: })
-    // };
+    Concept.prototype.hasBroader = function() {
+        return this.broadMatch || this.broader;
+    };
+
+    /**
+     * checks if concept has narrower concepts
+     */
+    Concept.prototype.hasNarrower = function() {
+        return this.narrowMatch || this.narrower;
+    };
+
+    Concept.prototype.hasRelated = function() {
+        return this.related || this.relatedMatch || this.closeMatch || this.exactMatch;
+    };
 
     Concept.prototype.getDetails = function() {
         var me = this;
