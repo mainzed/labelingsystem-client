@@ -22,8 +22,8 @@
   <span class="line-ext"></span>
 
   <span class="note-ext">
-    <span class="italic" ng-show="data.description">Description</span><br>
-    {{ data.description }}
+    <span class="italic smalltype" ng-show="data.description">Description</span><br>
+    <span class="smalltype">{{ data.description }}</span>
   </span>
 
   <!-- broader -->
@@ -43,8 +43,8 @@
   </span>
 
   <!-- link -->
-  <span class="note-ext"><span class="italic smalltype">link</span><br>
-    <a ng-href="{{ data.uri }}" target="_blank" ng-click="$event.stopPropagation()">link</a>
+  <span class="note-ext"><span class="italic smalltype"></span><br>
+    <a class="loudlinkmin smalltype" ng-href="{{ data.uri }}" target="_blank" ng-click="$event.stopPropagation()">open in new tab</a>
   </span>
 
 

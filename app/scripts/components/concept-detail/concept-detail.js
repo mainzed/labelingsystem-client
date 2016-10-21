@@ -14,20 +14,21 @@
 
     controller: function ($scope, $routeParams, $timeout, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ResourcesService, TooltipService, SearchService) {
 
-        // init nanoscroller here to prevent default scrollbar while loading boxes
-        $(".nano").nanoScroller();
+        var ctrl = this;
 
-        //$scope.user = AuthService.getUser();
+        ctrl.$onInit = function() {
+            $scope.tooltips = TooltipService;
 
-        $scope.tooltips = TooltipService;
+            VocabService.get({id: $routeParams.vID}, function(vocabulary) {
+                $scope.vocabulary = vocabulary;
+            });
 
-        VocabService.get({id: $routeParams.vID}, function(vocabulary) {
-            $scope.vocabulary = vocabulary;
-        });
+            // load current label
+            $scope.label = LabelService.get({id: $routeParams.lID});
 
-        // load current label
-        $scope.label = LabelService.get({id: $routeParams.lID});
-
+            // init nanoscroller here to prevent default scrollbar while loading boxes
+            $(".nano").nanoScroller();
+        }
 
         $scope.addTranslation = function(term, lang) {
 
@@ -68,34 +69,13 @@
             });
         };
 
-        /**
-         * Link a search result as a child concept to the current concept.
-         * @param {Object} concept - internal or external concept object
-         * @param {string} relation - Concept-to-Concept relation  (e.g. "broader" or "exactMatch")
-         */
-        $scope.addResource = function(concept, relation) {
-            $scope.label.addChild(concept, relation);
-
-            //console.log($scope.label);
-
-            $scope.label.save(function() {
-                console.log("success");
-                // success
-            }, function error(res) {
-                console.log(res);
-            });
-        };
-
-        // listener to reload nanoscroller when menu is hidden or shown
-        // $scope.$watch("showEnrichments", function() {
-        //     $timeout(function() {
-        //         $(".nano").nanoScroller();
-        //     }, 0);
-        // });
-
-        // $scope.$on('removed-description', function() {
-        //     delete $scope.label.description;
-        // });
+        // temporarily add box when new resource was addedd
+        $scope.$on("addedResource", function(event, data) {
+            if (!$scope.label[data.relation]) {
+                $scope.label[data.relation] = [];
+            }
+            $scope.label[data.relation].push(data.resource);
+        });
 
         // init nano-scroller (gets refreshed in directives after render)
         $(".nano").nanoScroller();

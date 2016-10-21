@@ -89,6 +89,7 @@ h3 {				font-size: @emphasize; margin-bottom: 5px; margin-top: @marginoutside; m
 h4 {				font-size: @regular; margin-left: @marginoutside; display: block; margin-bottom: 14px;}
 h5 {				float: left; font-weight: bold; font-style: italic; }
 h6 {				margin-bottom: 20px; }
+
 li {				margin-left: 14px; }
 button {			border: 0; background: transparent;}
 input:focus {		outline: none; }
@@ -101,7 +102,7 @@ textarea:focus {	outline: none; }
 #metafooter .listtype {
                     margin-left: @marginoutboxsmall;}
 .clipboardbutton {  float: left; background: white; font-size: @small; margin: 0 auto; padding: 2px; border-radius: 3px; cursor: pointer;}
-#ls-selfexplain {   font-size: @emphasize; }
+#ls-selfexplain {   font-size: @emphasize; margin-left: 32px; }
 #footer span {		float: left; margin-top: 8px; }
 .landingh1 {		color: white; font-weight: 300; font-size: 150px; margin-left: @marginoutside; margin-bottom: 50px;
 					font-family: "mainzeddisplay"; }
@@ -375,7 +376,7 @@ textarea:focus {	outline: none; }
 
 .micropreview {		height: 10px; margin: @margininboxsmall; background: black;
 					width: 32px; position: absolute; top: 0; right: 0; padding: 3px 1px 4px 1px; overflow: hidden;	}
-.bigboxwrapper .micropreview {  
+.bigboxwrapper .micropreview, .viewersearch .micropreview {  
                     position: relative; float: left; margin-top: 1px; margin-left: 3px; margin-right: 15px; }
 .microcol	 {		width: 4px; padding: 0 2px; float: left; height: 100%;	}
 .microbox 	{		width: 100%; height: 4px; margin-bottom: 3px; display: block;}
@@ -390,6 +391,7 @@ textarea:focus {	outline: none; }
 .deletebutton { 	width: calc(100% - @marginoutside * 2 ); border-radius: 3px; height: 38px; margin-left: @marginoutside; 
 					float: left; position: relative; background: #d6d6d6; color: black; margin-bottom: @marginbottombox; cursor: pointer;	}
 .bigconfirm {		height: 340px;  }
+.hierarchie .icon {	font-size: 22px; float: left; clear: left; line-height: 14px; width: 25px; margin-left: -2px; }
 .deletebutton.bigconfirm .confirmtext {	
 					font-size: @headlines; left: @margininboxsmall; width: calc(100% - @margininboxsmall * 2); text-align: left; margin-left: 0; }
 .deletebutton .icon {position: absolute;  line-height: 25px; right: @marginoutboxsmall; top: @margininboxsmall; }
@@ -477,7 +479,7 @@ textarea.inactive{	color: #a3a3a3; }
 .vocabulary .icon-more {
 					position: absolute; right: 5px; top: 5px;  }
 .vocabulary .icon-more:hover {
-					border-bottom: 1px solid black; }
+					 }
 .vocabulary:hover .icon-edit {
 					display: block; }
 .vocabheading {		margin-left: calc(@marginoutside + @margininboxsmall); }
@@ -542,12 +544,15 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
 .line-ext {			height: 1px; width: calc(100% - @margininboxsmall * 2); margin-left: @margininboxsmall; display: block; background: black; }
 .label .line-ext {	background: @linegray; }
 .note-ext {			float: left; margin: 14px; margin-left: 34px; width: calc((100% / 4) - 80px);    }
-.note-ext.small {	width: calc((100% / 8) - 80px); }
+.note-ext.smallsection {	
+					width: calc((100% / 8) - 80px); }
 .creator-ext {		float: left; margin-left: @margininboxsmall; margin-top: @margininboxsmall; }
 
 .float {			float: left; }
 .floatright {       float: right; }
 .italic {			font-style: italic; line-height: 20px; }
+.bold {				font-weight: bold; }
+.block {			display: block; margin-top: 5px; margin-bottom: 10px; }
 .italic .icon-note {line-height: 10px; line-height: 10px; margin-top: 2px; display: block; float: left;}
 .showadditionalcontent {
 					width: 26px; height: 20px; display: block; float: left; margin-top: 2px; color: white; }
@@ -562,6 +567,7 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
 
 .pointer		{	cursor: pointer; }
 .smalltype {		font-size: @small;}
+.description {		display: block; line-height: 17px; }
 .wordbreak {		overflow-wrap: break-word; word-wrap: break-word; -webkit-hyphens: auto;
                     -ms-hyphens: auto; -moz-hyphens: auto; hyphens: auto; }
 
@@ -574,6 +580,7 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
 .inactive {			color: gray; pointer-events:none; }
 .paddingbottom {	padding-bottom: 10px;	}
 .loudlink {			text-decoration: underline; background: #d3d3d3; border-radius: 6px; padding: 2px 8px; color: blue; cursor: pointer; }
+.loudlinkmin {		text-decoration: underline; background: #d3d3d3; border-radius: 6px; padding: 2px 8px; color: black; cursor: pointer; }
 
 
 

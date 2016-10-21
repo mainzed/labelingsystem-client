@@ -8,7 +8,7 @@ angular.module("labelsApp")
     templateUrl: "scripts/components/concept-detail/enrichment-browser/search-result-box/search-result-box.html",
 
     // The controller that handles our component logic
-    controller: function($scope, ngDialog, TooltipService) {
+    controller: function($scope, $routeParams, $rootScope, ngDialog, LabelService, TooltipService) {
         var ctrl = this;
 
         ctrl.$onInit = function() {
@@ -16,6 +16,8 @@ angular.module("labelsApp")
 
             // determine type class
             $scope.typeClass = ctrl.data.type;
+
+            $(".nano").nanoScroller();
         };
 
 
@@ -35,7 +37,7 @@ angular.module("labelsApp")
          * options for each type to link to the label.
          */
         ctrl.onClick = function() {
-            ngDialog.open({
+            ctrl.dialog = ngDialog.open({
                 template: 'scripts/components/concept-detail/enrichment-browser/search-result-box/dialog.html',
                 className: 'bigdialog',
                 showClose: false,
@@ -45,15 +47,26 @@ angular.module("labelsApp")
             });
         };
 
+        ctrl.toggleMore = function() {
+            $scope.showMore = !$scope.showMore;
+            $(".nano").nanoScroller();
+        }
+
         /**
-         * Watcher that updates nanoscroller when box is extended.
+         * Link a search result as a child concept to the current concept.
+         * @param {Object} conceptToAdd - internal or external concept object
+         * @param {string} relation - Concept-to-Concept relation  (e.g. "broader" or "exactMatch")
          */
-        // scope.$watch("showMore", function() {
-        //     $(".nano").nanoScroller();
-        // });
-        //
-        // reload nanoscroller when directive rendered
-        $(".nano").nanoScroller();
+        ctrl.addResource = function(conceptToAdd, relation) {
+            // get current concept
+            LabelService.get({id: $routeParams.lID}, function(concept) {
+                concept.addChild(conceptToAdd, relation);
+                concept.save(function success() {
+                    $rootScope.$broadcast("addedResource", { resource: conceptToAdd, relation: relation });
+                    ctrl.dialog.close();
+                });
+            })
+        };
 
     }
 });

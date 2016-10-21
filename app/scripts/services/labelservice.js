@@ -202,7 +202,6 @@ angular.module('labelsApp')
             this[relation].push({
                 type: concept.type || "ls",
                 uri: concept.uri || "http://143.93.114.135/item/label/" + concept.id
-
             });
         } else {
             console.log("failed to add child because of unknown relation: " + relation);
@@ -280,8 +279,8 @@ angular.module('labelsApp')
      */
     Concept.prototype.save = function(successCallback, errorCallback) {
         var me = this;
-        $http.put(ConfigService.api + '/labels/' + me.id, me).then(function() {
-            successCallback();
+        $http.put(ConfigService.api + '/labels/' + me.id, me).then(function(res) {
+            successCallback(res.data);
         }, function() {
             errorCallback();
         });

@@ -30,7 +30,6 @@
 
         // determine already used languages and block their usage
         this.getUsedLanguages = function() {
-            console.log("get used languages");
 
             LanguageService.query().then(function(languages) {
                 $scope.languages = languages;
@@ -61,9 +60,6 @@
             }, function error(res) {
                 console.log(res);
             });
-
-
-
 
         };
 
