@@ -12,21 +12,15 @@
     },
     templateUrl: "scripts/components/concept-detail/concept-detail.html",
 
-    controller: function ($scope, $routeParams, $timeout, $location, $http, $document, ngDialog, AuthService, VocabService, LabelService, ResourcesService, TooltipService) {
+    controller: function ($scope, $routeParams, VocabService, LabelService, TooltipService) {
 
         var ctrl = this;
 
         ctrl.$onInit = function() {
             $scope.tooltips = TooltipService;
-
-            VocabService.get({id: $routeParams.vID}, function(vocabulary) {
-                $scope.vocabulary = vocabulary;
-            });
-
-            // load current label
+            $scope.vocabulary = VocabService.get({id: $routeParams.vID});
             $scope.label = LabelService.get({id: $routeParams.lID});
 
-            // init nanoscroller here to prevent default scrollbar while loading boxes
             $(".nano").nanoScroller();
         }
 
@@ -43,6 +37,14 @@
                 $scope.label.translations = [];
             }
             $scope.label.translations.push(data.translation);
+        });
+
+        $scope.$on("addedDescription", function(event, data) {
+            console.log("added description!");
+        });
+
+        $scope.$on("addedLink", function(event, data) {
+            console.log("added link!");
         });
     }
 });
