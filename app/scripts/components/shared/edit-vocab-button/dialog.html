@@ -35,7 +35,7 @@
                     <span class="listcontent" ng-bind="vocabulary.creator"></span>
 
                     <span class="listtype">creation date</span>
-                    <span class="listcontent" ng-bind="vocabulary.created"></span>
+                    <span class="listcontent" ng-bind-template="{{ vocabulary.created | date: 'dd.MM.yyyy' }}"></span>
 
                 </div>
 

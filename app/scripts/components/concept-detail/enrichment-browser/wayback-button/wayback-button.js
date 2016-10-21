@@ -26,7 +26,7 @@
 
             ctrl.dialog = ngDialog.open({
                 template: 'scripts/components/concept-detail/enrichment-browser/wayback-button/dialog.html',
-                className: 'bigdialog',
+                className: 'bigdialog smallheightdialog',
                 showClose: false,
                 closeByDocument: false,
                 disableAnimation: true,
