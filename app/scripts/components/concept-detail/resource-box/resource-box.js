@@ -80,7 +80,11 @@ angular.module('labelsApp')
 
                     LabelService.update({id: $routeParams.lID}, concept, function() {
                         // delete element from DOM
-                        element.remove();
+                        //element.remove();
+                        $rootScope.$broadcast("removedResource", {
+                            resourceURI: scope.resource.uri,
+                            relation: scope.relation
+                        });
 
                     }, function(err) {
                         console.log(err);

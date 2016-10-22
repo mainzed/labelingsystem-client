@@ -1,12 +1,12 @@
-<div class="box small text low" ng-click="openDialog()">
+<div class="box small text low" ng-click="$ctrl.openDialog()">
 
   <!-- preflabel text -->
-  <span class="thumbnail" ng-bind="data.value"></span>
+  <span class="thumbnail" ng-bind="$ctrl.data.value"></span>
 
   <!-- icon -->
-  <span class="type" title="{{tooltips.icons.translation}}"><span class='icon-language'></span></span>
+  <span class="type" title="{{ $ctrl.tooltips.icons.translation }}"><span class='icon-language'></span></span>
 
   <!-- language -->
-  <span class="language" ng-bind="data.lang"></span>
+  <span class="language" ng-bind="$ctrl.data.lang"></span>
 
 </div>

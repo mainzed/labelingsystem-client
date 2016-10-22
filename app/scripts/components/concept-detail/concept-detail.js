@@ -32,6 +32,10 @@
             $scope.label[data.relation].push(data.resource);
         });
 
+        $scope.$on("removedResource", function(event, data) {
+            _.remove($scope.label[data.relation], { "uri": data.resourceURI });
+        });
+
         $scope.$on("addedTranslation", function(event, data) {
             if (!$scope.label.translations) {
                 $scope.label.translations = [];
@@ -39,8 +43,16 @@
             $scope.label.translations.push(data.translation);
         });
 
+        $scope.$on("removedTranslation", function(event, data) {
+            _.remove($scope.label.translations, { value: data.translation.value, lang: data.translation.lang });
+        });
+
         $scope.$on("addedDescription", function(event, data) {
-            console.log("added description!");
+            $scope.label.description = data.description;
+        });
+
+        $scope.$on("removedDescription", function(event) {
+            delete $scope.label.description;
         });
 
         $scope.$on("addedLink", function(event, data) {

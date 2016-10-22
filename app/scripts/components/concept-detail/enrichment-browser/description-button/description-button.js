@@ -18,6 +18,14 @@
     controller: function ($scope, $rootScope, ngDialog, ConfigService) {
         var ctrl = this;
 
+        this.$onInit = function() {}
+
+        // waits for async bindings and their changes
+        this.$onChanges = function(changesObj) {
+            console.log("changes!!!!");
+            console.log(changesObj);
+        };
+
         this.openDialog = function() {
             ctrl.description = "";
             ngDialog.open({

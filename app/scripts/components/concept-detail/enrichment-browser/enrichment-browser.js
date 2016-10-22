@@ -1,8 +1,8 @@
-"use strict";
 
 angular.module("labelsApp")
  .component("lsEnrichmentBrowser", {
     bindings: {
+        concept: "="
        // onConfirm: "&"
     },
     templateUrl: "scripts/components/concept-detail/enrichment-browser/" +
@@ -12,9 +12,9 @@ angular.module("labelsApp")
     controller: function($scope, $routeParams, $rootScope, ConfigService, SearchService,
         VocabService, TooltipService, UserSettingsService, LabelService) {
         var ctrl = this;
-        ctrl.concept;
 
         ctrl.$onInit = function() {
+            //console.log(ctrl.concept);
             $scope.searching = false;
             // limit for concepts shown in concepts tab
             $scope.conceptsLimit = ConfigService.conceptsLimit;
@@ -22,9 +22,12 @@ angular.module("labelsApp")
             $scope.tooltips = TooltipService;
             ctrl.showEnrichments = UserSettingsService.showEnrichments;
 
-            LabelService.get({id: $routeParams.lID}, function(concept) {
-                ctrl.concept = concept;
-            });
+            // ctrl.concept.then(function() {
+            //
+            // })
+            // LabelService.get({id: $routeParams.lID}, function(concept) {
+            //     ctrl.concept = concept;
+            // });
 
             // get thesauri when label is available
             VocabService.get({id: $routeParams.vID}, function(vocab) {
@@ -125,9 +128,10 @@ angular.module("labelsApp")
          * Adds a description to the current concept.
          */
         $scope.addDescription = function(value) {
-            $scope.label.description = value;
-            $scope.label.save(function() {
+            ctrl.concept.description = value;
+            ctrl.concept.save(function() {
                 // success
+                $rootScope.$broadcast("addedDescription", { description: value });
             }, function(res) {
                 // error
                 console.log(res);

@@ -1,47 +1,39 @@
 <div id="enrichment-src" ng-show="$ctrl.showEnrichments">
-	<div id="separator">
-		<h1><!--Enrich--></h1>
+    <div id="separator">
+	<h1><!--Enrich--></h1>
 
     <!-- search tab -->
     <div id="enrichmentsearch" class="threequarter" ng-init="showSearch = true">
+        <div class="tab lefttab" ng-click="showSearch = true" ng-class="{'active': showSearch}">
+            <span class="icon-search icon"></span>
+            <input type="text" placeholder="Search in Thesauri" ng-model="searchValue" ng-keypress="onSearchKeyPress($event)"></input>
 
-      <div class="tab lefttab" ng-click="showSearch = true" ng-class="{'active': showSearch}">
-        <span class="icon-search icon"></span>
-        <input type="text" placeholder="Search in Thesauri" ng-model="searchValue" ng-keypress="onSearchKeyPress($event)"></input>
-        <!--
-        <button type="button" ng-click="onSearchClick(); searching = true" ng-init="searching = false">
-          <span class="icon-arrow"></span>
-        </button>
-        -->
-        <!-- <span class="icon-config icon"></span> -->
+            <!-- change settings -->
+            <ls-edit-vocab-button data="vocab" shortcut="thesauri" title="{{tooltips.icons.thesauriSettings}}"></ls-edit-vocab-button>
+        </div>
 
-        <ls-edit-vocab-button data="vocab" shortcut="thesauri" title="{{tooltips.icons.thesauriSettings}}"></ls-edit-vocab-button>
+        <!-- labels tab -->
+        <div class="tab" ng-click="showSearch = false" ng-class="{'active': !showSearch, 'ls': enrichmentVocab.title !== vocab.title}">
+            <span class="tablabel">Concepts of {{ enrichmentVocab.title }}</span>
 
-      </div>
+            <!-- change settings -->
+            <ls-edit-vocab-button data="vocab" shortcut="selectVocab" title="{{tooltips.icons.vocabSettings}}"></ls-edit-vocab-button>
+        </div>
 
-      <!-- labels tab -->
-      <div class="tab" ng-click="showSearch = false" ng-class="{'active': !showSearch, 'ls': enrichmentVocab.title !== vocab.title}">
-        <span class="tablabel">Concepts of {{ enrichmentVocab.title }}</span>
-        <ls-edit-vocab-button data="vocab" shortcut="selectVocab" title="{{tooltips.icons.vocabSettings}}"></ls-edit-vocab-button>
-      </div>
-
-
-      <!--<span class="icon-info extendbutton"></span>-->
-
-
-      <!-- hide icon -->
-      <button class="hideenrichment pointer" type="button" name="button" ng-click="$ctrl.showEnrichments = false">
-  			<span class="icon-hide"></span>
+        <!-- hide icon -->
+        <button class="hideenrichment pointer" type="button" name="button" ng-click="$ctrl.showEnrichments = false">
+  		    <span class="icon-hide"></span>
   		</button>
-		</div>
 	</div>
+</div>
 
-  <div class="col left">
+<div class="col left">
+
     <!-- add translation -->
     <ls-translation-button data="label" on-confirm="addTranslation($term, $lang)"></ls-translation-button>
 
     <!-- add description, uses data to hide or show -->
-    <ls-description-button data="label.description" on-confirm="addDescription($description)"></ls-description-button>
+    <ls-description-button data="$ctrl.concept" on-confirm="addDescription($description)"></ls-description-button>
 
     <ls-wayback-button on-confirm="addLink($uri)"></ls-wayback-button>
 	</div>

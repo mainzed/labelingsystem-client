@@ -1,6 +1,6 @@
 <div class="dialogwrapper text">
 	<div class="dialogheader">
-		<h3 ng-bind="data.value"></h3>
+		<h3 ng-bind="$ctrl.data.value"></h3>
 		<p class="typeinformation">Translation</p>
 		<div class="line-bottom line"></div>
 	</div>
@@ -10,15 +10,15 @@
 	<div class="nano-content">
 		<div class="dialogbox dialog-full">
 			<h4>Edit</h4>
-			<input ng-model="newValue" ng-init="newValue = data.value"></input>
+			<input ng-model="newValue" ng-init="newValue = $ctrl.data.value"></input>
 		</div>
 
 
-		<div class="line-dialog line" ng-show="!data.isThumbnail"></div>
-		<div class="dialogbox dialog-full" ng-show="!data.isThumbnail">
+		<div class="line-dialog line" ng-show="!$ctrl.data.isThumbnail"></div>
+		<div class="dialogbox dialog-full" ng-show="!$ctrl.data.isThumbnail">
 			<h4>Actions</h4>
-      <!-- prevent thumbnail label from being deleted -->
-      		<ls-confirm-button text="Delete Translation" on-confirm="onDeleteClick(); closeThisDialog()"></ls-confirm-button>
+            <!-- prevent thumbnail label from being deleted -->
+      		<ls-confirm-button text="Delete Translation" on-confirm="$ctrl.onDeleteClick()"></ls-confirm-button>
 		</div>
 
 
@@ -29,5 +29,5 @@
 
 
 	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="updateTranslation(newValue); closeThisDialog()" ng-class="{'inactive': newValue === data.value}">Apply</div>
+	<div class="apply" ng-click="$ctrl.updateTranslation(newValue)" ng-class="{'inactive': newValue === $ctrl.data.value}">Apply</div>
 </div>

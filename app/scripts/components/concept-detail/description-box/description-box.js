@@ -23,7 +23,6 @@ angular.module('labelsApp')
              * Opens a dialog with detailed information.
              */
             scope.openDialog = function() {
-                console.log(scope.mode);
                 if (scope.mode !== "viewer") {
                     scope.newValue = scope.data.description;
                     ngDialog.open({
@@ -46,8 +45,8 @@ angular.module('labelsApp')
                     delete concept.description;
 
                     concept.save(function() {
-                        element.remove();
-                        $rootScope.$broadcast('removed-description');
+                        //element.remove();
+                        $rootScope.$broadcast('removedDescription');
                     }, function error(res) {
                         console.log(res);
                     });
