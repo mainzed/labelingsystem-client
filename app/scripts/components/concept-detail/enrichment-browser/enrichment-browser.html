@@ -9,7 +9,7 @@
             <input type="text" placeholder="Search in Thesauri" ng-model="searchValue" ng-keypress="onSearchKeyPress($event)"></input>
 
             <!-- change settings -->
-            <ls-edit-vocab-button data="vocab" shortcut="thesauri" title="{{tooltips.icons.thesauriSettings}}"></ls-edit-vocab-button>
+            <ls-edit-vocab-button data="vocab" shortcut="thesauri" title="{{tooltips.icons.thesauriSettings}}" scroll-to="thesauri"></ls-edit-vocab-button>
         </div>
 
         <!-- labels tab -->
@@ -17,7 +17,7 @@
             <span class="tablabel">Concepts of {{ enrichmentVocab.title }}</span>
 
             <!-- change settings -->
-            <ls-edit-vocab-button data="vocab" shortcut="selectVocab" title="{{tooltips.icons.vocabSettings}}"></ls-edit-vocab-button>
+            <ls-edit-vocab-button data="vocab" shortcut="selectVocab" title="{{tooltips.icons.vocabSettings}}" scroll-to="vocabularies"></ls-edit-vocab-button>
         </div>
 
         <!-- hide icon -->

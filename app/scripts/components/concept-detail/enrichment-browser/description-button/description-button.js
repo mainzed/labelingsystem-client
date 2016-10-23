@@ -21,10 +21,7 @@
         this.$onInit = function() {}
 
         // waits for async bindings and their changes
-        this.$onChanges = function(changesObj) {
-            console.log("changes!!!!");
-            console.log(changesObj);
-        };
+        this.$onChanges = function() {};
 
         this.openDialog = function() {
             ctrl.description = "";

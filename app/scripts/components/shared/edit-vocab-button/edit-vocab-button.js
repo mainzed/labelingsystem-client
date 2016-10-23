@@ -11,7 +11,8 @@ angular.module('labelsApp')
 .component('lsEditVocabButton', {
     bindings: {
         data: "=",  // concept object
-        shortcut: "@"  // "thesauri"
+        shortcut: "@",  // "thesauri"
+        scrollTo: "@"
     },
     template: '<span class="{{$ctrl.icon}} icon" ng-click="$ctrl.openDialog()"></span>',
     controller: function ($scope, $rootScope, $location, $document, $anchorScroll, $timeout, ngDialog, VocabService, ConfigService, LabelService, TooltipService, AuthService, HelperService, CachingService) {
@@ -71,13 +72,20 @@ angular.module('labelsApp')
                 $rootScope.$on('ngDialog.opened', function (e, $dialog) {
                     if ($scope.dialog.id === $dialog.attr('id')) {  // is the resource dialog
                         $(".nano").nanoScroller();
+
+                        console.log(ctrl.scrollTo);
+                        if (ctrl.scrollTo) {
+                            // scroll to div
+                            $location.hash(ctrl.scrollTo);
+                            $anchorScroll();
+                        }
+
                     }
                 });
             });
         };
 
         $scope.onCheck = function() {
-            console.log("changed!!!");
             $scope.changedThesauri = true;
         };
 
