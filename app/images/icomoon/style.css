@@ -25,6 +25,9 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-minimize:before {
+  content: "\e918";
+}
 .icon-public:before {
   content: "\e901";
 }
