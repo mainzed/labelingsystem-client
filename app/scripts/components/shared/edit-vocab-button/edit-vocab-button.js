@@ -10,9 +10,7 @@ angular.module('labelsApp')
 
 .component('lsEditVocabButton', {
     bindings: {
-        data: "=",  // concept object
-        shortcut: "@",  // "thesauri"
-        scrollTo: "@"
+        data: "="  // vocab
     },
     template: '<span class="{{$ctrl.icon}} icon" ng-click="$ctrl.openDialog()"></span>',
     controller: function ($scope, $rootScope, $location, $document, $anchorScroll, $timeout, ngDialog, VocabService, ConfigService, LabelService, TooltipService, AuthService, HelperService, CachingService) {
@@ -21,12 +19,8 @@ angular.module('labelsApp')
 
         ctrl.$onInit = function() {
             $scope.tooltips = TooltipService;
-
             $scope.user = AuthService.getUser();
-
             $scope.vocabDescriptionLength = ConfigService.vocabDescriptionLength;
-
-            //$scope.orderBy = "";  // set to '-checked' on start of dialog
 
             // determine icon
             this.icon = "icon-more";
@@ -46,26 +40,21 @@ angular.module('labelsApp')
             }
         };
 
-
         this.openDialog = function() {
-            // save original vocab object in case the dialog gets cancelled
-            $scope.vocabulary = ctrl.data;
 
-            $scope.changedThesauri = false;
-            $scope.newDescription = $scope.vocabulary.description;
+            ctrl.newTitle = ctrl.data.title;
+            ctrl.newDescription = ctrl.data.description;
 
-            $scope.vocabulary.getEnrichmentVocab(function(vocabID) {
-                $scope.checkedVocab = vocabID;
+            ctrl.data.getEnrichmentVocab(function(vocabID) {
+                ctrl.referenceVocabID = vocabID;
             });
 
-            $scope.vocabulary.getThesauri(function(thesauri) {
+            ctrl.data.getThesauri(function(thesauri) {
                 $scope.thesauri = thesauri;
 
                 $scope.dialog = ngDialog.open({
                     template: 'scripts/components/shared/edit-vocab-button/dialog.html',
                     className: 'bigdialog',
-                    showClose: false,
-                    closeByDocument: false,
                     disableAnimation: true,
                     scope: $scope
                 });
@@ -74,28 +63,41 @@ angular.module('labelsApp')
                 $rootScope.$on('ngDialog.opened', function (e, $dialog) {
                     if ($scope.dialog.id === $dialog.attr('id')) {  // is the resource dialog
                         $(".nano").nanoScroller();
+                    }
+                });
 
-                        if (ctrl.scrollTo) {
-                            // scroll to div
-                            $location.hash(ctrl.scrollTo);
-                            $anchorScroll();
+                $rootScope.$on('ngDialog.closed', function (e, $dialog) {
+                    if ($scope.dialog.id === $dialog.attr('id')) {  // is the resource dialog
+                        // save changes
+                        if (ctrl.newTitle !== ctrl.data.title || ctrl.newDescription !== ctrl.data.description) {  // changes
+                            ctrl.data.title = ctrl.newTitle;
+                            ctrl.data.description = ctrl.newDescription;
+                            ctrl.data.save(function() {
+                                updateVocabCache();
+                            }, function error(res) {
+                                console.log(res);
+                            });
                         }
-
                     }
                 });
             });
         };
 
-        $scope.onCheck = function() {
-            $scope.changedThesauri = true;
+        ctrl.saveThesauri = function() {
+            ctrl.data.setThesauri($scope.thesauri, function() {
+                $rootScope.$broadcast("changedThesauri");
+            });
         };
 
-        //console.log($scope.vocabulary.getEnrichmentVocab());
-
-        $scope.onVocabCheck = function(id) {
-            $scope.checkedVocab = id;
-            $scope.vocabChecked = true;
-        };
+        ctrl.saveReferenceVocab = function(vocabID) {
+            // update vocab list
+            ctrl.data.setEnrichmentVocab(vocabID).then(function() {
+                ctrl.referenceVocabID = vocabID;
+                $rootScope.$broadcast("changedEnrichmentVocab", vocabID);
+            }, function error(res) {
+                console.log(res);
+            });
+        }
 
         $scope.deleteVocab = function(id) {
             VocabService.remove({id: id}, function() {
@@ -108,12 +110,9 @@ angular.module('labelsApp')
 
         $scope.publish = function() {
 
-            $scope.processing = true;
-
-            if ($scope.vocabulary.releaseType === "draft") {
-                $scope.vocabulary.releaseType = "public";
-
-                $scope.vocabulary.save(function() {
+            if (ctrl.data.releaseType === "draft") {
+                ctrl.data.releaseType = "public";
+                ctrl.data.save(function() {
                     console.log("success");
                 }, function error(res) {
                     console.log(res);
@@ -121,58 +120,16 @@ angular.module('labelsApp')
             }
         };
 
-        /**
-         * Returns same vocab (draft or public) and all other public vocbs
-         */
-        $scope.vocabFilter = function(vocab) {
-            if (vocab.creator === $scope.user.id || vocab.id === $scope.vocabulary.id) {
-                return true;
-            } else {
-                return false;
-            }
-        };
+        $scope.validVocab = function(vocab) {
+            return vocab.creator === AuthService.getUser().id || vocab.releaseType === "public";
+        }
 
         // update cache when exists
         function updateVocabCache() {
             if (CachingService.editor.vocabs) {
-                HelperService.findAndReplace(CachingService.editor.vocabs, {id: $scope.vocabulary.id}, $scope.vocabulary);
+                HelperService.findAndReplace(CachingService.editor.vocabs, {id: ctrl.data.id}, ctrl.data);
             }
         }
-
-        this.update = function(newTitle, newDescription) {
-
-
-            // check if thesauri have been (de)selected
-            // updates automatically
-            if ($scope.changedThesauri) {
-                $scope.vocabulary.setThesauri($scope.thesauri, function() {
-                    //
-                    $rootScope.$broadcast("changedThesauri");
-                });
-            }
-
-            // update vocab list
-            if ($scope.vocabChecked) {
-                $scope.vocabulary.setEnrichmentVocab($scope.checkedVocab).then(function() {
-                    //
-                    $rootScope.$broadcast("changedEnrichmentVocab", $scope.checkedVocab.id);
-
-                }, function error(res) {
-                    console.log(res);
-                });
-            }
-
-            $scope.vocabulary.title = newTitle;
-            $scope.vocabulary.description = newDescription;
-
-            $scope.vocabulary.save(function() {
-                updateVocabCache();
-                // update thesauri
-
-            }, function error(res) {
-                console.log(res);
-            });
-        };
 
         $scope.onDescriptionKeyPress = function(e, description) {
             if (description.length > ConfigService.vocabDescriptionLength - 1) {

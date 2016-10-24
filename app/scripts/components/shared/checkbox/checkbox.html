@@ -1,6 +1,6 @@
 
 <!-- unchecked box -->
-<span class='icon icon-unchecked' ng-show="!ngModel" ng-click="ngModel = !ngModel; onCheck()"></span>
+<span class='icon icon-unchecked' ng-show="!$ctrl.ngModel.checked" ng-click="$ctrl.check()"></span>
 
 <!-- checked box -->
-<span class='icon icon-checked' ng-show="ngModel" ng-click="ngModel = !ngModel; onCheck()" ></span>
+<span class='icon icon-checked' ng-show="$ctrl.ngModel.checked" ng-click="$ctrl.check()"></span>
