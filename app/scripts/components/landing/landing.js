@@ -41,6 +41,16 @@ angular.module('labelsApp')
             $scope.extendAll = !$scope.extendAll;
         }
 
+        /**
+         * Order function for the use with the ng-repeat directive. Grades a label
+         * by how many connections it has to internal or external resources.
+         * @param {object} concept
+         * @returns {number}
+         */
+        ctrl.orderByQuality = function(concept) {
+            return -1 * concept.getScore();
+        };
+
         // focus when loading complete
         $scope.$watch("loading", function(loading) {
             if (loading) {
