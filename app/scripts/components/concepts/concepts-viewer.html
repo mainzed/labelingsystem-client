@@ -17,16 +17,16 @@
         <!--<span class="listtype">uri</span>
         <span class="listcontent smalltype autowidth">{{ uri }}</span>-->
         <span class="listtype">URI</span>
-        <span class="listcontent"><span class="loudlink" clipboard supported="supported" text="vocabulary.uri" on-copied="success()" on-error="fail(err)">Copy URI to clipboard</span></span>
+        <span class="listcontent smalllistcontent"><span class="loudlink" clipboard supported="supported" text="vocabulary.uri" on-copied="success()" on-error="fail(err)">Copy URI to clipboard</span></span>
 
         <span class="listtype">creator</span>
-        <span class="listcontent" ng-bind-html="agent.getNameAsLink()"></span>
+        <span class="listcontent smalllistcontent" ng-bind-html="agent.getNameAsLink()"></span>
         <span class="listtype">last modified:</span>
-        <span class="listcontent">{{ vocabulary.lastModified | date: 'dd.MM.yyyy' }}</span>
+        <span class="listcontent smalllistcontent">{{ vocabulary.lastModified | date: 'dd.MM.yyyy' }}</span>
         <span class="listtype">license</span>
-        <span class="listcontent"><a ng-href="{{vocabulary.license}}" target="_blank">CC BY</a></span>
+        <span class="listcontent smalllistcontent"><a ng-href="{{vocabulary.license}}" target="_blank">CC BY</a></span>
         <span class="listtype">Download</span>
-        <span class="listcontent">
+        <span class="listcontent smalllistcontent">
             <a ng-href="{{ vocabulary.getUrl() + '.skos' }}" target="_blank" ng-click="$event.stopPropagation()">SKOS</a>
         </span>
         
