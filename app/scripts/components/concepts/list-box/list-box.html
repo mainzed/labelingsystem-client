@@ -5,7 +5,7 @@
     <span class="thumbnail">
 
       <button class="showadditionalcontent" ng-click="toggleExtension(concept.id); $event.stopPropagation()">
-        <span class="showmore" ng-show="!showMore && (concept.description || hasBroader(concept) || hasNarrower(concept))">
+        <span class="showmore" ng-show="!showMore && $ctrl.hasMore()">
           <span class="icon-breadcrumb"></span>
         </span>
         <span class="showmore" ng-show="showMore">
@@ -37,7 +37,7 @@
             <span class="float smalltype mappingstext">{{ relatedConcept.thumbnail }}</span>
           </li>
           <li ng-repeat="relatedMatch in conceptDetails.relatedMatches | orderBy: 'label'">
-            <span class="icon-arrow icon"></span> 
+            <span class="icon-arrow icon"></span>
             <span class="float smalltype mappingstext">{{ relatedMatch.label }}</span>
           </li>
           <li ng-repeat="closeMatch in conceptDetails.closeMatches | orderBy: 'label'">

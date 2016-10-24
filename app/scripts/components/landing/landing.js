@@ -16,25 +16,29 @@ angular.module('labelsApp')
 
         var ctrl = this;
 
-        ctrl.resultsLimit = 0;
-
         ctrl.$onInit = function() {
+            //ctrl.resultsLimit = 0;
             ctrl.resultsLimit = ConfigService.conceptsLimit;
+            $scope.extendAll = CachingService.toggles.extendAll || false;
+
+            $scope.loading = false;
+            // get from cache or load new
+            if (CachingService.viewer.allConcepts) {  // already cached
+                $scope.labels = CachingService.viewer.allConcepts;
+            } else {
+                $scope.loading = true;
+                LabelService.queryPublic(function(labels) {
+                    $scope.labels = labels;
+                    CachingService.viewer.allConcepts = labels;
+                    $scope.loading = false;
+                });
+            }
+
             $(".nano").nanoScroller();
         };
 
-        $scope.loading = false;
-        // get from cache or load new
-        if (CachingService.viewer.allConcepts) {  // already cached
-            $scope.labels = CachingService.viewer.allConcepts;
-        } else {
-            console.log("reloading");
-            $scope.loading = true;
-            LabelService.queryPublic(function(labels) {
-                $scope.labels = labels;
-                CachingService.viewer.allConcepts = labels;
-                $scope.loading = false;
-            });
+        ctrl.toggleExtent = function() {
+            $scope.extendAll = !$scope.extendAll;
         }
 
         // focus when loading complete
