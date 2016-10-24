@@ -19,35 +19,37 @@ angular.module('labelsApp')
 
         var ctrl = this;
 
-        $scope.tooltips = TooltipService;
+        ctrl.$onInit = function() {
+            $scope.tooltips = TooltipService;
 
-        $scope.user = AuthService.getUser();
+            $scope.user = AuthService.getUser();
 
-        $scope.vocabDescriptionLength = ConfigService.vocabDescriptionLength;
+            $scope.vocabDescriptionLength = ConfigService.vocabDescriptionLength;
 
-        //$scope.orderBy = "";  // set to '-checked' on start of dialog
+            //$scope.orderBy = "";  // set to '-checked' on start of dialog
 
-        // determine icon
-        this.icon = "icon-more";
-        if (this.shortcut === "thesauri" || this.shortcut === "selectVocab") {
-            this.icon = "icon-config";
-        }
+            // determine icon
+            this.icon = "icon-more";
+            if (this.shortcut === "thesauri" || this.shortcut === "selectVocab") {
+                this.icon = "icon-config";
+            }
 
-        // get all vocabularies with creator info to make them selectable
-        if (CachingService.editor.vocabsWithCreator) {
-            $scope.vocabularies = CachingService.editor.vocabsWithCreator;
-        } else {
-            VocabService.query({creatorInfo: true}, function(vocabs) {
-                $scope.vocabularies = vocabs;
-                CachingService.editor.vocabsWithCreator = vocabs;
-                $(".nano").nanoScroller();
-            });
-        }
+            // get all vocabularies with creator info to make them selectable
+            if (CachingService.editor.vocabsWithCreator) {
+                $scope.vocabularies = CachingService.editor.vocabsWithCreator;
+            } else {
+                VocabService.query({creatorInfo: true}, function(vocabs) {
+                    $scope.vocabularies = vocabs;
+                    CachingService.editor.vocabsWithCreator = vocabs;
+                    $(".nano").nanoScroller();
+                });
+            }
+        };
+
 
         this.openDialog = function() {
             // save original vocab object in case the dialog gets cancelled
             $scope.vocabulary = ctrl.data;
-
 
             $scope.changedThesauri = false;
             $scope.newDescription = $scope.vocabulary.description;
@@ -73,7 +75,6 @@ angular.module('labelsApp')
                     if ($scope.dialog.id === $dialog.attr('id')) {  // is the resource dialog
                         $(".nano").nanoScroller();
 
-                        console.log(ctrl.scrollTo);
                         if (ctrl.scrollTo) {
                             // scroll to div
                             $location.hash(ctrl.scrollTo);
@@ -98,6 +99,7 @@ angular.module('labelsApp')
 
         $scope.deleteVocab = function(id) {
             VocabService.remove({id: id}, function() {
+                $rootScope.$broadcast("removedVocab", { vocabID: id });
                 $location.path("/editor/vocabularies/");
             }, function error(res) {
                 console.log(res);
@@ -107,7 +109,6 @@ angular.module('labelsApp')
         $scope.publish = function() {
 
             $scope.processing = true;
-            console.log("publishing concepts");
 
             if ($scope.vocabulary.releaseType === "draft") {
                 $scope.vocabulary.releaseType = "public";

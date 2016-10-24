@@ -1,0 +1,19 @@
+<div class="dialogwrapper text">
+	<div class="dialogheader">
+		<h3>history</h3>
+	</div>
+
+	<div class="dialogscroll">
+    	<div class="nano">
+        	<div class="nano-content">
+        		<div class="dialogbox dialog-full">
+                    <p ng-repeat="revision in $ctrl.revisions">
+                        <span>{{ revision.date | date:"dd.MM.yyyy" }}</span>
+                        <span>{{ revision.action }}</span>
+                        <span>{{ revision.objectType }}</span>
+                    </p>
+        		</div>
+        	</div>
+    	</div>
+	</div>
+</div>

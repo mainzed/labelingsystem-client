@@ -31,7 +31,7 @@ angular.module('labelsApp')
         */
        scope.onClick = function(id) {
            if (scope.mode === 'viewer') {
-               $location.path("/vocabularies/" + $routeParams.vID + "/concepts/" + id);
+               $location.path("vocabularies/" + $routeParams.vID + "/concepts/" + id);
            } else {
                $location.path("editor/vocabularies/" + $routeParams.vID + "/concepts/" + id);
            }
