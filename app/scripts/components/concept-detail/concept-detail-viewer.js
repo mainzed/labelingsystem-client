@@ -12,35 +12,39 @@
     },
     templateUrl: "scripts/components/concept-detail/concept-detail-viewer.html",
 
-    controller: function ($scope, $timeout, $location, $routeParams, LabelService, TooltipService, ConfigService, CachingService, AgentService) {
+    controller: function ($scope, $timeout, $location, $routeParams, LabelService, TooltipService, ConfigService, CachingService, AgentService, VocabService) {
+        var ctrl = this;
 
-        // init nanoscroller here to prevent default scrollbar while loading boxes
-        $(".nano").nanoScroller();
+        ctrl.$onInit = function() {
+            $scope.tooltips = TooltipService;
+            $scope.vocabulary = VocabService.get({id: $routeParams.vID});
+            //$scope.label = LabelService.get({id: $routeParams.lID});
 
-        $scope.tooltips = TooltipService;
-
-        // load current label
-        LabelService.get({id: $routeParams.lID}, function(label) {
-            $scope.label = label;
-            AgentService.get({id: label.creator}, function(agent) {
-                $scope.agent = agent;
+            // load current label
+            LabelService.getWithRevisions({id: $routeParams.lID}, function(label) {
+                $scope.label = label;
+                AgentService.get({id: label.creator}, function(agent) {
+                    $scope.agent = agent;
+                });
             });
-        });
 
-        // cache all concepts for landing page (if user clicks on search icon)
-        if (!CachingService.viewer.allConcepts) {
-            LabelService.query(function(concepts) {
-                CachingService.viewer.allConcepts = concepts;
-            });
+            // cache all concepts for landing page (if user clicks on search icon)
+            if (!CachingService.viewer.allConcepts) {
+                LabelService.query(function(concepts) {
+                    CachingService.viewer.allConcepts = concepts;
+                });
+            }
+
+            // copy to clipboard
+            $scope.uri = ConfigService.host + "/item/label/" + $routeParams.lID;
+            $scope.supported = false;
+
+            $(".nano").nanoScroller();
         }
 
         $scope.onSearchClick = function() {
             $location.path("/");
         };
-
-        // copy to clipboard
-        $scope.uri = ConfigService.host + "/item/label/" + $routeParams.lID;
-        $scope.supported = false;
 
         $scope.success = function () {
             console.log('Copied!');
@@ -50,7 +54,5 @@
             console.error('Error!', err);
         };
 
-        // init nano-scroller (gets refreshed in directives after render)
-        $(".nano").nanoScroller();
     }
 });

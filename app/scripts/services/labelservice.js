@@ -21,6 +21,11 @@ angular.module('labelsApp')
             params: { draft: false },
             isArray: true
         },
+        'getWithRevisions': {
+            method: 'GET',
+            params: { revisions: true },
+            isArray: false
+        },
         'update': {
             method: 'PUT'
         },

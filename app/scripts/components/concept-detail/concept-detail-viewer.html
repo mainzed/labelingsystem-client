@@ -21,7 +21,10 @@
         <span class="listcontent" ng-bind-html="agent.getNameAsLink()"></span>
 
         <span class="listtype">last modified:</span>
-        <span class="listcontent">{{ label.lastModified | date: 'dd.MM.yyyy' }}</span>
+        <span class="listcontent">
+            {{ label.lastModified | date: 'dd.MM.yyyy' }}
+            <ls-history-button revisions="label.revisions" ng-show="label.revisions"></ls-history-button>
+        </span>
 
         <span class="listtype">license</span>
         <span class="listcontent"><a ng-href="{{label.license}}" target="_blank">CC BY</a></span>
