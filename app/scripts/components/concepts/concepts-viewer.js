@@ -20,12 +20,11 @@
             $scope.loading = true;
             $scope.tooltips = TooltipService;
             $scope.placeholder = "loading labels...";
-            $scope.extendAll = UserSettingsService.extendAll;
+            $scope.extendAll = CachingService.toggles.extendAll || false;
+            $scope.extendButtonText = $scope.extendAll ? "collapse boxes" : "extend boxes";
+
             $scope.conceptsLimit = ConfigService.conceptsLimit;
             ctrl.vocabID = $routeParams.vID;
-
-            // init nanoscroller here to prevent default scrollbar while loading boxes
-            $(".nano").nanoScroller();
 
             // TODO: load currentVocab from cache
             VocabService.get({id: $routeParams.vID}, function(vocabulary) {
@@ -57,6 +56,8 @@
                     CachingService.viewer.allConcepts = concepts;
                 });
             }
+
+            $(".nano").nanoScroller();
         };
 
         ctrl.$onDestroy = function () {
@@ -74,6 +75,9 @@
                 vocabID: ctrl.vocabID,
                 items: $scope.labels
             };
+
+            // cache extent button
+            CachingService.toggles.extendAll = $scope.extendAll;
         };
 
         ctrl.loadConcepts = function() {
@@ -108,20 +112,10 @@
             UserSettingsService.labelOrder = newValue;
         });
 
-        /**
-         * Watch if boxes are extended or not and updated text accordingly.
-         */
-        $scope.$watch("extendAll", function(newVal) {
-            // update service
-            UserSettingsService.extendAll = $scope.extendAll;
-
-            // update button text
-            if (newVal) {
-                $scope.extendButtonText = "collapse all";
-            } else {
-                $scope.extendButtonText = "extend all";
-            }
-        });
+        $scope.toggleExtent = function() {
+            $scope.extendAll = !$scope.extendAll;
+            $scope.extendButtonText = $scope.extendAll ? "collapse boxes" : "extend boxes";
+        }
 
         // set inital labelOrder to a function, has to be defined before this line
         // TODO: sort button highlights dont work because of the returned functions

@@ -1,33 +1,22 @@
 <div id="header" class="box full" ng-class="vocabulary.releaseType">
-
     <input id="labelSearch" type="text" placeholder="{{placeholder}}" ng-model="filterValue" ng-change="onSearchBoxChange()" ng-disabled="!labels">
-
 	<div class="loader" ng-show="placeholder === 'loading labels ...'"></div>
-
 </div>
 
 <div class="separatorsmall" ng-show="filterValue">
-
-	
-
-  <div class="listoptions">
-    <ul class="sortlist">
-      <span class="icon-sort icon"></span>
-      <li ng-click="showOptions=!showOptions" ng-init="sortName='sort by last modified'; labelOrder = '-lastModified'">{{sortName}}
-      
-
-        <ul ng-show="showOptions" class="sortoptions" ng-blur="showOptions = false">
-          <li ng-click="labelOrder = '-lastModified'; sortName='sort by last modified'" ng-class="{'active': labelOrder === '-lastModified'}">by lastModified</li>
-          <li ng-click="labelOrder = 'thumbnail'; sortName='sort alphabetically'" ng-class="{'active': labelOrder === 'thumbnail'}">alphabetically</li>
-          <li ng-click="labelOrder = orderByQuality; sortName='sort by quality'" ng-class="{'active': labelOrder === orderByQuality}">by quality</li>
+    <div class="listoptions">
+        <ul class="sortlist">
+            <span class="icon-sort icon"></span>
+            <li ng-click="showOptions = !showOptions" ng-init="sortName='sort by last modified'; conceptOrder = '-lastModified'">{{sortName}}
+                <ul ng-show="showOptions" class="sortoptions" ng-blur="showOptions = false">
+                    <li ng-click="conceptOrder = '-lastModified'; sortName='sort by last modified'" ng-class="{'active': conceptOrder === '-lastModified'}">by lastModified</li>
+                    <li ng-click="conceptOrder = 'thumbnail'; sortName='sort alphabetically'" ng-class="{'active': conceptOrder === 'thumbnail'}">alphabetically</li>
+                    <li ng-click="conceptOrder = $ctrl.orderByQuality; sortName='sort by quality'" ng-class="{'active': conceptOrder === $ctrl.orderByQuality}">by quality</li>
+                </ul>
+            </li>
         </ul>
-
-      </li>
-    </ul>
-    <span class="extendbutton" ng-click="extendAll = !extendAll"><span class="icon-expand"></span>extend boxes</span>
-    <!--<button class="extendbutton" type="button" ng-click="extendAll = !extendAll" ng-bind="extendButtonText"></button>-->
-
-  </div>
+        <ls-extend-button ng-click="$ctrl.toggleExtent()"></ls-extend-button>
+    </div>
 </div>
 
 <div id="listwrapper" class="viewersearch">
@@ -42,7 +31,7 @@
     	<!-- search results -->
     	<ul ng-show="filterValue" style="color:white">
 
-    		<ls-result-box ng-repeat="label in filteredLabels = (labels | filter: {thumbnail: filterValue}) | limitTo: $ctrl.resultsLimit as limitedLabels" data="label"></ls-result-box>
+    		<ls-result-box ng-repeat="label in filteredLabels = (labels | filter: {thumbnail: filterValue}) | orderBy: conceptOrder | limitTo: $ctrl.resultsLimit as limitedLabels" concept="label"></ls-result-box>
 
             <span ng-show="filterValue && filteredLabels.length > limitedLabels.length" ng-click="$ctrl.resultsLimit = $ctrl.resultsLimit * 2">show more</span>
 
@@ -51,10 +40,6 @@
     			No labels found, <a href="#/vocabularies">browse vocabularies!</a>
     		</span>
 
-    		<!-- show more -->
-    		<span ng-show="filterValue && filteredLabels.length > $ctrl.resultsLimit">
-    			show more
-    		</span>
     	</ul>
 
     	<!-- landing page text prior to search -->
@@ -65,7 +50,7 @@
                 <p>
                 Angaben gemäß § 5 TMG:<br><br>
 
-                    mainzed - Mainzer Zentrum für Digitalität in den Geistes- und Kulturwissenschaften<br>  
+                    mainzed - Mainzer Zentrum für Digitalität in den Geistes- und Kulturwissenschaften<br>
                     c/o Hochschule Mainz University of Applied Sciences<br>
                     Lucy-Hillebrandtstr.2<br>
                     55128 Mainz, Germany<br><br>

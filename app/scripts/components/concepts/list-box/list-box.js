@@ -17,6 +17,10 @@ angular.module('labelsApp')
             scope.concept = ctrl.concept;
         }
 
+        ctrl.hasMore = function() {
+            return ctrl.concept.description || ctrl.concept.hasBroader() || ctrl.concept.hasNarrower();
+        }
+
         /**
          * Shows the box's extension with additional information about the
          * specified concept.
@@ -42,11 +46,14 @@ angular.module('labelsApp')
          * Watcher that resets nanoscroll each time the extentAll property
          * changes (e.g. by a button click on "extent all").
          */
-        scope.$parent.$watch("extendAll", function(newVal) {
-           scope.showMore = newVal;
-           $(".nano").nanoScroller();
-        });//
-
+        scope.$parent.$watch("extendAll", function(extendAll) {
+            if (extendAll && ctrl.hasMore()) {
+                scope.showMore = extendAll;
+            } else if (!extendAll && ctrl.hasMore()) {
+                scope.showMore = extendAll;
+            }
+            $(".nano").nanoScroller();
+        });
 
         /**
          * Watcher that resets nanoscroll each time a concept is extended

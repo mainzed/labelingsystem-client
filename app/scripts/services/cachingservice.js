@@ -38,6 +38,10 @@ angular.module('labelsApp')
             }
         };
 
+        this.toggles = {
+            extendAll: null
+        };
+
         /**
          * Returns the filter if the the vocab id matches.
          * @param {string} id - Vocabulary ID
