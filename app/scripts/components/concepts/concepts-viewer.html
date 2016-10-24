@@ -13,7 +13,7 @@
 </div>
 
 <div id="metafooter">
-      <div class="dialog-half float">
+      <div class="dialog-quarter float">
         <!--<span class="listtype">uri</span>
         <span class="listcontent smalltype autowidth">{{ uri }}</span>-->
         <span class="listtype">URI</span>
@@ -29,10 +29,16 @@
         <span class="listcontent">
             <a ng-href="{{ vocabulary.getUrl() + '.skos' }}" target="_blank" ng-click="$event.stopPropagation()">SKOS</a>
         </span>
+        
 
     </div>
 
-     <div class="dialog-half float" id="ls-selfexplain">
+    <div class="dialog-quarter float">
+        <span>Description</span>
+        <span>{{vocabulary.description}}</span>
+    </div>
+
+    <div class="dialog-half float" id="ls-selfexplain">
         Labeling System is a web based tool for creating controlled vocabularies using linked open data techniques.
         <a style="margin-top: 20px; display: block;" href="#/">Impressum</a>
     </div>
