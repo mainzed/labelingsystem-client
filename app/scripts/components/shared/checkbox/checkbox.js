@@ -1,26 +1,29 @@
-'use strict';
+"use strict";
 
 /**
  * @ngdoc directive
- * @name labelsApp.directive:checkbox
+ * @name labelsApp.directive:smallBox
  * @description
- * # checkbox
+ * # smallBox
  */
-angular.module('labelsApp')
-  .directive('checkbox', function () {
-    return {
-        templateUrl: 'scripts/components/shared/checkbox/checkbox.html',
-        restrict: 'E',
-        scope: {
-            ngModel: '=',  // two-way binding
-            onCheck: '&',  // references parent-scope function
-            type: "@"  // optional: radio
-        },
-        link: function postLink(scope) {
-            if (scope.type === "radio") {
-                //
-            }
+ angular.module('labelsApp')
+  .component('checkbox', {
+    bindings: {
+        ngModel: '=',  // thesaurus
+        onCheck: '&'  // references parent-scope function
+    },
+    templateUrl: "scripts/components/shared/checkbox/checkbox.html",
 
+    controller: function () {
+
+        var ctrl = this;
+
+        ctrl.$onInit = function() {};
+
+        ctrl.check = function() {
+            ctrl.ngModel.checked = !ctrl.ngModel.checked;
+            ctrl.onCheck();
         }
-    };
+
+    }
 });
