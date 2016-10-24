@@ -68,6 +68,10 @@
             });
         };
 
+        $rootScope.$on("removedVocab", function(event, data) {
+            _.remove($scope.vocabularies, { id: data.vocabID});
+        });
+
         $rootScope.$watch("isAuthenticated", function(isAuthenticated) {  // set in AuthService when user ready
 
             if (isAuthenticated) {
