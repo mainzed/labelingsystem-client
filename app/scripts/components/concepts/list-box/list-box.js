@@ -30,7 +30,7 @@ angular.module('labelsApp')
         * @param {string} id - Concept ID
         */
        scope.onClick = function(id) {
-           if (scope.mode === 'viewer') {
+           if (ctrl.mode === 'viewer') {
                $location.path("vocabularies/" + $routeParams.vID + "/concepts/" + id);
            } else {
                $location.path("editor/vocabularies/" + $routeParams.vID + "/concepts/" + id);

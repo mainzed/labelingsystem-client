@@ -27,7 +27,7 @@
         };
 
         ctrl.redirectToConcept = function() {
-            console.log($location.path($location.path()  + "/vocabularies/" + ctrl.data.vocabID + "/concepts/" + ctrl.data.id));
+            //console.log($location.path($location.path()  + "/vocabularies/" + ctrl.data.vocabID + "/concepts/" + ctrl.data.id));
             $location.path("/vocabularies/" + ctrl.data.vocabID + "/concepts/" + ctrl.data.id);
         };
 
