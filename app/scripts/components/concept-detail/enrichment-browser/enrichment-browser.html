@@ -19,7 +19,7 @@
         </div>
 
         <!-- hide icon -->
-        <button class="hideenrichment pointer" type="button" name="button" ng-click="$ctrl.showEnrichments = false">
+        <button class="hideenrichment pointer" type="button" name="button" ng-click="$ctrl.toggleEnrichments()">
   		    <span class="icon-hide"></span>
   		</button>
 	</div>
@@ -73,6 +73,6 @@
 </div>
 
 <!-- minified enrichment bar -->
-<div id="enrichment-src-min" ng-show="!$ctrl.showEnrichments" ng-click="$ctrl.showEnrichments = true">
+<div id="enrichment-src-min" ng-show="!$ctrl.showEnrichments" ng-click="$ctrl.toggleEnrichments()">
   <span class="mintext">Show Enrichment Sources</span>
 </div>

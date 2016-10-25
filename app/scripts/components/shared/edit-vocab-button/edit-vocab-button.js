@@ -121,7 +121,7 @@ angular.module('labelsApp')
         };
 
         $scope.validVocab = function(vocab) {
-            return vocab.creator === AuthService.getUser().id || vocab.releaseType === "public";
+            return ctrl.data.title === vocab.title || vocab.releaseType === "public";
         }
 
         // update cache when exists

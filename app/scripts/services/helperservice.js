@@ -8,12 +8,18 @@
  * Service in the labelsApp.
  */
 angular.module('labelsApp')
-  .service('HelperService', function ($window, LabelService, ResourcesService, VocabService, AuthService) {
+  .service('HelperService', function ($window, $timeout, LabelService, ResourcesService, VocabService, AuthService) {
     // helper functions
     // this.findAndReplace = function(arr, query, newObj) {
     //     var index = _.indexOf(arr, _.find(arr, query));
     //     arr.splice(index, 1, newObj);
     // };
+
+    this.refreshNanoScoller = function() {
+        $timeout(function () {
+            angular.element(".nano").nanoScroller();
+        }, 0);
+    };
 
     /**
      * Find and replace using lodash functions.

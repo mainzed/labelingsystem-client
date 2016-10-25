@@ -84,6 +84,10 @@ angular.module('labelsApp')
             });
         }
 
+        ctrl.isValidVocab = function(vocab) {
+            return ctrl.data.title === vocab.title || vocab.releaseType === "public";
+        }
+
         ctrl.getCreatorAsLink = function(vocab) {
             if (vocab.creatorInfo) {
                 var fullName = [
