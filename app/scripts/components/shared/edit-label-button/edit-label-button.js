@@ -13,28 +13,27 @@ angular.module('labelsApp')
         data: "=",
     },
     template: '<span class="icon-more icon" ng-click="$ctrl.openDialog()"></span>',
-    controller: function ($scope, $location, $routeParams, ngDialog, ConfigService, LabelService, VocabService) {
+    controller: function ($scope, $rootScope, $location, $routeParams, ngDialog, ConfigService, LabelService, VocabService) {
         var ctrl = this;
 
-        $scope.publicLabelEdit = ConfigService.publicLabelEdit;
+        ctrl.$onInit = function() {
+            $scope.publicLabelEdit = ConfigService.publicLabelEdit;
+        }
 
         /**
          * Opens the metadata/settings dialog of a vocabulary.
          */
         this.openDialog = function() {
-            $scope.label = ctrl.data;
+            ctrl.modifiedLabel = false;
 
             // get vocab to check if public and determine if this concept can be deleted
             VocabService.get({id: $routeParams.vID}, function(vocab) {
                 $scope.vocab = vocab;
             });
 
-            $scope.newLabel = $scope.label.thumbnail;
-            ngDialog.open({
+            ctrl.dialog = ngDialog.open({
                 template: 'scripts/components/shared/edit-label-button/dialog.html',
                 className: 'bigdialog',
-                showClose: false,
-                closeByDocument: false,
                 disableAnimation: true,
                 scope: $scope
             });
@@ -52,22 +51,25 @@ angular.module('labelsApp')
         /**
          * Deletes a concept.
          */
-        $scope.deleteConcept = function(concept) {
-            LabelService.remove({id: concept.id}, function() {
+        ctrl.deleteConcept = function() {
+            LabelService.remove({id: ctrl.data.id}, function() {
+                ctrl.dialog.close();
+                $rootScope.$broadcast("removedConcept", { id: ctrl.data.id});
                 $location.path("/editor/vocabularies/" + $routeParams.vID + "/concepts");
             }, function(res) {
                 console.log(res);
             });
         };
 
-        this.onApply = function(value) {
-            $scope.label.setLabel(value);
-            $scope.label.save(function() {
-                //console.log("success");
-            }, function error(res) {
-                console.log(res);
-            });
-        };
+        $rootScope.$on('ngDialog.closed', function (e, $dialog) {
+            if (ctrl.dialog.id === $dialog.attr('id') && ctrl.modifiedLabel) {
+                ctrl.data.save(function success() {
+                    //console.log("success");
+                }, function error(res) {
+                    console.log(res);
+                });
+            }
+        });
     }
 
 });

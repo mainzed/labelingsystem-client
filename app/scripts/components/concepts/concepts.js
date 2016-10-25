@@ -52,7 +52,7 @@
                     value: $scope.labelFilter
                 };
             }
-            
+
             // cache concepts. doing this on destroy saves us from having to
             // update the cache when adding or removing concepts
             CachingService.editor.concepts = {
@@ -128,6 +128,10 @@
             ctrl.loadConcepts();
         });
 
+        $scope.$on("removedConcept", function(event, data) {
+            _.remove($scope.labels, { id: data.id });
+        });
+
         $scope.$watch("loading", function(loading) {
             if (!loading) {
                 $timeout(function() {
@@ -139,6 +143,5 @@
         // set inital labelOrder to a function, has to be defined before this line
         // TODO: sort button highlights dont work because of the returned functions
         $scope.labelOrder = UserSettingsService.labelOrder;
-
     }
 });

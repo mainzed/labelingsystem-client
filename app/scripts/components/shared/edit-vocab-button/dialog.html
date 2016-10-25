@@ -91,29 +91,11 @@
                         <p ng-bind="vocab.description"></p>
 
                         <span class="floatright" ng-show="vocab.creator !== user.id">
-                          <span>{{ vocab.creator }}</span>
-                          <a ng-show="vocab.creatorInfo.orcid" ng-href="{{ vocab.creatorInfo.orcid }}" target="_blank">more info</a>
+                            <a ng-show="vocab.creatorInfo.orcid" ng-href="{{ vocab.creatorInfo.orcid }}" target="_blank">{{ vocab.creator }}</a>
                         </span>
-
                     </div>
-
                 </div>
-
-
-
-            </div>
-            <!-- end nano-content -->
-        </div>
-        <!-- end nano -->
-    </div>
-    <!-- end dialog scroll -->
-
-
-    <!-- apply -->
-    <!-- updateVocabThesauri() -->
-    <!-- onApplyChangesClick(vocabulary, newValue, newDescription); -->
-    <!-- <button id="someButton" type="button" class="apply" ng-click="$ctrl.update(newTitle, newDescription); closeThisDialog()" ng-class="{'inactive': newTitle === vocabulary.title && newDescription === vocabulary.description && !changedThesauri && !vocabChecked }">Apply</button> -->
-
-    <!-- cancel -->
-    <!-- <button type="button" class="cancel" ng-click="closeThisDialog()" ng-keypress="$ctrl.onCancelKeyDown($event)">Cancel</button> -->
+            </div><!-- end nano-content -->
+        </div><!-- end nano -->
+    </div><!-- end dialog scroll -->
 </div>

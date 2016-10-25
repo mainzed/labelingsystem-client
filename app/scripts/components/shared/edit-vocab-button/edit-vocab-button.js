@@ -13,7 +13,7 @@ angular.module('labelsApp')
         data: "="  // vocab
     },
     template: '<span class="{{$ctrl.icon}} icon" ng-click="$ctrl.openDialog()"></span>',
-    controller: function ($scope, $rootScope, $location, $document, $anchorScroll, $timeout, ngDialog, VocabService, ConfigService, LabelService, TooltipService, AuthService, HelperService, CachingService) {
+    controller: function ($scope, $rootScope, $location, $document, $anchorScroll, $timeout, ngDialog, VocabService, ConfigService, LabelService, TooltipService, AuthService, HelperService, CachingService, AgentService) {
 
         var ctrl = this;
 
@@ -139,6 +139,15 @@ angular.module('labelsApp')
                 $scope.newDescription = description.substring(0, ConfigService.vocabDescriptionLength);
             }
         };
+
+        ctrl.getAgentInfo = function(id) {
+            // get user info
+            AgentService.get({id: id}, function(agent) {
+                //$scope.agent = agent;
+                return agent.getNameAsLink();
+                //console.log($scope.agent);
+            });
+        }
 
     }
 });
