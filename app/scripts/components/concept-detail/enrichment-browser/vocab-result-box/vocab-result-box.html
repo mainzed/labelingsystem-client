@@ -3,16 +3,16 @@
 
     <!-- label -->
     <span class="thumbnail">
-        <button class="showadditionalcontent" ng-click="showMore = !showMore; $event.stopPropagation()">
+        <button class="showadditionalcontent" ng-click="$ctrl.toggleMore(); $event.stopPropagation()">
             <span ng-show="!showMore && $ctrl.data.hasMore()"><span class="icon-breadcrumb"></span></span>
             <span ng-show="showMore"><span class="icon-dropdown"></span></span>
         </button>
-        <span ng-bind="$ctrl.data.thumbnail"></span>
+        <span ng-bind="$ctrl.data.thumbnail || $ctrl.data.label"></span>
     </span>
 
     <!-- icon -->
-    <span class="type" ng-show="$ctrl.cssType !== 'label'" title="ls">(ls)</span>
-    <mini-preview ng-show="$ctrl.cssType === 'label'" label="$ctrl.data" size="micro" title="{{tooltips.icons.minipreview}}"></mini-preview>
+    <span class="type" ng-show="$ctrl.cssType !== 'label'" title="{{ $ctrl.data.type + ' - ' + $ctrl.data.scheme }}">({{ $ctrl.data.type }})</span>
+    <mini-preview ng-show="$ctrl.cssType === 'label'" label="$ctrl.data" size="micro" title="{{ tooltips.icons.minipreview }}"></mini-preview>
 
 </div>
 
@@ -32,6 +32,7 @@
         <span class="italic smalltype" ng-show="$ctrl.data.hasBroader()">broader</span><br>
         <ul class="hierarchie">
             <li ng-repeat="broaderConcept in $ctrl.conceptDetails.broader" ng-bind="broaderConcept.thumbnail"></li>
+            <li ng-repeat="broaderConcept in $ctrl.data.broaderTerms" ng-bind="broaderConcept.label"></li>
         </ul>
     </span>
 
@@ -45,9 +46,10 @@
 
     <!-- narrower -->
     <span class="note-ext">
-        <span class="italic smalltype" ng-show="data.narrower">narrower</span><br>
+        <span class="italic smalltype" ng-show="$ctrl.data.hasNarrower()">narrower</span><br>
         <ul class="hierarchie">
             <li ng-repeat="narrowerConcept in $ctrl.conceptDetails.narrower" ng-bind="narrowerConcept.thumbnail"></li>
+            <li ng-repeat="narrowerConcept in $ctrl.data.narrowerTerms" ng-bind="narrowerConcept.label"></li>
         </ul>
     </span>
 
