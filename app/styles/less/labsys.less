@@ -186,7 +186,7 @@ textarea:focus {	outline: none; }
 .sortlist li {		list-style: none; margin-left: 0; }
 .sortlist .icon-sort {	line-height: 0px; margin-top: 10px; float: left; margin-left: -2px;}
 .sortlist .icon-breadcrumb {float: right;}
-.sortoptions {		position: absolute; background: @workareas; width: 200px; padding: 10px; color: white; z-index: 9999999; margin-left: -10px; }
+.sortoptions {		position: absolute; background: @workareas; width: 180px; padding: 10px 0px 20px 73px; color: white; z-index: 9999999; margin-left: -10px; }
 .sortoptions li {	list-style: none; padding: 3px 0; }
 .extendbutton {		float: left; margin-left: 40px; color: white; border-bottom: 0; padding-left: @margininboxsmall; 
 					margin-top: 12px; cursor: pointer; }
@@ -214,6 +214,8 @@ textarea:focus {	outline: none; }
 .smallheight {		height: 38px; }
 .smallheight .showadditionalcontent {
 					margin-top: -1px;}
+.showmorebox {		background: #d3d3d3;  border-radius: 6px; float: left; padding: 2px 8px; margin-left: calc(50% - 50px); color: blue; 
+					text-decoration: underline; width: 100px; text-align: center;  }
 .smallheight .micropreview { 
 					margin-top: 10px; }
 .bigboxwrapper:hover div {		
@@ -572,7 +574,7 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
 .showadditionalcontent {
 					width: 26px; height: 20px; display: block; float: left; margin-top: 2px; color: white; }
 .label .showadditionalcontent, .high .showadditionalcontent {
-					color: black; }
+					color: black; overflow: hidden; }
 .showadditionalcontent:hover {
 					text-decoration: underline; cursor: pointer; }
 
@@ -586,7 +588,7 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
 .wordbreak {		overflow-wrap: break-word; word-wrap: break-word; -webkit-hyphens: auto;
                     -ms-hyphens: auto; -moz-hyphens: auto; hyphens: auto; }
 
-.active {			font-weight: bold; }
+.active {			text-decoration: underline; }
 .underlined {		border-bottom: 1px solid white; padding-bottom: 2px; cursor: pointer;}
 .whitetext {		color: white; }
 .emphasize p, .emphasize h6
