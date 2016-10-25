@@ -13,10 +13,8 @@ angular.module('labelsApp')
     this.get = function(url, success, failure) {
 
         $http.get(ConfigService.api + "/resourceinfo?uri=" + encodeURI(url)).then(function(response) {
-            // success
             success(response.data);
         }, function(response) {
-            // failure
             failure(response);
         });
 

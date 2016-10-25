@@ -1,7 +1,7 @@
 # Labeling System v0.2
 
 ## Introduction
-The Labeling System (LS) is a web-application that allows registered users to create controlled vocabularies. Vocabularies consists of concepts described by a label and translations. Concepts can be linked to other concepts in the Linked Open Data Cloud. These links can be hierarchical, associative or mapping. It is possible to build in-vocab skos hierarchies. The app provides a convenient way to search for Linked Open Data within controlled vocabularies. Once a concept is published, it can be publicly accessed via a Uniform Resource Identifier (URI).
+The Labeling System (LS) is a web-application that allows registered users to create controlled vocabularies. Vocabularies consist of concepts described by a label and translations. In addition, concepts can be linked to other concepts in the Linked Open Data Cloud. These links can be hierarchical, associative or mapping. The app provides a convenient way to search through controlled vocabularies in the Linked Open Data Cloud. Once a LS concept is published, it can be publicly accessed via a Uniform Resource Identifier (URI).
 
 ## Getting Started
 

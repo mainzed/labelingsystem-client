@@ -21,6 +21,15 @@
 
         ctrl.$onDestroy = function () {};
 
+        ctrl.showMore = function() {
+            console.log("show more");
+            ctrl.concept.getDetails(function(details) {
+                console.log(details);
+                ctrl.conceptDetails = details;
+            });
+            $scope.showMore = !$scope.showMore;
+        }
+
         ctrl.redirectToConcept = function() {
             $location.path("/vocabularies/" + ctrl.concept.vocabID + "/concepts/" + ctrl.concept.id);
         };

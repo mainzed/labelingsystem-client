@@ -2,7 +2,7 @@
 <div class="box bigbox label high smallheight" ng-click="$ctrl.redirectToConcept()">
     <span class="thumbnail">
 
-        <button class="showadditionalcontent" ng-click="showMore = !showMore; $event.stopPropagation()">
+        <button class="showadditionalcontent" ng-click="$ctrl.showMore(); $event.stopPropagation()">
             <span ng-show="$ctrl.hasMore() && !showMore"><span class="icon-breadcrumb"></span></span>
             <span ng-show="showMore"><span class="icon-dropdown"></span></span>
         </button>
@@ -23,17 +23,22 @@
     </span>
 
     <span class="note-ext small">
-        <span class="italic smalltype" ng-show="concept.broaderTerms.length">
-            broader
-        </span>
+        <span class="italic smalltype" ng-show="concept.hasBroader()">broader</span>
         <br>
         <ul class="hierarchie">
-            <li ng-repeat="term in concept.broaderTerms">{{ term.label }}</li>
+            <li ng-repeat="broaderConcept in concept.broader">{{ broaderConcept.thumbnail }}</li>
         </ul>
     </span>
 
     <span class="note-ext small">
-        <span class="italic smalltype" ng-show="concept.narrowerTerms.length">narrower</span><br>
+        <span class="italic smalltype" ng-show="concept.hasRelated()">narrower</span><br>
+        <ul class="hierarchie">
+            <li ng-repeat="term in concept.narrowerTerms">{{ term.label }}</li>
+        </ul>
+    </span>
+
+    <span class="note-ext small">
+        <span class="italic smalltype" ng-show="concept.narrower()">narrower</span><br>
         <ul class="hierarchie">
             <li ng-repeat="term in concept.narrowerTerms">{{ term.label }}</li>
         </ul>

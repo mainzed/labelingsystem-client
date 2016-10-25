@@ -153,6 +153,8 @@ angular.module('labelsApp')
                             if (index === array.length - 1) {
                                 resolve(relatedConcepts);
                             }
+                        }, function error(res) {
+                            console.log(res);
                         });
                     }
                 });
