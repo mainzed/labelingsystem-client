@@ -44,7 +44,7 @@
                 <div class="dialogbox dialog-full">
                     <h4 ng-class="{'inactive': $ctrl.data.releaseType === 'public'}">Actions</h4>
                     <!-- delete draft vocab (not allowed to delete public vocab) -->
-                    <ls-confirm-button on-confirm="deleteVocab(vocabulary.id); closeThisDialog()" text="Delete Vocabulary" inactive="$ctrl.data.releaseType === 'public'"></ls-confirm-button>
+                    <ls-confirm-button on-confirm="deleteVocab(); closeThisDialog()" text="Delete Vocabulary" inactive="$ctrl.data.releaseType === 'public'"></ls-confirm-button>
 
                     <!-- show publish -->
                     <ls-confirm-button on-confirm="publish()" text="Publish Vocab" confirm-text="{{tooltips.explaination.publication}}" icon="icon-public" ng-show="$ctrl.data.releaseType === 'draft'" size="large"></ls-confirm-button>
