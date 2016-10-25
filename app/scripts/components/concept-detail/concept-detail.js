@@ -12,7 +12,7 @@
     },
     templateUrl: "scripts/components/concept-detail/concept-detail.html",
 
-    controller: function ($scope, $routeParams, VocabService, LabelService, TooltipService) {
+    controller: function ($scope, $routeParams, VocabService, LabelService, TooltipService, HelperService) {
 
         var ctrl = this;
 
@@ -21,7 +21,7 @@
             $scope.vocabulary = VocabService.get({id: $routeParams.vID});
             $scope.label = LabelService.get({id: $routeParams.lID});
 
-            angular.element(".nano").nanoScroller();
+            HelperService.refreshNanoScoller();
         }
 
         // temporarily add box when new resource was addedd
@@ -57,6 +57,11 @@
 
         $scope.$on("addedLink", function(event, data) {
             console.log("added link!");
+        });
+
+        $scope.$on("toggledEnrichmentBrowser", function(event, data) {
+            ctrl.showEnrichments = data.visible;
+            HelperService.refreshNanoScoller();
         });
     }
 });

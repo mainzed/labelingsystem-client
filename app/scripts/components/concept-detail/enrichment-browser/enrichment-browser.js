@@ -159,5 +159,10 @@ angular.module("labelsApp")
         $scope.$on("changedThesauri", function() {
             updateSearchThesauri();
         });
+
+        ctrl.toggleEnrichments = function() {
+            ctrl.showEnrichments = !ctrl.showEnrichments;
+            $rootScope.$broadcast("toggledEnrichmentBrowser", { visible: ctrl.showEnrichments });
+        }
     }
 });
