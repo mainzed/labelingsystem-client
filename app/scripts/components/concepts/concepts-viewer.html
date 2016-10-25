@@ -34,7 +34,7 @@
     </div>
 
     <div class="dialog-quarter float">
-        <span>Description</span>
+        <span class="smalltype italic">Description</span><br>
         <span>{{vocabulary.description}}</span>
     </div>
 
@@ -82,7 +82,7 @@
       </span> -->
 
       <!-- when search empty and more labels available show option to load more -->
-      <span class="box bigbox label listbox" ng-show="!labelFilter && labels.length > conceptsLimit" ng-click="conceptsLimit = conceptsLimit * 2">
+      <span class="showmorebox" ng-show="!labelFilter && labels.length > conceptsLimit" ng-click="conceptsLimit = conceptsLimit * 2">
         show more
       </span>
 
