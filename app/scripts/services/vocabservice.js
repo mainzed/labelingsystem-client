@@ -97,8 +97,6 @@ angular.module('labelsApp')
             return o.checked;
         });
 
-        console.log(thesauri);
-
         // get all available thesauri
         ThesauriService.update({id: me.id }, thesauri, function(res) {
             successCallback();

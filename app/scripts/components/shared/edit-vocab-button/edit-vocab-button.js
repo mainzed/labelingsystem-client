@@ -99,9 +99,9 @@ angular.module('labelsApp')
             });
         }
 
-        $scope.deleteVocab = function(id) {
-            VocabService.remove({id: id}, function() {
-                $rootScope.$broadcast("removedVocab", { vocabID: id });
+        $scope.deleteVocab = function() {
+            VocabService.remove({id: ctrl.data.id}, function() {
+                $rootScope.$broadcast("removedVocab", { vocabID: ctrl.data.id });
                 $location.path("/editor/vocabularies/");
             }, function error(res) {
                 console.log(res);
