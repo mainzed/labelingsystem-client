@@ -60,7 +60,7 @@
 
         <ls-vocab-result-box ng-repeat="sibling in siblings | limitTo: conceptsLimit | orderBy: 'thumbnail'" data="sibling" on-confirm="addResource($concept, $relation)"></ls-vocab-result-box>
 
-        <div class="loader" ng-show="siblings.length === 0"></div>
+        <div class="loader" ng-show="$ctrl.loading"></div>
 
         <!-- TODO: make component -->
         <span class="box bigbox label listbox" ng-show="labels.length > conceptsLimit" ng-click="conceptsLimit = conceptsLimit * 2">

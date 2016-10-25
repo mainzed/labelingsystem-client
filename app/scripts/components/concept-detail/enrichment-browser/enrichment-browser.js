@@ -14,20 +14,14 @@ angular.module("labelsApp")
         var ctrl = this;
 
         ctrl.$onInit = function() {
-            //console.log(ctrl.concept);
             $scope.searching = false;
+            ctrl.loading = false;
             // limit for concepts shown in concepts tab
             $scope.conceptsLimit = ConfigService.conceptsLimit;
             $scope.showSearch = false; // ConfigService.showSearchOnStart;
             $scope.tooltips = TooltipService;
             ctrl.showEnrichments = UserSettingsService.showEnrichments;
 
-            // ctrl.concept.then(function() {
-            //
-            // })
-            // LabelService.get({id: $routeParams.lID}, function(concept) {
-            //     ctrl.concept = concept;
-            // });
 
             // get thesauri when label is available
             VocabService.get({id: $routeParams.vID}, function(vocab) {
@@ -42,16 +36,19 @@ angular.module("labelsApp")
         }
 
         ctrl.getEnrichmentVocab = function(vocab) {
+            ctrl.loading = true;
             vocab.getEnrichmentVocab(function(enrichmentVocabID) {
                 // get additional infos on enrichmentVocab
                 VocabService.get({id: enrichmentVocabID}, function(enrichmentVocab) {
                     $scope.enrichmentVocab = enrichmentVocab;
-                });
-
-                // get concepts of vocab to be shown
-                LabelService.query({'vocab': vocab.id}, function(concepts) {
-                    $scope.siblings = _.filter(concepts, function(o) {
-                        return o.id !== $routeParams.lID;  // skip current concept
+                    // get concepts of vocab to be shown
+                    LabelService.query({'vocab': enrichmentVocabID}, function(concepts) {
+                        ctrl.loading = false;
+                        $scope.siblings = _.filter(concepts, function(o) {
+                            return o.id !== $routeParams.lID;  // skip current concept
+                        });
+                    }, function() {
+                        ctrl.loading = false;
                     });
                 });
             });
@@ -147,12 +144,10 @@ angular.module("labelsApp")
             });
         };
 
-
-
-        // $rootScope.$on("changedEnrichmentVocab", function(vocabID) {
-        //     $scope.siblings = [];
-        //     ctrl.getEnrichmentVocab(vocabID.id);
-        // });
+        $rootScope.$on("changedEnrichmentVocab", function(event, vocabID) {
+            $scope.siblings = [];
+            ctrl.getEnrichmentVocab($scope.vocab);
+        });
 
         // press "enter" to start search
         $scope.onSearchKeyPress = function(e) {

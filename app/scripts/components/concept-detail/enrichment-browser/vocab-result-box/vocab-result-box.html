@@ -1,53 +1,59 @@
 
-<div class="box bigbox {{ cssType }} high smallheight" ng-click="openDialog()">
-  <span class="thumbnail">
-    <button class="showadditionalcontent" ng-click="showMore = !showMore; $event.stopPropagation()">
-      <span ng-show="!showMore"><span class="icon-breadcrumb"></span></span>
-      <span ng-show="showMore"><span class="icon-dropdown"></span></span>
-    </button>
-    <span ng-bind="data.thumbnail"></span>
-  </span>
+<div class="box bigbox {{ $ctrl.cssType }} high smallheight" ng-click="$ctrl.openDialog()">
 
-  <!-- icon -->
+    <!-- label -->
+    <span class="thumbnail">
+        <button class="showadditionalcontent" ng-click="showMore = !showMore; $event.stopPropagation()">
+            <span ng-show="!showMore && $ctrl.data.hasMore()"><span class="icon-breadcrumb"></span></span>
+            <span ng-show="showMore"><span class="icon-dropdown"></span></span>
+        </button>
+        <span ng-bind="$ctrl.data.thumbnail"></span>
+    </span>
 
-  <span class="type" ng-show="cssType !== 'label'" title="ls">(ls)</span>
-
-  <mini-preview ng-show="cssType === 'label'" label="data" size="micro" title="{{tooltips.icons.minipreview}}"></mini-preview>
+    <!-- icon -->
+    <span class="type" ng-show="$ctrl.cssType !== 'label'" title="ls">(ls)</span>
+    <mini-preview ng-show="$ctrl.cssType === 'label'" label="$ctrl.data" size="micro" title="{{tooltips.icons.minipreview}}"></mini-preview>
 
 </div>
 
-<!-- show details -->
-<div ng-if="showMore" class="box boxextension bigbox {{ cssType }} high" ng-click="openDialog()" ng-init="getInfo()">
+<!-- details -->
+<div ng-if="showMore" class="box boxextension bigbox {{ $ctrl.cssType }} high" ng-click="$ctrl.openDialog()" ng-init="$ctrl.getDetails()">
 
-  <span class="line-ext"></span>
+    <span class="line-ext"></span>
 
-  <span class="note-ext">
-    <span class="italic smalltype" ng-show="data.description">Description</span><br>
-    <span class="smalltype">{{ data.description }}</span>
-  </span>
+    <!-- description -->
+    <span class="note-ext">
+        <span class="italic smalltype" ng-show="$ctrl.data.description">Description</span><br>
+        <span class="smalltype" ng-bind="$ctrl.data.description"></span>
+    </span>
 
-  <!-- broader -->
-  <span class="note-ext">
-    <span class="italic smalltype" ng-show="data.broader">broader</span><br>
-    <ul class="hierarchie">
-      <li ng-repeat="concept in broaderConcepts" ng-bind="concept.thumbnail"></li>
-    </ul>
-  </span>
+    <!-- broader -->
+    <span class="note-ext">
+        <span class="italic smalltype" ng-show="$ctrl.data.hasBroader()">broader</span><br>
+        <ul class="hierarchie">
+            <li ng-repeat="broaderConcept in $ctrl.conceptDetails.broader" ng-bind="broaderConcept.thumbnail"></li>
+        </ul>
+    </span>
 
-  <!-- narrower -->
-  <span class="note-ext">
-    <span class="italic smalltype" ng-show="data.narrower">narrower</span><br>
-    <ul class="hierarchie">
-      <li ng-repeat="concept in narrowerConcepts" ng-bind="concept.thumbnail"></li>
-    </ul>
-  </span>
+    <!-- related -->
+    <span class="note-ext">
+        <span class="italic smalltype" ng-show="$ctrl.data.hasRelated()">related</span><br>
+        <ul class="hierarchie">
+            <li ng-repeat="relatedConcept in $ctrl.conceptDetails.related" ng-bind="relatedConcept.thumbnail"></li>
+        </ul>
+    </span>
 
-  <!-- link -->
-  <span class="note-ext"><span class="italic smalltype"></span><br>
-    <a class="loudlinkmin smalltype" ng-href="{{ data.uri }}" target="_blank" ng-click="$event.stopPropagation()">open in new tab</a>
-  </span>
+    <!-- narrower -->
+    <span class="note-ext">
+        <span class="italic smalltype" ng-show="data.narrower">narrower</span><br>
+        <ul class="hierarchie">
+            <li ng-repeat="narrowerConcept in $ctrl.conceptDetails.narrower" ng-bind="narrowerConcept.thumbnail"></li>
+        </ul>
+    </span>
 
-
-
+    <!-- link -->
+    <span class="note-ext"><span class="italic smalltype"></span><br>
+        <a class="loudlinkmin smalltype" ng-href="{{ $ctrl.getLink() }}" target="_blank" ng-click="$event.stopPropagation()">open in new tab</a>
+    </span>
 
 </div>

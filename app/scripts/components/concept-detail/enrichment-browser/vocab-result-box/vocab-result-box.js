@@ -6,62 +6,62 @@
  * @description
  * # searchResultBox
  */
-angular.module('labelsApp')
-  .directive('lsVocabResultBox', function ($routeParams, ngDialog, TooltipService) {
-    return {
-        templateUrl: "scripts/components/concept-detail/enrichment-browser/vocab-result-box/vocab-result-box.html",
-        restrict: 'E',
-        scope: {
-            data: "=",
-            onConfirm: "&"
-        },
-        link: function postLink(scope) {
+angular.module("labelsApp")
+  .component("lsVocabResultBox", {
+    bindings: {
+        data: "=",
+        onConfirm: "&"
+    },
+    templateUrl: "scripts/components/concept-detail/enrichment-browser/vocab-result-box/vocab-result-box.html",
+    controller: function($scope, $routeParams, ngDialog, TooltipService, LabelService, ConfigService, AuthService) {
+        var ctrl = this;
 
-            scope.tooltips = TooltipService;
+        ctrl.$onInit = function() {
+            $scope.tooltips = TooltipService;
 
-            scope.getInfo = function() {
-                console.log("get info!");
-                scope.data.getRelatedConcepts("broader").then(function(concepts) {
-                    scope.broaderConcepts = concepts;
-                });
-                scope.narrowerConcepts = scope.data.getRelatedConcepts("narrower");
+            // determine icon
+            ctrl.cssType = ctrl.data.vocabID === $routeParams.vID ? "label" : "ls";
 
-            };
+            angular.element(".nano").nanoScroller();
+        };
 
-            if (scope.data.vocabID === $routeParams.vID) {
-                scope.cssType = "label";
-            } else {
-                scope.cssType = "ls";
-            }
-
-            /**
-             * Opens a type-specific dialog that shows the connection (relation)
-             * options for each type to link to the label.
-             */
-            scope.openDialog = function() {
-
-                ngDialog.open({
-                    template: 'scripts/components/concept-detail/enrichment-browser/vocab-result-box/dialog.html',
-                    className: 'bigdialog',
-                    showClose: false,
-                    closeByDocument: false,
-                    disableAnimation: true,
-                    scope: scope
-                });
-            };
-
-            scope.getRelatedConcepts = function() {
-            };
-
-            /**
-             * Watcher that updates nanoscroller when box is extended.
-             */
-            scope.$watch("showMore", function() {
-                $(".nano").nanoScroller();
+        /**
+         * Opens a type-specific dialog that shows the connection (relation)
+         * options for each type to link to the label.
+         */
+        ctrl.openDialog = function() {
+            ngDialog.open({
+                template: 'scripts/components/concept-detail/enrichment-browser/vocab-result-box/dialog.html',
+                className: 'bigdialog',
+                disableAnimation: true,
+                scope: $scope
             });
+        };
 
-            // reload nanoscroller when directive rendered
-            $(".nano").nanoScroller();
-        }
-    };
-  });
+        ctrl.getDetails = function() {
+            ctrl.data.getDetails().then(function(details) {
+                ctrl.conceptDetails = details;
+                $scope.$apply();
+            });
+        };
+
+        /**
+         * Returns link to editor for own vocabularies and link to viewer for
+         * other users vocabularies
+         */
+        ctrl.getLink = function() {
+            if (ctrl.data.creator === AuthService.getUser().id) {
+                return "#/editor/vocabularies/" + ctrl.data.vocabID + "/concepts/" + ctrl.data.id;
+            } else {
+                return "#/vocabularies/" + ctrl.data.vocabID + "/concepts/" + ctrl.data.id;
+            }
+        };
+
+        /**
+         * Watcher that updates nanoscroller when box is extended.
+         */
+        $scope.$watch("showMore", function() {
+            angular.element(".nano").nanoScroller();
+        });
+    }
+});

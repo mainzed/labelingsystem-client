@@ -71,6 +71,10 @@ angular.module('labelsApp')
         return this.related || this.relatedMatch || this.closeMatch || this.exactMatch;
     };
 
+    Concept.prototype.hasMore = function() {
+        return this.description || this.hasBroader() || this.hasNarrower();
+    }
+
     Concept.prototype.getDetails = function() {
         var me = this;
 
