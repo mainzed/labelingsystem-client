@@ -8,16 +8,14 @@
             <span class="icon-search icon"></span>
             <input type="text" placeholder="Search in Thesauri" ng-model="searchValue" ng-keypress="onSearchKeyPress($event)"></input>
 
-            <!-- change settings -->
-            <ls-edit-vocab-button data="vocab" title="{{tooltips.icons.thesauriSettings}}"></ls-edit-vocab-button>
+            <ls-search-settings-button mode="thesauri" data="vocab" title="{{tooltips.icons.thesauriSettings}}"></search-settings-button>
         </div>
 
         <!-- labels tab -->
         <div class="tab" ng-click="showSearch = false" ng-class="{'active': !showSearch, 'ls': enrichmentVocab.title !== vocab.title}">
             <span class="tablabel">Concepts of {{ enrichmentVocab.title }}</span>
 
-            <!-- change settings -->
-            <ls-edit-vocab-button data="vocab" title="{{tooltips.icons.vocabSettings}}"></ls-edit-vocab-button>
+            <ls-search-settings-button mode="vocabs" data="vocab" title="{{tooltips.icons.thesauriSettings}}"></search-settings-button>
         </div>
 
         <!-- hide icon -->
