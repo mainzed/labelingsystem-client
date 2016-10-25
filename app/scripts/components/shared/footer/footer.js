@@ -13,10 +13,13 @@ angular.module('labelsApp')
         mode: "@"
     },
     templateUrl: 'scripts/components/shared/footer/footer.html',
-    controller: function ($scope, $rootScope, $location, ngDialog, AuthService, ConfigService) {
+    controller: function ($location, AuthService, ConfigService) {
         var ctrl = this;
 
-        ctrl.version = ConfigService.version;
+        ctrl.$onInit = function() {
+            ctrl.version = ConfigService.version;
+            ctrl.user = AuthService.getUser();
+        };
 
         /**
          * Logout current user and redirect to login page if successfull.
@@ -28,15 +31,5 @@ angular.module('labelsApp')
                 console.log("logout failed!!");
             });
         };
-
-
-
-
-
-        // $rootScope.$on("userReady", function() {
-        //     console.log("ready");
-        //     console.log(AuthService.getUser());
-        //     ctrl.user = AuthService.getUser();
-        // });
     }
 });

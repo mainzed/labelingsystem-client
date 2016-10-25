@@ -1,6 +1,6 @@
 <div id="footer">
     <span>Labeling System  {{ $ctrl.version }} </span>
 
-    <ls-edit-user-button></ls-edit-user-button>
+    <span class='icon-user'></span><span>{{ $ctrl.user.id }}</span>
     <span class="logout underlined" ng-click="$ctrl.onLogoutClick()">Logout</span>
 </div>

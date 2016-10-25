@@ -1,12 +1,7 @@
 <div id="header" class="box full" ng-class="vocabulary.releaseType">
-	<!-- <div id="breadcrumb"></div> -->
-  <ls-breadcrumbs></ls-breadcrumbs>
-
-  <!-- loop over all prefLabels, so it autofreshes on change -->
-  <h1 ng-bind="vocabulary.title"></h1>
-
-  <ls-edit-vocab-button data="vocabulary"></ls-edit-vocab-button>
-
+    <ls-breadcrumbs></ls-breadcrumbs>
+    <h1 ng-bind="vocabulary.title"></h1>
+    <ls-edit-vocab-button data="vocabulary"></ls-edit-vocab-button>
 	<span class="language" ng-bind="vocabulary.language"></span>
 </div>
 
@@ -16,25 +11,19 @@
         <input type="text" ng-model="labelFilter" placeholder="filter" autofocus>
 	</div>
 
-
-  <div class="listoptions">
-    <ul class="sortlist">
-      <span class="icon-sort icon"></span>
-      <li ng-click="showOptions=!showOptions" ng-init="sortName='sort by last modified'; labelOrder = '-lastModified'">{{sortName}}
-
-
-        <ul ng-show="showOptions" class="sortoptions" ng-blur="showOptions = false">
-          <li ng-click="labelOrder = '-lastModified'; sortName='sort by last modified'" ng-class="{'active': labelOrder === '-lastModified'}">by lastModified</li>
-          <li ng-click="labelOrder = 'thumbnail'; sortName='sort alphabetically'" ng-class="{'active': labelOrder === 'thumbnail'}">alphabetically</li>
-          <li ng-click="labelOrder = orderByQuality; sortName='sort by quality'" ng-class="{'active': labelOrder === orderByQuality}">by quality</li>
+    <div class="listoptions">
+        <ul class="sortlist">
+            <span class="icon-sort icon"></span>
+            <li ng-click="showOptions=!showOptions" ng-init="sortName='sort by last modified'; labelOrder = '-lastModified'">{{sortName}}
+                <ul ng-show="showOptions" class="sortoptions" ng-blur="showOptions = false">
+                    <li ng-click="labelOrder = '-lastModified'; sortName='sort by last modified'" ng-class="{'active': labelOrder === '-lastModified'}">by lastModified</li>
+                    <li ng-click="labelOrder = 'thumbnail'; sortName='sort alphabetically'" ng-class="{'active': labelOrder === 'thumbnail'}">alphabetically</li>
+                    <li ng-click="labelOrder = orderByQuality; sortName='sort by quality'" ng-class="{'active': labelOrder === orderByQuality}">by quality</li>
+                </ul>
+            </li>
         </ul>
-      </li>
-    </ul>
-  <span class="extendbutton" ng-click="extendAll = !extendAll"><span class="icon-expand"></span>{{ extendButtonText }}</span>
-  <!--<button class="extendbutton" type="button" ng-click="extendAll = !extendAll" ng-bind="extendButtonText"></button>-->
-  </div>
-
-
+        <ls-extend-button ng-click="extendAll = !extendAll"></ls-extend-button>
+    </div>
 </div>
 
 <div id="listwrapper">
