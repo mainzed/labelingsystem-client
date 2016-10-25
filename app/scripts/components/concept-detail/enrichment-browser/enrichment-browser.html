@@ -46,7 +46,7 @@
         <!-- placeholder when not searching -->
         <span class="noresult" ng-show="!searching && !resultBoxes">Add enrichment sources by searching</span>
 
-        <ls-search-result-box ng-repeat="box in resultBoxes | orderBy: ['quality', 'type']" data="box"></ls-search-result-box>
+        <ls-vocab-result-box ng-repeat="searchResult in resultBoxes | orderBy: ['quality', 'type']" data="searchResult"></ls-vocab-result-box>
 
         <!-- spinning icon -->
         <div class="loader" ng-show="searching && !resultBoxes.length"></div>
@@ -56,7 +56,7 @@
       <!-- own vocabs -->
       <div ng-show="!showSearch">
 
-        <ls-vocab-result-box ng-repeat="sibling in siblings | limitTo: conceptsLimit | orderBy: 'thumbnail'" data="sibling" on-confirm="addResource($concept, $relation)"></ls-vocab-result-box>
+        <ls-vocab-result-box ng-repeat="sibling in siblings | limitTo: conceptsLimit | orderBy: 'thumbnail'" data="sibling" ></ls-vocab-result-box>
 
         <div class="loader" ng-show="$ctrl.loading"></div>
 

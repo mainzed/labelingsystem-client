@@ -297,7 +297,6 @@ angular.module('labelsApp')
         });
     };
 
-
     return Concept;
 
   });

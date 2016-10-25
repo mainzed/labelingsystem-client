@@ -12,16 +12,16 @@ angular.module('labelsApp')
 
     var SearchResult = $resource(ConfigService.api + '/resourcequery');
 
+    SearchResult.prototype.hasBroader = function() {
+        return this.broaderTerms.length > 0;
+    };
 
+    SearchResult.prototype.hasNarrower = function() {
+        return this.narrowerTerms.length > 0;
+    };
 
-    // this.search = function(thesaurus, text, success, failure) {
-    //     $http.get(ConfigService.api + '/resourcequery?retcat=' + thesaurus + '&query=' + text).then(function(res) {
-    //         success(res.data);
-    //     }, function(res) {
-    //         failure(res);
-    //     });
-    // };
-
+    SearchResult.prototype.hasMore = function() {
+        return this.description || this.hasBroader() || this.hasNarrower();
+    }
     return SearchResult;
-
-  });
+});

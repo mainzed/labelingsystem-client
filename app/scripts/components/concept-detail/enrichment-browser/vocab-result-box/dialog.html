@@ -4,12 +4,11 @@
   </div>
 
   <div id="selectedbox">
-  	<div class="box bigbox {{ cssType }} high" ng-click="onBoxClick()">
-  	  <span class="thumbnail" ng-bind="data.thumbnail"></span>
+  	<div class="box bigbox {{ $ctrl.cssType }} high" ng-click="onBoxClick()">
+  	  <span class="thumbnail" ng-bind="$ctrl.data.thumbnail || $ctrl.data.label"></span>
 
-      <span class="type" ng-show="cssType !== 'label'" title="ls">(ls)</span>
-
-      <mini-preview ng-show="cssType ==='label'"label="data" size="micro" title="{{tooltips.icons.minipreview}}"></mini-preview>
+      <span class="type" ng-show="$ctrl.cssType !== 'label'" title="{{ $ctrl.data.type + ' - ' + $ctrl.data.scheme }}">({{ $ctrl.data.type }})</span>
+      <mini-preview ng-show="$ctrl.cssType === 'label'" label="$ctrl.data" size="micro" title="{{ tooltips.icons.minipreview }}"></mini-preview>
 
   	</div>
   </div>
@@ -17,16 +16,16 @@
   <div id="enrichbuttons">
 
     <!-- resource columns -->
-    <div ng-show="cssType !== 'label'">
+    <div ng-show="$ctrl.cssType !== 'label'">
       <div class="col five leftout">
-    		<button class="enrichbutton-ow" type="button" ng-click="onConfirm({ $concept: data, $relation: 'broadMatch' }); closeThisDialog()">
+    		<button class="enrichbutton-ow" type="button" ng-click="$ctrl.addConcept('broadMatch')">
     			<span class="buttontext-ow">broad Match</span>
     		</button>
         <p class="enrichinfo" ng-bind="tooltips.comments.broadMatch"></p>
     	</div>
 
       <div class="col five">
-    		<button class="enrichbutton-ow" type="button" ng-click="onConfirm({ $concept: data, $relation: 'exactMatch' }); closeThisDialog()">
+    		<button class="enrichbutton-ow" type="button" ng-click="$ctrl.addConcept('exactMatch')">
     			<span class="buttontext-ow">exact Match</span>
     			<span class="icon-exact icon"></span>
     		</button>
@@ -34,7 +33,7 @@
     	</div>
 
       <div class="col five">
-    		<button class="enrichbutton-ow" type="button" ng-click="onConfirm({ $concept: data, $relation: 'relatedMatch' }); closeThisDialog()">
+    		<button class="enrichbutton-ow" type="button" ng-click="$ctrl.addConcept('relatedMatch')">
     			<span class="buttontext-ow">related Match</span>
     			<span class="icon-arrow icon"></span>
     		</button>
@@ -42,7 +41,7 @@
     	</div>
 
       <div class="col five">
-    		<button class="enrichbutton-ow" type="button" ng-click="onConfirm({ $concept: data, $relation: 'closeMatch' }); closeThisDialog()">
+    		<button class="enrichbutton-ow" type="button" ng-click="$ctrl.addConcept('closeMatch')">
     			<span class="buttontext-ow">close Match</span>
     			<span class="icon-close icon"></span>
     		</button>
@@ -50,7 +49,7 @@
     	</div>
 
       <div class="col five rightout">
-    		<button class="enrichbutton-ow" type="button" ng-click="onConfirm({ $concept: data, $relation: 'narrowMatch' }); closeThisDialog()">
+    		<button class="enrichbutton-ow" type="button" ng-click="$ctrl.addConcept('narrowMatch')">
     			<span class="buttontext-ow">narrow Match</span>
     		</button>
         <p class="enrichinfo" ng-bind="tooltips.comments.narrowMatch"></p>
@@ -58,16 +57,16 @@
     </div>
 
     <!-- label columns -->
-    <div ng-show="cssType === 'label'">
+    <div ng-show="$ctrl.cssType === 'label'">
       <div class="col three leftout">
-    		<button class="enrichbutton-ow" type="button" ng-click="onConfirm({ $concept: data, $relation: 'broader' }); closeThisDialog()">
+    		<button class="enrichbutton-ow" type="button" ng-click="$ctrl.addConcept('broader')">
     			<span class="buttontext-ow">broader</span>
     		</button>
         <p class="enrichinfo" ng-bind="tooltips.comments.broader"></p>
     	</div>
 
       <div class="col three">
-    		<button class="enrichbutton-ow" type="button"ng-click="onConfirm({ $concept: data, $relation: 'related' }); closeThisDialog()">
+    		<button class="enrichbutton-ow" type="button"ng-click="$ctrl.addConcept('related')">
     			<span class="buttontext-ow">related</span>
     			<span class="icon-close icon"></span>
     		</button>
@@ -75,7 +74,7 @@
     	</div>
 
       <div class="col three rightout">
-    		<button class="enrichbutton-ow" type="button" name="button" ng-click="onConfirm({ $concept: data, $relation: 'narrower' }); closeThisDialog()">
+    		<button class="enrichbutton-ow" type="button" name="button" ng-click="$ctrl.addConcept('narrower')">
     			<span class="buttontext-ow">narrower</span>
     		</button>
         <p class="enrichinfo" ng-bind="tooltips.comments.narrower"></p>
@@ -84,5 +83,4 @@
 
   </div>
 
-  <div class="cancel" ng-click="closeThisDialog()">Cancel</div>
 </div>

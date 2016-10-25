@@ -21,15 +21,15 @@
             $scope.vocabulary = VocabService.get({id: $routeParams.vID});
             $scope.label = LabelService.get({id: $routeParams.lID});
 
-            $(".nano").nanoScroller();
+            angular.element(".nano").nanoScroller();
         }
 
         // temporarily add box when new resource was addedd
         $scope.$on("addedResource", function(event, data) {
-            if (!$scope.label[data.relation]) {
-                $scope.label[data.relation] = [];
-            }
-            $scope.label[data.relation].push(data.resource);
+            $scope.label.addChild(data.concept, data.relation);
+            $scope.label.save(function() {
+                //
+            });
         });
 
         $scope.$on("removedResource", function(event, data) {
