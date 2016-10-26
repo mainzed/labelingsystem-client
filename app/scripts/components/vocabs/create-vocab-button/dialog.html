@@ -1,42 +1,60 @@
 <div class="dialogwrapper label">
-	<div class="dialogheader">
+
+    <div class="dialogheader">
 		<h3>Create new vocabulary</h3>
 		<div class="line-bottom line"></div>
 	</div>
 
 	<div class="dialogscroll">
-	<div class="nano">
-	<div class="nano-content">
+	    <div class="nano">
+	        <div class="nano-content">
 
-		<div class="dialogbox dialog-full">
-			<h4>Title</h4>
-			<input type="text" placeholder="title" ng-model="newVocab.title">
-		</div>
+                <!-- title -->
+        		<div class="dialogbox dialog-full">
+        			<h4>Title</h4>
+        			<input type="text" placeholder="title" ng-model="newVocab.title">
+        		</div>
 
+        		<div class="line-dialog line"></div>
 
-		<div class="line-dialog line"></div>
+                <!-- description -->
+        		<div class="dialogbox dialog-full">
+                    <h4>Description</h4>
+                    <textarea rows="8" cols="40" placeholder="description" ng-model="newVocab.description" ng-paste="onDescriptionKeyPress($event)" ng-keypress="onDescriptionKeyPress($event)"></textarea>
+        		</div>
 
-		<div class="dialogbox dialog-full">
-      <h4>Description</h4>
-      <textarea rows="8" cols="40" placeholder="description" ng-model="newVocab.description" ng-paste="onDescriptionKeyPress($event)" ng-keypress="onDescriptionKeyPress($event)"></textarea>
-		</div>
+		        <div class="line-dialog line"></div>
 
-		<div class="line-dialog line"></div>
+                <!-- language -->
+		        <div class="dialogbox dialog-full">
+        			<h4>Language</h4>
+        			<select ng-model="newVocab.language">
+                        <option value="" disabled selected>Select language</option>
+        			    <option ng-repeat="language in languages | orderBy: 'name'" value="{{language.value}}" ng-bind="language.name"></option>
+        			</select>
+        		</div>
 
-		<div class="dialogbox dialog-full">
-			<h4>Language</h4>
-			<select ng-model="newVocab.language">
-        <option value="" disabled selected>Select language</option>
-			  <option ng-repeat="language in languages | orderBy: 'name'" value="{{language.value}}" ng-bind="language.name"></option>
-			</select>
-		</div>
+                <div class="line-dialog line"></div>
 
+                <!-- license -->
+		        <div class="dialogbox dialog-full">
+        			<h4>License</h4>
+                    <div class="thesaurus" ng-repeat="license in $ctrl.licenses" ng-class="{'checked': license === $ctrl.license}">
 
+                        <ls-radiobox checked="license === $ctrl.license" on-check="$ctrl.updateLicense(license)"></ls-radiobox>
+
+                        <h5 ng-bind="license.short"></h5>
+                        <p>
+                            {{ license.value }}
+                            <a ng-href="{{ license.link }}" target="_blank">more info</a>
+                        </p>
+
+                    </div>
+        		</div>
+	        </div>
+	    </div>
 	</div>
-	</div>
-	</div>
 
-
-	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="$ctrl.onConfirm({$newVocab: newVocab}); closeThisDialog()" ng-disabled="!term" ng-class="{'inactive': !newVocab.title || !newVocab.description || !newVocab.language}">Apply</div>
+	<!-- <div class="cancel" ng-click="closeThisDialog()">Cancel</div> -->
+	<div class="apply" ng-click="$ctrl.create()" ng-disabled="!term" ng-class="{'inactive': !newVocab.title || !newVocab.description || !newVocab.language}">Create</div>
 </div>
