@@ -14,8 +14,11 @@
     controller: function ($scope, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService, ConfigService, UserSettingsService, $timeout, CachingService) {
         var ctrl = this;
 
+        ctrl.loading = null;
+        ctrl.showMoreIsVisible = false;
+
         ctrl.$onInit = function () {
-            $scope.loading = true;
+            ctrl.loading = true;
             $scope.tooltips = TooltipService;
             $scope.placeholder = "loading labels...";
             $scope.extendAll = UserSettingsService.extendAll;
@@ -37,7 +40,7 @@
             if (CachingService.editor.concepts && CachingService.editor.concepts.vocabID === $routeParams.vID) {
                 // cached concepts are for the current vocab
                 $scope.labels = CachingService.editor.concepts.items;
-                $scope.loading = false;
+                ctrl.loading = false;
                 $scope.placeholder = "filter";
             } else {
                 ctrl.loadConcepts();
@@ -53,6 +56,8 @@
                 };
             }
 
+            // cache extend settings
+
             // cache concepts. doing this on destroy saves us from having to
             // update the cache when adding or removing concepts
             CachingService.editor.concepts = {
@@ -62,10 +67,10 @@
         };
 
         ctrl.loadConcepts = function() {
+            ctrl.loading = true;
             LabelService.query({'vocab': $routeParams.vID}, function(labels) {
                 $scope.labels = labels;
-                $scope.loading = false;
-                $scope.placeholder = "filter";
+                ctrl.loading = false;
             });
         };
 
@@ -107,24 +112,12 @@
             UserSettingsService.labelOrder = newValue;
         });
 
-        /**
-         * Watch if boxes are extended or not and updated text accordingly.
-         */
-        $scope.$watch("extendAll", function(newVal) {
-            // update service
-            UserSettingsService.extendAll = $scope.extendAll;
-
-            // update button text
-            if (newVal) {
-                $scope.extendButtonText = "collapse all";
-            } else {
-                $scope.extendButtonText = "extend all";
-            }
-        });
+        ctrl.toggleExtent = function() {
+            $scope.extendAll = !$scope.extendAll;
+        }
 
         // refresh boxes when csv upload complete
         $scope.$on("csvUploadComplete", function() {
-            $scope.loading = true;
             ctrl.loadConcepts();
         });
 

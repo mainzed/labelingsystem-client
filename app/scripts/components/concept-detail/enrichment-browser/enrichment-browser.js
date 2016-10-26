@@ -21,8 +21,10 @@ angular.module("labelsApp")
             $scope.showSearch = false; // ConfigService.showSearchOnStart;
             $scope.tooltips = TooltipService;
 
-            if (ctrl.showEnrichments !== null) {
-                ctrl.showEnrichments = CachingService.showEnrichments;
+            if (CachingService.editor.showEnrichments === false) {
+                ctrl.showEnrichments = CachingService.editor.showEnrichments;
+            } else {
+                ctrl.showEnrichments = true;
             }
 
             // get thesauri when label is available
@@ -34,7 +36,7 @@ angular.module("labelsApp")
         };
 
         ctrl.$onDestroy = function() {
-            CachingService.showEnrichments = ctrl.showEnrichments;
+            CachingService.editor.showEnrichments = ctrl.showEnrichments;
         }
 
         ctrl.getEnrichmentVocab = function(vocab) {
