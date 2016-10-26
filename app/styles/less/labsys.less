@@ -425,9 +425,14 @@ textarea:focus {	outline: none; }
 					height: 450px; top: calc((100% - 450px ) / 2);}
 .dialogwrapper {	width: 100%; height: 100%; position: absolute;}
 .dialogheader { 	width: 100%; height: 120px; position: relative; }
+.ngdialog-close {	font-size: 25px; text-align: right; position: absolute; top: 10px; right: @marginoutside;}
 .dialogscroll {		height: calc(100% - 180px); float: left; clear: both; display: block; overflow: hidden; width: 100%;
 					margin-bottom: 100px; }
+.dialogscroll.nocontrol {
+					height: calc(100% - 130px); }
 .dialogbox		{	float: left; padding-top: 4px; }
+.dialogboxnopadding {
+					padding-top: 0; margin-top: -1px;}
 .dialogbox input {	width: calc(100% - 2 * @marginoutside); margin-left: @marginoutside; margin-bottom: @marginbottombox; 
 					padding: @margininboxsmall; background: #d6d6d6; color: black; border: 0; height: 38px; }
 .buttonfollow {		margin-bottom: @marginbottombox; }

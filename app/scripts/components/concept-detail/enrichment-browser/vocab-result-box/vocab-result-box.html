@@ -27,14 +27,6 @@
         <span class="smalltype" ng-bind="$ctrl.data.description"></span>
     </span>
 
-    <!-- broader -->
-    <span class="note-ext">
-        <span class="italic smalltype" ng-show="$ctrl.data.hasBroader()">broader</span><br>
-        <ul class="hierarchie">
-            <li ng-repeat="broaderConcept in $ctrl.conceptDetails.broader" ng-bind="broaderConcept.thumbnail"></li>
-            <li ng-repeat="broaderConcept in $ctrl.data.broaderTerms" ng-bind="broaderConcept.label"></li>
-        </ul>
-    </span>
 
     <!-- related -->
     <span class="note-ext">
@@ -44,15 +36,7 @@
         </ul>
     </span>
 
-    <!-- narrower -->
-    <span class="note-ext">
-        <span class="italic smalltype" ng-show="$ctrl.data.hasNarrower()">narrower</span><br>
-        <ul class="hierarchie">
-            <li ng-repeat="narrowerConcept in $ctrl.conceptDetails.narrower" ng-bind="narrowerConcept.thumbnail"></li>
-            <li ng-repeat="narrowerConcept in $ctrl.data.narrowerTerms" ng-bind="narrowerConcept.label"></li>
-        </ul>
-    </span>
-
+ 
     <!-- link -->
     <span class="note-ext"><span class="italic smalltype"></span><br>
         <a class="loudlinkmin smalltype" ng-href="{{ $ctrl.getLink() }}" target="_blank" ng-click="$event.stopPropagation()">open in new tab</a>
