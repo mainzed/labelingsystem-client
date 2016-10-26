@@ -14,8 +14,9 @@
     controller: function ($scope, $timeout, $location, VocabService, LabelService, CachingService) {
         var ctrl = this;
 
+        ctrl.loading = null;
         ctrl.$onInit = function () {
-            $scope.loading = true;
+            ctrl.loading = true;
 
             if (CachingService.filters.vocabs) {
                 $scope.vocabFilter = CachingService.filters.vocabs;
@@ -24,12 +25,11 @@
             // get from cache or server
             if (CachingService.viewer.vocabs) {  // already cached
                 $scope.vocabularies = CachingService.viewer.vocabs;
-                $scope.loading = false;
+                ctrl.loading = false;
             } else {
                 VocabService.queryPublic(function(vocabs) {
                     $scope.vocabularies = vocabs;
-
-                    $scope.loading = false;
+                    ctrl.loading = false;
                 }, function error(res) {
                     console.log(res);
                 });
@@ -55,7 +55,7 @@
             $location.path("/");
         };
 
-        $scope.$watch("loading", function(loading) {
+        $scope.$watch("ctrl.loading", function(loading) {
             if (!loading) {
                 $timeout(function() {
                     angular.element('#filtersearch input').focus();

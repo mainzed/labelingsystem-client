@@ -42,6 +42,12 @@ angular.module('labelsApp')
             extendAll: null
         };
 
+        this.extendAll = {};
+
+        this.showEnrichments = null;
+
+        this.order = {};
+
         /**
          * Returns the filter if the the vocab id matches.
          * @param {string} id - Vocabulary ID
@@ -53,4 +59,30 @@ angular.module('labelsApp')
                 return;
             }
         };
+
+        this.reset = function() {
+            this.viewer = {
+                vocabs: null,
+                concepts: null, // concepts view
+                allConcepts: null // landing page
+            };
+            this.editor = {
+                vocabs: null,
+                vocabsWithCreator: null,
+                concepts: null
+            };
+            this.filters = {
+                vocabs: null,
+                concepts: {
+                    vocabID: null,
+                    value: null
+                }
+            };
+            this.toggles = {
+                extendAll: null
+            };
+            this.extendAll = {};
+            this.showEnrichments = null;
+            this.order = {};
+        }
     });

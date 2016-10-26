@@ -4,7 +4,7 @@
 
     <span class="thumbnail">
 
-      <button class="showadditionalcontent" ng-click="toggleExtension(concept.id); $event.stopPropagation()">
+      <button class="showadditionalcontent" ng-click="toggleExtension(concept.id); $event.stopPropagation()" ng-disabled="!$ctrl.hasMore()">
         <span class="showmore" ng-show="!showMore && $ctrl.hasMore()">
           <span class="icon-breadcrumb"></span>
         </span>

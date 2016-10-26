@@ -12,7 +12,7 @@ angular.module('labelsApp')
     },
     templateUrl: "scripts/components/landing/landing.html",
 
-    controller: function ($scope, $window, $filter, $timeout, $location, LabelService, FilterService, CachingService, ConfigService) {
+    controller: function ($scope, $window, $filter, $timeout, $location, LabelService, CachingService, ConfigService) {
 
         var ctrl = this;
 
@@ -62,15 +62,6 @@ angular.module('labelsApp')
                 }, 0);
             }
         });
-
-        // filter in controller to improve speed
-
-
-        // $scope.labelFilter = FilterService.getSearchFilter();
-        //
-        // $scope.$watch('labelFilter', function(newValue) {
-        //     FilterService.setSearchFilter(newValue);
-        // });
 
         $scope.highlightResult = function(labelName, search) {
             if (labelName) {

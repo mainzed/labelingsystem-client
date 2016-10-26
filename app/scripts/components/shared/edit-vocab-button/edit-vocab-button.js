@@ -35,7 +35,7 @@ angular.module('labelsApp')
                 VocabService.query({creatorInfo: true}, function(vocabs) {
                     $scope.vocabularies = vocabs;
                     CachingService.editor.vocabsWithCreator = vocabs;
-                    $(".nano").nanoScroller();
+                    angular.element(".nano").nanoScroller();
                 });
             }
         };

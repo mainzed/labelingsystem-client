@@ -16,7 +16,7 @@
 
       <ls-vocab-box ng-repeat="vocab in (filteredVocabularies = (vocabularies | filter: {'creator': user.name} | filter: {title: vocabFilter} | orderBy: 'title'))" data="vocab" mode="viewer"></ls-vocab-box>
 
-      <div class="loader" ng-show="!filteredVocabularies.length"></div>
+      <div class="loader" ng-show="$ctrl.loading"></div>
 
 	  </div>
 	</div>

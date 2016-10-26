@@ -10,7 +10,7 @@ angular.module("labelsApp")
 
     // The controller that handles our component logic
     controller: function($scope, $routeParams, $rootScope, ConfigService, SearchService,
-        VocabService, TooltipService, UserSettingsService, LabelService) {
+        VocabService, TooltipService, UserSettingsService, LabelService, CachingService) {
         var ctrl = this;
 
         ctrl.$onInit = function() {
@@ -20,8 +20,10 @@ angular.module("labelsApp")
             $scope.conceptsLimit = ConfigService.conceptsLimit;
             $scope.showSearch = false; // ConfigService.showSearchOnStart;
             $scope.tooltips = TooltipService;
-            ctrl.showEnrichments = UserSettingsService.showEnrichments;
 
+            if (ctrl.showEnrichments !== null) {
+                ctrl.showEnrichments = CachingService.showEnrichments;
+            }
 
             // get thesauri when label is available
             VocabService.get({id: $routeParams.vID}, function(vocab) {
@@ -32,7 +34,7 @@ angular.module("labelsApp")
         };
 
         ctrl.$onDestroy = function() {
-            UserSettingsService.showEnrichments = ctrl.showEnrichments;
+            CachingService.showEnrichments = ctrl.showEnrichments;
         }
 
         ctrl.getEnrichmentVocab = function(vocab) {

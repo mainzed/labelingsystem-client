@@ -14,12 +14,11 @@
     controller: function ($scope, $timeout, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService, ConfigService, UserSettingsService, CachingService, AgentService) {
         var ctrl = this;
 
-        var ctrl = this;
+        ctrl.loading = null;
 
         ctrl.$onInit = function () {
-            $scope.loading = true;
+            ctrl.loading = true;
             $scope.tooltips = TooltipService;
-            $scope.placeholder = "loading labels...";
             $scope.extendAll = CachingService.toggles.extendAll || false;
             $scope.extendButtonText = $scope.extendAll ? "collapse boxes" : "extend boxes";
 
@@ -29,7 +28,6 @@
             // TODO: load currentVocab from cache
             VocabService.get({id: $routeParams.vID}, function(vocabulary) {
                 $scope.vocabulary = vocabulary;
-                //console.log($scope.vocabulary);
 
                 // creator info
                 AgentService.get({id: $scope.vocabulary.creator}, function(agent) {
@@ -45,7 +43,6 @@
                 // cached concepts are for the current vocab
                 $scope.labels = CachingService.editor.concepts.items;
                 $scope.loading = false;
-                $scope.placeholder = "filter";
             } else {
                 ctrl.loadConcepts();
             }
@@ -83,8 +80,7 @@
         ctrl.loadConcepts = function() {
             LabelService.query({'vocab': $routeParams.vID}, function(labels) {
                 $scope.labels = labels;
-                $scope.loading = false;
-                $scope.placeholder = "filter";
+                ctrl.loading = false;
             });
         };
 
@@ -125,13 +121,9 @@
             $location.path("/");
         };
 
-        $scope.$watch("loading", function(loading) {
-            if (loading) {
-                $scope.placeholder = "loading labels...";
-
-            } else {
+        $scope.$watch("ctrl.loading", function(loading) {
+            if (!loading) {
                 $timeout(function() {
-                    $scope.placeholder = "filter";
                     angular.element('#filtersearch input').focus();
                 }, 0);
             }

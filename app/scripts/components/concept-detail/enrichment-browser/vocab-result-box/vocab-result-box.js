@@ -20,6 +20,7 @@ angular.module("labelsApp")
         ctrl.cssType = null;
 
         ctrl.$onInit = function() {
+            //console.log(ctrl.data);
             $scope.tooltips = TooltipService;
             ctrl.setIcon(ctrl.data);
             angular.element(".nano").nanoScroller();
@@ -34,6 +35,7 @@ angular.module("labelsApp")
                 ctrl.cssType = "ls"
             }
         }
+
         /**
          * Opens a type-specific dialog that shows the connection (relation)
          * options for each type to link to the label.

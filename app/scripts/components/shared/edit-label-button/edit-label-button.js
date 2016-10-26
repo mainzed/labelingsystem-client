@@ -62,7 +62,7 @@ angular.module('labelsApp')
         };
 
         $rootScope.$on('ngDialog.closed', function (e, $dialog) {
-            if (ctrl.dialog.id === $dialog.attr('id') && ctrl.modifiedLabel) {
+            if (ctrl.dialog && ctrl.dialog.id === $dialog.attr('id') && ctrl.modifiedLabel) {
                 ctrl.data.save(function success() {
                     //console.log("success");
                 }, function error(res) {

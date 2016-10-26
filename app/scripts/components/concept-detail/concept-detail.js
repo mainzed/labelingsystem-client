@@ -20,15 +20,23 @@
             $scope.tooltips = TooltipService;
             $scope.vocabulary = VocabService.get({id: $routeParams.vID});
             $scope.label = LabelService.get({id: $routeParams.lID});
-
             HelperService.refreshNanoScoller();
         }
 
-        // temporarily add box when new resource was addedd
+        $scope.$on("removedConcept", function(event, data) {
+            // TODO: implement removeChild() method for concepts
+            // that can handle both resources and concepts
+            $scope.label[data.relation] = _.pull($scope.label[data.relation], data.conceptID);
+
+            $scope.label.save(function() {
+                // success
+            });
+        });
+
         $scope.$on("addedResource", function(event, data) {
             $scope.label.addChild(data.concept, data.relation);
             $scope.label.save(function() {
-                //
+                // success
             });
         });
 

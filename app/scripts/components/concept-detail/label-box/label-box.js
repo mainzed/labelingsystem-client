@@ -47,7 +47,7 @@ angular.module('labelsApp')
                         scope.$apply();
                     });
 
-                    var conceptDialog = ngDialog.open({
+                    scope.conceptDialog = ngDialog.open({
                         template: "scripts/components/concept-detail/label-box/dialog.html",
                         className: 'bigdialog',
                         showClose: false,
@@ -58,7 +58,7 @@ angular.module('labelsApp')
 
                     // add listener to init nanoScroller once the dialog is loaded
                     $rootScope.$on('ngDialog.opened', function (e, $dialog) {
-                        if (conceptDialog.id === $dialog.attr('id')) {  // is the resource dialog
+                        if (scope.conceptDialog.id === $dialog.attr('id')) {  // is the resource dialog
                             $timeout(function() {
                                 $(".nano").nanoScroller();
                             }, 0);
@@ -79,21 +79,11 @@ angular.module('labelsApp')
              * Deletes the selected resource, description, prefLabel or altLabel.
              */
             scope.onDeleteClick = function() {
-
-                // get current parent concept
-                LabelService.get({id: $routeParams.lID}, function(parentConcept) {
-
-                    // remove current concept ID from array of relation in parentConcept
-                    parentConcept[scope.relation] = _.pull(parentConcept[scope.relation], scope.concept.id);
-
-                    // save to server
-                    parentConcept.save(function() {
-                        // delete element from DOM
-                        element.remove();
-                    }, function error(res) {
-                        console.log(res);
-                    });
+                $rootScope.$broadcast("removedConcept", {
+                    conceptID: scope.data,
+                    relation: scope.relation
                 });
+                scope.conceptDialog.close();
             };
 
             /**

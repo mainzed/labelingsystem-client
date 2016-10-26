@@ -13,7 +13,7 @@ angular.module('labelsApp')
         mode: "@"
     },
     templateUrl: 'scripts/components/shared/footer/footer.html',
-    controller: function ($location, AuthService, ConfigService) {
+    controller: function ($location, AuthService, ConfigService, CachingService) {
         var ctrl = this;
 
         ctrl.$onInit = function() {
@@ -26,6 +26,7 @@ angular.module('labelsApp')
          */
         ctrl.onLogoutClick = function() {
             AuthService.logout().then(function () {
+                CachingService.reset();
                 $location.path('/editor/login');
             }, function() {
                 console.log("logout failed!!");

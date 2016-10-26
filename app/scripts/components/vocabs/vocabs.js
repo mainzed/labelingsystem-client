@@ -13,14 +13,16 @@
     controller: function ($scope, $q, $location, $timeout, $rootScope, $http, ngDialog, AuthService, VocabService, ThesauriService, CachingService) {
 
         var ctrl = this;
+        ctrl.user = null;
 
         ctrl.$onInit = function () {
-            $scope.loading = true;
+            ctrl.loading = true;
 
             // get filters from cache
             if (CachingService.filters.vocabs) {
                 $scope.vocabFilter = CachingService.filters.vocabs;
             }
+
         };
 
         ctrl.$onDestroy = function () {
@@ -32,11 +34,23 @@
             CachingService.viewer.vocabs = $scope.vocabularies;
         };
 
+        $rootScope.$watch("isAuthenticated", function(isAuthenticated) {
+            if (isAuthenticated) {
+                // get from cache or server
+                if (CachingService.editor.vocabs) {
+                    $scope.vocabularies = CachingService.editor.vocabs;
+                    ctrl.loading = false;
+                } else {
+                    ctrl.loadVocabs();
+                }
+            }
+        });
+
         ctrl.loadVocabs = function() {
             VocabService.queryWithStats({ creator: AuthService.getUser().id }, function(vocabs) {
                 $scope.vocabularies = vocabs;
                 CachingService.editor.vocabs = vocabs;
-                $scope.loading = false;
+                ctrl.loading = false;
             });
         };
 
@@ -70,20 +84,6 @@
 
         $rootScope.$on("removedVocab", function(event, data) {
             _.remove($scope.vocabularies, { id: data.vocabID});
-        });
-
-        $rootScope.$watch("isAuthenticated", function(isAuthenticated) {  // set in AuthService when user ready
-
-            if (isAuthenticated) {
-
-                // get from cache or server
-                if (CachingService.editor.vocabs) {
-                    $scope.vocabularies = CachingService.editor.vocabs;
-                    $scope.loading = false;
-                } else {
-                    ctrl.loadVocabs();
-                }
-            }
         });
 
         $scope.$watch("loading", function(loading) {

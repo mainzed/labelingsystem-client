@@ -61,7 +61,7 @@ angular.module('labelsApp')
             }
 
             ctrl.dialog = ngDialog.open({
-                template: 'scripts/components/shared/search-settings-button/dialog.html',
+                template: 'scripts/components/concept-detail/enrichment-browser/search-settings-button/dialog.html',
                 className: 'bigdialog',
                 disableAnimation: true,
                 scope: $scope

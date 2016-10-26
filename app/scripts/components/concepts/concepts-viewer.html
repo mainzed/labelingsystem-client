@@ -1,14 +1,7 @@
 <div id="header" class="box full" ng-class="vocabulary.releaseType">
-	<!-- <div id="breadcrumb"></div> -->
-  <ls-breadcrumbs mode="viewer"></ls-breadcrumbs>
-
-  <!-- loop over all prefLabels, so it autofreshes on change -->
-  <h1 ng-bind="vocabulary.title"></h1>
-
-  <span class="icon-search" ng-click="onSearchClick()"></span>
-
-  <!-- <ls-edit-vocab-button data="vocabulary"></ls-edit-vocab-button> -->
-
+    <ls-breadcrumbs mode="viewer"></ls-breadcrumbs>
+    <h1 ng-bind="vocabulary.title"></h1>
+    <span class="icon-search" ng-click="onSearchClick()"></span>
 	<span class="language" ng-bind="vocabulary.language"></span>
 </div>
 
@@ -72,7 +65,7 @@
 
       <ls-list-box ng-repeat="label in filteredLabels = (labels | filter: {thumbnail: labelFilter} | orderBy: labelOrder | limitTo: conceptsLimit)" concept="label" mode="viewer"></ls-list-box>
 
-      <div class="loader" ng-show="!filteredLabels.length && loading">
+      <div class="loader" ng-show="$ctrl.loading">
 
       </div>
 
