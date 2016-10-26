@@ -1,15 +1,15 @@
-<div class="dialogwrapper" ng-class="{ 'label': $ctrl.data.releaseType === 'public', 'draft': $ctrl.data.releaseType === 'draft' }">
+<div class="dialogwrapper label">
     <div class="dialogheader">
         <h3 ng-bind="$ctrl.heading"></h3>
         <div class="line-bottom line"></div>
     </div>
 
-    <div class="dialogscroll">
+    <div class="dialogscroll nocontrol">
         <div class="nano">
             <div class="nano-content">
 
                 <!-- thesauri -->
-                <div class="dialogbox dialog-full" ng-if="$ctrl.mode === 'thesauri'">
+                <div class="dialogboxnopadding dialog-full" ng-if="$ctrl.mode === 'thesauri'">
                     <div class="thesaurus" ng-repeat="thesaurus in $ctrl.thesauri | orderBy: ['name']" ng-class="{'checked': thesaurus.checked}" ng-show="thesaurus.name.indexOf('this.') === -1">
                         <div class="checkboxwrapper">
                             <checkbox ng-model="thesaurus" on-check="$ctrl.saveThesauri()"></checkbox>
@@ -29,7 +29,7 @@
                             {{ vocab.title }}
                             <span ng-if="$ctrl.data.id === vocab.id">(current)</span>
                         </h5>
-                        <p ng-bind="vocab.description"></p>
+                        <p class="dialog-half" ng-bind="vocab.description"></p>
 
                         <span class="floatright" ng-show="vocab.creator !== $ctrl.user.id">
                             <a ng-href="{{ vocab.creatorInfo.orcid }}" target="_blank" ng-bind-html="$ctrl.getCreatorAsLink(vocab)"></a>
