@@ -12,44 +12,47 @@
         concept: "="
     },
     templateUrl: "scripts/components/landing/result-box/result-box.html",
-    controller: function ($scope, $location) {
+    controller: function ($scope, $location, HelperService) {
         var ctrl = this;
 
+        ctrl.conceptDetails = null;
+
         ctrl.$onInit = function () {
-            $(".nano").nanoScroller();
+            HelperService.refreshNanoScoller();
+            //$(".nano").nanoScroller();
         };
 
         ctrl.$onDestroy = function () {};
 
-        ctrl.showMore = function() {
-            console.log("show more");
-            ctrl.concept.getDetails(function(details) {
-                console.log(details);
-                ctrl.conceptDetails = details;
-            });
-            $scope.showMore = !$scope.showMore;
-        }
+        /**
+         * Watcher that resets nanoscroll each time a concept is extended
+         * to show additional details.
+         */
+        $scope.$watch("showMore", function(showMore) {
+            if (ctrl.concept && showMore) {
+                ctrl.concept.getDetails().then(function(conceptDetails) {
+                    ctrl.conceptDetails = conceptDetails;
+                    $scope.$apply();
+                });
+            }
+            angular.element(".nano").nanoScroller();
+       });
 
         ctrl.redirectToConcept = function() {
             $location.path("/vocabularies/" + ctrl.concept.vocabID + "/concepts/" + ctrl.concept.id);
         };
-
-        ctrl.hasMore = function() {
-            return ctrl.concept.description || ctrl.concept.hasBroader() || ctrl.concept.hasNarrower();
-        }
 
         /**
          * Watcher that resets nanoscroll each time the extentAll property
          * changes (e.g. by a button click on "extent all").
          */
         $scope.$parent.$watch("extendAll", function(extendAll) {
-            if (extendAll && ctrl.hasMore()) {
+            if (extendAll && ctrl.concept.hasMore()) {
                 $scope.showMore = extendAll;
-            } else if (!extendAll && ctrl.hasMore()) {
+            } else if (!extendAll && ctrl.concept.hasMore()) {
                 $scope.showMore = extendAll;
             }
-            $(".nano").nanoScroller();
+            angular.element(".nano").nanoScroller();
         });
-
     }
 });
