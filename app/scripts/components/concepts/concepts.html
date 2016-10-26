@@ -22,7 +22,7 @@
                 </ul>
             </li>
         </ul>
-        <ls-extend-button ng-click="extendAll = !extendAll"></ls-extend-button>
+        <ls-extend-button ng-click="$ctrl.toggleExtent()"></ls-extend-button>
     </div>
 </div>
 
@@ -32,7 +32,7 @@
 
       <ls-list-box ng-repeat="label in filteredLabels = (labels | filter: {thumbnail: labelFilter} | orderBy: labelOrder | limitTo: conceptsLimit)" concept="label"></ls-list-box>
 
-      <div class="loader" ng-show="!filteredLabels.length && loading">
+      <div class="loader" ng-show="$ctrl.loading">
 
       </div>
 
@@ -42,7 +42,7 @@
       </span> -->
 
       <!-- when search empty and more labels available show option to load more -->
-      <span class="box bigbox label listbox" ng-show="!labelFilter && labels.length > conceptsLimit" ng-click="conceptsLimit = conceptsLimit * 2">
+      <span id="showMoreID" class="box bigbox label listbox" ng-show="!labelFilter && labels.length > conceptsLimit" ng-click="conceptsLimit = conceptsLimit * 2">
         show more
       </span>
 

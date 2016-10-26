@@ -60,8 +60,8 @@ angular.module('labelsApp')
          * to show additional details.
          */
         scope.$watch("showMore", function(showMore) {
-            if (showMore) {
-                scope.concept.getDetails().then(function(conceptDetails) {
+            if (ctrl.concept && showMore) {
+                ctrl.concept.getDetails().then(function(conceptDetails) {
                     scope.conceptDetails = conceptDetails;
                     scope.$apply();
                 });

@@ -12,7 +12,7 @@
     },
     templateUrl: "scripts/components/concept-detail/concept-detail.html",
 
-    controller: function ($scope, $routeParams, VocabService, LabelService, TooltipService, HelperService) {
+    controller: function ($scope, $routeParams, VocabService, LabelService, TooltipService, HelperService, CachingService) {
 
         var ctrl = this;
 
@@ -20,7 +20,18 @@
             $scope.tooltips = TooltipService;
             $scope.vocabulary = VocabService.get({id: $routeParams.vID});
             $scope.label = LabelService.get({id: $routeParams.lID});
+
+            if (CachingService.editor.showEnrichments === false) {
+                ctrl.showEnrichments = CachingService.editor.showEnrichments;
+            } else {
+                ctrl.showEnrichments = true;
+            }
+
             HelperService.refreshNanoScoller();
+        }
+
+        ctrl.$onDestroy = function() {
+            CachingService.editor.showEnrichments = ctrl.showEnrichments;
         }
 
         $scope.$on("removedConcept", function(event, data) {
@@ -69,6 +80,7 @@
 
         $scope.$on("toggledEnrichmentBrowser", function(event, data) {
             ctrl.showEnrichments = data.visible;
+            CachingService.editor.showEnrichments = ctrl.showEnrichments;
             HelperService.refreshNanoScoller();
         });
     }

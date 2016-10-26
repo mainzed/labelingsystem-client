@@ -26,7 +26,8 @@ angular.module('labelsApp')
         this.editor = {
             vocabs: null,
             vocabsWithCreator: null,
-            concepts: null
+            concepts: null,
+            showEnrichments: null
         };
 
         // same for editor and viewer
@@ -43,8 +44,6 @@ angular.module('labelsApp')
         };
 
         this.extendAll = {};
-
-        this.showEnrichments = null;
 
         this.order = {};
 

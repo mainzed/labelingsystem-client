@@ -89,6 +89,7 @@ angular.module('labelsApp')
                 me.getRelatedMatches("relatedMatch"),
                 me.getRelatedMatches("closeMatch"),
                 me.getRelatedMatches("exactMatch")
+
             ]).then(function(values) {
                 resolve({
                     broader: values[0],
