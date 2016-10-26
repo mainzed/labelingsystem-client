@@ -20,11 +20,13 @@
                 <form name="$ctrl.conceptForm" novalidate>
 
                     <div class="dialogbox dialog-full">
+
                         <h4>Label</h4>
                         <input type="text" maxlength="{{ $ctrl.titleLength }}" placeholder="label" ng-model="$ctrl.newConcept.thumbnail" required>
 
                         <!-- confirm label -->
                         <input ng-show="$ctrl.vocab.releaseType === 'public'" type="text" maxlength="{{ $ctrl.titleLength }}" placeholder="rewrite to prevent wrong spelling" ng-model="$ctrl.newConcept.thumbnailConfirm">
+
                     </div>
 
                 </form>

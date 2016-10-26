@@ -8,37 +8,67 @@
  */
  angular.module('labelsApp')
   .component('lsCreateVocabButton', {
-    bindings: {
-        onConfirm: "&"
-    },
+    bindings: {},
     template: '<span type="button" class="plusposition" ng-click="$ctrl.openDialog()">+</span>',
-    controller: function ($scope, ngDialog, ConfigService, LanguageService, AuthService, ThesauriService) {
+    controller: function ($scope, $rootScope, ngDialog, ConfigService, LanguageService, AuthService, ThesauriService, LicenseService) {
 
-        $scope.languages = LanguageService.query().then(function(languages) {
-            $scope.languages = languages;
-        }, function(res) {
-            console.log(res);
-        });
+        var ctrl = this;
 
-        $scope.maxLength = ConfigService.vocabDescriptionLength;
-        this.openDialog = function() {
+        ctrl.license = null;
+        ctrl.licenses = null;
+        ctrl.dialog = null;
+
+        ctrl.$onInit = function() {
+
+            $scope.maxLength = ConfigService.vocabDescriptionLength;
+
+            $scope.languages = LanguageService.query().then(function(languages) {
+                $scope.languages = languages;
+            }, function(res) {
+                console.log(res);
+            });
+
+            LicenseService.query({}, function(licenses) {
+                ctrl.licenses = licenses;
+
+                // set default license
+                angular.forEach(ctrl.licenses, function(license) {
+                    if (license.short === "CC BY 4.0") {
+                        ctrl.license = license;
+                    }
+                });
+
+            })
+        }
+
+        ctrl.openDialog = function() {
 
             $scope.newVocab = {
                 creator: AuthService.getUser().id,
                 title: "",
                 description: "",
-                language: ""
+                language: "",
+                license: ""
             };
 
-            ngDialog.open({
+            ctrl.dialog = ngDialog.open({
                 template: 'scripts/components/vocabs/create-vocab-button/dialog.html',
                 className: 'bigdialog',
-                showClose: false,
-                closeByDocument: false,
+                showClose: true,
                 disableAnimation: true,
                 scope: $scope
             });
         };
+
+        ctrl.updateLicense = function(license) {
+            ctrl.license = license;
+        }
+
+        ctrl.create = function() {
+            $scope.newVocab.license = ctrl.license.link;
+            $rootScope.$broadcast("addedVocab", { vocab: $scope.newVocab });
+            ctrl.dialog.close();
+        }
 
         $scope.onDescriptionKeyPress = function(e) {
             //console.log();

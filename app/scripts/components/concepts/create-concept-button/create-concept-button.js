@@ -12,7 +12,7 @@
         onConfirm: "&"
     },
     template: '<span class="plusposition" ng-click="$ctrl.openDialog()">+</span>',
-    controller: function ($scope, $http, $rootScope, $document, $location, $routeParams, ngDialog, ConfigService, VocabService) {
+    controller: function ($scope, $http, $rootScope, $document, $location, $routeParams, ngDialog, ConfigService, VocabService, LicenseService) {
         var ctrl = this;
 
         ctrl.$onInit = function() {
@@ -25,8 +25,6 @@
             VocabService.get({id: $routeParams.vID}, function(vocab) {
                 ctrl.vocab = vocab;
             });
-
-            //$(":file").filestyle({buttonText: "Find file"});
         };
 
         //
@@ -59,13 +57,10 @@
                     headers: {'Content-Type': undefined}
                 })
                 .success(function(res) {
-                    console.log(res);
                     ctrl.dialog.close();
-
                     $rootScope.$broadcast("csvUploadComplete");
                 })
                 .error(function(res) {
-                    console.log(res);
                     $scope.errors = res.messages;
                 });
 

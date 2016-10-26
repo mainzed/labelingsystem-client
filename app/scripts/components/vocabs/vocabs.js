@@ -82,6 +82,10 @@
             });
         };
 
+        $rootScope.$on("addedVocab", function(event, data) {
+            $scope.createVocab(data.vocab);
+        });
+
         $rootScope.$on("removedVocab", function(event, data) {
             _.remove($scope.vocabularies, { id: data.vocabID});
         });
