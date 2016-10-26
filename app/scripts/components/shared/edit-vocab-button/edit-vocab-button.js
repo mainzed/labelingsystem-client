@@ -13,7 +13,7 @@ angular.module('labelsApp')
         data: "="  // vocab
     },
     template: '<span class="{{$ctrl.icon}} icon" ng-click="$ctrl.openDialog()"></span>',
-    controller: function ($scope, $rootScope, $location, $document, $anchorScroll, $timeout, ngDialog, VocabService, ConfigService, LabelService, TooltipService, AuthService, HelperService, CachingService, AgentService) {
+    controller: function ($scope, $rootScope, $location, $document, $anchorScroll, $timeout, ngDialog, VocabService, ConfigService, LabelService, TooltipService, AuthService, HelperService, CachingService, AgentService, LicenseService) {
 
         var ctrl = this;
 
@@ -38,9 +38,13 @@ angular.module('labelsApp')
                     angular.element(".nano").nanoScroller();
                 });
             }
+
+            LicenseService.query({}, function(licenses) {
+                ctrl.licenses = licenses;
+            })
         };
 
-        this.openDialog = function() {
+        ctrl.openDialog = function() {
 
             ctrl.newTitle = ctrl.data.title;
             ctrl.newDescription = ctrl.data.description;
@@ -80,6 +84,15 @@ angular.module('labelsApp')
                         }
                     }
                 });
+            });
+        };
+
+        ctrl.saveLicense = function(license) {
+            ctrl.data.license = license.link;
+            ctrl.data.save(function() {
+                //console.log("success");
+            }, function error(res) {
+                console.log(res);
             });
         };
 

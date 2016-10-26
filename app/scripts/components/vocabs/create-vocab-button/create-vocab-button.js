@@ -37,7 +37,6 @@
                         ctrl.license = license;
                     }
                 });
-
             })
         }
 

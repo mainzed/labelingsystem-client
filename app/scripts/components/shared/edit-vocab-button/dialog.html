@@ -23,6 +23,8 @@
                 </div>
 
                 <div class="line-dialog line"></div>
+
+                <!-- meta data -->
                 <div class="dialogbox dialog-full">
                     <h4>meta data</h4>
                     <span class="listtype">language</span>
@@ -36,11 +38,11 @@
 
                     <span class="listtype">creation date</span>
                     <span class="listcontent" ng-bind-template="{{ $ctrl.data.created | date: 'dd.MM.yyyy' }}"></span>
-
                 </div>
 
-
                 <div class="line-dialog line"></div>
+
+
                 <div class="dialogbox dialog-full">
                     <h4 ng-class="{'inactive': $ctrl.data.releaseType === 'public'}">Actions</h4>
                     <!-- delete draft vocab (not allowed to delete public vocab) -->
@@ -54,19 +56,20 @@
 
                 </div>
 
-
                 <div class="line-dialog line"></div>
+
+                <!-- downloads -->
                 <div class="dialogbox dialog-full">
                     <h4>Downloads</h4>
                     <span class="downloadlist">
-            <a ng-href="{{ vocabulary.getUrl() + '.skos' }}" target="_blank" ng-click="$event.stopPropagation()">SKOS</a>
-
-          </span>
+                        <a ng-href="{{ vocabulary.getUrl() + '.skos' }}" target="_blank" ng-click="$event.stopPropagation()">SKOS</a>
+                    </span>
                 </div>
 
                 <div class="line-dialog line"></div>
-                <div class="dialogbox dialog-full">
 
+                <!-- thesauri -->
+                <div class="dialogbox dialog-full">
                     <h4 id="thesauri">Reference thesauri</h4>
                     <div class="thesaurus" ng-repeat="thesaurus in thesauri | orderBy: ['name']" ng-class="{'checked': thesaurus.checked}" ng-show="thesaurus.name.indexOf('this.') === -1">
 
@@ -81,6 +84,8 @@
                 </div>
 
                 <div class="line-dialog line"></div>
+
+                <!-- vocabulary -->
                 <div class="dialogbox dialog-full">
                     <h4>Reference vocabulary</h4>
                     <!-- <div ng-bind="enrichmentVocabID"></div> -->
@@ -98,6 +103,23 @@
                         </span>
                     </div>
                 </div>
+
+                <!-- license -->
+		        <div class="dialogbox dialog-full">
+        			<h4 ng-class="{'inactive': $ctrl.data.releaseType === 'public'}">License</h4>
+                    <div class="thesaurus" ng-repeat="license in $ctrl.licenses" ng-class="{'checked': license.link === $ctrl.data.license, 'inactive': $ctrl.data.releaseType === 'public'}">
+
+                        <ls-radiobox checked="license.link === $ctrl.data.license" on-check="$ctrl.saveLicense(license)"></ls-radiobox>
+
+                        <h5 ng-bind="license.short"></h5>
+                        <p>
+                            {{ license.value }}
+                            <a ng-href="{{ license.link }}" target="_blank">more info</a>
+                        </p>
+
+                    </div>
+        		</div>
+
             </div><!-- end nano-content -->
         </div><!-- end nano -->
     </div><!-- end dialog scroll -->
