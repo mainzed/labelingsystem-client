@@ -11,10 +11,11 @@
     bindings: {
     },
     templateUrl: "scripts/components/concepts/concepts-viewer.html",
-    controller: function ($scope, $timeout, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService, ConfigService, UserSettingsService, CachingService, AgentService) {
+    controller: function ($scope, $timeout, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService, ConfigService, UserSettingsService, CachingService, AgentService, LicenseService) {
         var ctrl = this;
 
         ctrl.loading = null;
+        ctrl.license = null;
 
         ctrl.$onInit = function () {
             ctrl.loading = true;
@@ -32,6 +33,10 @@
                 // creator info
                 AgentService.get({id: $scope.vocabulary.creator}, function(agent) {
                     $scope.agent = agent;
+                });
+
+                LicenseService.query({}, function(licenses) {
+                    ctrl.license = _.find(licenses, { link: $scope.vocabulary.license });
                 });
             });
 

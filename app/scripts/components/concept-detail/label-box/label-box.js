@@ -24,6 +24,7 @@ angular.module('labelsApp')
             // get concept data from ID
             LabelService.get({id: scope.data}, function(concept) {
                 scope.concept = concept;
+                //scope.selected = scope.selected || scope.relation;
                 //$(".nano").nanoScroller();
             }, function(err) {
                 console.log(err);
@@ -38,7 +39,6 @@ angular.module('labelsApp')
                     var currentPath = $location.path().split("/");
                     currentPath.pop();
                     currentPath.push(scope.concept.id);
-
                     $location.path(currentPath.join("/"));
 
                 } else {
@@ -50,8 +50,7 @@ angular.module('labelsApp')
                     scope.conceptDialog = ngDialog.open({
                         template: "scripts/components/concept-detail/label-box/dialog.html",
                         className: 'bigdialog',
-                        showClose: false,
-                        closeByDocument: false,
+                        showClose: true,
                         disableAnimation: true,
                         scope: scope
                     });
@@ -88,46 +87,17 @@ angular.module('labelsApp')
 
             /**
              * change the relation of a concept.
-             * @param {string} newRelation - updated label-to-label relation
-             * @param {string} oldRelation - original label-to-label relation
+             * @param {string} relation - updated label-to-label relation
              */
-            scope.changeRelation = function(newRelation, oldRelation) {
-
-                // get current parent concept
-                LabelService.get({id: $routeParams.lID}, function(parentConcept) {
-
-                    // remove id from old relation array
-                    _.remove(parentConcept[oldRelation], function(n) {
-                        return n === scope.concept.id;
-                    });
-
-                    // add concept ID to new relation array
-                    if (!parentConcept[newRelation]) {
-                        parentConcept[newRelation] = [];
-                    }
-                    parentConcept[newRelation].push(scope.concept.id);
-
-                    parentConcept.save(function() {
-                        // temporarily push changes to parentConcept without refreshing everything
-                        // TODO: find cleaner solution
-                        _.remove(scope.$parent.label[oldRelation], function(n) {
-                            return n === scope.concept.id;
-                        });
-                        if (!scope.$parent.label[newRelation]) {
-                            scope.$parent.label[newRelation] = [];
-                        }
-                        scope.$parent.label[newRelation].push(scope.concept.id);
-
-                        // remove from current relation, gets created automatically in new column
-                        element.remove();
-
-                    }, function error(res) {
-                        console.log(res);
-                    });
-
+            scope.changeRelation = function(relation) {
+                $rootScope.$broadcast("changedConcept", {
+                    concept: scope.concept,
+                    oldRelation: scope.relation,
+                    newRelation: relation
                 });
+                scope.conceptDialog.close();
+                scope.relation = relation;  // update button
             };
-
         }
     };
 });

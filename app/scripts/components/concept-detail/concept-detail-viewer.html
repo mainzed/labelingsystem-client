@@ -27,7 +27,11 @@
         </span>
 
         <span class="listtype">license</span>
-        <span class="listcontent"><a ng-href="{{label.license}}" target="_blank">CC BY</a></span>
+        <span class="listcontent">
+            <a ng-href="{{ label.license }}" target="_blank">
+                {{ $ctrl.license.short }}
+            </a>
+        </span>
 
         <span class="listtype">Download</span>
         <span class="listcontent downloadlist downloadlistindent">

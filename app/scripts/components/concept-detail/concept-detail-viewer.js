@@ -12,13 +12,19 @@
     },
     templateUrl: "scripts/components/concept-detail/concept-detail-viewer.html",
 
-    controller: function ($scope, $timeout, $location, $routeParams, LabelService, TooltipService, ConfigService, CachingService, AgentService, VocabService) {
+    controller: function ($scope, $timeout, $location, $routeParams, LabelService, TooltipService, ConfigService, CachingService, AgentService, VocabService, LicenseService) {
         var ctrl = this;
+
+        ctrl.license = null;
 
         ctrl.$onInit = function() {
             $scope.tooltips = TooltipService;
-            $scope.vocabulary = VocabService.get({id: $routeParams.vID});
-            //$scope.label = LabelService.get({id: $routeParams.lID});
+            VocabService.get({id: $routeParams.vID}, function(vocab) {
+                $scope.vocabulary = vocab;
+                LicenseService.query({}, function(licenses) {
+                    ctrl.license = _.find(licenses, { link: $scope.vocabulary.license });
+                });
+            });
 
             // load current label
             LabelService.getWithRevisions({id: $routeParams.lID}, function(label) {

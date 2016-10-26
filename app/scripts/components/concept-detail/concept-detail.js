@@ -51,6 +51,23 @@
             });
         });
 
+        $scope.$on("changedConcept", function(event, data) {
+            // remove id from old relation array
+            _.remove($scope.label[data.oldRelation], function(n) {
+                return n === data.concept.id;
+            });
+
+            // add concept ID to new relation array
+            $scope.label[data.newRelation] = $scope.label[data.newRelation] || [];
+            $scope.label[data.newRelation].push(data.concept.id);
+
+            $scope.label.save(function() {
+                console.log("success");
+            }, function error(res) {
+                console.log(res);
+            });
+        });
+
         $scope.$on("removedResource", function(event, data) {
             _.remove($scope.label[data.relation], { "uri": data.resourceURI });
         });
