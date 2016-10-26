@@ -49,18 +49,9 @@
         </div>
     </div>
 
-    <!-- single concept buttons -->
-    <div ng-show="!$ctrl.showCSV">
-        <div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-        <div class="apply" ng-click="$ctrl.onConfirm({$newConcept: $ctrl.newConcept}); closeThisDialog()" ng-class="{'inactive': $ctrl.conceptForm.$invalid || ($ctrl.vocab.releaseType === 'public' && $ctrl.newConcept.thumbnail !== $ctrl.newConcept.thumbnailConfirm) }">Apply</div>
-    </div>
+    <!-- create / import button -->
+    <div class="apply" ng-if="!$ctrl.showCSV" ng-click="$ctrl.onConfirm({$newConcept: $ctrl.newConcept}); closeThisDialog()" ng-class="{'inactive': $ctrl.conceptForm.$invalid || ($ctrl.vocab.releaseType === 'public' && $ctrl.newConcept.thumbnail !== $ctrl.newConcept.thumbnailConfirm) }">Create</div>
 
-    <!-- csv buttons -->
-    <div ng-show="$ctrl.showCSV">
-        <div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-        <div class="apply" ng-click="$ctrl.import()" ng-class="{'inactive': !$ctrl.filename}">Import</div>
-    </div>
-
-
+    <div class="apply" ng-if="$ctrl.showCSV" ng-click="$ctrl.import()" ng-class="{'inactive': !$ctrl.filename}">Import</div>
 
 </div>

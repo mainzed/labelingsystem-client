@@ -13,7 +13,7 @@ angular.module('labelsApp')
         data: "=",
     },
     template: '<span class="icon-more icon" ng-click="$ctrl.openDialog()"></span>',
-    controller: function ($scope, $rootScope, $location, $routeParams, ngDialog, ConfigService, LabelService, VocabService) {
+    controller: function ($scope, $rootScope, $location, $routeParams, ngDialog, ConfigService, LabelService, VocabService, HelperService) {
         var ctrl = this;
 
         ctrl.$onInit = function() {
@@ -36,6 +36,13 @@ angular.module('labelsApp')
                 className: 'bigdialog',
                 disableAnimation: true,
                 scope: $scope
+            });
+
+            // add listener to init nanoScroller once the dialog is loaded
+            $rootScope.$on('ngDialog.opened', function (e, $dialog) {
+                if (ctrl.dialog.id === $dialog.attr('id')) {  // is the resource dialog
+                    HelperService.refreshNanoScroller();
+                }
             });
         };
 

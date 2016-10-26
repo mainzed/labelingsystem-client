@@ -22,7 +22,7 @@ angular.module('labelsApp')
         ctrl.dialog = null;
         ctrl.referenceVocabID = null;
 
-        function refreshNanoScoller() {
+        function refreshNanoScroller() {
             $timeout(function () {
                 angular.element(".nano").nanoScroller();
             }, 0);
@@ -32,7 +32,7 @@ angular.module('labelsApp')
             ctrl.mode = ctrl.mode || "thesauri";
             ctrl.heading = ctrl.mode === "thesauri" ? "Reference thesauri" : "Reference vocabulary";
             ctrl.user = AuthService.getUser();
-            refreshNanoScoller();
+            refreshNanoScroller();
         };
 
         this.openDialog = function() {
@@ -40,7 +40,7 @@ angular.module('labelsApp')
                 // get thesauri
                 ctrl.data.getThesauri(function(thesauri) {
                     ctrl.thesauri = thesauri;
-                    refreshNanoScoller();
+                    refreshNanoScroller();
                 });
             } else {
                 // get current reference vocab
@@ -56,7 +56,7 @@ angular.module('labelsApp')
                     });
 
                     //CachingService.editor.vocabsWithCreator = vocabs;
-                    refreshNanoScoller();
+                    refreshNanoScroller();
                 });
             }
 

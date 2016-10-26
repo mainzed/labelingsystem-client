@@ -27,7 +27,7 @@
                 ctrl.showEnrichments = true;
             }
 
-            HelperService.refreshNanoScoller();
+            HelperService.refreshNanoScroller();
         }
 
         ctrl.$onDestroy = function() {
@@ -98,7 +98,7 @@
         $scope.$on("toggledEnrichmentBrowser", function(event, data) {
             ctrl.showEnrichments = data.visible;
             CachingService.editor.showEnrichments = ctrl.showEnrichments;
-            HelperService.refreshNanoScoller();
+            HelperService.refreshNanoScroller();
         });
     }
 });

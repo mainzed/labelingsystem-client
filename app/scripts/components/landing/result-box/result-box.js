@@ -18,7 +18,7 @@
         ctrl.conceptDetails = null;
 
         ctrl.$onInit = function () {
-            HelperService.refreshNanoScoller();
+            HelperService.refreshNanoScroller();
             //$(".nano").nanoScroller();
         };
 

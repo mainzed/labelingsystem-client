@@ -15,7 +15,7 @@ angular.module('labelsApp')
     //     arr.splice(index, 1, newObj);
     // };
 
-    this.refreshNanoScoller = function() {
+    this.refreshNanoScroller = function() {
         $timeout(function () {
             angular.element(".nano").nanoScroller();
         }, 0);
