@@ -24,21 +24,23 @@
 
                 <div class="line-dialog line"></div>
 
-                <!-- meta data -->
+                <!-- license -->
                 <div class="dialogbox dialog-full">
-                    <h4>meta data</h4>
-                    <span class="listtype">language</span>
-                    <span class="listcontent" ng-bind="$ctrl.data.language"></span>
+                    <h4 ng-class="{'inactive': $ctrl.data.releaseType === 'public'}">License</h4>
+                    <div class="thesaurus" ng-repeat="license in $ctrl.licenses" ng-class="{'checked': license.link === $ctrl.data.license, 'inactive': $ctrl.data.releaseType === 'public'}">
 
-                    <!-- <span class="listtype">license</span>
-                    <span class="listcontent"><a ng-href="{{ $ctrl.data.license }}" target="_blank">CC BY</a></span> -->
+                        <ls-radiobox checked="license.link === $ctrl.data.license" on-check="$ctrl.saveLicense(license)"></ls-radiobox>
 
-                    <span class="listtype">creator</span>
-                    <span class="listcontent" ng-bind="$ctrl.data.creator"></span>
+                        <h5 ng-bind="license.short"></h5>
+                        <p>
+                            {{ license.value }}
+                            <a ng-href="{{ license.link }}" target="_blank">more info</a>
+                        </p>
 
-                    <span class="listtype">creation date</span>
-                    <span class="listcontent" ng-bind-template="{{ $ctrl.data.created | date: 'dd.MM.yyyy' }}"></span>
+                    </div>
                 </div>
+
+           
 
                 <div class="line-dialog line"></div>
 
@@ -66,23 +68,7 @@
                     </span>
                 </div>
 
-                <div class="line-dialog line"></div>
-
-                <!-- license -->
-		        <div class="dialogbox dialog-full">
-        			<h4 ng-class="{'inactive': $ctrl.data.releaseType === 'public'}">License</h4>
-                    <div class="thesaurus" ng-repeat="license in $ctrl.licenses" ng-class="{'checked': license.link === $ctrl.data.license, 'inactive': $ctrl.data.releaseType === 'public'}">
-
-                        <ls-radiobox checked="license.link === $ctrl.data.license" on-check="$ctrl.saveLicense(license)"></ls-radiobox>
-
-                        <h5 ng-bind="license.short"></h5>
-                        <p>
-                            {{ license.value }}
-                            <a ng-href="{{ license.link }}" target="_blank">more info</a>
-                        </p>
-
-                    </div>
-        		</div>
+               
 
                 <div class="line-dialog line"></div>
 

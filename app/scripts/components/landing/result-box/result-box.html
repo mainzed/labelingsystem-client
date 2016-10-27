@@ -22,17 +22,9 @@
         {{ $ctrl.concept.description }}
     </span>
 
-    <span class="note-ext small">
-        <span class="italic smalltype" ng-show="$ctrl.concept.hasBroader()">broader</span>
-        <ul class="hierarchie">
-            <li ng-repeat="broaderConcept in $ctrl.conceptDetails.broader | orderBy: 'thumbnail'">{{ broaderConcept.thumbnail }}</li>
-            <li ng-repeat="broadMatch in $ctrl.conceptDetails.broadMatches | orderBy: 'label'">{{ broadMatch.label }}</li>
-        </ul>
-    </span>
-
-    <!-- related -->
-    <span class="note-ext small">
-        <span class="italic smalltype" ng-show="$ctrl.concept.hasRelated()">related</span><br>
+     <!-- related -->
+    <span class="note-ext smallsection">
+        <span class="italic smalltype" ng-show="$ctrl.concept.hasRelated()">Mappings</span><br>
         <ul class="hierarchie">
             <li ng-repeat="relatedConcept in $ctrl.conceptDetails.related | orderBy: 'thumbnail'">
                 <span class="icon-arrow icon"></span>
@@ -53,6 +45,15 @@
         </ul>
     </span>
 
+    <span class="note-ext small">
+        <span class="italic smalltype" ng-show="$ctrl.concept.hasBroader()">broader</span>
+        <ul class="hierarchie">
+            <li ng-repeat="broaderConcept in $ctrl.conceptDetails.broader | orderBy: 'thumbnail'">{{ broaderConcept.thumbnail }}</li>
+            <li ng-repeat="broadMatch in $ctrl.conceptDetails.broadMatches | orderBy: 'label'">{{ broadMatch.label }}</li>
+        </ul>
+    </span>
+
+   
     <!-- narrower -->
     <span class="note-ext small">
         <span class="italic smalltype" ng-show="$ctrl.concept.hasNarrower()">narrower</span><br>
