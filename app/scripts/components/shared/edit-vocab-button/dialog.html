@@ -10,7 +10,7 @@
             <div class="nano-content">
 
                 <div class="dialogbox dialog-full">
-                    <h4 ng-class="{'inactive': vocabulary.releaseType === 'public'}">Title</h4>
+                    <h4 ng-class="{'inactive': $ctrl.data.releaseType === 'public'}">Title</h4>
                     <input type="text" ng-model="$ctrl.newTitle" ng-disabled="$ctrl.data.releaseType === 'public'" ng-class="{'inactive': $ctrl.data.releaseType === 'public'}">
                 </div>
 
@@ -100,7 +100,7 @@
                             {{ vocab.title }}
                             <span ng-if="$ctrl.data.id === vocab.id">(current)</span>
                         </h5>
-                        <p ng-bind="vocab.description"></p>
+                        <p class="dialog-half" ng-bind="vocab.description"></p>
 
                         <span class="floatright" ng-show="vocab.creator !== user.id">
                             <a ng-show="vocab.creatorInfo.orcid" ng-href="{{ vocab.creatorInfo.orcid }}" target="_blank">{{ vocab.creator }}</a>

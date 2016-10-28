@@ -31,6 +31,7 @@
 @emphasize:			19px;
 @regular: 			16px;
 @small: 			14px;
+@lineheightsmall: 	18px; 
 
 
 /* laptop font-sizes */
@@ -102,11 +103,11 @@ textarea:focus {	outline: none; }
 #metafooter .listtype {
                     margin-left: @marginoutboxsmall;}
 .clipboardbutton {  float: left; background: white; font-size: @small; margin: 0 auto; padding: 2px; border-radius: 3px; cursor: pointer;}
-#ls-selfexplain {   margin-left: 32px; }
+#ls-selfexplain {   margin-left: 32px; font-size: @emphasize; }
 #footer span {		float: left; margin-top: 8px; }
 .landingh1 {		color: white; font-weight: 300; font-size: 150px; margin-left: @marginoutside; margin-bottom: 50px;
 					font-family: "mainzeddisplay"; }
-.logout {			margin-left: 10px;  }
+.logout {			margin-left: 10px; text-decoration: underline; cursor: pointer;  }
 #viewport {			height: 100%; background: @background;}
 #separator {		color: white; height: 75px; }
 .separatorsmall {	height: 50px; float: left; width: 100%; background: @workareas; clear: left;}
@@ -182,7 +183,7 @@ textarea:focus {	outline: none; }
 .listoptions {		width: 50%; display: block; float: right;}
 
 .sortlist	{		display: block; float: left; position: relative; color: white; margin-top: 13px; 
-					padding-left: @margininboxsmall; cursor: pointer; width: 200px;  }
+					padding-left: 24px; cursor: pointer; width: 200px;  }
 .sortlist li {		list-style: none; margin-left: 0; }
 .sortlist .icon-sort {	line-height: 0px; margin-top: 10px; float: left; margin-left: -2px;}
 .sortlist .icon-breadcrumb {float: right;}
@@ -583,12 +584,13 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
 .showadditionalcontent:hover {
 					text-decoration: underline; cursor: pointer; }
 
+
 /* vector icon */
 .icon-min {			width: 20px; height: 3px; background: white; display: block;  }
 
 
 .pointer		{	cursor: pointer; }
-.smalltype {		font-size: @small;}
+.smalltype {		font-size: @small; line-height: @lineheightsmall; display: block; }
 .description {		display: block; line-height: 17px; }
 .wordbreak {		overflow-wrap: break-word; word-wrap: break-word; -webkit-hyphens: auto;
                     -ms-hyphens: auto; -moz-hyphens: auto; hyphens: auto; }
@@ -674,7 +676,12 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
 }
 
 
-/* keyframes */
+
+
+
+
+
+/* KEYFRAMES */
 
 @-webkit-keyframes load8 {
   0% {

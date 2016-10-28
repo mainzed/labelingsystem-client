@@ -27,12 +27,12 @@
   <div ng-if="showMore" class="box boxextension bigbox label high" ng-click="onClick(concept.id)">
     <span class="line-ext"></span>
     <span class="note-ext">
-      <span class="italic smalltype" ng-show="concept.description">Description</span><br>
+      <span class="italic smalltype" ng-show="concept.description">Description</span>
       {{ concept.description }}
     </span>
 
     <!-- related -->
-    <span class="note-ext smallsection"><span class="italic smalltype" ng-show="concept.hasRelated()">related</span><br>
+    <span class="note-ext smallsection"><span class="italic smalltype" ng-show="concept.hasRelated()">related</span>
         <ul class="hierarchie">
           <li ng-repeat="relatedConcept in conceptDetails.related | orderBy: 'thumbnail'">
             <span class="icon-arrow icon"></span>
@@ -54,7 +54,7 @@
     </span>
 
     <!-- broader -->
-    <span class="note-ext smallsection"><span class="italic smalltype" ng-show="concept.hasBroader()">broader</span><br>
+    <span class="note-ext smallsection"><span class="italic smalltype" ng-show="concept.hasBroader()">broader</span>
       <ul class="hierarchie">
         <li ng-repeat="broaderConcept in conceptDetails.broader | orderBy: 'thumbnail'">{{ broaderConcept.thumbnail }}</li>
         <li ng-repeat="broadMatch in conceptDetails.broadMatches | orderBy: 'label'">{{ broadMatch.label }}</li>
@@ -62,7 +62,7 @@
     </span>
 
     <!-- narrower -->
-    <span class="note-ext smallsection"><span class="italic smalltype" ng-show="concept.hasNarrower()">narrower</span><br>
+    <span class="note-ext smallsection"><span class="italic smalltype" ng-show="concept.hasNarrower()">narrower</span>
       <ul class="hierarchie">
         <li ng-repeat="narrowerConcept in conceptDetails.narrower | orderBy: 'thumbnail'">{{ narrowerConcept.thumbnail }}</li>
         <li ng-repeat="narrowMatch in conceptDetails.narrowMatches | orderBy: 'label'">{{ narrowMatch.label }}</li>
