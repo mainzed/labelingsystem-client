@@ -13,7 +13,7 @@ angular.module("labelsApp")
         onConfirm: "&"
     },
     templateUrl: "scripts/components/concept-detail/enrichment-browser/vocab-result-box/vocab-result-box.html",
-    controller: function($scope, $rootScope, $routeParams, ngDialog, TooltipService, LabelService, ConfigService, AuthService) {
+    controller: ["$scope", "$rootScope", "$routeParams", "ngDialog", "TooltipService", "AuthService", function($scope, $rootScope, $routeParams, ngDialog, TooltipService, AuthService) {
         var ctrl = this;
 
         ctrl.dialog = null;
@@ -100,5 +100,5 @@ angular.module("labelsApp")
         $scope.$watch("showMore", function() {
             angular.element(".nano").nanoScroller();
         });
-    }
+    }]
 });

@@ -5,11 +5,10 @@ angular.module("labelsApp")
         revisions: "="
     },
     template: "<span ng-click='$ctrl.openDialog()'>history</span>",
-    controller: function($scope, ngDialog) {
+    controller: ["$scope", "ngDialog", function($scope, ngDialog) {
         var ctrl = this;
 
-        this.$onInit = function() {
-        }
+        this.$onInit = function() {};
 
         /**
          * Opens a dialog with detailed information.
@@ -24,5 +23,5 @@ angular.module("labelsApp")
             });
 
         };
-    }
+    }]
 });

@@ -11,10 +11,9 @@
     bindings: {
     },
     templateUrl: "scripts/components/vocabs/vocabs-viewer.html",
-    controller: function ($scope, $timeout, $location, VocabService, LabelService, CachingService) {
+    controller: ["$scope", "$timeout", "$location", "VocabService", "LabelService", "CachingService", function($scope, $timeout, $location, VocabService, LabelService, CachingService) {
         var ctrl = this;
 
-        ctrl.loading = null;
         ctrl.$onInit = function () {
             ctrl.loading = true;
 
@@ -62,5 +61,5 @@
                 }, 0);
             }
         });
-    }
+    }]
 });

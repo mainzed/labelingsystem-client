@@ -7,16 +7,15 @@
 * # smallBox
 */
 angular.module('labelsApp')
-.component('lsLanding', {
-    bindings: {
-    },
+  .component('lsLanding', {
+    bindings: {},
     templateUrl: "scripts/components/landing/landing.html",
-
-    controller: function ($scope, $window, $filter, $timeout, $location, LabelService, CachingService, ConfigService) {
+    controller: ["$scope", "$window", "$timeout", "LabelService", "CachingService", "ConfigService", function($scope, $window, $timeout, LabelService, CachingService, ConfigService) {
 
         var ctrl = this;
 
         ctrl.$onInit = function() {
+
             //ctrl.resultsLimit = 0;
             ctrl.resultsLimit = ConfigService.conceptsLimit;
             $scope.extendAll = CachingService.toggles.extendAll || false;
@@ -34,7 +33,7 @@ angular.module('labelsApp')
                 });
             }
 
-            $(".nano").nanoScroller();
+            angular.element(".nano").nanoScroller();
         };
 
         ctrl.toggleExtent = function() {
@@ -72,6 +71,5 @@ angular.module('labelsApp')
                 return false;
             }
         };
-
-    }
+    }]
 });

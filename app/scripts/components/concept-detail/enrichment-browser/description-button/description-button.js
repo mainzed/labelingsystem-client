@@ -13,9 +13,7 @@
         onConfirm: "&"
     },
     templateUrl: "scripts/components/concept-detail/enrichment-browser/description-button/description-button.html",
-
-    // The controller that handles our component logic
-    controller: function ($scope, $rootScope, ngDialog, ConfigService) {
+    controller: ["$scope", "ngDialog", "ConfigService", function($scope, ngDialog, ConfigService) {
         var ctrl = this;
 
         this.$onInit = function() {}
@@ -43,5 +41,5 @@
                 ctrl.description = ctrl.description.substring(0, ConfigService.conceptDescriptionLength);
             }
         };
-    }
+    }]
 });

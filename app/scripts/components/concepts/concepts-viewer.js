@@ -11,13 +11,12 @@
     bindings: {
     },
     templateUrl: "scripts/components/concepts/concepts-viewer.html",
-    controller: function ($scope, $timeout, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService, ConfigService, UserSettingsService, CachingService, AgentService, LicenseService) {
+    controller: ["$scope", "$timeout", "$routeParams", "$location", "LabelService", "VocabService", "TooltipService", "ConfigService", "UserSettingsService", "CachingService", "AgentService", "LicenseService", function($scope, $timeout, $routeParams, $location, LabelService, VocabService, TooltipService, ConfigService, UserSettingsService, CachingService, AgentService, LicenseService) {
         var ctrl = this;
 
-        ctrl.loading = null;
-        ctrl.license = null;
-
         ctrl.$onInit = function () {
+            ctrl.license = null;
+
             ctrl.loading = true;
             $scope.tooltips = TooltipService;
             $scope.extendAll = CachingService.toggles.extendAll || false;
@@ -133,5 +132,5 @@
                 }, 0);
             }
         });
-    }
+    }]
 });

@@ -12,7 +12,7 @@
         concept: "="
     },
     templateUrl: "scripts/components/landing/result-box/result-box.html",
-    controller: function ($scope, $location, HelperService) {
+    controller: ["$scope", "$location", "HelperService", function($scope, $location, HelperService) {
         var ctrl = this;
 
         ctrl.conceptDetails = null;
@@ -54,5 +54,5 @@
             }
             angular.element(".nano").nanoScroller();
         });
-    }
+    }]
 });

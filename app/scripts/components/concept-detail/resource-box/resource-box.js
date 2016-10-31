@@ -7,7 +7,7 @@
 * # resourceBox
 */
 angular.module('labelsApp')
-.directive('lsResourceBox', function ($location, $rootScope, $timeout, $window, ngDialog, LabelService, HelperService, $routeParams, AuthService, ResourcesService) {
+.directive('lsResourceBox', function ($rootScope, $timeout, $window, ngDialog, LabelService, $routeParams, ResourcesService) {
   return {
         templateUrl: "scripts/components/concept-detail/resource-box/resource-box.html",
         restrict: 'E',
@@ -143,24 +143,6 @@ angular.module('labelsApp')
             scope.openResource = function() {
                 $window.open(scope.resource.uri, "_blank");
             };
-
-
-            // scope.$watchCollection("resource", function() {
-            //     // refresh nanoscroller
-            //     console.log("resource refresh");
-            //     $timeout(function() {
-            //         $(".nano").nanoScroller();
-            //     }, 5);
-            // });
-            //
-            // scope.$watchCollection("data", function() {
-            //     // refresh nanoscroller
-            //     console.log("data refresh");
-            //     $timeout(function() {
-            //         $(".nano").nanoScroller();
-            //     }, 100);
-            // });
-
         }
     };
 });

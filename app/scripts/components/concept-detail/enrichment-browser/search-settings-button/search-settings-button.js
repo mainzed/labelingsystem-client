@@ -14,7 +14,7 @@ angular.module('labelsApp')
         mode: "@"  // "thesauri" or "vocabs"
     },
     template: '<span class="icon-config icon" ng-click="$ctrl.openDialog()"></span>',
-    controller: function ($scope, $rootScope, $timeout, ngDialog, VocabService, AuthService) {
+    controller: ["$scope", "$rootScope", "ngDialog", "VocabService", "AuthService", "HelperService", function($scope, $rootScope, ngDialog, VocabService, AuthService, HelperService) {
 
         var ctrl = this;
 
@@ -22,17 +22,11 @@ angular.module('labelsApp')
         ctrl.dialog = null;
         ctrl.referenceVocabID = null;
 
-        function refreshNanoScroller() {
-            $timeout(function () {
-                angular.element(".nano").nanoScroller();
-            }, 0);
-        }
-
         ctrl.$onInit = function() {
             ctrl.mode = ctrl.mode || "thesauri";
             ctrl.heading = ctrl.mode === "thesauri" ? "Reference thesauri" : "Reference vocabulary";
             ctrl.user = AuthService.getUser();
-            refreshNanoScroller();
+            HelperService.refreshNanoScroller();
         };
 
         this.openDialog = function() {
@@ -99,5 +93,5 @@ angular.module('labelsApp')
             }
 
         }
-    }
+    }]
 });

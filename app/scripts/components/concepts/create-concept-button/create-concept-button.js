@@ -12,7 +12,7 @@
         onConfirm: "&"
     },
     template: '<span class="plusposition" ng-click="$ctrl.openDialog()">+</span>',
-    controller: function ($scope, $http, $rootScope, $document, $location, $routeParams, ngDialog, ConfigService, VocabService, LicenseService) {
+    controller: ["$scope", "$http", "$rootScope", "$document", "$location", "$routeParams", "ngDialog", "ConfigService", "VocabService", function($scope, $http, $rootScope, $document, $location, $routeParams, ngDialog, ConfigService, VocabService) {
         var ctrl = this;
 
         ctrl.$onInit = function() {
@@ -72,5 +72,5 @@
                 ctrl.dialog.close();
             }
         });
-    }
+    }]
 });

@@ -12,9 +12,7 @@ angular.module('labelsApp')
         onConfirm: '&'
     },
     templateUrl: 'scripts/components/concept-detail/enrichment-browser/translation-button/translation-button.html',
-
-    // The controller that handles our component logic
-    controller: function ($scope, $routeParams, ngDialog, LabelService, LanguageService) {
+    controller: ["$scope", "$routeParams", "ngDialog", "LabelService", "LanguageService", function($scope, $routeParams, ngDialog, LabelService, LanguageService) {
         var ctrl = this;
 
         ctrl.$onInit = function() {
@@ -64,5 +62,5 @@ angular.module('labelsApp')
                 scope: $scope
             });
         };
-    }
+    }]
 });

@@ -6,7 +6,7 @@ angular.module("labelsApp")
         mode: "@"
     },
     templateUrl: "scripts/components/concept-detail/translation-box/translation-box.html",
-    controller: function($scope, $rootScope, $routeParams, ngDialog, TooltipService, LabelService) {
+    controller: ["$scope", "$rootScope", "$routeParams", "ngDialog", "TooltipService", "LabelService", function($scope, $rootScope, $routeParams, ngDialog, TooltipService, LabelService) {
         var ctrl = this;
 
         this.$onInit = function() {
@@ -83,6 +83,5 @@ angular.module("labelsApp")
                 });
             });
         };
-
-    }
+    }]
 });

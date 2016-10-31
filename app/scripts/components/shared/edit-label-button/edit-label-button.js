@@ -13,7 +13,7 @@ angular.module('labelsApp')
         data: "=",
     },
     template: '<span class="icon-more icon" ng-click="$ctrl.openDialog()"></span>',
-    controller: function ($scope, $rootScope, $location, $routeParams, ngDialog, ConfigService, LabelService, VocabService, HelperService) {
+    controller: ["$scope", "$rootScope", "$location", "$routeParams", "ngDialog", "ConfigService", "LabelService", "VocabService", "HelperService", function ($scope, $rootScope, $location, $routeParams, ngDialog, ConfigService, LabelService, VocabService, HelperService) {
         var ctrl = this;
 
         ctrl.$onInit = function() {
@@ -77,6 +77,5 @@ angular.module('labelsApp')
                 });
             }
         });
-    }
-
+    }]
 });

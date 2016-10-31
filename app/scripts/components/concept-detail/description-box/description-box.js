@@ -7,7 +7,7 @@
  * # descriptionBox
  */
 angular.module('labelsApp')
-  .directive('lsDescriptionBox', function ($routeParams, $rootScope, ngDialog, LabelService, AuthService, TooltipService, ConfigService) {
+  .directive('lsDescriptionBox', function ($routeParams, $rootScope, ngDialog, LabelService, TooltipService, ConfigService) {
     return {
         templateUrl: 'scripts/components/concept-detail/description-box/description-box.html',
         restrict: 'E',

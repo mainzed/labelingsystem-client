@@ -11,8 +11,7 @@
     bindings: {
     },
     templateUrl: "scripts/components/concept-detail/concept-detail-viewer.html",
-
-    controller: function ($scope, $timeout, $location, $routeParams, LabelService, TooltipService, ConfigService, CachingService, AgentService, VocabService, LicenseService) {
+    controller: ["$scope", "$location", "$routeParams", "LabelService", "TooltipService", "ConfigService", "CachingService", "AgentService", "VocabService", "LicenseService", function($scope, $location, $routeParams, LabelService, TooltipService, ConfigService, CachingService, AgentService, VocabService, LicenseService) {
         var ctrl = this;
 
         ctrl.license = null;
@@ -45,7 +44,7 @@
             $scope.uri = ConfigService.host + "/item/label/" + $routeParams.lID;
             $scope.supported = false;
 
-            $(".nano").nanoScroller();
+            angular.element(".nano").nanoScroller();
         }
 
         $scope.onSearchClick = function() {
@@ -59,6 +58,5 @@
         $scope.fail = function (err) {
             console.error('Error!', err);
         };
-
-    }
+    }]
 });

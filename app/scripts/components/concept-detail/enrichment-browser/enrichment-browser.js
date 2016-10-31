@@ -9,8 +9,9 @@ angular.module("labelsApp")
         "enrichment-browser.html",
 
     // The controller that handles our component logic
-    controller: function($scope, $routeParams, $rootScope, ConfigService, SearchService,
-        VocabService, TooltipService, UserSettingsService, LabelService, CachingService) {
+    controller: ["$scope", "$routeParams", "$rootScope", "ConfigService", "SearchService",
+        "VocabService", "TooltipService", "LabelService", "CachingService", function($scope, $routeParams, $rootScope, ConfigService, SearchService,
+        VocabService, TooltipService, LabelService, CachingService) {
         var ctrl = this;
 
         ctrl.$onInit = function() {
@@ -168,5 +169,5 @@ angular.module("labelsApp")
             ctrl.showEnrichments = !ctrl.showEnrichments;
             $rootScope.$broadcast("toggledEnrichmentBrowser", { visible: ctrl.showEnrichments });
         }
-    }
+    }]
 });

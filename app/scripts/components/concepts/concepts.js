@@ -11,13 +11,11 @@
     bindings: {
     },
     templateUrl: "scripts/components/concepts/concepts.html",
-    controller: function ($scope, $routeParams, $location, ngDialog, AuthService, LabelService, ThesauriService, VocabService, TooltipService, ConfigService, UserSettingsService, $timeout, CachingService) {
+    controller: ["$scope", "$routeParams", "AuthService", "LabelService", "VocabService", "TooltipService", "ConfigService", "UserSettingsService", "$timeout", "CachingService", function($scope, $routeParams, AuthService, LabelService, VocabService, TooltipService, ConfigService, UserSettingsService, $timeout, CachingService) {
         var ctrl = this;
 
-        ctrl.loading = null;
-        ctrl.showMoreIsVisible = false;
-
         ctrl.$onInit = function () {
+            ctrl.showMoreIsVisible = false;
             ctrl.loading = true;
             $scope.tooltips = TooltipService;
             $scope.placeholder = "loading labels...";
@@ -26,7 +24,7 @@
             ctrl.vocabID = $routeParams.vID;
 
             // init nanoscroller here to prevent default scrollbar while loading boxes
-            $(".nano").nanoScroller();
+            angular.element(".nano").nanoScroller();
 
             // TODO: load currentVocab from cache
             VocabService.get({id: $routeParams.vID}, function(vocabulary) {
@@ -136,5 +134,5 @@
         // set inital labelOrder to a function, has to be defined before this line
         // TODO: sort button highlights dont work because of the returned functions
         $scope.labelOrder = UserSettingsService.labelOrder;
-    }
+    }]
 });

@@ -14,24 +14,24 @@ angular.module('labelsApp')
         mode: "@"
     },
     templateUrl: "scripts/components/vocabs/vocab-box/vocab-box.html",
-    controller: function ($rootScope, $scope, $location, TooltipService) {
+    controller: ["$location", "TooltipService", function($location, TooltipService) {
         var ctrl = this;
 
-        //console.log(ctrl.data.getSomething());
+        ctrl.$onInit = function() {
+            ctrl.tooltips = TooltipService;
+            angular.element(".nano").nanoScroller();
+        };
+
         /**
          * Redirects to the label overview of the specified vocabulary.
          * @param {string} id - Vocabulary ID
          */
-        this.onClick = function(id) {
+        ctrl.onClick = function(id) {
             if (ctrl.mode === "viewer") {
                 $location.path('/vocabularies/' + id + '/concepts');
             } else {
                 $location.path('/editor/vocabularies/' + id + '/concepts');
             }
         };
-
-        $scope.tooltips = TooltipService;
-
-        $(".nano").nanoScroller();
-    }
+    }]
 });

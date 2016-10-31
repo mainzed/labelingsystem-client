@@ -7,7 +7,7 @@ angular.module('labelsApp')
        mode: "@"
     },
     templateUrl: "scripts/components/concepts/list-box/list-box.html",
-    controller: function ($scope, $location, $routeParams, ConfigService) {
+    controller: ["$scope", "$location", "$routeParams", function($scope, $location, $routeParams) {
         var ctrl = this;
         var scope = $scope;
         scope.conceptDetails = {};
@@ -52,7 +52,7 @@ angular.module('labelsApp')
             } else if (!extendAll && ctrl.hasMore()) {
                 scope.showMore = extendAll;
             }
-            $(".nano").nanoScroller();
+            angular.element(".nano").nanoScroller();
         });
 
         /**
@@ -68,7 +68,7 @@ angular.module('labelsApp')
             }
 
            // reset nanoscroll
-           $(".nano").nanoScroller();
+           angular.element(".nano").nanoScroller();
        });
-   }
+    }]
 });

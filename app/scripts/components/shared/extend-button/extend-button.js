@@ -13,14 +13,14 @@
     },
     template: '<span class="extendbutton" ng-click="$ctrl.toggle()">{{ $ctrl.text }}<span class="{{$ctrl.icon}}"></span></span>',
 
-    controller: function (CachingService) {
+    controller: ["CachingService", function(CachingService) {
 
         var ctrl = this;
 
         ctrl.$onInit = function() {
             ctrl.text = CachingService.toggles.extendAll ? "collapse boxes" : "extend boxes";
             ctrl.icon = CachingService.toggles.extendAll ? "icon-minimize" : "icon-expand";
-            
+
         };
 
         ctrl.toggle = function() {
@@ -28,6 +28,5 @@
             ctrl.text = CachingService.toggles.extendAll ? "collapse boxes" : "extend boxes";
             ctrl.icon = CachingService.toggles.extendAll ? "icon-minimize" : "icon-expand";
         }
-
-    }
+    }]
 });

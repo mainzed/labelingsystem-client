@@ -8,7 +8,7 @@
  * Service in the labelsApp.
  */
 angular.module('labelsApp')
-  .factory('LabelService', function ($resource, $http, AuthService, ConfigService, ResourcesService) {
+  .factory('LabelService', function ($resource, $http, ConfigService, ResourcesService) {
 
     var Concept = $resource(ConfigService.api + '/labels/:id', null, {
         'query': {

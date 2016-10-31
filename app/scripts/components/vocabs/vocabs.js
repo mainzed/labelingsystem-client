@@ -10,7 +10,7 @@
   .component('lsVocabs', {
     bindings: {},
     templateUrl: "scripts/components/vocabs/vocabs.html",
-    controller: function ($scope, $q, $location, $timeout, $rootScope, $http, ngDialog, AuthService, VocabService, ThesauriService, CachingService) {
+    controller: ["$scope", "$location", "$timeout", "$rootScope", "AuthService", "VocabService", "ThesauriService", "CachingService", function($scope, $location, $timeout, $rootScope, AuthService, VocabService, ThesauriService, CachingService) {
 
         var ctrl = this;
         ctrl.user = null;
@@ -97,6 +97,5 @@
                 }, 0);
             }
         });
-
-    }
+    }]
 });

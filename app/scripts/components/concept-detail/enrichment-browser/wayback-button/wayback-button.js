@@ -12,12 +12,12 @@
         onConfirm: "&"
     },
     templateUrl: "scripts/components/concept-detail/enrichment-browser/wayback-button/wayback-button.html",
-
-    // The controller that handles our component logic
-    controller: function ($scope, $document, ngDialog, WaybackService, TooltipService) {
+    controller: ["$scope", "$document", "ngDialog", "WaybackService", "TooltipService", function($scope, $document, ngDialog, WaybackService, TooltipService) {
         var ctrl = this;
 
-        $scope.tooltips = TooltipService;
+        ctrl.$onInit = function() {
+            $scope.tooltips = TooltipService;
+        };
 
         ctrl.openDialog = function() {
             ctrl.url = "";
@@ -51,15 +51,5 @@
                 ctrl.verifyLink(ctrl.url);
             }
         });
-
-        // "enter" to apply
-        // $document.keydown(function(e) {
-        //
-        //     if (ctrl.validUri.length > 0 && e.keyCode === 13) {  // enter to apply
-        //         ctrl.onConfirm({$uri: ctrl.validUri});
-        //         ngDialog.closeAll();
-        //     }
-        //
-        // });
-    }
+    }]
 });

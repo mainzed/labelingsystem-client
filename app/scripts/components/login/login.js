@@ -8,11 +8,9 @@
  */
  angular.module('labelsApp')
   .component('lsLogin', {
-    bindings: {
-    },
+    bindings: {},
     templateUrl: "scripts/components/login/login.html",
-
-    controller: function ($scope, $rootScope, $location, $document, AuthService) {
+    controller: ["$scope", "$location", "$document", "AuthService", function($scope, $location, $document, AuthService) {
 
         $scope.onLoginClick = function() {
             $scope.error = false;
@@ -38,5 +36,5 @@
                 }
             }
         });
-    }
+    }]
 });

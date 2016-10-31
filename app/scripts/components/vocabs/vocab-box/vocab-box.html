@@ -24,13 +24,13 @@
 
     <span class="linksize">
 
-        <span ng-show="$ctrl.data.statistics.links.external > 0" title="{{tooltips.icons.externalLink}}">
+        <span ng-show="$ctrl.data.statistics.links.external > 0" title="{{$ctrl.tooltips.icons.externalLink}}">
           <span class="minibox ls"></span>
           <span class="minibox getty"></span>
           <span class="listcontent">{{ $ctrl.data.statistics.links.external }}</span>
         </span>
 
-        <span ng-show="$ctrl.data.statistics.links.internal > 0" title="{{tooltips.icons.internalLink}}">
+        <span ng-show="$ctrl.data.statistics.links.internal > 0" title="{{$ctrl.tooltips.icons.internalLink}}">
           <span class="minibox concept"></span>
           <span class="listcontent">{{ $ctrl.data.statistics.links.internal }}</span>
         </span>

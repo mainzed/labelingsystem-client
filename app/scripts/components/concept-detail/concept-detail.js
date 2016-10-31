@@ -12,7 +12,7 @@
     },
     templateUrl: "scripts/components/concept-detail/concept-detail.html",
 
-    controller: function ($scope, $routeParams, VocabService, LabelService, TooltipService, HelperService, CachingService) {
+    controller: ["$scope", "$routeParams", "VocabService", "LabelService", "TooltipService", "HelperService", "CachingService", function($scope, $routeParams, VocabService, LabelService, TooltipService, HelperService, CachingService) {
 
         var ctrl = this;
 
@@ -100,5 +100,5 @@
             CachingService.editor.showEnrichments = ctrl.showEnrichments;
             HelperService.refreshNanoScroller();
         });
-    }
+    }]
 });

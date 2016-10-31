@@ -7,7 +7,7 @@
  * # conceptBox
  */
 angular.module('labelsApp')
-  .directive('lsLabelBox', function ($rootScope, $location, $timeout, ngDialog, LabelService, HelperService, $routeParams, AuthService, ConfigService, TooltipService) {
+  .directive('lsLabelBox', function ($rootScope, $location, ngDialog, LabelService, HelperService, TooltipService) {
     return {
         templateUrl: "scripts/components/concept-detail/label-box/label-box.html",
         restrict: 'E',
@@ -58,9 +58,7 @@ angular.module('labelsApp')
                     // add listener to init nanoScroller once the dialog is loaded
                     $rootScope.$on('ngDialog.opened', function (e, $dialog) {
                         if (scope.conceptDialog.id === $dialog.attr('id')) {  // is the resource dialog
-                            $timeout(function() {
-                                $(".nano").nanoScroller();
-                            }, 0);
+                            HelperService.refreshNanoScroller();
                         }
                     });
                 }

@@ -10,7 +10,7 @@
   .component('lsCreateVocabButton', {
     bindings: {},
     template: '<span type="button" class="plusposition" ng-click="$ctrl.openDialog()">+</span>',
-    controller: function ($scope, $rootScope, ngDialog, ConfigService, LanguageService, AuthService, ThesauriService, LicenseService) {
+    controller: ["$scope", "$rootScope", "ngDialog", "ConfigService", "LanguageService", "AuthService", "LicenseService", function($scope, $rootScope, ngDialog, ConfigService, LanguageService, AuthService, LicenseService) {
 
         var ctrl = this;
 
@@ -78,5 +78,5 @@
                 $scope.newVocab.description = $scope.newVocab.description.substring(0, ConfigService.vocabDescriptionLength);
             }
         };
-    }
+    }]
 });

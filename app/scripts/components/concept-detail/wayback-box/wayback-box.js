@@ -7,7 +7,7 @@
  * # linkBox
  */
 angular.module('labelsApp')
-  .directive('linkBox', function ($window, ngDialog, $routeParams, ResourcesService, LabelService, HelperService, AuthService) {
+  .directive('linkBox', function($window, ngDialog, $routeParams, ResourcesService, LabelService, HelperService, AuthService) {
     return {
         templateUrl: 'scripts/components/concept-detail/wayback-box/wayback-box.html',
         restrict: 'E',
