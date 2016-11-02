@@ -140,15 +140,6 @@ angular.module("labelsApp")
             });
         };
 
-        $scope.addLink = function(uri) {
-            $scope.label.addChild({ uri: uri}, "seeAlso");
-            $scope.label.save(function() {
-                // success
-            }, function error(res) {
-                console.log(res);
-            });
-        };
-
         $rootScope.$on("changedEnrichmentVocab", function(event, vocabID) {
             $scope.siblings = [];
             ctrl.getEnrichmentVocab($scope.vocab);

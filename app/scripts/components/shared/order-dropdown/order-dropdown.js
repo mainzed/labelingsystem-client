@@ -20,6 +20,12 @@ angular.module('labelsApp')
             $scope.sortName = 'sort by last modified';
         };
 
+        /**
+         * Order function for the use with the ng-repeat directive. Grades a label
+         * by how many connections it has to internal or external resources.
+         * @param {object} concept
+         * @returns {number}
+         */
         ctrl.orderByQuality = function(concept) {
             return -1 * concept.getScore();
         };

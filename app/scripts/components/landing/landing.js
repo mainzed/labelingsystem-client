@@ -19,16 +19,16 @@ angular.module('labelsApp')
             //ctrl.resultsLimit = 0;
             ctrl.resultsLimit = ConfigService.conceptsLimit;
             $scope.extendAll = CachingService.toggles.extendAll || false;
-            $scope.conceptOrder = '-lastModified'; 
+            $scope.conceptOrder = '-lastModified';
 
             $scope.loading = false;
             // get from cache or load new
             if (CachingService.viewer.allConcepts) {  // already cached
-                $scope.labels = CachingService.viewer.allConcepts;
+                ctrl.labels = CachingService.viewer.allConcepts;
             } else {
                 $scope.loading = true;
                 LabelService.queryPublic(function(labels) {
-                    $scope.labels = labels;
+                    ctrl.labels = labels;
 
                     // save for later
                     CachingService.viewer.allConcepts = labels;
@@ -45,16 +45,6 @@ angular.module('labelsApp')
 
         ctrl.toggleExtent = function() {
             $scope.extendAll = !$scope.extendAll;
-        };
-
-        /**
-         * Order function for the use with the ng-repeat directive. Grades a label
-         * by how many connections it has to internal or external resources.
-         * @param {object} concept
-         * @returns {number}
-         */
-        ctrl.orderByQuality = function(concept) {
-            return -1 * concept.getScore();
         };
 
         // focus when loading complete

@@ -11,7 +11,7 @@
     bindings: {
     },
     templateUrl: "scripts/components/concepts/concepts.html",
-    controller: ["$scope", "$routeParams", "AuthService", "LabelService", "VocabService", "TooltipService", "ConfigService", "UserSettingsService", "$timeout", "CachingService", function($scope, $routeParams, AuthService, LabelService, VocabService, TooltipService, ConfigService, UserSettingsService, $timeout, CachingService) {
+    controller: ["$scope", "$routeParams", "AuthService", "LabelService", "VocabService", "TooltipService", "ConfigService", "$timeout", "CachingService", function($scope, $routeParams, AuthService, LabelService, VocabService, TooltipService, ConfigService, $timeout, CachingService) {
         var ctrl = this;
 
         ctrl.$onInit = function () {
@@ -19,7 +19,6 @@
             ctrl.loading = true;
             $scope.tooltips = TooltipService;
             $scope.placeholder = "loading labels...";
-            $scope.extendAll = UserSettingsService.extendAll;
             $scope.conceptsLimit = ConfigService.conceptsLimit;
             ctrl.vocabID = $routeParams.vID;
 
@@ -97,19 +96,9 @@
             });
         };
 
-        /**
-         * Order function for the use with the ng-repeat directive. Grades a label
-         * by how many connections it has to internal or external resources.
-         * @param {object} concept
-         * @returns {number}
-         */
-        $scope.orderByQuality = function(concept) {
-            return -1 * concept.getScore();
-        };
-
         ctrl.toggleExtent = function() {
             $scope.extendAll = !$scope.extendAll;
-        }
+        };
 
         // refresh boxes when csv upload complete
         $scope.$on("csvUploadComplete", function() {
@@ -127,9 +116,5 @@
                 }, 0);
             }
         });
-
-        // set inital labelOrder to a function, has to be defined before this line
-        // TODO: sort button highlights dont work because of the returned functions
-        $scope.labelOrder = UserSettingsService.labelOrder;
     }]
 });

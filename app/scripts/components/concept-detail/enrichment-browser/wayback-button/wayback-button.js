@@ -12,7 +12,7 @@
         onConfirm: "&"
     },
     templateUrl: "scripts/components/concept-detail/enrichment-browser/wayback-button/wayback-button.html",
-    controller: ["$scope", "$document", "ngDialog", "WaybackService", "TooltipService", function($scope, $document, ngDialog, WaybackService, TooltipService) {
+    controller: ["$scope", "$rootScope", "$document", "ngDialog", "WaybackService", "TooltipService", function($scope, $rootScope, $document, ngDialog, WaybackService, TooltipService) {
         var ctrl = this;
 
         ctrl.$onInit = function() {
@@ -45,11 +45,9 @@
             });
         };
 
-        // "enter" to verify
-        $document.keydown(function(e) {
-            if (ctrl.url && ctrl.url.length > 0 && !ctrl.processing && e.keyCode === 13) {  // enter to verify
-                ctrl.verifyLink(ctrl.url);
-            }
-        });
+        ctrl.add = function(uri) {
+            $rootScope.$broadcast("addedWaybackLink", { uri: uri });
+        };
+
     }]
 });

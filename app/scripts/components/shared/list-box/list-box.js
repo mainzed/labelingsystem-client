@@ -6,8 +6,8 @@ angular.module('labelsApp')
        concept: "=",
        mode: "@"
     },
-    templateUrl: "scripts/components/concepts/list-box/list-box.html",
-    controller: ["$scope", "$location", "$routeParams", function($scope, $location, $routeParams) {
+    templateUrl: "scripts/components/shared/list-box/list-box.html",
+    controller: ["$scope", "$location", "$routeParams", "HelperService", function($scope, $location, $routeParams, HelperService) {
         var ctrl = this;
         var scope = $scope;
         scope.conceptDetails = {};
@@ -15,10 +15,6 @@ angular.module('labelsApp')
         ctrl.$onInit = function() {
             // workaround
             scope.concept = ctrl.concept;
-        }
-
-        ctrl.hasMore = function() {
-            return ctrl.concept.description || ctrl.concept.hasBroader() || ctrl.concept.hasNarrower();
         }
 
         /**
@@ -31,28 +27,26 @@ angular.module('labelsApp')
 
        /**
         * Redirects to detail view of the specified concept.
-        * @param {string} id - Concept ID
         */
-       scope.onClick = function(id) {
-           if (ctrl.mode === 'viewer') {
-               $location.path("vocabularies/" + $routeParams.vID + "/concepts/" + id);
-           } else {
-               $location.path("editor/vocabularies/" + $routeParams.vID + "/concepts/" + id);
-           }
-
-       };
+       ctrl.onClick = function() {
+            if (ctrl.mode === 'viewer') {
+               $location.path("vocabularies/" + ctrl.concept.vocabID + "/concepts/" + ctrl.concept.id);
+            } else {
+               $location.path("editor/vocabularies/" + ctrl.concept.vocabID + "/concepts/" + ctrl.concept.id);
+            }
+        };
 
         /**
          * Watcher that resets nanoscroll each time the extentAll property
          * changes (e.g. by a button click on "extent all").
          */
         scope.$parent.$watch("extendAll", function(extendAll) {
-            if (extendAll && ctrl.hasMore()) {
+            if (extendAll && ctrl.concept.hasMore()) {
                 scope.showMore = extendAll;
-            } else if (!extendAll && ctrl.hasMore()) {
+            } else if (!extendAll && ctrl.concept.hasMore()) {
                 scope.showMore = extendAll;
             }
-            angular.element(".nano").nanoScroller();
+            HelperService.refreshNanoScroller();
         });
 
         /**
@@ -64,11 +58,9 @@ angular.module('labelsApp')
                 ctrl.concept.getDetails().then(function(conceptDetails) {
                     scope.conceptDetails = conceptDetails;
                     scope.$apply();
+                    HelperService.refreshNanoScroller();
                 });
             }
-
-           // reset nanoscroll
-           angular.element(".nano").nanoScroller();
        });
     }]
 });

@@ -11,7 +11,7 @@
     bindings: {
     },
     templateUrl: "scripts/components/concepts/concepts-viewer.html",
-    controller: ["$scope", "$timeout", "$routeParams", "$location", "LabelService", "VocabService", "TooltipService", "ConfigService", "UserSettingsService", "CachingService", "AgentService", "LicenseService", function($scope, $timeout, $routeParams, $location, LabelService, VocabService, TooltipService, ConfigService, UserSettingsService, CachingService, AgentService, LicenseService) {
+    controller: ["$scope", "$timeout", "$routeParams", "$location", "LabelService", "VocabService", "TooltipService", "ConfigService", "CachingService", "AgentService", "LicenseService", function($scope, $timeout, $routeParams, $location, LabelService, VocabService, TooltipService, ConfigService, CachingService, AgentService, LicenseService) {
         var ctrl = this;
 
         ctrl.$onInit = function () {
@@ -90,37 +90,9 @@
             });
         };
 
-        /**
-         * Order function for the use with the ng-repeat directive.
-         * @param {object} concept
-         * @returns {String}
-         */
-        $scope.orderByLabel = function(concept) {
-            return concept.thumbnail;
-        };
-
-        /**
-         * Order function for the use with the ng-repeat directive. Grades a label
-         * by how many connections it has to internal or external resources.
-         * @param {object} concept
-         * @returns {number}
-         */
-        $scope.orderByQuality = function(concept) {
-            return -1 * concept.getScore();
-        };
-
-        // UserSettingsService watchers
-        $scope.$watch("labelOrder", function(newValue) {
-            UserSettingsService.labelOrder = newValue;
-        });
-
         $scope.toggleExtent = function() {
             $scope.extendAll = !$scope.extendAll;
-        }
-
-        // set inital labelOrder to a function, has to be defined before this line
-        // TODO: sort button highlights dont work because of the returned functions
-        $scope.labelOrder = UserSettingsService.labelOrder || $scope.orderByThumbnail;
+        };
 
         $scope.onSearchClick = function() {
             $location.path("/search");

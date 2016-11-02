@@ -1,5 +1,5 @@
 <div id="header" class="box full">
-    <input id="labelSearch" type="text" placeholder="search labels" ng-model="filterValue" ng-disabled="!$ctrl.labels" autofocus>
+    <input id="labelSearch" type="text" placeholder="{{ placeholder }}" ng-model="filterValue" ng-disabled="!$ctrl.labels" autofocus>
 	<div class="loader" ng-show="$ctrl.loading"></div>
 </div>
 
@@ -18,7 +18,7 @@
     	<!-- search results -->
     	<ul ng-show="filterValue" style="color:white">
 
-    		<ls-result-box ng-repeat="label in filteredLabels = ($ctrl.labels | filter: {thumbnail: filterValue}) | orderBy: conceptOrder | limitTo: $ctrl.resultsLimit as limitedLabels" concept="label"></ls-result-box>
+            <ls-list-box ng-repeat="label in filteredLabels = ($ctrl.labels | filter: {thumbnail: filterValue}) | orderBy: conceptOrder | limitTo: $ctrl.resultsLimit as limitedLabels" concept="label" mode="viewer"></ls-list-box>
 
             <span ng-show="filterValue && filteredLabels.length > limitedLabels.length" ng-click="$ctrl.resultsLimit = $ctrl.resultsLimit * 2">show more</span>
 

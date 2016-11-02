@@ -6,27 +6,24 @@
 	</div>
 
 	<div class="dialogscroll">
-	<div class="nano">
-	<div class="nano-content">
-		<div class="dialogbox dialog-full">
-			<h4>url</h4>
-			<input type="text" placeholder="https://www.example.de" ng-model="$ctrl.url" ng-disabled="$ctrl.validUri || $ctrl.processing" ng-class="{'inactive': $ctrl.validUri || $ctrl.processing}" class="buttonfollow">
+    	<div class="nano">
+        	<div class="nano-content">
+                <div class="dialogbox dialog-full">
+        			<h4>url</h4>
+        			<input type="text" placeholder="https://www.example.de" ng-model="$ctrl.url" ng-disabled="$ctrl.validUri || $ctrl.processing" ng-class="{'inactive': $ctrl.validUri || $ctrl.processing}" class="buttonfollow">
 
-      <button class="deletebutton" type="button" ng-click="$ctrl.verifyLink($ctrl.url)" ng-class="{'inactive': !$ctrl.url || $ctrl.validUri || $ctrl.processing}">verify link</button>
+                    <button class="deletebutton" type="button" ng-click="$ctrl.verifyLink($ctrl.url)" ng-class="{'inactive': !$ctrl.url || $ctrl.validUri || $ctrl.processing}">verify link</button>
+        		</div>
 
-		</div>
-		<div class="line-dialog line"></div>
-    <div class="dialogbox dialog-full">
+                <div class="line-dialog line"></div>
 
-   	 <p class="confirmed">{{ $ctrl.validUri }}</hp>
-    </div>
-
-
-	</div>
-	</div>
-	</div>
+                <div class="dialogbox dialog-full">
+           	        <p class="confirmed">{{ $ctrl.validUri }}</hp>
+                </div>
+            </div><!-- nano-content -->
+    	</div><!-- nano -->
+	</div><!-- dialogscroll -->
 
 
-	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-class="{'inactive': !$ctrl.validUri}" ng-click="$ctrl.onConfirm({$uri: validUri}); closeThisDialog()">Apply</div>
+	<div class="apply" ng-class="{'inactive': !$ctrl.validUri}" ng-click="$ctrl.add($ctrl.validUri); closeThisDialog()">Add</div>
 </div>

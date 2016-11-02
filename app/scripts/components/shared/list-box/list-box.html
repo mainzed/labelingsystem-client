@@ -1,11 +1,11 @@
-<div class="bigboxwrapper {{ concept.releaseType }}">
+<div class="bigboxwrapper public">
 
-  <div class="box bigbox label listbox smallheight" ng-click="onClick(concept.id)">
+  <div class="box bigbox label high listbox smallheight" ng-click="$ctrl.onClick()">
 
     <span class="thumbnail">
 
-      <button class="showadditionalcontent" ng-click="toggleExtension(concept.id); $event.stopPropagation()" ng-disabled="!$ctrl.hasMore()">
-        <span class="showmore" ng-show="!showMore && $ctrl.hasMore()">
+      <button class="showadditionalcontent" ng-click="toggleExtension(concept.id); $event.stopPropagation()" ng-disabled="!$ctrl.concept.hasMore()">
+        <span class="showmore" ng-show="!showMore && $ctrl.concept.hasMore()">
           <span class="icon-breadcrumb"></span>
         </span>
         <span class="showmore" ng-show="showMore">
@@ -19,12 +19,10 @@
 
     <ls-edit-label-button ng-hide="mode ==='viewer'" data="concept" ng-click="$event.stopPropagation()"></ls-edit-label-button>
 
-     <!--<span class="bigboxdate"><span class="icon-time"></span>{{ concept.lastModified | date:"dd.MM.yyyy"}}</span>-->
-
   </div>
 
   <!-- extension that open on button click -->
-  <div ng-if="showMore" class="box boxextension bigbox label high" ng-click="onClick(concept.id)">
+  <div ng-if="showMore" class="box boxextension bigbox label high" ng-click="$ctrl.onClick()">
     <span class="line-ext"></span>
     <span class="note-ext">
       <span class="italic smalltype" ng-show="concept.description">Description</span>

@@ -10,7 +10,7 @@ angular.module('labelsApp')
   .component('lsSearchResults', {
     bindings: {},
     templateUrl: "scripts/components/search-results/search-results.html",
-    controller: ["$scope", "$window", "CachingService", "HelperService", "ConfigService", function($scope, $window, CachingService, HelperService, ConfigService) {
+    controller: ["$scope", "$window", "CachingService", "HelperService", "ConfigService", "LabelService", function($scope, $window, CachingService, HelperService, ConfigService, LabelService) {
 
         var ctrl = this;
 
@@ -18,12 +18,25 @@ angular.module('labelsApp')
             ctrl.resultsLimit = ConfigService.conceptsLimit;
 
             $scope.filterValue = CachingService.viewer.filterValue;
-            ctrl.labels = CachingService.viewer.allConcepts;
-
             $scope.conceptOrder = '-lastModified';
 
             $window.document.getElementById("labelSearch").focus();
 
+            // get labels cache or load new
+            if (CachingService.viewer.allConcepts) {  // already cached
+                ctrl.labels = CachingService.viewer.allConcepts;
+            } else {
+                $scope.loading = true;
+                $scope.placeholder = "loading labels";
+                LabelService.queryPublic(function(labels) {
+                    ctrl.labels = labels;
+                    $window.document.getElementById("labelSearch").focus();
+                    $scope.placeholder = "search labels";
+                    // save for later
+                    CachingService.viewer.allConcepts = labels;
+                    $scope.loading = false;
+                });
+            }
             HelperService.refreshNanoScroller();
         };
 

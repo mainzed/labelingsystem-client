@@ -51,6 +51,13 @@
             });
         });
 
+        $scope.$on("addedWaybackLink", function(event, data) {
+            $scope.label.addChild({ uri: data.uri }, "seeAlso");
+            $scope.label.save(function() {
+                // success
+            });
+        });
+
         $scope.$on("changedConcept", function(event, data) {
             // remove id from old relation array
             _.remove($scope.label[data.oldRelation], function(n) {
