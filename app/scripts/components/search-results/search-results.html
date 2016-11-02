@@ -1,0 +1,38 @@
+<div id="header" class="box full">
+    <input id="labelSearch" type="text" placeholder="search labels" ng-model="filterValue" ng-change="onSearchBoxChange()" ng-disabled="!$ctrl.labels">
+	<div class="loader" ng-show="placeholder === 'loading labels ...'"></div>
+</div>
+
+<div class="separatorsmall" ng-show="filterValue">
+    <ls-order-dropdown order="conceptOrder"></ls-order-dropdown>
+</div>
+
+<div id="listwrapper" class="viewersearch">
+	<div class="nano">
+
+    <div id="boxcontainer" class="nano-content">
+
+    	<!-- search results -->
+    	<ul ng-show="filterValue" style="color:white">
+
+    		<ls-result-box ng-repeat="label in filteredLabels = ($ctrl.labels | filter: {thumbnail: filterValue}) | orderBy: conceptOrder | limitTo: $ctrl.resultsLimit as limitedLabels" concept="label"></ls-result-box>
+
+            <span ng-show="filterValue && filteredLabels.length > limitedLabels.length" ng-click="$ctrl.resultsLimit = $ctrl.resultsLimit * 2">show more</span>
+
+    		<!-- message when no labels found -->
+    		<span ng-show="filterValue && !filteredLabels.length">
+    			No labels found, <a href="#/vocabularies">browse vocabularies!</a>
+    		</span>
+
+    	</ul>
+
+    	<!-- placeholder when no search value is entered -->
+    	<div ng-show="!filterValue">
+    		<div class="whitetext">
+    			enter value to start searching!
+            </div>
+    	</div>
+    </div>
+    </div>
+
+</div>

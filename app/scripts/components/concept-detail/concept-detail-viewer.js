@@ -48,7 +48,7 @@
         }
 
         $scope.onSearchClick = function() {
-            $location.path("/");
+            $location.path("/search");
         };
 
         $scope.success = function () {

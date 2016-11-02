@@ -27,6 +27,10 @@ angular
         template: '<ls-landing></ls-landing>',
         access: {restricted: false}
       })
+      .when('/search', {
+        template: '<ls-search-results></ls-search-results>',
+        access: {restricted: false}
+      })
       .when('/vocabularies', {
         template: '<ls-vocabs-viewer></ls-vocabs-viewer>',
         access: {restricted: false}

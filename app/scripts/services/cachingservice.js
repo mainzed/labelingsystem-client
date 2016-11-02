@@ -20,7 +20,8 @@ angular.module('labelsApp')
              */
             concepts: null, // concepts view
 
-            allConcepts: null // landing page
+            allConcepts: null, // landing page
+            filterValue: null
         };
 
         this.editor = {
@@ -63,7 +64,9 @@ angular.module('labelsApp')
             this.viewer = {
                 vocabs: null,
                 concepts: null, // concepts view
-                allConcepts: null // landing page
+                allConcepts: null, // landing page
+                landingSearchResults: null,
+                filterValue: null
             };
             this.editor = {
                 vocabs: null,

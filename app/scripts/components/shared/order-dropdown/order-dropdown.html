@@ -1,0 +1,21 @@
+<div class="listoptions">
+    <ul class="sortlist">
+        <span class="icon-sort icon"></span>
+        <li ng-click="showOptions = !showOptions">
+            {{ sortName }}
+            <ul ng-show="showOptions" class="sortoptions" ng-blur="showOptions = false">
+
+                <!-- change order to last modified -->
+                <li ng-click="$ctrl.order = '-lastModified'; sortName='sort by last modified'" ng-class="{'active': $ctrl.order === '-lastModified'}">by lastModified</li>
+
+                <!-- change order to alphabetically -->
+                <li ng-click="$ctrl.order = 'thumbnail'; sortName='sort alphabetically'" ng-class="{'active': $ctrl.order === 'thumbnail'}">alphabetically</li>
+
+                <!-- change order to quality -->
+                <li ng-click="$ctrl.order = $ctrl.orderByQuality; sortName='sort by quality'" ng-class="{'active': $ctrl.order === $ctrl.orderByQuality}">by quality</li>
+            </ul>
+        </li>
+    </ul>
+
+    <ls-extend-button ng-click="$ctrl.toggleExtent()"></ls-extend-button>
+</div>

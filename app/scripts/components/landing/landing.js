@@ -19,6 +19,7 @@ angular.module('labelsApp')
             //ctrl.resultsLimit = 0;
             ctrl.resultsLimit = ConfigService.conceptsLimit;
             $scope.extendAll = CachingService.toggles.extendAll || false;
+            $scope.conceptOrder = '-lastModified'; 
 
             $scope.loading = false;
             // get from cache or load new
@@ -28,6 +29,8 @@ angular.module('labelsApp')
                 $scope.loading = true;
                 LabelService.queryPublic(function(labels) {
                     $scope.labels = labels;
+
+                    // save for later
                     CachingService.viewer.allConcepts = labels;
                     $scope.loading = false;
                 });
@@ -36,9 +39,13 @@ angular.module('labelsApp')
             angular.element(".nano").nanoScroller();
         };
 
+        ctrl.$onDestroy = function() {
+            CachingService.viewer.filterValue = $scope.filterValue;
+        };
+
         ctrl.toggleExtent = function() {
             $scope.extendAll = !$scope.extendAll;
-        }
+        };
 
         /**
          * Order function for the use with the ng-repeat directive. Grades a label

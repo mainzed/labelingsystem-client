@@ -51,7 +51,7 @@
         };
 
         $scope.onSearchClick = function() {
-            $location.path("/");
+            $location.path("/search");
         };
 
         $scope.$watch("ctrl.loading", function(loading) {
