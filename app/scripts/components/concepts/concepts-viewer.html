@@ -6,30 +6,27 @@
 </div>
 
 <div id="metafooter">
-      <div class="dialog-quarter float">
-        <!--<span class="listtype">uri</span>
-        <span class="listcontent smalltype autowidth">{{ uri }}</span>-->
-        <span class="listtype">URI</span>
-        <span class="listcontent smalllistcontent"><span class="loudlink" clipboard supported="supported" text="vocabulary.uri" on-copied="success()" on-error="fail(err)">Copy URI to clipboard</span></span>
+      <div class="dialog-half float">
+        <span class="listtype">uri</span>
+        <span class="listcontent smalllistcontent autowidth">{{ vocabulary.id }}</span>
+     
+      
 
         <span class="listtype">creator</span>
         <span class="listcontent smalllistcontent" ng-bind-html="agent.getNameAsLink()"></span>
-        <span class="listtype">last modified:</span>
-        <span class="listcontent smalllistcontent">{{ vocabulary.lastModified | date: 'dd.MM.yyyy' }}</span>
+        <span class="listtype">description</span>
+        <span class="listcontent smalllistcontent">{{vocabulary.description}}</span>
         <span class="listtype">license</span>
         <span class="listcontent smalllistcontent"><a ng-href="{{vocabulary.license}}" target="_blank">{{ $ctrl.license.short }}</a></span>
         <span class="listtype">Download</span>
         <span class="listcontent smalllistcontent">
             <a ng-href="{{ vocabulary.getUrl() + '.skos' }}" target="_blank" ng-click="$event.stopPropagation()">SKOS</a>
+              <!--<span class="listcontent smalllistcontent"><span class="loudlink" clipboard supported="supported" text="vocabulary.uri" on-copied="success()" on-error="fail(err)">Copy URI to clipboard</span></span>-->
         </span>
 
 
     </div>
-
-    <div class="dialog-quarter float">
-        <span class="smalltype italic">Description</span><br>
-        <span>{{vocabulary.description}}</span>
-    </div>
+  
 
     <div class="dialog-half float" id="ls-selfexplain">
         Labeling System is a web based tool for creating controlled vocabularies using linked open data techniques.
