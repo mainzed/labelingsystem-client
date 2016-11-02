@@ -10,7 +10,7 @@ angular.module('labelsApp')
   .component('lsSearchResults', {
     bindings: {},
     templateUrl: "scripts/components/search-results/search-results.html",
-    controller: ["$scope", "CachingService", "HelperService", "ConfigService", function($scope, CachingService, HelperService, ConfigService) {
+    controller: ["$scope", "$window", "CachingService", "HelperService", "ConfigService", function($scope, $window, CachingService, HelperService, ConfigService) {
 
         var ctrl = this;
 
@@ -20,13 +20,19 @@ angular.module('labelsApp')
             $scope.filterValue = CachingService.viewer.filterValue;
             ctrl.labels = CachingService.viewer.allConcepts;
 
-            $scope.conceptOrder = '-lastModified'; 
+            $scope.conceptOrder = '-lastModified';
+
+            $window.document.getElementById("labelSearch").focus();
 
             HelperService.refreshNanoScroller();
         };
 
         ctrl.$onDestroy = function() {
             CachingService.viewer.filterValue = $scope.filterValue;
+        };
+
+        ctrl.toggleExtent = function() {
+            $scope.extendAll = !$scope.extendAll;
         };
 
     }]

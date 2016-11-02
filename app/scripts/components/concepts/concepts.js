@@ -23,6 +23,8 @@
             $scope.conceptsLimit = ConfigService.conceptsLimit;
             ctrl.vocabID = $routeParams.vID;
 
+            $scope.labelOrder = "-lastModified";
+
             // init nanoscroller here to prevent default scrollbar while loading boxes
             angular.element(".nano").nanoScroller();
 
@@ -104,11 +106,6 @@
         $scope.orderByQuality = function(concept) {
             return -1 * concept.getScore();
         };
-
-        // UserSettingsService watchers
-        $scope.$watch("labelOrder", function(newValue) {
-            UserSettingsService.labelOrder = newValue;
-        });
 
         ctrl.toggleExtent = function() {
             $scope.extendAll = !$scope.extendAll;

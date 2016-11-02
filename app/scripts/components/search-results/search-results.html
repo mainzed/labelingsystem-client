@@ -1,10 +1,13 @@
 <div id="header" class="box full">
-    <input id="labelSearch" type="text" placeholder="search labels" ng-model="filterValue" ng-change="onSearchBoxChange()" ng-disabled="!$ctrl.labels">
-	<div class="loader" ng-show="placeholder === 'loading labels ...'"></div>
+    <input id="labelSearch" type="text" placeholder="search labels" ng-model="filterValue" ng-disabled="!$ctrl.labels" autofocus>
+	<div class="loader" ng-show="$ctrl.loading"></div>
 </div>
 
 <div class="separatorsmall" ng-show="filterValue">
-    <ls-order-dropdown order="conceptOrder"></ls-order-dropdown>
+    <div class="listoptions">
+        <ls-order-dropdown order="conceptOrder"></ls-order-dropdown>
+        <ls-extend-button ng-click="$ctrl.toggleExtent()"></ls-extend-button>
+    </div>
 </div>
 
 <div id="listwrapper" class="viewersearch">

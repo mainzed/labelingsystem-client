@@ -22,6 +22,8 @@
             $scope.extendAll = CachingService.toggles.extendAll || false;
             $scope.extendButtonText = $scope.extendAll ? "collapse boxes" : "extend boxes";
 
+            $scope.labelOrder = '-lastModified';
+
             $scope.conceptsLimit = ConfigService.conceptsLimit;
             ctrl.vocabID = $routeParams.vID;
 
@@ -114,7 +116,6 @@
 
         $scope.toggleExtent = function() {
             $scope.extendAll = !$scope.extendAll;
-            $scope.extendButtonText = $scope.extendAll ? "collapse boxes" : "extend boxes";
         }
 
         // set inital labelOrder to a function, has to be defined before this line

@@ -4,7 +4,10 @@
 </div>
 
 <div class="separatorsmall" ng-show="filterValue">
-    <ls-order-dropdown order="conceptOrder"></ls-order-dropdown>
+    <div class="listoptions">
+        <ls-order-dropdown order="conceptOrder"></ls-order-dropdown>
+        <ls-extend-button ng-click="$ctrl.toggleExtent()"></ls-extend-button>
+    </div>
 </div>
 
 <div id="listwrapper" class="viewersearch">

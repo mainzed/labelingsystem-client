@@ -44,19 +44,11 @@
         <input type="text" ng-model="labelFilter" placeholder="filter" autofocus>
 	</div>
 
-  <div class="listoptions">
-    <ul class="sortlist">
-      <li ng-click="showOptions=!showOptions" ng-init="sortName='sort by last modified'; labelOrder = '-lastModified'">{{ sortName }}<span class="icon-sort icon"></span>
-        <ul ng-show="showOptions" class="sortoptions">
-          <li ng-click="labelOrder = '-lastModified'; sortName='sort by last modified'" ng-class="{'active': labelOrder === '-lastModified'}">by lastModified</li>
-          <li ng-click="labelOrder = orderByLabel; sortName='sort alphabetically'" ng-class="{'active': labelOrder === orderByLabel}">alphabetically</li>
-          <li ng-click="labelOrder = orderByQuality; sortName='sort by quality'" ng-class="{'active': labelOrder === orderByQuality}">by quality</li>
-        </ul>
-      </li>
-    </ul>
-    <ls-extend-button ng-click="toggleExtent()"></ls-extend-button>
+    <div class="listoptions">
+        <ls-order-dropdown order="labelOrder"></ls-order-dropdown>
+        <ls-extend-button ng-click="toggleExtent()"></ls-extend-button>
+    </div>
 
-  </div>
 </div>
 
 <div id="listwrapper" class="listwrappermin">

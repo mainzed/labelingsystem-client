@@ -17,13 +17,11 @@ angular.module('labelsApp')
         var ctrl = this;
 
         ctrl.$onInit = function() {
-            $scope.sortName= 'sort by last modified';
-            //ctrl.order = '-lastModified';
+            $scope.sortName = 'sort by last modified';
         };
 
-        $scope.$watch("ctrl.order", function(newVal) {
-            console.log(newVal);
-        })
-
+        ctrl.orderByQuality = function(concept) {
+            return -1 * concept.getScore();
+        };
     }]
 });
