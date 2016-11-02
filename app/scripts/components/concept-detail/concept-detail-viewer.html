@@ -12,39 +12,42 @@
 <div id="metafooter">
 
     <div class="dialog-half float">
-        <!--<span class="listtype">uri</span>
-        <span class="listcontent smalltype autowidth">{{ uri }}</span>-->
-        <span class="listtype">URI</span>
-        <span class="listcontent"><span class="loudlink" clipboard supported="supported" text="uri" on-copied="success()" on-error="fail(err)">Copy URI to clipboard</span></span>
+        <span class="listtype">uri</span>
+        <span class="listcontent autowidth smalltype">{{ uri }}</span>
+       
 
         <span class="listtype">creator</span>
-        <span class="listcontent" ng-bind-html="agent.getNameAsLink()"></span>
+        <span class="listcontent smalltype" ng-bind-html="agent.getNameAsLink()"></span>
 
         <span class="listtype">last modified:</span>
-        <span class="listcontent">
+        <span class="listcontent smalltype">
             {{ label.lastModified | date: 'dd.MM.yyyy' }}
             <ls-history-button revisions="label.revisions" ng-show="label.revisions"></ls-history-button>
         </span>
 
         <span class="listtype">license</span>
         <span class="listcontent">
-            <a ng-href="{{ label.license }}" target="_blank">
+            <a class="smalltype" ng-href="{{ label.license }}" target="_blank">
                 {{ $ctrl.license.short }}
             </a>
         </span>
 
         <span class="listtype">Download</span>
-        <span class="listcontent downloadlist downloadlistindent">
-           <a ng-href="{{ label.getUrl() + '.jsonld' }}" target="_blank" ng-click="$event.stopPropagation()">JSONLD</a>
-           <a ng-href="{{ label.getUrl() + '.ttl' }}" target="_blank" ng-click="$event.stopPropagation()">Turtle</a>
-           <a ng-href="{{ label.getUrl() + '.rdf' }}" target="_blank" ng-click="$event.stopPropagation()">RDF/XML</a>
-           <a ng-href="{{ label.getUrl() + '.n3'}}" target="_blank" ng-click="$event.stopPropagation()">N-Triples</a>
+        <span class="listcontent downloadlist downloadlistindent smalltype">
+           <a class="smalltype" ng-href="{{ label.getUrl() + '.jsonld' }}" target="_blank" ng-click="$event.stopPropagation()">JSONLD</a>
+           <a class="smalltype" ng-href="{{ label.getUrl() + '.ttl' }}" target="_blank" ng-click="$event.stopPropagation()">Turtle</a>
+           <a class="smalltype" ng-href="{{ label.getUrl() + '.rdf' }}" target="_blank" ng-click="$event.stopPropagation()">RDF/XML</a>
+           <a class="smalltype" ng-href="{{ label.getUrl() + '.n3'}}" target="_blank" ng-click="$event.stopPropagation()">N-Triples</a>
         </span>
     </div>
 
      <div class="dialog-half float" id="ls-selfexplain">
+        <!-- <span class="listcontent"><span class="loudlink" clipboard supported="supported" text="uri" on-copied="success()" on-error="fail(err)">Copy URI to clipboard</span></span> -->
+
         Labeling System is a web based tool for creating controlled vocabularies using linked open data techniques.
-        <a style="margin-top: 20px; display: block;" href="#/">Impressum</a>
+        <a style="display: block; margin-top: 10px;" href="#/">Impressum</a>
+
+        
     </div>
 </div>
 
