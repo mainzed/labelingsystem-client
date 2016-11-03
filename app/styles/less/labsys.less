@@ -80,8 +80,7 @@ html {				height: 100%;	}
 body {				height: 100%;	}
 textarea {			margin-left: @marginoutside; width: calc(100% - 2 * @marginoutside); display: block; resize: none;
 					height: 120px; background: white; padding: @margininboxsmall; border: 0; }
-h1 {				font-size: @headlines; font-weight: normal;
-					@media screen and (max-width: 1600px) {font-size: @headlines-small; } }
+h1 {				font-size: @headlines; font-weight: normal; }
 h2 {				font-size: @headlines; font-weight: normal; margin-bottom: 50px; margin-top: @marginoutside; margin-left: @marginoutside; display: block;
 					@media screen and (max-width: 1600px) {font-size: @headlines-small; } }
 h3 {				font-size: @emphasize; margin-bottom: 5px; margin-top: @marginoutside; margin-left: @marginoutside;
@@ -99,11 +98,12 @@ textarea:focus {	outline: none; }
 
 #header {			color: white; height: @headerheight; position: relative; background: @background;	}
 #footer {			position: fixed; bottom: @margininboxsmall; left: calc( @marginoutside + @marginoutboxsmall ); color: @label; height: 30px;  }
-#metafooter {		color: white; height: 130px; width: 100%; float: left; margin-top: 10px; }
+#metafooter {		color: white; height: 130px; width: 100%; float: left; margin-top: 10px; 
+					@media screen and (max-width: 1400px) {height: 160px; }}
 #metafooter .listtype {
                     margin-left: @marginoutboxsmall;}
 .clipboardbutton {  float: left; background: white; font-size: @small; margin: 0 auto; padding: 2px; border-radius: 3px; cursor: pointer;}
-#ls-selfexplain {   margin-left: 32px; font-size: @emphasize; }
+#ls-selfexplain {   margin-left: 32px;  }
 #footer span {		float: left; margin-top: 8px; }
 .landingh1 {		color: white; font-weight: 300; font-size: 150px; margin-left: @marginoutside; margin-bottom: 50px;
 					font-family: "mainzeddisplay"; }
@@ -116,8 +116,7 @@ textarea:focus {	outline: none; }
 .separatorsmall .pre {
 					color: white; margin-top: 10px; border-left: 1px solid white; padding-left: 10px; }
 #separator h1 {		padding-left: calc(@marginoutside + @marginoutboxsmall); padding-top: 20px; float: left; width: calc(@quartersize);    }
-#header h1 {		margin-top: 45px; float: left; font-weight: bold;
-					@media screen and (max-width: 1600px) { margin-top: 53px;} }
+#header h1 {		margin-top: 45px; float: left; font-weight: bold;}
 .nano {				 	}
 .noresult {			width: calc(100% - @marginoutboxsmall - @marginoutside); height: calc( 100% - 100px); font-size: @headlines; font-style: italic; color: @workareas; font-weight: 300;
 					text-align: center; position: absolute; margin-left: @marginoutboxsmall; background: @text; padding-top: 100px; }
@@ -141,7 +140,8 @@ textarea:focus {	outline: none; }
 #enrichments {		overflow-y: scroll; overflow-x: hidden; float: left; background: @workareas;}
 #listwrapper {		height: calc(100% - @headerheight - 50px - 38px); float: left; clear: left; display: block; width: 100%;}
 #listwrapper.listwrappermin {
-					height: calc(100% - 250px - 50px); }
+					height: calc(100% - 250px - 50px); 
+					@media screen and (max-width: 1400px) {height: calc(100% - 250px - 80px); }}
 #listwrapper.startwrapper {
                     background: @workareas; height: calc(100% - @headerheight); }
 #boxcontainer {		overflow-y: scroll; overflow-x: hidden; float: left; background: @workareas; padding-bottom: @marginoutside; }
@@ -183,7 +183,7 @@ textarea:focus {	outline: none; }
 .listoptions {		width: 50%; display: block; float: right;}
 
 .sortlist	{		display: block; float: left; position: relative; color: white; margin-top: 13px;
-					padding-left: 24px; cursor: pointer; width: 200px;  }
+					padding-left: 8px; cursor: pointer; width: 200px;  }
 .sortlist li {		list-style: none; margin-left: 0; }
 .sortlist .icon-sort {	line-height: 0px; margin-top: 10px; float: left; margin-left: -2px;}
 .sortlist .icon-breadcrumb {float: right;}
@@ -308,6 +308,8 @@ textarea:focus {	outline: none; }
 .halfleft {			width: calc((100% - @marginoutboxsmall * 3) / 2 + @marginoutboxsmall * 2 ); }
 .halfright {		width: calc((100% - @marginoutboxsmall * 3) / 2 + @marginoutboxsmall ); }
 
+.tablehead.halfright span 
+				{	margin-left: @margininboxsmall;}
 
 .left .box {		margin-left: @marginoutside; margin-right: @marginoutboxsmall; width: calc(100% - @marginoutboxsmall - @marginoutside); }
 .right .box {		margin-right: @marginoutside; margin-left: @marginoutboxsmall; width: calc(100% - @marginoutboxsmall - @marginoutside); }
@@ -445,7 +447,7 @@ textarea:focus {	outline: none; }
 					color: #a3a3a3; }
 textarea		 {	background: #d6d6d6;  }
 textarea.inactive{	color: #a3a3a3; }
-.typeinformation {	margin-left: calc(@marginoutside); font-style: italic; float: left; clear: left; }
+.typeinformation {	margin-left: calc(@marginoutside); float: left; clear: left; }
 .listtype {			float: left; width: 100px; margin-right: 20px; clear: left; margin-left: @marginoutside; font-style: italic;
 					padding-top: 2px; font-size: @small;  }
 .listcontent {		float: left; width: calc(100% - @marginoutboxsmall - @marginoutside - 200px); }
@@ -591,6 +593,7 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
 
 .pointer		{	cursor: pointer; }
 .smalltype {		font-size: @small; line-height: @lineheightsmall; display: block; }
+.smalltype a {		font-size: inherit;}
 .description {		display: block; line-height: 17px; }
 .wordbreak {		overflow-wrap: break-word; word-wrap: break-word; -webkit-hyphens: auto;
                     -ms-hyphens: auto; -moz-hyphens: auto; hyphens: auto; }
@@ -603,7 +606,7 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
 
 .inactive {			color: gray; pointer-events:none; }
 .paddingbottom {	padding-bottom: 10px;	}
-.loudlink {			 background: tomato; border-radius: 6px; padding: 2px 8px; color: white; cursor: pointer; }
+.loudlink {			 background: #0041CF; border-radius: 6px; padding: 2px 8px; color: white; cursor: pointer; }
 .loudlinkmin {		 background: #d3d3d3; border-radius: 6px; padding: 2px 8px; color: black; cursor: pointer; }
 
 

@@ -50,7 +50,7 @@ angular.module('labelsApp')
                     scope.conceptDialog = ngDialog.open({
                         template: "scripts/components/concept-detail/label-box/dialog.html",
                         className: 'bigdialog',
-                        showClose: true,
+                        showClose: false,
                         disableAnimation: true,
                         scope: scope
                     });

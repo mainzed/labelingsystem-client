@@ -13,13 +13,13 @@
       
 
         <span class="listtype">creator</span>
-        <span class="listcontent smalllistcontent" ng-bind-html="agent.getNameAsLink()"></span>
+        <span class="listcontent smalllistcontent smalltype" ng-bind-html="agent.getNameAsLink()"></span>
         <span class="listtype">description</span>
-        <span class="listcontent smalllistcontent">{{vocabulary.description}}</span>
+        <span class="listcontent smalllistcontent smalltype">{{vocabulary.description}}</span>
         <span class="listtype">license</span>
-        <span class="listcontent smalllistcontent"><a ng-href="{{vocabulary.license}}" target="_blank">{{ $ctrl.license.short }}</a></span>
+        <span class="listcontent smalllistcontent smalltype"><a ng-href="{{vocabulary.license}}" target="_blank">{{ $ctrl.license.short }}</a></span>
         <span class="listtype">Download</span>
-        <span class="listcontent smalllistcontent">
+        <span class="listcontent smalllistcontent smalltype">
             <a ng-href="{{ vocabulary.getUrl() + '.skos' }}" target="_blank" ng-click="$event.stopPropagation()">SKOS</a>
               <!--<span class="listcontent smalllistcontent"><span class="loudlink" clipboard supported="supported" text="vocabulary.uri" on-copied="success()" on-error="fail(err)">Copy URI to clipboard</span></span>-->
         </span>
