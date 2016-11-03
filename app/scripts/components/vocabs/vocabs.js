@@ -47,7 +47,11 @@
         });
 
         ctrl.loadVocabs = function() {
-            VocabService.queryWithStats({ creator: AuthService.getUser().id }, function(vocabs) {
+            VocabService.query({
+                creator: AuthService.getUser().id,
+                draft: true,
+                statistics: true
+            }, function(vocabs) {
                 $scope.vocabularies = vocabs;
                 CachingService.editor.vocabs = vocabs;
                 ctrl.loading = false;

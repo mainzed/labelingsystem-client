@@ -14,22 +14,6 @@ angular.module('labelsApp')
     var Vocab = $resource(ConfigService.api + '/vocabs/:id', null, {
         'query': {
             method: 'GET',
-            params: { draft: true },
-            isArray: true
-        },
-        'queryWithStats': {
-            method: 'GET',
-            params: { draft: true, statistics: true },
-            isArray: true
-        },
-        'queryWithCreator': {
-            method: 'GET',
-            params: { draft: true, creatorInfo: true },  // filter later
-            isArray: true
-        },
-        'queryPublic': {
-            method: 'GET',
-            params: { statistics: true },
             isArray: true
         },
         //'update': { method:'PUT' },

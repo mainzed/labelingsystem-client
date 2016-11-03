@@ -14,7 +14,7 @@ angular.module('labelsApp')
         mode: "@"
     },
     templateUrl: "scripts/components/vocabs/vocab-box/vocab-box.html",
-    controller: ["$location", "TooltipService", function($location, TooltipService) {
+    controller: ["$location", "TooltipService", "HelperService", function($location, TooltipService, HelperService) {
         var ctrl = this;
 
         ctrl.$onInit = function() {
@@ -33,5 +33,17 @@ angular.module('labelsApp')
                 $location.path('/editor/vocabularies/' + id + '/concepts');
             }
         };
+
+        ctrl.getFullName = function(creatorInfo) {
+            return [
+                creatorInfo.title,
+                creatorInfo.firstName,
+                creatorInfo.lastName
+            ].join(" ");
+        };
+
+        ctrl.openOrcID = function(orcid) {
+            HelperService.openLinkInNewTab(orcid);
+        }
     }]
 });

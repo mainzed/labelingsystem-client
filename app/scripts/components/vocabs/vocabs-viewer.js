@@ -26,12 +26,7 @@
                 $scope.vocabularies = CachingService.viewer.vocabs;
                 ctrl.loading = false;
             } else {
-                VocabService.queryPublic(function(vocabs) {
-                    $scope.vocabularies = vocabs;
-                    ctrl.loading = false;
-                }, function error(res) {
-                    console.log(res);
-                });
+                ctrl.loadVocabs();
             }
 
             // cache all concepts for landing page (if user clicks on search icon)
@@ -49,6 +44,15 @@
             // cache vocabs
             CachingService.viewer.vocabs = $scope.vocabularies;
         };
+
+        ctrl.loadVocabs = function() {
+            VocabService.query({ statistics: true, creatorInfo: true }, function(vocabs) {
+                $scope.vocabularies = vocabs;
+                ctrl.loading = false;
+            }, function error(res) {
+                console.log(res);
+            });
+        }
 
         $scope.onSearchClick = function() {
             $location.path("/search");
