@@ -38,8 +38,6 @@ angular.module('labelsApp')
                     ngDialog.open({
                         template: "scripts/components/concept-detail/wayback-box/dialog.html",
                         className: 'bigdialog smallheightdialog',
-                        showClose: false,
-                        closeByDocument: false,
                         disableAnimation: true,
                         scope: scope
                     });

@@ -106,7 +106,24 @@
         });
 
         $scope.$on("removedDescription", function(event) {
-            delete $scope.label.description;
+            console.log("inside!!!");
+            delete $scope.label["description"];
+
+            console.log($scope.label);
+            $scope.label.save(function() {
+                //
+            }, function error(res) {
+                console.log(res);
+            });
+        });
+
+        $scope.$on("changedDescription", function(event, data) {
+            $scope.label.description = data.newDescription;
+            $scope.label.save(function() {
+                //
+            }, function error(res) {
+                console.log(res);
+            });
         });
 
         $scope.$on("addedLink", function(event, data) {

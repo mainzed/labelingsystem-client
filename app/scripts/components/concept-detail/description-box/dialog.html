@@ -1,30 +1,27 @@
 <div class="dialogwrapper text">
 	<div class="dialogheader">
 		<h3>Description</h3>
-		<p class="typeinformation">{{tooltips.explainations.scopenote}}</p>
+		<p class="typeinformation">{{ $ctrl.tooltips.explainations.scopenote }}</p>
 		<div class="line-dialog line"></div>
 	</div>
 
 	<div class="dialogscroll">
-	<div class="nano">
-	<div class="nano-content">
-		<div class="dialogbox dialog-full">
-			<h4>Edit</h4>
-			<textarea ng-model="newValue" ng-paste="onKeyPress($event, newValue)" ng-keypress="onKeyPress($event, newValue)"></textarea>
+		<div class="nano">
+			<div class="nano-content">
+				<div class="dialogbox dialog-full">
+					<h4>Edit</h4>
+					<textarea ng-model="$ctrl.newValue" ng-paste="onKeyPress($event, newValue)" ng-keypress="onKeyPress($event, newValue)"></textarea>
+				</div>
+
+				<div class="line-dialog line"></div>
+
+				<div class="dialogbox dialog-full">
+					<h4>Functions</h4>
+					<ls-confirm-button on-confirm="$ctrl.delete(); closeThisDialog()"></ls-confirm-button>
+				</div>
+
+			</div>
 		</div>
-
-
-		<div class="line-dialog line"></div>
-		<div class="dialogbox dialog-full">
-		<h4>Functions</h4>
-      <ls-confirm-button on-confirm="onDeleteClick(); closeThisDialog()"></ls-confirm-button>
-		</div>
-
-
-	</div>
-	</div>
 	</div>
 
-	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="updateDescription(newValue); closeThisDialog()" ng-disabled="newValue === text" ng-class="{'inactive': newValue === data.description || newValue.length < 1}">Apply</div>
 </div>

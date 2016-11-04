@@ -2,85 +2,70 @@
 
 /**
  * @ngdoc directive
- * @name labelsApp.directive:descriptionBox
+ * @name labelsApp.directive:smallBox
  * @description
- * # descriptionBox
+ * # smallBox
  */
-angular.module('labelsApp')
-  .directive('lsDescriptionBox', function ($routeParams, $rootScope, ngDialog, LabelService, TooltipService, ConfigService) {
-    return {
-        templateUrl: 'scripts/components/concept-detail/description-box/description-box.html',
-        restrict: 'E',
-        scope: {
-            data: "=",
-            mode: "@"
-        },
-        link: function postLink(scope, element) {
+ angular.module('labelsApp')
+  .component('lsDescriptionBox', {
+    bindings: {
+        data: "=",
+        mode: "@"
+    },
+    templateUrl: "scripts/components/concept-detail/description-box/description-box.html",
 
-            scope.tooltips = TooltipService;
+    controller: ["$scope", "$routeParams", "$rootScope", "ngDialog", "LabelService", "TooltipService", "ConfigService", function($scope, $routeParams, $rootScope, ngDialog, LabelService, TooltipService, ConfigService) {
 
-            /**
-             * Opens a dialog with detailed information.
-             */
-            scope.openDialog = function() {
-                if (scope.mode !== "viewer") {
-                    scope.newValue = scope.data.description;
-                    ngDialog.open({
-                        template: "scripts/components/concept-detail/description-box/dialog.html",
-                        className: 'bigdialog',
-                        showClose: false,
-                        closeByDocument: false,
-                        disableAnimation: true,
-                        scope: scope
-                    });
-                }
-            };
+        var ctrl = this;
 
-            /**
-             * Deletes the current prefLabel.
-             */
-            scope.onDeleteClick = function() {
-                // get current concept
-                LabelService.get({id: $routeParams.lID}, function(concept) {
-                    delete concept.description;
+        ctrl.tooltips = null;
+        ctrl.newValue = null;
+        ctrl.dialog = null;
 
-                    concept.save(function() {
-                        //element.remove();
-                        $rootScope.$broadcast('removedDescription');
-                    }, function error(res) {
-                        console.log(res);
-                    });
+        ctrl.$onInit = function() {
+            ctrl.tooltips = TooltipService;
+        };
+
+        /**
+         * Opens a dialog with detailed information.
+         */
+        ctrl.openDialog = function() {
+            if (ctrl.mode !== "viewer") {
+                ctrl.newValue = ctrl.data.description;
+                ctrl.dialog = ngDialog.open({
+                    template: "scripts/components/concept-detail/description-box/dialog.html",
+                    className: 'bigdialog',
+                    disableAnimation: true,
+                    scope: $scope
                 });
-            };
+            }
+        };
 
-            /**
-             * Updates the label description.
-             * @param {string} newValue - updated term text
-             */
-            scope.updateDescription = function(newValue) {
+        /**
+         * Deletes the current prefLabel.
+         */
+        ctrl.delete = function() {
+             $rootScope.$broadcast('removedDescription');
+        };
 
-                LabelService.get({id: $routeParams.lID}, function(concept) {
+        ctrl.onKeyPress = function(e, newValue) {
+            //console.log(newValue.length);
+            if (newValue.length > ConfigService.conceptDescriptionLength - 1) {
+                // prevent new characters from being added
+                e.preventDefault();
+                // shorten description back to allowed length
+                ctrl.newValue = newValue.substring(0, ConfigService.conceptDescriptionLength);
+            }
+        };
 
-                    // replace old scopeNote
-                    concept.description = newValue;
-
-                    concept.save(function() {
-                        scope.data.description = newValue;
-                    }, function error(res) {
-                        console.log(res);
-                    });
-                });
-            };
-
-            scope.onKeyPress = function(e, newValue) {
-                //console.log(newValue.length);
-                if (newValue.length > ConfigService.conceptDescriptionLength - 1) {
-                    // prevent new characters from being added
-                    e.preventDefault();
-                    // shorten description back to allowed length
-                    scope.newValue = newValue.substring(0, ConfigService.conceptDescriptionLength);
+        $rootScope.$on('ngDialog.closed', function (e, $dialog) {
+            if (ctrl.dialog.id === $dialog.attr('id')) {  // is the resource dialog
+                if (ctrl.newValue) {
+                    $rootScope.$broadcast("changedDescription", { newDescription: ctrl.newValue});
                 }
-            };
-        }
-    };
+            }
+        });
+
+    }]
 });
+

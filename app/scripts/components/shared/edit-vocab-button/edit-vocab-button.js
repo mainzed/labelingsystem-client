@@ -126,7 +126,7 @@ angular.module('labelsApp')
             if (ctrl.data.releaseType === "draft") {
                 ctrl.data.releaseType = "public";
                 ctrl.data.save(function() {
-                    console.log("success");
+                    //console.log("success");
                 }, function error(res) {
                     console.log(res);
                 });
