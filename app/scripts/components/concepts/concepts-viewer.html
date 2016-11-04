@@ -6,11 +6,9 @@
 </div>
 
 <div id="metafooter">
-      <div class="dialog-half float">
+    <div class="dialog-half float">
         <span class="listtype">uri</span>
         <span class="listcontent smalllistcontent autowidth">{{ vocabulary.id }}</span>
-     
-      
 
         <span class="listtype">creator</span>
         <span class="listcontent smalllistcontent smalltype" ng-bind-html="agent.getNameAsLink()"></span>
@@ -23,10 +21,7 @@
             <a ng-href="{{ vocabulary.getUrl() + '.skos' }}" target="_blank" ng-click="$event.stopPropagation()">SKOS</a>
               <!--<span class="listcontent smalllistcontent"><span class="loudlink" clipboard supported="supported" text="vocabulary.uri" on-copied="success()" on-error="fail(err)">Copy URI to clipboard</span></span>-->
         </span>
-
-
     </div>
-  
 
     <div class="dialog-half float" id="ls-selfexplain">
         Labeling System is a web based tool for creating controlled vocabularies using linked open data techniques.
@@ -50,26 +45,24 @@
 
 <div id="listwrapper" class="listwrappermin">
 	<div class="nano">
-    <div id="boxcontainer" class="nano-content">
+        <div id="boxcontainer" class="nano-content">
 
-      <ls-list-box ng-repeat="label in filteredLabels = (labels | filter: {thumbnail: labelFilter} | orderBy: labelOrder | limitTo: conceptsLimit)" concept="label" mode="viewer"></ls-list-box>
+            <!-- spinner -->
+            <div class="loader" ng-show="$ctrl.loading"></div>
 
-      <div class="loader" ng-show="$ctrl.loading">
+            <ls-list-box ng-repeat="label in filteredLabels = (labels | filter: {thumbnail: labelFilter} | orderBy: labelOrder | limitTo: conceptsLimit)" concept="label" mode="viewer"></ls-list-box>
 
-      </div>
+            <!-- message when no labels found -->
+            <!-- <span class="box bigbox label listbox" ng-show="filteredLabels.length > 30">
+              No labels found, <a href="#/vocabularies">browse vocabularies!</a>
+            </span> -->
 
-      <!-- message when no labels found -->
-      <!-- <span class="box bigbox label listbox" ng-show="filteredLabels.length > 30">
-       No labels found, <a href="#/vocabularies">browse vocabularies!</a>
-      </span> -->
+            <!-- when search empty and more labels available show option to load more -->
+            <span class="showmorebox" ng-show="!labelFilter && labels.length > conceptsLimit" ng-click="conceptsLimit = conceptsLimit * 2">
+                show more
+            </span>
 
-      <!-- when search empty and more labels available show option to load more -->
-      <span class="showmorebox" ng-show="!labelFilter && labels.length > conceptsLimit" ng-click="conceptsLimit = conceptsLimit * 2">
-        show more
-      </span>
-
-      <!-- <ls-create-concept-button on-confirm="createConcept($newConcept)"></ls-create-concept-button> -->
-
-	</div>
+            <!-- <ls-create-concept-button on-confirm="createConcept($newConcept)"></ls-create-concept-button> -->
+    	</div>
 	</div>
 </div>

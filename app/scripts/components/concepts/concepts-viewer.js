@@ -48,7 +48,7 @@
             if (CachingService.editor.concepts && CachingService.editor.concepts.vocabID === $routeParams.vID) {
                 // cached concepts are for the current vocab
                 $scope.labels = CachingService.editor.concepts.items;
-                $scope.loading = false;
+                ctrl.loading = false;
             } else {
                 ctrl.loadConcepts();
             }

@@ -32,22 +32,22 @@
     <!-- related -->
     <span class="note-ext smallsection"><span class="italic smalltype" ng-show="concept.hasRelated()">related</span>
         <ul class="hierarchie">
-          <li ng-repeat="relatedConcept in conceptDetails.related | orderBy: 'thumbnail'">
-            <span class="icon-arrow icon"></span>
-            <span class="float smalltype mappingstext">{{ relatedConcept.thumbnail }}</span>
-          </li>
-          <li ng-repeat="relatedMatch in conceptDetails.relatedMatches | orderBy: 'label'">
-            <span class="icon-arrow icon"></span>
-            <span class="float smalltype mappingstext">{{ relatedMatch.label }}</span>
-          </li>
-          <li ng-repeat="closeMatch in conceptDetails.closeMatches | orderBy: 'label'">
-            <span class="icon-close icon"></span>
-            <span class="float smalltype mappingstext">{{ closeMatch.label }}</span>
-          </li>
-          <li ng-repeat="exactMatch in conceptDetails.exactMatches | orderBy: 'label'">
-            <span class="icon-exact icon"></span>
-            <span class="float smalltype mappingstext">{{ exactMatch.label }}</span>
-          </li>
+            <li ng-repeat="relatedConcept in conceptDetails.related | orderBy: 'thumbnail'">
+                <span class="icon-arrow icon"></span>
+                <span class="float smalltype mappingstext">{{ relatedConcept.thumbnail }}</span>
+            </li>
+            <li ng-repeat="relatedMatch in conceptDetails.relatedMatches | orderBy: 'label'">
+                <span class="icon-arrow icon"></span>
+                <span class="float smalltype mappingstext">{{ relatedMatch.label }}</span>
+            </li>
+            <li ng-repeat="closeMatch in conceptDetails.closeMatches | orderBy: 'label'">
+                <span class="icon-close icon"></span>
+                <span class="float smalltype mappingstext">{{ closeMatch.label }}</span>
+            </li>
+            <li ng-repeat="exactMatch in conceptDetails.exactMatches | orderBy: 'label'">
+                <span class="icon-exact icon"></span>
+                <span class="float smalltype mappingstext">{{ exactMatch.label }}</span>
+            </li>
         </ul>
     </span>
 

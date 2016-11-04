@@ -1,3 +1,4 @@
+<!-- navigation -->
 <div id="header" class="box full" ng-class="vocabulary.releaseType">
     <ls-breadcrumbs></ls-breadcrumbs>
     <h1 ng-bind="vocabulary.title"></h1>
@@ -5,42 +6,39 @@
 	<span class="language" ng-bind="vocabulary.language"></span>
 </div>
 
+<!-- filter and buttons -->
 <div class="separatorsmall">
-
 	<div id="filtersearch">
         <input type="text" ng-model="labelFilter" placeholder="filter" autofocus>
 	</div>
-
     <div class="listoptions">
         <ls-order-dropdown order="labelOrder"></ls-order-dropdown>
         <ls-extend-button ng-click="$ctrl.toggleExtent()"></ls-extend-button>
     </div>
-
 </div>
 
+<!-- concepts -->
 <div id="listwrapper">
 	<div class="nano">
-    <div id="boxcontainer" class="nano-content">
+        <div id="boxcontainer" class="nano-content">
 
-      <ls-list-box ng-repeat="label in filteredLabels = (labels | filter: {thumbnail: labelFilter} | orderBy: labelOrder | limitTo: conceptsLimit)" concept="label"></ls-list-box>
+            <!-- spinner -->
+            <div class="loader" ng-show="$ctrl.loading"></div>
 
-      <div class="loader" ng-show="$ctrl.loading">
+            <ls-list-box ng-repeat="label in filteredLabels = (labels | filter: {thumbnail: labelFilter} | orderBy: labelOrder | limitTo: conceptsLimit)" concept="label"></ls-list-box>
 
-      </div>
+            <!-- message when no labels found -->
+            <!-- <span class="box bigbox label listbox" ng-show="filteredLabels.length > 30">
+             No labels found, <a href="#/vocabularies">browse vocabularies!</a>
+            </span> -->
 
-      <!-- message when no labels found -->
-      <!-- <span class="box bigbox label listbox" ng-show="filteredLabels.length > 30">
-       No labels found, <a href="#/vocabularies">browse vocabularies!</a>
-      </span> -->
+            <!-- when search empty and more labels available show option to load more -->
+            <span id="showMoreID" class="box bigbox label listbox" ng-show="!labelFilter && labels.length > conceptsLimit" ng-click="conceptsLimit = conceptsLimit * 2">
+                show more
+            </span>
 
-      <!-- when search empty and more labels available show option to load more -->
-      <span id="showMoreID" class="box bigbox label listbox" ng-show="!labelFilter && labels.length > conceptsLimit" ng-click="conceptsLimit = conceptsLimit * 2">
-        show more
-      </span>
-
-      <ls-create-concept-button on-confirm="createConcept($newConcept)"></ls-create-concept-button>
-
-	</div>
+            <ls-create-concept-button on-confirm="createConcept($newConcept)"></ls-create-concept-button>
+    	</div>
 	</div>
 </div>
 

@@ -45,6 +45,9 @@ angular
       })
 
       // editor
+      .when('/editor', {
+        redirectTo: '/editor/login'
+      })
       .when('/editor/login', {
         template: '<ls-login></ls-login>',
         access: {restricted: false}
