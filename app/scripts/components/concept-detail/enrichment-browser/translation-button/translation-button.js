@@ -12,7 +12,7 @@ angular.module('labelsApp')
         onConfirm: '&'
     },
     templateUrl: 'scripts/components/concept-detail/enrichment-browser/translation-button/translation-button.html',
-    controller: ["$scope", "$routeParams", "ngDialog", "LabelService", "LanguageService", function($scope, $routeParams, ngDialog, LabelService, LanguageService) {
+    controller: ["$scope", "$rootScope", "$routeParams", "ngDialog", "LabelService", "LanguageService", function($scope, $rootScope, $routeParams, ngDialog, LabelService, LanguageService) {
         var ctrl = this;
 
         ctrl.$onInit = function() {
@@ -51,16 +51,18 @@ angular.module('labelsApp')
         };
 
         ctrl.openDialog = function() {
-
             ctrl.lookUsedLanguages();
+            $scope.newTranslation = {};
             ngDialog.open({
                 template: 'scripts/components/concept-detail/enrichment-browser/translation-button/dialog.html',
                 className: 'bigdialog',
-                showClose: false,
-                closeByDocument: false,
                 disableAnimation: true,
                 scope: $scope
             });
         };
+
+        ctrl.addTranslation = function() {
+            $rootScope.$broadcast("addedTranslation", { translation: $scope.newTranslation });
+        }; 
     }]
 });

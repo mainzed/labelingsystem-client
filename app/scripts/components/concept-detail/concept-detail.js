@@ -84,7 +84,14 @@
                 $scope.label.translations = [];
             }
             $scope.label.translations.push(data.translation);
+
+            $scope.label.save(function() {
+                // console.log("success");
+            }, function error(res) {
+                console.log(res);
+            });
         });
+
 
         $scope.$on("removedTranslation", function(event, data) {
             _.remove($scope.label.translations, { value: data.translation.value, lang: data.translation.lang });

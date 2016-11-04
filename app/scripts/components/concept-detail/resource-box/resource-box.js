@@ -128,7 +128,7 @@ angular.module('labelsApp')
                             uri: resource.uri
                         });
 
-                        // remove from current relation, gets created automatically in new column
+                        // remove from current relation, gets created automatically in new column 
                         element.remove();
                     });
 

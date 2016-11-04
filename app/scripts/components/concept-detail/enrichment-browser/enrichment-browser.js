@@ -108,22 +108,6 @@ angular.module("labelsApp")
                     $scope.onSearchClick();
                 }
             });
-        }
-
-        $scope.addTranslation = function(term, lang) {
-            var newTranslation = {
-                value: term,
-                lang: lang
-            };
-
-            if (!ctrl.concept.translations) {
-                ctrl.concept.translations = [];
-            }
-
-            ctrl.concept.translations.push(newTranslation);
-            ctrl.concept.save(function success() {
-                $rootScope.$broadcast("addedTranslation", { translation: newTranslation });
-            });
         };
 
         /**
