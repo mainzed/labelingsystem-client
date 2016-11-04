@@ -5,18 +5,15 @@
 	</div>
 
 	<div class="dialogscroll">
-	<div class="nano">
-	<div class="nano-content">
-		<div class="dialogbox dialog-full">
-			<textarea name="name" rows="4" cols="40" placeholder="description" ng-model="$ctrl.description" ng-paste="onKeyPress($event)" ng-keypress="onKeyPress($event)"></textarea>
-		</div>
+    	<div class="nano">
+        	<div class="nano-content">
+        		<div class="dialogbox dialog-full">
+        			<textarea name="name" rows="4" cols="40" placeholder="description" ng-model="$ctrl.description" ng-paste="onKeyPress($event)" ng-keypress="onKeyPress($event)"></textarea>
+        		</div>
 
+        	</div>
+    	</div>
 	</div>
-	</div>
-	</div>
 
-
-
-	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="$ctrl.onConfirm({$description: $ctrl.description}); closeThisDialog()" ng-class="{'inactive': !$ctrl.description}">Apply</div>
+	<div class="apply" ng-click="$ctrl.addDescription($ctrl.description); closeThisDialog()" ng-class="{'inactive': !$ctrl.description}">Apply</div>
 </div>

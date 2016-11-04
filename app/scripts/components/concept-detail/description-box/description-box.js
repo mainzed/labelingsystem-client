@@ -45,7 +45,7 @@
          * Deletes the current prefLabel.
          */
         ctrl.delete = function() {
-             $rootScope.$broadcast('removedDescription');
+            $rootScope.$broadcast('removedDescription');
         };
 
         ctrl.onKeyPress = function(e, newValue) {
@@ -68,4 +68,3 @@
 
     }]
 });
-

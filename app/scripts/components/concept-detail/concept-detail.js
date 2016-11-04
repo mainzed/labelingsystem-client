@@ -41,21 +41,23 @@
 
             $scope.label.save(function() {
                 // success
+                // update cache
+
+
+
             });
+
+
         });
 
         $scope.$on("addedResource", function(event, data) {
             $scope.label.addChild(data.concept, data.relation);
-            $scope.label.save(function() {
-                // success
-            });
+            ctrl.saveChanges();
         });
 
         $scope.$on("addedWaybackLink", function(event, data) {
             $scope.label.addChild({ uri: data.uri }, "seeAlso");
-            $scope.label.save(function() {
-                // success
-            });
+            ctrl.saveChanges();
         });
 
         $scope.$on("changedConcept", function(event, data) {
@@ -68,20 +70,12 @@
             $scope.label[data.newRelation] = $scope.label[data.newRelation] || [];
             $scope.label[data.newRelation].push(data.concept.id);
 
-            $scope.label.save(function() {
-                //console.log("success");
-            }, function error(res) {
-                console.log(res);
-            });
+            ctrl.saveChanges();
         });
 
         $scope.$on("removedResource", function(event, data) {
             _.remove($scope.label[data.relation], { "uri": data.resourceURI });
-            $scope.label.save(function() {
-                // console.log("success");
-            }, function error(res) {
-                console.log(res);
-            });
+            ctrl.saveChanges();
         });
 
         $scope.$on("addedTranslation", function(event, data) {
@@ -90,11 +84,7 @@
             }
             $scope.label.translations.push(data.translation);
 
-            $scope.label.save(function() {
-                // console.log("success");
-            }, function error(res) {
-                console.log(res);
-            });
+            ctrl.saveChanges();
         });
 
         $scope.$on("removedTranslation", function(event, data) {
@@ -103,27 +93,18 @@
 
         $scope.$on("addedDescription", function(event, data) {
             $scope.label.description = data.description;
+            ctrl.saveChanges();
         });
 
         $scope.$on("removedDescription", function(event) {
-            console.log("inside!!!");
-            delete $scope.label["description"];
-
+            $scope.label.description = null;
             console.log($scope.label);
-            $scope.label.save(function() {
-                //
-            }, function error(res) {
-                console.log(res);
-            });
+            ctrl.saveChanges();
         });
 
         $scope.$on("changedDescription", function(event, data) {
             $scope.label.description = data.newDescription;
-            $scope.label.save(function() {
-                //
-            }, function error(res) {
-                console.log(res);
-            });
+            ctrl.saveChanges();
         });
 
         $scope.$on("addedLink", function(event, data) {
@@ -147,13 +128,7 @@
                 type: data.resource.type,
                 uri: data.resource.uri
             });
-
-            $scope.label.save(function() {
-                // console.log("success");
-            }, function error(res) {
-                console.log(res);
-            });
-
+            ctrl.saveChanges();
         });
 
         $scope.$on("toggledEnrichmentBrowser", function(event, data) {
@@ -161,5 +136,25 @@
             CachingService.editor.showEnrichments = ctrl.showEnrichments;
             HelperService.refreshNanoScroller();
         });
+
+        /**
+         * saves changes to label and updates this label in cache
+         */
+        ctrl.saveChanges = function() {
+            $scope.label.save(function() {
+                // update single label in cache
+                if (CachingService.editor.concepts) {
+                    var array = CachingService.editor.concepts.items;
+                    var query = { id: $scope.label.id };
+                    var match = _.find(array, query);
+                    if (match) {
+                        var index = _.indexOf(array, _.find(array, query));
+                        array.splice(index, 1, $scope.label);
+                    } else {
+                        array.push($scope.label);
+                    }
+                }
+            });
+        };
     }]
 });

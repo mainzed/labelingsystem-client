@@ -13,7 +13,7 @@
         onConfirm: "&"
     },
     templateUrl: "scripts/components/concept-detail/enrichment-browser/description-button/description-button.html",
-    controller: ["$scope", "ngDialog", "ConfigService", function($scope, ngDialog, ConfigService) {
+    controller: ["$scope", "$rootScope", "ngDialog", "ConfigService", function($scope, $rootScope, ngDialog, ConfigService) {
         var ctrl = this;
 
         this.$onInit = function() {}
@@ -31,6 +31,10 @@
                 disableAnimation: true,
                 scope: $scope
             });
+        };
+
+        ctrl.addDescription = function(value) {
+            $rootScope.$broadcast("addedDescription", { description: value });
         };
 
         $scope.onKeyPress = function(e) {

@@ -110,20 +110,6 @@ angular.module("labelsApp")
             });
         };
 
-        /**
-         * Adds a description to the current concept.
-         */
-        $scope.addDescription = function(value) {
-            ctrl.concept.description = value;
-            ctrl.concept.save(function() {
-                // success
-                $rootScope.$broadcast("addedDescription", { description: value });
-            }, function(res) {
-                // error
-                console.log(res);
-            });
-        };
-
         $rootScope.$on("changedEnrichmentVocab", function(event, vocabID) {
             $scope.siblings = [];
             ctrl.getEnrichmentVocab($scope.vocab);
