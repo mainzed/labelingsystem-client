@@ -1,12 +1,11 @@
-<div class="box small text low" ng-click="openDialog()">
+<div class="box small text low" ng-click="$ctrl.openDialog()">
 
-  <!-- description text -->
-  <span class="thumbnail" ng-bind="data.description"></span>
+    <!-- description text -->
+    <span class="thumbnail" ng-bind="$ctrl.data.description"></span>
 
-  <!-- icon -->
-  <span class="type" title="{{ tooltips.icons.description }}"><span class='icon-note'></span></span>
-
-  <!-- language -->
-  <!-- <span class="language" ng-bind="data.language"></span> -->
+    <!-- icon -->
+    <span class="type" title="{{ $ctrl.tooltips.icons.description }}">
+        <span class='icon-note'></span>
+    </span>
 
 </div>

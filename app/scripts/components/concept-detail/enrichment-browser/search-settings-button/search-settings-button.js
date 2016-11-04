@@ -34,7 +34,7 @@ angular.module('labelsApp')
                 // get thesauri
                 ctrl.data.getThesauri(function(thesauri) {
                     ctrl.thesauri = thesauri;
-                    refreshNanoScroller();
+                    HelperService.refreshNanoScroller();
                 });
             } else {
                 // get current reference vocab
@@ -50,7 +50,7 @@ angular.module('labelsApp')
                     });
 
                     //CachingService.editor.vocabsWithCreator = vocabs;
-                    refreshNanoScroller();
+                    HelperService.refreshNanoScroller();
                 });
             }
 

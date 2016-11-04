@@ -69,7 +69,7 @@
             $scope.label[data.newRelation].push(data.concept.id);
 
             $scope.label.save(function() {
-                console.log("success");
+                //console.log("success");
             }, function error(res) {
                 console.log(res);
             });
@@ -77,6 +77,11 @@
 
         $scope.$on("removedResource", function(event, data) {
             _.remove($scope.label[data.relation], { "uri": data.resourceURI });
+            $scope.label.save(function() {
+                // console.log("success");
+            }, function error(res) {
+                console.log(res);
+            });
         });
 
         $scope.$on("addedTranslation", function(event, data) {
@@ -92,7 +97,6 @@
             });
         });
 
-
         $scope.$on("removedTranslation", function(event, data) {
             _.remove($scope.label.translations, { value: data.translation.value, lang: data.translation.lang });
         });
@@ -102,11 +106,54 @@
         });
 
         $scope.$on("removedDescription", function(event) {
-            delete $scope.label.description;
+            console.log("inside!!!");
+            delete $scope.label["description"];
+
+            console.log($scope.label);
+            $scope.label.save(function() {
+                //
+            }, function error(res) {
+                console.log(res);
+            });
+        });
+
+        $scope.$on("changedDescription", function(event, data) {
+            $scope.label.description = data.newDescription;
+            $scope.label.save(function() {
+                //
+            }, function error(res) {
+                console.log(res);
+            });
         });
 
         $scope.$on("addedLink", function(event, data) {
             console.log("added link!");
+        });
+
+        $scope.$on("changedRelation", function(event, data) {
+            
+            // get resource
+            var query = { uri: data.resource.uri };
+            var resource = _.find($scope.label[data.oldRelation], query);
+
+            // remove it from the array (e.g. remove a narrowMatch from the narrowWatch array)
+            _.remove($scope.label[data.oldRelation], query);
+
+            // push resource to the corresponding array (e.g. to the broaderMatch array)
+            if (!$scope.label[data.newRelation]) {
+                $scope.label[data.newRelation] = [];
+            }
+            $scope.label[data.newRelation].push({
+                type: data.resource.type,
+                uri: data.resource.uri
+            });
+
+            $scope.label.save(function() {
+                // console.log("success");
+            }, function error(res) {
+                console.log(res);
+            });
+        
         });
 
         $scope.$on("toggledEnrichmentBrowser", function(event, data) {
