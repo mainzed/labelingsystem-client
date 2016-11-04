@@ -1,0 +1,30 @@
+<span ng-class="{'micro': 'micropreview', 'mini': 'minipreview'}[$ctrl.size]">
+
+    <!-- broader -->
+    <span ng-class="{'micro': 'microcol', 'mini': 'minicol'}[$ctrl.size]">
+        <span ng-repeat="broaderConcept in $ctrl.label.broader" class="label" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[$ctrl.size]"></span>
+        <span ng-repeat="broaderMatch in $ctrl.label.broadMatch" class="{{broaderMatch.type}}" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[$ctrl.size]"></span>
+    </span>
+
+    <!-- text -->
+    <span ng-class="{'micro': 'microcol', 'mini': 'minicol'}[$ctrl.size]">
+        <span ng-repeat="translation in $ctrl.label.translations" class="text" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[$ctrl.size]"></span>
+        <span ng-show="$ctrl.label.description" class="text" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[$ctrl.size]"></span>
+    </span>
+
+    <!-- relations -->
+    <span ng-class="{'micro': 'microcol', 'mini': 'minicol'}[$ctrl.size]">
+        <span ng-repeat="relatedConcept in $ctrl.label.related" class="label" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[$ctrl.size]"></span>
+        <span ng-repeat="exactMatch in $ctrl.label.exactMatch" class="{{exactMatch.type}}" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[$ctrl.size]"></span>
+        <span ng-repeat="relatedMatch in $ctrl.label.relatedMatch" class="{{relatedMatch.type}}" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[$ctrl.size]"></span>
+        <span ng-repeat="closeMatch in $ctrl.label.closeMatch" class="{{closeMatch.type}}" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[$ctrl.size]"></span>
+        <span ng-repeat="link in $ctrl.label.seeAlso" class="text" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[$ctrl.size]"></span>
+    </span>
+
+    <!-- narrower -->
+    <span ng-class="{'micro': 'microcol', 'mini': 'minicol'}[$ctrl.size]">
+        <span ng-repeat="narrowerConcept in $ctrl.label.narrower" class="label" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[$ctrl.size]"></span>
+        <span ng-repeat="narrowerMatch in $ctrl.label.narrowMatch" class="{{narrowerMatch.type}}" ng-class="{'micro': 'microbox', 'mini': 'minibox'}[$ctrl.size]"></span>
+    </span>
+
+</span>

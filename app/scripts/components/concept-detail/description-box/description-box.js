@@ -46,6 +46,7 @@
          */
         ctrl.delete = function() {
             $rootScope.$broadcast('removedDescription');
+            ctrl.dialog.close();
         };
 
         ctrl.onKeyPress = function(e, newValue) {

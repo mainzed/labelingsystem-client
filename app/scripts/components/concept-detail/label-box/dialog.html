@@ -2,11 +2,11 @@
 
     <div class="dialogheader">
 		<h3 ng-bind="concept.thumbnail"></h3>
-		<p class="typeinformation">Concept</p> 
+		<p class="typeinformation">Concept</p>
 		<p class="typeinformation bottomleft">
 			<span class="loudlink" ng-click="openConcept(); closeThisDialog()">open in same tab</span>
 		</p>
-        <mini-preview label="concept"></mini-preview>
+        <ls-preview label="concept"></ls-preview>
 
         <div class="line-bottom line"></div>
 	</div>
@@ -66,26 +66,8 @@
 		</div>
 
 		<div class="line-dialog line"></div>
-		<div class="dialogbox dialog-full">
-	    	<h4>Meta data</h4>
-	    	<span class="listtype">id</span>
-	        <span class="listcontent" ng-bind="concept.id"></span>
 
-	        <span class="listtype">Creator</span>
-	        <span class="listcontent" ng-bind="concept.creator"></span>
-
-	        <span class="listtype">Last modified</span>
-	        <span class="listcontent" ng-bind-template="{{ concept.lastModified | date: 'dd.MM.yyyy hh:mm'}}"></span>
-
-	        <!-- <span class="listtype">License</span>
-	        <span class="listcontent"><a ng-href="{{concept.license}}" target="_blank">CC BY</a></span> -->
-	    </div>
-
-
-
-
-		<div class="line-dialog line"></div>
-		<div class="dialogbox dialog-full">
+        <div class="dialogbox dialog-full">
 
             <h4>Connection</h4>
 			<div class="enrichbuttons">

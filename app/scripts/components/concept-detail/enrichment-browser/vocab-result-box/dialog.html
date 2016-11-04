@@ -8,7 +8,7 @@
   	  <span class="thumbnail" ng-bind="$ctrl.data.thumbnail || $ctrl.data.label"></span>
 
       <span class="type" ng-show="$ctrl.cssType !== 'label'" title="{{ $ctrl.data.type + ' - ' + $ctrl.data.scheme }}">({{ $ctrl.data.type || "ls" }})</span>
-      <mini-preview ng-show="$ctrl.cssType === 'label'" label="$ctrl.data" size="micro" title="{{ tooltips.icons.minipreview }}"></mini-preview>
+      <!-- <ls-preview ng-show="$ctrl.cssType === 'label'" label="$ctrl.data" size="micro" title="{{ tooltips.icons.minipreview }}"></ls-preview> -->
 
   	</div>
   </div>

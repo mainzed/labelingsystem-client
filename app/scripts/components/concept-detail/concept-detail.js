@@ -38,16 +38,7 @@
             // TODO: implement removeChild() method for concepts
             // that can handle both resources and concepts
             $scope.label[data.relation] = _.pull($scope.label[data.relation], data.conceptID);
-
-            $scope.label.save(function() {
-                // success
-                // update cache
-
-
-
-            });
-
-
+            ctrl.saveChanges();
         });
 
         $scope.$on("addedResource", function(event, data) {
@@ -97,8 +88,7 @@
         });
 
         $scope.$on("removedDescription", function(event) {
-            $scope.label.description = null;
-            console.log($scope.label);
+            _.unset($scope.label.description);
             ctrl.saveChanges();
         });
 

@@ -12,7 +12,7 @@
 
     <!-- icon -->
     <span class="type" ng-show="$ctrl.cssType !== 'label'" title="{{ $ctrl.data.type + ' - ' + $ctrl.data.scheme }}">({{ $ctrl.data.type || "ls" }})</span>
-    <mini-preview ng-show="$ctrl.cssType === 'label'" label="$ctrl.data" size="micro" title="{{ tooltips.icons.minipreview }}"></mini-preview>
+    <ls-preview ng-show="$ctrl.cssType === 'label'" label="$ctrl.data" size="micro" title="{{ tooltips.icons.minipreview }}"></ls-preview>
 
 </div>
 
@@ -36,7 +36,7 @@
         </ul>
     </span>
 
- 
+
     <!-- link -->
     <span class="note-ext"><span class="italic smalltype"></span><br>
         <a class="loudlinkmin smalltype" ng-href="{{ $ctrl.getLink() }}" target="_blank" ng-click="$event.stopPropagation()">open in new tab</a>
