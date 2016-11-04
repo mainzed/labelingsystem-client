@@ -282,11 +282,11 @@ textarea:focus {
   width: 100%;
 }
 #listwrapper.listwrappermin {
-  height: calc(100% - 250px - 50px);
+  height: calc(100% - 90px - 130px - 50px - 10px);
 }
 @media screen and (max-width: 1400px) {
   #listwrapper.listwrappermin {
-    height: calc(100% - 250px - 80px);
+    height: calc(100% - 90px - 160px - 50px - 10px);
   }
 }
 #listwrapper.startwrapper {
@@ -1596,14 +1596,14 @@ span.icon-time {
   padding-bottom: 10px;
 }
 .loudlink {
-  background: #0041CF;
+  background: white;
   border-radius: 6px;
   padding: 2px 8px;
-  color: white;
+  color: black;
   cursor: pointer;
 }
 .loudlinkmin {
-  background: #d3d3d3;
+  background: white;
   border-radius: 6px;
   padding: 2px 8px;
   color: black;

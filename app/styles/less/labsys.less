@@ -50,6 +50,8 @@
 @marginbottombox: 	3px;
 @boxheight: 		60px;
 @headerheight: 		90px;
+@metafooterheight:	130px;
+@metafooterheighte:	160px;
 
 
 /*------------------- grid --------------------- */
@@ -98,8 +100,8 @@ textarea:focus {	outline: none; }
 
 #header {			color: white; height: @headerheight; position: relative; background: @background;	}
 #footer {			position: fixed; bottom: @margininboxsmall; left: calc( @marginoutside + @marginoutboxsmall ); color: @label; height: 30px;  }
-#metafooter {		color: white; height: 130px; width: 100%; float: left; margin-top: 10px; 
-					@media screen and (max-width: 1400px) {height: 160px; }}
+#metafooter {		color: white; height: @metafooterheight; width: 100%; float: left; margin-top: 10px; 
+					@media screen and (max-width: 1400px) {height: @metafooterheighte; }}
 #metafooter .listtype {
                     margin-left: @marginoutboxsmall;}
 .clipboardbutton {  float: left; background: white; font-size: @small; margin: 0 auto; padding: 2px; border-radius: 3px; cursor: pointer;}
@@ -140,8 +142,8 @@ textarea:focus {	outline: none; }
 #enrichments {		overflow-y: scroll; overflow-x: hidden; float: left; background: @workareas;}
 #listwrapper {		height: calc(100% - @headerheight - 50px - 38px); float: left; clear: left; display: block; width: 100%;}
 #listwrapper.listwrappermin {
-					height: calc(100% - 250px - 50px); 
-					@media screen and (max-width: 1400px) {height: calc(100% - 250px - 80px); }}
+					height: calc(100% - @headerheight - @metafooterheight - 50px - 10px); 
+					@media screen and (max-width: 1400px) {height: calc(100% - @headerheight - @metafooterheighte - 50px - 10px); }}
 #listwrapper.startwrapper {
                     background: @workareas; height: calc(100% - @headerheight); }
 #boxcontainer {		overflow-y: scroll; overflow-x: hidden; float: left; background: @workareas; padding-bottom: @marginoutside; }
@@ -606,8 +608,8 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
 
 .inactive {			color: gray; pointer-events:none; }
 .paddingbottom {	padding-bottom: 10px;	}
-.loudlink {			 background: #0041CF; border-radius: 6px; padding: 2px 8px; color: white; cursor: pointer; }
-.loudlinkmin {		 background: #d3d3d3; border-radius: 6px; padding: 2px 8px; color: black; cursor: pointer; }
+.loudlink {			 background: white; border-radius: 6px; padding: 2px 8px; color: black; cursor: pointer; }
+.loudlinkmin {		 background: white; border-radius: 6px; padding: 2px 8px; color: black; cursor: pointer; }
 
 
 
