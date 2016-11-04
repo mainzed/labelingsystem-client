@@ -22,7 +22,8 @@
 
                 <!-- vocabs -->
                 <div class="dialogboxnopadding dialog-full" ng-if="$ctrl.mode === 'vocabs'">
-                    <div class="thesaurus thesaurussmall" ng-repeat="vocab in $ctrl.vocabs | filter: $ctrl.isValidVocab | orderBy: 'title'" ng-class="{'checked': vocab.id === $ctrl.referenceVocabID}">
+                    <div class="thesaurus thesaurussmall" ng-repeat="vocab in $ctrl.vocabs | orderBy: 'title'" ng-class="{'checked': vocab.id === $ctrl.referenceVocabID}">
+
                         <ls-radiobox checked="vocab.id === $ctrl.referenceVocabID" on-check="$ctrl.saveReferenceVocab(vocab.id)"></ls-radiobox>
 
                         <h5>

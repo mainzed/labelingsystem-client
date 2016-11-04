@@ -12,7 +12,7 @@
         </div>
 
         <!-- labels tab -->
-        <div class="tab" ng-click="showSearch = false" ng-class="{'active': !showSearch, 'ls': enrichmentVocab.title !== vocab.title}">
+        <div class="tab" ng-click="showSearch = false" ng-class="{'active': !showSearch, 'ls': enrichmentVocab && enrichmentVocab.title !== vocab.title}">
             <span class="tablabel">Concepts of {{ enrichmentVocab.title }}</span>
 
             <ls-search-settings-button mode="vocabs" data="vocab" title="{{tooltips.icons.thesauriSettings}}"></search-settings-button>

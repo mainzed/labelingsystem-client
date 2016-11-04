@@ -86,7 +86,7 @@ angular.module("labelsApp")
 
          // save changes when dialog is closed
         $rootScope.$on('ngDialog.closed', function (e, $dialog) {
-            if (ctrl.dialog.id === $dialog.attr('id')) {  // is the resource dialog
+            if (ctrl.dialog && ctrl.dialog.id === $dialog.attr('id')) {  // is the resource dialog
                 ctrl.updateTranslation();
             }
         });

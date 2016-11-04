@@ -16,8 +16,7 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ngDialog',
-    'angular-clipboard'
+    'ngDialog'
   ])
   .config(function ($routeProvider) {
     $routeProvider

@@ -32,7 +32,6 @@ module.exports = function(config) {
       'bower_components/ng-dialog/js/ngDialog.js',
       'bower_components/nanoscroller/bin/javascripts/jquery.nanoscroller.js',
       'bower_components/lodash/lodash.js',
-      'bower_components/angular-clipboard/angular-clipboard.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js'

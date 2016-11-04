@@ -43,10 +43,10 @@ angular.module('labelsApp')
                 });
 
                 // get all available public vocabs
-                VocabService.query({creatorInfo: true}, function(vocabs) {
+                VocabService.query({ creatorInfo: true, draft: true }, function(vocabs) {
 
                     ctrl.vocabs = _.filter(vocabs, function(o) {
-                        return o.creator === ctrl.user.id || o.releaseType === "public";
+                        return ctrl.data.title === o.title || o.releaseType === "public";
                     });
 
                     //CachingService.editor.vocabsWithCreator = vocabs;
@@ -76,10 +76,6 @@ angular.module('labelsApp')
             }, function error(res) {
                 console.log(res);
             });
-        }
-
-        ctrl.isValidVocab = function(vocab) {
-            return ctrl.data.title === vocab.title || vocab.releaseType === "public";
         }
 
         ctrl.getCreatorAsLink = function(vocab) {

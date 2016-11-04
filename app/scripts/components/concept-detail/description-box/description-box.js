@@ -20,7 +20,6 @@
 
         ctrl.tooltips = null;
         ctrl.newValue = null;
-        ctrl.dialog = null;
 
         ctrl.$onInit = function() {
             ctrl.tooltips = TooltipService;
@@ -60,7 +59,7 @@
         };
 
         $rootScope.$on('ngDialog.closed', function (e, $dialog) {
-            if (ctrl.dialog.id === $dialog.attr('id')) {  // is the resource dialog
+            if (ctrl.dialog && ctrl.dialog.id === $dialog.attr('id')) {  // is the resource dialog
                 if (ctrl.newValue) {
                     $rootScope.$broadcast("changedDescription", { newDescription: ctrl.newValue});
                 }

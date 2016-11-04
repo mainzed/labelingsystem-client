@@ -40,10 +40,7 @@
                     </div>
                 </div>
 
-           
-
                 <div class="line-dialog line"></div>
-
 
                 <div class="dialogbox dialog-full">
                     <h4 ng-class="{'inactive': $ctrl.data.releaseType === 'public'}">Actions</h4>
@@ -68,8 +65,6 @@
                     </span>
                 </div>
 
-               
-
                 <div class="line-dialog line"></div>
 
                 <!-- thesauri -->
@@ -93,7 +88,7 @@
                 <div class="dialogbox dialog-full">
                     <h4>Reference vocabulary</h4>
                     <!-- <div ng-bind="enrichmentVocabID"></div> -->
-                    <div class="thesaurus thesaurussmall" ng-repeat="vocab in vocabularies | filter: validVocab | orderBy: 'title'" ng-class="{'checked': vocab.id === $ctrl.referenceVocabID}">
+                    <div class="thesaurus thesaurussmall" ng-repeat="vocab in vocabularies | orderBy: 'title'" ng-class="{'checked': vocab.id === $ctrl.referenceVocabID}">
                         <ls-radiobox checked="vocab.id === $ctrl.referenceVocabID" on-check="$ctrl.saveReferenceVocab(vocab.id)"></ls-radiobox>
 
                         <h5>

@@ -28,17 +28,6 @@ angular.module('labelsApp')
                 this.icon = "icon-config";
             }
 
-            // get all vocabularies with creator info to make them selectable
-            if (CachingService.editor.vocabsWithCreator) {
-                $scope.vocabularies = CachingService.editor.vocabsWithCreator;
-            } else {
-                VocabService.query({creatorInfo: true}, function(vocabs) {
-                    $scope.vocabularies = vocabs;
-                    CachingService.editor.vocabsWithCreator = vocabs;
-                    angular.element(".nano").nanoScroller();
-                });
-            }
-
             LicenseService.query({}, function(licenses) {
                 ctrl.licenses = licenses;
             })
@@ -49,6 +38,17 @@ angular.module('labelsApp')
             ctrl.newTitle = ctrl.data.title;
             ctrl.newDescription = ctrl.data.description;
 
+            // get all available public vocabs
+            VocabService.query({ creatorInfo: true, draft: true }, function(vocabs) {
+
+                $scope.vocabularies = _.filter(vocabs, function(o) {
+                    return ctrl.data.title === o.title || o.releaseType === "public";
+                });
+
+                //CachingService.editor.vocabsWithCreator = vocabs;
+                HelperService.refreshNanoScroller();
+            });
+            
             ctrl.data.getEnrichmentVocab(function(vocabID) {
                 ctrl.referenceVocabID = vocabID;
             });
