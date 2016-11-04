@@ -1195,6 +1195,11 @@ textarea.inactive {
   float: left;
   clear: left;
 }
+.bottomleft {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+}
 .listtype {
   float: left;
   width: 100px;
