@@ -1,0 +1,53 @@
+<div class="dialogwrapper label">
+
+    <div class="dialogheader">
+		<h3>Edit users</h3>
+		<div class="line-bottom line"></div>
+	</div>
+
+	<div class="dialogscroll">
+	    <div class="nano">
+	        <div class="nano-content">
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>title</th>
+                            <th>firstName</th>
+                            <th>lastName</th>
+                            <th>orcid</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="user in $ctrl.users | orderBy: 'id'">
+                            <td>{{ user.id }}</td>
+                            <td>{{ user.title }}</td>
+                            <td>{{ user.firstName }}</td>
+                            <td>{{ user.lastName }}</td>
+                            <td><a ng-href="{{ user.orcid }}" target="_blank">{{ user.orcid }}</a></td>
+                            <td><button class="logout" ng-click="$ctrl.delete()">delete</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <button class="logout" ng-click="$ctrl.openNewUser()">new user</button>
+
+                <!-- new user -->
+                <div class="dialogbox dialog-full" ng-if="$ctrl.showNewUser">
+                    <!-- <h4>id</h4> -->
+                    <input type="text" placeholder="id" ng-model="$ctrl.newUser.id">
+                    <input type="text" placeholder="title" ng-model="$ctrl.newUser.title">
+                    <input type="text" placeholder="firstName" ng-model="$ctrl.newUser.firstName">
+                    <input type="text" placeholder="lastName" ng-model="$ctrl.newUser.lastName">
+                    <input type="text" placeholder="orcid" ng-model="$ctrl.newUser.orcid">
+
+                    <button class="logout" ng-click="$ctrl.create()">create</button>
+
+                </div>
+
+	        </div>
+	    </div>
+	</div>
+
+</div>
