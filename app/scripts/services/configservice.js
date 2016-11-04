@@ -11,7 +11,7 @@ angular.module('labelsApp')
   .service('ConfigService', function () {
 
     // webapp version number
-    this.version = "v0.2";
+    this.version = "v0.3";
 
     // host adress of the used labeling system api
     this.host = "http://143.93.114.135";

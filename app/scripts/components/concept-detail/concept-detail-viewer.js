@@ -41,8 +41,8 @@
             }
 
             // copy to clipboard
-            $scope.uri = ConfigService.host + "/item/label/" + $routeParams.lID;
-            $scope.supported = false;
+            //$scope.uri = ConfigService.host + "/item/label/" + $routeParams.lID;
+            //$scope.supported = false;
 
             angular.element(".nano").nanoScroller();
         }
@@ -51,12 +51,5 @@
             $location.path("/search");
         };
 
-        $scope.success = function () {
-            console.log('Copied!');
-        };
-
-        $scope.fail = function (err) {
-            console.error('Error!', err);
-        };
     }]
 });

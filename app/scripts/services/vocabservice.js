@@ -16,13 +16,15 @@ angular.module('labelsApp')
             method: 'GET',
             isArray: true
         },
-        //'update': { method:'PUT' },
-        //'download' : { method: 'GET', url: ConfigService.api + '/vocabs/:id' + ".skos", isArray: false },
         'remove': { method: 'DELETE' }
     });
 
     Vocab.prototype.getUrl = function() {
         return ConfigService.api + "/vocabs/" + this.id;
+    };
+
+    Vocab.prototype.getUri = function() {
+        return ConfigService.host + "/item/vocabulary/" + this.id;
     };
 
     /**

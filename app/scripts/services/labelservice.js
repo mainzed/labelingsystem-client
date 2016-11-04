@@ -49,6 +49,10 @@ angular.module('labelsApp')
         return ConfigService.api + "/labels/" + this.id;
     };
 
+    Concept.prototype.getUri = function() {
+        return ConfigService.host + "/item/label/" + this.id;
+    };
+
     /**
      * Gets this concepts language.
      */
