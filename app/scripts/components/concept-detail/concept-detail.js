@@ -131,7 +131,7 @@
         });
 
         $scope.$on("changedRelation", function(event, data) {
-            
+
             // get resource
             var query = { uri: data.resource.uri };
             var resource = _.find($scope.label[data.oldRelation], query);
@@ -153,7 +153,7 @@
             }, function error(res) {
                 console.log(res);
             });
-        
+
         });
 
         $scope.$on("toggledEnrichmentBrowser", function(event, data) {

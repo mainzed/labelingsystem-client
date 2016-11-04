@@ -21,39 +21,37 @@
 
         <div id="enrichments" class="nano-content">
 
-          <!-- broader column -->
+            <!-- broader column -->
       		<div class="col left">
-            <ls-label-box ng-repeat="broaderConcept in label.broader" data="broaderConcept" relation="broader"></ls-label-box>
-            <ls-resource-box ng-repeat="broadMatch in label.broadMatch" data="broadMatch" relation="broadMatch"></ls-resource-box>
+                <ls-label-box ng-repeat="broaderConcept in label.broader" data="broaderConcept" relation="broader"></ls-label-box>
+                <ls-resource-box ng-repeat="broadMatch in label.broadMatch" data="broadMatch" relation="broadMatch"></ls-resource-box>
       		</div>
 
-          <!-- middle column -->
+            <!-- middle column -->
       		<div class="insidewrapper half paddingbottom">
 
-            <!-- descriptive -->
-      			<div class="col halfleft">
-              <ls-translation-box ng-repeat="translation in label.translations" data="translation"></ls-translation-box>
-              <ls-description-box ng-show="label.description" data="label"></ls-description-box>
-      			</div>
+                <!-- descriptive -->
+          		<div class="col halfleft">
+                    <ls-translation-box ng-repeat="translation in label.translations" data="translation"></ls-translation-box>
+                    <ls-description-box ng-show="label.description" data="label"></ls-description-box>
+          		</div>
 
-      			<!-- relations column -->
-      			<div class="col halfright">
-
-              <ls-label-box ng-repeat="relatedConcept in label.related" data="relatedConcept" relation="related"></ls-label-box>
-              <ls-resource-box ng-repeat="relatedMatch in label.relatedMatch" data="relatedMatch" relation="relatedMatch"></ls-resource-box>
-              <ls-resource-box ng-repeat="closeMatch in label.closeMatch" data="closeMatch" relation="closeMatch"></ls-resource-box>
-              <ls-resource-box ng-repeat="exactMatch in label.exactMatch" data="exactMatch" relation="exactMatch"></ls-resource-box>
-              <link-box ng-repeat="seeAlso in label.seeAlso" data="seeAlso"></link-box>
-      			</div>
+          		<!-- relations column -->
+          		<div class="col halfright">
+                    <ls-label-box ng-repeat="relatedConcept in label.related" data="relatedConcept" relation="related"></ls-label-box>
+                    <ls-resource-box ng-repeat="exactMatch in label.exactMatch" data="exactMatch" relation="exactMatch"></ls-resource-box>
+                    <ls-resource-box ng-repeat="closeMatch in label.closeMatch" data="closeMatch" relation="closeMatch"></ls-resource-box>
+                    <ls-resource-box ng-repeat="relatedMatch in label.relatedMatch" data="relatedMatch" relation="relatedMatch"></ls-resource-box>
+                    <link-box ng-repeat="seeAlso in label.seeAlso" data="seeAlso"></link-box>
+          		</div>
 
       		</div>
 
       		<!-- narrower column -->
       		<div class="col right">
-            <ls-label-box ng-repeat="narrowerConcept in label.narrower" data="narrowerConcept" relation="narrower"></ls-label-box>
-            <ls-resource-box ng-repeat="narrowMatch in label.narrowMatch" data="narrowMatch" relation="narrowMatch"></ls-resource-box>
+                <ls-label-box ng-repeat="narrowerConcept in label.narrower" data="narrowerConcept" relation="narrower"></ls-label-box>
+                <ls-resource-box ng-repeat="narrowMatch in label.narrowMatch" data="narrowMatch" relation="narrowMatch"></ls-resource-box>
       		</div>
-
       	</div>
 	</div>
 </div>
