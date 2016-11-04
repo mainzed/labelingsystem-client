@@ -15,22 +15,31 @@ angular.module('labelsApp')
     controller: ["$scope", "$rootScope", "$routeParams", "ngDialog", "LabelService", "LanguageService", function($scope, $rootScope, $routeParams, ngDialog, LabelService, LanguageService) {
         var ctrl = this;
 
+        function lock(languages, language) {
+            var langObj = _.find(languages, {value: language});
+            var index = _.indexOf(languages, langObj);
+            langObj.used = true;
+            languages.splice(index, 1, langObj);
+            return languages;
+        }
+
+        function unlock(languages, language) {
+            var langObj = _.find(languages, {value: language});
+            var index = _.indexOf(languages, langObj);
+            langObj.used = false;
+            languages.splice(index, 1, langObj);
+            return languages;
+        }
+
         ctrl.$onInit = function() {
             LabelService.get({ id: $routeParams.lID }, function success(concept) {
                 ctrl.concept = concept;
+                ctrl.lookUsedLanguages();
             });
         };
 
-        // determine already used languages and block their usage
         ctrl.lookUsedLanguages = function() {
-            function lock(languages, language) {
-                var langObj = _.find(languages, {value: language});
-                var index = _.indexOf(languages, langObj);
-                langObj.used = true;
-                languages.splice(index, 1, langObj);
-                return languages;
-            }
-
+            // determine already used languages and block their usage
             LanguageService.query().then(function(languages) {
                 $scope.languages = languages;
 
@@ -47,11 +56,10 @@ angular.module('labelsApp')
             }, function error(res) {
                 console.log(res);
             });
-
         };
 
         ctrl.openDialog = function() {
-            ctrl.lookUsedLanguages();
+            //ctrl.lookUsedLanguages();
             $scope.newTranslation = {};
             ngDialog.open({
                 template: 'scripts/components/concept-detail/enrichment-browser/translation-button/dialog.html',
@@ -63,6 +71,11 @@ angular.module('labelsApp')
 
         ctrl.addTranslation = function() {
             $rootScope.$broadcast("addedTranslation", { translation: $scope.newTranslation });
-        }; 
+            $scope.languages = lock($scope.languages, $scope.newTranslation.lang);
+        };
+
+        $scope.$on("removedTranslation", function(event, data) {
+            $scope.languages = unlock($scope.languages, data.translation.lang);
+        });
     }]
 });

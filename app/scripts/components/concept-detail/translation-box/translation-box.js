@@ -9,14 +9,14 @@ angular.module("labelsApp")
     controller: ["$scope", "$rootScope", "$routeParams", "ngDialog", "TooltipService", "LabelService", function($scope, $rootScope, $routeParams, ngDialog, TooltipService, LabelService) {
         var ctrl = this;
 
-        this.$onInit = function() {
+        ctrl.$onInit = function() {
             ctrl.tooltips = TooltipService;
-        }
+        };
 
         /**
          * Opens a dialog with detailed information.
          */
-        this.openDialog = function() {
+        ctrl.openDialog = function() {
             if (ctrl.mode !== "viewer") {
 
                 ctrl.newValue = ctrl.data.value;
@@ -32,7 +32,7 @@ angular.module("labelsApp")
         /**
          * Deletes the current prefLabel.
          */
-        this.onDeleteClick = function() {
+        ctrl.onDeleteClick = function() {
 
             // get current concept
             LabelService.get({id: $routeParams.lID}, function(concept) {
