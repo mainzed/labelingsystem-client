@@ -6,28 +6,23 @@
 	</div>
 
 	<div class="dialogscroll">
-	<div class="nano">
-	<div class="nano-content">
-		<div class="dialogbox dialog-full">
-			<h4>Edit</h4>
-			<input ng-model="newValue" ng-init="newValue = $ctrl.data.value"></input>
+		<div class="nano">
+			<div class="nano-content">
+				<div class="dialogbox dialog-full">
+					<h4>Edit</h4>
+					<input ng-model="$ctrl.newValue"></input>
+				</div>
+
+				<div class="line-dialog line" ng-show="!$ctrl.data.isThumbnail"></div>
+
+				<div class="dialogbox dialog-full" ng-show="!$ctrl.data.isThumbnail">
+					<h4>Actions</h4>
+					<!-- prevent thumbnail label from being deleted -->
+					<ls-confirm-button text="Delete Translation" on-confirm="$ctrl.onDeleteClick()"></ls-confirm-button>
+				</div>
+
+
+			</div>
 		</div>
-
-
-		<div class="line-dialog line" ng-show="!$ctrl.data.isThumbnail"></div>
-		<div class="dialogbox dialog-full" ng-show="!$ctrl.data.isThumbnail">
-			<h4>Actions</h4>
-            <!-- prevent thumbnail label from being deleted -->
-      		<ls-confirm-button text="Delete Translation" on-confirm="$ctrl.onDeleteClick()"></ls-confirm-button>
-		</div>
-
-
 	</div>
-	</div>
-	</div>
-
-
-
-	<div class="cancel" ng-click="closeThisDialog()">Cancel</div>
-	<div class="apply" ng-click="$ctrl.updateTranslation(newValue)" ng-class="{'inactive': newValue === $ctrl.data.value}">Apply</div>
 </div>
