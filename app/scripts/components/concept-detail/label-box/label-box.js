@@ -54,13 +54,6 @@ angular.module('labelsApp')
                         disableAnimation: true,
                         scope: scope
                     });
-
-                    // add listener to init nanoScroller once the dialog is loaded
-                    $scope.$on('ngDialog.opened', function (e, $dialog) {
-                        if (scope.conceptDialog.id === $dialog.attr('id')) {  // is the resource dialog
-                            HelperService.refreshNanoScroller();
-                        }
-                    });
                 }
 
             };
@@ -96,6 +89,13 @@ angular.module('labelsApp')
                 scope.conceptDialog.close();
                 scope.relation = relation;  // update button
             };
+
+            // add listener to init nanoScroller once the dialog is loaded
+            scope.$on('ngDialog.opened', function (e, $dialog) {
+                if (scope.conceptDialog && scope.conceptDialog.id === $dialog.attr('id')) {  // is the resource dialog
+                    HelperService.refreshNanoScroller();
+                }
+            });
         }
     };
 });

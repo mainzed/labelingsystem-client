@@ -26,6 +26,7 @@ angular.module("labelsApp")
         };
 
         ctrl.setIcon = function(data) {
+            console.log(data);
             if (data.type) {
                 ctrl.cssType = data.type;
             } else if (data.vocabID === $routeParams.vID) {

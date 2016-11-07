@@ -119,6 +119,19 @@ angular.module('labelsApp')
             }
         }
 
+        ctrl.getCreatorAsLink = function(vocab) {
+            if (vocab.creatorInfo) {
+                var fullName = [
+                    //vocab.creatorInfo.title,
+                    vocab.creatorInfo.firstName,
+                    vocab.creatorInfo.lastName
+                ].join(" ");
+                return "<a href=" + vocab.creatorInfo.orcid + " target='_blank'>" + fullName + "</a>";
+
+                getCreatorFullName
+            }
+        }
+
         $scope.onDescriptionKeyPress = function(e, description) {
             if (description.length > ConfigService.vocabDescriptionLength - 1) {
                 // prevent new characters from being added

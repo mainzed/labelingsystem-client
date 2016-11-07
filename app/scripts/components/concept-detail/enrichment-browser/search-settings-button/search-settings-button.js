@@ -76,18 +76,7 @@ angular.module('labelsApp')
             }, function error(res) {
                 console.log(res);
             });
-        }
+        };
 
-        ctrl.getCreatorAsLink = function(vocab) {
-            if (vocab.creatorInfo) {
-                var fullName = [
-                    //vocab.creatorInfo.title,
-                    vocab.creatorInfo.firstName,
-                    vocab.creatorInfo.lastName
-                ].join(" ");
-                return "<a href=" + vocab.creatorInfo.orcid + " target='_blank'>" + fullName + "</a>";
-            }
-
-        }
     }]
 });
