@@ -25,7 +25,6 @@
         };
 
         ctrl.$onDestroy = function () {
-            //console.log("destroy ")
             // cache filter value
             CachingService.filters.vocabs = $scope.vocabFilter;
 
@@ -35,32 +34,28 @@
 
         $rootScope.$watch("isAuthenticated", function(isAuthenticated) {
             if (isAuthenticated) {
-                console.log("ready");
-                //console.log(CachingService.editor.vocabs);
-                // get from cache or server
-                if (CachingService.editor.vocabs) {
-                    $scope.vocabularies = CachingService.editor.vocabs;
-                    ctrl.loading = false;
-                } else {
-                    ctrl.loadVocabs();
-                }
+                // if (CachingService.editor.vocabs) {
+                //     $scope.vocabularies = CachingService.editor.vocabs;
+                //     ctrl.loading = false;
+                // } else {
+                //     ctrl.loadVocabs();
+                // }
+                ctrl.loadVocabs();
             }
         });
 
         ctrl.loadVocabs = function() {
-            console.log("load vocabs");
             VocabService.query({
                 creator: AuthService.getUser().id,
                 draft: true,
                 statistics: true
             }, function(vocabs) {
                 $scope.vocabularies = vocabs;
-                console.log(vocabs);
                 ctrl.loading = false;
             });
         };
 
-        $rootScope.$on("addedVocab", function(event, data) {
+        $scope.$on("addedVocab", function(event, data) {
             VocabService.save(data.vocab, function(res) {
                 $scope.vocabularies.push(res);
 
