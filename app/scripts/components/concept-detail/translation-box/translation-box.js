@@ -22,7 +22,7 @@ angular.module("labelsApp")
                 ctrl.newValue = ctrl.data.value;
                 ctrl.dialog = ngDialog.open({
                     template: "scripts/components/concept-detail/translation-box/dialog.html",
-                    className: 'bigdialog',
+                    className: 'bigdialog smallheightdialog',
                     disableAnimation: true,
                     scope: $scope
                 });

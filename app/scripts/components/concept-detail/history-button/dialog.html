@@ -8,9 +8,9 @@
         	<div class="nano-content">
         		<div class="dialogbox dialog-full">
                     <span class="thesaurus" ng-repeat="revision in $ctrl.revisions">
-                        <span>{{ revision.date | date:"dd.MM.yyyy" }}</span>
-                        <span>{{ revision.action }}</span>
-                        <span>{{ revision.objectType }}</span>
+                        <span>{{ revision.date | date:"dd.MM.yyyy" }}</span><br><br>
+                        <span class="italic">{{ revision.action }}</span>
+                        <span class="italic">{{ revision.objectType }}</span><br>
                         <span>{{ revision.valueBefore }}</span>
                         <span>{{ revision.valueAfter }}</span>
                     </span>
