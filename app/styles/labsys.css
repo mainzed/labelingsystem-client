@@ -548,10 +548,9 @@ textarea:focus {
   float: left;
   padding: 2px 8px;
   margin-left: calc(50% - 50px);
-  color: blue;
-  text-decoration: underline;
   width: 100px;
   text-align: center;
+  cursor: pointer;
 }
 .smallheight .micropreview {
   margin-top: 10px;
