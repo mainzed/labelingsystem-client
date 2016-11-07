@@ -83,8 +83,8 @@
             });
         });
 
-        $rootScope.$on("removedVocab", function(event, data) {
-            _.remove($scope.vocabularies, { id: data.vocabID});
+        $scope.$on("removedVocab", function(event, data) {
+            _.remove($scope.vocabularies, { id: data.vocabID });
         });
 
         $scope.$watch("loading", function(loading) {

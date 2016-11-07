@@ -116,6 +116,16 @@ angular.module('labelsApp')
         return deferred.promise;
     };
 
+    Vocab.prototype.getCreatorFullName = function() {
+        if (this.creatorInfo) {
+            return [
+                //creatorInfo.title,
+                this.creatorInfo.firstName,
+                this.creatorInfo.lastName
+            ].join(" ");
+        }
+    };
+
     Vocab.prototype.getDraftConcepts = function() {
         var deferred = $q.defer();
         var me = this;

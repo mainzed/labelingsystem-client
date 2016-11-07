@@ -97,9 +97,10 @@
                         </h5>
                         <p class="dialog-half" ng-bind="vocab.description"></p>
 
-                        <span class="floatright" ng-show="vocab.creator !== user.id">
-                            <a ng-show="vocab.creatorInfo.orcid" ng-href="{{ vocab.creatorInfo.orcid }}" target="_blank">{{ vocab.creator }}</a>
-                        </span>
+                        <a class="floatright" ng-href="{{ vocab.creatorInfo.orcid }}" target='_blank' ng-if="vocab.creator !== user.id">
+                            {{ vocab.getCreatorFullName() }}
+                        </a>
+
                     </div>
                 </div>
 

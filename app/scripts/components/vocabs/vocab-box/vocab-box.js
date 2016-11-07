@@ -19,7 +19,7 @@ angular.module('labelsApp')
 
         ctrl.$onInit = function() {
             ctrl.tooltips = TooltipService;
-            angular.element(".nano").nanoScroller();
+            HelperService.refreshNanoScroller();
         };
 
         /**
@@ -32,14 +32,6 @@ angular.module('labelsApp')
             } else {
                 $location.path('/editor/vocabularies/' + id + '/concepts');
             }
-        };
-
-        ctrl.getFullName = function(creatorInfo) {
-            return [
-                creatorInfo.title,
-                creatorInfo.firstName,
-                creatorInfo.lastName
-            ].join(" ");
         };
 
         ctrl.openOrcID = function(orcid) {

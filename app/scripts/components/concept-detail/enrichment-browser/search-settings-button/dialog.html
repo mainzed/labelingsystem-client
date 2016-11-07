@@ -32,9 +32,10 @@
                         </h5>
                         <p class="dialog-half" ng-bind="vocab.description"></p>
 
-                        <span class="floatright" ng-show="vocab.creator !== $ctrl.user.id">
-                            <a ng-href="{{ vocab.creatorInfo.orcid }}" target="_blank" ng-bind-html="$ctrl.getCreatorAsLink(vocab)"></a>
-                        </span>
+                        <a class="floatright" ng-href="{{ vocab.creatorInfo.orcid }}" target='_blank' ng-if="vocab.creator !== $ctrl.user.id">
+                            {{ vocab.getCreatorFullName() }}
+                        </a>
+
                     </div>
                 </div>
 

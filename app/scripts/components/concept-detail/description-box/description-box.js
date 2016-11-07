@@ -58,7 +58,7 @@
             }
         };
 
-        $rootScope.$on('ngDialog.closed', function (e, $dialog) {
+        $scope.$on('ngDialog.closed', function (e, $dialog) {
             if (ctrl.dialog && ctrl.dialog.id === $dialog.attr('id')) {  // is the resource dialog
                 if (ctrl.newValue) {
                     $rootScope.$broadcast("changedDescription", { newDescription: ctrl.newValue});

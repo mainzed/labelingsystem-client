@@ -79,16 +79,16 @@ angular.module("labelsApp")
                     SearchService.query({retcat: thesaurus.name, query: $scope.searchValue}, function(results) {
 
                         if (thesaurus.name === "Local Labeling System") {
+                            // skip same vocab concepts
                             results = _.filter(results, function(o) {
-                                //console.log(o.scheme);
-                                //console.log(scope.vocab.title);
-                                return o.scheme !== $scope.vocab.title;  // skip same vocab concepts
+                                return o.scheme !== $scope.vocab.title;
                             });
 
                         } else if (thesaurus.name === "this." + $scope.vocab.id) {
-                            results = _.filter(results, function(o) {
-                                return o.uri.split("/").pop() !== $scope.label.id;  // skip current concept
-                            });
+                            console.log(results.length);
+                            // results = _.filter(results, function(o) {
+                            //     return o.uri.split("/").pop() !== $scope.label.id;  // skip current concept
+                            // });
                         }
                         //
                         $scope.searching = false;
@@ -110,7 +110,7 @@ angular.module("labelsApp")
             });
         };
 
-        $rootScope.$on("changedEnrichmentVocab", function(event, vocabID) {
+        $scope.$on("changedEnrichmentVocab", function(event, vocabID) {
             $scope.siblings = [];
             ctrl.getEnrichmentVocab($scope.vocab);
         });
