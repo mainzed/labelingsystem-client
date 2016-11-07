@@ -61,22 +61,19 @@ angular.module('labelsApp')
     };
 
     Concept.prototype.hasBroader = function() {
-        return this.broadMatch || this.broader;
+        return _.has(this, "broadMatch") || _.has(this, "broader");
     };
 
-    /**
-     * checks if concept has narrower concepts
-     */
     Concept.prototype.hasNarrower = function() {
-        return this.narrowMatch || this.narrower;
+        return _.has(this, "narrowMatch") || _.has(this, "narrower");
     };
 
     Concept.prototype.hasRelated = function() {
-        return this.related || this.relatedMatch || this.closeMatch || this.exactMatch;
+        return _.has(this, "related") || _.has(this, "relatedMatch")  || _.has(this, "closeMatch") || _.has(this, "exactMatch");
     };
 
     Concept.prototype.hasMore = function() {
-        return this.description || this.hasBroader() || this.hasNarrower();
+        return _.has(this, "description") || this.hasBroader() || this.hasNarrower() || this.hasRelated();
     }
 
     Concept.prototype.getDetails = function() {

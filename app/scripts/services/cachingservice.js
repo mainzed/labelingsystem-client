@@ -14,14 +14,7 @@ angular.module('labelsApp')
 
         this.viewer = {
             vocabs: null,
-
-            /**
-             * Holds all concepts for a vocabulary.
-             * concepts.vocabID - id of concepts' vocab
-             * concepts.items - concepts
-             */
             concepts: null, // concepts view
-
             allConcepts: null, // landing page
             filterValue: null
         };
@@ -56,26 +49,26 @@ angular.module('labelsApp')
 
         this.reset = function() {
             console.log("reset");
-            // service.viewer = {
-            //     vocabs: null,
-            //     concepts: null, // concepts view
-            //     allConcepts: null, // landing page
-            //     landingSearchResults: null,
-            //     filterValue: null
-            // };
-            // service.editor = {
-            //     vocabs: null,
-            //     vocabsWithCreator: null,
-            //     concepts: null,
-            //     showEnrichments: null
-            // };
-            // service.filters = {
-            //     vocabs: null,
-            //     concepts: {
-            //         vocabID: null,
-            //         value: null
-            //     }
-            // };
+            service.viewer = {
+                vocabs: [],
+                concepts: [], // concepts view
+                allConcepts: [], // landing page
+                landingSearchResults: [],
+                filterValue: "null"
+            };
+            service.editor = {
+                vocabs: [],
+                //vocabsWithCreator: null,
+                concepts: [],
+                showEnrichments: null
+            };
+            service.filters = {
+                vocabs: null,
+                concepts: {
+                    vocabID: null,
+                    value: null
+                }
+            };
 
             console.log(service.editor.vocabs);
         }
