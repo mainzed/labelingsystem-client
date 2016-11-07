@@ -4,7 +4,7 @@ angular.module("labelsApp")
     bindings: {
         revisions: "="
     },
-    template: "<span ng-click='$ctrl.openDialog()'>history</span>",
+    template: "<span ng-click='$ctrl.openDialog()' class='icon-time'></span>",
     controller: ["$scope", "ngDialog", function($scope, ngDialog) {
         var ctrl = this;
 

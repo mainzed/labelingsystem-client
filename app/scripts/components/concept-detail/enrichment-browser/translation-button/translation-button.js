@@ -63,7 +63,7 @@ angular.module('labelsApp')
             $scope.newTranslation = {};
             ngDialog.open({
                 template: 'scripts/components/concept-detail/enrichment-browser/translation-button/dialog.html',
-                className: 'bigdialog',
+                className: 'bigdialog smallheightdialog',
                 disableAnimation: true,
                 scope: $scope
             });

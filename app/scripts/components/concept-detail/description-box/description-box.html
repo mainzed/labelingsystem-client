@@ -1,4 +1,4 @@
-<div class="box small text low" ng-click="$ctrl.openDialog()">
+<div class="box small text low" ng-class="{'nocursor': $ctrl.mode === 'viewer'}" ng-click="$ctrl.openDialog()">
 
     <!-- description text -->
     <span class="thumbnail" ng-bind="$ctrl.data.description"></span>
