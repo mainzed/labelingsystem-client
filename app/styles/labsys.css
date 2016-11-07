@@ -1114,8 +1114,8 @@ textarea:focus {
   overflow: hidden;
 }
 .bigdialog.smallheightdialog .ngdialog-content {
-  height: 450px;
-  top: calc((100% - 450px) / 2);
+  height: 500px;
+  top: calc((100% - 500px) / 2);
 }
 .dialogwrapper {
   width: 100%;
@@ -1133,6 +1133,10 @@ textarea:focus {
   position: absolute;
   top: 10px;
   right: 20px;
+}
+.low .ngdialog-close,
+.text .ngdialog-close {
+  color: white;
 }
 .dialogscroll {
   height: calc(100% - 180px);
@@ -1497,6 +1501,12 @@ span.icon-time {
   margin-left: 34px;
   width: calc((100% / 4) - 80px);
 }
+.note-extbig {
+  float: left;
+  margin: 14px;
+  margin-left: 34px;
+  width: calc((100% / 2) - 80px);
+}
 .note-ext.smallsection {
   width: calc((100% / 8) - 80px);
   min-width: 200px;
@@ -1523,6 +1533,9 @@ span.icon-time {
   display: block;
   margin-top: 5px;
   margin-bottom: 10px;
+}
+.nocursor {
+  cursor: default;
 }
 .italic .icon-note {
   line-height: 10px;
