@@ -19,11 +19,10 @@
         <span class="listcontent smalltype" ng-bind-html="agent.getNameAsLink()"></span>
 
         <span class="listtype">last modified:</span>
-        <span class="listcontent smalltype">
-            {{ label.lastModified | date: 'dd.MM.yyyy' }}
-            <ls-history-button revisions="label.revisions" ng-show="label.revisions"></ls-history-button>
+        <span class="listcontent smalltype lastmodified">
+            {{ label.lastModified | date: 'dd.MM.yyyy' }} <span ng-show="label.revisions">/</span>
         </span>
-
+        <ls-history-button revisions="label.revisions" ng-show="label.revisions"></ls-history-button>
         <span class="listtype">license</span>
         <span class="listcontent">
             <a class="smalltype" ng-href="{{ label.license }}" target="_blank">
@@ -43,7 +42,7 @@
      <div class="dialog-half float" id="ls-selfexplain">
         <!-- <span class="listcontent"><span class="loudlink" clipboard supported="supported" text="uri" on-copied="success()" on-error="fail(err)">Copy URI to clipboard</span></span> -->
 
-        Labeling System is a web based tool for creating controlled vocabularies using linked open data techniques.
+        <a href="#/">Labeling System</a> is a web based tool for creating controlled vocabularies using linked open data techniques.
         <a style="display: block; margin-top: 10px;" href="#/">Impressum</a>
 
 

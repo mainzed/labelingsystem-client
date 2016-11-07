@@ -29,6 +29,7 @@
 a {
   color: inherit;
   text-decoration: underline;
+  cursor: pointer;
 }
 html {
   height: 100%;
@@ -276,6 +277,13 @@ textarea:focus {
 }
 #listwrapper {
   height: calc(100% - 90px - 50px - 38px);
+  float: left;
+  clear: left;
+  display: block;
+  width: 100%;
+}
+#listwrapperviewer {
+  height: calc(100% - 90px - 50px);
   float: left;
   clear: left;
   display: block;
@@ -1432,9 +1440,10 @@ span.icon-minimize {
 }
 span.icon-time {
   line-height: 5px;
-  display: inline-block;
   float: left;
-  margin-top: 7px;
+  margin-top: 6px;
+  margin-left: -2px;
+  margin-right: -6px;
 }
 .bigbox span.icon-dropdown,
 .bigbox span.icon-breadcrumb {
@@ -1536,6 +1545,9 @@ span.icon-time {
 }
 .nocursor {
   cursor: default;
+}
+.lastmodified {
+  width: auto;
 }
 .italic .icon-note {
   line-height: 10px;

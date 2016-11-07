@@ -77,7 +77,7 @@
 
 
 * {					font-size: @regular; margin: 0; padding: 0; font-family: Roboto, Arial, sans-serif; letter-spacing: 0.02em; 	}
-a {					color: inherit; text-decoration: underline; }
+a {					color: inherit; text-decoration: underline; cursor: pointer; }
 html {				height: 100%;	}
 body {				height: 100%;	}
 textarea {			margin-left: @marginoutside; width: calc(100% - 2 * @marginoutside); display: block; resize: none;
@@ -141,6 +141,8 @@ textarea:focus {	outline: none; }
 .tableheadwrapper {	width: 100%; float: left; }
 #enrichments {		overflow-y: scroll; overflow-x: hidden; float: left; background: @workareas;}
 #listwrapper {		height: calc(100% - @headerheight - 50px - 38px); float: left; clear: left; display: block; width: 100%;}
+#listwrapperviewer
+			 {		height: calc(100% - @headerheight - 50px); float: left; clear: left; display: block; width: 100%;}
 #listwrapper.listwrappermin {
 					height: calc(100% - @headerheight - @metafooterheight - 50px - 10px); 
 					@media screen and (max-width: 1400px) {height: calc(100% - @headerheight - @metafooterheighte - 50px - 10px); }}
@@ -543,7 +545,7 @@ textarea.inactive{	color: #a3a3a3; }
 .icon-folder {		margin-top: -3px; margin-right: -3px; }
 span.icon-expand {	line-height: 5px; float: left; margin-top: 9px;}
 span.icon-minimize {line-height: 5px; float: left; margin-top: 9px;}
-span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-top: 7px;}
+span.icon-time {	line-height: 5px; float: left; margin-top: 6px; margin-left: -2px; margin-right: -6px; }
 
 .bigbox span.icon-dropdown, .bigbox span.icon-breadcrumb  {
 					line-height: 23px; font-size: 31px; margin-left: -5px; }
@@ -586,6 +588,7 @@ span.icon-time {	line-height: 5px; display: inline-block; float: left; margin-to
 .bold {				font-weight: bold; }
 .block {			display: block; margin-top: 5px; margin-bottom: 10px; }
 .nocursor {			cursor: default; }
+.lastmodified {		width: auto; }
 .italic .icon-note {line-height: 10px; line-height: 10px; margin-top: 2px; display: block; float: left;}
 .showadditionalcontent {
 					width: 26px; height: 20px; display: block; float: left; margin-top: 2px; color: white; }
