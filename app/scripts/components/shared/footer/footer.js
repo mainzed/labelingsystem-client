@@ -25,7 +25,7 @@ angular.module('labelsApp')
          * Logout current user and redirect to login page if successfull.
          */
         ctrl.onLogoutClick = function() {
-            AuthService.logout().then(function () {
+            AuthService.logout().then(function() {
                 CachingService.reset();
                 $location.path('/editor/login');
             }, function error() {
