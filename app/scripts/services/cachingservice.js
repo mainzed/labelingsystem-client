@@ -23,6 +23,7 @@ angular.module('labelsApp')
             vocabs: null,
             vocabsWithCreator: null,
             concepts: null,
+            vocab: null,
             showEnrichments: null
         };
 

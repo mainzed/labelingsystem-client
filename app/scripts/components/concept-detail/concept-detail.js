@@ -18,7 +18,11 @@
 
         ctrl.$onInit = function() {
             $scope.tooltips = TooltipService;
-            $scope.vocabulary = VocabService.get({id: $routeParams.vID});
+            VocabService.get({id: $routeParams.vID}, function(vocab) {
+                $scope.vocabulary = vocab;
+                // save for vocab results
+                CachingService.editor.vocab = $scope.vocabulary;
+            });
             $scope.label = LabelService.get({id: $routeParams.lID});
 
             if (CachingService.editor.showEnrichments === false) {
