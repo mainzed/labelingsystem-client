@@ -13,7 +13,7 @@ angular.module('labelsApp')
         data: "="  // vocab
     },
     template: '<span class="{{$ctrl.icon}} icon" ng-click="$ctrl.openDialog()"></span>',
-    controller: ["$scope", "$rootScope", "$location", "ngDialog", "VocabService", "ConfigService", "TooltipService", "AuthService", "HelperService", "CachingService", "AgentService", "LicenseService", function ($scope, $rootScope, $location, ngDialog, VocabService, ConfigService, TooltipService, AuthService, HelperService, CachingService, AgentService, LicenseService) {
+    controller: ["$scope", "$rootScope", "$location", "ngDialog", "VocabService", "ConfigService", "TooltipService", "AuthService", "HelperService", "CachingService", "LicenseService", function ($scope, $rootScope, $location, ngDialog, VocabService, ConfigService, TooltipService, AuthService, HelperService, CachingService, LicenseService) {
 
         var ctrl = this;
 
@@ -26,11 +26,11 @@ angular.module('labelsApp')
             this.icon = "icon-more";
             if (this.shortcut === "thesauri" || this.shortcut === "selectVocab") {
                 this.icon = "icon-config";
-            }
+            };
 
             LicenseService.query({}, function(licenses) {
                 ctrl.licenses = licenses;
-            })
+            });
         };
 
         ctrl.openDialog = function() {
@@ -40,15 +40,12 @@ angular.module('labelsApp')
 
             // get all available public vocabs
             VocabService.query({ creatorInfo: true, draft: true }, function(vocabs) {
-
                 $scope.vocabularies = _.filter(vocabs, function(o) {
                     return ctrl.data.title === o.title || o.releaseType === "public";
                 });
-
-                //CachingService.editor.vocabsWithCreator = vocabs;
                 HelperService.refreshNanoScroller();
             });
-            
+
             ctrl.data.getEnrichmentVocab(function(vocabID) {
                 ctrl.referenceVocabID = vocabID;
             });
@@ -56,33 +53,11 @@ angular.module('labelsApp')
             ctrl.data.getThesauri(function(thesauri) {
                 $scope.thesauri = thesauri;
 
-                $scope.dialog = ngDialog.open({
+                ctrl.dialog = ngDialog.open({
                     template: 'scripts/components/shared/edit-vocab-button/dialog.html',
                     className: 'bigdialog',
                     disableAnimation: true,
                     scope: $scope
-                });
-
-                // add listener to init nanoScroller once the dialog is loaded
-                $rootScope.$on('ngDialog.opened', function (e, $dialog) {
-                    if ($scope.dialog.id === $dialog.attr('id')) {  // is the resource dialog
-                        $(".nano").nanoScroller();
-                    }
-                });
-
-                $rootScope.$on('ngDialog.closed', function (e, $dialog) {
-                    if ($scope.dialog.id === $dialog.attr('id')) {  // is the resource dialog
-                        // save changes
-                        if (ctrl.newTitle !== ctrl.data.title || ctrl.newDescription !== ctrl.data.description) {  // changes
-                            ctrl.data.title = ctrl.newTitle;
-                            ctrl.data.description = ctrl.newDescription;
-                            ctrl.data.save(function() {
-                                updateVocabCache();
-                            }, function error(res) {
-                                console.log(res);
-                            });
-                        }
-                    }
                 });
             });
         };
@@ -153,13 +128,26 @@ angular.module('labelsApp')
             }
         };
 
-        ctrl.getAgentInfo = function(id) {
-            // get user info
-            AgentService.get({id: id}, function(agent) {
-                //$scope.agent = agent;
-                return agent.getNameAsLink();
-                //console.log($scope.agent);
-            });
-        }
+        // add listener to init nanoScroller once the dialog is loaded
+        $scope.$on('ngDialog.opened', function (e, $dialog) {
+            if (ctrl.dialog && ctrl.dialog.id === $dialog.attr('id')) {
+                HelperService.refreshNanoScroller();
+            }
+        });
+
+        $scope.$on('ngDialog.closed', function (e, $dialog) {
+            if (ctrl.dialog && ctrl.dialog.id === $dialog.attr('id')) {  // is the resource dialog
+                // save changes
+                if (ctrl.newTitle !== ctrl.data.title || ctrl.newDescription !== ctrl.data.description) {  // changes
+                    ctrl.data.title = ctrl.newTitle;
+                    ctrl.data.description = ctrl.newDescription;
+                    ctrl.data.save(function() {
+                        updateVocabCache();
+                    }, function error(res) {
+                        console.log(res);
+                    });
+                }
+            }
+        });
     }]
 });

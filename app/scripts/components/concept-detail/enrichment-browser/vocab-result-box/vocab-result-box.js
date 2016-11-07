@@ -20,10 +20,8 @@ angular.module("labelsApp")
         ctrl.cssType = null;
 
         ctrl.$onInit = function() {
-            //console.log(ctrl.data);
             $scope.tooltips = TooltipService;
             ctrl.setIcon(ctrl.data);
-
             HelperService.refreshNanoScroller();
         };
 
@@ -50,16 +48,6 @@ angular.module("labelsApp")
             });
         };
 
-        // ctrl.getDetails = function() {
-        //     if (angular.isFunction(ctrl.data.getDetails)) {
-        //         ctrl.data.getDetails().then(function(details) {
-        //             ctrl.conceptDetails = details;
-        //             console.log(details);
-        //             $scope.$apply();
-        //         });
-        //     };
-        // };
-
         /**
          * Returns link to editor for own vocabularies and link to viewer for
          * other users vocabularies
@@ -74,7 +62,6 @@ angular.module("labelsApp")
             } else {  // search result
                 return ctrl.data.uri;
             }
-
         };
 
         ctrl.addConcept = function(relation) {
@@ -82,25 +69,10 @@ angular.module("labelsApp")
             ctrl.dialog.close();
         };
 
-        ctrl.hasMore = function() {
-            if (angular.isFunction(ctrl.data.hasMore)) {
-                return ctrl.data.hasMore();
-            } else {
-                //console.log(ctrl.data);
-                //angular.isObject(ctrl.data)
-            }
-        }
-
         ctrl.toggleMore = function() {
             $scope.showMore = !$scope.showMore;
-            angular.element(".nano").nanoScroller();
+            HelperService.refreshNanoScroller();
         };
 
-        /**
-         * Watcher that updates nanoscroller when box is extended.
-         */
-        $scope.$watch("showMore", function() {
-            angular.element(".nano").nanoScroller();
-        });
     }]
 });

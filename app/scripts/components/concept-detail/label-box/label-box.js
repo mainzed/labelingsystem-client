@@ -56,7 +56,7 @@ angular.module('labelsApp')
                     });
 
                     // add listener to init nanoScroller once the dialog is loaded
-                    $rootScope.$on('ngDialog.opened', function (e, $dialog) {
+                    $scope.$on('ngDialog.opened', function (e, $dialog) {
                         if (scope.conceptDialog.id === $dialog.attr('id')) {  // is the resource dialog
                             HelperService.refreshNanoScroller();
                         }

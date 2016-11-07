@@ -17,7 +17,7 @@
     },
     templateUrl: "scripts/components/concept-detail/resource-box/resource-box.html",
 
-    controller: ["$scope", "$rootScope", "$timeout", "$window", "ngDialog", "LabelService", "$routeParams", "ResourcesService", function($scope, $rootScope, $timeout, $window, ngDialog, LabelService, $routeParams, ResourcesService) {
+    controller: ["$scope", "$rootScope", "$timeout", "$window", "ngDialog", "LabelService", "$routeParams", "ResourcesService", "HelperService", function($scope, $rootScope, $timeout, $window, ngDialog, LabelService, $routeParams, ResourcesService, HelperService) {
 
         var ctrl = this;
 
@@ -45,7 +45,7 @@
             } else if (ctrl.relation === "relatedMatch") {
                 ctrl.relationIcon = "<span class='icon-arrow'></span>";
             }
-        };    
+        };
 
         /**
          * Opens a dialog with detailed information.
@@ -66,24 +66,22 @@
                 });
 
                 // add listener to init nanoScroller once the dialog is loaded
-                $rootScope.$on('ngDialog.opened', function (e, $dialog) {
+                $scope.$on('ngDialog.opened', function (e, $dialog) {
                     if (ctrl.dialog.id === $dialog.attr('id')) {  // is the resource dialog
-                        $timeout(function() {
-                            $(".nano").nanoScroller();
-                        }, 0);
+                        HelperService.refreshNanoScroller();
                     }
                 });
             }
 
         };
 
-        $rootScope.$on('ngDialog.closed', function (e, $dialog) {
+        $scope.$on('ngDialog.closed', function (e, $dialog) {
             if (ctrl.dialog && ctrl.dialog.id === $dialog.attr('id')) {  // is the resource dialog
                 if (ctrl.newRelation !== ctrl.relation) {
-                    $rootScope.$broadcast("changedRelation", { 
-                        newRelation: ctrl.newRelation, 
+                    $rootScope.$broadcast("changedRelation", {
+                        newRelation: ctrl.newRelation,
                         oldRelation: ctrl.relation,
-                        resource: ctrl.resource 
+                        resource: ctrl.resource
                     });
                 }
             }
@@ -93,8 +91,8 @@
          * Deletes the selected resource, description, prefLabel or altLabel.
         */
         $scope.onDeleteClick = function() {
-            $rootScope.$broadcast("removedResource", { 
-                relation: ctrl.relation, 
+            $rootScope.$broadcast("removedResource", {
+                relation: ctrl.relation,
                 resourceURI: ctrl.resource.uri
             });
         };

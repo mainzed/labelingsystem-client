@@ -39,7 +39,7 @@ angular.module('labelsApp')
             });
 
             // add listener to init nanoScroller once the dialog is loaded
-            $rootScope.$on('ngDialog.opened', function (e, $dialog) {
+            $scope.$on('ngDialog.opened', function (e, $dialog) {
                 if (ctrl.dialog.id === $dialog.attr('id')) {  // is the resource dialog
                     HelperService.refreshNanoScroller();
                 }
@@ -68,7 +68,7 @@ angular.module('labelsApp')
             });
         };
 
-        $rootScope.$on('ngDialog.closed', function (e, $dialog) {
+        $scope.$on('ngDialog.closed', function (e, $dialog) {
             if (ctrl.dialog && ctrl.dialog.id === $dialog.attr('id') && ctrl.modifiedLabel) {
                 ctrl.data.save(function success() {
                     //console.log("success");

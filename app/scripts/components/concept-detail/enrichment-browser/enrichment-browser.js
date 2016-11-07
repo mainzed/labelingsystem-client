@@ -110,7 +110,7 @@ angular.module("labelsApp")
             });
         };
 
-        $rootScope.$on("changedEnrichmentVocab", function(event, vocabID) {
+        $scope.$on("changedEnrichmentVocab", function(event, vocabID) {
             $scope.siblings = [];
             ctrl.getEnrichmentVocab($scope.vocab);
         });
