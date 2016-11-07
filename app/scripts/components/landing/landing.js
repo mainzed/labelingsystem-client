@@ -18,7 +18,6 @@ angular.module('labelsApp')
 
             //ctrl.resultsLimit = 0;
             ctrl.resultsLimit = ConfigService.conceptsLimit;
-            $scope.extendAll = CachingService.toggles.extendAll || false;
             $scope.conceptOrder = '-lastModified';
 
             $scope.loading = false;

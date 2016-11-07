@@ -15,7 +15,6 @@ angular.module('labelsApp')
         ctrl.$onInit = function() {
             // workaround
             scope.concept = ctrl.concept;
-            console.log(ctrl.mode);
         }
 
         /**

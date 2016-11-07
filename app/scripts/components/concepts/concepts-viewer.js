@@ -19,8 +19,7 @@
 
             ctrl.loading = true;
             $scope.tooltips = TooltipService;
-            $scope.extendAll = CachingService.toggles.extendAll || false;
-            $scope.extendButtonText = $scope.extendAll ? "collapse boxes" : "extend boxes";
+            $scope.extendAll = false;
 
             $scope.labelOrder = '-lastModified';
 
@@ -70,7 +69,7 @@
                     vocabID: ctrl.vocabID,
                     value: $scope.labelFilter
                 };
-            }
+            };
 
             // cache concepts. doing this on destroy saves us from having to
             // update the cache when adding or removing concepts
@@ -78,9 +77,6 @@
                 vocabID: ctrl.vocabID,
                 items: $scope.labels
             };
-
-            // cache extent button
-            CachingService.toggles.extendAll = $scope.extendAll;
         };
 
         ctrl.loadConcepts = function() {
