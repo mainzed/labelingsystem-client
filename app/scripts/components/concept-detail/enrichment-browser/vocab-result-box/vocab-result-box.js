@@ -13,7 +13,7 @@ angular.module("labelsApp")
         onConfirm: "&"
     },
     templateUrl: "scripts/components/concept-detail/enrichment-browser/vocab-result-box/vocab-result-box.html",
-    controller: ["$scope", "$rootScope", "$routeParams", "ngDialog", "TooltipService", "AuthService", "HelperService", function($scope, $rootScope, $routeParams, ngDialog, TooltipService, AuthService, HelperService) {
+    controller: ["$scope", "$rootScope", "$routeParams", "ngDialog", "TooltipService", "AuthService", "HelperService", "CachingService", function($scope, $rootScope, $routeParams, ngDialog, TooltipService, AuthService, HelperService, CachingService) {
         var ctrl = this;
 
         ctrl.dialog = null;
@@ -25,12 +25,15 @@ angular.module("labelsApp")
             HelperService.refreshNanoScroller();
         };
 
+        ctrl.isSameVocab = function() {
+            return ctrl.data.vocabID === $routeParams.vID || ctrl.data.scheme === CachingService.editor.vocab.title;
+        };
+
         ctrl.setIcon = function(data) {
-            console.log(data);
-            if (data.type) {
-                ctrl.cssType = data.type;
-            } else if (data.vocabID === $routeParams.vID) {
+            if (ctrl.isSameVocab()) {
                 ctrl.cssType = "label"
+            } else if (data.type) {
+                ctrl.cssType = data.type;
             } else {
                 ctrl.cssType = "ls"
             }

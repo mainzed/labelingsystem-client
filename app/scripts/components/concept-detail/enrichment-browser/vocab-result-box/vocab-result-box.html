@@ -13,7 +13,7 @@
     <!-- icon -->
     <span class="type" ng-show="$ctrl.cssType !== 'label'" title="{{ $ctrl.data.type + ' - ' + $ctrl.data.scheme }}">({{ $ctrl.data.type || "ls" }})</span>
 
-    <ls-preview ng-show="$ctrl.cssType === 'label'" label="$ctrl.data" size="micro" title="{{ tooltips.icons.minipreview }}"></ls-preview>
+    <ls-preview ng-show="$ctrl.cssType === 'label' && !$ctrl.data.type" label="$ctrl.data" size="micro" title="{{ tooltips.icons.minipreview }}"></ls-preview>
 
 </div>
 

@@ -85,10 +85,9 @@ angular.module("labelsApp")
                             });
 
                         } else if (thesaurus.name === "this." + $scope.vocab.id) {
-                            console.log(results.length);
-                            // results = _.filter(results, function(o) {
-                            //     return o.uri.split("/").pop() !== $scope.label.id;  // skip current concept
-                            // });
+                            results = _.filter(results, function(o) {
+                                return o.uri.split("/").pop() !== ctrl.concept.id;  // skip current concept
+                            });
                         }
                         //
                         $scope.searching = false;
