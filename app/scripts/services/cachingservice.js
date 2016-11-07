@@ -9,7 +9,9 @@
  */
 angular.module('labelsApp')
     .service('CachingService', function() {
-        // AngularJS will instantiate a singleton by calling "new" on this function
+
+        var service = this;
+
         this.viewer = {
             vocabs: null,
 
@@ -40,14 +42,6 @@ angular.module('labelsApp')
             }
         };
 
-        this.toggles = {
-            extendAll: null
-        };
-
-        this.extendAll = {};
-
-        this.order = {};
-
         /**
          * Returns the filter if the the vocab id matches.
          * @param {string} id - Vocabulary ID
@@ -61,30 +55,28 @@ angular.module('labelsApp')
         };
 
         this.reset = function() {
-            this.viewer = {
-                vocabs: null,
-                concepts: null, // concepts view
-                allConcepts: null, // landing page
-                landingSearchResults: null,
-                filterValue: null
-            };
-            this.editor = {
-                vocabs: null,
-                vocabsWithCreator: null,
-                concepts: null
-            };
-            this.filters = {
-                vocabs: null,
-                concepts: {
-                    vocabID: null,
-                    value: null
-                }
-            };
-            this.toggles = {
-                extendAll: null
-            };
-            this.extendAll = {};
-            this.showEnrichments = null;
-            this.order = {};
+            console.log("reset");
+            // service.viewer = {
+            //     vocabs: null,
+            //     concepts: null, // concepts view
+            //     allConcepts: null, // landing page
+            //     landingSearchResults: null,
+            //     filterValue: null
+            // };
+            // service.editor = {
+            //     vocabs: null,
+            //     vocabsWithCreator: null,
+            //     concepts: null,
+            //     showEnrichments: null
+            // };
+            // service.filters = {
+            //     vocabs: null,
+            //     concepts: {
+            //         vocabID: null,
+            //         value: null
+            //     }
+            // };
+
+            console.log(service.editor.vocabs);
         }
     });

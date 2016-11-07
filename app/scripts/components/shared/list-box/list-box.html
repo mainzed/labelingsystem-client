@@ -17,7 +17,7 @@
        {{ concept.thumbnail }}
     </span>
 
-    <ls-edit-label-button ng-hide="mode ==='viewer'" data="concept" ng-click="$event.stopPropagation()"></ls-edit-label-button>
+    <ls-edit-label-button ng-hide="$ctrl.mode === 'viewer'" data="concept" ng-click="$event.stopPropagation()"></ls-edit-label-button>
 
   </div>
 

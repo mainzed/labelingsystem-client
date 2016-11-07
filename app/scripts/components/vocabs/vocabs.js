@@ -17,7 +17,6 @@
 
         ctrl.$onInit = function () {
             ctrl.loading = true;
-
             // get filters from cache
             if (CachingService.filters.vocabs) {
                 $scope.vocabFilter = CachingService.filters.vocabs;
@@ -31,11 +30,13 @@
             CachingService.filters.vocabs = $scope.vocabFilter;
 
             // cache vocabs
-            CachingService.viewer.vocabs = $scope.vocabularies;
+            CachingService.editor.vocabs = $scope.vocabularies;
         };
 
         $rootScope.$watch("isAuthenticated", function(isAuthenticated) {
             if (isAuthenticated) {
+                console.log("ready");
+                //console.log(CachingService.editor.vocabs);
                 // get from cache or server
                 if (CachingService.editor.vocabs) {
                     $scope.vocabularies = CachingService.editor.vocabs;
@@ -47,19 +48,20 @@
         });
 
         ctrl.loadVocabs = function() {
+            console.log("load vocabs");
             VocabService.query({
                 creator: AuthService.getUser().id,
                 draft: true,
                 statistics: true
             }, function(vocabs) {
                 $scope.vocabularies = vocabs;
-                CachingService.editor.vocabs = vocabs;
+                console.log(vocabs);
                 ctrl.loading = false;
             });
         };
 
-        $scope.createVocab = function(vocab) {
-            VocabService.save(vocab, function(res) {
+        $rootScope.$on("addedVocab", function(event, data) {
+            VocabService.save(data.vocab, function(res) {
                 $scope.vocabularies.push(res);
 
                 // update the thesauri for the new vocab and add the default ones
@@ -84,10 +86,6 @@
             }, function error(res) {
                 console.log(res);
             });
-        };
-
-        $rootScope.$on("addedVocab", function(event, data) {
-            $scope.createVocab(data.vocab);
         });
 
         $rootScope.$on("removedVocab", function(event, data) {
