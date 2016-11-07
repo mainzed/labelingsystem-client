@@ -11,22 +11,22 @@
     bindings: {
         onClick: "@"
     },
-    template: '<span class="extendbutton" ng-click="$ctrl.toggle()">{{ $ctrl.text }}<span class="{{$ctrl.icon}}"></span></span>',
+    template: '<span class="extendbutton" ng-click="$ctrl.toggle()">{{ $ctrl.text }}<span class="{{ $ctrl.icon }}"></span></span>',
 
     controller: ["CachingService", function(CachingService) {
 
         var ctrl = this;
 
         ctrl.$onInit = function() {
-            ctrl.text = CachingService.toggles.extendAll ? "collapse boxes" : "extend boxes";
-            ctrl.icon = CachingService.toggles.extendAll ? "icon-minimize" : "icon-expand";
-
+            ctrl.isCollapsed = true;
+            ctrl.text = "extend boxes";
+            ctrl.icon = "icon-expand";
         };
 
         ctrl.toggle = function() {
-            CachingService.toggles.extendAll = !CachingService.toggles.extendAll;
-            ctrl.text = CachingService.toggles.extendAll ? "collapse boxes" : "extend boxes";
-            ctrl.icon = CachingService.toggles.extendAll ? "icon-minimize" : "icon-expand";
+            ctrl.isCollapsed = !ctrl.isCollapsed;
+            ctrl.text = ctrl.isCollapsed ? "extend boxes" : "collapse boxes";
+            ctrl.icon = ctrl.isCollapsed ? "icon-expand" : "icon-minimize";
         }
     }]
 });

@@ -33,7 +33,7 @@
                 ctrl.newValue = ctrl.data.description;
                 ctrl.dialog = ngDialog.open({
                     template: "scripts/components/concept-detail/description-box/dialog.html",
-                    className: 'bigdialog',
+                    className: 'bigdialog smallheightdialog',
                     disableAnimation: true,
                     scope: $scope
                 });

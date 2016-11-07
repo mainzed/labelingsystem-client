@@ -65,6 +65,7 @@
 
         ctrl.create = function() {
             $scope.newVocab.license = ctrl.license.link;
+            console.log("broadcast");
             $rootScope.$broadcast("addedVocab", { vocab: $scope.newVocab });
             ctrl.dialog.close();
         }
