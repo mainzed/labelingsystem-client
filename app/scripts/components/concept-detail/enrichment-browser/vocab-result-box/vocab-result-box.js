@@ -13,7 +13,7 @@ angular.module("labelsApp")
         onConfirm: "&"
     },
     templateUrl: "scripts/components/concept-detail/enrichment-browser/vocab-result-box/vocab-result-box.html",
-    controller: ["$scope", "$rootScope", "$routeParams", "ngDialog", "TooltipService", "AuthService", function($scope, $rootScope, $routeParams, ngDialog, TooltipService, AuthService) {
+    controller: ["$scope", "$rootScope", "$routeParams", "ngDialog", "TooltipService", "AuthService", "HelperService", function($scope, $rootScope, $routeParams, ngDialog, TooltipService, AuthService, HelperService) {
         var ctrl = this;
 
         ctrl.dialog = null;
@@ -23,7 +23,8 @@ angular.module("labelsApp")
             //console.log(ctrl.data);
             $scope.tooltips = TooltipService;
             ctrl.setIcon(ctrl.data);
-            angular.element(".nano").nanoScroller();
+
+            HelperService.refreshNanoScroller();
         };
 
         ctrl.setIcon = function(data) {
@@ -49,14 +50,15 @@ angular.module("labelsApp")
             });
         };
 
-        ctrl.getDetails = function() {
-            if (angular.isFunction(ctrl.data.getDetails)) {
-                ctrl.data.getDetails().then(function(details) {
-                    ctrl.conceptDetails = details;
-                    $scope.$apply();
-                });
-            };
-        };
+        // ctrl.getDetails = function() {
+        //     if (angular.isFunction(ctrl.data.getDetails)) {
+        //         ctrl.data.getDetails().then(function(details) {
+        //             ctrl.conceptDetails = details;
+        //             console.log(details);
+        //             $scope.$apply();
+        //         });
+        //     };
+        // };
 
         /**
          * Returns link to editor for own vocabularies and link to viewer for

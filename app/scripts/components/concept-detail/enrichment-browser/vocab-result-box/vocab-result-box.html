@@ -12,30 +12,21 @@
 
     <!-- icon -->
     <span class="type" ng-show="$ctrl.cssType !== 'label'" title="{{ $ctrl.data.type + ' - ' + $ctrl.data.scheme }}">({{ $ctrl.data.type || "ls" }})</span>
+
     <ls-preview ng-show="$ctrl.cssType === 'label'" label="$ctrl.data" size="micro" title="{{ tooltips.icons.minipreview }}"></ls-preview>
 
 </div>
 
 <!-- details -->
-<div ng-if="showMore" class="box boxextension bigbox {{ $ctrl.cssType }} high" ng-click="$ctrl.openDialog()" ng-init="$ctrl.getDetails()">
+<div ng-if="showMore" class="box boxextension bigbox {{ $ctrl.cssType }} high" ng-click="$ctrl.openDialog()">
 
     <span class="line-ext"></span>
 
     <!-- description -->
-    <span class="note-ext">
+    <span class="note-extbig">
         <span class="italic smalltype" ng-show="$ctrl.data.description">Description</span>
         <span class="smalltype" ng-bind="$ctrl.data.description"></span>
     </span>
-
-
-    <!-- related -->
-    <span class="note-ext">
-        <span class="italic smalltype" ng-show="$ctrl.data.hasRelated()">related</span>
-        <ul class="hierarchie">
-            <li ng-repeat="relatedConcept in $ctrl.conceptDetails.related" ng-bind="relatedConcept.thumbnail"></li>
-        </ul>
-    </span>
-
 
     <!-- link -->
     <span class="note-ext"><span class="italic smalltype"></span><br>
