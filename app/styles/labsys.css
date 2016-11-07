@@ -1601,14 +1601,14 @@ span.icon-time {
   padding-bottom: 10px;
 }
 .loudlink {
-  background: white;
+  background: #d6d6d6;
   border-radius: 6px;
   padding: 2px 8px;
   color: black;
   cursor: pointer;
 }
 .loudlinkmin {
-  background: white;
+  background: #d6d6d6;
   border-radius: 6px;
   padding: 2px 8px;
   color: black;
