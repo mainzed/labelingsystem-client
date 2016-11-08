@@ -17,6 +17,9 @@
         ctrl.$onInit = function () {
             ctrl.showMoreIsVisible = false;
             ctrl.loading = true;
+            $scope.labelFilter = "";
+            $scope.labels = [];
+            $scope.filteredLabels = [];
             $scope.tooltips = TooltipService;
             $scope.placeholder = "loading labels...";
             $scope.conceptsLimit = ConfigService.conceptsLimit;
@@ -94,6 +97,14 @@
             }, function error(res) {
                 console.log(res);
             });
+        };
+
+        /**
+         * Returns true when the available concepts exceed the limit defined in
+         * the ConfigService.
+         */
+        ctrl.hasMoreConcepts = function() {
+            return $scope.filteredLabels.length >= $scope.conceptsLimit;
         };
 
         ctrl.toggleExtent = function() {

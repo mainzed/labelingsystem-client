@@ -86,6 +86,14 @@
             });
         };
 
+        /**
+         * Returns true when the available concepts exceed the limit defined in
+         * the ConfigService.
+         */
+        ctrl.hasMoreConcepts = function() {
+            return $scope.filteredLabels.length >= $scope.conceptsLimit;
+        };
+
         $scope.toggleExtent = function() {
             $scope.extendAll = !$scope.extendAll;
         };

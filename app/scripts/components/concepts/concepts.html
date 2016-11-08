@@ -33,9 +33,7 @@
             </span> -->
 
             <!-- when search empty and more labels available show option to load more -->
-            <span class="showmorebox" id="showMoreID"  ng-show="!labelFilter && labels.length > conceptsLimit" ng-click="conceptsLimit = conceptsLimit * 2">
-                show more
-            </span>
+            <ls-show-more-button ng-show="$ctrl.hasMoreConcepts()" limit="conceptsLimit"></ls-show-more-button>
 
             <ls-create-concept-button on-confirm="createConcept($newConcept)"></ls-create-concept-button>
     	</div>

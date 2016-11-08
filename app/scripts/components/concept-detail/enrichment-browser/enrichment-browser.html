@@ -41,33 +41,36 @@
 		<div id="enrichmentbrowser" class="nano">
 		    <div class="nano-content">
 
+                <!-- search results -->
+                <div ng-show="showSearch">
 
-      <!-- search results -->
-      <div ng-show="showSearch">
-        <!-- placeholder when not searching -->
-        <span class="noresult" ng-show="!searching && !resultBoxes">Add enrichment sources by searching</span>
+                    <!-- placeholder when not searching -->
+                    <span class="noresult" ng-show="!searching && !resultBoxes">Add enrichment sources by searching</span>
 
-        <ls-vocab-result-box ng-repeat="searchResult in resultBoxes | orderBy: ['quality', 'type']" data="searchResult"></ls-vocab-result-box>
+                    <ls-vocab-result-box ng-repeat="searchResult in resultBoxes | orderBy: ['quality', 'type']" data="searchResult"></ls-vocab-result-box>
 
-        <!-- spinning icon -->
-        <div class="loader" ng-show="searching && !resultBoxes.length"></div>
+                    <!-- spinning icon -->
+                    <div class="loader" ng-show="searching && !resultBoxes.length"></div>
 
-      </div>
+                </div>
 
-      <!-- own vocabs -->
-      <div ng-show="!showSearch">
+                <!-- own vocabs -->
+                <div ng-show="!showSearch">
 
-        <ls-vocab-result-box ng-repeat="sibling in siblings | limitTo: conceptsLimit | orderBy: 'thumbnail'" data="sibling" ></ls-vocab-result-box>
+                    <ls-vocab-result-box ng-repeat="sibling in siblings | limitTo: $ctrl.conceptsLimit | orderBy: 'thumbnail'" data="sibling" ></ls-vocab-result-box>
 
-        <div class="loader" ng-show="$ctrl.loading"></div>
+                    <div class="loader" ng-show="$ctrl.loading"></div>
 
-        <!-- TODO: make component -->
-        <span class="box bigbox label listbox" ng-show="labels.length > conceptsLimit" ng-click="conceptsLimit = conceptsLimit * 2">
-          show more
-        </span>
-      </div>
+                    <!-- TODO: make component -->
+                    <span class="box bigbox label listbox" ng-show="labels.length > conceptsLimit" ng-click="conceptsLimit = conceptsLimit * 2">
+                      show more
+                    </span>
 
-		</div>
+                    <ls-show-more-button ng-show="$ctrl.hasMoreConcepts()" limit="$ctrl.conceptsLimit"></ls-show-more-button>
+
+                </div>
+
+		    </div>
 		</div>
 	</div>
 

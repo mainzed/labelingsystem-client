@@ -20,7 +20,7 @@
 
             <ls-list-box ng-repeat="label in filteredLabels = ($ctrl.labels | filter: {thumbnail: filterValue}) | orderBy: conceptOrder | limitTo: $ctrl.resultsLimit as limitedLabels" concept="label" mode="viewer"></ls-list-box>
 
-            <span class="showmorebox" ng-show="filterValue && filteredLabels.length > limitedLabels.length" ng-click="$ctrl.resultsLimit = $ctrl.resultsLimit * 2">show more</span>
+            <ls-show-more-button ng-show="filterValue && filteredLabels.length > limitedLabels.length" limit="$ctrl.resultsLimit"></ls-show-more-button>
 
     		<!-- message when no labels found -->
     		<span ng-show="filterValue && !filteredLabels.length">

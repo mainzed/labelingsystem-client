@@ -22,7 +22,7 @@
 
             <ls-list-box ng-repeat="label in filteredLabels = ($ctrl.labels | filter: {thumbnail: filterValue}) | orderBy: conceptOrder | limitTo: $ctrl.resultsLimit as limitedLabels" concept="label" mode="viewer"></ls-list-box>
 
-            <span class="showmorebox" ng-show="filterValue && filteredLabels.length > limitedLabels.length" ng-click="$ctrl.resultsLimit = $ctrl.resultsLimit * 2">show more</span>
+            <ls-show-more-button ng-show="filterValue && filteredLabels.length > limitedLabels.length" limit="$ctrl.resultsLimit"></ls-show-more-button>
 
     		<!-- message when no labels found -->
     		<span ng-show="filterValue && !filteredLabels.length">
@@ -34,7 +34,7 @@
     	<!-- landing page text prior to search -->
     	<div ng-show="!filterValue">
 
-    		
+
             <div class="dialog-half whitetext float emphasize">
 
 
@@ -44,7 +44,7 @@
     			</p>
     		</div>
             <div class="dialog-half whitetext float emphasize" style="height: 200px;">
-                
+
             </div>
             <div class="dialog-half whitetext float emphasize">
                 <span>
@@ -67,7 +67,7 @@
                     IEG - Institute for European History<br>
                     i3mainz - Institute for Spatial Information and Surveying Technology<br>
                     RGZM - Romano-Germanic Central Museum<br><br>
-                    
+
                 </span>
                 <div class="logos">
                         <a href="http://www.mainzed.org">
@@ -86,7 +86,7 @@
     		</div>
 
             <div class="dialog-half whitetext float">
-                
+
                 <p>
                     <span>Impressum</span><br>
                     Angaben gemäß § 5 TMG:<br>
@@ -104,7 +104,7 @@
                 </p>
             </div>
 
-    		
+
 
 
     	</div>

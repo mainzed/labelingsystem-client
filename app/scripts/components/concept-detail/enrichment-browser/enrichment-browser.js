@@ -17,8 +17,8 @@ angular.module("labelsApp")
         ctrl.$onInit = function() {
             $scope.searching = false;
             ctrl.loading = false;
-            // limit for concepts shown in concepts tab
-            $scope.conceptsLimit = ConfigService.conceptsLimit;
+
+            ctrl.conceptsLimit = ConfigService.conceptsLimit;
             $scope.showSearch = false; // ConfigService.showSearchOnStart;
             $scope.tooltips = TooltipService;
 
@@ -38,7 +38,15 @@ angular.module("labelsApp")
 
         ctrl.$onDestroy = function() {
             CachingService.editor.showEnrichments = ctrl.showEnrichments;
-        }
+        };
+
+        /**
+         * Returns true when the available concepts exceed the limit defined in
+         * the ConfigService.
+         */
+        ctrl.hasMoreConcepts = function() {
+            return $scope.siblings && $scope.siblings.length >= ctrl.conceptsLimit;
+        };
 
         ctrl.getEnrichmentVocab = function(vocab) {
             ctrl.loading = true;

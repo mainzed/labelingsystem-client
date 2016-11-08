@@ -16,7 +16,6 @@ angular.module('labelsApp')
 
         ctrl.$onInit = function() {
 
-            //ctrl.resultsLimit = 0;
             ctrl.resultsLimit = ConfigService.conceptsLimit;
             $scope.conceptOrder = '-lastModified';
 
