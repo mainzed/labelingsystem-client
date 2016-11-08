@@ -9,6 +9,10 @@
 @draft: 			#FFFDB5;
 @hovergray: 		#d5d5d5;
 @linegray:			#c5c5c5;
+@lineblue:			#00AAE6;
+@linels:			#E86B9D;
+
+
 
 /* line color */
 @draftlinecolor: 	#D6CE60;
@@ -617,8 +621,8 @@ span.icon-time {	line-height: 5px; float: left; margin-top: 6px; margin-left: -2
 
 .inactive {			color: gray; pointer-events:none; }
 .paddingbottom {	padding-bottom: 10px;	}
-.loudlink {			 background: #d6d6d6; border-radius: 6px; padding: 2px 8px; color: black; cursor: pointer; }
-.loudlinkmin {		 background: #d6d6d6; border-radius: 6px; padding: 2px 8px; color: black; cursor: pointer; }
+.loudlink {			background: #d6d6d6; border-radius: 6px; padding: 2px 8px; color: black; cursor: pointer; }
+.loudlinkmin {		background: #d6d6d6; border-radius: 6px; padding: 2px 8px; color: black; cursor: pointer; }
 
 
 
@@ -633,7 +637,10 @@ span.icon-time {	line-height: 5px; float: left; margin-top: 6px; margin-left: -2
 .line 	{			background: black;}
 .label .line {		background: @linegray; }
 .low .line {		background: white; }
-.getty .line {		background: #24A4FF; }
+.getty .line {		background: @lineblue; }
+.dbpedia .line {	background: @lineblue; }
+.finto .line {		background: @lineblue; }
+.ls .line {			background: @linels; }
 .text .line {		background: gray; }
 .vocabulary.draft .note  {
 					border-top: 1px solid @draftlinecolor;

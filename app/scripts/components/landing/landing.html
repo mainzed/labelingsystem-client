@@ -22,7 +22,7 @@
 
             <ls-list-box ng-repeat="label in filteredLabels = ($ctrl.labels | filter: {thumbnail: filterValue}) | orderBy: conceptOrder | limitTo: $ctrl.resultsLimit as limitedLabels" concept="label" mode="viewer"></ls-list-box>
 
-            <span ng-show="filterValue && filteredLabels.length > limitedLabels.length" ng-click="$ctrl.resultsLimit = $ctrl.resultsLimit * 2">show more</span>
+            <span class="showmorebox" ng-show="filterValue && filteredLabels.length > limitedLabels.length" ng-click="$ctrl.resultsLimit = $ctrl.resultsLimit * 2">show more</span>
 
     		<!-- message when no labels found -->
     		<span ng-show="filterValue && !filteredLabels.length">
@@ -49,14 +49,14 @@
             <div class="dialog-half whitetext float emphasize">
                 <span>
                     <span>Idea</span><br>
-                    Dr.-Ing. Michael Piotrowski (IEG)<br>
-                    Giovanni Colavizza M.A. (former IEG)<br><br>
+                    Michael Piotrowski (IEG)<br>
+                    Giovanni Colavizza (former IEG)<br><br>
 
                     <span>Advisor</span><br>
-                    Prof. Dr. phil. Kai-Christian Bruhn (mainzed)<br><br>
+                    Kai-Christian Bruhn (mainzed)<br><br>
 
                     <span>Backend Architecture and API Development</span><br>
-                    Florian Thiery M.Sc. (i3mainz, RGZM)<br><br>
+                    Florian Thiery (i3mainz, RGZM)<br><br>
 
                     <span>Frontend Development</span><br>
                     User Interface Design / CSS: Matthias Dufner (i3mainz)<br>

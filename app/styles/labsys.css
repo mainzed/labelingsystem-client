@@ -1653,7 +1653,16 @@ span.icon-time {
   background: white;
 }
 .getty .line {
-  background: #24A4FF;
+  background: #00AAE6;
+}
+.dbpedia .line {
+  background: #00AAE6;
+}
+.finto .line {
+  background: #00AAE6;
+}
+.ls .line {
+  background: #E86B9D;
 }
 .text .line {
   background: gray;

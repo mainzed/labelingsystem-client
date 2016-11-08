@@ -28,13 +28,13 @@
 
 					<!-- description -->
 					<div class="dialog-half col">
-						<span class="italic" ng-show="$ctrl.resource.description">Description</span><br>
+						<span class="bold block" ng-show="$ctrl.resource.description">Description</span>
 						{{ $ctrl.resource.description }}
 					</div>
 
 					<!-- broader -->
 					<div class="dialog-quarter col">
-						<span class="italic smalltype" ng-show="$ctrl.resource.broaderTerms.length > 0">Broader</span><br>
+						<span class="bold smalltype block" ng-show="$ctrl.resource.broaderTerms.length > 0">Broader</span>
 						<ul class="hierarchie">
 							<li ng-repeat="term in $ctrl.resource.broaderTerms" ng-bind="term.label"></li>
 						</ul>
@@ -42,7 +42,7 @@
 
 					<!-- narrower -->
 					<div class="dialog-quarter col">
-						<span class="italic smalltype" ng-show="$ctrl.resource.narrowerTerms.length > 0">Narrower</span><br>
+						<span class="bold smalltype block" ng-show="$ctrl.resource.narrowerTerms.length > 0">Narrower</span>
 						<ul class="hierarchie">
 							<li ng-repeat="term in $ctrl.resource.narrowerTerms" ng-bind="term.label"></li>
 						</ul>
@@ -72,7 +72,7 @@
 							<div class="col five">
 								<button class="enrichbutton-ow" type="button" name="button" ng-click="$ctrl.newRelation = 'relatedMatch'" ng-class="{'selectedbutton': $ctrl.newRelation === 'relatedMatch'}" title="tooltips.comments.relatedMatch">
 									<span class="buttontext-ow">related Match</span>
-									<span class="icon-related icon"></span>
+									<span class="icon-arrow icon"></span>
 								</button>
 							</div>
 
