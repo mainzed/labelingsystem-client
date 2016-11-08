@@ -9,9 +9,8 @@ angular.module("labelsApp")
         "enrichment-browser.html",
 
     // The controller that handles our component logic
-    controller: ["$scope", "$routeParams", "$rootScope", "ConfigService", "SearchService",
-        "VocabService", "TooltipService", "ConceptService", "CachingService", function($scope, $routeParams, $rootScope, ConfigService, SearchService,
-        VocabService, TooltipService, ConceptService, CachingService) {
+    controller: ["$scope", "$routeParams", "$rootScope", "ConfigService", "SearchService", "VocabService", "TooltipService", "ConceptService", "CachingService", function($scope, $routeParams, $rootScope, ConfigService, SearchService, VocabService, TooltipService, ConceptService, CachingService) {
+
         var ctrl = this;
 
         ctrl.$onInit = function() {
@@ -38,6 +37,11 @@ angular.module("labelsApp")
 
         ctrl.$onDestroy = function() {
             CachingService.editor.showEnrichments = ctrl.showEnrichments;
+        };
+
+        ctrl.showSearch = function() {
+            $scope.showSearch = true;
+            angular.element("input").focus();
         };
 
         /**

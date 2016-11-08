@@ -10,7 +10,7 @@ angular.module('labelsApp')
   .component('lsLanding', {
     bindings: {},
     templateUrl: "scripts/components/landing/landing.html",
-    controller: ["$scope", "$window", "$timeout", "ConceptService", "CachingService", "ConfigService", function($scope, $window, $timeout, ConceptService, CachingService, ConfigService) {
+    controller: ["$scope", "$timeout", "ConceptService", "CachingService", "ConfigService", function($scope, $timeout, ConceptService, CachingService, ConfigService) {
 
         var ctrl = this;
 
@@ -52,7 +52,7 @@ angular.module('labelsApp')
             } else {
                 $timeout(function() {
                     $scope.placeholder = "search labels";
-                    $window.document.getElementById("labelSearch").focus();
+                    angular.element("#labelSearch").focus();
                 }, 0);
             }
         });
