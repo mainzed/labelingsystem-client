@@ -21,6 +21,7 @@
         ctrl.$onInit = function() {
 
             $scope.maxLength = ConfigService.vocabDescriptionLength;
+            ctrl.maxTitleLength = ConfigService.vocabTitleLength;
 
             $scope.languages = LanguageService.query().then(function(languages) {
                 $scope.languages = languages;

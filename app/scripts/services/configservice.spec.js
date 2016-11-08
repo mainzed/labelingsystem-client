@@ -19,7 +19,6 @@ describe('Service: ConfigService', function () {
         expect(ConfigService.hasOwnProperty("version")).toBe(true);
         expect(ConfigService.hasOwnProperty("host")).toBe(true);
         expect(ConfigService.hasOwnProperty("api")).toBe(true);
-        expect(ConfigService.hasOwnProperty("publicLabelEdit")).toBe(true);
         expect(ConfigService.hasOwnProperty("showMatches")).toBe(true);
     });
 

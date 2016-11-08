@@ -21,6 +21,7 @@ angular.module('labelsApp')
             $scope.tooltips = TooltipService;
             $scope.user = AuthService.getUser();
             $scope.vocabDescriptionLength = ConfigService.vocabDescriptionLength;
+            ctrl.maxTitleLength = ConfigService.vocabTitleLength;
 
             // determine icon
             this.icon = "icon-more";
@@ -140,13 +141,6 @@ angular.module('labelsApp')
                 $scope.newDescription = description.substring(0, ConfigService.vocabDescriptionLength);
             }
         };
-
-        // add listener to init nanoScroller once the dialog is loaded
-        $scope.$on('ngDialog.opened', function (e, $dialog) {
-            if (ctrl.dialog && ctrl.dialog.id === $dialog.attr('id')) {
-                HelperService.refreshNanoScroller();
-            }
-        });
 
         $scope.$on('ngDialog.closed', function (e, $dialog) {
             if (ctrl.dialog && ctrl.dialog.id === $dialog.attr('id')) {  // is the resource dialog

@@ -71,7 +71,8 @@ angular
       });
  });
 
-angular.module('labelsApp').run(function ($rootScope, $location, $route, AuthService) {
+// global events
+angular.module('labelsApp').run(function ($rootScope, $location, $route, AuthService, HelperService) {
     // do this before a route is changed
     // to prevent this for public routes use "access: {restricted: true}"
     $rootScope.$on('$routeChangeStart', function (event, next, current) {
@@ -88,7 +89,11 @@ angular.module('labelsApp').run(function ($rootScope, $location, $route, AuthSer
             }
         });
         //}
+    });
 
+    // init nanoscroller when dialog is opened
+    $rootScope.$on('ngDialog.opened', function (e, $dialog) {
+        HelperService.refreshNanoScroller();
     });
 
 });

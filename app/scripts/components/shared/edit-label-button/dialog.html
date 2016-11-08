@@ -12,8 +12,8 @@
 
                 <!-- change label -->
                 <div class="dialogbox dialog-full">
-                    <h4 ng-class="{'inactive': vocab.releaseType === 'public' && !publicLabelEdit}">Rename</h4>
-                    <input type="text" placeholder="label" ng-model="$ctrl.data.thumbnail" ng-class="{'inactive': vocab.releaseType === 'public' && !publicLabelEdit}" ng-disabled="vocab.releaseType === 'public' && !publicLabelEdit" ng-change="$ctrl.modifiedLabel = true">
+                    <h4 ng-class="{'inactive': vocab.releaseType === 'public'}">Rename</h4>
+                    <input type="text" maxlength="{{ $ctrl.maxConceptLabelLength }}" placeholder="label" ng-model="$ctrl.data.thumbnail" ng-class="{'inactive': vocab.releaseType === 'public'}" ng-disabled="vocab.releaseType === 'public'" ng-change="$ctrl.modifiedLabel = true">
                 </div>
 
                 <div class="line-dialog line"></div>
@@ -33,7 +33,7 @@
 
                 <!-- functions -->
                 <div class="dialogbox dialog-full">
-                    <h4 ng-class="{'inactive': vocab.releaseType === 'public' && !publicLabelEdit}">Functions</h4>
+                    <h4 ng-class="{'inactive': vocab.releaseType === 'public'}">Functions</h4>
                     <ls-confirm-button on-confirm="$ctrl.deleteConcept()" inactive="vocab.releaseType === 'public'"></ls-confirm-button>
                 </div>
 

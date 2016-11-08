@@ -11,7 +11,7 @@
 
                 <div class="dialogbox dialog-full">
                     <h4 ng-class="{'inactive': $ctrl.data.releaseType === 'public'}">Title</h4>
-                    <input type="text" ng-model="$ctrl.newTitle" ng-disabled="$ctrl.data.releaseType === 'public'" ng-class="{'inactive': $ctrl.data.releaseType === 'public'}">
+                    <input type="text" maxlength="{{ $ctrl.maxTitleLength }}" ng-model="$ctrl.newTitle" ng-disabled="$ctrl.data.releaseType === 'public'" ng-class="{'inactive': $ctrl.data.releaseType === 'public'}">
                 </div>
 
 

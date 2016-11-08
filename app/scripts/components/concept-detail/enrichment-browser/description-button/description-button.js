@@ -38,11 +38,11 @@
         };
 
         $scope.onKeyPress = function(e) {
-            if (ctrl.description.length > ConfigService.conceptDescriptionLength - 1) {
+            if (ctrl.description.length > ConfigService.maxConceptDescriptionLength - 1) {
                 // prevent new characters from being added
                 e.preventDefault();
                 // shorten description back to allowed length
-                ctrl.description = ctrl.description.substring(0, ConfigService.conceptDescriptionLength);
+                ctrl.description = ctrl.description.substring(0, ConfigService.maxConceptDescriptionLength);
             }
         };
     }]

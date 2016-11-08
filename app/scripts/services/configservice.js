@@ -19,13 +19,6 @@ angular.module('labelsApp')
     this.api = this.host + "/api/v1";
 
     /**
-     * If true, prevents users from editing the thumbnail prefLabel of a concept
-     * if it's vocabulary has the releaseType "public". If true, allows editing
-     * even if a vocabulary is public.
-     */
-    this.publicLabelEdit = false;
-
-    /**
      * If true, shows broadMatches and narrowMatches in broader/narrower columns
      * in the concept detail box. If false, only shows broader and narrower
      * concepts of the same vocabulary.
@@ -57,10 +50,16 @@ angular.module('labelsApp')
     // and on landing page
     this.conceptsLimit = 30;
 
-    // maximum numbe rof chars allowed for descriptions
+    // maximum number of characters allowed for a vocab's title
+    this.vocabTitleLength = 40;
+
+    // maximum number of characters allowed for a vocab's description
     this.vocabDescriptionLength = 160;
 
-    this.conceptLabelLength = 40;
-    this.conceptDescriptionLength = 400;
+    // maximum number of characters allowed for a concept's label
+    this.maxConceptLabelLength = 40;
+
+    // maximum number of characters allowed for a concept's description
+    this.maxConceptDescriptionLength = 400;
 
 });

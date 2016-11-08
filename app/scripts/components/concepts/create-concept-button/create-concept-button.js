@@ -17,8 +17,8 @@
 
         ctrl.$onInit = function() {
             ctrl.showCSV = false;
-            ctrl.titleLength = ConfigService.conceptLabelLength;
-            ctrl.descriptionLength = ConfigService.conceptDescriptionLength;
+            ctrl.maxConceptLabelLength = ConfigService.maxConceptLabelLength;
+            ctrl.descriptionLength = ConfigService.maxConceptDescriptionLength;
 
             // get vocab to check if it is public
             // TODO: get currentVocab from cache
