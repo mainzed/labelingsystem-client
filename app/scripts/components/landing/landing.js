@@ -10,7 +10,7 @@ angular.module('labelsApp')
   .component('lsLanding', {
     bindings: {},
     templateUrl: "scripts/components/landing/landing.html",
-    controller: ["$scope", "$window", "$timeout", "LabelService", "CachingService", "ConfigService", function($scope, $window, $timeout, LabelService, CachingService, ConfigService) {
+    controller: ["$scope", "$window", "$timeout", "ConceptService", "CachingService", "ConfigService", function($scope, $window, $timeout, ConceptService, CachingService, ConfigService) {
 
         var ctrl = this;
 
@@ -26,7 +26,7 @@ angular.module('labelsApp')
                 ctrl.labels = CachingService.viewer.allConcepts;
             } else {
                 $scope.loading = true;
-                LabelService.queryPublic(function(labels) {
+                ConceptService.queryPublic(function(labels) {
                     ctrl.labels = labels;
 
                     // save for later

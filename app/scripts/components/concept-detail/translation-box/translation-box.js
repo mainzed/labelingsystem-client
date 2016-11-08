@@ -6,7 +6,7 @@ angular.module("labelsApp")
         mode: "@"
     },
     templateUrl: "scripts/components/concept-detail/translation-box/translation-box.html",
-    controller: ["$scope", "$rootScope", "$routeParams", "ngDialog", "TooltipService", "LabelService", function($scope, $rootScope, $routeParams, ngDialog, TooltipService, LabelService) {
+    controller: ["$scope", "$rootScope", "$routeParams", "ngDialog", "TooltipService", "ConceptService", function($scope, $rootScope, $routeParams, ngDialog, TooltipService, ConceptService) {
         var ctrl = this;
 
         ctrl.$onInit = function() {
@@ -35,7 +35,7 @@ angular.module("labelsApp")
         ctrl.onDeleteClick = function() {
 
             // get current concept
-            LabelService.get({id: $routeParams.lID}, function(concept) {
+            ConceptService.get({id: $routeParams.lID}, function(concept) {
 
                 _.remove(concept.translations, { value: ctrl.data.value, lang: ctrl.data.lang });
 
@@ -60,7 +60,7 @@ angular.module("labelsApp")
         this.updateTranslation = function() {
 
             // get current concept
-            LabelService.get({id: $routeParams.lID}, function(concept) {
+            ConceptService.get({id: $routeParams.lID}, function(concept) {
 
                 // find and replace
                 var index = _.indexOf(concept.translations, _.find(concept.translations, {

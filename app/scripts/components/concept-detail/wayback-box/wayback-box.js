@@ -7,7 +7,7 @@
  * # linkBox
  */
 angular.module('labelsApp')
-  .directive('linkBox', function($window, ngDialog, $routeParams, ResourcesService, LabelService, HelperService, AuthService) {
+  .directive('linkBox', function($window, ngDialog, $routeParams, ResourcesService, ConceptService, HelperService, AuthService) {
     return {
         templateUrl: 'scripts/components/concept-detail/wayback-box/wayback-box.html',
         restrict: 'E',
@@ -51,7 +51,7 @@ angular.module('labelsApp')
             scope.onDeleteClick = function() {
                 // get current concept
 
-                LabelService.get({id: $routeParams.lID}, function(concept) {
+                ConceptService.get({id: $routeParams.lID}, function(concept) {
 
                     _.remove(concept.seeAlso, { "uri": scope.data.uri });
 

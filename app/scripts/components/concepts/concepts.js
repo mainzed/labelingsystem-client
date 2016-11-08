@@ -11,7 +11,7 @@
     bindings: {
     },
     templateUrl: "scripts/components/concepts/concepts.html",
-    controller: ["$scope", "$routeParams", "AuthService", "LabelService", "VocabService", "TooltipService", "ConfigService", "$timeout", "CachingService", function($scope, $routeParams, AuthService, LabelService, VocabService, TooltipService, ConfigService, $timeout, CachingService) {
+    controller: ["$scope", "$routeParams", "AuthService", "ConceptService", "VocabService", "TooltipService", "ConfigService", "$timeout", "CachingService", function($scope, $routeParams, AuthService, ConceptService, VocabService, TooltipService, ConfigService, $timeout, CachingService) {
         var ctrl = this;
 
         ctrl.$onInit = function () {
@@ -67,7 +67,7 @@
 
         ctrl.loadConcepts = function() {
             ctrl.loading = true;
-            LabelService.query({'vocab': $routeParams.vID}, function(labels) {
+            ConceptService.query({'vocab': $routeParams.vID}, function(labels) {
                 $scope.labels = labels;
                 ctrl.loading = false;
             });
@@ -87,7 +87,7 @@
                 delete newConcept.description;
             }
 
-            LabelService.save(newConcept, function(concept) {
+            ConceptService.save(newConcept, function(concept) {
                 if (concept.id) {
                     $scope.labels.push(concept);
                 }

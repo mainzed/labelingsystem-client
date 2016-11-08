@@ -10,8 +10,8 @@ angular.module("labelsApp")
 
     // The controller that handles our component logic
     controller: ["$scope", "$routeParams", "$rootScope", "ConfigService", "SearchService",
-        "VocabService", "TooltipService", "LabelService", "CachingService", function($scope, $routeParams, $rootScope, ConfigService, SearchService,
-        VocabService, TooltipService, LabelService, CachingService) {
+        "VocabService", "TooltipService", "ConceptService", "CachingService", function($scope, $routeParams, $rootScope, ConfigService, SearchService,
+        VocabService, TooltipService, ConceptService, CachingService) {
         var ctrl = this;
 
         ctrl.$onInit = function() {
@@ -47,7 +47,7 @@ angular.module("labelsApp")
                 VocabService.get({id: enrichmentVocabID}, function(enrichmentVocab) {
                     $scope.enrichmentVocab = enrichmentVocab;
                     // get concepts of vocab to be shown
-                    LabelService.query({'vocab': enrichmentVocabID}, function(concepts) {
+                    ConceptService.query({'vocab': enrichmentVocabID}, function(concepts) {
                         ctrl.loading = false;
                         $scope.siblings = _.filter(concepts, function(o) {
                             return o.id !== $routeParams.lID;  // skip current concept

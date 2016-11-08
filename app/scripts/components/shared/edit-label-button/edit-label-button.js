@@ -13,7 +13,7 @@ angular.module('labelsApp')
         data: "=",
     },
     template: '<span class="icon-more icon" ng-click="$ctrl.openDialog()"></span>',
-    controller: ["$scope", "$rootScope", "$location", "$routeParams", "ngDialog", "ConfigService", "LabelService", "VocabService", "HelperService", function ($scope, $rootScope, $location, $routeParams, ngDialog, ConfigService, LabelService, VocabService, HelperService) {
+    controller: ["$scope", "$rootScope", "$location", "$routeParams", "ngDialog", "ConfigService", "ConceptService", "VocabService", "HelperService", function ($scope, $rootScope, $location, $routeParams, ngDialog, ConfigService, ConceptService, VocabService, HelperService) {
         var ctrl = this;
 
         ctrl.$onInit = function() {
@@ -52,7 +52,7 @@ angular.module('labelsApp')
          * Deletes a concept.
          */
         ctrl.deleteConcept = function() {
-            LabelService.remove({id: ctrl.data.id}, function() {
+            ConceptService.remove({id: ctrl.data.id}, function() {
                 ctrl.dialog.close();
                 $rootScope.$broadcast("removedConcept", { id: ctrl.data.id});
                 $location.path("/editor/vocabularies/" + $routeParams.vID + "/concepts");

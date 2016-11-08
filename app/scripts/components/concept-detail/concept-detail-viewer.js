@@ -11,7 +11,7 @@
     bindings: {
     },
     templateUrl: "scripts/components/concept-detail/concept-detail-viewer.html",
-    controller: ["$scope", "$location", "$routeParams", "LabelService", "TooltipService", "ConfigService", "CachingService", "AgentService", "VocabService", "LicenseService", function($scope, $location, $routeParams, LabelService, TooltipService, ConfigService, CachingService, AgentService, VocabService, LicenseService) {
+    controller: ["$scope", "$location", "$routeParams", "ConceptService", "TooltipService", "ConfigService", "CachingService", "AgentService", "VocabService", "LicenseService", function($scope, $location, $routeParams, ConceptService, TooltipService, ConfigService, CachingService, AgentService, VocabService, LicenseService) {
         var ctrl = this;
 
         ctrl.license = null;
@@ -26,7 +26,7 @@
             });
 
             // load current label
-            LabelService.getWithRevisions({id: $routeParams.lID}, function(label) {
+            ConceptService.getWithRevisions({id: $routeParams.lID}, function(label) {
                 $scope.label = label;
                 AgentService.get({id: label.creator}, function(agent) {
                     $scope.agent = agent;
@@ -35,7 +35,7 @@
 
             // cache all concepts for landing page (if user clicks on search icon)
             if (!CachingService.viewer.allConcepts) {
-                LabelService.query(function(concepts) {
+                ConceptService.query(function(concepts) {
                     CachingService.viewer.allConcepts = concepts;
                 });
             }

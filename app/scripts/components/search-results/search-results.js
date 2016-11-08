@@ -10,7 +10,7 @@ angular.module('labelsApp')
   .component('lsSearchResults', {
     bindings: {},
     templateUrl: "scripts/components/search-results/search-results.html",
-    controller: ["$scope", "$window", "CachingService", "HelperService", "ConfigService", "LabelService", function($scope, $window, CachingService, HelperService, ConfigService, LabelService) {
+    controller: ["$scope", "$window", "CachingService", "HelperService", "ConfigService", "ConceptService", function($scope, $window, CachingService, HelperService, ConfigService, ConceptService) {
 
         var ctrl = this;
 
@@ -28,7 +28,7 @@ angular.module('labelsApp')
             } else {
                 $scope.loading = true;
                 $scope.placeholder = "loading labels";
-                LabelService.queryPublic(function(labels) {
+                ConceptService.queryPublic(function(labels) {
                     ctrl.labels = labels;
                     $window.document.getElementById("labelSearch").focus();
                     $scope.placeholder = "search labels";

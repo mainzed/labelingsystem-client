@@ -12,7 +12,7 @@ angular.module('labelsApp')
         onConfirm: '&'
     },
     templateUrl: 'scripts/components/concept-detail/enrichment-browser/translation-button/translation-button.html',
-    controller: ["$scope", "$rootScope", "$routeParams", "ngDialog", "LabelService", "LanguageService", function($scope, $rootScope, $routeParams, ngDialog, LabelService, LanguageService) {
+    controller: ["$scope", "$rootScope", "$routeParams", "ngDialog", "ConceptService", "LanguageService", function($scope, $rootScope, $routeParams, ngDialog, ConceptService, LanguageService) {
         var ctrl = this;
 
         function lock(languages, language) {
@@ -32,7 +32,7 @@ angular.module('labelsApp')
         }
 
         ctrl.$onInit = function() {
-            LabelService.get({ id: $routeParams.lID }, function success(concept) {
+            ConceptService.get({ id: $routeParams.lID }, function success(concept) {
                 ctrl.concept = concept;
                 ctrl.lookUsedLanguages();
             });

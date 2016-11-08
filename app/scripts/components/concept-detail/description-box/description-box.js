@@ -14,7 +14,7 @@
     },
     templateUrl: "scripts/components/concept-detail/description-box/description-box.html",
 
-    controller: ["$scope", "$routeParams", "$rootScope", "ngDialog", "LabelService", "TooltipService", "ConfigService", function($scope, $routeParams, $rootScope, ngDialog, LabelService, TooltipService, ConfigService) {
+    controller: ["$scope", "$routeParams", "$rootScope", "ngDialog", "ConceptService", "TooltipService", "ConfigService", function($scope, $routeParams, $rootScope, ngDialog, ConceptService, TooltipService, ConfigService) {
 
         var ctrl = this;
 

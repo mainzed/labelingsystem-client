@@ -17,7 +17,7 @@
     },
     templateUrl: "scripts/components/concept-detail/resource-box/resource-box.html",
 
-    controller: ["$scope", "$rootScope", "$timeout", "$window", "ngDialog", "LabelService", "$routeParams", "ResourcesService", "HelperService", function($scope, $rootScope, $timeout, $window, ngDialog, LabelService, $routeParams, ResourcesService, HelperService) {
+    controller: ["$scope", "$rootScope", "$timeout", "$window", "ngDialog", "ConceptService", "$routeParams", "ResourcesService", "HelperService", function($scope, $rootScope, $timeout, $window, ngDialog, ConceptService, $routeParams, ResourcesService, HelperService) {
 
         var ctrl = this;
 
