@@ -50,11 +50,11 @@
 
         ctrl.onKeyPress = function(e, newValue) {
             //console.log(newValue.length);
-            if (newValue.length > ConfigService.conceptDescriptionLength - 1) {
+            if (newValue.length > ConfigService.maxConceptDescriptionLength - 1) {
                 // prevent new characters from being added
                 e.preventDefault();
                 // shorten description back to allowed length
-                ctrl.newValue = newValue.substring(0, ConfigService.conceptDescriptionLength);
+                ctrl.newValue = newValue.substring(0, ConfigService.maxConceptDescriptionLength);
             }
         };
 

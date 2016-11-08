@@ -12,7 +12,7 @@
                 <!-- title -->
         		<div class="dialogbox dialog-full">
         			<h4>Title</h4>
-        			<input type="text" placeholder="title" ng-model="newVocab.title">
+        			<input type="text" maxlength="{{ $ctrl.maxTitleLength }}" placeholder="title" ng-model="newVocab.title">
         		</div>
 
         		<div class="line-dialog line"></div>

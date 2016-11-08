@@ -17,8 +17,8 @@ angular.module('labelsApp')
         var ctrl = this;
 
         ctrl.$onInit = function() {
-            $scope.publicLabelEdit = ConfigService.publicLabelEdit;
-        }
+            ctrl.maxConceptLabelLength = ConfigService.maxConceptLabelLength;
+        };
 
         /**
          * Opens the metadata/settings dialog of a vocabulary.
@@ -36,13 +36,6 @@ angular.module('labelsApp')
                 className: 'bigdialog',
                 disableAnimation: true,
                 scope: $scope
-            });
-
-            // add listener to init nanoScroller once the dialog is loaded
-            $scope.$on('ngDialog.opened', function (e, $dialog) {
-                if (ctrl.dialog.id === $dialog.attr('id')) {  // is the resource dialog
-                    HelperService.refreshNanoScroller();
-                }
             });
         };
 
