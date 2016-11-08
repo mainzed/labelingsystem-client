@@ -8,7 +8,7 @@
  * Service in the labelsApp.
  */
 angular.module('labelsApp')
-  .service('HelperService', function ($window, $timeout, LabelService, ResourcesService, VocabService, AuthService) {
+  .service('HelperService', function ($window, $timeout, ConceptService, ResourcesService, VocabService, AuthService) {
     // helper functions
     // this.findAndReplace = function(arr, query, newObj) {
     //     var index = _.indexOf(arr, _.find(arr, query));
@@ -62,7 +62,7 @@ angular.module('labelsApp')
             concept[relation].forEach(function(resource, index, array) {
 
                 if (_.isString(resource)) {  // is internal concept ID
-                    LabelService.get({id: resource}, function(relatedConcept) {
+                    ConceptService.get({id: resource}, function(relatedConcept) {
                         relatedConcepts.push(relatedConcept);
                         // callback when all done
                         if (index === array.length - 1) {

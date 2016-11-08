@@ -2,13 +2,13 @@
 
 /**
  * @ngdoc service
- * @name labelsApp.LabelService
+ * @name labelsApp.ConceptService
  * @description
- * # LabelService
+ * # ConceptService
  * Service in the labelsApp.
  */
 angular.module('labelsApp')
-  .factory('LabelService', function ($resource, $http, ConfigService, ResourcesService) {
+  .factory('ConceptService', function ($resource, $http, ConfigService, ResourcesService) {
 
     var Concept = $resource(ConfigService.api + '/labels/:id', null, {
         'query': {
@@ -34,9 +34,6 @@ angular.module('labelsApp')
         }
     });
 
-    /**
-     * returns the concept's thumbnail prefLabel.
-     */
     Concept.prototype.getLabel = function() {
         return this.thumbnail;
     };
@@ -116,7 +113,7 @@ angular.module('labelsApp')
         var concept = this;
 
         // TODO: the concepts return dont have all the prototype functions
-        // because LabelService is not used!!!
+        // because ConceptService is not used!!!
         // maybe its better to leave this as helperfunction for now
 
         return new Promise(function(resolve, reject) {

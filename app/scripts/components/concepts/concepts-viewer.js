@@ -11,7 +11,7 @@
     bindings: {
     },
     templateUrl: "scripts/components/concepts/concepts-viewer.html",
-    controller: ["$scope", "$timeout", "$routeParams", "$location", "LabelService", "VocabService", "TooltipService", "ConfigService", "CachingService", "AgentService", "LicenseService", function($scope, $timeout, $routeParams, $location, LabelService, VocabService, TooltipService, ConfigService, CachingService, AgentService, LicenseService) {
+    controller: ["$scope", "$timeout", "$routeParams", "$location", "ConceptService", "VocabService", "TooltipService", "ConfigService", "CachingService", "AgentService", "LicenseService", function($scope, $timeout, $routeParams, $location, ConceptService, VocabService, TooltipService, ConfigService, CachingService, AgentService, LicenseService) {
         var ctrl = this;
 
         ctrl.$onInit = function () {
@@ -54,7 +54,7 @@
 
             // cache all concepts for landing page (if user clicks on search icon)
             if (!CachingService.viewer.allConcepts) {
-                LabelService.query(function(concepts) {
+                ConceptService.query(function(concepts) {
                     CachingService.viewer.allConcepts = concepts;
                 });
             }
@@ -80,7 +80,7 @@
         };
 
         ctrl.loadConcepts = function() {
-            LabelService.query({'vocab': $routeParams.vID}, function(labels) {
+            ConceptService.query({'vocab': $routeParams.vID}, function(labels) {
                 $scope.labels = labels;
                 ctrl.loading = false;
             });

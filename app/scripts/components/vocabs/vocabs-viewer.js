@@ -11,7 +11,7 @@
     bindings: {
     },
     templateUrl: "scripts/components/vocabs/vocabs-viewer.html",
-    controller: ["$scope", "$timeout", "$location", "VocabService", "LabelService", "CachingService", function($scope, $timeout, $location, VocabService, LabelService, CachingService) {
+    controller: ["$scope", "$timeout", "$location", "VocabService", "ConceptService", "CachingService", function($scope, $timeout, $location, VocabService, ConceptService, CachingService) {
         var ctrl = this;
 
         ctrl.$onInit = function () {
@@ -31,7 +31,7 @@
 
             // cache all concepts for landing page (if user clicks on search icon)
             if (!CachingService.viewer.allConcepts) {
-                LabelService.query(function(concepts) {
+                ConceptService.query(function(concepts) {
                     CachingService.viewer.allConcepts = concepts;
                 });
             }

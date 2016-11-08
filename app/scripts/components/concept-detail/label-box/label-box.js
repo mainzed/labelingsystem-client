@@ -7,7 +7,7 @@
  * # conceptBox
  */
 angular.module('labelsApp')
-  .directive('lsLabelBox', function ($rootScope, $location, ngDialog, LabelService, HelperService, TooltipService) {
+  .directive('lsLabelBox', function ($rootScope, $location, ngDialog, ConceptService, HelperService, TooltipService) {
     return {
         templateUrl: "scripts/components/concept-detail/label-box/label-box.html",
         restrict: 'E',
@@ -22,7 +22,7 @@ angular.module('labelsApp')
             scope.tooltips = TooltipService;
 
             // get concept data from ID
-            LabelService.get({id: scope.data}, function(concept) {
+            ConceptService.get({id: scope.data}, function(concept) {
                 scope.concept = concept;
                 //scope.selected = scope.selected || scope.relation;
                 //$(".nano").nanoScroller();

@@ -1,3 +1,13 @@
 module.exports = {
-    "extends": "angular"
+    "extends": [
+        "eslint:recommended",
+        "angular",
+        "plugin:lodash/recommended"
+    ],
+    "plugins": [
+        "lodash"
+    ],
+    "globals": {
+        "_": true
+    }
 };

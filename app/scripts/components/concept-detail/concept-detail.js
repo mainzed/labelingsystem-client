@@ -12,7 +12,7 @@
     },
     templateUrl: "scripts/components/concept-detail/concept-detail.html",
 
-    controller: ["$scope", "$routeParams", "VocabService", "LabelService", "TooltipService", "HelperService", "CachingService", function($scope, $routeParams, VocabService, LabelService, TooltipService, HelperService, CachingService) {
+    controller: ["$scope", "$routeParams", "VocabService", "ConceptService", "TooltipService", "HelperService", "CachingService", function($scope, $routeParams, VocabService, ConceptService, TooltipService, HelperService, CachingService) {
 
         var ctrl = this;
 
@@ -23,7 +23,7 @@
                 // save for vocab results
                 CachingService.editor.vocab = $scope.vocabulary;
             });
-            $scope.label = LabelService.get({id: $routeParams.lID});
+            $scope.label = ConceptService.get({id: $routeParams.lID});
 
             if (CachingService.editor.showEnrichments === false) {
                 ctrl.showEnrichments = CachingService.editor.showEnrichments;
@@ -48,7 +48,7 @@
         $scope.$on("addedResource", function(event, data) {
             $scope.label.addChild(data.concept, data.relation);
             ctrl.saveChanges();
-        });
+        })
 
         $scope.$on("addedWaybackLink", function(event, data) {
             $scope.label.addChild({ uri: data.uri }, "seeAlso");
@@ -92,6 +92,7 @@
         });
 
         $scope.$on("removedDescription", function(event) {
+
             _.unset($scope.label.description);
             ctrl.saveChanges();
         });

@@ -1,19 +1,19 @@
 'use strict';
 
-describe('Service: LabelService', function () {
+describe('Service: ConceptService', function () {
     var mockConcept;
 
     // load the service's module
     beforeEach(module('labelsApp'));
 
     // instantiate service
-    var LabelService;
-    beforeEach(inject(function (_LabelService_) {
-        LabelService = _LabelService_;
+    var ConceptService;
+    beforeEach(inject(function (_ConceptService_) {
+        ConceptService = _ConceptService_;
     }));
 
     it('should do something', function () {
-        expect(!!LabelService).toBe(true);
+        expect(!!ConceptService).toBe(true);
     });
 
     describe("Concept methods", function() {
@@ -42,7 +42,7 @@ describe('Service: LabelService', function () {
             //     scopeNote: { value: "a broader concept", lang: "en"}
             // }));
 
-            concept = LabelService.get({id: "36799281-7c6c-4251-a0c1-ef20ce07a8b9"});
+            concept = ConceptService.get({id: "36799281-7c6c-4251-a0c1-ef20ce07a8b9"});
             $httpBackend.flush();
         }));
 
@@ -53,16 +53,6 @@ describe('Service: LabelService', function () {
 
         it("should return mock concept object", function() {
             expect(concept.id).toBe("36799281-7c6c-4251-a0c1-ef20ce07a8b9");
-        });
-
-        it("getLabel() should return thumbnail", function() {
-            var label = concept.getLabel();
-            expect(label).toBe("english label");
-        });
-
-        it("setLabel() should update thumbnail", function() {
-            concept.setLabel("new label");
-            expect(concept.getLabel()).toBe("new label");
         });
 
         it("getUrl() should return url", function() {
