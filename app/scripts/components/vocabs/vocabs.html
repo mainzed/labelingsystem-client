@@ -1,5 +1,10 @@
 <div id="header" class="box full">
-	<h1 class="vocabheading">My vocabularies</h1>
+
+    <h1 class="vocabheading" ng-if="$ctrl.mode === 'editor'">My vocabularies</h1>
+
+    <h1 class="vocabheading" ng-if="$ctrl.mode === 'viewer'">All vocabularies</h1>
+    <span class="icon-search" ng-click="$ctrl.onSearchClick()" ng-if="$ctrl.mode === 'viewer'"></span>
+
 </div>
 
 <div class="separatorsmall">
@@ -12,7 +17,7 @@
 	<div class="nano">
     <div id="boxcontainer" class="nano-content voc-box">
 
-      <ls-vocab-box ng-repeat="vocab in (filteredVocabularies = (vocabularies | filter: {'creator': user.name} | filter: {title: vocabFilter} | orderBy: 'title'))" data="vocab"></ls-vocab-box>
+      <ls-vocab-box ng-repeat="vocab in (filteredVocabularies = (vocabularies | filter: {'creator': user.name} | filter: {title: vocabFilter} | orderBy: 'title'))" data="vocab" mode="{{ $ctrl.mode }}"></ls-vocab-box>
 
       <div class="loader" ng-show="$ctrl.loading"></div>
 
@@ -20,6 +25,6 @@
 	</div>
 </div>
 
-<ls-create-vocab-button></ls-create-vocab-button>
+<ls-create-vocab-button ng-if="$ctrl.mode === 'editor'"></ls-create-vocab-button>
 
-<ls-footer></ls-footer>
+<ls-footer ng-if="$ctrl.mode === 'editor'"></ls-footer>

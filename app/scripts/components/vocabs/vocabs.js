@@ -8,7 +8,9 @@
  */
  angular.module('labelsApp')
   .component('lsVocabs', {
-    bindings: {},
+    bindings: {
+        mode: "@"
+    },
     templateUrl: "scripts/components/vocabs/vocabs.html",
     controller: ["$scope", "$location", "$timeout", "$rootScope", "AuthService", "VocabService", "ThesauriService", "CachingService", function($scope, $location, $timeout, $rootScope, AuthService, VocabService, ThesauriService, CachingService) {
 
@@ -16,6 +18,7 @@
         ctrl.user = null;
 
         ctrl.$onInit = function () {
+
             ctrl.loading = true;
             // get filters from cache
             if (CachingService.filters.vocabs) {
@@ -25,34 +28,51 @@
         };
 
         ctrl.$onDestroy = function () {
-            // cache filter value
-            CachingService.filters.vocabs = $scope.vocabFilter;
+            if (AuthService.isLoggedIn()) {  //prevents caching after logout
+                // cache filter value
+                CachingService.filters.vocabs = $scope.vocabFilter;
 
-            // cache vocabs
-            CachingService.editor.vocabs = $scope.vocabularies;
+                // cache vocabs
+                CachingService[ctrl.mode].vocabs = $scope.vocabularies;
+            }
         };
 
         $rootScope.$watch("isAuthenticated", function(isAuthenticated) {
-            if (isAuthenticated) {
-                // if (CachingService.editor.vocabs) {
-                //     $scope.vocabularies = CachingService.editor.vocabs;
-                //     ctrl.loading = false;
-                // } else {
-                //     ctrl.loadVocabs();
-                // }
-                ctrl.loadVocabs();
+            if (ctrl.mode === "editor" && isAuthenticated) {
+                ctrl.loadEditorVocabs();
+            } else if (ctrl.mode === "viewer") {
+                ctrl.loadPublicVocabs();
             }
         });
 
-        ctrl.loadVocabs = function() {
-            VocabService.query({
-                creator: AuthService.getUser().id,
-                draft: true,
-                statistics: true
-            }, function(vocabs) {
-                $scope.vocabularies = vocabs;
+        ctrl.loadEditorVocabs = function() {
+            if (CachingService.editor.vocabs) {
+                $scope.vocabularies = CachingService.editor.vocabs;
                 ctrl.loading = false;
-            });
+            } else {
+                VocabService.query({
+                    creator: AuthService.getUser().id,
+                    draft: true,
+                    statistics: true
+                }, function(vocabs) {
+                    $scope.vocabularies = vocabs;
+                    ctrl.loading = false;
+                });
+            }
+        };
+
+        ctrl.loadPublicVocabs = function() {
+            if (CachingService.viewer.vocabs) {
+                $scope.vocabularies = CachingService.viewer.vocabs;
+                ctrl.loading = false;
+            } else {
+                VocabService.query({ statistics: true, creatorInfo: true }, function(vocabs) {
+                    $scope.vocabularies = vocabs;
+                    ctrl.loading = false;
+                }, function error(res) {
+                    console.log(res);
+                });
+            }
         };
 
         $scope.$on("addedVocab", function(event, data) {
@@ -82,6 +102,10 @@
                 console.log(res);
             });
         });
+
+        ctrl.onSearchClick = function() {
+            $location.path("/search");
+        };
 
         $scope.$on("removedVocab", function(event, data) {
             _.remove($scope.vocabularies, { id: data.vocabID });

@@ -31,7 +31,7 @@ angular
         access: {restricted: false}
       })
       .when('/vocabularies', {
-        template: '<ls-vocabs-viewer></ls-vocabs-viewer>',
+        template: '<ls-vocabs mode="viewer"></ls-vocabs>',
         access: {restricted: false}
       })
       .when('/vocabularies/:vID/concepts', {
@@ -52,7 +52,7 @@ angular
         access: {restricted: false}
       })
       .when('/editor/vocabularies', {
-        template: '<ls-vocabs></ls-vocabs>',
+        template: '<ls-vocabs mode="editor"></ls-vocabs>',
         access: {restricted: true}
       })
       .when('/editor/vocabularies/:vID/concepts', {
@@ -78,6 +78,7 @@ angular.module('labelsApp').run(function ($rootScope, $location, $route, AuthSer
     $rootScope.$on('$routeChangeStart', function (event, next, current) {
         //if (next.access) {  // allow unit tests
         // sets user object before everything else so that isLoggedIn is synchronous
+
         AuthService.getUserStatus().then(function() {
             if (next.access && next.access.restricted && !AuthService.isLoggedIn()) {
                 $location.path('/editor/login');
@@ -88,7 +89,7 @@ angular.module('labelsApp').run(function ($rootScope, $location, $route, AuthSer
                 $location.path('/editor/vocabularies');
             }
         });
-        //}
+
     });
 
     // init nanoscroller when dialog is opened

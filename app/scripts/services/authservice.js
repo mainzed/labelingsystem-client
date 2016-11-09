@@ -8,23 +8,12 @@
  * Service in the labelsApp.
  */
 angular.module('labelsApp')
-  .service('AuthService', function ($rootScope, $interval, $location, $q, $cookies, $http, $httpParamSerializerJQLike, ConfigService, CachingService) {
-
-    // $interval(
-    //     function handleInterval() {
-    //         $rootScope.$broadcast( "ping");
-    //     },
-    //     1000
-    // );
+  .service('AuthService', function ($rootScope, $interval, $location, $q, $cookies, $http, $httpParamSerializerJQLike, ConfigService) {
 
     var user = null;
 
     this.isLoggedIn = function() {
-        if (user) {
-            return true;
-        } else {
-            return false;
-        }
+        return user ? true : false;
     };
 
     /**
@@ -37,22 +26,19 @@ angular.module('labelsApp')
         // get username and token from cookie. if it doesnt exist, request
         // will fail anyway
         var cookie = $cookies.getObject("lsCookie");
-
+        
         if (cookie) {
             $http.get(ConfigService.api + "/auth/status?user=" + cookie.userID + "&token=" + cookie.token)
             // handle success
             .success(function (data) {
                 if (data.status.verified) {
                     user = data.user;  // update user object with response user object
-                    // broadcast userReady
                     $rootScope.isAuthenticated = true;
-
                 } else {
                     user = false;
                     $cookies.remove("lsCookie");
                     $rootScope.isAuthenticated = false;
                 }
-
                 deferred.resolve();
             })
             .error(function () {
@@ -81,9 +67,11 @@ angular.module('labelsApp')
             // TODO Florian: dont return expection when login failed, but meaningful error message
             if (status === 200 && data) {
                 user = data.user;
+
                 //user.role = data.status.role;
 
                 // set cookie to remember username and token
+                $cookies.remove("lsCookie");
                 $cookies.putObject("lsCookie", {
                     "userID": data.user.id,
                     "token": data.status.token,
@@ -112,18 +100,21 @@ angular.module('labelsApp')
 
         $http.post(ConfigService.api + "/auth/logout?user=" + user.id)
         .success(function () {
+            console.log("logout success");
             user = false;  // remove user in any case
             $cookies.remove("lsCookie");
+            console.log($cookies.getObject("lsCookie"));
             deferred.resolve();
         })
         .error(function () {
             user = false;  // remove user in any case
             $cookies.remove("lsCookie");
+            console.log($cookies.getObject("lsCookie"));
             deferred.reject();
         });
 
-      // return promise object
-      return deferred.promise;
+        // return promise object
+        return deferred.promise;
     };
 
     /**

@@ -1,7 +1,7 @@
 <div class="center">
 	<h3>Labeling System Editor</h3>
 
-	<input type="text" name="username" ng-model="username" placeholder="Username" autofocus><br>
+	<input id="inputUsername" type="text" name="username" ng-model="username" placeholder="Username" autofocus><br>
 	<input type="password" name="password" ng-model="password" placeholder="Password"><br>
 
 	<button class="deletebutton" type="button" ng-click="onLoginClick()" ng-class="{'inactive': !username || !password || disabled }">Login</button>

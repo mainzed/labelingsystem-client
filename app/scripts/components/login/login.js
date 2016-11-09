@@ -12,6 +12,12 @@
     templateUrl: "scripts/components/login/login.html",
     controller: ["$scope", "$location", "$document", "AuthService", function($scope, $location, $document, AuthService) {
 
+        var ctrl = this;
+
+        ctrl.$onInit = function() {
+            angular.element("#inputUsername").focus();
+        };
+
         $scope.onLoginClick = function() {
             $scope.error = false;
             $scope.disabled = true;  // block another click
@@ -30,7 +36,7 @@
 
         // hotkeys
         $document.keydown(function(e) {
-            if ($location.path() === "/editor/login" && e.keyCode === 13) {  // enter
+            if ($location.path() === "/editor/login" && e.keyCode === 13 && !$scope.disabled) {  // enter
                 if ($scope.username && $scope.password) {
                     $scope.onLoginClick();
                 }

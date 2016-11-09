@@ -12,30 +12,6 @@ angular.module('labelsApp')
 
         var service = this;
 
-        this.viewer = {
-            vocabs: null,
-            concepts: null, // concepts view
-            allConcepts: null, // landing page
-            filterValue: null
-        };
-
-        this.editor = {
-            vocabs: null,
-            vocabsWithCreator: null,
-            concepts: null,
-            vocab: null,
-            showEnrichments: null
-        };
-
-        // same for editor and viewer
-        this.filters = {
-            vocabs: null,
-            concepts: {
-                vocabID: null,
-                value: null
-            }
-        };
-
         /**
          * Returns the filter if the the vocab id matches.
          * @param {string} id - Vocabulary ID
@@ -48,21 +24,31 @@ angular.module('labelsApp')
             }
         };
 
-        this.reset = function() {
-            console.log("reset");
+        this.init = function() {
             service.viewer = {
-                vocabs: [],
-                concepts: [], // concepts view
-                allConcepts: [], // landing page
-                landingSearchResults: [],
-                filterValue: "null"
+                vocabs: null,
+                concepts: null, // concepts view
+                allConcepts: null, // landing page
+                filterValue: null
             };
+
             service.editor = {
-                vocabs: [],
-                //vocabsWithCreator: null,
-                concepts: [],
+                vocabs: null,
+                vocabsWithCreator: null,
+                concepts: null,
+                vocab: null,
                 showEnrichments: null
             };
+
+            service.editor = {
+                vocabs: null,
+                vocabsWithCreator: null,
+                concepts: null,
+                vocab: null,
+                showEnrichments: null
+            };
+
+            // same for editor and viewer
             service.filters = {
                 vocabs: null,
                 concepts: {
@@ -70,7 +56,7 @@ angular.module('labelsApp')
                     value: null
                 }
             };
+        };
 
-            console.log(service.editor.vocabs);
-        }
+        this.init();
     });

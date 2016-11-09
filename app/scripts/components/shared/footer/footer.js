@@ -26,7 +26,7 @@ angular.module('labelsApp')
          */
         ctrl.onLogoutClick = function() {
             AuthService.logout().then(function() {
-                CachingService.reset();
+                CachingService.init();
                 $location.path('/editor/login');
             }, function error() {
                 console.log("logout failed!!");
