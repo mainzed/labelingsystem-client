@@ -1,7 +1,13 @@
-'use strict';
+"use strict";
 
-angular.module('labelsApp')
- .component('lsShowMoreButton', {
+/**
+ * @ngdoc directive
+ * @name labelsApp.directive:lsShowMoreButton
+ * @description
+ * # checkbox
+ */
+angular.module("labelsApp")
+.component("lsShowMoreButton", {
     bindings: {
         limit: "="
     },
@@ -15,6 +21,5 @@ angular.module('labelsApp')
         ctrl.click = function() {
             ctrl.limit += ConfigService.conceptsLimit;
         };
-
     }]
 });

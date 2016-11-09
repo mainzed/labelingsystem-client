@@ -2,7 +2,7 @@
 
 /**
 * @ngdoc directive
-* @name labelsApp.directive:vocabBox
+* @name labelsApp.directive:lsOrderDropdown
 * @description
 * # vocabBox
 */

@@ -7,10 +7,11 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-protractor-runner');
+  grunt.loadNpmTasks('grunt-ngdocs');
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
@@ -290,6 +291,15 @@ module.exports = function (grunt) {
       }
     },
 
+    ngdocs: {
+      all: ['app/scripts/**/*.js'],
+      options: {
+        dest: 'docs',
+        //html5Mode: true,
+        title: "Labeling System Client Documentation",
+      }
+    },
+
     // The following *-min tasks will produce minified files in the dist folder
     // By default, your `index.html`'s <!-- Usemin block --> will take care of
     // minification. These next options are pre-configured if you do not wish
@@ -553,13 +563,18 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin',
-    'htmlmin'
+    'htmlmin',
+    'ngdocs'
   ]);
 
   grunt.registerTask('e2e', [
       'connect:test',
       'protractor',
       'watch:protractor'
+  ]);
+
+  grunt.registerTask('docs', [
+      'ngdocs'
   ]);
 
   grunt.registerTask('default', [

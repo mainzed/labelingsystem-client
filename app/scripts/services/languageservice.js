@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc service
- * @name labelsApp.VocabService
+ * @name labelsApp.LanguageService
  * @description
  * # VocabService
  * Service in the labelsApp.

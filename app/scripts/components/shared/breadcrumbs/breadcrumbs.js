@@ -1,28 +1,28 @@
-'use strict';
+"use strict";
 
 /**
  * @ngdoc directive
- * @name labelsApp.directive:breadcrumb
+ * @name labelsApp.directive:lsBreadcrumbs
  * @description
  * # breadcrumb
  */
-angular.module('labelsApp')
-  .directive('lsBreadcrumbs', function ($location, $routeParams, VocabService) {
-    return {
-        templateUrl: "scripts/components/shared/breadcrumbs/breadcrumbs.html",
-        restrict: 'E',
-        scope: {
-            mode: "@"  // viewer
+ angular.module("labelsApp")
+    .component("lsBreadcrumbs", {
+        bindings: {
+            mode: "@"
         },
-        link: function postLink(scope) {
+        templateUrl: "scripts/components/shared/breadcrumbs/breadcrumbs.html",
+        controller: ["$scope", "$location", "$routeParams", "VocabService", function($scope, $location, $routeParams, VocabService) {
+            var ctrl = this;
 
-            scope.vocabID = $routeParams.vID;
-            scope.conceptID = $routeParams.lID;
+            ctrl.$onInit = function() {
+                $scope.vocabID = $routeParams.vID;
+                $scope.conceptID = $routeParams.lID;
 
-            // get vocab title
-            if (scope.vocabID) {
-                scope.vocab = VocabService.get({ id: scope.vocabID });
-            }
-      }
-    };
-  });
+                // get vocab title
+                if ($scope.vocabID) {
+                    $scope.vocab = VocabService.get({ id: $scope.vocabID });
+                }
+            };
+        }]
+    });

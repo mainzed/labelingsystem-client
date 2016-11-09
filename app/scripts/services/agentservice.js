@@ -2,9 +2,10 @@
 
 /**
  * @ngdoc service
- * @name labelsApp.ConceptService
+ * @name labelsApp.AgentService
  * @description
  * # ConceptService
+ * 
  * Service in the labelsApp.
  */
 angular.module('labelsApp')

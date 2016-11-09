@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc directive
- * @name labelsApp.directive:checkbox
+ * @name labelsApp.directive:lsRadiobox
  * @description
  * # checkbox
  */

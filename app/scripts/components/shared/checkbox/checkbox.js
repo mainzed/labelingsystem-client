@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc directive
- * @name labelsApp.directive:smallBox
+ * @name labelsApp.directive:checkbox
  * @description
  * # smallBox
  */

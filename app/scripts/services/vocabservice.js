@@ -3,14 +3,14 @@
 /**
  * @ngdoc service
  * @name labelsApp.VocabService
+ *
  * @description
- * # VocabService
- * Service in the labelsApp.
+ * Service in the labelsApp. Gets the vocabularies using the LS Server API.
  */
 angular.module('labelsApp')
-  .factory('VocabService', function ($resource, $q, $http, AuthService, ConfigService, ThesauriService) {
+  .factory('VocabService', function($resource, $q, $http, AuthService, ConfigService, ThesauriService) {
 
-    // the data model lives on the server!
+    /** @class Vocab */
     var Vocab = $resource(ConfigService.api + '/vocabs/:id', null, {
         'query': {
             method: 'GET',
@@ -19,6 +19,10 @@ angular.module('labelsApp')
         'remove': { method: 'DELETE' }
     });
 
+    /**
+     * This will be an instance member.
+     * @memberof Vocab.prototype
+     */
     Vocab.prototype.getUrl = function() {
         return ConfigService.api + "/vocabs/" + this.id;
     };
@@ -119,7 +123,6 @@ angular.module('labelsApp')
     Vocab.prototype.getCreatorFullName = function() {
         if (this.creatorInfo) {
             return [
-                //creatorInfo.title,
                 this.creatorInfo.firstName,
                 this.creatorInfo.lastName
             ].join(" ");

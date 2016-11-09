@@ -2,12 +2,60 @@
 <div id="header" class="box full" ng-class="vocabulary.releaseType">
     <ls-breadcrumbs></ls-breadcrumbs>
     <h1 ng-bind="vocabulary.title"></h1>
-    <ls-edit-vocab-button data="vocabulary"></ls-edit-vocab-button>
+    
+    <ls-edit-vocab-button ng-if="$ctrl.mode === 'editor'" data="vocabulary"></ls-edit-vocab-button>
+    <span class="icon-search" ng-if="$ctrl.mode === 'viewer'" ng-click="onSearchClick()"></span>
+
 	<span class="language" ng-bind="vocabulary.language"></span>
+</div>
+
+<!-- metadata -->
+<div id="metafooter" ng-if="$ctrl.mode === 'viewer'">
+    <div class="dialog-half float">
+        <span class="listtype">uri</span>
+        <span class="listcontent smalllistcontent autowidth smalltype">
+            {{ vocabulary.getUri() }}
+        </span>
+
+        <!-- creator -->
+        <span class="listtype">creator</span>
+        <span class="listcontent smalllistcontent smalltype">
+            <a ng-href="{{ vocabulary.creatorInfo.orcid }}" target="_blank">
+                {{ vocabulary.getCreatorFullName() }}
+            </a>
+        </span>
+
+        <!-- description -->
+        <span class="listtype">description</span>
+        <span class="listcontent smalllistcontent smalltype">
+            {{ vocabulary.description }}
+        </span>
+
+        <!-- license -->
+        <span class="listtype">license</span>
+        <span class="listcontent smalllistcontent smalltype">
+            <a ng-href="{{ vocabulary.license }}" target="_blank">
+                {{ $ctrl.license.short }}
+            </a>
+        </span>
+
+        <!-- download -->
+        <span class="listtype">Download</span>
+        <span class="listcontent smalllistcontent smalltype">
+            <a ng-href="{{ vocabulary.getUrl() + '.skos' }}" target="_blank" ng-click="$event.stopPropagation()">SKOS</a>
+        </span>
+    </div>
+
+    <div class="dialog-half float" id="ls-selfexplain">
+        Labeling System is a web based tool for creating controlled vocabularies using linked open data techniques.
+        <a style="margin-top: 20px; display: block;" href="#/">Impressum</a>
+    </div>
+
 </div>
 
 <!-- filter and buttons -->
 <div class="separatorsmall">
+
 	<div id="filtersearch">
         <input type="text" ng-model="labelFilter" placeholder="filter" autofocus>
 	</div>
@@ -18,14 +66,14 @@
 </div>
 
 <!-- concepts -->
-<div id="listwrapper">
+<div id="listwrapper" ng-class="{'listwrappermin': $ctrl.mode ==='viewer'}">
 	<div class="nano">
         <div id="boxcontainer" class="nano-content">
 
             <!-- spinner -->
             <div class="loader" ng-show="$ctrl.loading"></div>
 
-            <ls-list-box ng-repeat="label in filteredLabels = (labels | filter: {thumbnail: labelFilter} | orderBy: labelOrder | limitTo: conceptsLimit)" concept="label"></ls-list-box>
+            <ls-list-box ng-repeat="label in filteredLabels = (labels | filter: {thumbnail: labelFilter} | orderBy: labelOrder | limitTo: conceptsLimit)" concept="label" mode="{{ $ctrl.mode }}"></ls-list-box>
 
             <!-- message when no labels found -->
             <!-- <span class="box bigbox label listbox" ng-show="filteredLabels.length > 30">
@@ -35,9 +83,9 @@
             <!-- when search empty and more labels available show option to load more -->
             <ls-show-more-button ng-show="$ctrl.hasMoreConcepts()" limit="conceptsLimit"></ls-show-more-button>
 
-            <ls-create-concept-button on-confirm="createConcept($newConcept)"></ls-create-concept-button>
+            <ls-create-concept-button ng-if="$ctrl.mode === 'editor'" on-confirm="createConcept($newConcept)"></ls-create-concept-button>
     	</div>
 	</div>
 </div>
 
-<ls-footer></ls-footer>
+<ls-footer ng-if="$ctrl.mode === 'editor'"></ls-footer>

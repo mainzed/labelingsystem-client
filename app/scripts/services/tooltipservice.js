@@ -1,16 +1,20 @@
-'use strict';
+"use strict";
 
 /**
  * @ngdoc service
  * @name labelsApp.TooltipService
  * @description
- * # TooltipService
- * Service in the labelsApp.
+ * Service in the labelsApp. Holds all the used tooltips throughout the application.
+ * @propertyOf {Object} Button tooltips
  */
-angular.module('labelsApp')
-    .service('TooltipService', function() {
+angular.module("labelsApp")
+    .service("TooltipService", function() {
         // AngularJS will instantiate a singleton by calling "new" on this function
 
+        /**
+         * This will be a static member, Observable.cache.
+         * @propertyOf {Object} Button tooltips
+         */
         this.buttons = {
             description: {
                 active: "this is the active description tooltip",
@@ -51,6 +55,5 @@ angular.module('labelsApp')
         this.explaination = {
             wayback: "Use Wayback links",
             publication: "By pressing this button you make this vocabulary and all its concepts public. You may not delete concepts of this vocabulary anymore. Furthermore, the concepts of this vocabulary can be still edited and a revision history will be created. In this case, be carefull and do not change the meaning of the concept. Somebody could have used it as a reference."
-        }
-
+        };
     });

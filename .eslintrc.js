@@ -1,18 +1,18 @@
 module.exports = {
     "extends": [
-        "eslint:recommended",
-        "angular",
-        "plugin:lodash/recommended",
-        "plugin:jasmine/recommended"
+        "standard",
+        "angular"
     ],
     "plugins": [
-        "lodash",
-        "jasmine"
+        "standard",
+        "promise"
     ],
-    "globals": {
-        "_": true
-    },
-    "env": {
-        "jasmine": true
+
+    // my custom rules (overwrite the above)
+    "rules": {
+        "quotes": ["error", "double"],  // use single quotes
+        "indent": ["error", 4],  // indent using four spaces
+        "semi": ["error", "always"],  // require semicolons
+        "space-before-function-paren": ["error", "never"]  // no space between function name and parameters
     }
 };

@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc service
- * @name labelsApp.thesauriService
+ * @name labelsApp.ThesauriService
  * @description
  * # thesauriService
  * Service in the labelsApp.

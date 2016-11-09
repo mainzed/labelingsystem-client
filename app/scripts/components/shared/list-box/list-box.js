@@ -1,10 +1,16 @@
-'use strict';
+"use strict";
 
-angular.module('labelsApp')
- .component('lsListBox', {
+/**
+* @ngdoc directive
+* @name labelsApp.directive:lsListBox
+* @description
+* # vocabBox
+*/
+angular.module("labelsApp")
+.component("lsListBox", {
     bindings: {
-       concept: "=",
-       mode: "@"
+        concept: "=",
+        mode: "@"
     },
     templateUrl: "scripts/components/shared/list-box/list-box.html",
     controller: ["$scope", "$location", "$routeParams", "HelperService", function($scope, $location, $routeParams, HelperService) {
@@ -15,21 +21,22 @@ angular.module('labelsApp')
         ctrl.$onInit = function() {};
 
         /**
-         * Shows the box's extension with additional information about the
+         * Shows the box"s extension with additional information about the
          * specified concept.
          */
         $scope.toggleExtension = function() {
             $scope.showMore = !$scope.showMore;
         };
 
-       /**
+        /**
         * Redirects to detail view of the specified concept.
         */
-       ctrl.onClick = function() {
-            if (ctrl.mode === 'viewer') {
-               $location.path("vocabularies/" + ctrl.concept.vocabID + "/concepts/" + ctrl.concept.id);
+        ctrl.onClick = function() {
+            console.log(ctrl.mode);
+            if (ctrl.mode === "viewer") {
+                $location.path("vocabularies/" + ctrl.concept.vocabID + "/concepts/" + ctrl.concept.id);
             } else {
-               $location.path("editor/vocabularies/" + ctrl.concept.vocabID + "/concepts/" + ctrl.concept.id);
+                $location.path("editor/vocabularies/" + ctrl.concept.vocabID + "/concepts/" + ctrl.concept.id);
             }
         };
 
@@ -54,10 +61,10 @@ angular.module('labelsApp')
             if (ctrl.concept && showMore) {
                 ctrl.concept.getDetails().then(function(conceptDetails) {
                     ctrl.conceptDetails = conceptDetails;
-                    //scope.$apply();
+                    // scope.$apply();
                     HelperService.refreshNanoScroller();
                 });
             }
-       });
+        });
     }]
 });

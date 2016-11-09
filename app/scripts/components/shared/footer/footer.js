@@ -1,18 +1,17 @@
-'use strict';
+"use strict";
 
 /**
 * @ngdoc directive
-* @name labelsApp.directive:vocabBox
+* @name labelsApp.directive:lsFooter
 * @description
 * # vocabBox
 */
-angular.module('labelsApp')
-
-.component('lsFooter', {
+angular.module("labelsApp")
+.component("lsFooter", {
     bindings: {
         mode: "@"
     },
-    templateUrl: 'scripts/components/shared/footer/footer.html',
+    templateUrl: "scripts/components/shared/footer/footer.html",
     controller: ["$location", "AuthService", "ConfigService", "CachingService", function($location, AuthService, ConfigService, CachingService) {
         var ctrl = this;
 
@@ -27,7 +26,7 @@ angular.module('labelsApp')
         ctrl.onLogoutClick = function() {
             AuthService.logout().then(function() {
                 CachingService.init();
-                $location.path('/editor/login');
+                $location.path("/editor/login");
             }, function error() {
                 console.log("logout failed!!");
             });

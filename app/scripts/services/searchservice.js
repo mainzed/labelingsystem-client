@@ -2,10 +2,10 @@
 
 /**
  * @ngdoc service
- * @name labelsApp.retcatService
+ * @name labelsApp.SearchService
  * @description
- * # retcatService
- * Service in the labelsApp.
+ * Service in the labelsApp. Uses the LS Server API to get concepts from external
+ * repositories. The available repositories are defined by the RetcatService.
  */
 angular.module('labelsApp')
   .factory('SearchService', function ($resource, ConfigService) {

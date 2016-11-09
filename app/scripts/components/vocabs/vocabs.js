@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc directive
- * @name labelsApp.directive:smallBox
+ * @name labelsApp.lsVocabs
  * @description
- * # smallBox
+ * # lsVocabs
  */
  angular.module('labelsApp')
   .component('lsVocabs', {

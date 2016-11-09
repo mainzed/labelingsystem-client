@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc service
- * @name labelsApp.configService
+ * @name labelsApp.ConfigService
  * @description
  * # configService
  * Service in the labelsApp.
