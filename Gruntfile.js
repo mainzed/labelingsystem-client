@@ -563,8 +563,7 @@ module.exports = function(grunt) {
     'uglify',
     'filerev',
     'usemin',
-    'htmlmin',
-    'ngdocs'
+    'htmlmin'
   ]);
 
   grunt.registerTask('e2e', [

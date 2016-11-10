@@ -2,7 +2,7 @@
 
 /**
  * @ngdoc service
- * @name labelsApp.CachingService
+ * @name labelsApp.service.CachingService
  * @description
  * # TooltipService
  * Service in the labelsApp.

@@ -16,6 +16,7 @@
             var ctrl = this;
 
             ctrl.$onInit = function() {
+                console.log(ctrl.mode);
                 $scope.vocabID = $routeParams.vID;
                 $scope.conceptID = $routeParams.lID;
 

@@ -1,6 +1,6 @@
 <!-- navigation -->
 <div id="header" class="box full" ng-class="vocabulary.releaseType">
-    <ls-breadcrumbs></ls-breadcrumbs>
+    <ls-breadcrumbs mode="{{ $ctrl.mode }}"></ls-breadcrumbs>
     <h1 ng-bind="vocabulary.title"></h1>
     
     <ls-edit-vocab-button ng-if="$ctrl.mode === 'editor'" data="vocabulary"></ls-edit-vocab-button>
