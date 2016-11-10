@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * @ngdoc directive
@@ -6,12 +6,11 @@
  * @description
  * # smallBox
  */
- angular.module('labelsApp')
-  .component('lsCreateVocabButton', {
+angular.module("labelsApp")
+.component("lsCreateVocabButton", {
     bindings: {},
-    template: '<span type="button" class="plusposition" ng-click="$ctrl.openDialog()">+</span>',
+    template: "<span type='button' class='plusposition' ng-click='$ctrl.openDialog()'>+</span>",
     controller: ["$scope", "$rootScope", "ngDialog", "ConfigService", "LanguageService", "AuthService", "LicenseService", function($scope, $rootScope, ngDialog, ConfigService, LanguageService, AuthService, LicenseService) {
-
         var ctrl = this;
 
         ctrl.license = null;
@@ -38,8 +37,8 @@
                         ctrl.license = license;
                     }
                 });
-            })
-        }
+            });
+        };
 
         ctrl.openDialog = function() {
 
@@ -52,8 +51,8 @@
             };
 
             ctrl.dialog = ngDialog.open({
-                template: 'scripts/components/vocabs/create-vocab-button/dialog.html',
-                className: 'bigdialog',
+                template: "scripts/components/vocabs/create-vocab-button/dialog.html",
+                className: "bigdialog",
                 showClose: true,
                 disableAnimation: true,
                 scope: $scope
@@ -62,16 +61,15 @@
 
         ctrl.updateLicense = function(license) {
             ctrl.license = license;
-        }
+        };
 
         ctrl.create = function() {
             $scope.newVocab.license = ctrl.license.link;
             $rootScope.$broadcast("addedVocab", { vocab: $scope.newVocab });
-            ctrl.dialog.close();
-        }
+            // ctrl.dialog.close();
+        };
 
         $scope.onDescriptionKeyPress = function(e) {
-            //console.log();
             if ($scope.newVocab.description.length > ConfigService.vocabDescriptionLength - 1) {
                 // prevent new characters from being added
                 e.preventDefault();
