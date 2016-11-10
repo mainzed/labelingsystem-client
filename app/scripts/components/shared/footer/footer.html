@@ -2,5 +2,6 @@
     <span>Labeling System  {{ $ctrl.version }} </span>
 
     <span class='icon-user'></span><span>{{ $ctrl.user.id }}</span>
+    <ls-edit-users-button ng-if="$ctrl.user.role === 'administrator'"></ls-edit-users-button>
     <span class="logout" ng-click="$ctrl.onLogoutClick()">Logout</span>
 </div>
