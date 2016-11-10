@@ -6,7 +6,7 @@
  * @description
  * # breadcrumb
  */
- angular.module("labelsApp")
+angular.module("labelsApp")
     .component("lsBreadcrumbs", {
         bindings: {
             mode: "@"
@@ -16,13 +16,12 @@
             var ctrl = this;
 
             ctrl.$onInit = function() {
-                console.log(ctrl.mode);
-                $scope.vocabID = $routeParams.vID;
-                $scope.conceptID = $routeParams.lID;
+                ctrl.vocabID = $routeParams.vID;
+                ctrl.conceptID = $routeParams.lID;
 
                 // get vocab title
-                if ($scope.vocabID) {
-                    $scope.vocab = VocabService.get({ id: $scope.vocabID });
+                if (ctrl.vocabID) {
+                    ctrl.vocab = VocabService.get({ id: ctrl.vocabID });
                 }
             };
         }]

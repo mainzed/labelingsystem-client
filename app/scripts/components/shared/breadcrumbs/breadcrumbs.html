@@ -9,11 +9,11 @@
     <span class="icon-breadcrumb"></span>
 
     <!-- concepts link (if in concepts-detail) -->
-    <a ng-show="conceptID && mode === 'editor'" ng-href="#/editor/vocabularies/{{ vocabID }}/concepts">{{ vocab.title }}</a>
-    <a ng-show="conceptID && mode === 'viewer'" ng-href="#/vocabularies/{{ vocabID }}/concepts">{{ vocab.title }}</a>
+    <a ng-show="$ctrl.conceptID && $ctrl.mode === 'editor'" ng-href="#/editor/vocabularies/{{ $ctrl.vocabID }}/concepts">{{ $ctrl.vocab.title }}</a>
+    <a ng-show="$ctrl.conceptID && $ctrl.mode === 'viewer'" ng-href="#/vocabularies/{{ $ctrl.vocabID }}/concepts">{{ $ctrl.vocab.title }}</a>
 
     <!-- placeholder (if in concepts-detail) -->
-    <span ng-show="conceptID" class="icon-breadcrumb"></span>
+    <span ng-show="$ctrl.conceptID" class="icon-breadcrumb"></span>
 
   </span>
 
