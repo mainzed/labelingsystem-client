@@ -1378,6 +1378,23 @@ textarea.inactive {
   margin-top: 45px;
   float: left;
 }
+/* admin table */
+.admintable {
+  margin-left: 20px;
+}
+.admintable th,
+.admintable td {
+  padding-right: 40px;
+}
+td {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+th {
+  text-align: left;
+}
 /* height corrections */
 .fullheight {
   height: calc(100% - 90px - 40px * 2) !important;
