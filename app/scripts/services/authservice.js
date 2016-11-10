@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * @ngdoc service
@@ -7,9 +7,8 @@
  * # AuthService
  * Service in the labelsApp.
  */
-angular.module('labelsApp')
-  .service('AuthService', function ($rootScope, $interval, $location, $q, $cookies, $http, $httpParamSerializerJQLike, ConfigService) {
-
+angular.module("labelsApp")
+.service("AuthService", function($rootScope, $interval, $location, $q, $cookies, $http, $httpParamSerializerJQLike, ConfigService) {
     var user = null;
 
     this.isLoggedIn = function() {
@@ -26,15 +25,14 @@ angular.module('labelsApp')
         // get username and token from cookie. if it doesnt exist, request
         // will fail anyway
         var cookie = $cookies.getObject("lsCookie");
-        
+
         if (cookie) {
             $http.get(ConfigService.api + "/auth/status?user=" + cookie.userID + "&token=" + cookie.token)
             // handle success
-            .success(function (data) {
+            .success(function(data) {
                 if (data.status.verified) {
                     user = data.user;  // update user object with response user object
                     user.role = data.status.role;
-
                     $rootScope.isAuthenticated = true;
                 } else {
                     user = false;
@@ -43,7 +41,7 @@ angular.module('labelsApp')
                 }
                 deferred.resolve();
             })
-            .error(function () {
+            .error(function() {
                 user = false;
                 $cookies.remove("lsCookie");
                 $rootScope.isAuthenticated = false;
@@ -53,13 +51,10 @@ angular.module('labelsApp')
             $rootScope.isAuthenticated = false;
             deferred.resolve();
         }
-
         return deferred.promise;
-
     };
 
     this.login = function(username, password) {
-
         // create a new instance of deferred
         var deferred = $q.defer();
 
@@ -92,25 +87,20 @@ angular.module('labelsApp')
 
         // return promise object
         return deferred.promise;
-
     };
 
     this.logout = function() {
-
         var deferred = $q.defer();
 
         $http.post(ConfigService.api + "/auth/logout?user=" + user.id)
-        .success(function () {
-            console.log("logout success");
+        .success(function() {
             user = false;  // remove user in any case
             $cookies.remove("lsCookie");
-            console.log($cookies.getObject("lsCookie"));
             deferred.resolve();
         })
-        .error(function () {
+        .error(function() {
             user = false;  // remove user in any case
             $cookies.remove("lsCookie");
-            console.log($cookies.getObject("lsCookie"));
             deferred.reject();
         });
 
@@ -137,5 +127,4 @@ angular.module('labelsApp')
             console.log(res);
         });
     };
-
 });

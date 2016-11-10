@@ -12,7 +12,7 @@
         mode: "@"
     },
     templateUrl: "scripts/components/vocabs/vocabs.html",
-    controller: ["$scope", "$location", "$timeout", "$rootScope", "AuthService", "VocabService", "ThesauriService", "CachingService", function($scope, $location, $timeout, $rootScope, AuthService, VocabService, ThesauriService, CachingService) {
+    controller: ["$scope", "ngDialog", "$location", "$timeout", "$rootScope", "AuthService", "VocabService", "ThesauriService", "CachingService", function($scope, ngDialog, $location, $timeout, $rootScope, AuthService, VocabService, ThesauriService, CachingService) {
 
         var ctrl = this;
         ctrl.user = null;
@@ -91,6 +91,7 @@
                     // update
                     ThesauriService.update({id: res.id}, vocabThesauri, function() {
                         // redirect when everything finished
+                        ngDialog.closeAll();
                         $location.path("/editor/vocabularies/" + res.id + "/concepts");
 
                     }, function error(res) {
