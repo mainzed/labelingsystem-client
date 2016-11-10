@@ -25,6 +25,8 @@
                 $scope.vocabFilter = CachingService.filters.vocabs;
             }
 
+            ctrl.listID = ctrl.mode === "editor" ? "listwrapper" : "listwrapperviewer"; 
+
         };
 
         ctrl.$onDestroy = function () {

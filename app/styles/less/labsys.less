@@ -112,7 +112,10 @@ textarea:focus {	outline: none; }
 #ls-selfexplain {   margin-left: 32px;  }
 #footer span {		float: left; margin-top: 8px; }
 .landingh1 {		color: white; font-weight: 300; font-size: 150px; margin-left: @marginoutside; margin-bottom: 50px;
-					font-family: "mainzeddisplay"; }
+					font-family: "mainzeddisplay";
+					@media screen and (max-width: 1600px) { font-size: 130px; }
+
+					 }
 .logout {			margin-left: 10px; text-decoration: underline; cursor: pointer;  }
 #viewport {			height: 100%; background: @background;}
 #separator {		color: white; height: 75px; }
@@ -377,14 +380,10 @@ textarea:focus {	outline: none; }
 .dialogheader .minipreview {
 					position: absolute; right: @marginoutside; width: 100px; top: @marginoutside; height: 74px; margin-top: 0; margin-right: 0;
 }
-
 .dialogheader .minibox {
-					height: 6px;
-}
+					height: 6px; }
 .dialogheader .minicol {
-					width: 25%;
-}
-
+					width: 25%; }
 
 .micropreview {		height: 10px; margin: @margininboxsmall; background: black;
 					width: 32px; position: absolute; top: 0; right: 0; padding: 3px 1px 4px 1px; overflow: hidden;	}
@@ -398,10 +397,14 @@ textarea:focus {	outline: none; }
 /* dialogs */
 /* dialog grid */
 .dialog-half {		width: calc((100% - ( @marginoutboxsmall * 4  + @marginoutside * 2)) / 2 ); margin-left: @marginoutside; }
+.dialog-halfrightpadding {	
+					width: calc((100% -  @marginoutside * 2) / 2 - 10% ); margin-left: @marginoutside; margin-right: 10%;}
 .dialog-quarter {	width: calc((100% - ( @marginoutboxsmall * 4  + @marginoutside * 2)) / 4 ); margin-left: calc(@marginoutboxsmall * 2); }
 .dialog-full	{	width: 100%;  }
 .deletebutton { 	width: calc(100% - @marginoutside * 2 ); border-radius: 3px; height: 38px; margin-left: @marginoutside;
 					float: left; position: relative; background: #d6d6d6; color: black; margin-bottom: @marginbottombox; cursor: pointer;	}
+.contactbutton {	width: calc(100%); border-radius: 3px; height: 38px; margin-top: 25px; 
+					float: left; position: relative; background: #d6d6d6; text-align: center; color: black;}
 .bigconfirm {		height: 340px;  }
 .hierarchie .icon {	font-size: 22px; float: left; clear: left; line-height: 14px; width: 25px; margin-left: -2px; }
 .mappingstext {		width: calc(100% - 25px); }
@@ -412,15 +415,15 @@ textarea:focus {	outline: none; }
 					color: black; background: #d6d6d6; }
 .label .deletebutton.inactive {
 					color: #a3a3a3; }
-.deletebutton .buttontext {
+.deletebutton .buttontext, .contactbutton .buttontext {
 					margin: @margininboxsmall; }
 .deletebutton.confirm {
 					background: tomato;}
 
 .csverrors {        float: left; clear: left; margin-top: 50px; margin-left: @marginoutside; }
 .error {            float: left; clear: left; color: tomato; }
-.deletebutton .confirmtext {
-					position: absolute; left: 50%; margin-left: -50px; text-align: center; width: 100px;}
+.deletebutton .confirmtext, .contactbutton .confirmtext {
+					position: absolute; left: 50%; margin-left: -100px; text-align: center; width: 200px;}
 .confirmed {		margin-left: calc(@marginoutside); width: calc(100% - @marginoutside * 2); background: #08C93C;
 					line-height: 38px; text-indent: @margininboxsmall; color: black; }
 .line-dialog {		height: 1px; width: calc(100% - @marginoutside * 2); margin-left: @marginoutside; float: left;
@@ -462,6 +465,7 @@ textarea.inactive{	color: #a3a3a3; }
 .bottomleft {		position: absolute; bottom: 10px; left: 0;}
 .listtype {			float: left; width: 100px; margin-right: 20px; clear: left; margin-left: @marginoutside; font-style: italic;
 					padding-top: 2px; font-size: @small;  }
+.listtypemin {		float: left; width: 70px; margin-right: 20px; clear: left;  }					
 .listcontent {		float: left; width: calc(100% - @marginoutboxsmall - @marginoutside - 200px); }
 .smalllistcontent {	width: calc(100% - @marginoutboxsmall - @marginoutside - 100px); }
 
@@ -579,7 +583,7 @@ span.icon-time {	line-height: 5px; float: left; margin-top: 6px; margin-left: -2
 
 
 /*logo corrections*/
-.logos {			margin-top: 20px;}
+.logos {			margin-top: 40px; clear: left; float: left; margin-bottom: 50px;}
 .logo {				float: left; margin-right: 20px;}
 .mainzedlogo {		margin-left: -7px; margin-top: 2px; }
 .rgzmlogo {			margin-top: -9px;}
@@ -603,6 +607,10 @@ span.icon-time {	line-height: 5px; float: left; margin-top: 6px; margin-left: -2
 .floatright {       float: right; }
 .italic {			font-style: italic; line-height: 20px; }
 .bold {				font-weight: bold; }
+.break {			float: left; clear: both;}
+.linetop {			border-top: 1px solid white; padding-top: 10px;}
+.marginbottom {		margin-bottom: 50px;}
+.rightpadding {		padding-right: 10%;}
 .block {			display: block; margin-top: 5px; margin-bottom: 10px; }
 .nocursor {			cursor: default; }
 .lastmodified {		width: auto; }

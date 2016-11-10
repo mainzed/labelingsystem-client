@@ -159,6 +159,11 @@ textarea:focus {
   margin-bottom: 50px;
   font-family: "mainzeddisplay";
 }
+@media screen and (max-width: 1600px) {
+  .landingh1 {
+    font-size: 130px;
+  }
+}
 .logout {
   margin-left: 10px;
   text-decoration: underline;
@@ -1012,6 +1017,11 @@ textarea:focus {
   width: calc((100% - (9px * 4 + 20px * 2)) / 2);
   margin-left: 20px;
 }
+.dialog-halfrightpadding {
+  width: calc((100% - 20px * 2) / 2 - 10%);
+  margin-left: 20px;
+  margin-right: 10%;
+}
 .dialog-quarter {
   width: calc((100% - (9px * 4 + 20px * 2)) / 4);
   margin-left: calc(9px * 2);
@@ -1030,6 +1040,17 @@ textarea:focus {
   color: black;
   margin-bottom: 3px;
   cursor: pointer;
+}
+.contactbutton {
+  width: calc(100%);
+  border-radius: 3px;
+  height: 38px;
+  margin-top: 25px;
+  float: left;
+  position: relative;
+  background: #d6d6d6;
+  text-align: center;
+  color: black;
 }
 .bigconfirm {
   height: 340px;
@@ -1065,7 +1086,8 @@ textarea:focus {
 .label .deletebutton.inactive {
   color: #a3a3a3;
 }
-.deletebutton .buttontext {
+.deletebutton .buttontext,
+.contactbutton .buttontext {
   margin: 8px;
 }
 .deletebutton.confirm {
@@ -1082,12 +1104,13 @@ textarea:focus {
   clear: left;
   color: tomato;
 }
-.deletebutton .confirmtext {
+.deletebutton .confirmtext,
+.contactbutton .confirmtext {
   position: absolute;
   left: 50%;
-  margin-left: -50px;
+  margin-left: -100px;
   text-align: center;
-  width: 100px;
+  width: 200px;
 }
 .confirmed {
   margin-left: calc(20px);
@@ -1221,6 +1244,12 @@ textarea.inactive {
   font-style: italic;
   padding-top: 2px;
   font-size: 14px;
+}
+.listtypemin {
+  float: left;
+  width: 70px;
+  margin-right: 20px;
+  clear: left;
 }
 .listcontent {
   float: left;
@@ -1493,7 +1522,10 @@ span.icon-time {
 }
 /*logo corrections*/
 .logos {
-  margin-top: 20px;
+  margin-top: 40px;
+  clear: left;
+  float: left;
+  margin-bottom: 50px;
 }
 .logo {
   float: left;
@@ -1560,6 +1592,20 @@ span.icon-time {
 }
 .bold {
   font-weight: bold;
+}
+.break {
+  float: left;
+  clear: both;
+}
+.linetop {
+  border-top: 1px solid white;
+  padding-top: 10px;
+}
+.marginbottom {
+  margin-bottom: 50px;
+}
+.rightpadding {
+  padding-right: 10%;
 }
 .block {
   display: block;

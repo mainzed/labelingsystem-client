@@ -10,7 +10,7 @@
     </div>
 </div>
 
-<div id="listwrapper" ng-class="{'viewersearch': !filterValue}">
+<div id="listwrapperviewer" ng-class="{'viewersearch': !filterValue}">
 	<div class="nano">
 
     <div id="boxcontainer" class="nano-content">
@@ -35,38 +35,49 @@
     	<div ng-show="!filterValue">
 
 
-            <div class="dialog-half whitetext float emphasize">
+            <div class="dialog-halfrightpadding whitetext float emphasize marginbottom">
 
 
     			<p>
     			The Labeling System (LS) is a web-application that allows registered users to create controlled vocabularies. Vocabularies consist of concepts described by a label and translations. In addition, concepts can be linked to other concepts in the Linked Open Data Cloud. These links can be hierarchical, associative or mapping. The app provides a convenient way to search through controlled vocabularies in the Linked Open Data Cloud. Once a LS concept is published, it can be publicly accessed via a Uniform Resource Identifier (URI).
     			<br><br>
+                
     			</p>
     		</div>
-            <div class="dialog-half whitetext float emphasize" style="height: 200px;">
+            <div class="dialog-quarter whitetext float emphasize marginbottom">
+                The public version of the Labeling System offers the possibility to view and download all vocabularies.<br><br>
+
+                The editor requires registration. Therefore please contact us if you want to participate. 
+                <a href="mailto:florian.thiery@hs-mainz.de">
+                    <div class="contactbutton confirm pointer">
+                      <span class="buttontext confirmtext">Request Editor Account</span>
+                    </div>
+                </a>
 
             </div>
-            <div class="dialog-half whitetext float emphasize">
+            <div class="dialog-halfrightpadding whitetext float emphasize break linetop">
                 <span>
-                    <span>Idea</span><br>
-                    Michael Piotrowski (IEG)<br>
-                    Giovanni Colavizza (former IEG)<br><br>
-
-                    <span>Advisor</span><br>
+                   <span class="italic">Advisor</span><br>
                     Kai-Christian Bruhn (mainzed)<br><br>
 
-                    <span>Backend Architecture and API Development</span><br>
+                    <span class="italic">Backend Architecture and API Development</span><br>
                     Florian Thiery (i3mainz, RGZM)<br><br>
 
-                    <span>Frontend Development</span><br>
+                    <span class="italic">Frontend Development</span><br>
                     User Interface Design / CSS: Matthias Dufner (i3mainz)<br>
                     AngularJS: Axel Kunz (i3mainz)<br><br>
 
-                    <span>Participating Institutes</span><br>
-                    mainzed - Mainz Centre for Digitality in the Humanities and Cultural Studies<br>
-                    IEG - Institute for European History<br>
-                    i3mainz - Institute for Spatial Information and Surveying Technology<br>
-                    RGZM - Romano-Germanic Central Museum<br><br>
+                    <span class="italic">Idea</span><br>
+                    Michael Piotrowski (IEG)<br>
+                    Giovanni Colavizza (former IEG)<br><br>
+
+                    <span class="italic">Participating Institutes</span><br>
+                    <span class="listtypemin">mainzed</span><span class="listcontent">Mainz Centre for Digitality in the Humanities and Cultural Studies</span>
+                    <span class="listtypemin">IEG</span><span class="listcontent">Institute for European History</span><br>
+                    <span class="listtypemin">i3mainz</span><span class="listcontent">Institute for Spatial Information and Surveying Technology</span><br>
+                    <span class="listtypemin">RGZM</span><span class="listcontent">Romano-Germanic Central Museum</span><br><br>
+                    
+
 
                 </span>
                 <div class="logos">
@@ -85,22 +96,21 @@
                 </div>
     		</div>
 
-            <div class="dialog-half whitetext float">
+            <div class="dialog-halfrightpadding whitetext float linetop">
 
                 <p>
-                    <span>Impressum</span><br>
+                    <span class="italic">Impressum</span><br>
                     Angaben gemäß § 5 TMG:<br>
 
                     mainzed - Mainzer Zentrum für Digitalität in den Geistes- und Kulturwissenschaften<br>
                     c/o Hochschule Mainz University of Applied Sciences<br>
                     Lucy-Hillebrandtstr.2<br>
                     55128 Mainz, Germany<br><br>
-                    Kontakt<br>
-
-                    Tel: +49 (0)6131 628 1495<br>
-                    Fax: +49 (0) 6131 6289 1495<br>
-                    E-Mail: klammt@mainzed.org<br>
-                    Website: https://mainzed.org<br><br>
+                    <span class="italic">Kontakt</span><br>
+                    <span class="listtypemin">Tel:</span><span class="listcontent">+49 (0)6131 628 1495</span>
+                    <span class="listtypemin">Fax:</span><span class="listcontent"> +49 (0) 6131 6289 1495</span><br>
+                    <span class="listtypemin">E-Mail:</span><span class="listcontent"> klammt@mainzed.org</span><br>
+                    <span class="listtypemin">Website:</span><span class="listcontent"> https://mainzed.org</span><br><br>
                 </p>
             </div>
 
