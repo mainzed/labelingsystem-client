@@ -9,7 +9,7 @@
 	    <div class="nano">
 	        <div class="nano-content">
 
-                <table ng-if="!$ctrl.showNewUser && !$ctrl.editUser">
+                <table class="admintable" ng-if="!$ctrl.showNewUser && !$ctrl.editUser">
                     <thead>
                         <tr>
                             <th>id</th>
@@ -30,10 +30,7 @@
                         </tr>
                     </tbody>
                 </table>
-                <button class="logout" ng-click="$ctrl.openNewUser()" ng-if="!$ctrl.showNewUser && !$ctrl.editUser">new user</button>
-
-                <!-- back button -->
-                <button class="logout" ng-if="$ctrl.showNewUser || $ctrl.editUser" ng-click="$ctrl.showNewUser = false; $ctrl.editUser = false">back</button>
+           
 
                 <!-- new user -->
                 <div class="dialogbox dialog-full" ng-if="$ctrl.showNewUser">
@@ -47,7 +44,7 @@
                     <input type="password" placeholder="password" ng-model="$ctrl.newUser.pwd">
                     <input type="password" placeholder="confirm password" ng-model="$ctrl.newUser.passwordConfirm">
 
-                    <button class="logout" ng-click="$ctrl.create()" ng-class="{'inactive': !$ctrl.isValidNew($ctrl.newUser)}" ng-disabled="!$ctrl.isValidNew($ctrl.newUser)">create</button>
+                    
                     <span ng-if="$ctrl.error">error!</span>
                 </div>
 
@@ -63,8 +60,7 @@
                         <option value="active">active</option>
                         <option value="inactive">inactive</option>
                     </select>
-                    <button class="logout" ng-click="$ctrl.save($ctrl.user)" ng-class="{'inactive': !$ctrl.isValidUpdate($ctrl.user)}" ng-disabled="!$ctrl.isValidUpdate($ctrl.user)">save</button>
-
+                    
                     <span ng-if="$ctrl.error">error!</span>
 
                 </div>
@@ -72,5 +68,20 @@
 	        </div>
 	    </div>
 	</div>
+    <button class="logout apply" ng-click="$ctrl.openNewUser()" ng-if="!$ctrl.showNewUser && !$ctrl.editUser">
+        new user
+    </button>
+
+    <!-- back button -->
+    <button class="logout cancel" ng-if="$ctrl.showNewUser || $ctrl.editUser" ng-click="$ctrl.showNewUser = false; $ctrl.editUser = false">    back
+    </button>
+
+    <button class="logout apply" ng-click="$ctrl.save($ctrl.user)" ng-if="$ctrl.editUser" ng-class="{'inactive': !$ctrl.isValidUpdate($ctrl.user)}" ng-disabled="!$ctrl.isValidUpdate($ctrl.user)">
+        save
+    </button>
+
+    <button class="logout apply" ng-click="$ctrl.create()" ng-class="{'inactive': !$ctrl.isValidNew($ctrl.newUser)}" ng-disabled="!$ctrl.isValidNew($ctrl.newUser)" ng-if="$ctrl.showNewUser">
+        create
+    </button>
 
 </div>

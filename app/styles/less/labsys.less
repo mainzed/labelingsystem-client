@@ -224,7 +224,7 @@ textarea:focus {	outline: none; }
 .smallheight .showadditionalcontent {
 					margin-top: -1px;}
 .showmorebox {		background: #d3d3d3;  border-radius: 6px; float: left; padding: 2px 8px; margin-left: calc(50% - 50px); 
-					width: 100px; text-align: center; cursor: pointer;  }
+					width: 100px; text-align: center; cursor: pointer; color: black;  }
 .smallheight .micropreview {
 					margin-top: 10px; }
 .bigboxwrapper:hover div {
@@ -491,7 +491,7 @@ textarea.inactive{	color: #a3a3a3; }
 .vocabname {		margin: @margininboxsmall 0 0 @margininboxsmall; font-weight: bold; font-size: @emphasize; float: left; width: 80%; display: block;  }
 .vocabrelease {		float: left; clear: left; margin-left: @margininboxsmall; font-style: italic; font-size: @small; }
 .vocabsize {		position: absolute; top: calc(40% - 20px); left: @margininboxsmall; font-style: italic; font-size: @small; }
-
+.vocabcreator {		position: absolute; top: calc(40% - 20px); left: calc( 50% - @margininboxsmall);}
 
 .vocabulary .listtype {
 					margin-left: @margininboxsmall; width: 100px; font-size: @small; }
@@ -522,6 +522,19 @@ textarea.inactive{	color: #a3a3a3; }
 					margin-top: 45px; float: left;}
 
 
+
+/* admin table */
+.admintable {		margin-left: @marginoutside; }
+.admintable th, .admintable td 	
+			{		padding-right: 40px;}
+td {
+    max-width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+th {	text-align: left;}
 
 
 /* height corrections */
