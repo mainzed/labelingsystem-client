@@ -66,7 +66,7 @@
                 $scope.vocabularies = CachingService.viewer.vocabs;
                 ctrl.loading = false;
             } else {
-                VocabService.query({ statistics: true, creatorInfo: true }, function(vocabs) {
+                VocabService.query({ creatorInfo: true }, function(vocabs) {
                     $scope.vocabularies = vocabs;
                     ctrl.loading = false;
                 }, function error(res) {
