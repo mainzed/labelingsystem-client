@@ -44,6 +44,8 @@ angular.module('labelsApp')
             .success(function (data) {
                 if (data.status.verified) {
                     user = data.user;  // update user object with response user object
+                    user.role = data.status.role;
+
                     // broadcast userReady
                     $rootScope.isAuthenticated = true;
 
@@ -81,7 +83,7 @@ angular.module('labelsApp')
             // TODO Florian: dont return expection when login failed, but meaningful error message
             if (status === 200 && data) {
                 user = data.user;
-                //user.role = data.status.role;
+                user.role = data.status.role;
 
                 // set cookie to remember username and token
                 $cookies.putObject("lsCookie", {

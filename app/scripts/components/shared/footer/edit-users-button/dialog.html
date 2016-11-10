@@ -1,7 +1,7 @@
 <div class="dialogwrapper label">
 
     <div class="dialogheader">
-		<h3>Edit users</h3>
+		<h3>Manage Users</h3>
 		<div class="line-bottom line"></div>
 	</div>
 
@@ -9,40 +9,63 @@
 	    <div class="nano">
 	        <div class="nano-content">
 
-                <table>
+                <table ng-if="!$ctrl.showNewUser && !$ctrl.editUser">
                     <thead>
                         <tr>
                             <th>id</th>
-                            <th>title</th>
                             <th>firstName</th>
                             <th>lastName</th>
-                            <th>orcid</th>
+                            <th>role</th>
+                            <th>status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="user in $ctrl.users | orderBy: 'id'">
                             <td>{{ user.id }}</td>
-                            <td>{{ user.title }}</td>
                             <td>{{ user.firstName }}</td>
                             <td>{{ user.lastName }}</td>
-                            <td><a ng-href="{{ user.orcid }}" target="_blank">{{ user.orcid }}</a></td>
-                            <td><button class="logout" ng-click="$ctrl.delete()">delete</button></td>
+                            <td>{{ user.role }}</td>
+                            <td>{{ user.status }}</td>
+                            <td><button class="logout" ng-click="$ctrl.showUserEdit(user)">edit</button></td>
                         </tr>
                     </tbody>
                 </table>
+                <button class="logout" ng-click="$ctrl.openNewUser()" ng-if="!$ctrl.showNewUser && !$ctrl.editUser">new user</button>
 
-                <button class="logout" ng-click="$ctrl.openNewUser()">new user</button>
+                <!-- back button -->
+                <button class="logout" ng-if="$ctrl.showNewUser || $ctrl.editUser" ng-click="$ctrl.showNewUser = false; $ctrl.editUser = false">back</button>
 
                 <!-- new user -->
                 <div class="dialogbox dialog-full" ng-if="$ctrl.showNewUser">
                     <!-- <h4>id</h4> -->
                     <input type="text" placeholder="id" ng-model="$ctrl.newUser.id">
-                    <input type="text" placeholder="title" ng-model="$ctrl.newUser.title">
+                    <input type="text" placeholder="title (optional)" ng-model="$ctrl.newUser.title">
                     <input type="text" placeholder="firstName" ng-model="$ctrl.newUser.firstName">
                     <input type="text" placeholder="lastName" ng-model="$ctrl.newUser.lastName">
                     <input type="text" placeholder="orcid" ng-model="$ctrl.newUser.orcid">
+                    <input type="text" placeholder="affiliation" ng-model="$ctrl.newUser.affiliation">
+                    <input type="password" placeholder="password" ng-model="$ctrl.newUser.pwd">
+                    <input type="password" placeholder="confirm password" ng-model="$ctrl.newUser.passwordConfirm">
 
-                    <button class="logout" ng-click="$ctrl.create()">create</button>
+                    <button class="logout" ng-click="$ctrl.create()" ng-class="{'inactive': !$ctrl.isValidNew($ctrl.newUser)}" ng-disabled="!$ctrl.isValidNew($ctrl.newUser)">create</button>
+                    <span ng-if="$ctrl.error">error!</span>
+                </div>
+
+                <!-- edit user -->
+                <div class="dialogbox dialog-full" ng-if="$ctrl.editUser">
+                    <input type="text" placeholder="id" ng-model="$ctrl.user.id" ng-class="{'inactive': true}" disabled>
+                    <input type="text" placeholder="title (optional)" ng-model="$ctrl.user.title">
+                    <input type="text" placeholder="firstName" ng-model="$ctrl.user.firstName">
+                    <input type="text" placeholder="lastName" ng-model="$ctrl.user.lastName">
+                    <input type="text" placeholder="orcid" ng-model="$ctrl.user.orcid">
+                    <input type="text" placeholder="affiliation" ng-model="$ctrl.user.affiliation">
+                    <select ng-model="$ctrl.user.status">
+                        <option value="active">active</option>
+                        <option value="inactive">inactive</option>
+                    </select>
+                    <button class="logout" ng-click="$ctrl.save($ctrl.user)" ng-class="{'inactive': !$ctrl.isValidUpdate($ctrl.user)}" ng-disabled="!$ctrl.isValidUpdate($ctrl.user)">save</button>
+
+                    <span ng-if="$ctrl.error">error!</span>
 
                 </div>
 
