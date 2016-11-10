@@ -2,22 +2,20 @@
 
     <span class="vocabname" ng-bind="$ctrl.data.title"></span>
 
-    <span ng-if="$ctrl.mode !== 'viewer'">
+    <span>
         <span class="vocabsize" ng-show="$ctrl.data.statistics.labels.count > 1">{{ $ctrl.data.statistics.labels.count }} concepts</span>
         <span class="vocabsize" ng-show="$ctrl.data.statistics.labels.count === 1">{{ $ctrl.data.statistics.labels.count }} concept</span>
         <span class="vocabsize" ng-show="$ctrl.data.statistics.labels.count === 0">empty</span>
     </span>
 
-    <span ng-if="$ctrl.mode === 'viewer'">
-        <span class="vocabsize" ng-click="$ctrl.openOrcID($ctrl.data.creatorInfo.orcid); $event.stopPropagation()">{{ $ctrl.data.getCreatorFullName() }}</span>
-    </span>
+ 
 
-    <span class="language" ng-bind="$ctrl.data.language"></span>
+    <span class="language smalltype" ng-bind="$ctrl.data.language"></span>
     <span class="note" ng-bind="$ctrl.data.description"></span>
 
     <ls-edit-vocab-button ng-hide="$ctrl.mode === 'viewer'" data="$ctrl.data" ng-click="$event.stopPropagation()"></ls-edit-vocab-button>
 
-    <span class="linksize">
+    <span class="linksize" ng-if="$ctrl.mode === 'editor'">
 
         <span ng-show="$ctrl.data.statistics.links.external > 0" title="{{$ctrl.tooltips.icons.externalLink}}">
           <span class="minibox ls"></span>
@@ -30,6 +28,11 @@
           <span class="listcontent">{{ $ctrl.data.statistics.links.internal }}</span>
         </span>
 
+    </span>
+    <span class="vocabcreator" ng-if="$ctrl.mode === 'viewer'">
+       <a class="smalltype italic" ng-click="$ctrl.openOrcID($ctrl.data.creatorInfo.orcid); $event.stopPropagation()">
+          {{ $ctrl.data.getCreatorFullName() }}
+        </a>
     </span>
 
 </div>
