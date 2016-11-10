@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * @ngdoc directive
@@ -6,8 +6,8 @@
  * @description
  * # smallBox
  */
- angular.module('labelsApp')
-  .component('lsDescriptionBox', {
+angular.module("labelsApp")
+.component("lsDescriptionBox", {
     bindings: {
         data: "=",
         mode: "@"
@@ -15,7 +15,6 @@
     templateUrl: "scripts/components/concept-detail/description-box/description-box.html",
 
     controller: ["$scope", "$routeParams", "$rootScope", "ngDialog", "ConceptService", "TooltipService", "ConfigService", function($scope, $routeParams, $rootScope, ngDialog, ConceptService, TooltipService, ConfigService) {
-
         var ctrl = this;
 
         ctrl.tooltips = null;
@@ -33,7 +32,7 @@
                 ctrl.newValue = ctrl.data.description;
                 ctrl.dialog = ngDialog.open({
                     template: "scripts/components/concept-detail/description-box/dialog.html",
-                    className: 'bigdialog smallheightdialog',
+                    className: "bigdialog smallheightdialog",
                     disableAnimation: true,
                     scope: $scope
                 });
@@ -44,12 +43,13 @@
          * Deletes the current prefLabel.
          */
         ctrl.delete = function() {
-            $rootScope.$broadcast('removedDescription');
+            $rootScope.$broadcast("removedDescription");
+            ctrl.isDeleted = true;
             ctrl.dialog.close();
         };
 
         ctrl.onKeyPress = function(e, newValue) {
-            //console.log(newValue.length);
+            // console.log(newValue.length);
             if (newValue.length > ConfigService.maxConceptDescriptionLength - 1) {
                 // prevent new characters from being added
                 e.preventDefault();
@@ -58,13 +58,12 @@
             }
         };
 
-        $scope.$on('ngDialog.closed', function (e, $dialog) {
-            if (ctrl.dialog && ctrl.dialog.id === $dialog.attr('id')) {  // is the resource dialog
-                if (ctrl.newValue) {
-                    $rootScope.$broadcast("changedDescription", { newDescription: ctrl.newValue});
+        $scope.$on("ngDialog.closed", function(e, $dialog) {
+            if (ctrl.dialog && ctrl.dialog.id === $dialog.attr("id")) {  // is the resource dialog
+                if (ctrl.newValue && !ctrl.isDeleted) {
+                    $rootScope.$broadcast("changedDescription", { newDescription: ctrl.newValue });
                 }
             }
         });
-
     }]
 });

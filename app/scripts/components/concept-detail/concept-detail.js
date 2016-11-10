@@ -29,11 +29,11 @@ angular.module("labelsApp")
                 }
 
                 HelperService.refreshNanoScroller();
-            }
+            };
 
             ctrl.$onDestroy = function() {
                 CachingService.editor.showEnrichments = ctrl.showEnrichments;
-            }
+            };
 
             $scope.$on("removedConcept", function(event, data) {
                 // TODO: implement removeChild() method for concepts
@@ -45,7 +45,7 @@ angular.module("labelsApp")
             $scope.$on("addedResource", function(event, data) {
                 $scope.label.addChild(data.concept, data.relation);
                 ctrl.saveChanges();
-            })
+            });
 
             $scope.$on("addedWaybackLink", function(event, data) {
                 $scope.label.addChild({ uri: data.uri }, "seeAlso");
@@ -89,8 +89,7 @@ angular.module("labelsApp")
             });
 
             $scope.$on("removedDescription", function(event) {
-
-                _.unset($scope.label.description);
+                delete $scope.label.description;
                 ctrl.saveChanges();
             });
 
