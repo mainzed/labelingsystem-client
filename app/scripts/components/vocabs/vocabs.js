@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * @ngdoc directive
@@ -6,28 +6,25 @@
  * @description
  * # lsVocabs
  */
- angular.module('labelsApp')
-  .component('lsVocabs', {
+angular.module("labelsApp")
+.component("lsVocabs", {
     bindings: {
         mode: "@"
     },
     templateUrl: "scripts/components/vocabs/vocabs.html",
     controller: ["$scope", "ngDialog", "$location", "$timeout", "$rootScope", "AuthService", "VocabService", "ThesauriService", "CachingService", function($scope, ngDialog, $location, $timeout, $rootScope, AuthService, VocabService, ThesauriService, CachingService) {
-
         var ctrl = this;
         ctrl.user = null;
 
-        ctrl.$onInit = function () {
-
+        ctrl.$onInit = function() {
             ctrl.loading = true;
             // get filters from cache
             if (CachingService.filters.vocabs) {
                 $scope.vocabFilter = CachingService.filters.vocabs;
             }
-
         };
 
-        ctrl.$onDestroy = function () {
+        ctrl.$onDestroy = function() {
             if (AuthService.isLoggedIn()) {  //prevents caching after logout
                 // cache filter value
                 CachingService.filters.vocabs = $scope.vocabFilter;
