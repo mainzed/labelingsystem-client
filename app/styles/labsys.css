@@ -1587,12 +1587,30 @@ span.icon-time {
 .floatright {
   float: right;
 }
+.smalltype {
+  font-size: 14px;
+  line-height: 18px;
+  display: block;
+}
+.smalltype a {
+  font-size: inherit;
+}
 .italic {
   font-style: italic;
   line-height: 20px;
 }
 .bold {
   font-weight: bold;
+}
+.caps {
+  text-transform: uppercase;
+}
+.inline {
+  display: inline-block;
+  margin-left: 5px;
+}
+.extended {
+  letter-spacing: 0.1em;
 }
 .break {
   float: left;
@@ -1651,14 +1669,6 @@ span.icon-time {
 }
 .pointer {
   cursor: pointer;
-}
-.smalltype {
-  font-size: 14px;
-  line-height: 18px;
-  display: block;
-}
-.smalltype a {
-  font-size: inherit;
 }
 .description {
   display: block;
