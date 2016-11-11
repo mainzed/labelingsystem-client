@@ -12,18 +12,18 @@
 <div id="metafooter">
 
     <div class="dialog-half float">
-        <span class="listtype">uri</span>
+        <span class="listtype">URI</span>
         <span class="listcontent autowidth smalltype">{{ label.getUri() }}</span>
 
-        <span class="listtype">creator</span>
+        <span class="listtype">Creator</span>
         <span class="listcontent smalltype" ng-bind-html="agent.getNameAsLink()"></span>
 
-        <span class="listtype">last modified:</span>
+        <span class="listtype">Last modified</span>
         <span class="listcontent smalltype lastmodified">
             {{ label.lastModified | date: 'dd.MM.yyyy' }} <span ng-show="label.revisions">/</span>
         </span>
         <ls-history-button revisions="label.revisions" ng-show="label.revisions"></ls-history-button>
-        <span class="listtype">license</span>
+        <span class="listtype">License</span>
         <span class="listcontent">
             <a class="smalltype" ng-href="{{ label.license }}" target="_blank">
                 {{ $ctrl.license.short }}
@@ -55,7 +55,7 @@
 		<div class="tablehead left"><span>Broader</span></div>
 		<div class="insidewrapper half">
 			<div class="tablehead halfleft"><span>Descriptive</span></div>
-			<div class="tablehead halfright"><span>Similar</span></div>
+			<div class="tablehead halfright"><span>Mapping & Associations</span></div>
 		</div>
 	       <div class="tablehead right">
             <span>Narrower</span>

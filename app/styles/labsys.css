@@ -1092,6 +1092,7 @@ textarea:focus {
 }
 .deletebutton.confirm {
   background: tomato;
+  color: white;
 }
 .csverrors {
   float: left;

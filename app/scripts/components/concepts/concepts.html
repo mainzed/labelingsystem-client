@@ -12,13 +12,13 @@
 <!-- metadata -->
 <div id="metafooter" ng-if="$ctrl.mode === 'viewer'">
     <div class="dialog-half float">
-        <span class="listtype">uri</span>
+        <span class="listtype">URI</span>
         <span class="listcontent smalllistcontent autowidth smalltype">
             {{ vocabulary.getUri() }}
         </span>
 
         <!-- creator -->
-        <span class="listtype">creator</span>
+        <span class="listtype">Creator</span>
         <span class="listcontent smalllistcontent smalltype">
             <a ng-href="{{ vocabulary.creatorInfo.orcid }}" target="_blank">
                 {{ vocabulary.getCreatorFullName() }}
@@ -26,13 +26,13 @@
         </span>
 
         <!-- description -->
-        <span class="listtype">description</span>
+        <span class="listtype">Description</span>
         <span class="listcontent smalllistcontent smalltype">
             {{ vocabulary.description }}
         </span>
 
         <!-- license -->
-        <span class="listtype">license</span>
+        <span class="listtype">License</span>
         <span class="listcontent smalllistcontent smalltype">
             <a ng-href="{{ vocabulary.license }}" target="_blank">
                 {{ $ctrl.license.short }}
@@ -47,7 +47,7 @@
     </div>
 
     <div class="dialog-half float" id="ls-selfexplain">
-        Labeling System is a web based tool for creating controlled vocabularies using linked open data techniques.
+        <a href="#/">Labeling System</a> is a web based tool for creating controlled vocabularies using linked open data techniques.
         <a style="margin-top: 20px; display: block;" href="#/">Impressum</a>
     </div>
 
