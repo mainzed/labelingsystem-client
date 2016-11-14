@@ -20,13 +20,13 @@ angular.module("labelsApp")
             // get concept data from ID
             ConceptService.get({id: ctrl.data}, function(concept) {
                 $scope.concept = concept;
-                ctrl.refreshPreviewOnTemp($scope.concept);
+                ctrl.refreshTemp($scope.concept);
             }, function(err) {
                 console.log(err);
             });
         };
 
-        ctrl.refreshPreviewOnTemp = function(concept) {
+        ctrl.refreshTemp = function(concept) {
             function isBiDirectional() {
                 return ctrl.relation === "narrower" || ctrl.relation === "broader";
             }
@@ -35,16 +35,23 @@ angular.module("labelsApp")
                 return concept[relation] && _.includes(concept[relation], $routeParams.lID)
             }
 
+            var oppositeRelation = null;
             if (isBiDirectional()) {
-                var oppositeRelation = ctrl.relation === "broader" ? "narrower" : "broader";
+                oppositeRelation = ctrl.relation === "broader" ? "narrower" : "broader";
+            }
 
-                if (!isIncluded(concept, oppositeRelation)) {  // is temp
-                    // push parentID to array temporarily to update preview
-                    if (!concept[oppositeRelation]) {
-                        concept[oppositeRelation] = [];
-                    }
-                    concept[oppositeRelation].push($routeParams.lID);
+            var relation = oppositeRelation || ctrl.relation;
+            if (!isIncluded(concept, relation)) {
+                // remove just in case
+                _.pull(concept["narrower"], $routeParams.lID);
+                _.pull(concept["broader"], $routeParams.lID);
+                _.pull(concept["related"], $routeParams.lID);
+
+                // add current
+                if (!concept[relation]) {
+                    concept[relation] = [];
                 }
+                concept[relation].push($routeParams.lID);
             }
         };
 
