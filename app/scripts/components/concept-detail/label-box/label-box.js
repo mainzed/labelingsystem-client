@@ -1,101 +1,108 @@
-'use strict';
+"use strict";
 
-/**
- * @ngdoc directive
- * @name labelsApp.directive:conceptBox
- * @description
- * # conceptBox
- */
-angular.module('labelsApp')
-  .directive('lsLabelBox', function ($rootScope, $location, ngDialog, ConceptService, HelperService, TooltipService) {
-    return {
-        templateUrl: "scripts/components/concept-detail/label-box/label-box.html",
-        restrict: 'E',
-        scope: {
-            data: "=",  // concept ID
-            relation: "@",  // "related", "broader", "narrower"
-            parentConcept: "=",  // needed to push updates on relation changes (maybe not)
-            mode: "@ "  // viewer
-        },
-        link: function postLink(scope, element) {
+angular.module("labelsApp")
+.component("lsLabelBox", {
+    bindings: {
+        data: "=",  // concept ID
+        relation: "@",  // "related", "broader", "narrower"
+        parentConcept: "=",  // needed to push updates on relation changes (maybe not)
+        mode: "@ "  // viewer
+    },
+    templateUrl: "scripts/components/concept-detail/label-box/label-box.html",
+    controller: ["$scope", "$routeParams", "$location", "$rootScope", "ngDialog", "TooltipService", "ConceptService", function($scope, $routeParams, $location, $rootScope, ngDialog, TooltipService, ConceptService) {
+        var ctrl = this;
 
-            scope.tooltips = TooltipService;
+        var scope = $scope;
+
+        ctrl.$onInit = function() {
+            $scope.tooltips = TooltipService;
 
             // get concept data from ID
-            ConceptService.get({id: scope.data}, function(concept) {
-                scope.concept = concept;
-                //scope.selected = scope.selected || scope.relation;
-                //$(".nano").nanoScroller();
+            ConceptService.get({id: ctrl.data}, function(concept) {
+                $scope.concept = concept;
+                ctrl.refreshPreviewOnTemp($scope.concept);
             }, function(err) {
                 console.log(err);
             });
+        };
 
-            /**
-             * Opens a dialog with detailed information.
-             */
-            scope.openDialog = function() {
-                if (scope.mode === "viewer") {
+        ctrl.refreshPreviewOnTemp = function(concept) {
+            function isBiDirectional() {
+                return ctrl.relation === "narrower" || ctrl.relation === "broader";
+            }
 
-                    var currentPath = $location.path().split("/");
-                    currentPath.pop();
-                    currentPath.push(scope.concept.id);
-                    $location.path(currentPath.join("/"));
+            function isIncluded(concept, relation) {
+                return concept[relation] && _.includes(concept[relation], $routeParams.lID)
+            }
 
-                } else {
-                    scope.concept.getDetails().then(function(conceptDetails) {
-                        scope.conceptDetails = conceptDetails;
-                        scope.$apply();
-                    });
+            if (isBiDirectional()) {
+                var oppositeRelation = ctrl.relation === "broader" ? "narrower" : "broader";
 
-                    scope.conceptDialog = ngDialog.open({
-                        template: "scripts/components/concept-detail/label-box/dialog.html",
-                        className: 'bigdialog',
-                        showClose: false,
-                        disableAnimation: true,
-                        scope: scope
-                    });
+                if (!isIncluded(concept, oppositeRelation)) {  // is temp
+                    // push parentID to array temporarily to update preview
+                    if (!concept[oppositeRelation]) {
+                        concept[oppositeRelation] = [];
+                    }
+                    concept[oppositeRelation].push($routeParams.lID);
                 }
+            }
+        };
 
-            };
-
-            /**
-             * redirect to new concept path
-             */
-            scope.openConcept = function() {
-                $location.path('/editor/vocabularies/' + scope.concept.vocabID + '/concepts/' + scope.concept.id);
-            };
-
-            /**
-             * Deletes the selected resource, description, prefLabel or altLabel.
-             */
-            scope.onDeleteClick = function() {
-                $rootScope.$broadcast("removedConcept", {
-                    conceptID: scope.data,
-                    relation: scope.relation
+        /**
+         * Opens a dialog with detailed information.
+         */
+        $scope.openDialog = function() {
+            if (ctrl.mode === "viewer") {
+                var currentPath = $location.path().split("/");
+                currentPath.pop();
+                currentPath.push(scope.concept.id);
+                $location.path(currentPath.join("/"));
+            } else {
+                $scope.concept.getDetails().then(function(conceptDetails) {
+                    scope.conceptDetails = conceptDetails;
+                    scope.$apply();
                 });
-                scope.conceptDialog.close();
-            };
 
-            /**
-             * change the relation of a concept.
-             * @param {string} relation - updated label-to-label relation
-             */
-            scope.changeRelation = function(relation) {
-                $rootScope.$broadcast("changedConcept", {
-                    concept: scope.concept,
-                    oldRelation: scope.relation,
-                    newRelation: relation
+                $scope.conceptDialog = ngDialog.open({
+                    template: "scripts/components/concept-detail/label-box/dialog.html",
+                    className: "bigdialog",
+                    showClose: false,
+                    disableAnimation: true,
+                    scope: scope
                 });
-                scope.conceptDialog.close();
-                scope.relation = relation;  // update button
-            };
+            }
+        };
 
-            // add listener to init nanoScroller once the dialog is loaded
-            scope.$on('ngDialog.opened', function (e, $dialog) {
-                if (scope.conceptDialog && scope.conceptDialog.id === $dialog.attr('id')) {  // is the resource dialog
-                    HelperService.refreshNanoScroller();
-                }
+        /**
+         * redirect to new concept path
+         */
+        $scope.openConcept = function() {
+            $location.path("/editor/vocabularies/" + $scope.concept.vocabID + "/concepts/" + $scope.concept.id);
+        };
+
+        /**
+         * Deletes the selected resource, description, prefLabel or altLabel.
+         */
+        $scope.onDeleteClick = function() {
+            $rootScope.$broadcast("removedConcept", {
+                conceptID: ctrl.data,
+                relation: ctrl.relation
             });
-        }
-    };
+            $scope.conceptDialog.close();
+        };
+
+        /**
+         * change the relation of a concept.
+         * @param {string} relation - updated label-to-label relation
+         */
+        $scope.changeRelation = function(relation) {
+            $rootScope.$broadcast("changedConcept", {
+                concept: $scope.concept,
+                oldRelation: ctrl.relation,
+                newRelation: relation
+            });
+            $scope.conceptDialog.close();
+            ctrl.relation = relation;  // update button
+        };
+    }]
 });
