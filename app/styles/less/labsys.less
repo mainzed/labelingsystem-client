@@ -398,7 +398,7 @@ textarea:focus {	outline: none; }
 /* dialog grid */
 .dialog-half {		width: calc((100% - ( @marginoutboxsmall * 4  + @marginoutside * 2)) / 2 ); margin-left: @marginoutside; }
 .dialog-halfrightpadding {	
-					width: calc((100% -  @marginoutside * 2) / 2 - 10% ); margin-left: @marginoutside; margin-right: 10%;}
+					width: calc((100% -  @marginoutside * 2) / 2 - 10% ); margin-left: @marginoutside; margin-right: 10%; position: relative; }
 .dialog-quarter {	width: calc((100% - ( @marginoutboxsmall * 4  + @marginoutside * 2)) / 4 ); margin-left: calc(@marginoutboxsmall * 2); }
 .dialog-full	{	width: 100%;  }
 .deletebutton { 	width: calc(100% - @marginoutside * 2 ); border-radius: 3px; height: 38px; margin-left: @marginoutside;
@@ -585,6 +585,7 @@ span.icon-time {	line-height: 5px; float: left; margin-top: 6px; margin-left: -2
 /*logo corrections*/
 .logos {			margin-top: 40px; clear: left; float: left; margin-bottom: 50px;}
 .logo {				float: left; margin-right: 20px;}
+.githublogo {		margin-right: 8px;}
 .mainzedlogo {		margin-left: -7px; margin-top: 2px; }
 .rgzmlogo {			margin-top: -9px;}
 .i3mainzlogo {		margin-left: 8px;}
@@ -604,17 +605,20 @@ span.icon-time {	line-height: 5px; float: left; margin-top: 6px; margin-left: -2
 .creator-ext {		float: left; margin-left: @margininboxsmall; margin-top: @margininboxsmall; }
 
 .float {			float: left; }
+.clear {			clear: both;}
 .floatright {       float: right; }
 
 .smalltype {		font-size: @small; line-height: @lineheightsmall; display: block; }
 .smalltype a {		font-size: inherit;}
 .italic {			font-style: italic; line-height: 20px; }
 .bold {				font-weight: bold; }
+.underlinedlink	{	text-decoration: underline;}
 .caps {				text-transform: uppercase; }
 .inline {			display: inline-block; margin-left: 5px;}
 .extended {		 	letter-spacing: 0.1em;}
 .break {			float: left; clear: both;}
 .linetop {			border-top: 1px solid white; padding-top: 10px;}
+.margintop {		margin-top: 0px; }
 .marginbottom {		margin-bottom: 50px;}
 .rightpadding {		padding-right: 10%;}
 .block {			display: block; margin-top: 5px; margin-bottom: 10px; }

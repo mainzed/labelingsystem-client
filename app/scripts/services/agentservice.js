@@ -21,7 +21,7 @@ angular.module('labelsApp')
      */
     Agent.prototype.getNameAsLink = function() {
         var fullName = [
-            this.title,
+            // this.title,
             this.firstName,
             this.lastName
         ].join(" ");
