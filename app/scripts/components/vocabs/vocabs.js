@@ -23,7 +23,7 @@ angular.module("labelsApp")
                 $scope.vocabFilter = CachingService.filters.vocabs;
             }
 
-            ctrl.listID = ctrl.mode === "editor" ? "listwrapper" : "listwrapperviewer"; 
+            ctrl.listID = ctrl.mode === "editor" ? "listwrapper" : "listwrapperviewer";
         };
 
         ctrl.$onDestroy = function() {
@@ -65,8 +65,12 @@ angular.module("labelsApp")
                 $scope.vocabularies = CachingService.viewer.vocabs;
                 ctrl.loading = false;
             } else {
-                VocabService.query({ creatorInfo: true }, function(vocabs) {
+                VocabService.query({
+                    creatorInfo: true,
+                    statistics: true
+                }, function(vocabs) {
                     $scope.vocabularies = vocabs;
+                    console.log(vocabs);
                     ctrl.loading = false;
                 }, function error(res) {
                     console.log(res);
