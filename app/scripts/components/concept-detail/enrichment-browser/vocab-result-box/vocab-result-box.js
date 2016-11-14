@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * @ngdoc directive
@@ -7,7 +7,7 @@
  * # searchResultBox
  */
 angular.module("labelsApp")
-  .component("lsVocabResultBox", {
+.component("lsVocabResultBox", {
     bindings: {
         data: "=",
         onConfirm: "&"
@@ -18,11 +18,19 @@ angular.module("labelsApp")
 
         ctrl.dialog = null;
         ctrl.cssType = null;
+        ctrl.isEnriched = false;
 
         ctrl.$onInit = function() {
             $scope.tooltips = TooltipService;
             ctrl.setIcon(ctrl.data);
+            ctrl.isEnriched = ctrl.hasEnrichment();
             HelperService.refreshNanoScroller();
+        };
+
+        // hide concepts already enriched with the given concept
+        ctrl.hasEnrichment = function() {
+            var parentID = $routeParams.lID;
+            return _.includes(ctrl.data["broader"], parentID) || _.includes(ctrl.data["related"], parentID) || _.includes(ctrl.data["narrower"], parentID);
         };
 
         ctrl.isSameVocab = function() {
@@ -31,13 +39,13 @@ angular.module("labelsApp")
 
         ctrl.setIcon = function(data) {
             if (ctrl.isSameVocab()) {
-                ctrl.cssType = "label"
+                ctrl.cssType = "label";
             } else if (data.type) {
                 ctrl.cssType = data.type;
             } else {
-                ctrl.cssType = "ls"
+                ctrl.cssType = "ls";
             }
-        }
+        };
 
         /**
          * Opens a type-specific dialog that shows the connection (relation)
@@ -45,8 +53,8 @@ angular.module("labelsApp")
          */
         ctrl.openDialog = function() {
             ctrl.dialog = ngDialog.open({
-                template: 'scripts/components/concept-detail/enrichment-browser/vocab-result-box/dialog.html',
-                className: 'bigdialog',
+                template: "scripts/components/concept-detail/enrichment-browser/vocab-result-box/dialog.html",
+                className: "bigdialog",
                 disableAnimation: true,
                 scope: $scope
             });
@@ -70,6 +78,7 @@ angular.module("labelsApp")
 
         ctrl.addConcept = function(relation) {
             $rootScope.$broadcast("addedResource", { concept: ctrl.data, relation: relation });
+            ctrl.isEnriched = true;
             ctrl.dialog.close();
         };
 
@@ -78,5 +87,11 @@ angular.module("labelsApp")
             HelperService.refreshNanoScroller();
         };
 
+        // listen if this concept is removed from parent and therefore available again
+        $scope.$on("removedConcept", function(event, data) {
+            // temporarily remove from concept and check again
+            _.pull(ctrl.data[data.relation], data.conceptID);
+            ctrl.isEnriched = ctrl.hasEnrichment();
+        });
     }]
 });

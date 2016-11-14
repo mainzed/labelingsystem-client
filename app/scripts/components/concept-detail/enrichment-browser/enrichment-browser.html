@@ -62,11 +62,6 @@
 
                     <div class="loader" ng-show="$ctrl.loading"></div>
 
-                    <!-- TODO: make component -->
-                    <span class="box bigbox label listbox" ng-show="labels.length > conceptsLimit" ng-click="conceptsLimit = conceptsLimit * 2">
-                      show more
-                    </span>
-
                     <ls-show-more-button ng-show="$ctrl.hasMoreConcepts()" limit="$ctrl.conceptsLimit"></ls-show-more-button>
 
                 </div>

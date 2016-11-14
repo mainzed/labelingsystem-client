@@ -1,6 +1,6 @@
 
 angular.module("labelsApp")
- .component("lsEnrichmentBrowser", {
+.component("lsEnrichmentBrowser", {
     bindings: {
         concept: "="
        // onConfirm: "&"
@@ -10,7 +10,6 @@ angular.module("labelsApp")
 
     // The controller that handles our component logic
     controller: ["$scope", "$routeParams", "$rootScope", "ConfigService", "SearchService", "VocabService", "TooltipService", "ConceptService", "CachingService", function($scope, $routeParams, $rootScope, ConfigService, SearchService, VocabService, TooltipService, ConceptService, CachingService) {
-
         var ctrl = this;
 
         ctrl.$onInit = function() {
@@ -95,7 +94,6 @@ angular.module("labelsApp")
                             results = _.filter(results, function(o) {
                                 return o.scheme !== $scope.vocab.title;
                             });
-
                         } else if (thesaurus.name === "this." + $scope.vocab.id) {
                             results = _.filter(results, function(o) {
                                 return o.uri.split("/").pop() !== ctrl.concept.id;  // skip current concept
