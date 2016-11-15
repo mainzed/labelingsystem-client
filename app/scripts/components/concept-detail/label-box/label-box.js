@@ -93,7 +93,6 @@ angular.module("labelsApp")
                 currentPath.push(ctrl.concept.id);
                 $location.path(currentPath.join("/"));
             } else {
-
                 ctrl.dialog = ngDialog.open({
                     template: "scripts/components/concept-detail/label-box/dialog.html",
                     className: "bigdialog",

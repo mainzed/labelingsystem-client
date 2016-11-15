@@ -1,11 +1,55 @@
 <div id="header" class="box full" ng-class="vocabulary.releaseType">
-    <ls-breadcrumbs mode="editor"></ls-breadcrumbs>
+    <ls-breadcrumbs mode="{{ $ctrl.mode }}"></ls-breadcrumbs>
+
     <h1 ng-bind="label.thumbnail"></h1>
 	<span class="language" ng-bind="label.language"></span>
-    <ls-edit-label-button data="label"></ls-edit-label-button>
+
+    <ls-edit-label-button ng-if="$ctrl.isEditor" data="label"></ls-edit-label-button>
+    <span ng-if="!$ctrl.isEditor" class="icon-search" ng-click="onSearchClick()"></span>
 </div>
 
-<div id="enrichment-ov" ng-class="{ 'fullheight': !$ctrl.showEnrichments }">
+<!-- metadata in viewer -->
+<div id="metafooter" ng-if="!$ctrl.isEditor">
+
+    <div class="dialog-half float">
+        <span class="listtype">URI</span>
+        <span class="listcontent autowidth smalltype">{{ label.getUri() }}</span>
+
+        <span class="listtype">Creator</span>
+        <span class="listcontent smalltype"><a ng-href="{{ label.creatorInfo.orcid }}" target="_blank">{{ label.getCreatorFullName() }}</a></span>
+
+        <span class="listtype">Last modified</span>
+        <span class="listcontent smalltype lastmodified">
+            {{ label.lastModified | date: 'dd.MM.yyyy' }} <span ng-show="label.revisions">/</span>
+        </span>
+        <ls-history-button revisions="label.revisions" ng-show="label.revisions"></ls-history-button>
+        <span class="listtype">License</span>
+        <span class="listcontent">
+            <a class="smalltype" ng-href="{{ label.license }}" target="_blank">
+                {{ $ctrl.license.short }}
+            </a>
+        </span>
+
+        <span class="listtype">Download</span>
+        <span class="listcontent downloadlist downloadlistindent smalltype">
+           <a class="smalltype" ng-href="{{ label.getUrl() + '.jsonld' }}" target="_blank" ng-click="$event.stopPropagation()">JSONLD</a>
+           <a class="smalltype" ng-href="{{ label.getUrl() + '.ttl' }}" target="_blank" ng-click="$event.stopPropagation()">Turtle</a>
+           <a class="smalltype" ng-href="{{ label.getUrl() + '.rdf' }}" target="_blank" ng-click="$event.stopPropagation()">RDF/XML</a>
+           <a class="smalltype" ng-href="{{ label.getUrl() + '.n3'}}" target="_blank" ng-click="$event.stopPropagation()">N-Triples</a>
+        </span>
+    </div>
+
+     <div class="dialog-half float" id="ls-selfexplain">
+        <!-- <span class="listcontent"><span class="loudlink" clipboard supported="supported" text="uri" on-copied="success()" on-error="fail(err)">Copy URI to clipboard</span></span> -->
+
+        <a href="#/">Labeling System</a> is a web based tool for creating controlled vocabularies using linked open data techniques.
+        <a style="display: block; margin-top: 10px;" href="#/">Impressum</a>
+
+
+    </div>
+</div>
+
+<div id="enrichment-ov" ng-class="{ 'fullheight': $ctrl.isEditor && !$ctrl.showEnrichments, 'viewerheight': !ctrl.isEditor }">
 	<!-- fixed table header -->
 	<div class="tableheadwrapper">
 		<div class="tablehead left"><span>Broader</span></div>
@@ -17,14 +61,14 @@
 	</div>
 
 	<!-- table -->
-	<div class="nano enrichmentswrapper">
+	<div class="nano enrichmentswrapper" ng-class="{'enrichmentswrappermin': !$ctrl.isEditor}">
 
         <div id="enrichments" class="nano-content">
 
             <!-- broader column -->
       		<div class="col left">
-                <ls-label-box ng-repeat="broaderConceptID in label.broader" data="broaderConceptID" relation="broader"></ls-label-box>
-                <ls-label-box ng-repeat="broadMatch in label.broadMatch" data="broadMatch" relation="broadMatch"></ls-label-box>
+                <ls-label-box ng-repeat="broaderConceptID in label.broader" data="broaderConceptID" relation="broader" mode="{{ $ctrl.mode }}"></ls-label-box>
+                <ls-label-box ng-repeat="broadMatch in label.broadMatch" data="broadMatch" relation="broadMatch" mode="{{ $ctrl.mode }}"></ls-label-box>
       		</div>
 
             <!-- middle column -->
@@ -32,30 +76,30 @@
 
                 <!-- descriptive -->
           		<div class="col halfleft">
-                    <ls-description-box ng-show="label.description" data="label"></ls-description-box>
-                    <ls-translation-box ng-repeat="translation in label.translations" data="translation"></ls-translation-box>
+                    <ls-description-box ng-show="label.description" data="label" mode="{{ $ctrl.mode }}"></ls-description-box>
+                    <ls-translation-box ng-repeat="translation in label.translations" data="translation" mode="{{ $ctrl.mode }}"></ls-translation-box>
           		</div>
 
           		<!-- relations column -->
           		<div class="col halfright">
-                    <ls-label-box ng-repeat="relatedConceptID in label.related" data="relatedConceptID" relation="related"></ls-label-box>
-                    <ls-label-box ng-repeat="exactMatch in label.exactMatch" data="exactMatch" relation="exactMatch"></ls-label-box>
-                    <ls-label-box ng-repeat="closeMatch in label.closeMatch" data="closeMatch" relation="closeMatch"></ls-label-box>
-                    <ls-label-box ng-repeat="relatedMatch in label.relatedMatch" data="relatedMatch" relation="relatedMatch"></ls-label-box>
-                    <link-box ng-repeat="seeAlso in label.seeAlso" data="seeAlso"></link-box>
+                    <ls-label-box ng-repeat="relatedConceptID in label.related" data="relatedConceptID" relation="related" mode="{{ $ctrl.mode }}"></ls-label-box>
+                    <ls-label-box ng-repeat="exactMatch in label.exactMatch" data="exactMatch" relation="exactMatch" mode="{{ $ctrl.mode }}"></ls-label-box>
+                    <ls-label-box ng-repeat="closeMatch in label.closeMatch" data="closeMatch" relation="closeMatch" mode="{{ $ctrl.mode }}"></ls-label-box>
+                    <ls-label-box ng-repeat="relatedMatch in label.relatedMatch" data="relatedMatch" relation="relatedMatch" mode="{{ $ctrl.mode }}"></ls-label-box>
+                    <link-box ng-repeat="seeAlso in label.seeAlso" data="seeAlso" mode="{{ $ctrl.mode }}"></link-box>
           		</div>
 
       		</div>
 
       		<!-- narrower column -->
       		<div class="col right">
-                <ls-label-box ng-repeat="narrowerConceptID in label.narrower" data="narrowerConceptID" relation="narrower"></ls-label-box>
-                <ls-label-box ng-repeat="narrowMatch in label.narrowMatch" data="narrowMatch" relation="narrowMatch"></ls-label-box>
+                <ls-label-box ng-repeat="narrowerConceptID in label.narrower" data="narrowerConceptID" relation="narrower" mode="{{ $ctrl.mode }}"></ls-label-box>
+                <ls-label-box ng-repeat="narrowMatch in label.narrowMatch" data="narrowMatch" relation="narrowMatch" mode="{{ $ctrl.mode }}"></ls-label-box>
       		</div>
       	</div>
 	</div>
 </div>
 
-<ls-enrichment-browser concept="label"></ls-enrichment-browser>
+<ls-enrichment-browser ng-if="$ctrl.isEditor" concept="label"></ls-enrichment-browser>
 
-<ls-footer></ls-footer>
+<ls-footer ng-if="$ctrl.isEditor"></ls-footer>

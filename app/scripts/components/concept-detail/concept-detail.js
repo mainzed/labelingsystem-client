@@ -8,19 +8,35 @@
  */
 angular.module("labelsApp")
     .component("lsConceptDetail", {
-        bindings: {},
+        bindings: {
+            mode: "@"
+        },
         templateUrl: "scripts/components/concept-detail/concept-detail.html",
-        controller: ["$scope", "$routeParams", "VocabService", "ConceptService", "TooltipService", "HelperService", "CachingService", "$location", function($scope, $routeParams, VocabService, ConceptService, TooltipService, HelperService, CachingService, $location) {
+        controller: ["$scope", "$routeParams", "VocabService", "ConceptService", "TooltipService", "HelperService", "CachingService", "$location", "LicenseService", function($scope, $routeParams, VocabService, ConceptService, TooltipService, HelperService, CachingService, $location, LicenseService) {
             var ctrl = this;
 
             ctrl.$onInit = function() {
                 $scope.tooltips = TooltipService;
+
+                // get vocab
                 VocabService.get({id: $routeParams.vID}, function(vocab) {
                     $scope.vocabulary = vocab;
+
+                    // get license from vocab
+                    LicenseService.query({}, function(licenses) {
+                        ctrl.license = _.find(licenses, { link: $scope.vocabulary.license });
+                    });
+
                     // save for vocab results
                     CachingService.editor.vocab = $scope.vocabulary;
                 });
-                $scope.label = ConceptService.get({id: $routeParams.lID}, function(concept) {
+
+                // get current label
+                $scope.label = ConceptService.get({
+                    id: $routeParams.lID,
+                    revisions: true,
+                    creatorInfo: true
+                }, function(concept) {
                     // ctrl.loadConceptDetails(concept);
                 });
 
@@ -29,7 +45,7 @@ angular.module("labelsApp")
                 } else {
                     ctrl.showEnrichments = true;
                 }
-
+                ctrl.isEditor = ctrl.mode === "editor";
                 HelperService.refreshNanoScroller();
             };
 

@@ -21,11 +21,6 @@ angular.module("labelsApp")
             params: { draft: false },
             isArray: true
         },
-        "getWithRevisions": {
-            method: "GET",
-            params: { revisions: true },
-            isArray: false
-        },
         "update": {
             method: "PUT"
         },
@@ -166,6 +161,15 @@ angular.module("labelsApp")
             }
         });
 
+    };
+
+    Concept.prototype.getCreatorFullName = function() {
+        if (this.creatorInfo) {
+            return [
+                this.creatorInfo.firstName,
+                this.creatorInfo.lastName
+            ].join(" ");
+        }
     };
 
     /**

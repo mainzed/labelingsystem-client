@@ -39,7 +39,7 @@ angular
           access: {restricted: false}
       })
       .when("/vocabularies/:vID/concepts/:lID", {
-          template: "<ls-concept-detail-viewer></ls-concept-detail-viewer>",
+          template: "<ls-concept-detail mode='viewer'></ls-concept-detail>",
           access: {restricted: false}
       })
 
@@ -60,7 +60,7 @@ angular
           access: {restricted: true}
       })
       .when("/editor/vocabularies/:vID/concepts/:lID", {
-          template: "<ls-concept-detail></ls-concept-detail>",
+          template: "<ls-concept-detail mode='editor'></ls-concept-detail>",
           access: {restricted: true}
       })
       .when("/editor/vocabularies/:vID", {
