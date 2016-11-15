@@ -70,7 +70,6 @@ angular.module("labelsApp")
             });
 
             $scope.$on("addedResource", function(event, data) {
-                console.log("added resource");
                 $scope.label.addChild(data.concept, data.relation);
                 ctrl.saveChanges();
             });

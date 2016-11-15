@@ -18,7 +18,7 @@ angular.module("labelsApp")
         this.buttons = {
             description: {
                 active: "this is the active description tooltip",
-                inactive: "this is the inactive description tooltip",
+                inactive: "this is the inactive description tooltip"
             }
         };
 
@@ -26,11 +26,10 @@ angular.module("labelsApp")
             types: {
                 concept: "this is a concept!"
             },
-            relations: {
-                closeMatch: "closeMatch!",
-                exactMatch: "exactMatch!",
-                relatedMatch: "relatedMatch!"
-            },
+            closeMatch: "closeMatch!",
+            exactMatch: "exactMatch!",
+            relatedMatch: "relatedMatch!",
+            related: "related",
             translation: "this is a translation",
             description: "This is a description!",
             internalLink: "internal links",
@@ -38,7 +37,7 @@ angular.module("labelsApp")
             thesauriSettings: "change thesauri settings",
             vocabSettings: "change vocabulary",
             minipreview: "this is the minipreview"
-        }; //
+        };
 
         this.comments = {
             description: "Describe current concept with a few, clear words.",

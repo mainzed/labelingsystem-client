@@ -1,16 +1,25 @@
 
 angular.module("labelsApp")
- .component("lsTranslationBox", {
+.component("lsTranslationBox", {
     bindings: {
         data: "=",
         mode: "@"
     },
     templateUrl: "scripts/components/concept-detail/translation-box/translation-box.html",
-    controller: ["$scope", "$rootScope", "$routeParams", "ngDialog", "TooltipService", "ConceptService", function($scope, $rootScope, $routeParams, ngDialog, TooltipService, ConceptService) {
+    controller: ["$scope", "$rootScope", "$routeParams", "ngDialog", "TooltipService", "ConceptService", "LanguageService", "CachingService", function($scope, $rootScope, $routeParams, ngDialog, TooltipService, ConceptService, LanguageService, CachingService) {
         var ctrl = this;
 
         ctrl.$onInit = function() {
             ctrl.tooltips = TooltipService;
+
+            if (CachingService.languages.length) {
+                ctrl.languages = CachingService.languages;
+            } else {
+                LanguageService.query().then(function(languages) {
+                    ctrl.languages = languages;
+                    CachingService.languages = languages;
+                })
+            }
         };
 
         /**
@@ -18,7 +27,6 @@ angular.module("labelsApp")
          */
         ctrl.openDialog = function() {
             if (ctrl.mode !== "viewer") {
-
                 ctrl.newValue = ctrl.data.value;
                 ctrl.dialog = ngDialog.open({
                     template: "scripts/components/concept-detail/translation-box/dialog.html",
@@ -26,6 +34,13 @@ angular.module("labelsApp")
                     disableAnimation: true,
                     scope: $scope
                 });
+            }
+        };
+
+        ctrl.getLangTooltip = function() {
+            var langObj = _.find(ctrl.languages, {value: ctrl.data.lang});
+            if (langObj && langObj.name) {
+                return langObj.name;
             }
         };
 

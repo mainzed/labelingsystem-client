@@ -56,6 +56,8 @@ angular.module('labelsApp')
                     value: null
                 }
             };
+
+            service.languages = [];
         };
 
         this.init();

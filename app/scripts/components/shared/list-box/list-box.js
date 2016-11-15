@@ -32,7 +32,6 @@ angular.module("labelsApp")
         * Redirects to detail view of the specified concept.
         */
         ctrl.onClick = function() {
-            console.log(ctrl.mode);
             if (ctrl.mode === "viewer") {
                 $location.path("vocabularies/" + ctrl.concept.vocabID + "/concepts/" + ctrl.concept.id);
             } else {

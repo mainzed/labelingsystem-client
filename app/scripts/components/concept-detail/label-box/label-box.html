@@ -1,7 +1,9 @@
 <div class="box small {{ $ctrl.cssType }} high" ng-click="openDialog()">
 
     <!-- relation icon (exactMatch etc) -->
-    <span class="relation" ng-bind-html="$ctrl.relationIcon"></span>
+    <span class="relation">
+        <span ng-class="$ctrl.relationCss" title="{{ tooltips.icons[$ctrl.relation] }}"></span>
+    </span>
 
     <span class="thumbnail" ng-bind="$ctrl.concept.thumbnail || $ctrl.concept.label"></span>
 
@@ -10,6 +12,6 @@
     <!-- resource type icon (getty, wayback etc) -->
     <span ng-show="!$ctrl.concept.id" class="type" title="{{ $ctrl.concept.type + ' - ' + $ctrl.concept.scheme }}" ng-bind-template="{{ '(' + $ctrl.concept.type + ')' }}"></span>
 
-    <span ng-show="!$ctrl.concept.id" class="language" ng-bind="$ctrl.concept.lang"></span>
+    <span ng-show="!$ctrl.concept.id" class="language" ng-bind="$ctrl.concept.lang" title="{{ $ctrl.langTooltip }}"></span>
 
 </div>
