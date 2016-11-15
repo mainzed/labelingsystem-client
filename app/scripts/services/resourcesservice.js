@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * @ngdoc service
@@ -7,20 +7,22 @@
  * # ResourcesService
  * Service in the labelsApp.
  */
-angular.module('labelsApp')
-  .service('ResourcesService', function ($http, ConfigService) {
+angular.module("labelsApp")
+.service("ResourcesService", function($resource, ConfigService) {
+    var Resource = $resource(ConfigService.api + "/resourceinfo", null, {
+        "get": {
+            method: "GET",
+            // params: { uri: true },
+            isArray: false
+        }
+    });
 
-    var Resource = function(data) {
-        this.description = data.description;
-        this.group = data.group;;
-        this.label = data.label;
-        this.lang = data.lang;
-        this.broaderTerms = data.broaderTerms;
-        this.narrowerTerms = data.narrowerTerms;
-        this.quality = data.quality;
-        this.scheme = data.scheme;
-        this.type = data.type;
-        this.uri = data.uri;
+    Resource.prototype.getLabel = function() {
+        return this.label;
+    };
+
+    Resource.prototype.getDesciption = function() {
+        return this.description;
     };
 
     Resource.prototype.hasBroader = function() {
@@ -32,15 +34,8 @@ angular.module('labelsApp')
     };
 
     Resource.prototype.hasMore = function() {
-        return this.description || this.hasBroader() || this.hasNarrower();
-    }
-
-    this.get = function(url, success, failure) {
-        $http.get(ConfigService.api + "/resourceinfo?uri=" + encodeURI(url)).then(function(response) {
-            success(new Resource(response.data));
-        }, function(response) {
-            failure(response);
-        });
+        return _.has(this, "description") || this.hasBroader() || this.hasNarrower();
     };
 
+    return Resource;
 });

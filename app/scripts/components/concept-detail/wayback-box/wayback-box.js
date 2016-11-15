@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * @ngdoc directive
@@ -6,11 +6,11 @@
  * @description
  * # linkBox
  */
-angular.module('labelsApp')
-  .directive('linkBox', function($window, ngDialog, $routeParams, ResourcesService, ConceptService, HelperService, AuthService) {
+angular.module("labelsApp")
+.directive("linkBox", function($window, ngDialog, $routeParams, ResourcesService, ConceptService, HelperService, AuthService) {
     return {
-        templateUrl: 'scripts/components/concept-detail/wayback-box/wayback-box.html',
-        restrict: 'E',
+        templateUrl: "scripts/components/concept-detail/wayback-box/wayback-box.html",
+        restrict: "E",
         scope: {
             data: "=",
             mode: "@"
@@ -23,7 +23,7 @@ angular.module('labelsApp')
             };
 
             // get data
-            ResourcesService.get(scope.data.uri, function(resource) {
+            ResourcesService.get({ uri: scope.data.uri}, function(resource) {
                 scope.resource = resource;
             });
 
@@ -37,7 +37,7 @@ angular.module('labelsApp')
                 } else {
                     ngDialog.open({
                         template: "scripts/components/concept-detail/wayback-box/dialog.html",
-                        className: 'bigdialog smallheightdialog',
+                        className: "bigdialog smallheightdialog",
                         disableAnimation: true,
                         scope: scope
                     });

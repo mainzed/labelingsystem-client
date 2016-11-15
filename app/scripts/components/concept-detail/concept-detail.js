@@ -10,7 +10,7 @@ angular.module("labelsApp")
     .component("lsConceptDetail", {
         bindings: {},
         templateUrl: "scripts/components/concept-detail/concept-detail.html",
-        controller: ["$scope", "$routeParams", "VocabService", "ConceptService", "TooltipService", "HelperService", "CachingService", function($scope, $routeParams, VocabService, ConceptService, TooltipService, HelperService, CachingService) {
+        controller: ["$scope", "$routeParams", "VocabService", "ConceptService", "TooltipService", "HelperService", "CachingService", "$location", function($scope, $routeParams, VocabService, ConceptService, TooltipService, HelperService, CachingService, $location) {
             var ctrl = this;
 
             ctrl.$onInit = function() {
@@ -20,7 +20,9 @@ angular.module("labelsApp")
                     // save for vocab results
                     CachingService.editor.vocab = $scope.vocabulary;
                 });
-                $scope.label = ConceptService.get({id: $routeParams.lID});
+                $scope.label = ConceptService.get({id: $routeParams.lID}, function(concept) {
+                    // ctrl.loadConceptDetails(concept);
+                });
 
                 if (CachingService.editor.showEnrichments === false) {
                     ctrl.showEnrichments = CachingService.editor.showEnrichments;
@@ -30,6 +32,12 @@ angular.module("labelsApp")
 
                 HelperService.refreshNanoScroller();
             };
+
+            // ctrl.loadConceptDetails = function(concept) {
+            //     concept.getDetails().then(function(details) {
+            //         $scope.labelDetails = details;
+            //     });
+            // };
 
             ctrl.$onDestroy = function() {
                 CachingService.editor.showEnrichments = ctrl.showEnrichments;
@@ -43,25 +51,13 @@ angular.module("labelsApp")
             });
 
             $scope.$on("addedResource", function(event, data) {
+                console.log("added resource");
                 $scope.label.addChild(data.concept, data.relation);
                 ctrl.saveChanges();
             });
 
             $scope.$on("addedWaybackLink", function(event, data) {
                 $scope.label.addChild({ uri: data.uri }, "seeAlso");
-                ctrl.saveChanges();
-            });
-
-            $scope.$on("changedConcept", function(event, data) {
-                // remove id from old relation array
-                _.remove($scope.label[data.oldRelation], function(n) {
-                    return n === data.concept.id;
-                });
-
-                // add concept ID to new relation array
-                $scope.label[data.newRelation] = $scope.label[data.newRelation] || [];
-                $scope.label[data.newRelation].push(data.concept.id);
-
                 ctrl.saveChanges();
             });
 
@@ -103,23 +99,35 @@ angular.module("labelsApp")
             });
 
             $scope.$on("changedRelation", function(event, data) {
+                if (data.resource.id) {  // is concept
+                    // remove id from old relation array
+                    _.remove($scope.label[data.oldRelation], function(n) {
+                        return n === data.resource.id;
+                    });
 
-                // get resource
-                var query = { uri: data.resource.uri };
-                var resource = _.find($scope.label[data.oldRelation], query);
+                    // add concept ID to new relation array
+                    $scope.label[data.newRelation] = $scope.label[data.newRelation] || [];
+                    $scope.label[data.newRelation].push(data.resource.id);
 
-                // remove it from the array (e.g. remove a narrowMatch from the narrowWatch array)
-                _.remove($scope.label[data.oldRelation], query);
+                    ctrl.saveChanges();
+                } else {  // is resource
+                    // get resource
+                    var query = { uri: data.resource.uri };
+                    var resource = _.find($scope.label[data.oldRelation], query);
 
-                // push resource to the corresponding array (e.g. to the broaderMatch array)
-                if (!$scope.label[data.newRelation]) {
-                    $scope.label[data.newRelation] = [];
+                    // remove it from the array (e.g. remove a narrowMatch from the narrowWatch array)
+                    _.remove($scope.label[data.oldRelation], query);
+
+                    // push resource to the corresponding array (e.g. to the broaderMatch array)
+                    if (!$scope.label[data.newRelation]) {
+                        $scope.label[data.newRelation] = [];
+                    }
+                    $scope.label[data.newRelation].push({
+                        type: data.resource.type,
+                        uri: data.resource.uri
+                    });
+                    ctrl.saveChanges();
                 }
-                $scope.label[data.newRelation].push({
-                    type: data.resource.type,
-                    uri: data.resource.uri
-                });
-                ctrl.saveChanges();
             });
 
             $scope.$on("toggledEnrichmentBrowser", function(event, data) {
@@ -146,6 +154,10 @@ angular.module("labelsApp")
                         }
                     }
                 });
+            };
+
+            $scope.onSearchClick = function() {
+                $location.path("/search");
             };
         }]
     });

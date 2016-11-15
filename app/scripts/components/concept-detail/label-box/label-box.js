@@ -3,27 +3,48 @@
 angular.module("labelsApp")
 .component("lsLabelBox", {
     bindings: {
-        data: "=",  // concept ID
+        data: "=",  // concept id or resource
         relation: "@",  // "related", "broader", "narrower"
         parentConcept: "=",  // needed to push updates on relation changes (maybe not)
         mode: "@ "  // viewer
     },
     templateUrl: "scripts/components/concept-detail/label-box/label-box.html",
-    controller: ["$scope", "$routeParams", "$location", "$rootScope", "ngDialog", "TooltipService", "ConceptService", function($scope, $routeParams, $location, $rootScope, ngDialog, TooltipService, ConceptService) {
+    controller: ["$scope", "$window", "$routeParams", "$location", "$rootScope", "ngDialog", "TooltipService", "ConceptService", "ResourcesService", function($scope, $window, $routeParams, $location, $rootScope, ngDialog, TooltipService, ConceptService, ResourcesService) {
         var ctrl = this;
 
         var scope = $scope;
 
-        ctrl.$onInit = function() {
-            $scope.tooltips = TooltipService;
+        ctrl.isConcept = null;
 
-            // get concept data from ID
-            ConceptService.get({id: ctrl.data}, function(concept) {
-                $scope.concept = concept;
-                ctrl.refreshTemp($scope.concept);
-            }, function(err) {
-                console.log(err);
-            });
+        ctrl.$onInit = function() {
+            ctrl.isConcept = ctrl.data.uri ? false : true;
+            $scope.tooltips = TooltipService;
+            if (ctrl.isConcept) {  // is same-vocab concept
+                ConceptService.get({ id: ctrl.data }, function(concept) {
+                    ctrl.concept = concept;
+
+                    ctrl.refreshTemp(ctrl.concept);
+                    concept.getDetails().then(function(conceptDetails) {
+                        $scope.conceptDetails = conceptDetails;
+                        $scope.$apply();
+                    });
+                });
+            } else {
+                ResourcesService.get({ uri: ctrl.data.uri }, function(resource) {
+                    ctrl.concept = resource;
+                });
+
+                // determine relation icon
+                if (ctrl.relation === "closeMatch") {
+                    ctrl.relationIcon = "<span class='icon-close'></span>";
+                } else if (ctrl.relation === "exactMatch") {
+                    ctrl.relationIcon = "<span title='exact Match' class='icon-exact'></span>";
+                } else if (ctrl.relation === "relatedMatch") {
+                    ctrl.relationIcon = "<span class='icon-arrow'></span>";
+                }
+            }
+            ctrl.newRelation = ctrl.relation;
+            ctrl.cssType = ctrl.isConcept ? "label" : ctrl.data.type;
         };
 
         ctrl.refreshTemp = function(concept) {
@@ -56,21 +77,24 @@ angular.module("labelsApp")
         };
 
         /**
+         * Open resource-url in new tab.
+        */
+        ctrl.openResource = function() {
+            $window.open(ctrl.concept.uri, "_blank");
+        };
+
+        /**
          * Opens a dialog with detailed information.
          */
         $scope.openDialog = function() {
             if (ctrl.mode === "viewer") {
                 var currentPath = $location.path().split("/");
                 currentPath.pop();
-                currentPath.push(scope.concept.id);
+                currentPath.push(ctrl.concept.id);
                 $location.path(currentPath.join("/"));
             } else {
-                $scope.concept.getDetails().then(function(conceptDetails) {
-                    scope.conceptDetails = conceptDetails;
-                    scope.$apply();
-                });
 
-                $scope.conceptDialog = ngDialog.open({
+                ctrl.dialog = ngDialog.open({
                     template: "scripts/components/concept-detail/label-box/dialog.html",
                     className: "bigdialog",
                     showClose: false,
@@ -84,32 +108,37 @@ angular.module("labelsApp")
          * redirect to new concept path
          */
         $scope.openConcept = function() {
-            $location.path("/editor/vocabularies/" + $scope.concept.vocabID + "/concepts/" + $scope.concept.id);
+            $location.path("/editor/vocabularies/" + ctrl.concept.vocabID + "/concepts/" + ctrl.concept.id);
         };
 
         /**
          * Deletes the selected resource, description, prefLabel or altLabel.
          */
         $scope.onDeleteClick = function() {
-            $rootScope.$broadcast("removedConcept", {
-                conceptID: ctrl.data,
-                relation: ctrl.relation
-            });
-            $scope.conceptDialog.close();
+            if (ctrl.isConcept) {
+                $rootScope.$broadcast("removedConcept", {
+                    conceptID: ctrl.concept.id,
+                    relation: ctrl.relation
+                });
+            } else {
+                $rootScope.$broadcast("removedResource", {
+                    resourceURI: ctrl.concept.uri,
+                    relation: ctrl.relation
+                });
+            }
+            ctrl.dialog.close();
         };
 
-        /**
-         * change the relation of a concept.
-         * @param {string} relation - updated label-to-label relation
-         */
-        $scope.changeRelation = function(relation) {
-            $rootScope.$broadcast("changedConcept", {
-                concept: $scope.concept,
-                oldRelation: ctrl.relation,
-                newRelation: relation
-            });
-            $scope.conceptDialog.close();
-            ctrl.relation = relation;  // update button
-        };
+        $scope.$on("ngDialog.closed", function(e, $dialog) {
+            if (ctrl.dialog && ctrl.dialog.id === $dialog.attr("id")) {  // is the resource dialog
+                if (ctrl.newRelation !== ctrl.relation) {
+                    $rootScope.$broadcast("changedRelation", {
+                        newRelation: ctrl.newRelation,
+                        oldRelation: ctrl.relation,
+                        resource: ctrl.concept
+                    });
+                }
+            }
+        });
     }]
 });

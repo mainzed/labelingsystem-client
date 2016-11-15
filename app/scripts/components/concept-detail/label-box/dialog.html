@@ -1,12 +1,23 @@
-<div class="dialogwrapper label">
+<div class="dialogwrapper {{ $ctrl.cssType }}">
 
     <div class="dialogheader">
-		<h3 ng-bind="concept.thumbnail"></h3>
-		<p class="typeinformation">Concept</p>
-		<p class="typeinformation bottomleft">
+		<h3>{{ $ctrl.concept.getLabel() }}</h3>
+
+        <!-- type info -->
+        <p ng-show="$ctrl.concept.id" class="typeinformation">Concept</p>
+		<p ng-show="!$ctrl.concept.id" class="typeinformation">
+      		{{ $ctrl.concept.type }} Resource - {{ $ctrl.concept.scheme }}
+    	</p>
+
+        <!-- open -->
+        <p ng-show="$ctrl.concept.id" class="typeinformation bottomleft">
 			<span class="loudlink" ng-click="openConcept(); closeThisDialog()">open in same tab</span>
 		</p>
-        <ls-preview label="concept"></ls-preview>
+	    <p ng-show="!$ctrl.concept.id" class="typeinformation bottomleft">
+	       <span class="loudlink" ng-click="$ctrl.openResource()">open in new tab</span>
+	    </p>
+
+        <ls-preview ng-show="$ctrl.concept.id" label="$ctrl.concept"></ls-preview>
 
         <div class="line-bottom line"></div>
 	</div>
@@ -18,13 +29,13 @@
 
                     <!-- description -->
                     <div class="dialog-quarter col">
-                        <span class="smalltype bold block" ng-show="concept.description">Description</span>
-        		        <span class="smalltype description">{{ concept.description }}</span>
+                        <span class="smalltype bold block" ng-show="$ctrl.concept.description">Description</span>
+        		        <span class="smalltype description">{{ $ctrl.concept.getDescription() }}</span>
 			        </div>
 
                     <!-- related -->
 			        <div class="dialog-quarter col">
-				        <span class="smalltype bold block" ng-show="concept.hasRelated()">Mapping & Associations</span>
+				        <span class="smalltype bold block" ng-show="$ctrl.concept.hasRelated()">Mapping & Associations</span>
 				        <ul class="hierarchie">
                             <li ng-repeat="relatedConcept in conceptDetails.related | orderBy: 'thumbnail'">
         		          	    <span class="icon-arrow icon"></span>
@@ -49,18 +60,32 @@
 
             <!-- broader -->
 			<div class="dialog-quarter col">
-				<span class="smalltype bold block" ng-show="concept.hasBroader()">Broader</span>
+				<span class="smalltype bold block" ng-show="$ctrl.concept.hasBroader() || $ctrl.concept.broaderTerms.length">Broader</span>
 				<ul class="hierarchie">
+
+                    <!-- concept broader options -->
 					<li ng-repeat="broaderConcept in conceptDetails.broader | orderBy: 'thumbnail'">{{ broaderConcept.thumbnail }}</li>
           			<li ng-repeat="broadMatch in conceptDetails.broadMatches | orderBy: 'label'">{{ broadMatch.label }}</li>
+
+                    <!-- resources broader options -->
+                    <li ng-repeat="broaderTerm in $ctrl.concept.broaderTerms">
+                      <span class="icon-exact icon"></span>
+                      <span class="float smalltype">{{ broaderTerm.label }}</span>
+                    </li>
 				</ul>
 			</div>
 
       		<div class="dialog-quarter col">
-				<span class="smalltype bold block" ng-show="concept.hasNarrower()">Narrower</span>
+				<span class="smalltype bold block" ng-show="$ctrl.concept.hasNarrower() || $ctrl.concept.narrowerTerms.length">Narrower</span>
 				<ul class="hierarchie">
 		          <li ng-repeat="narrowerConcept in conceptDetails.narrower| orderBy: 'thumbnail'">{{ narrowerConcept.thumbnail }}</li>
 		          <li ng-repeat="narrowMatch in conceptDetails.narrowMatches| orderBy: 'label'">{{ narrowMatch.label }}</li>
+
+                  <!-- resources narrower options -->
+                  <li ng-repeat="narrowerTerm in $ctrl.concept.narrowerTerms">
+                    <span class="icon-exact icon"></span>
+                    <span class="float smalltype">{{ narrowerTerm.label }}</span>
+                  </li>
 				</ul>
 			</div>
 		</div>
@@ -70,30 +95,70 @@
         <div class="dialogbox dialog-full">
 
             <h4>Connection</h4>
-			<div class="enrichbuttons">
 
-			<!-- broader -->
-		    <div class="col three leftout">
-		  		<button class="enrichbutton-ow" type="button" ng-click="changeRelation('broader')" ng-class="{'selectedbutton': relation === 'broader'}">
-		  			<span class="buttontext-ow">broader</span>
-		  		</button>
-		  	</div>
+            <!-- enrich buttons concept -->
+			<div class="enrichbuttons" ng-show="$ctrl.concept.id">
 
-            <!-- related -->
-		    <div class="col three">
-		  		<button class="enrichbutton-ow" type="button" ng-click="changeRelation('related')" ng-class="{'selectedbutton': relation === 'related'}">
-		  			<span class="buttontext-ow">related</span>
-		  			<span class="icon-arrow icon"></span>
-		  		</button>
-		  	</div>
+    			<!-- broader -->
+    		    <div class="col three leftout">
+    		  		<button class="enrichbutton-ow" type="button" ng-click="$ctrl.newRelation = 'broader'" ng-class="{'selectedbutton': $ctrl.newRelation === 'broader'}">
+    		  			<span class="buttontext-ow">broader</span>
+    		  		</button>
+    		  	</div>
 
-            <!-- narrower -->
-		    <div class="col three rightout">
-		  		<button class="enrichbutton-ow" type="button" ng-click="changeRelation('narrower')" ng-class="{'selectedbutton': relation === 'narrower'}">
-		  			<span class="buttontext-ow">narrower</span>
-		  		</button>
-		  	</div>
-	  	</div>
+                <!-- related -->
+    		    <div class="col three">
+    		  		<button class="enrichbutton-ow" type="button" ng-click="$ctrl.newRelation = 'related'" ng-class="{'selectedbutton': $ctrl.newRelation === 'related'}">
+    		  			<span class="buttontext-ow">related</span>
+    		  			<span class="icon-arrow icon"></span>
+    		  		</button>
+    		  	</div>
+
+                <!-- narrower -->
+    		    <div class="col three rightout">
+    		  		<button class="enrichbutton-ow" type="button" ng-click="$ctrl.newRelation = 'narrower'" ng-class="{'selectedbutton': $ctrl.newRelation === 'narrower'}">
+    		  			<span class="buttontext-ow">narrower</span>
+    		  		</button>
+    		  	</div>
+	  	    </div>
+
+            <!-- enrich buttons resources -->
+            <div class="enrichbuttons" ng-show="!$ctrl.concept.id">
+                <div>
+                    <div class="col five leftout">
+                        <button class="enrichbutton-ow" type="button" name="button" ng-click="$ctrl.newRelation = 'broadMatch'" ng-class="{'selectedbutton': $ctrl.newRelation === 'broadMatch'}" titel="tooltips.comments.broadMatch">
+                            <span class="buttontext-ow">broad Match</span>
+                        </button>
+                    </div>
+
+                    <div class="col five">
+                        <button class="enrichbutton-ow" type="button" name="button" ng-click="$ctrl.newRelation = 'exactMatch'" ng-class="{'selectedbutton': $ctrl.newRelation === 'exactMatch'}" title="tooltips.comments.exactMatch">
+                            <span class="buttontext-ow">exact Match</span>
+                            <span class="icon-exact icon"></span>
+                        </button>
+                    </div>
+
+                    <div class="col five">
+                        <button class="enrichbutton-ow" type="button" name="button" ng-click="$ctrl.newRelation = 'relatedMatch'" ng-class="{'selectedbutton': $ctrl.newRelation === 'relatedMatch'}" title="tooltips.comments.relatedMatch">
+                            <span class="buttontext-ow">related Match</span>
+                            <span class="icon-arrow icon"></span>
+                        </button>
+                    </div>
+
+                    <div class="col five">
+                        <button class="enrichbutton-ow" type="button" name="button" ng-click="$ctrl.newRelation = 'closeMatch'" ng-class="{'selectedbutton': $ctrl.newRelation === 'closeMatch'}" title="tooltips.comments.closeMatch">
+                            <span class="buttontext-ow">close Match</span>
+                            <span class="icon-close icon"></span>
+                        </button>
+                    </div>
+
+                    <div class="col five rightout">
+                        <button class="enrichbutton-ow" type="button" name="button" ng-click="$ctrl.newRelation = 'narrowMatch'" ng-class="{'selectedbutton': $ctrl.newRelation === 'narrowMatch'}" title="tooltips.comments.narrowMatch">
+                            <span class="buttontext-ow">narrow Match</span>
+                        </button>
+                    </div>
+                </div>
+            </div><!-- end enrich buttons -->
 	  </div>
 
 

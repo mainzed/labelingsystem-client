@@ -23,8 +23,8 @@
 
             <!-- broader column -->
       		<div class="col left">
-                <ls-label-box ng-repeat="broaderConcept in label.broader" data="broaderConcept" relation="broader"></ls-label-box>
-                <ls-resource-box ng-repeat="broadMatch in label.broadMatch" data="broadMatch" relation="broadMatch"></ls-resource-box>
+                <ls-label-box ng-repeat="broaderConceptID in label.broader" data="broaderConceptID" relation="broader"></ls-label-box>
+                <ls-label-box ng-repeat="broadMatch in label.broadMatch" data="broadMatch" relation="broadMatch"></ls-label-box>
       		</div>
 
             <!-- middle column -->
@@ -38,10 +38,10 @@
 
           		<!-- relations column -->
           		<div class="col halfright">
-                    <ls-label-box ng-repeat="relatedConcept in label.related" data="relatedConcept" relation="related"></ls-label-box>
-                    <ls-resource-box ng-repeat="exactMatch in label.exactMatch" data="exactMatch" relation="exactMatch"></ls-resource-box>
-                    <ls-resource-box ng-repeat="closeMatch in label.closeMatch" data="closeMatch" relation="closeMatch"></ls-resource-box>
-                    <ls-resource-box ng-repeat="relatedMatch in label.relatedMatch" data="relatedMatch" relation="relatedMatch"></ls-resource-box>
+                    <ls-label-box ng-repeat="relatedConceptID in label.related" data="relatedConceptID" relation="related"></ls-label-box>
+                    <ls-label-box ng-repeat="exactMatch in label.exactMatch" data="exactMatch" relation="exactMatch"></ls-label-box>
+                    <ls-label-box ng-repeat="closeMatch in label.closeMatch" data="closeMatch" relation="closeMatch"></ls-label-box>
+                    <ls-label-box ng-repeat="relatedMatch in label.relatedMatch" data="relatedMatch" relation="relatedMatch"></ls-label-box>
                     <link-box ng-repeat="seeAlso in label.seeAlso" data="seeAlso"></link-box>
           		</div>
 
@@ -49,8 +49,8 @@
 
       		<!-- narrower column -->
       		<div class="col right">
-                <ls-label-box ng-repeat="narrowerConcept in label.narrower" data="narrowerConcept" relation="narrower"></ls-label-box>
-                <ls-resource-box ng-repeat="narrowMatch in label.narrowMatch" data="narrowMatch" relation="narrowMatch"></ls-resource-box>
+                <ls-label-box ng-repeat="narrowerConceptID in label.narrower" data="narrowerConceptID" relation="narrower"></ls-label-box>
+                <ls-label-box ng-repeat="narrowMatch in label.narrowMatch" data="narrowMatch" relation="narrowMatch"></ls-label-box>
       		</div>
       	</div>
 	</div>

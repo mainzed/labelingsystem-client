@@ -70,7 +70,7 @@ angular.module('labelsApp')
                         }
                     });
                 } else if (resource.uri) {  // is external resource
-                    ResourcesService.get(resource.uri, function(relatedConcept) {
+                    ResourcesService.get({ uri: resource.uri }, function(relatedConcept) {
                         relatedConcepts.push(relatedConcept);
 
                         // callback when all done

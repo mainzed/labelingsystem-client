@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * @ngdoc service
@@ -7,30 +7,30 @@
  * # ConceptService
  * Service in the labelsApp.
  */
-angular.module('labelsApp')
-  .factory('ConceptService', function ($resource, $http, ConfigService, ResourcesService) {
+angular.module("labelsApp")
+.factory("ConceptService", function($resource, $http, ConfigService, ResourcesService) {
 
-    var Concept = $resource(ConfigService.api + '/labels/:id', null, {
-        'query': {
-            method: 'GET',
+    var Concept = $resource(ConfigService.api + "/labels/:id", null, {
+        "query": {
+            method: "GET",
             params: { draft: true },
             isArray: true
         },
-        'queryPublic': {
-            method: 'GET',
+        "queryPublic": {
+            method: "GET",
             params: { draft: false },
             isArray: true
         },
-        'getWithRevisions': {
-            method: 'GET',
+        "getWithRevisions": {
+            method: "GET",
             params: { revisions: true },
             isArray: false
         },
-        'update': {
-            method: 'PUT'
+        "update": {
+            method: "PUT"
         },
-        'remove': {
-            method: 'DELETE'
+        "remove": {
+            method: "DELETE"
         }
     });
 
@@ -104,7 +104,7 @@ angular.module('labelsApp')
     }
 
     /**
-     * Gets all of a concept's broader, narrower and related concepts and
+     * Gets all of a concept"s broader, narrower and related concepts and
      * returns a list of objects.
      * @param {String} relation - Relation to get concepts for
      */
@@ -121,7 +121,7 @@ angular.module('labelsApp')
             if (concept[relation]) {
                  concept[relation].forEach(function(resource, index, array) {
 
-                    $http.get(ConfigService.api + '/labels/' + resource).then(function(res) {
+                    $http.get(ConfigService.api + "/labels/" + resource).then(function(res) {
                         relatedConcepts.push(res.data);
                         // callback when all done
                         if (index === array.length - 1) {
@@ -136,7 +136,7 @@ angular.module('labelsApp')
     };
 
     /**
-     * Gets all of a concept's broader, narrower and related concepts and
+     * Gets all of a concept"s broader, narrower and related concepts and
      * returns a list of objects.
      * @param {String} relation - Relation to get concepts for
      */
@@ -149,7 +149,7 @@ angular.module('labelsApp')
                 concept[relation].forEach(function(resource, index, array) {
 
                     if (resource.uri) {  // is external resource
-                        ResourcesService.get(resource.uri, function(relatedConcept) {
+                        ResourcesService.get({ uri: resource.uri }, function(relatedConcept) {
                             relatedConcepts.push(relatedConcept);
 
                             // callback when all done
@@ -279,8 +279,7 @@ angular.module('labelsApp')
             }
             return score;
         }
-
-        //console.log(qualityScore);
+        // console.log(qualityScore);
         return qualityScore;
     };
 
@@ -289,7 +288,7 @@ angular.module('labelsApp')
      */
     Concept.prototype.save = function(successCallback, errorCallback) {
         var me = this;
-        $http.put(ConfigService.api + '/labels/' + me.id, me).then(function(res) {
+        $http.put(ConfigService.api + "/labels/" + me.id, me).then(function(res) {
             successCallback(res.data);
         }, function() {
             errorCallback();
@@ -297,5 +296,4 @@ angular.module('labelsApp')
     };
 
     return Concept;
-
-  });
+});
