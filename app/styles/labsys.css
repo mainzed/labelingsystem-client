@@ -1117,10 +1117,10 @@ textarea:focus {
 .confirmed {
   margin-left: calc(20px);
   width: calc(100% - 20px * 2);
-  background: #08C93C;
+  background: #544d3b;
   line-height: 38px;
   text-indent: 8px;
-  color: black;
+  color: white;
 }
 .line-dialog {
   height: 1px;
@@ -1433,6 +1433,11 @@ th {
 .viewerheight {
   height: calc(100% - 230px) !important;
 }
+@media screen and (max-width: 1400px) {
+  .viewerheight {
+    height: calc(100% - 260px) !important;
+  }
+}
 .viewersearch {
   height: calc(100% - 90px) !important;
 }
@@ -1631,7 +1636,7 @@ span.icon-time {
   padding-top: 10px;
 }
 .margintop {
-  margin-top: 0px;
+  margin-top: -1px;
 }
 .marginbottom {
   margin-bottom: 50px;
@@ -1749,6 +1754,9 @@ span.icon-time {
   background: #00AAE6;
 }
 .dbpedia .line {
+  background: #00AAE6;
+}
+.geonames .line {
   background: #00AAE6;
 }
 .finto .line {

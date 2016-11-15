@@ -26,6 +26,7 @@ angular.module("labelsApp")
             types: {
                 concept: "this is a concept!"
             },
+
             closeMatch: "closeMatch!",
             exactMatch: "exactMatch!",
             relatedMatch: "relatedMatch!",
