@@ -11,7 +11,7 @@
 
         <!-- open -->
         <p ng-show="$ctrl.concept.id" class="typeinformation bottomleft">
-			<span class="loudlink" ng-click="openConcept(); closeThisDialog()">open in same tab</span>
+			<span class="loudlink" ng-click="$ctrl.openConcept(); closeThisDialog()">open in same tab</span>
 		</p>
 	    <p ng-show="!$ctrl.concept.id" class="typeinformation bottomleft">
 	       <span class="loudlink" ng-click="$ctrl.openResource()">open in new tab</span>

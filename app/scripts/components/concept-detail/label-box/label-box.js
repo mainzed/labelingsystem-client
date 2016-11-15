@@ -101,23 +101,18 @@ angular.module("labelsApp")
         };
 
         /**
-         * Open resource-url in new tab.
-        */
-        ctrl.openResource = function() {
-            $window.open(ctrl.concept.uri, "_blank");
-        };
-
-        /**
          * Opens a dialog with detailed information.
          */
         $scope.openDialog = function() {
-            if (ctrl.mode === "viewer") {
+            if (ctrl.mode === "viewer" && ctrl.isConcept) {  // viewer concept
                 var currentPath = $location.path().split("/");
                 currentPath.pop();
                 currentPath.push(ctrl.concept.id);
                 $location.path(currentPath.join("/"));
+            } else if (ctrl.mode === "viewer" && !ctrl.isConcept) {  // viewer resource
+                ctrl.openResource();
             } else {
-                ctrl.dialog = ngDialog.open({
+                ctrl.dialog = ngDialog.open({  // editor concept & resource
                     template: "scripts/components/concept-detail/label-box/dialog.html",
                     className: "bigdialog",
                     showClose: false,
@@ -130,8 +125,15 @@ angular.module("labelsApp")
         /**
          * redirect to new concept path
          */
-        $scope.openConcept = function() {
+        ctrl.openConcept = function() {
             $location.path("/editor/vocabularies/" + ctrl.concept.vocabID + "/concepts/" + ctrl.concept.id);
+        };
+
+        /**
+         * Open resource-url in new tab.
+        */
+        ctrl.openResource = function() {
+            $window.open(ctrl.concept.uri, "_blank");
         };
 
         /**

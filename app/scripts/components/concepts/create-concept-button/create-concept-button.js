@@ -6,8 +6,8 @@
  * @description
  * # smallBox
  */
- angular.module('labelsApp')
-  .component('lsCreateConceptButton', {
+angular.module('labelsApp')
+.component('lsCreateConceptButton', {
     bindings: {
         onConfirm: "&"
     },
@@ -61,7 +61,6 @@
                 .error(function(res) {
                     $scope.errors = res.messages;
                 });
-
             };
         };
 
