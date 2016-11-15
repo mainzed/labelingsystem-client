@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 /**
  * @ngdoc directive
@@ -6,8 +6,8 @@
  * @description
  * # smallBox
  */
-angular.module('labelsApp')
-.component('lsCreateConceptButton', {
+angular.module("labelsApp")
+.component("lsCreateConceptButton", {
     bindings: {
         onConfirm: "&"
     },
@@ -27,8 +27,6 @@ angular.module('labelsApp')
             });
         };
 
-        //
-        // ctrl.vocabulary
         this.openDialog = function() {
 
             ctrl.newConcept = {
