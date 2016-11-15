@@ -26,7 +26,6 @@
                 $scope.conceptsLimit = ConfigService.conceptsLimit;
                 ctrl.vocabID = $routeParams.vID;
 
-
                 $scope.labelOrder = "-lastModified";
 
                 // init nanoscroller here to prevent default scrollbar while loading boxes
