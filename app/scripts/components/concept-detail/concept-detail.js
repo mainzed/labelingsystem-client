@@ -16,6 +16,7 @@ angular.module("labelsApp")
             var ctrl = this;
 
             ctrl.$onInit = function() {
+                ctrl.isEditor = ctrl.mode === "editor";
                 $scope.tooltips = TooltipService;
 
                 // get vocab
@@ -28,7 +29,7 @@ angular.module("labelsApp")
                     });
 
                     // save for vocab results
-                    CachingService.editor.vocab = $scope.vocabulary;
+                    CachingService[ctrl.mode].vocab = $scope.vocabulary;
                 });
 
                 // get current label
@@ -40,12 +41,12 @@ angular.module("labelsApp")
                     // ctrl.loadConceptDetails(concept);
                 });
 
-                if (CachingService.editor.showEnrichments === false) {
+                if (ctrl.isEditor && CachingService.editor.showEnrichments === false) {
                     ctrl.showEnrichments = CachingService.editor.showEnrichments;
                 } else {
                     ctrl.showEnrichments = true;
                 }
-                ctrl.isEditor = ctrl.mode === "editor";
+
                 HelperService.refreshNanoScroller();
             };
 
@@ -56,7 +57,9 @@ angular.module("labelsApp")
             // };
 
             ctrl.$onDestroy = function() {
-                CachingService.editor.showEnrichments = ctrl.showEnrichments;
+                if (ctrl.isEditor) {
+                    CachingService.editor.showEnrichments = ctrl.showEnrichments;
+                }
             };
 
             $scope.$on("removedConcept", function(event, data) {
