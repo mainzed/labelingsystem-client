@@ -37,7 +37,7 @@ angular.module("labelsApp")
             externalLink: "external links",
             thesauriSettings: "change thesauri settings",
             vocabSettings: "change vocabulary",
-            minipreview: "this is the minipreview"
+            minipreview: "preview of linked connections"
         };
 
         this.comments = {
