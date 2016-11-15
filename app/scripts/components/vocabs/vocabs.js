@@ -12,7 +12,7 @@ angular.module("labelsApp")
         mode: "@"
     },
     templateUrl: "scripts/components/vocabs/vocabs.html",
-    controller: ["$scope", "ngDialog", "$location", "$timeout", "$rootScope", "AuthService", "VocabService", "ThesauriService", "CachingService", function($scope, ngDialog, $location, $timeout, $rootScope, AuthService, VocabService, ThesauriService, CachingService) {
+    controller: ["$scope", "ngDialog", "$location", "$timeout", "$rootScope", "AuthService", "VocabService", "ThesauriService", "CachingService", "LanguageService", function($scope, ngDialog, $location, $timeout, $rootScope, AuthService, VocabService, ThesauriService, CachingService, LanguageService) {
         var ctrl = this;
         ctrl.user = null;
 
@@ -27,7 +27,7 @@ angular.module("labelsApp")
         };
 
         ctrl.$onDestroy = function() {
-            if (AuthService.isLoggedIn()) {  //prevents caching after logout
+            if (AuthService.isLoggedIn()) {  // prevents caching after logout
                 // cache filter value
                 CachingService.filters.vocabs = $scope.vocabFilter;
 
@@ -70,7 +70,6 @@ angular.module("labelsApp")
                     statistics: true
                 }, function(vocabs) {
                     $scope.vocabularies = vocabs;
-                    console.log(vocabs);
                     ctrl.loading = false;
                 }, function error(res) {
                     console.log(res);

@@ -9,7 +9,7 @@ angular.module("labelsApp")
         mode: "@ "  // viewer
     },
     templateUrl: "scripts/components/concept-detail/label-box/label-box.html",
-    controller: ["$scope", "$window", "$routeParams", "$location", "$rootScope", "ngDialog", "TooltipService", "ConceptService", "ResourcesService", function($scope, $window, $routeParams, $location, $rootScope, ngDialog, TooltipService, ConceptService, ResourcesService) {
+    controller: ["$scope", "$window", "$routeParams", "$location", "$rootScope", "ngDialog", "TooltipService", "ConceptService", "ResourcesService", "CachingService", "LanguageService", function($scope, $window, $routeParams, $location, $rootScope, ngDialog, TooltipService, ConceptService, ResourcesService, CachingService, LanguageService) {
         var ctrl = this;
 
         var scope = $scope;
@@ -17,11 +17,12 @@ angular.module("labelsApp")
         ctrl.isConcept = null;
 
         ctrl.$onInit = function() {
-            ctrl.isConcept = ctrl.data.uri ? false : true;
+            ctrl.isConcept = !ctrl.data.uri;
             $scope.tooltips = TooltipService;
             if (ctrl.isConcept) {  // is same-vocab concept
                 ConceptService.get({ id: ctrl.data }, function(concept) {
                     ctrl.concept = concept;
+                    ctrl.getLanguages();
 
                     ctrl.refreshTemp(ctrl.concept);
                     concept.getDetails().then(function(conceptDetails) {
@@ -29,22 +30,45 @@ angular.module("labelsApp")
                         $scope.$apply();
                     });
                 });
+                ctrl.relationCss = "icon-arrow";
             } else {
                 ResourcesService.get({ uri: ctrl.data.uri }, function(resource) {
                     ctrl.concept = resource;
+                    ctrl.getLanguages();
                 });
 
                 // determine relation icon
                 if (ctrl.relation === "closeMatch") {
-                    ctrl.relationIcon = "<span class='icon-close'></span>";
+                    ctrl.relationCss = "icon-close";
                 } else if (ctrl.relation === "exactMatch") {
-                    ctrl.relationIcon = "<span title='exact Match' class='icon-exact'></span>";
+                    ctrl.relationCss = "icon-exact";
                 } else if (ctrl.relation === "relatedMatch") {
-                    ctrl.relationIcon = "<span class='icon-arrow'></span>";
+                    ctrl.relationCss = "icon-arrow";
                 }
             }
             ctrl.newRelation = ctrl.relation;
             ctrl.cssType = ctrl.isConcept ? "label" : ctrl.data.type;
+        };
+
+        ctrl.getLanguages = function() {
+            // get languages for language tooltips
+            if (CachingService.languages.length) {
+                ctrl.languages = CachingService.languages;
+                ctrl.langTooltip = ctrl.getLangTooltip();
+            } else {
+                LanguageService.query().then(function(languages) {
+                    ctrl.languages = languages;
+                    CachingService.languages = languages;
+                    ctrl.langTooltip = ctrl.getLangTooltip();
+                })
+            }
+        };
+
+        ctrl.getLangTooltip = function(resource) {
+            var langObj = _.find(ctrl.languages, {value: ctrl.concept.lang});
+            if (langObj && langObj.name) {
+                return langObj.name;
+            }
         };
 
         ctrl.refreshTemp = function(concept) {
