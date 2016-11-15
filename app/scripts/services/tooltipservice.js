@@ -27,7 +27,7 @@ angular.module("labelsApp")
                 concept: "this is a concept!"
             },
             relations: {
-                closeMatch: "closeMatch!",
+                closeMatch: "skos:closeMatch is used to link two concepts that are sufficiently similar that they can be used interchangeably in some information retrieval applications.",
                 exactMatch: "exactMatch!",
                 relatedMatch: "relatedMatch!"
             },

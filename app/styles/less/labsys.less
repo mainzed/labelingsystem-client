@@ -424,8 +424,8 @@ textarea:focus {	outline: none; }
 .error {            float: left; clear: left; color: tomato; }
 .deletebutton .confirmtext, .contactbutton .confirmtext {
 					position: absolute; left: 50%; margin-left: -100px; text-align: center; width: 200px;}
-.confirmed {		margin-left: calc(@marginoutside); width: calc(100% - @marginoutside * 2); background: #08C93C;
-					line-height: 38px; text-indent: @margininboxsmall; color: black; }
+.confirmed {		margin-left: calc(@marginoutside); width: calc(100% - @marginoutside * 2); background: @categorythree;
+					line-height: 38px; text-indent: @margininboxsmall; color: white; }
 .line-dialog {		height: 1px; width: calc(100% - @marginoutside * 2); margin-left: @marginoutside; float: left;
 					display: block; margin-top: 60px;  }
 .line-bottom {		height: 1px; width: calc(100% - @marginoutside * 2); left: @marginoutside; position: absolute; bottom: 0; display: block;  }
@@ -543,7 +543,8 @@ th {	text-align: left;}
 
 /* height corrections */
 .fullheight		{	height: calc(100% - @headerheight - 40px * 2) !important; }
-.viewerheight {		height: calc(100% - 230px) !important; }
+.viewerheight {		height: calc(100% - 230px) !important; 
+					@media screen and (max-width: 1400px) {height: calc(100% - 260px) !important; }}
 .viewersearch {		height: calc(100% - @headerheight) !important;}
 
 
@@ -618,7 +619,7 @@ span.icon-time {	line-height: 5px; float: left; margin-top: 6px; margin-left: -2
 .extended {		 	letter-spacing: 0.1em;}
 .break {			float: left; clear: both;}
 .linetop {			border-top: 1px solid white; padding-top: 10px;}
-.margintop {		margin-top: 0px; }
+.margintop {		margin-top: -1px; }
 .marginbottom {		margin-bottom: 50px;}
 .rightpadding {		padding-right: 10%;}
 .block {			display: block; margin-top: 5px; margin-bottom: 10px; }
@@ -668,6 +669,7 @@ span.icon-time {	line-height: 5px; float: left; margin-top: 6px; margin-left: -2
 .low .line {		background: white; }
 .getty .line {		background: @lineblue; }
 .dbpedia .line {	background: @lineblue; }
+.geonames .line {	background: @lineblue; }
 .finto .line {		background: @lineblue; }
 .ls .line {			background: @linels; }
 .text .line {		background: gray; }
