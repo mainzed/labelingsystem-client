@@ -11,7 +11,7 @@ angular.module("labelsApp")
     bindings: {
         onConfirm: "&"
     },
-    template: '<span class="plusposition" ng-click="$ctrl.openDialog()">+</span>',
+    template: "<span class=\"plusposition\" ng-click=\"$ctrl.openDialog()\">+</span>",
     controller: ["$scope", "$http", "$rootScope", "$document", "$location", "$routeParams", "ngDialog", "ConfigService", "VocabService", function($scope, $http, $rootScope, $document, $location, $routeParams, ngDialog, ConfigService, VocabService) {
         var ctrl = this;
 
@@ -28,29 +28,30 @@ angular.module("labelsApp")
         };
 
         this.openDialog = function() {
-
             ctrl.newConcept = {
                 thumbnail: "",
                 description: ""
             };
-
+            $scope.errors = "";
             ctrl.dialog = ngDialog.open({
-                template: 'scripts/components/concepts/create-concept-button/dialog.html',
-                className: 'bigdialog smallheightdialog',
+                template: "scripts/components/concepts/create-concept-button/dialog.html",
+                className: "bigdialog smallheightdialog",
                 disableAnimation: true,
                 scope: $scope
             });
 
             ctrl.import = function() {
+                $scope.errors = "";
+
                 var url = ConfigService.api + "/importcsv/vocabulary/" + $routeParams.vID;
 
                 var fd = new FormData();
 
-                fd.append('fileName', ctrl.filename);
+                fd.append("fileName", ctrl.filename);
 
                 $http.post(url, fd, {
                     transformRequest: angular.identity,
-                    headers: {'Content-Type': undefined}
+                    headers: {"Content-Type": undefined}
                 })
                 .success(function(res) {
                     ctrl.dialog.close();
