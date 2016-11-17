@@ -49,7 +49,7 @@
                 $scope.labelFilter = CachingService.getFilterByVocab(ctrl.vocabID);
 
                 // get from cache or server
-                if (CachingService[ctrl.mode].concepts && CachingService[ctrl.mode].concepts.vocabID === $routeParams.vID) {
+                if (ctrl.isCached()) {
                     // cached concepts are for the current vocab
                     $scope.labels = CachingService[ctrl.mode].concepts.items;
                     ctrl.loading = false;
@@ -76,6 +76,12 @@
                     vocabID: ctrl.vocabID,
                     items: $scope.labels
                 };
+            };
+
+            ctrl.isCached = function() {
+                return CachingService[ctrl.mode].concepts &&
+                    CachingService[ctrl.mode].concepts.vocabID === $routeParams.vID &&
+                    CachingService[ctrl.mode].concepts.items.length;
             };
 
             ctrl.loadConcepts = function() {

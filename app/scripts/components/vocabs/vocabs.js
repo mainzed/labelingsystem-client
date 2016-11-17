@@ -30,9 +30,6 @@ angular.module("labelsApp")
             if (AuthService.isLoggedIn()) {  // prevents caching after logout
                 // cache filter value
                 CachingService.filters.vocabs = $scope.vocabFilter;
-
-                // cache vocabs
-                CachingService[ctrl.mode].vocabs = $scope.vocabularies;
             }
         };
 
@@ -45,36 +42,28 @@ angular.module("labelsApp")
         });
 
         ctrl.loadEditorVocabs = function() {
-            if (CachingService.editor.vocabs) {
-                $scope.vocabularies = CachingService.editor.vocabs;
+            VocabService.query({
+                creator: AuthService.getUser().id,
+                draft: true,
+                statistics: true
+            }, function(vocabs) {
+                $scope.vocabularies = vocabs;
                 ctrl.loading = false;
-            } else {
-                VocabService.query({
-                    creator: AuthService.getUser().id,
-                    draft: true,
-                    statistics: true
-                }, function(vocabs) {
-                    $scope.vocabularies = vocabs;
-                    ctrl.loading = false;
-                });
-            }
+            }, function error(res) {
+                console.log(res);
+            });
         };
 
         ctrl.loadPublicVocabs = function() {
-            if (CachingService.viewer.vocabs) {
-                $scope.vocabularies = CachingService.viewer.vocabs;
+            VocabService.query({
+                creatorInfo: true,
+                statistics: true
+            }, function(vocabs) {
+                $scope.vocabularies = vocabs;
                 ctrl.loading = false;
-            } else {
-                VocabService.query({
-                    creatorInfo: true,
-                    statistics: true
-                }, function(vocabs) {
-                    $scope.vocabularies = vocabs;
-                    ctrl.loading = false;
-                }, function error(res) {
-                    console.log(res);
-                });
-            }
+            }, function error(res) {
+                console.log(res);
+            });
         };
 
         $scope.$on("addedVocab", function(event, data) {
