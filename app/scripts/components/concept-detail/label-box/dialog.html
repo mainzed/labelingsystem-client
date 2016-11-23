@@ -1,23 +1,25 @@
 <div class="dialogwrapper {{ $ctrl.cssType }}">
 
     <div class="dialogheader">
-		<h3>{{ $ctrl.concept.getLabel() }}</h3>
+
+        <h3>{{ $ctrl.concept.getLabel()  }}</h3>
 
         <!-- type info -->
-        <p ng-show="$ctrl.concept.id" class="typeinformation">Concept</p>
-		<p ng-show="!$ctrl.concept.id" class="typeinformation">
+        <p ng-if="$ctrl.isConcept" class="typeinformation">Concept</p>
+		<p ng-if="!$ctrl.isConcept" class="typeinformation">
       		{{ $ctrl.concept.type }} Resource - {{ $ctrl.concept.scheme }}
     	</p>
 
         <!-- open -->
-        <p ng-show="$ctrl.concept.id" class="typeinformation bottomleft">
+        <p ng-if="$ctrl.isConcept" class="typeinformation bottomleft">
 			<span class="loudlink" ng-click="$ctrl.openConcept(); closeThisDialog()">open in same tab</span>
 		</p>
-	    <p ng-show="!$ctrl.concept.id" class="typeinformation bottomleft">
+
+	    <p ng-show="!$ctrl.isConcept" class="typeinformation bottomleft">
 	       <span class="loudlink" ng-click="$ctrl.openResource()">open in new tab</span>
 	    </p>
 
-        <ls-preview ng-show="$ctrl.concept.id" label="$ctrl.concept"></ls-preview>
+        <ls-preview ng-if="$ctrl.isConcept" label="$ctrl.concept"></ls-preview>
 
         <div class="line-bottom line"></div>
 	</div>
@@ -30,7 +32,7 @@
                     <!-- description -->
                     <div class="dialog-quarter col">
                         <span class="smalltype bold block" ng-show="$ctrl.concept.description">Description</span>
-        		        <span class="smalltype description">{{ $ctrl.concept.getDescription() }}</span>
+        		        <span class="smalltype description">{{ $ctrl.concept.description }}</span>
 			        </div>
 
                     <!-- related -->
@@ -97,7 +99,7 @@
             <h4>Connection</h4>
 
             <!-- enrich buttons concept -->
-			<div class="enrichbuttons" ng-show="$ctrl.concept.id">
+			<div class="enrichbuttons" ng-if="$ctrl.isConcept">
 
     			<!-- broader -->
     		    <div class="col three leftout">
@@ -123,7 +125,7 @@
 	  	    </div>
 
             <!-- enrich buttons resources -->
-            <div class="enrichbuttons" ng-show="!$ctrl.concept.id">
+            <div class="enrichbuttons" ng-if="!$ctrl.isConcept">
                 <div>
                     <div class="col five leftout">
                         <button class="enrichbutton-ow" type="button" name="button" ng-click="$ctrl.newRelation = 'broadMatch'" ng-class="{'selectedbutton': $ctrl.newRelation === 'broadMatch'}" titel="tooltips.comments.broadMatch">
@@ -159,11 +161,10 @@
                     </div>
                 </div>
             </div><!-- end enrich buttons -->
-	  </div>
-
-
+	    </div>
 
     <div class="line-dialog line"></div>
+
 	<div class="dialogbox dialog-full">
 		<h4>Functions</h4>
   		<ls-confirm-button text="Delete Connection" on-confirm="onDeleteClick(); closeThisDialog()"></ls-confirm-button>

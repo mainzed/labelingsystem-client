@@ -19,6 +19,8 @@ angular.module("labelsApp")
         ctrl.$onInit = function() {
             ctrl.isConcept = !ctrl.data.uri;
             $scope.tooltips = TooltipService;
+
+            // get concept details
             if (ctrl.isConcept) {  // is same-vocab concept
                 ConceptService.get({ id: ctrl.data }, function(concept) {
                     ctrl.concept = concept;
@@ -32,6 +34,8 @@ angular.module("labelsApp")
                 });
                 ctrl.relationCss = "icon-arrow";
             } else {
+
+                // get resource details
                 ResourcesService.get({ uri: ctrl.data.uri }, function(resource) {
                     ctrl.concept = resource;
                     ctrl.getLanguages();

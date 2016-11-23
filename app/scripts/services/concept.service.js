@@ -53,15 +53,24 @@ angular.module("labelsApp")
     };
 
     Concept.prototype.hasBroader = function() {
-        return _.has(this, "broadMatch") || _.has(this, "broader");
+        if (ConfigService.includeMatches) {
+            return _.has(this, "broadMatch") || _.has(this, "broader");
+        }
+        return _.has(this, "broader");
     };
 
     Concept.prototype.hasNarrower = function() {
-        return _.has(this, "narrowMatch") || _.has(this, "narrower");
+      if (ConfigService.includeMatches) {
+          return _.has(this, "narrowMatch") || _.has(this, "narrower");
+      }
+      return _.has(this, "narrower");
     };
 
     Concept.prototype.hasRelated = function() {
-        return _.has(this, "related") || _.has(this, "relatedMatch")  || _.has(this, "closeMatch") || _.has(this, "exactMatch");
+      if (ConfigService.includeMatches) {
+          return _.has(this, "related") || _.has(this, "relatedMatch")  || _.has(this, "closeMatch") || _.has(this, "exactMatch");
+      }
+      return _.has(this, "related");
     };
 
     Concept.prototype.hasMore = function() {
@@ -71,31 +80,49 @@ angular.module("labelsApp")
     Concept.prototype.getDetails = function() {
         var me = this;
 
-        return new Promise(function(resolve, reject) {
+        if (ConfigService.includeMatches) {
+          return new Promise(function(resolve, reject) {
 
-            Promise.all([
-                me.getRelatedConcepts("broader"),
-                me.getRelatedMatches("broadMatch"),
-                me.getRelatedConcepts("narrower"),
-                me.getRelatedMatches("narrowMatch"),
-                me.getRelatedConcepts("related"),
-                me.getRelatedMatches("relatedMatch"),
-                me.getRelatedMatches("closeMatch"),
-                me.getRelatedMatches("exactMatch")
+              Promise.all([
+                  me.getRelatedConcepts("broader"),
+                  me.getRelatedMatches("broadMatch"),
+                  me.getRelatedConcepts("narrower"),
+                  me.getRelatedMatches("narrowMatch"),
+                  me.getRelatedConcepts("related"),
+                  me.getRelatedMatches("relatedMatch"),
+                  me.getRelatedMatches("closeMatch"),
+                  me.getRelatedMatches("exactMatch")
 
-            ]).then(function(values) {
-                resolve({
-                    broader: values[0],
-                    broadMatches: values[1],
-                    narrower: values[2],
-                    narrowMatches: values[3],
-                    related: values[4],
-                    relatedMatches: values[5],
-                    closeMatches: values[6],
-                    exactMatches: values[7]
-                });
-            });
-        });
+              ]).then(function(values) {
+                  resolve({
+                      broader: values[0],
+                      broadMatches: values[1],
+                      narrower: values[2],
+                      narrowMatches: values[3],
+                      related: values[4],
+                      relatedMatches: values[5],
+                      closeMatches: values[6],
+                      exactMatches: values[7]
+                  });
+              });
+          });
+
+        } else {
+          return new Promise(function(resolve, reject) {
+
+              Promise.all([
+                  me.getRelatedConcepts("broader"),
+                  me.getRelatedConcepts("narrower"),
+                  me.getRelatedConcepts("related"),
+              ]).then(function(values) {
+                  resolve({
+                      broader: values[0],
+                      narrower: values[1],
+                      related: values[2]
+                  });
+              });
+          });
+        }
     }
 
     /**
@@ -226,40 +253,21 @@ angular.module("labelsApp")
      * Returns a score based on how many links to other concepts it has.
      */
     Concept.prototype.getScore = function() {
-        var me = this;
 
         var qualityScore = 0;
 
         // gray boxes
-        if (this.translations) {
-            qualityScore += this.translations.length * ConfigService.scores.prefLabel;
+        if (me.translations) {
+            qualityScore += me.translations.length * ConfigService.scores.translation;
         }
-        if (this.description) {
-            qualityScore += ConfigService.scores.scopeNote;
+        if (me.description) {
+            qualityScore += ConfigService.scores.description;
         }
-        if (this.seeAlso) {
+        if (me.seeAlso) {
             qualityScore += ConfigService.scores.wayback;
         }
 
-        // blue and green boxes
-        var matchType = [
-            "closeMatch",
-            "exactMatch",
-            "relatedMatch",
-            "broadMatch",
-            "narrowMatch"
-        ];
-        matchType.forEach(function(matchType) {
-            if (me[matchType]) {
-                me[matchType].forEach(function(match) {
-                    if (ConfigService.scores[match.type]) {
-                        qualityScore += ConfigService.scores[match.type];
-                    }
-                });
-            }
-        });
-
-        // blue boxes
+        // internal concepts (white)
         if (this.broader) {
             qualityScore += this.broader.length * ConfigService.scores.concept;
         }
@@ -270,20 +278,23 @@ angular.module("labelsApp")
             qualityScore += this.narrower.length * ConfigService.scores.concept;
         }
 
-        function getMatchScore(matchType) {
-            var score = 0;
-            if (me[matchType]) {
-                me[matchType].forEach(function(match) {
-                    if (ConfigService.scores[match.type]) {
-                        score += ConfigService.scores[match.type];
-                    } else {
-                        console.log("unknown match type: " + match.type + ". add score for this type in ConfigService!");
-                    }
-                });
-            }
-            return score;
+        // external  resources (blue and pink)
+        if (this.broadMatch) {
+            qualityScore += this.broadMatch.length * ConfigService.scores.resource;
         }
-        // console.log(qualityScore);
+        if (this.narrowMatch) {
+            qualityScore += this.narrowMatch.length * ConfigService.scores.resource;
+        }
+        if (this.relatedMatch) {
+            qualityScore += this.relatedMatch.length * ConfigService.scores.resource;
+        }
+        if (this.closeMatch) {
+            qualityScore += this.closeMatch.length * ConfigService.scores.resource;
+        }
+        if (this.exactMatch) {
+            qualityScore += this.exactMatch.length * ConfigService.scores.resource;
+        }
+
         return qualityScore;
     };
 

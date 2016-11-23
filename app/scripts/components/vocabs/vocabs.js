@@ -12,12 +12,13 @@ angular.module("labelsApp")
         mode: "@"
     },
     templateUrl: "scripts/components/vocabs/vocabs.html",
-    controller: ["$scope", "ngDialog", "$location", "$timeout", "$rootScope", "AuthService", "VocabService", "ThesauriService", "CachingService", "LanguageService", function($scope, ngDialog, $location, $timeout, $rootScope, AuthService, VocabService, ThesauriService, CachingService, LanguageService) {
+    controller: ["$scope", "ngDialog", "$location", "$timeout", "$rootScope", "AuthService", "VocabService", "ThesauriService", "CachingService", "LanguageService", "ConfigService", function($scope, ngDialog, $location, $timeout, $rootScope, AuthService, VocabService, ThesauriService, CachingService, LanguageService, ConfigService) {
         var ctrl = this;
         ctrl.user = null;
 
         ctrl.$onInit = function() {
             ctrl.loading = true;
+
             // get filters from cache
             if (CachingService.filters.vocabs) {
                 $scope.vocabFilter = CachingService.filters.vocabs;
@@ -35,9 +36,19 @@ angular.module("labelsApp")
 
         $rootScope.$watch("isAuthenticated", function(isAuthenticated) {
             if (ctrl.mode === "editor" && isAuthenticated) {
-                ctrl.loadEditorVocabs();
+                if (ConfigService.cacheEditorVocabs && CachingService.editor.vocabs) {
+                    $scope.vocabularies = CachingService.editor.vocabs;
+                } else {
+                    console.log("LOAD!");
+                    ctrl.loadEditorVocabs();
+                }
             } else if (ctrl.mode === "viewer") {
-                ctrl.loadPublicVocabs();
+                if (ConfigService.cacheViewerVocabs && CachingService.viewer.vocabs) {
+                    $scope.vocabularies = CachingService.viewer.vocabs;
+                } else {
+                    console.log("LOAD!");
+                    ctrl.loadPublicVocabs();
+                }
             }
         });
 
@@ -49,6 +60,9 @@ angular.module("labelsApp")
             }, function(vocabs) {
                 $scope.vocabularies = vocabs;
                 ctrl.loading = false;
+                if (ConfigService.cacheEditorVocabs) {
+                    CachingService.editor.vocabs = $scope.vocabularies;
+                }
             }, function error(res) {
                 console.log(res);
             });
@@ -61,6 +75,9 @@ angular.module("labelsApp")
             }, function(vocabs) {
                 $scope.vocabularies = vocabs;
                 ctrl.loading = false;
+                if (ConfigService.cacheViewerVocabs) {
+                    CachingService.viewer.vocabs = $scope.vocabularies;
+                }
             }, function error(res) {
                 console.log(res);
             });

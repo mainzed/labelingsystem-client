@@ -12,6 +12,9 @@
     <!-- resource type icon (getty, wayback etc) -->
     <span ng-show="!$ctrl.concept.id" class="type" title="{{ $ctrl.concept.type + ' - ' + $ctrl.concept.scheme }}" ng-bind-template="{{ '(' + $ctrl.concept.type + ')' }}"></span>
 
-    <span ng-show="!$ctrl.concept.id" class="language" ng-bind="$ctrl.concept.lang" title="{{ $ctrl.langTooltip }}"></span>
+    <!-- language -->
+    <span ng-show="!$ctrl.concept.id" class="language" title="{{ $ctrl.langTooltip }}">
+      {{ $ctrl.concept.lang }}
+    </span>
 
 </div>

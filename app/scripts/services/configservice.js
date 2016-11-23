@@ -23,27 +23,15 @@ angular.module('labelsApp')
      * in the concept detail box. If false, only shows broader and narrower
      * concepts of the same vocabulary.
      */
-    this.showMatches = true;
+    this.includeMatches = true;
 
     // score values for a concept's properties and links to grade it's quality
     this.scores = {
-        // property
-        prefLabel: 1,
-        altLabel: 1,
-        scopeNote: 1,
-
-        // linked internal concept (broader, narrower, related)
-        concept: 5,
-
-        // linked resource (broadMatch, narrowmatch etc.)
-        wayback: 1,
-        fao: 3,
-        finto: 3,
-        dbpedia: 3,
-        ls: 5,
-        getty: 5,
-        heritagedata: 5,
-        chronontology: 5
+        translation: 1,
+        description: 1,
+        concept: 5,  // white
+        resources: 5, // blue and red
+        wayback: 1
     };
 
     // limit of concepts shown in concepts overview and enrichment-browser 'concepts'-tab
@@ -61,5 +49,17 @@ angular.module('labelsApp')
 
     // maximum number of characters allowed for a concept's description
     this.maxConceptDescriptionLength = 400;
+
+    // use cache for vocabs in editor mode
+    this.cacheEditorVocabs = false;
+
+    // use cache for vocabs in viewer mode
+    this.cacheViewerVocabs = true;
+
+    // TODO caching
+    // this.cacheEditorConcepts = false;
+    // this.cacheViewerConcepts = true;
+    // this.cacheEditorConceptsDetail = false;
+    // this.cacheViewerConceptsDetail = true;
 
 });

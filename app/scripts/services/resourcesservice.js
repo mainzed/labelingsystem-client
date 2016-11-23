@@ -21,10 +21,6 @@ angular.module("labelsApp")
         return this.label;
     };
 
-    Resource.prototype.getDesciption = function() {
-        return this.description;
-    };
-
     Resource.prototype.hasBroader = function() {
         return this.broaderTerms.length > 0;
     };
