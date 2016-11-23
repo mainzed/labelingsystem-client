@@ -37,6 +37,8 @@ angular.module('labelsApp')
     // limit of concepts shown in concepts overview and enrichment-browser 'concepts'-tab
     // and on landing page
     this.conceptsLimit = 30;
+    // TODO
+    //this.enrichtmentConceptsLimit = 30;
 
     // maximum number of characters allowed for a vocab's title
     this.vocabTitleLength = 40;
