@@ -334,6 +334,11 @@ textarea:focus {
   margin-left: 3px;
   color: gray;
 }
+@media screen and (max-width: 1400px) {
+  #enrichmentsearch input {
+    width: 160px;
+  }
+}
 #enrichmentsearch .active input {
   color: black;
 }
@@ -373,6 +378,11 @@ textarea:focus {
   margin-top: 36px;
   height: 36px;
   color: gray;
+}
+@media screen and (max-width: 1400px) {
+  .tab {
+    width: 240px;
+  }
 }
 .tab.ls {
   background: #3f3f3f;
@@ -701,6 +711,9 @@ textarea:focus {
 .geonames {
   background: #31CAFF;
 }
+.persondb {
+  background: #31CAFF;
+}
 .wayback {
   background: #544d3b;
 }
@@ -1022,6 +1035,12 @@ textarea:focus {
   margin-left: 20px;
   margin-right: 10%;
   position: relative;
+}
+@media screen and (max-width: 1400px) {
+  .dialog-halfrightpadding {
+    width: calc((100% - 20px * 2) / 2 - 5%);
+    margin-right: 5%;
+  }
 }
 .dialog-quarter {
   width: calc((100% - (9px * 4 + 20px * 2)) / 4);
