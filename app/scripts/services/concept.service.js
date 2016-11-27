@@ -257,13 +257,13 @@ angular.module("labelsApp")
         var qualityScore = 0;
 
         // gray boxes
-        if (me.translations) {
-            qualityScore += me.translations.length * ConfigService.scores.translation;
+        if (this.translations) {
+            qualityScore += this.translations.length * ConfigService.scores.translation;
         }
-        if (me.description) {
+        if (this.description) {
             qualityScore += ConfigService.scores.description;
         }
-        if (me.seeAlso) {
+        if (this.seeAlso) {
             qualityScore += ConfigService.scores.wayback;
         }
 
