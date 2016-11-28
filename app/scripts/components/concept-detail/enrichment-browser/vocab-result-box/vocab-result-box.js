@@ -79,6 +79,7 @@ angular.module("labelsApp")
         ctrl.addConcept = function(relation) {
             $rootScope.$broadcast("addedResource", { concept: ctrl.data, relation: relation });
             ctrl.isEnriched = true;
+            $scope.showMore = false;
             ctrl.dialog.close();
         };
 
