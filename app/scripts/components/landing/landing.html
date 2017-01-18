@@ -39,18 +39,49 @@
 
 
     			<p>
-    			This instance of the Labeling System (LS) contains controlled vocabularies and concepts of mainzed's partner institutes. The main goal is to publish knowledge as keywords to the public. Moreover, it creates interoperabilty between distributed data repositories. The LS is based on Linked Open Data techniques, in particular a limited usage of SKOS.
+    			The Labeling System (LS) offers experts the possibility to create concepts with context-bound validity, to concretize, to group in containers (vocabularies) and to share them with the research community. The LS provides user-friendly web tools that allow semantic linking of terms into the Linked Open Data Cloud. Once vocabularies are published, the LS serves as a distributed repository of concepts (concept-gazetteer), which provides citable addresses on the Web (URI). Each generated concept is explicit assigned to its creator. This assured authorship yield in a clear responsibility for data maintenance.
     			<br><br>
-		        The Labeling System is a web-application for building up your own special controlled vocabularies. Vocabularies consist of concepts described by a label and translations. In addition, concepts can be linked to other concepts in the Linked Open Data Cloud. These links can be hierarchical, associative or mapping. Moreover, the app provides a convenient way to search through controlled vocabularies (reference thesauri) in the Linked Open Data Cloud. Once a concept is released, it can be publicly accessed via a Uniform Resource Identifier (URI).
-    			<br><br>
-                
+
+                <span class="italic">System Components</span><br>
+                * public viewer of concepts<br>
+                * editor for creating context-bound vocabularies<br>
+                * documented interfaces / API<br><br>
+
+                <span class="italic">Editor Functions</span><br>
+                * concept creating<br>
+                * concept modelling as LOD using a simplified SKOS model specialised for humanities questions<br>
+                ** textual description of a concept using a label, translations and short description<br>
+                ** concretise concepts via links<br>
+                *** hierarchical (broader, narrower)<br>
+                *** associative (related)<br>
+                *** mapping (closeMatch, exactMatch)<br>
+                *** easy linking of concepts to refence thesauri (e.g. Getty, Heritage Data, ...) via keyword search<br>
+                *** creating links to Internet Archive web resources<br>
+                *** grouping concepts -> context-bound vocabulary<br>
+                ** publishing / sharing of vocabularies and its concepts via HTTP addressable URIs<br>
+                ** prototypical working in a draft mode without publishing<br><br>
+
+                <span class="italic">Viewer</span><br>
+                * distributed repository of concepts (concept-gazzetter)<br>
+                * user-friendly HTML interface<br><br>
+
+                <span class="italic">Technology / System</span><br>
+                * Frontend<br>
+                ** AngularJS 1.x / CSS3 / HTML5<br>
+                * Backend<br>
+                ** Java + Maven / RDF4J Triplestore / SQlite<br>
+                * Ontology<br>
+                ** SKOS / Dublin Core / FOAF / Provenance / LS Vocab<br>
+                * Interfaces<br>
+                ** API / cool URIs / REST / SPARQL endpoint<br><br>
+
     			</p>
-               
+
     		</div>
             <div class="dialog-quarter whitetext float emphasize marginbottom">
                 The public version of the Labeling System offers the possibility to view and download released vocabularies.<br><br>
 
-                The editor mode is only available for registered users. Please contact us via email if you want to participate. 
+                The editor mode is only available for registered users. Please contact us via email if you want to participate.
                 <a href="mailto:labeling@mainzed.org">
                     <div class="contactbutton confirm pointer">
                       <span class="buttontext confirmtext">Request Editor Account</span>
@@ -66,9 +97,11 @@
                     <span class="italic">Backend Architecture and API Development</span><br>
                     Florian Thiery (i3mainz, RGZM)<br><br>
 
-                    <span class="italic">Frontend Development</span><br>
-                    User Interface Design / CSS: Matthias Dufner (i3mainz)<br>
-                    AngularJS: Axel Kunz (i3mainz)<br><br>
+                    <span class="italic">User Interface Design / CSS</span><br>
+                    Matthias Dufner (i3mainz)<br><br>
+
+                    <span class="italic">AngularJS Development</span><br>
+                    Axel Kunz (i3mainz)<br><br>
 
                     <span class="italic">Documentation & Code</span><br>
                     <a class="clear float" href="https://github.com/mainzed/labelingsystem-client">
@@ -87,11 +120,11 @@
                             Labeling System Server (JAVA, RDF4J, SQLite)
                         </div>
                     </a><br><br>
-					
+
 					<span class="italic">Services</span><br>
 					<a href="/sparql">SPARQL and fulltext search</a><br><br>
 
-                    <span class="italic">Idea</span><br>
+                    <span class="italic">Primary Idea</span><br>
                     Michael Piotrowski (IEG)<br>
                     Giovanni Colavizza (IEG)<br><br>
 
@@ -100,7 +133,7 @@
                     <span class="listtypemin">IEG</span><span class="listcontent">Institute for European History</span><br>
                     <span class="listtypemin">i3mainz</span><span class="listcontent">Institute for Spatial Information and Surveying Technology</span><br>
                     <span class="listtypemin">RGZM</span><span class="listcontent">Römisch-Germanisches Zentralmuseum</span><br><br>
-                    
+
 
 
                 </span>
