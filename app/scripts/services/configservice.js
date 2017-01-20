@@ -11,7 +11,7 @@ angular.module('labelsApp')
   .service('ConfigService', function () {
 
     // webapp version number
-    this.version = "v0.3";
+    this.version = "lucy edition";
 
     // host adress of the used labeling system api
     this.host = "http://143.93.114.135";
@@ -36,7 +36,7 @@ angular.module('labelsApp')
 
     // limit of concepts shown in concepts overview and enrichment-browser 'concepts'-tab
     // and on landing page
-    this.conceptsLimit = 30;
+    this.conceptsLimit = 50;
     // TODO
     //this.enrichtmentConceptsLimit = 30;
 
