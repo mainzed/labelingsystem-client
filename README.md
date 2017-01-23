@@ -1,4 +1,4 @@
-# Labeling System Client v0.3
+# Labeling System Client "lucy edition"
 
 The Labeling System (LS) is a web application that allows registered users to create their own controlled vocabularies. Vocabularies consist of concepts described by a label, a description and translations. In addition, concepts can be linked to other concepts in the Linked Open Data Cloud or within the same vocabulary. These links can be hierarchical, associative or mapping. In contrast to other SKOS editors, the app provides a convenient way to look up concepts in selected controlled vocabularies in the LOD Cloud. It also enables users to publish their vocabularies, which makes its concepts publicly accessable via Uniform Resource Identifiers (URI).
 
