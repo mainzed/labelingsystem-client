@@ -5,7 +5,7 @@ The Labeling System (LS) is a web application that allows registered users to cr
 ## Setup
 This LS client uses the LS Server API. See https://github.com/mainzed/labelingsystem-server for instructions on how to set it up the backend.
 
-Run `git clone https://github.com/i3mainz/labels.git` to create a local copy of this repository.  
+Run `git clone https://github.com/mainzed/labelingsystem-client.git` to create a local copy of this repository.  
 Run `npm install` to install all node and bower modules.  
 Run `grunt build` for building and `grunt serve` to start development server.  
 
