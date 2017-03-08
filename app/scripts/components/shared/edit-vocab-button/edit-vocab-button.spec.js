@@ -16,7 +16,7 @@ describe('Component: lsEditVocabButton', function () {
     }));
 
     beforeEach(inject(function($httpBackend) {
-        $httpBackend.when('GET', 'http://143.93.114.135/api/v1/vocabs?creatorInfo=true').respond(200, JSON.stringify([
+        $httpBackend.when('GET', ConfigService.host + '/api/v1/vocabs?creatorInfo=true').respond(200, JSON.stringify([
             // mocked vocabs
             { id: "vocab1", title: "Vocabulary 1", creator: { id: "user1"} },
             { id: "vocab2", title: "Vocabulary 2", creator: { id: "user2"} },

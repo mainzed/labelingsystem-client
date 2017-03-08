@@ -20,7 +20,7 @@ describe('Service: ConceptService', function () {
         var concept;
 
         beforeEach(inject(function($httpBackend) {
-            $httpBackend.when('GET', 'http://143.93.114.135/api/v1/labels/36799281-7c6c-4251-a0c1-ef20ce07a8b9?draft=true').respond(200, JSON.stringify({
+            $httpBackend.when('GET', ConfigService.host + '/api/v1/labels/36799281-7c6c-4251-a0c1-ef20ce07a8b9?draft=true').respond(200, JSON.stringify({
                 id: '36799281-7c6c-4251-a0c1-ef20ce07a8b9',
                 thumbnail: "english label",
                 translations: [
@@ -34,7 +34,7 @@ describe('Service: ConceptService', function () {
                 ]
             }));
 
-            // $httpBackend.when('GET', 'http://143.93.114.135/api/v1/labels/some-broader-concept-id').respond(200, JSON.stringify({
+            // $httpBackend.when('GET', ConfigService.host + '/api/v1/labels/some-broader-concept-id').respond(200, JSON.stringify({
             //     id: 'some-broader-concept-id',
             //     prefLabels: [
             //         { value: "broader label", lang: "en", isThumbnail: true }

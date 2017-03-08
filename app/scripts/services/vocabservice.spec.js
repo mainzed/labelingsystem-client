@@ -19,7 +19,7 @@ describe('Service: VocabService', function () {
         var vocab;
 
         beforeEach(inject(function($httpBackend) {
-            $httpBackend.when('GET', 'http://143.93.114.135/api/v1/vocabs/some-vocab-id').respond(200, JSON.stringify({
+            $httpBackend.when('GET', ConfigService.host + '/api/v1/vocabs/some-vocab-id').respond(200, JSON.stringify({
                 id: 'some-vocab-id',
                 title: "vocab title",
                 description: "vocab description",

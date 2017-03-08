@@ -242,7 +242,7 @@ angular.module("labelsApp")
             // is external concept
             this[relation].push({
                 type: concept.type || "ls",
-                uri: concept.uri || "http://143.93.114.135/item/label/" + concept.id
+                uri: concept.uri || ConfigService.host + "/item/label/" + concept.id
             });
         } else {
             console.log("failed to add child because of unknown relation: " + relation);
