@@ -30,6 +30,10 @@ angular
           template: "<ls-search-results></ls-search-results>",
           access: {restricted: false}
       })
+      .when("/faq", {
+          template: "<ls-faq></ls-faq>",
+          access: {restricted: false}
+      })
       .when("/vocabularies", {
           template: "<ls-vocabs mode='viewer'></ls-vocabs>",
           access: {restricted: false}
