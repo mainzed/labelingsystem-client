@@ -5,14 +5,12 @@ The Labeling System (LS) is a web application that allows registered users to cr
 ## Setup
 This LS client uses the LS Server API. See https://github.com/mainzed/labelingsystem-server for instructions on how to set it up the backend.
 
-Install `grunt client` global `npm install -g grunt-cli`
-
-Run `git clone https://github.com/mainzed/labelingsystem-client.git` to create a local copy of this repository.  
-Run `npm install` to install all node and bower modules.  
-Run `grunt build` for building and `grunt serve` to start development server.  
+Run `git clone https://github.com/mainzed/labelingsystem-client.git` to create a local copy of this repository.
+Run `npm install` to install all required modules.
+Run `npm run build` for building and `npm start` to start development server.
 
 ## Unit tests
-Running `grunt test` will run the unit tests with karma.
+Running `npm test` will run the unit tests with karma.
 
 ## E2E tests
 Run `webdriver-manager update` and `webdriver-manager start` to get an instance of a Selenium Server running.

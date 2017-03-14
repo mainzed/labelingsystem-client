@@ -11,6 +11,7 @@
     "eslint-plugin-standard": "^2.0.1",
     "grunt": "^0.4.5",
     "grunt-angular-templates": "^0.5.7",
+    "grunt-cli": "^1.2.0",
     "grunt-concurrent": "^1.0.0",
     "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-concat": "^0.5.0",
@@ -49,7 +50,23 @@
   "engines": {
     "node": ">=0.10.0"
   },
+  "dependencies": {
+    "angular": "^1.5.8",
+    "angular-animate": "^1.5.8",
+    "angular-cookies": "^1.5.8",
+    "angular-resource": "^1.5.8",
+    "angular-route": "^1.5.8",
+    "angular-sanitize": "^1.5.8",
+    "angular-touch": "^1.5.8",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.1.1",
+    "lodash": "^4.17.4",
+    "nanoscroller": "^0.8.7",
+    "ng-dialog": "^1.0.1"
+  },
   "scripts": {
-    "postinstall": "bower install"
+    "start": "grunt serve",
+    "build": "grunt build",
+    "test": "grunt test"
   }
 }
