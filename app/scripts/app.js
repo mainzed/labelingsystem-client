@@ -18,7 +18,10 @@ angular
       "ngTouch",
       "ngDialog"
   ])
-  .config(function($routeProvider) {
+  .config(function($routeProvider,$locationProvider) {
+  //.config(function($routeProvider) {
+      // http://stackoverflow.com/questions/41214312/exclamation-mark-after-hash-in-angularjs-app
+      $locationProvider.hashPrefix('');
       $routeProvider
 
       // viewer
