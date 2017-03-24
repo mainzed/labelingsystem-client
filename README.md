@@ -24,7 +24,7 @@ Run `webdriver-manager update` and `webdriver-manager start` to get an instance 
 
 Run `protractor e2e-tests/protractor-conf.js` to run e2e tests with protractor.
 
-### Credits
+## Credits
 
 Developers:
 
@@ -37,7 +37,7 @@ Developers:
     * Römisch-Germanisches Zentralmuseum, Leibniz-Forschungsinstitut für Archäologie (RGZM)
     * Mainzer Zentrum für Digitalität in den Geistes- und Kulturwissenschaften (mainzed)
 
-### License
+## License
 
 MIT License
 
