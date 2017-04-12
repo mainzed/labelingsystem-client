@@ -14,7 +14,7 @@ angular.module('labelsApp')
     this.version = "lucy edition";
 
     // host adress of the used labeling system api
-    this.host = "http://143.93.114.135";
+    this.host = "http://labeling.link";
 
     this.api = this.host + "/api/v1";
 
