@@ -693,6 +693,12 @@ textarea:focus {
 .unesco {
   background: #31CAFF;
 }
+.archwort {
+  background: #31CAFF;
+}
+.bgs {
+  background: #31CAFF;
+}
 .label {
   background: #e5e5e5;
 }
@@ -706,6 +712,9 @@ textarea:focus {
   background: #31CAFF;
 }
 .dbpedia {
+  background: #31CAFF;
+}
+.wikidata {
   background: #31CAFF;
 }
 .geonames {
