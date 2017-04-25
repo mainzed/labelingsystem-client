@@ -104,7 +104,7 @@ textarea:focus {	outline: none; }
 
 #header {			color: white; height: @headerheight; position: relative; background: @background;	}
 #footer {			position: fixed; bottom: @margininboxsmall; left: calc( @marginoutside + @marginoutboxsmall ); color: @label; height: 30px;  }
-#metafooter {		color: white; height: @metafooterheight; width: 100%; float: left; margin-top: 10px; 
+#metafooter {		color: white; height: @metafooterheight; width: 100%; float: left; margin-top: 10px;
 					@media screen and (max-width: 1400px) {height: @metafooterheighte; }}
 #metafooter .listtype {
                     margin-left: @marginoutboxsmall;}
@@ -151,7 +151,7 @@ textarea:focus {	outline: none; }
 #listwrapperviewer
 			 {		height: calc(100% - @headerheight - 50px); float: left; clear: left; display: block; width: 100%;}
 #listwrapper.listwrappermin {
-					height: calc(100% - @headerheight - @metafooterheight - 50px - 10px); 
+					height: calc(100% - @headerheight - @metafooterheight - 50px - 10px);
 					@media screen and (max-width: 1400px) {height: calc(100% - @headerheight - @metafooterheighte - 50px - 10px); }}
 #listwrapper.startwrapper {
                     background: @workareas; height: calc(100% - @headerheight); }
@@ -160,7 +160,7 @@ textarea:focus {	outline: none; }
 					overflow-x: hidden; float: left; height: 100%; background: @middle; }
 #enrichmentsearch {	float: left; margin-top: 0px; background: @middle; height: 100%; position: relative; }
 #enrichmentsearch input
-				 {	background: none; border: none; width: 200px; margin-top: 8px; margin-left: 3px; color: gray; 
+				 {	background: none; border: none; width: 200px; margin-top: 8px; margin-left: 3px; color: gray;
 				 	@media screen and (max-width: 1400px) {width: 160px; }}
 #enrichmentsearch .active input {
 					color: black;
@@ -175,7 +175,7 @@ textarea:focus {	outline: none; }
 #tabcontainer .lefttab {
 					margin-left: 0; }
 .tab {				float: left; border-radius: 0 3px 0px 0; cursor: pointer; width: 310px; background: @text;
-					margin-top: 36px; height: 36px; color: gray; 
+					margin-top: 36px; height: 36px; color: gray;
 					@media screen and (max-width: 1400px) {width: 240px; } }
 .tab.ls {			background: @text; }
 .tab.ls.active {	background: @ls; }
@@ -228,7 +228,7 @@ textarea:focus {	outline: none; }
 .smallheight {		height: 38px; }
 .smallheight .showadditionalcontent {
 					margin-top: -1px;}
-.showmorebox {		background: #d3d3d3;  border-radius: 6px; float: left; padding: 2px 8px; margin-left: calc(50% - 50px); 
+.showmorebox {		background: #d3d3d3;  border-radius: 6px; float: left; padding: 2px 8px; margin-left: calc(50% - 50px);
 					width: 100px; text-align: center; cursor: pointer; color: black;  }
 .smallheight .micropreview {
 					margin-top: 10px; }
@@ -275,11 +275,14 @@ textarea:focus {	outline: none; }
 .pleiades {			background: @high; }
 .chronontology {	background: @high; }
 .unesco		{		background: @high; }
+.archwort		{		background: @high; }
+.bgs		{		background: @high; }
 .label {			background: @label; }
 .draft {			background: @draft; }
 .finto {			background: @high; }
 .fao {				background: @high; }
 .dbpedia {			background: @high; }
+.wikidata {			background: @high; }
 .geonames {			background: @high; }
 .persondb {			background: @high; }
 .wayback {			background: @categorythree; }
@@ -320,7 +323,7 @@ textarea:focus {	outline: none; }
 .halfleft {			width: calc((100% - @marginoutboxsmall * 3) / 2 + @marginoutboxsmall * 2 ); }
 .halfright {		width: calc((100% - @marginoutboxsmall * 3) / 2 + @marginoutboxsmall ); }
 
-.tablehead.halfright span 
+.tablehead.halfright span
 				{	margin-left: @margininboxsmall;}
 
 .left .box {		margin-left: @marginoutside; margin-right: @marginoutboxsmall; width: calc(100% - @marginoutboxsmall - @marginoutside); }
@@ -398,14 +401,14 @@ textarea:focus {	outline: none; }
 /* dialogs */
 /* dialog grid */
 .dialog-half {		width: calc((100% - ( @marginoutboxsmall * 4  + @marginoutside * 2)) / 2 ); margin-left: @marginoutside; }
-.dialog-halfrightpadding {	
-					width: calc((100% -  @marginoutside * 2) / 2 - 10% ); margin-left: @marginoutside; margin-right: 10%; position: relative; 
+.dialog-halfrightpadding {
+					width: calc((100% -  @marginoutside * 2) / 2 - 10% ); margin-left: @marginoutside; margin-right: 10%; position: relative;
 					@media screen and (max-width: 1400px) { width: calc((100% -  @marginoutside * 2) / 2 - 5% ); margin-right: 5%; }}
 .dialog-quarter {	width: calc((100% - ( @marginoutboxsmall * 4  + @marginoutside * 2)) / 4 ); margin-left: calc(@marginoutboxsmall * 2); }
 .dialog-full	{	width: 100%;  }
 .deletebutton { 	width: calc(100% - @marginoutside * 2 ); border-radius: 3px; height: 38px; margin-left: @marginoutside;
 					float: left; position: relative; background: #d6d6d6; color: black; margin-bottom: @marginbottombox; cursor: pointer;	}
-.contactbutton {	width: calc(100%); border-radius: 3px; height: 38px; margin-top: 25px; 
+.contactbutton {	width: calc(100%); border-radius: 3px; height: 38px; margin-top: 25px;
 					float: left; position: relative; background: #d6d6d6; text-align: center; color: black;}
 .bigconfirm {		height: 340px;  }
 .hierarchie .icon {	font-size: 22px; float: left; clear: left; line-height: 14px; width: 25px; margin-left: -2px; }
@@ -467,7 +470,7 @@ textarea.inactive{	color: #a3a3a3; }
 .bottomleft {		position: absolute; bottom: 10px; left: 0;}
 .listtype {			float: left; width: 100px; margin-right: 20px; clear: left; margin-left: @marginoutside; font-style: italic;
 					padding-top: 2px; font-size: @small;  }
-.listtypemin {		float: left; width: 70px; margin-right: 20px; clear: left;  }					
+.listtypemin {		float: left; width: 70px; margin-right: 20px; clear: left;  }
 .listcontent {		float: left; width: calc(100% - @marginoutboxsmall - @marginoutside - 200px); }
 .smalllistcontent {	width: calc(100% - @marginoutboxsmall - @marginoutside - 100px); }
 
@@ -531,7 +534,7 @@ textarea.inactive{	color: #a3a3a3; }
 
 /* admin table */
 .admintable {		margin-left: @marginoutside; }
-.admintable th, .admintable td 	
+.admintable th, .admintable td
 			{		padding-right: 40px;}
 td {				max-width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 th {				text-align: left;}
@@ -539,7 +542,7 @@ th {				text-align: left;}
 
 /* height corrections */
 .fullheight		{	height: calc(100% - @headerheight - 40px * 2) !important; }
-.viewerheight {		height: calc(100% - 230px) !important; 
+.viewerheight {		height: calc(100% - 230px) !important;
 					@media screen and (max-width: 1400px) {height: calc(100% - 260px) !important; }}
 .viewersearch {		height: calc(100% - @headerheight) !important;}
 
