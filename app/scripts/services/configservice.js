@@ -15,6 +15,9 @@ angular.module('labelsApp')
 
     // host adress of the used labeling system api
     this.host = "http://labeling.link";
+    // name of item servlet and vocabulary and concept instances
+    this.itemVocabulary = this.host + "/" + "item" + "/" + "vocab" + "/"; // dev item vocabulary - labeling.link item vocab
+    this.itemConcept = this.host + "/" + "item" + "/" + "concept" + "/"; // dev item label - labeling.link item concept
 
     this.api = this.host + "/api/v1";
 
