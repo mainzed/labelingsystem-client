@@ -2,7 +2,7 @@
 <div id="header" class="box full" ng-class="vocabulary.releaseType">
     <ls-breadcrumbs mode="{{ $ctrl.mode }}"></ls-breadcrumbs>
     <h1 ng-bind="vocabulary.title"></h1>
-    
+
     <ls-edit-vocab-button ng-if="$ctrl.mode === 'editor'" data="vocabulary"></ls-edit-vocab-button>
     <span class="icon-search" ng-if="$ctrl.mode === 'viewer'" ng-click="onSearchClick()"></span>
 
@@ -47,8 +47,9 @@
     </div>
 
     <div class="dialog-half float" id="ls-selfexplain">
-        <a href="#/">Labeling System</a> is a web based tool for creating controlled vocabularies using linked open data techniques.
-        <a style="margin-top: 20px; display: block;" href="#/">Impressum</a>
+        This resource is part of the <a href="http://labeling.link">Labeling System</a>.<br><br>
+        The Labeling System is a web based tool to create concepts with context-bound validity as Linked Data.<br><br>
+        <a style="display: block; margin-top: 10px;" href="http://labeling.link/docs/de/impressum.html" target="_blank">Impressum</a>
     </div>
 
 </div>
