@@ -26,7 +26,7 @@ angular.module("labelsApp")
     };
 
     Vocab.prototype.getUri = function() {
-        return ConfigService.host + "/item/vocabulary/" + this.id;
+        return ConfigService.itemVocabulary + this.id;
     };
 
     /**

@@ -42,7 +42,7 @@ angular.module("labelsApp")
     };
 
     Concept.prototype.getUri = function() {
-        return ConfigService.host + "/item/label/" + this.id;
+        return ConfigService.itemConcept + this.id;
     };
 
     /**
@@ -242,7 +242,7 @@ angular.module("labelsApp")
             // is external concept
             this[relation].push({
                 type: concept.type || "ls",
-                uri: concept.uri || ConfigService.host + "/item/label/" + concept.id
+                uri: concept.uri || ConfigService.itemConcept + concept.id
             });
         } else {
             console.log("failed to add child because of unknown relation: " + relation);
