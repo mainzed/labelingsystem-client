@@ -1,7 +1,7 @@
 <div class="dialogwrapper" ng-class="{ 'label': $ctrl.data.releaseType === 'public', 'draft': $ctrl.data.releaseType === 'draft' }">
     <div class="dialogheader">
         <h3 ng-bind="$ctrl.data.title"></h3>
-        <p class="typeinformation"> metadata/settings<br>{{ $ctrl.data.releaseType }}</p>
+        <p class="typeinformation">vocabulary metadata/settings<br>{{ $ctrl.data.releaseType }}</p>
         <div class="line-bottom line"></div>
     </div>
 
@@ -43,12 +43,12 @@
                 <div class="line-dialog line"></div>
 
                 <div class="dialogbox dialog-full">
-                    <h4 ng-class="{'inactive': $ctrl.data.releaseType === 'public'}">Actions</h4>
+                    <h4 ng-class="{'inactive': $ctrl.data.releaseType === 'public'}">Functions</h4>
                     <!-- delete draft vocab (not allowed to delete public vocab) -->
                     <ls-confirm-button on-confirm="deleteVocab(); closeThisDialog()" text="Delete Vocabulary" inactive="$ctrl.data.releaseType === 'public'"></ls-confirm-button>
 
                     <!-- show publish -->
-                    <ls-confirm-button on-confirm="publish()" text="Publish Vocab" confirm-text="{{tooltips.explaination.publication}}" icon="icon-public" ng-show="$ctrl.data.releaseType === 'draft'" size="large"></ls-confirm-button>
+                    <ls-confirm-button on-confirm="publish()" text="Publish Vocababulary" confirm-text="{{tooltips.explaination.publication}}" icon="icon-public" ng-show="$ctrl.data.releaseType === 'draft'" size="large"></ls-confirm-button>
 
                     <!-- show when already published -->
                     <ls-confirm-button text="Published" icon="icon-public" inactive="true" ng-show="$ctrl.data.releaseType === 'public'"></ls-confirm-button>
@@ -59,7 +59,7 @@
 
                 <!-- downloads -->
                 <div class="dialogbox dialog-full">
-                    <h4>Downloads</h4>
+                    <h4>RDF Download</h4>
                     <span class="downloadlist">
                         <a ng-href="{{ $ctrl.data.getUrl() + '.skos' }}" target="_blank" ng-click="$event.stopPropagation()">SKOS</a>
                     </span>

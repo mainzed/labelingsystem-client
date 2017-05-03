@@ -2,7 +2,7 @@
 
     <div class="dialogheader">
         <h3 ng-bind="$ctrl.data.thumbnail"></h3>
-        <p class="typeinformation"> metadata/settings</p>
+        <p class="typeinformation">concept metadata/settings</p>
         <div class="line-bottom line"></div>
     </div>
 
@@ -20,9 +20,9 @@
 
                 <!-- Downloads -->
                 <div class="dialogbox dialog-full">
-                    <h4>Downloads</h4>
+                    <h4>RDF Downloads</h4>
                     <span class="downloadlist">
-                        <a ng-href="{{ $ctrl.data.getUrl() + '.jsonld' }}" target="_blank" ng-click="$event.stopPropagation()">JSONLD</a>
+                        <a ng-href="{{ $ctrl.data.getUrl() + '.jsonld' }}" target="_blank" ng-click="$event.stopPropagation()">JSON-LD</a>
                         <a ng-href="{{ $ctrl.data.getUrl() + '.ttl' }}" target="_blank" ng-click="$event.stopPropagation()">Turtle</a>
                         <a ng-href="{{ $ctrl.data.getUrl() + '.rdf' }}" target="_blank" ng-click="$event.stopPropagation()">RDF/XML</a>
                         <a ng-href="{{ $ctrl.data.getUrl() + '.n3'}}" target="_blank" ng-click="$event.stopPropagation()">N-Triples</a>
@@ -34,7 +34,7 @@
                 <!-- functions -->
                 <div class="dialogbox dialog-full">
                     <h4 ng-class="{'inactive': vocab.releaseType === 'public'}">Functions</h4>
-                    <ls-confirm-button on-confirm="$ctrl.deleteConcept()" inactive="vocab.releaseType === 'public'"></ls-confirm-button>
+                    <ls-confirm-button text="Delete Concept" on-confirm="$ctrl.deleteConcept()" inactive="vocab.releaseType === 'public'"></ls-confirm-button>
                 </div>
 
             </div>

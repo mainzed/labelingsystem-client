@@ -28,12 +28,13 @@
 
 <div class="col left">
 
-    <!-- add translation -->
-    <ls-translation-button data="label" on-confirm="addTranslation($term, $lang)"></ls-translation-button>
-
     <!-- add description, uses data to hide or show -->
     <ls-description-button data="$ctrl.concept"></ls-description-button>
 
+    <!-- add translation -->
+    <ls-translation-button data="label" on-confirm="addTranslation($term, $lang)"></ls-translation-button>
+
+    <!-- add link to Internet Archive -->
     <ls-wayback-button on-confirm="addLink($uri)"></ls-wayback-button>
 
 </div>
@@ -46,7 +47,7 @@
                 <div ng-show="showSearch">
 
                     <!-- placeholder when not searching -->
-                    <span class="noresult" ng-show="!searching && !resultBoxes">Add enrichment sources by searching</span>
+                    <span class="noresult" ng-show="!searching && !resultBoxes">Add enrichment resources by searching</span>
 
                     <ls-vocab-result-box ng-repeat="searchResult in resultBoxes | orderBy: ['quality', 'type']" data="searchResult"></ls-vocab-result-box>
 
@@ -74,5 +75,5 @@
 
 <!-- minified enrichment bar -->
 <div id="enrichment-src-min" ng-show="!$ctrl.showEnrichments" ng-click="$ctrl.toggleEnrichments()">
-    <span class="mintext">Show Enrichment Sources</span>
+    <span class="mintext">Show Enrichment Browser</span>
 </div>

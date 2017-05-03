@@ -20,7 +20,7 @@
 
         <span class="listtype">Last modified</span>
         <span class="listcontent smalltype lastmodified">
-            {{ label.lastModified | date: 'dd.MM.yyyy' }} <span ng-show="label.revisions">/</span>
+            {{ label.lastModified | date: 'dd.MM.yyyy' }} <span ng-show="label.revisions"></span>
         </span>
         <ls-history-button revisions="label.revisions" ng-show="label.revisions"></ls-history-button>
         <span class="listtype">License</span>
@@ -30,9 +30,9 @@
             </a>
         </span>
 
-        <span class="listtype">Download</span>
+        <span class="listtype">RDF Download</span>
         <span class="listcontent downloadlist downloadlistindent smalltype">
-           <a class="smalltype" ng-href="{{ label.getUrl() + '.jsonld' }}" target="_blank" ng-click="$event.stopPropagation()">JSONLD</a>
+           <a class="smalltype" ng-href="{{ label.getUrl() + '.jsonld' }}" target="_blank" ng-click="$event.stopPropagation()">JSON-LD</a>
            <a class="smalltype" ng-href="{{ label.getUrl() + '.ttl' }}" target="_blank" ng-click="$event.stopPropagation()">Turtle</a>
            <a class="smalltype" ng-href="{{ label.getUrl() + '.rdf' }}" target="_blank" ng-click="$event.stopPropagation()">RDF/XML</a>
            <a class="smalltype" ng-href="{{ label.getUrl() + '.n3'}}" target="_blank" ng-click="$event.stopPropagation()">N-Triples</a>
@@ -53,12 +53,12 @@
 <div id="enrichment-ov" ng-class="{ 'fullheight': $ctrl.isEditor && !$ctrl.showEnrichments, 'viewerheight': !$ctrl.isEditor }">
 	<!-- fixed table header -->
 	<div class="tableheadwrapper">
-		<div class="tablehead left"><span>Broader</span></div>
+		<div class="tablehead left"><span>has Broader</span></div>
 		<div class="insidewrapper half">
 			<div class="tablehead halfleft"><span>Descriptive</span></div>
 			<div class="tablehead halfright"><span>Mapping & Associations</span></div>
 		</div>
-		<div class="tablehead right"><span>Narrower</span></div>
+		<div class="tablehead right"><span>has Narrower</span></div>
 	</div>
 
 	<!-- table -->

@@ -14,7 +14,7 @@
 				<div class="line-dialog line"></div>
 
 				<div class="dialogbox dialog-full">
-					<h4>language</h4>
+					<h4>Language</h4>
 					<select ng-model="newTranslation.lang">
 						<option value="" disabled selected>Select language</option>
 						<option ng-repeat="language in languages | orderBy: 'name'" value="{{language.value}}" ng-bind="language.name" ng-disabled="language.used"></option>

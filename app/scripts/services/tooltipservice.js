@@ -24,17 +24,17 @@ angular.module("labelsApp")
 
         this.icons = {
             types: {
-                concept: "this is a concept!"
+                concept: "concept"
             },
 
-            closeMatch: "closeMatch!",
-            exactMatch: "exactMatch!",
-            relatedMatch: "relatedMatch!",
+            closeMatch: "close match",
+            exactMatch: "exact match",
+            relatedMatch: "related match",
             related: "related",
-            translation: "this is a translation",
-            description: "This is a description!",
-            internalLink: "internal links",
-            externalLink: "external links",
+            translation: "translation",
+            description: "description",
+            internalLink: "links to concepts in the same vocabulary",
+            externalLink: "links to concepts to external vocabularies",
             thesauriSettings: "change thesauri settings",
             vocabSettings: "change vocabulary",
             minipreview: "preview of linked connections"
@@ -53,7 +53,7 @@ angular.module("labelsApp")
         };
 
         this.explaination = {
-            wayback: "Use Wayback links",
+            wayback: "set a link to the Wayback Machine",
             publication: "By pressing this button you make this vocabulary and all its concepts public. You may not delete concepts of this vocabulary anymore. Furthermore, the concepts of this vocabulary can be still edited and a revision history will be created. In this case, be carefull and do not change the meaning of the concept. Somebody could have used it as a reference."
         };
     });

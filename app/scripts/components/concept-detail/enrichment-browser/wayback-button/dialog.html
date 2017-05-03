@@ -1,6 +1,6 @@
 <div class="dialogwrapper text">
 	<div class="dialogheader">
-		<h3>Add wayback link</h3>
+		<h3>Add link to Internet Archive</h3>
 		<p class="typeinformation">{{tooltips.explaination.wayback}}</p>
 		<div class="line-bottom line"></div>
 	</div>
@@ -9,10 +9,10 @@
     	<div class="nano">
         	<div class="nano-content">
                 <div class="dialogbox dialog-full">
-        			<h4>url</h4>
-        			<input type="text" placeholder="https://www.example.de" ng-model="$ctrl.url" ng-disabled="$ctrl.validUri || $ctrl.processing" ng-class="{'inactive': $ctrl.validUri || $ctrl.processing}" class="buttonfollow">
+        			<h4>Website URL</h4>
+        			<input type="text" placeholder="http://www.example.de" ng-model="$ctrl.url" ng-disabled="$ctrl.validUri || $ctrl.processing" ng-class="{'inactive': $ctrl.validUri || $ctrl.processing}" class="buttonfollow">
 
-                    <button class="deletebutton" type="button" ng-click="$ctrl.verifyLink($ctrl.url)" ng-class="{'inactive': !$ctrl.url || $ctrl.validUri || $ctrl.processing}">verify link</button>
+                    <button class="deletebutton" type="button" ng-click="$ctrl.verifyLink($ctrl.url)" ng-class="{'inactive': !$ctrl.url || $ctrl.validUri || $ctrl.processing}">verify URL</button>
         		</div>
 
                 <div class="line-dialog line"></div>

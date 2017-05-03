@@ -2,17 +2,18 @@
 	<div class="dialogheader">
 
     <h3 ng-bind="resource.label"></h3>
-	<p class="typeinformation">Wayback Link</p>	
+	<p class="typeinformation">link to Internet Archive</p>
 	<p class="typeinformation bottomleft"><span class="loudlink" ng-click="openResource()">open in new tab</span></p>
 
-    <div class="line-bottom line"></div>
+    <div class="line-dialog line"></div>
 	</div>
 
   <div class="dialogscroll">
 	  <div class="nano">
 	    <div class="nano-content">
     		<div class="dialogbox dialog-full">
-          <ls-confirm-button on-confirm="onDeleteClick(); closeThisDialog()"></ls-confirm-button>
+					<h4>Functions</h4>
+          <ls-confirm-button text="Delete Connection" on-confirm="onDeleteClick(); closeThisDialog()"></ls-confirm-button>
     		</div>
 	    </div>
 	  </div>
