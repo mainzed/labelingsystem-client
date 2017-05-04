@@ -9,7 +9,7 @@
  angular.module('labelsApp')
   .component('lsEditUsersButton', {
     bindings: {},
-    template: '<span type="button" class="logout" ng-click="$ctrl.openDialog()">manage users</span>',
+    template: '<span type="button" class="logout" ng-click="$ctrl.openDialog()">Manage Users</span>',
     controller: ["$scope", "ngDialog", "AuthService", "AgentService", function($scope, ngDialog, AuthService, AgentService) {
 
         var ctrl = this;
@@ -34,7 +34,7 @@
             ctrl.showNewUser = true;
         };
 
-        /** 
+        /**
          * @param {Object} user - LS Agent object
          */
         ctrl.showUserEdit = function(user) {
@@ -56,7 +56,7 @@
         ctrl.save = function(user) {
 
             AgentService.update({ id: user.id }, user, function() {
-                
+
                 // remove old object
                 _.remove(ctrl.users, { id: user.id });
 

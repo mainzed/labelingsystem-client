@@ -165,7 +165,7 @@ textarea:focus {
   }
 }
 .logout {
-  margin-left: 10px;
+  margin-left: 50px;
   text-decoration: underline;
   cursor: pointer;
 }
@@ -1546,7 +1546,7 @@ span.icon-time {
   margin-left: -4px;
 }
 #footer span.icon-user {
-  margin: 5px 0 0 50px;
+  margin: 7px 0 0 50px;
   display: block;
   float: left;
   font-size: 23px;

@@ -30,7 +30,7 @@
                         </tr>
                     </tbody>
                 </table>
-           
+
 
                 <!-- new user -->
                 <div class="dialogbox dialog-full" ng-if="$ctrl.showNewUser">
@@ -44,7 +44,7 @@
                     <input type="password" placeholder="password" ng-model="$ctrl.newUser.pwd">
                     <input type="password" placeholder="confirm password" ng-model="$ctrl.newUser.passwordConfirm">
 
-                    
+
                     <span ng-if="$ctrl.error">error!</span>
                 </div>
 
@@ -60,7 +60,7 @@
                         <option value="active">active</option>
                         <option value="inactive">inactive</option>
                     </select>
-                    
+
                     <span ng-if="$ctrl.error">error!</span>
 
                 </div>
@@ -69,7 +69,7 @@
 	    </div>
 	</div>
     <button class="logout apply" ng-click="$ctrl.openNewUser()" ng-if="!$ctrl.showNewUser && !$ctrl.editUser">
-        new user
+        Create User
     </button>
 
     <!-- back button -->

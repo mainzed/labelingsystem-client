@@ -71,7 +71,8 @@ angular.module("labelsApp")
                 $cookies.putObject("lsCookie", {
                     "userID": data.user.id,
                     "token": data.status.token,
-                    "role": data.status.role
+                    "role": data.status.role,
+                    "userName": data.user.firstName + " " + data.user.lastName
                 });
                 deferred.resolve();
             } else {

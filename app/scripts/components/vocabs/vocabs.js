@@ -39,14 +39,12 @@ angular.module("labelsApp")
                 if (ConfigService.cacheEditorVocabs && CachingService.editor.vocabs) {
                     $scope.vocabularies = CachingService.editor.vocabs;
                 } else {
-                    console.log("LOAD!");
                     ctrl.loadEditorVocabs();
                 }
             } else if (ctrl.mode === "viewer") {
                 if (ConfigService.cacheViewerVocabs && CachingService.viewer.vocabs) {
                     $scope.vocabularies = CachingService.viewer.vocabs;
                 } else {
-                    console.log("LOAD!");
                     ctrl.loadPublicVocabs();
                 }
             }
