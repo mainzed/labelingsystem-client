@@ -20,6 +20,7 @@ angular.module("labelsApp")
             ctrl.user = AuthService.getUser();
             ctrl.userID = $cookies.getObject("lsCookie").userID;
             ctrl.userName = $cookies.getObject("lsCookie").userName;
+            ctrl.role = $cookies.getObject("lsCookie").role;
         };
 
         /**
