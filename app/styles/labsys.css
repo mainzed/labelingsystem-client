@@ -1126,7 +1126,7 @@ textarea:focus {
 .csverrors {
   float: left;
   clear: left;
-  margin-top: 50px;
+  margin-top: 20px;
   margin-left: 20px;
 }
 .error {
@@ -1139,6 +1139,19 @@ textarea:focus {
   margin-left: 20px;
   font-weight: 700;
   font-size: 24px;
+}
+.errorcsvheader {
+  font-size: 18px;
+  clear: both;
+  float: left;
+  font-weight: 700;
+  padding-bottom: 14px;
+}
+.choosefile {
+  margin-left: 20px;
+  margin-top: 10px;
+  clear: both;
+  width: calc(100% - 20px);
 }
 .deletebutton .confirmtext,
 .contactbutton .confirmtext {

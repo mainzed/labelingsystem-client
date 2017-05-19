@@ -5,7 +5,7 @@
         <div id="tabcontainer">
             <div class="tab lefttab" ng-click="$ctrl.showCSV = false" ng-class="{'active': !$ctrl.showCSV}"><span class="tablabel">single concept</span></div>
 
-            <div class="tab righttab" ng-click="$ctrl.showCSV = true" ng-class="{'active': $ctrl.showCSV}"><span class="tablabel">csv import</span></div>
+            <div class="tab righttab" ng-click="$ctrl.showCSV = true" ng-class="{'active': $ctrl.showCSV}"><span class="tablabel">import from csv file</span></div>
 
         </div>
         <div class="line-bottom line"></div>
@@ -38,9 +38,10 @@
 
                 <input type="file" class="filestyle" data-buttonText="Find file"> -->
 
-                <input type="file" file-model="$ctrl.filename" accept=".csv" />
+                <input type="file" file-model="$ctrl.filename" accept=".csv" class="choosefile" />
 
                 <div ng-show="errors" class="csverrors">
+                <span class="errorcsvheader error">some errors occurred, see list:</span>
                 <span ng-repeat="error in errors track by $index" ng-bind="error" class="error"></span>
                 </div>
 
