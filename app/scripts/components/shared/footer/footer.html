@@ -1,7 +1,7 @@
 <div id="footer">
     <span>Labeling System <i>{{ $ctrl.version }}</i></span>
 
-    <span class='icon-user'></span><span>Hi, {{ $ctrl.userName }} as <i>{{ $ctrl.userID }}</i></span>
+    <span class='icon-user'></span><span>Hi, {{ $ctrl.userName }}</span>
     <ls-edit-users-button ng-if="$ctrl.role === 'administrator'"></ls-edit-users-button>
     <span class="logout" ng-click="$ctrl.onLogoutClick()">Logout</span>
 </div>
