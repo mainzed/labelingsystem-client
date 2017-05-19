@@ -1134,6 +1134,12 @@ textarea:focus {
   clear: left;
   color: tomato;
 }
+.loginerror {
+  margin-top: 20px;
+  margin-left: 20px;
+  font-weight: 700;
+  font-size: 24px;
+}
 .deletebutton .confirmtext,
 .contactbutton .confirmtext {
   position: absolute;
@@ -1402,7 +1408,7 @@ textarea.inactive {
 .center {
   width: 500px;
   background: #e5e5e5;
-  height: 400px;
+  height: 320px;
   top: 50%;
   margin-top: -200px;
   position: absolute;

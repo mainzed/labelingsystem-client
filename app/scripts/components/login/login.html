@@ -5,5 +5,5 @@
 	<input type="password" name="password" ng-model="password" placeholder="Password"><br>
 
 	<button class="deletebutton" type="button" ng-click="onLoginClick()" ng-class="{'inactive': !username || !password || disabled }">Login</button>
-	<span ng-show="error" ng-bind="errorMessage"></span>
+	<span ng-show="error" ng-bind="errorMessage" class="error loginerror"></span>
 </div>

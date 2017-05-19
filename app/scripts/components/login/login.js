@@ -29,7 +29,7 @@
                 })
                 .catch(function() {
                     $scope.error = true;
-                    $scope.errorMessage = "some error message";  // res.userMessage
+                    $scope.errorMessage = "Sorry, access denied!";
                     $scope.disabled = false;
                     $scope.username = "";
                     $scope.password = "";
